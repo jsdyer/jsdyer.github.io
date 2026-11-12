@@ -66,6 +66,7 @@ jobs:
               tar -czf dist/$name.tar.gz -C dist $name
             fi
           done
+          git archive --format=zip --prefix=waystation/ HEAD:tools/waystation > dist/waystation-source.zip
           (cd dist && sha256sum *.tar.gz *.zip > SHA256SUMS)
       - uses: actions/upload-artifact@v4
         with:
@@ -77,7 +78,7 @@ jobs:
           retention-days: 30
 
   release:
-    if: startsWith(github.ref, 'refs/tags/waystation-v')
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/waystation-v'))
     needs: package
     runs-on: ubuntu-latest
     permissions:
@@ -86,6 +87,7 @@ jobs:
       run:
         working-directory: .
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: waystation-portable
@@ -95,6 +97,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh release create "$GITHUB_REF_NAME" dist/* --verify-tag \
-            --title "Waystation ${GITHUB_REF_NAME#waystation-}" \
+          set -euo pipefail
+          version=$(tr -d '\r\n' < tools/waystation/VERSION)
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit 1
+          tag=waystation-v$version
+          if [[ "$GITHUB_REF" == refs/tags/* && "$GITHUB_REF_NAME" != "$tag" ]]; then
+            echo "Tag does not match VERSION" >&2
+            exit 1
+          fi
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "$tag is already published; bump VERSION for a new release."
+            exit 0
+          fi
+          gh release create "$tag" dist/* --target "$GITHUB_SHA" --latest=false \
+            --title "Waystation v$version" \
             --notes "A pocket internet for your homelab. Capture server-rendered sites, compare snapshots, verify content, and replay offline. Extract the build for your machine and run waystation demo. Source and hacking guide: https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation"

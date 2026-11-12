@@ -17,7 +17,7 @@ artifacts; Waystation preserves the websites that give those artifacts context.
 ## Try the disappearing-server demo
 
 Download the archive for your machine from the
-[Waystation releases](https://github.com/jsdyer/jsdyer.github.io/releases),
+[Waystation v0.1.0 release](https://github.com/jsdyer/jsdyer.github.io/releases/tag/waystation-v0.1.0),
 extract it, and run:
 
 ```sh
@@ -178,6 +178,8 @@ go test -mod=vendor -race ./...
 The tests run against local fixtures. They cover archive corruption, offline
 replay after origin shutdown, scope controls, budgets, and link rewriting.
 CI runs the suite on Linux and Windows and creates portable build artifacts.
-Tags named `waystation-v*` publish release archives and SHA-256 checksums.
+A successful push to main publishes the version in `VERSION` if it has no
+release yet, with archives and SHA-256 checksums. Existing releases are never
+replaced. Tags named `waystation-v*` can also trigger the workflow.
 
 MIT licensed; the vendored Go HTML parser retains its BSD-style license.

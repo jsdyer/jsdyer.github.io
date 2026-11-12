@@ -3,6 +3,7 @@ package main
 
 import (
 	"context"
+	_ "embed"
 	"encoding/json"
 	"errors"
 	"flag"
@@ -20,7 +21,8 @@ import (
 	"github.com/jsdyer/jsdyer.github.io/tools/waystation/internal/viewer"
 )
 
-var version = "0.1.0"
+//go:embed VERSION
+var version string
 
 const help = `WAYSTATION — your pocket internet
 
@@ -59,7 +61,7 @@ func run(ctx context.Context, args []string) error {
 		return nil
 	}
 	if args[0] == "version" {
-		fmt.Println("waystation", version)
+		fmt.Println("waystation", strings.TrimSpace(version))
 		return nil
 	}
 	cmd := args[0]

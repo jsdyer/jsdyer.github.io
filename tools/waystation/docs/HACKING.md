@@ -84,5 +84,8 @@ CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -mod=vendor -trimpath -o waystati
 ```
 
 The GitHub workflow builds Linux, macOS, and Windows variants without a C
-runtime dependency. Release tags use `waystation-v0.1.0` so they do not collide
-with other projects in the CoolCode collection.
+runtime dependency. Bump `VERSION` when a new release is ready; a successful
+main-branch build creates its release if one does not exist. The embedded
+version and release version come from the same file. Existing releases are
+never replaced. Release tags use `waystation-v0.1.0` so they do not collide with
+other projects in the CoolCode collection.
