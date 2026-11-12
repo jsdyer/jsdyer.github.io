@@ -1,0 +1,65 @@
+name: Timefold · Check the archive
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: tools/timefold
+
+jobs:
+  sqlite:
+    name: PHP ${{ matrix.php }} · SQLite
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo_sqlite, sqlite3, fileinfo
+          coverage: none
+      - name: Check PHP syntax
+        run: find app bin public tests -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Test storage and portable backups
+        run: php tests/run.php
+      - name: Test login, permissions and browser API
+        run: python3 tests/http_smoke.py
+
+  mariadb:
+    name: PHP 8.3 · MariaDB 11
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mariadb:11
+        env:
+          MARIADB_DATABASE: timefold_test
+          MARIADB_USER: timefold_test
+          MARIADB_PASSWORD: ephemeral-ci-password
+          MARIADB_ROOT_PASSWORD: ephemeral-ci-root-password
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    env:
+      TIMEFOLD_TEST_DSN: 'mysql:host=127.0.0.1;port=3306;dbname=timefold_test;charset=utf8mb4'
+      TIMEFOLD_TEST_DB_USER: timefold_test
+      TIMEFOLD_TEST_DB_PASSWORD: ephemeral-ci-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, pdo_sqlite, sqlite3, fileinfo
+          coverage: none
+      - run: php tests/run.php
+      - run: python3 tests/http_smoke.py

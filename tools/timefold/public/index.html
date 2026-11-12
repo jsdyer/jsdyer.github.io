@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#182c26">
+  <meta name="description" content="A private, self-hosted archive you can travel through. Keep the fragments. Find the connections.">
+  <title>Timefold · Your personal time machine</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/timefold.css">
+  <script src="assets/timefold.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to archive</a>
+  <div id="login-view" class="login-layout" hidden>
+    <div class="login-story">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 30 36"><path d="M5 3v18c0 6 4 9 10 9h10M18 23l7 7-7 5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Timefold<span class="brand-dot">.</span></a>
+      <p class="eyebrow">YOUR PERSONAL TIME MACHINE</p>
+      <h1>Keep the fragments.<br><em>Find the connections.</em></h1>
+      <p>A photograph. A saved game. A small discovery.<br>The things you keep have more to say together.</p>
+      <div class="login-art" aria-hidden="true"><div class="login-polaroid"><div class="art art-photo"><span class="art-sun"></span><span class="art-land"></span></div><span>somewhere, sometime.</span></div><div class="login-terminal"><small>~/memories</small><p>$ keep what matters<br><span>archive ready_</span></p></div></div>
+      <span class="login-foot">OWN YOUR ARCHIVE. FOLLOW YOUR CURIOSITY.</span>
+    </div>
+    <div class="login-panel">
+      <div class="login-box">
+        <p class="eyebrow">A SPACE OF YOUR OWN</p><h2>Welcome back.</h2><p>Unlock your archive and pick up a thread.</p>
+        <form id="login-form"><label for="password">Archive password</label><input id="password" name="password" type="password" autocomplete="current-password" required autofocus><button class="button primary" type="submit">Open the archive <span aria-hidden="true">↗︎</span></button><p id="login-error" class="form-error" role="alert"></p></form>
+        <div id="setup-help" class="setup-help" hidden><b>Your archive needs a first run.</b><p>From the Timefold directory, initialize a local demo:</p><code>php bin/timefold.php init --sqlite --demo</code><p>Then sign in with the password printed in your terminal.</p></div>
+        <p class="login-privacy"><span aria-hidden="true">◈</span> Your files stay on your server.<br>No account, tracking, or outside services.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="app-view" class="app-layout" hidden>
+    <aside class="sidebar" aria-label="Archive navigation">
+      <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 30 36"><path d="M5 3v18c0 6 4 9 10 9h10M18 23l7 7-7 5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Timefold<span class="brand-dot">.</span></a>
+      <div class="archive-label"><span class="status-dot"></span><span id="archive-name">Personal archive</span></div>
+      <nav class="view-nav" aria-label="Views">
+        <button class="nav-item active" data-view="table" aria-pressed="true"><span class="nav-icon" aria-hidden="true">▦</span>Light table<span class="nav-arrow" aria-hidden="true">↗︎</span></button>
+        <button class="nav-item" data-view="graph" aria-pressed="false"><span class="nav-icon" aria-hidden="true">✳︎</span>Constellation<span class="nav-arrow" aria-hidden="true">↗︎</span></button>
+        <button id="surprise-button" class="nav-item"><span class="nav-icon" aria-hidden="true">⤨</span>Surprise me<span class="nav-arrow" aria-hidden="true">↗︎</span></button>
+      </nav>
+      <div class="nav-section-label">THE COLLECTION</div>
+      <nav id="kind-nav" class="kind-nav" aria-label="Capsule type">
+        <button class="kind-item active" data-kind=""><span>Everything</span><span class="kind-count" data-count="all">0</span></button>
+        <button class="kind-item" data-kind="photo"><span><i class="kind-dot photo-dot"></i>Photographs</span><span class="kind-count" data-count="photo">0</span></button>
+        <button class="kind-item" data-kind="note"><span><i class="kind-dot note-dot"></i>Notes & discoveries</span><span class="kind-count" data-count="note">0</span></button>
+        <button class="kind-item" data-kind="save"><span><i class="kind-dot save-dot"></i>Game saves & files</span><span class="kind-count" data-count="save">0</span></button>
+        <button class="kind-item" data-kind="web"><span><i class="kind-dot web-dot"></i>Web fragments</span><span class="kind-count" data-count="web">0</span></button>
+      </nav>
+      <div class="sidebar-note"><span class="asterisk" aria-hidden="true">✳︎</span><p>The past is full of<br>unexpected company.</p><button id="sidebar-explore">Find a connection <span aria-hidden="true">↗︎</span></button></div>
+      <div class="sidebar-bottom"><div><span class="status-dot"></span>SELF-HOSTED · <span id="app-version">1.0</span></div><button id="logout-button">Lock archive <span aria-hidden="true">↗︎</span></button></div>
+    </aside>
+
+    <main id="main" class="main-content">
+      <header class="topbar"><div class="breadcrumb">YOUR ARCHIVE <span>/</span> <span id="view-crumb">LIGHT TABLE</span></div><div class="top-actions"><span id="demo-badge" class="demo-badge" hidden>FICTIONAL DEMO</span><button id="mobile-logout-button" class="text-button mobile-only" aria-label="Lock archive">Lock</button><button id="backup-button" class="text-button">↓ Export</button><button id="import-button" class="text-button">↑ Import</button><button id="add-button" class="button primary small"><span aria-hidden="true">+</span> Add a capsule</button></div></header>
+      <section class="intro-section" aria-labelledby="archive-heading">
+        <div class="intro-copy"><p class="eyebrow"><span class="orange-line"></span>NOTHING LOST. SOMETHING FOUND.</p><h1 id="archive-heading">A little past.<br><em>A lot to discover.</em></h1><p>Your photographs, notes, saves, and small obsessions.<br>Keep them close. See what connects.</p></div>
+        <div class="archive-stamp" aria-hidden="true"><div class="stamp-circle"><span>A PERSONAL</span><b>TIME<br>MACHINE</b><span>NO CLOUD REQUIRED</span></div><span class="stamp-spark">✳︎</span></div>
+      </section>
+      <section class="time-machine" aria-label="Explore by date">
+        <div class="time-label"><span class="dial-icon" aria-hidden="true">◴</span><div><span class="eyebrow">TURN BACK THE CLOCK</span><p>Show everything up to <b id="selected-year">2026</b></p></div></div>
+        <div class="time-track"><input id="year-dial" type="range" min="1989" max="2026" value="2026" aria-label="Show capsules up to year"><div class="time-years"><span id="first-year">1989</span><span id="middle-year">2008</span><span id="last-year">2026</span></div></div>
+        <button id="reset-time" class="time-reset" title="Return to all years" aria-label="Return to all years">↺</button>
+      </section>
+      <section class="collection-section" aria-label="Capsules">
+        <div class="collection-title"><div><h2 id="collection-heading">The light table<span class="orange-dot">.</span></h2><p><span id="visible-count">0</span> capsules <span class="count-divider">/</span> <span id="date-span">your story, piece by piece</span></p></div><div class="view-switch" aria-label="Display mode"><button data-view="table" class="active" aria-pressed="true" title="Light table" aria-label="Light table">▦</button><button data-view="graph" aria-pressed="false" title="Constellation" aria-label="Constellation">✳︎</button></div></div>
+        <div class="filterbar"><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a memory, tag, or tiny detail…" aria-label="Search capsules"></div><select id="kind-filter" class="mobile-kind-select" aria-label="Filter by capsule type"><option value="">All kinds</option><option value="photo">Photos</option><option value="note">Notes</option><option value="save">Games / files</option><option value="web">Web</option></select><select id="tag-filter" aria-label="Filter by tag"><option value="">All threads</option></select><select id="sort-order" aria-label="Sort capsules"><option value="desc">Newest first</option><option value="asc">Oldest first</option><option value="title">Title A–Z</option></select><button id="clear-filters" class="text-button clear-filters" hidden>Clear</button></div>
+        <div id="active-filter" class="active-filter" hidden></div>
+        <div id="capsule-grid" class="capsule-grid"></div>
+        <div id="graph-view" class="graph-panel" hidden><div class="graph-heading"><span class="eyebrow">EVERY THREAD TELLS A STORY</span><p>Shared tags connect capsules. Select a star to open it.</p></div><svg id="constellation" viewBox="0 0 1000 620" role="group" aria-label="Capsules connected by shared tags"></svg><div class="graph-footer"><span><i></i>One capsule</span><span>— A shared tag</span><p id="graph-note">Your archive, connected.</p></div></div>
+        <div id="empty-state" class="empty-state" hidden><span aria-hidden="true">⌑</span><h3>No capsules in this corner of time.</h3><p>Try another year or clear your filters. There’s more to find.</p><button id="empty-reset" class="button secondary">Show everything</button></div>
+        <div class="collection-footer"><span id="collection-footnote">A place for the things worth keeping.</span><button id="print-button">Print a contact sheet <span aria-hidden="true">↗︎</span></button></div>
+      </section>
+      <footer class="page-footer"><span>TIMEFOLD <b>✳︎</b> KEEP WHAT MATTERS.</span><span>Made to be yours. Built to be changed.</span></footer>
+    </main>
+  </div>
+
+  <dialog id="detail-dialog" class="detail-dialog"><button class="dialog-close" data-close aria-label="Close details">×</button><div id="detail-content"></div></dialog>
+  <dialog id="edit-dialog" class="edit-dialog"><button class="dialog-close" data-close aria-label="Close editor">×</button><div class="dialog-header"><p class="eyebrow">MAKE A LITTLE ROOM IN THE PAST</p><h2 id="editor-heading">Keep a capsule.</h2><p>A date, a few words, and something worth remembering.</p></div><form id="capsule-form"><input name="id" type="hidden"><label for="capsule-title">Title <span>required</span></label><input id="capsule-title" name="title" required maxlength="160" placeholder="Give this fragment a name"><div class="form-row"><div><label for="capsule-date">Original date</label><input id="capsule-date" type="date" name="date" required></div><div><label for="capsule-kind">Kind</label><select id="capsule-kind" name="kind"><option value="photo">Photograph</option><option value="note">Note / discovery</option><option value="save">Game save / file</option><option value="web">Web fragment</option></select></div></div><label for="capsule-note">The story <span>up to 16,000 UTF-8 bytes</span></label><textarea id="capsule-note" name="note" rows="4" maxlength="16000" placeholder="What would you like to remember?"></textarea><label for="capsule-tags">Threads <span>comma-separated tags</span></label><input id="capsule-tags" name="tags" placeholder="linux, summer, firsts"><label for="capsule-source">Source or location <span>optional text or URL</span></label><input id="capsule-source" name="source" maxlength="2000" placeholder="A place, a folder, or a link"><label for="capsule-attachment">Keep the original <span>optional attachment</span></label><input id="capsule-attachment" name="attachment" type="file"><p id="current-file" class="field-note"></p><label id="remove-file-label" class="checkbox-label" hidden><input type="checkbox" name="remove_file" value="1"> Remove the existing attachment</label><p class="field-note">Up to 8 MiB per file. JPEG, PNG, and WebP get previews. Other files are kept as downloads.</p><p id="edit-error" class="form-error" role="alert"></p><div class="dialog-actions"><button class="button secondary" type="button" data-close>Cancel</button><button class="button primary" id="save-capsule" type="submit">Save capsule <span aria-hidden="true">↗︎</span></button></div></form></dialog>
+  <dialog id="surprise-dialog" class="surprise-dialog"><button class="dialog-close" data-close aria-label="Close connection">×</button><div class="dialog-header"><p class="eyebrow">THE PAST HAS GOOD COMPANY</p><h2>An unexpected thread<span class="orange-dot">.</span></h2><p id="surprise-explanation"></p></div><div id="surprise-pair" class="surprise-pair"></div><div class="dialog-actions"><button id="surprise-again" class="button primary">Find another connection <span aria-hidden="true">⤨</span></button></div></dialog>
+  <input id="backup-file" type="file" accept="application/x-ndjson,application/json,.ndjson,.json" hidden>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="loading" class="loading"><span class="loading-mark">✳︎</span><p>Opening the archive…</p></div>
+</body>
+</html>
