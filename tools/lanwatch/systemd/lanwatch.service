@@ -1,0 +1,6 @@
+[Unit]
+Description=LANWatch — ping configured LAN devices and store results
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/src/jsdyer.github.io/tools/lanwatch/lanwatch.py check
