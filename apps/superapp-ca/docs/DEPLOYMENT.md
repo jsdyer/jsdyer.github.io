@@ -1,6 +1,6 @@
 # Running Superapp on superapp.ca
 
-Target: Linux, Apache 2.4, MariaDB 10.11+ (CI targets 11.8), PHP 8.3+ (tested on 8.4.27) with PDO/pdo_mysql. SQLite is provided for local trials and automated tests. No npm or Composer build is necessary.
+Target: Linux, Apache 2.4, MariaDB 10.11+ (tested on 11.8.9), PHP 8.3+ (tested on 8.3 in CI and 8.4.27 locally) with PDO/pdo_mysql. SQLite is provided for local trials and automated tests. No npm or Composer build is necessary.
 
 ## Native LAMP
 
@@ -28,7 +28,7 @@ docker compose exec --user www-data web php bin/console.php create-admin YOUR_HA
 
 The application binds to `127.0.0.1:8080`; the database has no published port. Access locally or put your existing reverse proxy in front of that loopback port. For external HTTPS set `APP_URL=https://superapp.ca` and `SESSION_SECURE=true`, then recreate the web container. The Compose defaults support a local HTTP trial only. Production registration remains closed until you set `REGISTRATION_OPEN=true`. Persist both named volumes. Never run `docker compose down -v` unless intentionally destroying all instance data.
 
-The Docker definition has been reviewed but was not built in the development environment; native PHP/SQLite was exercised locally and CI covers both database paths. Test your image build and reverse-proxy configuration on staging before public launch.
+The Docker definition has been reviewed but was not built in the development environment; native PHP/SQLite was exercised locally and both MariaDB and SQLite passed the domain and HTTP suites in CI. Test your image build and reverse-proxy configuration on staging before public launch.
 
 ## Operator configuration
 
