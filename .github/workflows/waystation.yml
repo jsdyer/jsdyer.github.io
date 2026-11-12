@@ -1,0 +1,100 @@
+name: Waystation · Test and package
+
+on:
+  push:
+    branches: [main]
+    tags: ['waystation-v*']
+    paths: ['tools/waystation/**', '.github/workflows/waystation.yml']
+  pull_request:
+    paths: ['tools/waystation/**', '.github/workflows/waystation.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: tools/waystation
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.x'
+          cache: false
+      - run: go test -mod=vendor ./...
+      - run: go vet -mod=vendor ./...
+      - name: Race detector
+        if: runner.os == 'Linux'
+        run: go test -mod=vendor -race ./...
+
+  package:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.x'
+          cache: false
+      - name: Build portable executables
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          for target in linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64; do
+            os=${target%/*}
+            arch=${target#*/}
+            name=waystation-${os}-${arch}
+            mkdir -p dist/$name
+            bin=waystation
+            if [ "$os" = windows ]; then bin=waystation.exe; fi
+            CGO_ENABLED=0 GOOS=$os GOARCH=$arch go build -mod=vendor -trimpath -ldflags='-s -w' -o dist/$name/$bin .
+            cp README.md LICENSE SECURITY.md dist/$name/
+            cp -r docs dist/$name/
+            cp vendor/golang.org/x/net/LICENSE dist/$name/HTML-PARSER-LICENSE
+            if [ "$os" = windows ]; then
+              (cd dist && zip -qr $name.zip $name)
+            else
+              tar -czf dist/$name.tar.gz -C dist $name
+            fi
+          done
+          (cd dist && sha256sum *.tar.gz *.zip > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: waystation-portable
+          path: |
+            tools/waystation/dist/*.tar.gz
+            tools/waystation/dist/*.zip
+            tools/waystation/dist/SHA256SUMS
+          retention-days: 30
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/waystation-v')
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: waystation-portable
+          path: dist
+      - name: Publish release and checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* --verify-tag \
+            --title "Waystation ${GITHUB_REF_NAME#waystation-}" \
+            --notes "A pocket internet for your homelab. Capture server-rendered sites, compare snapshots, verify content, and replay offline. Extract the build for your machine and run waystation demo. Source and hacking guide: https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation"

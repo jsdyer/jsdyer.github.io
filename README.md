@@ -4,6 +4,7 @@ A Linux workbench for archiving, self-hosting and running a home lab. The public
 
 | Project | What you can do | Runs with |
 | --- | --- | --- |
+| [Waystation](tools/waystation/README.md) | Capture your small websites into verifiable capsules, compare changes, and browse them after the original server disappears. | One Go executable; Linux, macOS, Windows |
 | [Timefold](tools/timefold/README.md) | Travel through a private archive of photographs, notes, game saves and web fragments; explore tag constellations and export complete portable backups. | PHP 8.2+, Apache and MySQL/MariaDB; optional SQLite demo |
 | [Tape Index](tools/tape-index/README.md) | Verify a backup of a WARC collection, photo scans or game saves against a SHA-256 manifest. | Python 3 |
 | [Switchboard](tools/switchboard/README.md) | Serve a LAN start page with links to your archive, NAS and DNS console. | PHP 8+ |
@@ -12,7 +13,8 @@ A Linux workbench for archiving, self-hosting and running a home lab. The public
 
 ## First run on Linux
 
-For the new LAMP app, start with [Timefold's installation guide](tools/timefold/README.md).
+For a self-contained project beyond LAMP, try [Waystation's disappearing-server demo](tools/waystation/README.md).
+For the LAMP app, start with [Timefold's installation guide](tools/timefold/README.md).
 It includes Docker, native Apache/MariaDB, and a PHP/SQLite demo. The repository
 also includes [a hands-on GitHub workshop](tools/timefold/docs/github-guide.md)
 covering Actions, Codespaces, Releases, issue forms, and Dependabot.

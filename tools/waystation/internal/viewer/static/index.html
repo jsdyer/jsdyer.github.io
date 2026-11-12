@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111a1a">
+  <title>Waystation · Your pocket internet</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#library">Skip to the library</a>
+  <header class="masthead"><a class="brand" href="/"><span class="brand-icon" aria-hidden="true">W</span>WAYSTATION<span class="version">/ 01</span></a><div class="connection"><span></span>LOCAL ARCHIVE</div></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">A SMALL WEB, HELD CLOSE.</p><h1>Your pocket<br><em>internet.</em></h1><p class="lede">The server can disappear.<br>Your corner of the web stays here.</p></div><div class="intro-note"><span class="note-index">FIELD NOTES / 001</span><p>Capture a place.<br>Keep its connections.<br>Come back any time.</p><span class="note-rule"></span><small>READ-ONLY REPLAY · NO LIVE REQUESTS</small></div></section>
+    <div class="library-head" id="library"><h2>The capsule library <span id="library-count">—</span></h2><button id="refresh" type="button">↻ Refresh library</button></div>
+    <p id="notice" class="notice" role="status" aria-live="polite">Opening your library…</p>
+    <section id="empty" class="empty" hidden><span class="empty-icon" aria-hidden="true">◎</span><h3>A place for websites to outlive their servers.</h3><p>Make your first capture from the command line, then refresh this page.</p><pre><code>waystation capture http://localhost:8000</code></pre><p class="muted">Use <code>waystation demo</code> for a self-contained first journey.</p></section>
+    <div id="workspace" hidden>
+      <div class="controls"><label class="field snapshot-field">CURRENT CAPSULE<select id="snapshot"></select></label><div class="snapshot-detail"><span id="snapshot-date"></span><code id="snapshot-id"></code></div></div>
+      <div class="stats"><div><span class="stat-label">PRESERVED</span><strong id="stat-captured">0</strong><small>pages &amp; assets</small></div><div><span class="stat-label">STORED BYTES</span><strong id="stat-bytes">0</strong><small>before deduplication</small></div><div><span class="stat-label">CAPTURE GAPS</span><strong id="stat-errors">0</strong><small id="gap-note">recorded errors</small></div><div class="stat-action"><span class="stat-label">TAKE A LOOK AROUND</span><a id="start-replay" class="primary" href="/missing">Enter the captured site <span aria-hidden="true">↗</span></a><small>Scripts and forms stay inert.</small></div></div>
+      <section class="map-section" aria-labelledby="map-title"><div class="section-heading"><div><p class="eyebrow">01 / THE CONNECTIONS</p><h2 id="map-title">A little constellation.</h2></div><p id="map-caption">Each dot is an address. Follow one into the archive.</p></div><div class="map-wrap"><svg id="graph" viewBox="0 0 1000 320" role="group" aria-label="Captured address connections"></svg><div class="map-key"><span class="dot page"></span>PAGE <span class="dot asset"></span>ASSET <span class="dot gap"></span>GAP <span class="map-key-tail">SELECT A DOT TO EXPLORE</span></div></div></section>
+      <section aria-labelledby="addresses-title"><div class="section-heading"><div><p class="eyebrow">02 / THE ADDRESSES</p><h2 id="addresses-title">Everything we brought back.</h2></div><label class="search"><span class="sr-only">Search captured addresses</span><input id="search" type="search" placeholder="Find a title, address, or type…"></label></div><div class="resource-head" aria-hidden="true"><span>ADDRESS / TITLE</span><span>TYPE</span><span>SIZE</span><span>STATE</span></div><ul id="resources" class="resources"></ul><p id="no-results" class="muted" hidden>No matching addresses. Try a different search.</p></section>
+      <section class="compare-section" aria-labelledby="compare-title"><div class="section-heading"><div><p class="eyebrow">03 / BETWEEN VISITS</p><h2 id="compare-title">Notice what changed.</h2></div><p>Compare the selected capsule with an earlier visit.</p></div><div class="compare-controls"><label class="field">COMPARE FROM<select id="before"></select></label><span class="compare-arrow" aria-hidden="true">→</span><span id="compare-current"></span><button id="compare" type="button">Compare captures</button></div><p id="diff-summary" class="muted" role="status">Choose another capture to see added, changed, and removed addresses.</p><ul id="changes" class="changes"></ul></section>
+    </div>
+  </main>
+  <footer><span>WAYSTATION</span><p>Plain files. Open source. Yours to keep.</p><span>MADE FOR THE SMALL WEB ↗</span></footer>
+</body>
+</html>

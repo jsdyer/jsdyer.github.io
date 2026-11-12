@@ -1,0 +1,7 @@
+/waystation
+/waystation.exe
+/waystation-data/
+/dist/
+*.zip
+*.test
+coverage.out
