@@ -22,7 +22,7 @@ jobs:
       matrix:
         php: ['8.2', '8.3']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
@@ -55,7 +55,7 @@ jobs:
       TIMEFOLD_TEST_DB_USER: timefold_test
       TIMEFOLD_TEST_DB_PASSWORD: ephemeral-ci-password
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
