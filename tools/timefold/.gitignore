@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+config.local.php
+var/*
+!var/.gitkeep
+*.timefold.ndjson
+*.timefold.json
+*.sqlite*
+*.log
+.DS_Store
+__pycache__/

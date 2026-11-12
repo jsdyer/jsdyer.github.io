@@ -1,0 +1,39 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:${TIMEFOLD_PORT:-8080}:80"
+    environment:
+      TIMEFOLD_DSN: "mysql:host=db;dbname=timefold;charset=utf8mb4"
+      TIMEFOLD_DB_USER: timefold
+      TIMEFOLD_DB_PASSWORD: "${TIMEFOLD_DB_PASSWORD:?Set TIMEFOLD_DB_PASSWORD in .env first}"
+      TIMEFOLD_PASSWORD: "${TIMEFOLD_PASSWORD:?Set TIMEFOLD_PASSWORD in .env first}"
+      TIMEFOLD_DATA_DIR: /var/www/html/var
+      TIMEFOLD_ARCHIVE_NAME: "${TIMEFOLD_ARCHIVE_NAME:-My time machine}"
+      TIMEFOLD_SEED_DEMO: "${TIMEFOLD_SEED_DEMO:-}"
+    volumes:
+      - archive:/var/www/html/var
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: timefold
+      MARIADB_USER: timefold
+      MARIADB_PASSWORD: "${TIMEFOLD_DB_PASSWORD:?Set TIMEFOLD_DB_PASSWORD in .env first}"
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 15s
+    restart: unless-stopped
+
+volumes:
+  archive:
+  database:

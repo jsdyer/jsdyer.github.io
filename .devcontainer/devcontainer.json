@@ -1,0 +1,23 @@
+{
+  "name": "Timefold · private archive playground",
+  "build": { "dockerfile": "Dockerfile" },
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Timefold demo",
+      "onAutoForward": "notify",
+      "visibility": "private",
+      "protocol": "http"
+    }
+  },
+  "postCreateCommand": "cd tools/timefold && php bin/timefold.php init --sqlite --demo",
+  "postStartCommand": "cd tools/timefold && nohup php -S 0.0.0.0:8000 -t public >/tmp/timefold-server.log 2>&1 &",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.exclude": { "tools/timefold/var": true },
+        "editor.tabSize": 4
+      }
+    }
+  }
+}

@@ -4,12 +4,18 @@ A Linux workbench for archiving, self-hosting and running a home lab. The public
 
 | Project | What you can do | Runs with |
 | --- | --- | --- |
+| [Timefold](tools/timefold/README.md) | Travel through a private archive of photographs, notes, game saves and web fragments; explore tag constellations and export complete portable backups. | PHP 8.2+, Apache and MySQL/MariaDB; optional SQLite demo |
 | [Tape Index](tools/tape-index/README.md) | Verify a backup of a WARC collection, photo scans or game saves against a SHA-256 manifest. | Python 3 |
 | [Switchboard](tools/switchboard/README.md) | Serve a LAN start page with links to your archive, NAS and DNS console. | PHP 8+ |
 | [Vhost Logbook](tools/logbook/README.md) | Summarize a local Apache access log by date and HTTP status. | PHP CLI 8+ |
 | [LANWatch](tools/lanwatch/README.md) | Check the hosts you choose and keep their availability history in SQLite. | Python 3 and Linux iputils ping |
 
 ## First run on Linux
+
+For the new LAMP app, start with [Timefold's installation guide](tools/timefold/README.md).
+It includes Docker, native Apache/MariaDB, and a PHP/SQLite demo. The repository
+also includes [a hands-on GitHub workshop](tools/timefold/docs/github-guide.md)
+covering Actions, Codespaces, Releases, issue forms, and Dependabot.
 
 With Git and the PHP CLI installed, try the included six-request Apache log.
 

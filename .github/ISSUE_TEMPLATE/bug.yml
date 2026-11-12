@@ -1,0 +1,22 @@
+name: 'Timefold: something went wrong'
+description: Report a reproducible problem without sharing private archive content.
+title: 'Timefold bug: '
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps and expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened?
+      description: Remove passwords, personal paths, and archive content from logs.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Installation and version
+      placeholder: Docker / native LAMP / SQLite demo; PHP version; browser

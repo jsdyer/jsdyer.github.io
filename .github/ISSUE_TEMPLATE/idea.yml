@@ -1,0 +1,23 @@
+name: 'Timefold: a new way to explore the archive'
+description: Suggest a small, understandable feature you would like to build.
+title: 'Timefold idea: '
+body:
+  - type: textarea
+    id: moment
+    attributes:
+      label: What would you like to do?
+      description: Describe one concrete archive moment this would make better.
+      placeholder: I want to compare two versions of an old game save…
+    validations:
+      required: true
+  - type: textarea
+    id: smallest
+    attributes:
+      label: What is the smallest useful version?
+      description: Keep it self-contained. No cloud accounts or build pipeline needed.
+  - type: checkboxes
+    id: hack
+    attributes:
+      label: Make it yours
+      options:
+        - label: I would like to try implementing this myself.

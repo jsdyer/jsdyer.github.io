@@ -1,0 +1,51 @@
+name: Pack a Timefold release
+
+on:
+  push:
+    tags: ['timefold-v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: tools/timefold
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_sqlite, sqlite3, fileinfo
+          coverage: none
+      - name: Verify the version before packing it
+        run: |
+          php tests/run.php
+          python3 tests/http_smoke.py
+      - name: Pack tracked source and checksum
+        shell: bash
+        working-directory: .
+        run: |
+          mkdir -p release
+          git archive --format=zip --prefix=timefold/ HEAD:tools/timefold > release/timefold.zip
+          (cd release && sha256sum timefold.zip > SHA256SUMS)
+      - name: Save a downloadable Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: timefold-portable
+          path: release/
+          retention-days: 30
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/timefold-v')
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" release/timefold.zip release/SHA256SUMS \
+            --verify-tag --title "Timefold ${GITHUB_REF_NAME#timefold-}" --generate-notes

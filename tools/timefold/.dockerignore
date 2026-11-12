@@ -1,0 +1,13 @@
+# Allowlist: personal archive data and local secrets never enter build context.
+**
+!Dockerfile
+!app/
+!app/**
+!bin/
+!bin/**
+!database/
+!database/**
+!public/
+!public/**
+!docker/
+!docker/**
