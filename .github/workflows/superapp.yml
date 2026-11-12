@@ -1,0 +1,60 @@
+name: Superapp LAMP checks
+on:
+  push:
+    branches: [superapp-ca]
+    paths: ['apps/superapp-ca/**', '.github/workflows/superapp.yml']
+  pull_request:
+    paths: ['apps/superapp-ca/**', '.github/workflows/superapp.yml']
+permissions:
+  contents: read
+jobs:
+  application:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        database: [sqlite, mariadb]
+    services:
+      mariadb:
+        image: mariadb:11.8
+        env:
+          MARIADB_ROOT_PASSWORD: disposable-test-password
+          MARIADB_DATABASE: superapp_test
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    defaults:
+      run:
+        working-directory: apps/superapp-ca
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PHP extensions
+        run: sudo apt-get update && sudo apt-get install -y php-cli php-mysql php-sqlite3
+      - name: Check PHP syntax
+        run: find app bin config public tests -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Domain checks
+        env:
+          SUPERAPP_TEST_DSN: ${{ matrix.database == 'mariadb' && 'mysql:host=127.0.0.1;dbname=superapp_test;charset=utf8mb4' || 'sqlite::memory:' }}
+          SUPERAPP_TEST_DB_USER: root
+          SUPERAPP_TEST_DB_PASS: disposable-test-password
+        run: php tests/domain.php
+      - name: HTTP checks
+        env:
+          SUPERAPP_DSN: ${{ matrix.database == 'mariadb' && 'mysql:host=127.0.0.1;dbname=superapp_test;charset=utf8mb4' || 'sqlite:/tmp/superapp-http.sqlite' }}
+          SUPERAPP_DB_USER: root
+          SUPERAPP_DB_PASS: disposable-test-password
+          SUPERAPP_APP_URL: http://127.0.0.1:8080
+          SUPERAPP_SESSION_SECURE: 'false'
+          SUPERAPP_REGISTRATION_OPEN: 'true'
+          SUPERAPP_DEMO: 'false'
+        run: |
+          php bin/console.php migrate
+          php -S 127.0.0.1:8080 -t public public/router.php > /tmp/superapp-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do curl --silent --fail http://127.0.0.1:8080/ > /dev/null && break || sleep 1; done
+          python3 tests/http_smoke.py http://127.0.0.1:8080
+      - name: Show server log on failure
+        if: failure()
+        run: cat /tmp/superapp-http.log || true

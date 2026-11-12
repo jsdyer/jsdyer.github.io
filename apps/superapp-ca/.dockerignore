@@ -1,0 +1,9 @@
+.git
+.env
+config/local.php
+var/*
+node_modules
+package.json
+.preview.sh
+docs/*.jpg
+tests

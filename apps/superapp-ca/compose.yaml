@@ -1,0 +1,40 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      SUPERAPP_APP_URL: ${APP_URL:-http://localhost:8080}
+      SUPERAPP_DSN: mysql:host=db;dbname=superapp;charset=utf8mb4
+      SUPERAPP_DB_USER: superapp
+      SUPERAPP_DB_PASS: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      SUPERAPP_SESSION_SECURE: ${SESSION_SECURE:-false}
+      SUPERAPP_REGISTRATION_OPEN: ${REGISTRATION_OPEN:-false}
+      SUPERAPP_DEMO: "false"
+      SUPERAPP_DONATION_URL: ${DONATION_URL:-}
+      SUPERAPP_CONTACT_URL: ${CONTACT_URL:-}
+      SUPERAPP_HOSTING_NOTE: ${HOSTING_NOTE:-Hosting details have not been published.}
+    volumes:
+      - app-data:/var/www/superapp/var
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:11.8
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: superapp
+      MARIADB_USER: superapp
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD in .env}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  db-data:
+  app-data:

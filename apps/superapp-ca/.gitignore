@@ -1,0 +1,8 @@
+/config/local.php
+/var/*
+!/var/.gitkeep
+.env
+node_modules/
+*.log
+/package.json
+/.preview.sh
