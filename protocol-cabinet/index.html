@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eee9dc">
+  <meta name="description" content="Step through local simulations of DNS lookups, HTTP requests and SMTP mail delivery, one message at a time.">
+  <title>Protocol Cabinet · CoolCode.ca</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="cabinet.css">
+  <script src="exchanges.js" defer></script>
+  <script src="cabinet.js" defer></script>
+</head>
+<body>
+  <a href="#cabinet" class="skip">Skip to protocol controls</a>
+  <div class="page">
+    <header class="mast">
+      <a class="brand" href="../#projects"><span class="terminal-mark" aria-hidden="true">&gt;_</span> CoolCode.ca</a>
+      <a class="back" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/protocol-cabinet">Source on GitHub ↗</a>
+    </header>
+    <main>
+      <div class="intro">
+        <h1>Protocol Cabinet<span>.</span></h1>
+        <p>Read a conversation between two computers, one message at a time.</p>
+      </div>
+
+      <noscript>Enable JavaScript to step through the local simulations.</noscript>
+      <section id="cabinet" aria-label="Protocol explorer" hidden>
+        <div class="protocols" role="group" aria-label="Choose a protocol">
+          <button type="button" data-protocol="dns"><strong>DNS</strong><span>Name lookup</span></button>
+          <button type="button" data-protocol="http"><strong>HTTP</strong><span>Web requests</span></button>
+          <button type="button" data-protocol="smtp"><strong>SMTP</strong><span>Mail relay</span></button>
+        </div>
+        <div class="settings">
+          <div class="selector"><label for="exchange">Exchange</label><select id="exchange"></select></div>
+          <span id="transport"></span>
+        </div>
+        <div class="instrument">
+          <section class="screen" aria-labelledby="wire-title">
+            <div class="screen-header"><h2 id="wire-title">Message viewer</h2><span class="lamp">Simulation</span></div>
+            <div class="tube">
+              <p id="direction"></p>
+              <pre id="message" tabindex="0" aria-label="Message contents"></pre>
+            </div>
+            <div class="screen-footer"><span id="format"></span><span id="counter"></span></div>
+          </section>
+          <section class="annotation" aria-labelledby="step-title">
+            <p class="label">Field notes</p>
+            <h2 id="step-title"></h2>
+            <p id="explanation"></p>
+            <dl><dt id="field"></dt><dd id="meaning"></dd></dl>
+          </section>
+        </div>
+        <div class="playback">
+          <div class="selector"><label for="jump">Jump to message</label><select id="jump"></select></div>
+          <div class="step-controls">
+            <button type="button" id="previous">← Back</button>
+            <button type="button" id="forward">Next message →</button>
+          </div>
+        </div>
+        <p class="local-note">These exchanges use built-in examples. All protocol traffic is simulated in your browser.</p>
+        <p class="sr-only" role="status" id="announcement"></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

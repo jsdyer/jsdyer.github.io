@@ -1,9 +1,12 @@
 # CoolCode.ca
 
-A Linux workbench for archiving, self-hosting and running a home lab. The public site is a catalogue. Each project lives in its own directory with source and a Linux walkthrough.
+A Linux workbench for archiving, self-hosting and running a home lab. The public site is a catalogue. The installable tools have Linux walkthroughs. Browser projects open directly from the catalogue.
 
 | Project | What you can do | Runs with |
 | --- | --- | --- |
+| [Packet Detour](packet-detour/README.md) | Explore Canadian routing examples and inspect your own annotated hops. | [Open browser tool](https://coolcode.ca/packet-detour/) |
+| [Protocol Cabinet](protocol-cabinet/README.md) | Step through DNS, HTTP and SMTP exchanges. | [Open browser demo](https://coolcode.ca/protocol-cabinet/) |
+| [Rack Recipes](rack-recipes/README.md) | Plan a homelab stack and export its Compose file. | [Open browser tool](https://coolcode.ca/rack-recipes/) |
 | [Archive Shelf](tools/archive-shelf/README.md) | Search newsletters and meeting minutes by page and open the original PDF at the passage you found. | Python 3, SQLite FTS5, and Poppler for PDFs |
 | [Waystation](tools/waystation/README.md) | Capture your small websites into verifiable capsules, compare changes, and browse them after the original server disappears. | One Go executable; Linux, macOS, Windows |
 | [Timefold](tools/timefold/README.md) | Travel through a private archive of photographs, notes, game saves and web fragments; explore tag constellations and export complete portable backups. | PHP 8.2+, Apache and MySQL/MariaDB; optional SQLite demo |
@@ -48,4 +51,4 @@ GitHub Pages publishes the static homepage at [coolcode.ca](https://coolcode.ca/
 
 ## Add another project
 
-Put the code and a short README in a new directory under `tools/`. Include a command someone can run with sample data. Add a project card to the directory in `index.html` and a row in the table above. Preview the page locally, then commit the files and push to `main`. The [Pages workflow history](https://github.com/jsdyer/jsdyer.github.io/actions) shows when the updated site is deployed.
+For an installable tool, put the code and a short README under `tools/`. For a browser app, use a top-level project directory with its own `index.html` and README. Include a command someone can run with sample data. Add a project card to the directory in `index.html` and a row in the table above. Preview the page locally, then commit the files and push to `main`. The [Pages workflow history](https://github.com/jsdyer/jsdyer.github.io/actions) shows when the updated site is deployed.

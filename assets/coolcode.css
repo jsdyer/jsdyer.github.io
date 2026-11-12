@@ -66,7 +66,7 @@ h2 { font-weight: 720; font-size: clamp(2.1rem, 3.5vw, 3.45rem); letter-spacing:
 .code-link, .guide { display: inline-flex; align-items: center; gap: .55rem; }
 .catalogue { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(12px, 1.5vw, 20px); }
 .catalogue > .card { grid-column: span 3; }
-.catalogue > .card:nth-child(-n+3) { grid-column: span 4; }
+@media (min-width: 941px) { .catalogue > .card:nth-child(-n+6) { grid-column: span 4; } }
 .card { display: flex; flex-direction: column; border: 1px solid #9eaa99; background: #faf9ed; min-width: 0; }
 .cover { position: relative; height: clamp(115px, 10vw, 145px); display: grid; place-items: center; border-bottom: 1px solid #a4ab99; overflow: hidden; background-image: repeating-linear-gradient(0deg, transparent 0px 15px, #46543912 15px 16px), repeating-linear-gradient(90deg, transparent 0px 15px, #46543912 15px 16px); }
 .cover::before, .cover::after { position: absolute; content: "+"; font: .8rem/1 var(--mono); color: #43534188; }
@@ -76,6 +76,18 @@ h2 { font-weight: 720; font-size: clamp(2.1rem, 3.5vw, 3.45rem); letter-spacing:
 .logbook { background-color: #e8d9ad; }
 .lan { background-color: #c7d6d6; }
 .shelf-cover { background-color: #e0c6ab; }
+.detour-cover { background-color: #c4d6dc; }
+.detour-diagram { width: 138px; height: 70px; position: relative; color: #304953; }
+.detour-diagram i { position: absolute; width: 86px; height: 50px; border: 2px solid currentColor; border-top: 0; left: 26px; top: 8px; border-radius: 0 0 20px 20px; }
+.detour-diagram b { position: absolute; left: 9px; top: 0; background: #e7f0e7; border: 2px solid currentColor; padding: 3px 6px; font: 700 12px/1 var(--mono); }
+.detour-diagram b:nth-of-type(2) { left: 52px; top: 45px; background: #efbd87; }
+.detour-diagram b:last-child { left: auto; right: 10px; }
+.protocol-cover { background-color: #e6d5af; }
+.protocol-slip { width: 102px; padding: 8px 10px; transform: rotate(-5deg); background: #fff5d7; color: #4f4835; border: 1px solid #756d4c; box-shadow: 4px 4px 0 #9a9177; font: 10px/1.5 var(--mono); }
+.protocol-slip b, .protocol-slip span { display: block; }
+.protocol-slip b { margin-bottom: 3px; border-bottom: 1px dashed currentColor; }
+.protocol-slip span:last-child { text-align: right; }
+.recipes-cover { background-color: #c6d6ac; }
 .shelf-drawer { position: relative; width: 115px; height: 65px; border: 2px solid #614535; border-radius: 2px; background: linear-gradient(100deg, #b98563, #bc9273); box-shadow: 4px 5px 0 #71503e55; transform: rotate(-5deg); }
 .shelf-drawer::before { content: ""; position: absolute; height: 21px; left: 6px; right: 6px; bottom: 100%; border: 2px solid #725941; border-bottom: 0; border-radius: 4px 4px 0 0; background: repeating-linear-gradient(to bottom, #eee4c8 0 4px, #b59f83 4px 5px); transform: perspective(35px) rotateX(13deg); transform-origin: bottom; }
 .shelf-drawer i { position: absolute; inset: 11px 25px auto; height: 20px; border: 3px double #65513b; background: repeating-linear-gradient(to bottom, #f5eccb 0 6px, #b2a58b 6px 7px); }

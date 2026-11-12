@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Plan a small Linux homelab, estimate its memory budget, and export a ready-to-edit Docker Compose file.">
+  <meta name="theme-color" content="#173a31">
+  <title>Rack Recipes · CoolCode.ca</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="rack.css">
+  <script src="rack.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap bar">
+      <a class="brand" href="../#projects"><span class="prompt" aria-hidden="true">&gt;_</span> CoolCode.ca</a>
+      <a class="back" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/rack-recipes">Source on GitHub ↗</a>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="title">
+      <div>
+        <p class="overline">Linux / Self-hosting</p>
+        <h1 id="title">Rack Recipes<span>.</span></h1>
+        <p class="lede">Pick services for a small Linux host, budget the memory, and take the Compose file home.</p>
+      </div>
+      <div class="rack" aria-hidden="true">
+        <div class="rack-unit"><b></b><span>FEEDS</span><i></i><em></em></div>
+        <div class="rack-unit"><b></b><span>LINKS</span><i></i><em></em></div>
+        <div class="rack-unit"><b></b><span>UPTIME</span><i></i><em></em></div>
+      </div>
+    </section>
+    <noscript><p class="notice">Enable JavaScript to choose services and generate your Compose file.</p></noscript>
+    <div class="bench" id="bench" hidden>
+      <div class="controls">
+        <fieldset class="panel">
+          <legend>Services</legend>
+          <div class="choices" id="services"></div>
+        </fieldset>
+        <section class="panel memory" aria-labelledby="memory-heading">
+          <div class="panel-head"><h2 id="memory-heading">Memory budget</h2><label>Host RAM
+            <select id="ram">
+              <option value="1">1 GiB</option><option value="2">2 GiB</option>
+              <option value="4" selected>4 GiB</option><option value="8">8 GiB</option><option value="16">16 GiB</option>
+            </select></label></div>
+          <div class="meter" aria-hidden="true"><span id="system-bar"></span><span id="apps-bar"></span></div>
+          <ul class="numbers">
+            <li><i class="system-dot"></i>Host reserve <strong>1 GiB</strong></li>
+            <li><i class="apps-dot"></i>Services <strong id="apps-memory"></strong></li>
+            <li><i class="free-dot"></i><span id="balance-label">Available</span> <strong id="balance"></strong></li>
+          </ul>
+          <p class="hint">Starting estimates for a lightly used host. Feed fetching, bookmark imports and frequent checks can increase memory use.</p>
+          <p id="shortage" class="notice" hidden>This plan exceeds your selected RAM. Try a larger host or fewer services.</p>
+        </section>
+      </div>
+      <div class="output">
+        <section class="config" aria-labelledby="file-heading">
+          <div class="filebar"><h2 id="file-heading">compose.yaml</h2><span id="count"></span></div>
+          <pre tabindex="0" aria-label="Generated Docker Compose file"><code id="preview"></code></pre>
+          <div class="actions"><button type="button" id="download">Download YAML <span aria-hidden="true">↓</span></button><button type="button" id="copy">Copy YAML</button></div>
+        </section>
+        <details class="run" open>
+          <summary>Run this recipe</summary>
+          <div id="instructions">
+            <p>Save <code>compose.yaml</code> in a new folder on a machine with Docker Engine and Compose. Open a terminal there and run</p>
+            <pre><code>docker compose config --quiet
+docker compose up -d</code></pre>
+            <ul id="startup"></ul>
+            <p class="hint">Open these addresses on the Docker host. Data stays in local named volumes. Run <code>docker compose stop</code> to pause the stack.</p>
+          </div>
+          <p id="empty-instructions" hidden>Select a service to see its setup steps.</p>
+        </details>
+      </div>
+    </div>
+    <p class="sr-only" id="summary" role="status"></p>
+    <p id="feedback" role="status"></p>
+  </main>
+</body>
+</html>

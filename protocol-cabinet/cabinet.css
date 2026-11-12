@@ -1,0 +1,85 @@
+:root {
+  color-scheme: light;
+  --paper: #eee9dc;
+  --ink: #292c24;
+  --line: #c7c0ad;
+  --amber: #f5b44f;
+  --mono: "IBM Plex Mono", ui-monospace, "DejaVu Sans Mono", monospace;
+  font-family: "Barlow", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+button, select { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #13779c; outline-offset: 3px; }
+.page { width: min(1040px, calc(100% - 3rem)); margin: 0 auto; }
+.mast { min-height: 65px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand, .back { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; }
+.brand { font-weight: 760; letter-spacing: -.03em; }
+.terminal-mark { font: 700 13px var(--mono); color: var(--amber); background: var(--ink); border-radius: 3px; padding: 4px 5px; }
+.back { font: .78rem var(--mono); }
+.back:hover, .brand:hover { text-decoration: underline; }
+.intro { padding: clamp(1.7rem, 4.5vw, 3.5rem) 0 1.7rem; }
+h1 { margin: 0; font: 500 clamp(3rem, 7vw, 5.7rem)/1 "Instrument Serif", Georgia, serif; letter-spacing: -.067em; }
+h1 span { color: #9f5b19; }
+.intro p { font-size: clamp(1rem, 2vw, 1.2rem); margin: .85rem 0 0; }
+.protocols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+.protocols button { text-align: left; border: 1px solid #aaa593; background: #e3decd; padding: .75rem 1.1rem; border-radius: 4px 4px 0 0; cursor: pointer; }
+.protocols strong { display: block; font: 700 1.1rem var(--mono); }
+.protocols span { display: block; margin-top: .14rem; font-size: .86rem; }
+.protocols button[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); box-shadow: inset 0 3px var(--amber); }
+.protocols button:hover { border-color: var(--ink); }
+.settings, .playback { display: flex; align-items: center; justify-content: space-between; gap: 1.1rem; flex-wrap: wrap; padding: 1rem 0; }
+.selector { display: flex; align-items: center; gap: .65rem; }
+.selector label, .label, .screen-header h2, .screen-footer, #transport { font: 600 .72rem/1.45 var(--mono); letter-spacing: .055em; }
+.selector label, .label, .screen-header h2 { text-transform: uppercase; }
+select { max-width: 100%; min-height: 40px; border: 1px solid #b1aa96; border-radius: 3px; padding: .35rem .45rem; background: #f7f4ea; font-size: .9rem; }
+#transport { color: #535545; }
+.instrument { display: grid; grid-template-columns: 1.58fr 1fr; gap: .8rem; align-items: stretch; }
+.screen { min-width: 0; border-radius: 8px; background: #363a31; border: 1px solid #22271f; padding: .85rem; }
+.screen-header, .screen-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .7rem; color: #e4e1ce; padding: 0 .15rem; }
+.screen-header h2 { margin: 0; font-size: .78rem; }
+.lamp { font: .69rem var(--mono); color: #e8d8ac; display: inline-flex; align-items: center; gap: .45rem; }
+.lamp::before { content: ""; background: var(--amber); height: 7px; width: 7px; border-radius: 50%; }
+.tube { margin: .75rem 0; min-height: 168px; border: 1px solid #444739; background: #151a14; color: #ffcc75; box-shadow: inset 0 2px 8px #0d100c; padding: clamp(.85rem, 2vw, 1.35rem); border-radius: 4px; }
+#direction { margin: 0 0 .85rem; color: #c2c6af; font: .74rem/1.5 var(--mono); }
+#message { font: .91rem/1.6 var(--mono); margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 4; }
+.screen-footer { font-weight: 400; font-size: .67rem; letter-spacing: .025em; }
+.annotation { padding: 1.25rem 1.4rem; background: #f8f4e9; border: 1px solid var(--line); border-top: 4px solid #be8c48; border-radius: 4px; }
+.label { margin: 0 0 .7rem; color: #695d48; }
+.annotation h2 { font: 500 clamp(1.55rem, 3vw, 2.05rem)/1.08 "Instrument Serif", Georgia, serif; letter-spacing: -.035em; margin: 0; }
+#explanation, dd { font-size: .93rem; line-height: 1.48; }
+#explanation { margin: .55rem 0 1rem; }
+dl { margin: 0; padding: .75rem 0 0; border-top: 1px dashed var(--line); }
+dt { color: #74480f; font: bold .77rem var(--mono); }
+dd { margin: .3rem 0 0; }
+.playback { border-bottom: 1px solid var(--line); }
+.step-controls { display: flex; gap: .45rem; }
+.step-controls button { cursor: pointer; border: 1px solid #919580; border-radius: 4px; padding: .58rem 1rem; min-height: 42px; font-size: .9rem; font-weight: 660; }
+#previous { background: transparent; }
+#forward { background: #ecc079; border-color: #a78044; }
+.step-controls button:hover:enabled { filter: brightness(.93); }
+.step-controls button:disabled { cursor: default; color: #756f61; border-color: #bcb6a4; }
+.local-note { color: #535545; font-size: .82rem; margin: .85rem 0 2rem; }
+.skip, .sr-only { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; }
+.skip:focus { width: auto; height: auto; clip-path: none; background: white; padding: .7rem; z-index: 2; top: .2rem; left: .2rem; }
+@media (max-width: 690px) {
+  .page { width: calc(100% - 2rem); }
+  .instrument { grid-template-columns: 1fr; }
+  .tube { min-height: 135px; }
+  .selector { flex-wrap: wrap; }
+  .playback .selector { flex: 1 1 100%; }
+  .step-controls { width: 100%; }
+  .step-controls button { flex: 1; }
+  .settings { gap: .5rem 1rem; }
+}
+@media (max-width: 400px) {
+  .page { width: calc(100% - 1.4rem); }
+  .back { font-size: .66rem; }
+  .protocols button { padding: .68rem .45rem; }
+  .protocols span { font-size: .75rem; }
+  .annotation { padding: 1rem; }
+}
