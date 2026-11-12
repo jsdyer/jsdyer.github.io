@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find a modem reference in a community-network bulletin with Archive Shelf, then repeat the page-level search on Linux.">
+  <title>Finding the dial-up page · CoolCode Field Notes</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="CoolCode Field Notes" href="../feed.xml">
+  <link rel="stylesheet" href="../notes.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead"><div class="mast-inner">
+    <a class="wordmark" href="/"><span aria-hidden="true">&gt;_</span> CoolCode<span class="domain">.ca</span></a>
+    <nav aria-label="Site"><a href="/#projects">Projects</a><a href="../feed.xml">RSS feed</a></nav>
+  </div></header>
+  <main class="wrap" id="main">
+    <article>
+      <header class="article-head">
+        <a href="../"><span aria-hidden="true">←</span> All field notes</a>
+        <h1>Finding the dial-up page</h1>
+        <time datetime="2026-11-12">12 November 2026</time>
+      </header>
+      <div class="article-grid">
+        <div class="prose">
+          <p>What time did the second modem line open? The answer is in the November 1998 issue of the <cite>Rainline Community Network Bulletin</cite>, a fictional newsletter written for this experiment. Its filename gives you the publication. The interesting detail is one sentence on an inside page.</p>
+          <h2>Go from a word to a page</h2>
+          <p><a href="/archive-shelf/?q=dial-up">Search the sample for “dial-up”</a>. The result points to page 2. Open it in the PDF and look under <cite>Two lines after dark</cite>.</p>
+          <blockquote cite="/archive-shelf/sample/rainline-bulletin.pdf#page=2">“The second dial-up line opens at seven each evening.”</blockquote>
+          <p>Now try <a href="/archive-shelf/?q=tape%20rotation">“tape rotation”</a>. You land on page 3 of the same issue, in <cite>The Friday shelf</cite>. Both hits would look identical in a list of matching filenames. The page number lets you find the passage again, even in a printed copy.</p>
+          <h2>Repeat it on Linux</h2>
+          <p>You’ll need Git, Python 3 with SQLite FTS5 support, and Poppler’s <code>pdftotext</code>. If this is your first time using the CoolCode repository, clone it and enter the checkout.</p>
+          <pre tabindex="0" aria-label="Clone CoolCode"><code>git clone https://github.com/jsdyer/jsdyer.github.io.git
+cd jsdyer.github.io</code></pre>
+          <p>From the repository root, create a temporary directory for the search index, index the sample PDF, and run the same search.</p>
+          <pre tabindex="0" aria-label="Index and search the sample"><code>work=$(mktemp -d)
+tool=tools/archive-shelf/archive_shelf.py
+python3 "$tool" index archive-shelf/sample --db "$work/shelf.sqlite"
+python3 "$tool" search 'dial-up' --db "$work/shelf.sqlite"</code></pre>
+          <p>The first two lines of the result show the citation and the surrounding words. Brackets mark the search phrase.</p>
+          <pre class="result" tabindex="0" aria-label="First two lines of search output"><code>rainline-bulletin.pdf  (page 2)
+  … 04 FROM THE EQUIPMENT DESK Two lines after dark The second [dial-up] line opens at seven each evening. The first line stays available …</code></pre>
+          <p>Check the result against <a href="/archive-shelf/sample/rainline-bulletin.pdf#page=2">page 2 of the original</a>. In a larger collection, save the filename and page number together when you cite a passage. You can share that reference with another reader even if their collection lives on a different drive.</p>
+          <h2>Try a box of your own</h2>
+          <p>Point the <code>index</code> command at a folder of local minutes or newsletters and use a fresh database path for that collection. For an image-only scan, text extraction can return an empty page. Archive Shelf flags pages with no extractable text so you can decide which scans to OCR and reindex.</p>
+        </div>
+        <aside class="source" aria-labelledby="sources">
+          <h2 id="sources">At the workbench</h2>
+          <ul>
+            <li><a href="/archive-shelf/">Try Archive Shelf</a></li>
+            <li><a href="/archive-shelf/sample/rainline-bulletin.pdf">Open the sample issue (PDF)</a></li>
+            <li><a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/archive-shelf">Linux guide and source</a></li>
+          </ul>
+        </aside>
+      </div>
+    </article>
+  </main>
+  <footer><div class="foot-inner"><a href="../">All field notes</a><a href="../feed.xml">Subscribe via RSS</a></div></footer>
+</body>
+</html>

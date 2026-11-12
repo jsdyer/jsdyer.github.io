@@ -1,0 +1,79 @@
+:root {
+  color-scheme: light;
+  --dark: #1d2922; --green: #c2ed87; --paper: #f4f1e5; --ink: #202a24;
+  --muted: #4d5b4f; --line: #b5b9a6; --mono: "IBM Plex Mono", "DejaVu Sans Mono", monospace;
+  --sans: "Instrument Sans", Arial, sans-serif; --serif: "STIX Two Text", Georgia, serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 1rem/1.55 var(--sans); background: var(--paper); color: var(--ink); }
+[hidden] { display: none !important; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #b65814; outline-offset: 3px; }
+.wrap { width: min(1080px, 89%); margin-inline: auto; }
+.skip { position: absolute; top: -5rem; left: 1rem; z-index: 2; background: var(--green); color: var(--dark); padding: .5rem; }
+.skip:focus { top: 1rem; }
+header, .hero, footer { background-color: var(--dark); color: var(--paper); }
+.mast { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 70px; border-bottom: 1px solid #536052; }
+.brand { display: inline-flex; align-items: baseline; font-weight: 750; font-size: 1.35rem; letter-spacing: -.06em; text-decoration: none; }
+.brand b { margin-right: .55rem; align-self: center; padding: .13rem .35rem; background: var(--green); color: var(--dark); font: bold .92rem/1.1 var(--mono); }
+.brand span { color: var(--green); font: .9em var(--mono); letter-spacing: -.07em; }
+nav { display: flex; gap: clamp(.75rem, 3vw, 2rem); }
+nav a, .back { font: 600 .78rem/1.4 var(--mono); text-decoration: none; }
+nav a:hover, .back:hover { text-decoration: underline; }
+.hero { border-bottom: 4px solid #a6b796; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(220px, .7fr); gap: clamp(2rem, 7vw, 7rem); align-items: center; padding-block: clamp(2rem, 5.3vw, 4rem); }
+.back { color: #d0d9c6; }
+h1 { font-size: clamp(3.6rem, 7vw, 6rem); line-height: .95; letter-spacing: -.075em; margin: 1.4rem 0 1rem; }
+h1 span { color: var(--green); }
+.intro > p { max-width: 33em; margin: 0; color: #dae0d2; font-size: clamp(1rem, 1.5vw, 1.16rem); }
+.issue { position: relative; isolation: isolate; padding: 1.25rem 1.35rem .8rem; color: var(--dark); background-color: #e8e4cd; border: 1px solid #263828; box-shadow: 4px 4px 0 #a8b59c, 5px 5px 0 #243024, 8px 8px 0 #879984; transform: rotate(-2deg); }
+.serial, .issue-foot { display: flex; align-items: center; justify-content: space-between; gap: .4rem; font: 600 .69rem/1.4 var(--mono); }
+.serial { margin: 0; padding-bottom: .55rem; border-bottom: 2px solid #40543e; text-transform: uppercase; }
+.issue h2 { margin: 1rem 0 .35rem; font: bold clamp(2.1rem, 4.2vw, 4rem)/.88 var(--serif); letter-spacing: -.07em; }
+.press { margin: 0; font: 700 clamp(.66rem, 1.2vw, .85rem)/1.5 var(--mono); text-transform: uppercase; }
+.issue-foot { border-top: 1px solid #8c967c; margin-top: 1.1rem; padding-top: .55rem; }
+.workspace { padding-block: clamp(2rem, 4.5vw, 4rem); display: grid; align-items: start; grid-template-columns: minmax(0, 2.4fr) minmax(200px, 1fr); gap: clamp(2rem, 6vw, 5.5rem); }
+.workspace h2 { margin: 0 0 1.2rem; font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.045em; line-height: 1.05; }
+label, .examples, .reset, .folio, .results-head h3, .guide a, footer, button { font: 600 .76rem/1.5 var(--mono); }
+label { display: block; color: var(--muted); margin-bottom: .35rem; }
+.search-row { display: flex; gap: .45rem; }
+input { flex: 1; min-width: 0; padding: .8rem .9rem; border: 1px solid #65705f; border-radius: 0; background: #fffef7; color: var(--ink); font: 1rem/1.4 var(--mono); }
+button { border-radius: 0; cursor: pointer; }
+.search-row button { padding: .65rem 1.2rem; background: var(--dark); border: 1px solid var(--dark); color: var(--green); }
+.search-row button:hover { background: #364532; }
+.examples { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .55rem; margin-block: .65rem 1.4rem; color: var(--muted); }
+.examples button, .reset { color: #354d3a; background: transparent; padding: .2rem .35rem; border: 1px solid #a4ae99; }
+.examples button:hover, .reset:hover { background: #e1e7d2; }
+.results-head { min-height: 2.1rem; display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.results-head h3 { color: var(--muted); margin: 0; overflow-wrap: anywhere; }
+.results { list-style: none; margin: .2rem 0 0; padding: 0; border-top: 2px solid #354733; }
+.results li { display: grid; grid-template-columns: 4.1rem minmax(0, 1fr); align-items: start; gap: .65rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.results .empty { display: block; }
+.folio { font-size: .71rem; color: #375340; padding-top: .32rem; }
+.results h4 { margin: 0; font: 700 1.5rem/1.12 var(--serif); letter-spacing: -.025em; }
+.results a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.results a:hover { color: #546b37; }
+.results p { margin: .4rem 0 0; color: #424e44; line-height: 1.52; overflow-wrap: anywhere; }
+mark { background: #ceeb9d; color: #1b2d19; }
+.guide { padding: 1.2rem 1.35rem; background: #e5e8d7; border-top: 3px solid #50634a; }
+.guide h2 { font-size: clamp(1.35rem, 2.1vw, 1.65rem); margin: .8rem 0 .55rem; }
+.shell-sign { color: #40563d; font: bold 1rem/1 var(--mono); }
+.guide p { color: #424e44; margin: .55rem 0 .8rem; }
+.guide a { display: block; width: fit-content; margin-top: .45rem; text-underline-offset: .18em; }
+footer .wrap { padding-block: 1.2rem; display: flex; justify-content: space-between; gap: 1rem; }
+footer a { color: var(--green); }
+@media(max-width: 700px) {
+  .workspace { grid-template-columns: minmax(0, 1fr); }
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(160px, .66fr); gap: 1.5rem; }
+  .issue { padding: .85rem; }
+}
+@media(max-width: 540px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .issue { max-width: 285px; transform: none; }
+  .issue h2 { font-size: 2.6rem; margin-block: .6rem .25rem; }
+  .issue-foot { margin-top: .55rem; }
+  .mast { min-height: 56px; }
+  .wrap { width: 90%; }
+  .search-row button { padding-inline: .85rem; }
+  .results li { grid-template-columns: 3.3rem minmax(0, 1fr); gap: .35rem; }
+}

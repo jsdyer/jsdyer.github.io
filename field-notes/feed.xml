@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CoolCode Field Notes</title>
+    <link>https://coolcode.ca/field-notes/</link>
+    <description>Reproducible experiments in Linux, self-hosting and personal archives.</description>
+    <language>en-ca</language>
+    <atom:link href="https://coolcode.ca/field-notes/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Finding the dial-up page</title>
+      <link>https://coolcode.ca/field-notes/finding-the-dial-up-page/</link>
+      <guid isPermaLink="true">https://coolcode.ca/field-notes/finding-the-dial-up-page/</guid>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 -0700</pubDate>
+      <category>Archiving</category>
+      <description>Recover a modem reference from page two of a fictional community-network newsletter. Try the search in your browser, then repeat it locally with Python, Poppler and SQLite.</description>
+    </item>
+  </channel>
+</rss>

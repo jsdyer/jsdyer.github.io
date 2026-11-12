@@ -4,12 +4,15 @@ A Linux workbench for archiving, self-hosting and running a home lab. The public
 
 | Project | What you can do | Runs with |
 | --- | --- | --- |
+| [Archive Shelf](tools/archive-shelf/README.md) | Search newsletters and meeting minutes by page and open the original PDF at the passage you found. | Python 3, SQLite FTS5, and Poppler for PDFs |
 | [Waystation](tools/waystation/README.md) | Capture your small websites into verifiable capsules, compare changes, and browse them after the original server disappears. | One Go executable; Linux, macOS, Windows |
 | [Timefold](tools/timefold/README.md) | Travel through a private archive of photographs, notes, game saves and web fragments; explore tag constellations and export complete portable backups. | PHP 8.2+, Apache and MySQL/MariaDB; optional SQLite demo |
 | [Tape Index](tools/tape-index/README.md) | Verify a backup of a WARC collection, photo scans or game saves against a SHA-256 manifest. | Python 3 |
 | [Switchboard](tools/switchboard/README.md) | Serve a LAN start page with links to your archive, NAS and DNS console. | PHP 8+ |
 | [Vhost Logbook](tools/logbook/README.md) | Summarize a local Apache access log by date and HTTP status. | PHP CLI 8+ |
 | [LANWatch](tools/lanwatch/README.md) | Check the hosts you choose and keep their availability history in SQLite. | Python 3 and Linux iputils ping |
+
+Try [Archive Shelf in the browser](https://coolcode.ca/archive-shelf/) with a fictional newsletter or follow [Finding the dial-up page](https://coolcode.ca/field-notes/finding-the-dial-up-page/) on Linux. [Field Notes](https://coolcode.ca/field-notes/) has an [RSS feed](https://coolcode.ca/field-notes/feed.xml).
 
 ## First run on Linux
 
@@ -29,7 +32,7 @@ cd jsdyer.github.io
 php tools/logbook/logbook.php tools/logbook/example.log
 ```
 
-If you already have the checkout, run `git pull --ff-only` in it and skip the clone. On Debian and Ubuntu the packages for all four projects are `git python3 php-cli iputils-ping`. The project guides cover configuration, examples and output.
+If you already have the checkout, run `git pull --ff-only` in it and skip the clone. On Debian and Ubuntu the packages for Vhost Logbook, Switchboard, Tape Index, and LANWatch are `git python3 php-cli iputils-ping`. The project guides cover configuration, examples and output.
 
 ## Preview and publish the homepage
 

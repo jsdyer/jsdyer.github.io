@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#17201c">
   <meta name="description" content="Independent Linux tools for a home lab, a personal archive, and an Apache server. Source and setup notes by jsdyer.">
   <title>CoolCode.ca · The Linux workbench</title>
+  <link rel="alternate" type="application/rss+xml" title="CoolCode Field Notes" href="/field-notes/feed.xml">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/coolcode.css">
 </head>
@@ -16,6 +17,7 @@
       <a class="wordmark" href="#top" aria-label="CoolCode.ca home"><span aria-hidden="true" class="mark">&gt;_</span>CoolCode<span class="domain">.ca</span></a>
       <nav aria-label="Main navigation">
         <a href="#projects">Projects</a>
+        <a href="/field-notes/">Field Notes</a>
         <a href="#run">Run locally</a>
         <a class="external" href="https://github.com/jsdyer">GitHub <span aria-hidden="true">↗</span></a>
         <button class="theme" id="theme" type="button" hidden aria-label="Dark mode" aria-pressed="false" title="Toggle dark mode">◐</button>
@@ -28,7 +30,7 @@
         <div>
           <p class="byline"><span aria-hidden="true"></span>A software collection by jsdyer</p>
           <h1 id="hero-title">The Linux<br><em>workbench.</em></h1>
-          <p class="intro">Small, self-hosted tools for the home lab. Keep an archive, read your server logs, and see which machines respond to ping.</p>
+          <p class="intro">Independent tools for your home lab. Search a box of old newsletters, keep a website alive offline, or see what your Apache server has been serving.</p>
           <a class="primary" href="#projects">Explore the projects <span aria-hidden="true">↓</span></a>
         </div>
         <figure class="computer">
@@ -56,8 +58,15 @@
         <div class="section-head"><h2 id="projects-heading">Project directory</h2><a class="code-link" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools">Browse source <span aria-hidden="true">↗</span></a></div>
         <div class="catalogue">
           <article class="card">
+            <div class="cover shelf-cover" aria-hidden="true"><div class="shelf-drawer"><i></i><b></b></div></div>
+            <div class="card-body"><p class="category">Archiving <span>/</span> Python + SQLite</p><h3>Archive Shelf</h3>
+              <p>Search newsletters and meeting minutes by page. Try the sample bulletin here, or index a private collection on your own Linux machine.</p>
+              <a class="guide" href="/archive-shelf/">Search the sample <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+          <article class="card">
             <div class="cover lan" aria-hidden="true"><svg viewBox="0 0 280 150" width="280" height="150" fill="none"><rect x="72" y="28" width="136" height="94" rx="8" stroke="currentColor" stroke-width="2"/><path d="M92 76L123 49L150 94L184 58M92 76L184 58M123 49L150 94" stroke="currentColor" opacity=".5"/><g fill="currentColor"><circle cx="92" cy="76" r="5"/><circle cx="123" cy="49" r="4"/><circle cx="150" cy="94" r="7"/><circle cx="184" cy="58" r="4"/></g><path d="M113 135h54" stroke="currentColor" stroke-width="3"/></svg></div>
-            <div class="card-body"><p class="category">New project <span>/</span> Go · single executable</p><h3>Waystation</h3>
+            <div class="card-body"><p class="category">Web preservation <span>/</span> Go</p><h3>Waystation</h3>
               <p>Unplug the server. Keep the small web. Capture your sites into portable capsules, map their links, compare changes, and browse them offline.</p>
               <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation">Waystation source &amp; installation <span aria-hidden="true">↗</span></a>
             </div>
@@ -70,7 +79,7 @@
                 <g fill="currentColor" font-family="monospace" font-size="8"><text x="28" y="132">1989</text><text x="83" y="22">1993</text><text x="134" y="119">2007</text><text x="202" y="25">2026</text></g>
               </svg>
             </div>
-            <div class="card-body"><p class="category">New project <span>/</span> LAMP · PHP + MariaDB</p><h3>Timefold</h3>
+            <div class="card-body"><p class="category">Personal archives <span>/</span> LAMP</p><h3>Timefold</h3>
               <p>A personal archive you can travel through. Keep photographs, Linux discoveries, game saves, and web fragments; turn the year dial and find the threads connecting them.</p>
               <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold">Timefold source &amp; installation <span aria-hidden="true">↗</span></a>
             </div>
@@ -104,6 +113,15 @@
             </div>
           </article>
         </div>
+      </div>
+    </section>
+    <section class="notes-strip" aria-labelledby="notes-title">
+      <div class="wrap notes-row">
+        <div class="notes-label"><h2 id="notes-title"><a href="/field-notes/">Field Notes</a></h2><a class="code-link" href="/field-notes/feed.xml">RSS feed <span aria-hidden="true">↗</span></a></div>
+        <article><p class="category"><time datetime="2026-11-12">12 November 2026</time> <span>/</span> Archiving</p>
+          <h3><a href="/field-notes/finding-the-dial-up-page/">Finding the dial-up page <span aria-hidden="true">→</span></a></h3>
+          <p>Follow a phrase from a search box to page two of a 1998-style community bulletin. Then try the same search in a Linux terminal.</p>
+        </article>
       </div>
     </section>
     <section class="run" id="run" aria-labelledby="run-heading">
