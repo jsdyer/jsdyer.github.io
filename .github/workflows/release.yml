@@ -36,7 +36,7 @@ jobs:
           git archive --format=zip --prefix=timefold/ HEAD:tools/timefold > release/timefold.zip
           (cd release && sha256sum timefold.zip > SHA256SUMS)
       - name: Save a downloadable Actions artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: timefold-portable
           path: release/
