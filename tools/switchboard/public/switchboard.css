@@ -1,0 +1,25 @@
+:root {
+  color-scheme: dark;
+  background: #151711;
+  color: #ededdc;
+  font-family: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+main { max-width: 56rem; margin: auto; padding: clamp(1.1rem, 5vw, 3rem); }
+header { border-top: .35rem solid #ccdf99; padding-top: 1rem; }
+.imprint, code, h2 { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+.imprint, a code { color: #c0cdad; font-size: .85rem; }
+h1 { font-size: clamp(2.8rem, 10vw, 5.3rem); letter-spacing: -.065em; margin: .35em 0 .05em; line-height: 1.1; }
+h1 span { color: #ccdf99; }
+header p { margin: .5rem 0 2rem; font-size: 1.15rem; }
+.notice { background: #252a1e; border-left: .2rem solid #ccdf99; padding: .8rem 1rem; line-height: 1.55; }
+section { margin-top: 2.5rem; }
+h2 { color: #ccdf99; font-size: 1.05rem; font-weight: 550; }
+ul { list-style: none; padding: 0; border-top: 1px solid #4a5141; }
+li { border-bottom: 1px solid #4a5141; }
+a { display: grid; gap: .38rem; padding: 1rem .6rem; color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+a strong { font-size: 1.2rem; }
+a span { line-height: 1.5; }
+a:hover, a:focus-visible { background: #22271b; }
+a:hover strong { text-decoration: underline; }
+a:focus-visible { outline: 2px solid #ccdf99; outline-offset: 2px; }

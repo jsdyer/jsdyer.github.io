@@ -1,0 +1,20 @@
+[
+  {
+    "group": "On the shelf",
+    "name": "Web archive",
+    "url": "http://archive.home.arpa:8080/",
+    "note": "Replay saved sites in pywb."
+  },
+  {
+    "group": "On the shelf",
+    "name": "Photo scans",
+    "url": "https://photos.home.arpa/",
+    "note": "Contact sheets and dated Polaroid scans."
+  },
+  {
+    "group": "Machine room",
+    "name": "Resolver console",
+    "url": "https://dns.home.arpa/",
+    "note": "Local DNS records for the lab."
+  }
+]

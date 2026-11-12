@@ -1,221 +1,133 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en-CA">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="CoolCode — Linux, networking, homelabs, and thoughtful little experiments for the open web.">
-  <meta name="theme-color" content="#0a1016">
-  <meta property="og:title" content="CoolCode — code, networks & curiosity">
-  <meta property="og:description" content="Independent projects, Linux tools, networking rabbit holes, and experiments for the open web.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://coolcode.ca/">
-  <title>CoolCode — code, networks & curiosity</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #0a1016; --surface: #111d26; --surface-2: #15232e;
-      --text: #e9f3f0; --muted: #a2b5bc; --subtle: #78919b;
-      --line: rgba(166, 215, 212, .15); --accent: #89ecc1; --accent-2: #9db9ff;
-      --chip: rgba(137, 236, 193, .1); --shadow: rgba(0, 0, 0, .28);
-    }
-    :root[data-theme="light"] {
-      color-scheme: light;
-      --bg: #f4f8f6; --surface: #ffffff; --surface-2: #eaf1ed;
-      --text: #162d2a; --muted: #46615e; --subtle: #617b78;
-      --line: rgba(36, 84, 71, .16); --accent: #0b7554; --accent-2: #345fa9;
-      --chip: rgba(24, 145, 100, .08); --shadow: rgba(16, 51, 45, .09);
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; transition: background .2s, color .2s; }
-    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .25; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 58px 58px; mask-image: linear-gradient(to bottom, black, transparent 75%); }
-    a { color: inherit; text-decoration: none; }
-    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
-    button { font: inherit; cursor: pointer; }
-    ::selection { background: var(--accent); color: var(--bg); }
-    .skip-link { position: absolute; top: -80px; left: 16px; z-index: 50; padding: 9px 15px; color: #092018; background: #89ecc1; border-radius: 9px; }
-    .skip-link:focus { top: 12px; }
-    .ambient { position: absolute; width: min(680px, 90vw); height: 520px; top: 60px; right: 0; pointer-events: none; background: radial-gradient(ellipse at 65% 40%, rgba(59, 174, 145, .15), transparent 67%); filter: blur(12px); }
-    .container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; position: relative; }
-    .header { display: flex; align-items: center; gap: 28px; justify-content: space-between; min-height: 90px; border-bottom: 1px solid var(--line); }
-    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 820; font-size: 21px; letter-spacing: -.8px; }
-    .brand-icon { width: 35px; height: 35px; display: grid; place-items: center; border-radius: 10px; background: var(--chip); color: var(--accent); border: 1px solid var(--line); font: 700 17px/1 ui-monospace, Consolas, monospace; }
-    .brand .dot { color: var(--accent); }
-    .nav { display: flex; gap: 28px; align-items: center; }
-    .nav a { font-size: 14px; font-weight: 650; color: var(--muted); transition: color .18s; }
-    .nav a:hover, .nav a[aria-current] { color: var(--accent); }
-    .nav .github-link { color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
-    .theme-toggle { flex: 0 0 auto; width: 41px; height: 41px; border: 1px solid var(--line); border-radius: 12px; color: var(--text); background: var(--surface); }
-    .theme-toggle:hover { border-color: var(--accent); }
-    .hero { min-height: 580px; padding: 95px 0 86px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr); gap: 56px; align-items: center; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); background: var(--chip); border: 1px solid var(--line); padding: 7px 13px; border-radius: 999px; font: 650 12px/1.3 ui-monospace, Consolas, monospace; letter-spacing: .03em; }
-    .signal { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 { margin: 24px 0; font-weight: 850; font-size: clamp(48px, 6.2vw, 82px); line-height: 1.04; letter-spacing: -.075em; }
-    h1 em { font-style: normal; background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: transparent; background-clip: text; }
-    .hero-copy { max-width: 565px; color: var(--muted); font-size: 18px; line-height: 1.8; }
-    .actions { display: flex; gap: 13px; flex-wrap: wrap; margin-top: 29px; }
-    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 45px; padding: 11px 18px; border-radius: 11px; border: 1px solid var(--line); font-size: 14px; font-weight: 750; transition: transform .15s, border-color .15s, background .15s; }
-    .button:hover { transform: translateY(-2px); border-color: var(--accent); }
-    .button.primary { background: var(--accent); color: #09271d; border-color: var(--accent); }
-    :root[data-theme="light"] .button.primary { color: #fff; }
-    .button.secondary { background: var(--surface); }
-    .terminal { border: 1px solid rgba(137, 236, 193, .26); border-radius: 17px; background: #0c151b; color: #dbece8; box-shadow: 0 24px 65px var(--shadow), 0 0 0 7px rgba(137,236,193,.025); overflow: hidden; transform: rotate(1.3deg); }
-    .terminal-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 17px; background: #16242c; border-bottom: 1px solid #2b3b43; font: 12px ui-monospace, Consolas, monospace; color: #9bb4b8; }
-    .lights { display: flex; gap: 7px; }
-    .lights i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #ee827c; }
-    .lights i:nth-child(2) { background: #eac777; }
-    .lights i:nth-child(3) { background: #81c99a; }
-    .term-body { padding: 25px 24px 28px; font: 13px/1.9 ui-monospace, "SFMono-Regular", Consolas, monospace; overflow-x: auto; white-space: nowrap; }
-    .term-body .prompt { color: #84edbc; }
-    .term-body .output { color: #a5bbbf; }
-    .term-body .violet { color: #b9c6ff; }
-    .term-body .space { height: 15px; }
-    .term-note { padding: 0 24px 20px; color: #6f8b91; font: 11px ui-monospace, Consolas, monospace; }
-    .section { border-top: 1px solid var(--line); padding: 76px 0 80px; }
-    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 27px; }
-    .kicker { margin: 0 0 12px; text-transform: uppercase; letter-spacing: .16em; font: 750 12px ui-monospace, Consolas, monospace; color: var(--accent); }
-    h2 { font-size: clamp(30px, 3.7vw, 43px); line-height: 1.13; letter-spacing: -.055em; margin-bottom: 12px; }
-    .section-intro { color: var(--muted); margin: 0; max-width: 580px; }
-    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 17px; padding: 26px 24px 24px; min-height: 264px; transition: border-color .2s, transform .2s; }
-    .card:hover { border-color: rgba(137,236,193,.55); transform: translateY(-3px); }
-    .card .card-symbol { display: inline-grid; place-items: center; background: var(--chip); color: var(--accent); height: 44px; width: 44px; border: 1px solid var(--line); border-radius: 11px; font: 800 19px ui-monospace, Consolas, monospace; }
-    .card .card-type { display: block; margin-top: 22px; color: var(--subtle); font: 700 11px ui-monospace, Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
-    .card h3 { margin: 5px 0 9px; font-size: 21px; letter-spacing: -.035em; }
-    .card p { font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 13px; }
-    .card a { color: var(--accent); font-size: 13px; font-weight: 750; }
-    .card a:hover { text-decoration: underline; text-underline-offset: 4px; }
-    .split { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 70px; }
-    .split p { color: var(--muted); }
-    .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 21px; }
-    .chip { font: 650 12px/1.3 ui-monospace, Consolas, monospace; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; }
-    .quote-box { padding: 32px; border-radius: 17px; background: linear-gradient(130deg, var(--surface), var(--surface-2)); border: 1px solid var(--line); }
-    .quote-box blockquote { margin: 0 0 21px; font-size: 24px; line-height: 1.45; letter-spacing: -.035em; font-weight: 680; }
-    .quote-box small { color: var(--subtle); font: 12px ui-monospace, Consolas, monospace; }
-    .start { border: 1px solid var(--line); border-radius: 17px; background: var(--surface); padding: 30px; }
-    .start-head { display: flex; justify-content: space-between; gap: 25px; align-items: center; margin-bottom: 16px; }
-    .start-head h3 { margin: 0; font-size: 21px; }
-    .copy { border: 1px solid var(--line); border-radius: 9px; padding: 8px 13px; color: var(--text); background: var(--surface-2); font-size: 12px; font-weight: 700; }
-    .copy:hover { border-color: var(--accent); }
-    pre { white-space: pre; margin: 0; overflow-x: auto; padding: 20px; background: #0c151b; color: #bed4d0; border-radius: 11px; font: 13px/1.9 ui-monospace, Consolas, monospace; }
-    pre .cmd { color: #93edc4; }
-    .start p { color: var(--muted); font-size: 13px; margin: 15px 0 0; }
-    .footer { padding: 29px 0 41px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--subtle); font-size: 13px; }
-    .footer a { color: var(--muted); }
-    .footer a:hover { color: var(--accent); }
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; gap: 46px; padding: 77px 0 70px; min-height: auto; }
-      .terminal { max-width: 650px; transform: none; }
-      .card-grid { grid-template-columns: 1fr 1fr; }
-      .card:last-child { grid-column: span 2; }
-      .split { gap: 32px; }
-    }
-    @media (max-width: 650px) {
-      .container { width: min(100% - 32px, 1120px); }
-      .header { gap: 14px; flex-wrap: wrap; padding: 18px 0; }
-      .nav { order: 3; width: 100%; justify-content: space-between; gap: 10px; }
-      .nav a { font-size: 12px; }
-      .hero { padding-top: 55px; gap: 38px; }
-      .hero-copy { font-size: 16px; }
-      .term-body { padding: 18px 14px 20px; font-size: 11px; }
-      .term-note { padding-left: 14px; }
-      .section { padding: 62px 0; }
-      .card-grid, .split { grid-template-columns: 1fr; }
-      .card:last-child { grid-column: auto; }
-      .card { min-height: auto; }
-      .quote-box { padding: 25px; }
-      .start { padding: 20px; }
-      .footer { flex-direction: column; align-items: flex-start; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17201c">
+  <meta name="description" content="Independent Linux tools for a home lab, a personal archive, and an Apache server. Source and setup notes by jsdyer.">
+  <title>CoolCode.ca · The Linux workbench</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/coolcode.css">
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="ambient" aria-hidden="true"></div>
-  <div class="container">
-    <header class="header">
-      <a class="brand" href="/" aria-label="CoolCode, home"><span class="brand-icon" aria-hidden="true">&gt;_</span><span>coolcode<span class="dot">.</span>ca</span></a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#projects">Projects</a><a href="#about">About</a><a href="#get-started">Try it</a><a class="github-link" href="https://github.com/jsdyer" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast">
+    <div class="wrap mast-inner">
+      <a class="wordmark" href="#top" aria-label="CoolCode.ca home"><span aria-hidden="true" class="mark">&gt;_</span>CoolCode<span class="domain">.ca</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#projects">Projects</a>
+        <a href="#run">Run locally</a>
+        <a class="external" href="https://github.com/jsdyer">GitHub <span aria-hidden="true">↗</span></a>
+        <button class="theme" id="theme" type="button" hidden aria-label="Dark mode" aria-pressed="false" title="Toggle dark mode">◐</button>
       </nav>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle colour theme">☼</button>
-    </header>
-    <main id="main">
-      <section class="hero" aria-labelledby="hero-title">
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" id="about" aria-labelledby="hero-title">
+      <div class="wrap hero-inner">
         <div>
-          <span class="eyebrow"><span class="signal" aria-hidden="true"></span> ~/the-open-web · established by curiosity</span>
-          <h1 id="hero-title">Make things.<br>Ask <em>why.</em></h1>
-          <p class="hero-copy">Linux, networks, homelabs, and the occasional trip down an internet rabbit hole. A home for useful little tools, technical experiments, and notes from figuring things out.</p>
-          <div class="actions"><a class="button primary" href="#projects">Explore projects <span aria-hidden="true">↗</span></a><a class="button secondary" href="https://github.com/jsdyer" target="_blank" rel="noopener noreferrer">View GitHub <span aria-hidden="true">↗</span></a></div>
+          <p class="byline"><span aria-hidden="true"></span>A software collection by jsdyer</p>
+          <h1 id="hero-title">The Linux<br><em>workbench.</em></h1>
+          <p class="intro">Small, self-hosted tools for the home lab. Keep an archive, read your server logs, and see which machines respond to ping.</p>
+          <a class="primary" href="#projects">Explore the projects <span aria-hidden="true">↓</span></a>
         </div>
-        <div class="terminal" aria-label="Illustrative Linux terminal session">
-          <div class="terminal-top"><div class="lights" aria-hidden="true"><i></i><i></i><i></i></div><span>coolcode — bash</span><span>●</span></div>
-          <div class="term-body">
-            <div><span class="prompt">$</span> uname -s</div><div class="output">Linux</div>
-            <div class="space"></div>
-            <div><span class="prompt">$</span> ls ~/interests</div><div class="output">dns/ &nbsp; self-hosting/ &nbsp; web/ &nbsp; retro/</div>
-            <div class="space"></div>
-            <div><span class="prompt">$</span> lanwatch status</div><div><span class="prompt">●</span> router &nbsp;&nbsp; <span class="violet">UP</span></div><div><span class="prompt">●</span> nas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="violet">UP</span></div>
-            <div class="space"></div><div><span class="prompt">$</span> <span class="output">_</span></div>
+        <figure class="computer">
+          <div class="case">
+            <div class="well"><div class="glass">
+              <div class="tty-top"><span>Slackware Linux</span><span>tty1</span></div>
+              <div class="login">coolcode login: guest</div>
+              <div><b>guest@lab:~$</b> cd ~/src/jsdyer.github.io</div>
+              <div><b>$</b> cd tools/tape-index</div>
+              <div><b>$</b> python3 tape_index.py verify &#92;</div>
+              <div class="indent">~/polaroids ~/polaroids.json</div>
+              <div class="result">Verified 2 file(s).</div>
+              <div><b>$</b> <span class="cursor" aria-hidden="true"></span></div>
+            </div></div>
+            <div class="chin" aria-hidden="true"><span>COOLCODE / CRT</span><i></i><b></b></div>
           </div>
-          <div class="term-note">// demo terminal · not live network data</div>
+          <div class="stand" aria-hidden="true"></div>
+          <figcaption>Tape Index <span>/</span> sample console session</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="projects" id="projects" aria-labelledby="projects-heading">
+      <div class="wrap">
+        <div class="section-head"><h2 id="projects-heading">Project directory</h2><a class="code-link" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools">Browse source <span aria-hidden="true">↗</span></a></div>
+        <div class="catalogue">
+          <article class="card">
+            <div class="cover archive" aria-hidden="true"><div class="cassette"><div class="tape-label"><span>FIELD RECORDS</span><b>A</b></div><div class="wheels"><i></i><span></span><i></i></div><div class="tape-base"></div></div></div>
+            <div class="card-body"><p class="category">Archiving <span>/</span> Python</p><h3>Tape Index</h3>
+              <p>Fingerprint Polaroid scans, web archives, or old game saves. Verify a travel drive offline and see what changed.</p>
+              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index">Tape Index guide <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="cover switchboard" aria-hidden="true"><div class="patch"><div class="patch-vents"></div><div class="ports"><i></i><i></i><i></i><i></i></div><div class="port-labels"><b>1</b><b>2</b><b>3</b><b>4</b></div></div></div>
+            <div class="card-body"><p class="category">Self-hosting <span>/</span> PHP</p><h3>Switchboard</h3>
+              <p>Give your NAS, DNS console, and web archive a common front door. Edit a local JSON file to change the links.</p>
+              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard">Switchboard guide <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="cover logbook" aria-hidden="true"><div class="sheet"><b>ACCESS.LOG</b><div class="book-lines"></div></div></div>
+            <div class="card-body"><p class="category">LAMP <span>/</span> PHP CLI</p><h3>Vhost Logbook</h3>
+              <p>Read an Apache access log from disk or stdin. Count requests, HTTP status classes, and bytes served for each day.</p>
+              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook">Vhost Logbook guide <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="cover lan" aria-hidden="true"><div class="rack"><div><i></i><b></b></div><div><i></i><b></b></div><div><i></i><b></b></div></div></div>
+            <div class="card-body"><p class="category">Networking <span>/</span> Python + SQLite</p><h3>LANWatch</h3>
+              <p>Ping the devices you choose and keep a local history of replies. Look up when a router or lab machine last changed state.</p>
+              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch">LANWatch guide <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
         </div>
-      </section>
-      <section class="section" id="projects" aria-labelledby="projects-title">
-        <div class="section-heading"><div><p class="kicker">01 / things worth building</p><h2 id="projects-title">Projects & rabbit holes</h2><p class="section-intro">Small tools and big questions. The fun is in making something useful, then understanding how it works.</p></div></div>
-        <div class="card-grid">
-          <article class="card"><span class="card-symbol" aria-hidden="true">$_</span><span class="card-type">Open-source tool · Python / SQLite</span><h3>LANWatch</h3><p>Monitor devices on your local network, save availability history, and spot online/offline changes. Just Linux and the standard library.</p><a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch">Browse the source ↗</a></article>
-          <article class="card"><span class="card-symbol" aria-hidden="true">⇄</span><span class="card-type">Area of exploration</span><h3>Networks & DNS</h3><p>Routing quirks, resolvers, packet paths, and the wonderfully strange ways traffic finds its destination.</p></article>
-          <article class="card"><span class="card-symbol" aria-hidden="true">{ }</span><span class="card-type">Area of exploration</span><h3>Web & self-hosting</h3><p>Simple services, practical automation, and a preference for tools you can understand, maintain, and run yourself.</p></article>
+      </div>
+    </section>
+    <section class="run" id="run" aria-labelledby="run-heading">
+      <div class="wrap run-inner" id="get-started">
+        <div><h2 id="run-heading">Run one locally.</h2><p>Start with Vhost Logbook. These commands use Git, the PHP CLI, and the sample Apache log included in the repository.</p></div>
+        <div class="recipe"><div class="recipe-head"><span>Shell commands</span><button id="copy" type="button" hidden>Copy</button></div>
+          <pre tabindex="0" aria-label="Shell commands to run Vhost Logbook"><code id="commands">git clone https://github.com/jsdyer/jsdyer.github.io.git
+cd jsdyer.github.io
+php tools/logbook/logbook.php tools/logbook/example.log</code></pre>
+          <span id="copy-state" class="sr-only" aria-live="polite"></span>
         </div>
-      </section>
-      <section class="section" id="about" aria-labelledby="about-title">
-        <div class="split">
-          <div><p class="kicker">02 / about this corner</p><h2 id="about-title">Built for the curious.</h2><p>This is a personal playground for software, systems administration, networking, and the open web. Not everything needs to be a startup, a framework, or a perfectly polished product.</p><p>Sometimes a small script, a weird DNS answer, or an old protocol is more interesting than the shiny new thing.</p><div class="chips"><span class="chip">Linux</span><span class="chip">Python</span><span class="chip">PHP</span><span class="chip">DNS</span><span class="chip">SQLite</span><span class="chip">Homelabs</span><span class="chip">Open web</span></div></div>
-          <aside class="quote-box"><p class="kicker">The guiding principle</p><blockquote>“If you can run it, inspect it, break it, and fix it, you've probably learned something worthwhile.”</blockquote><small>— a working philosophy, not a production SLA</small></aside>
-        </div>
-      </section>
-      <section class="section" id="get-started" aria-labelledby="start-title">
-        <div class="split">
-          <div><p class="kicker">03 / get your hands dirty</p><h2 id="start-title">Start on Linux.</h2><p>This whole website is plain HTML and CSS hosted with GitHub Pages. Clone the source, serve it locally, and change whatever you like.</p><p>No build chain, dependencies, or deployment platform required for a local preview.</p><a class="button secondary" href="https://github.com/jsdyer/jsdyer.github.io">Open the repository ↗</a></div>
-          <div class="start"><div class="start-head"><h3>Three commands to start</h3><button class="copy" type="button" id="copy-command" aria-label="Copy setup commands">Copy</button></div><pre id="setup-commands"><span class="cmd">git clone</span> https://github.com/jsdyer/jsdyer.github.io.git
-<span class="cmd">cd</span> jsdyer.github.io
-<span class="cmd">python3</span> -m http.server 8000</pre><p>Then open <strong>localhost:8000</strong> in your browser. For LANWatch, see the <a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch" style="color:var(--accent);text-decoration:underline">project instructions</a>.</p></div>
-        </div>
-      </section>
-    </main>
-    <footer class="footer"><span>© <span id="year">2026</span> CoolCode · Built on the open web, served by GitHub Pages.</span><span><a href="https://github.com/jsdyer" target="_blank" rel="noopener noreferrer">GitHub</a> &nbsp;·&nbsp; <a href="#main">Back to top ↑</a></span></footer>
-  </div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap footer-inner"><a class="foot-brand" href="#top">CoolCode.ca</a><a href="https://www.gnu.org/philosophy/free-sw.html">GNU free software philosophy <span aria-hidden="true">↗</span></a><a href="https://github.com/jsdyer/jsdyer.github.io">Site source <span aria-hidden="true">↗</span></a></div></footer>
   <script>
-    (() => {
-      const root = document.documentElement;
-      const toggle = document.getElementById('theme-toggle');
-      const copy = document.getElementById('copy-command');
-      const command = 'git clone https://github.com/jsdyer/jsdyer.github.io.git\ncd jsdyer.github.io\npython3 -m http.server 8000';
-      const applyTheme = theme => {
-        root.dataset.theme = theme;
-        toggle.textContent = theme === 'dark' ? '☼' : '☾';
-        toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0a1016' : '#f4f8f6';
-      };
-      try { if (localStorage.getItem('coolcode-theme') === 'light') applyTheme('light'); } catch (_) {}
-      toggle.addEventListener('click', () => {
-        const theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-        applyTheme(theme);
-        try { localStorage.setItem('coolcode-theme', theme); } catch (_) {}
-      });
-      copy.addEventListener('click', async () => {
+    const themeButton = document.getElementById('theme');
+    function setTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
+    }
+    try { setTheme(localStorage.getItem('coolcode-theme') === 'dark' ? 'dark' : 'light'); }
+    catch { setTheme('light'); }
+    themeButton.hidden = false;
+    themeButton.addEventListener('click', () => {
+      const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      setTheme(theme);
+      try { localStorage.setItem('coolcode-theme', theme); } catch { /* Storage is optional. */ }
+    });
+    const copyButton = document.getElementById('copy');
+    if (navigator.clipboard && window.isSecureContext) {
+      copyButton.hidden = false;
+      copyButton.addEventListener('click', async () => {
+        const result = document.getElementById('copy-state');
         try {
-          await navigator.clipboard.writeText(command);
-          copy.textContent = 'Copied ✓';
-        } catch (_) { copy.textContent = 'Select & copy'; }
-        window.setTimeout(() => { copy.textContent = 'Copy'; }, 1800);
+          await navigator.clipboard.writeText(document.getElementById('commands').textContent);
+          copyButton.textContent = 'Copied';
+          result.textContent = 'Commands copied.';
+        } catch {
+          result.classList.remove('sr-only');
+          result.textContent = 'Select the commands to copy them manually.';
+        }
       });
-      document.getElementById('year').textContent = new Date().getFullYear();
-    })();
+    }
   </script>
 </body>
 </html>

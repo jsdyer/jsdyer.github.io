@@ -1,0 +1,6 @@
+192.0.2.4 - - [01/Nov/2026:23:59:50 -0800] "GET / HTTP/1.1" 200 1250 "-" "ExampleBrowser/1.0"
+198.51.100.7 - - [02/Nov/2026:00:03:01 -0800] "GET /zine/ HTTP/1.1" 301 120 "-" "ExampleBrowser/1.0"
+192.0.2.4 - - [02/Nov/2026:00:03:02 -0800] "GET /zine/index.html HTTP/1.1" 200 640 "-" "ExampleBrowser/1.0"
+203.0.113.8 - - [02/Nov/2026:08:21:13 -0800] "GET /gone HTTP/1.1" 404 210
+198.51.100.7 - - [02/Nov/2026:09:04:14 -0800] "GET /feed.xml HTTP/1.1" 304 -
+archive.example:443 203.0.113.9 - - [02/Nov/2026:12:20:01 -0800] "GET /search?q=demo HTTP/1.1" 503 83 "-" "ExampleBrowser/1.0"

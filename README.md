@@ -1,41 +1,40 @@
-# coolcode.ca
+# CoolCode.ca
 
-A lightweight personal site for Linux, networking, code and small tools. Published from this repository with [GitHub Pages](https://pages.github.com/) at **https://coolcode.ca/**.
+A Linux workbench for archiving, self-hosting and running a home lab. The public site is a catalogue. Each project lives in its own directory with source and a Linux walkthrough.
 
-## How it is hosted
+| Project | What you can do | Runs with |
+| --- | --- | --- |
+| [Tape Index](tools/tape-index/README.md) | Verify a backup of a WARC collection, photo scans or game saves against a SHA-256 manifest. | Python 3 |
+| [Switchboard](tools/switchboard/README.md) | Serve a LAN start page with links to your archive, NAS and DNS console. | PHP 8+ |
+| [Vhost Logbook](tools/logbook/README.md) | Summarize a local Apache access log by date and HTTP status. | PHP CLI 8+ |
+| [LANWatch](tools/lanwatch/README.md) | Check the hosts you choose and keep their availability history in SQLite. | Python 3 and Linux iputils ping |
 
-- The repo is named `jsdyer.github.io`, which is GitHub's special user-site naming convention.
-- `index.html` is the homepage; `favicon.svg` is its icon. This is a static site with no third-party frameworks or trackers.
-- The existing root `CNAME` contains `coolcode.ca`, GitHub Pages' custom domain. **Do not delete it** unless intentionally changing the domain.
-- `.nojekyll` tells Pages to serve the HTML files directly; the old `_config.yml` is a harmless leftover from the previous Jekyll theme.
-- `tools/lanwatch/` is an independent, dependency-free Linux utility. Its data stays local, not on the website.
+## First run on Linux
 
-## Local Linux preview
+With Git and the PHP CLI installed, try the included six-request Apache log.
 
-```bash
-sudo apt install git python3
-mkdir -p ~/src && cd ~/src
+```sh
+mkdir -p ~/src
+cd ~/src
 git clone https://github.com/jsdyer/jsdyer.github.io.git
 cd jsdyer.github.io
-python3 -m http.server 8000
+php tools/logbook/logbook.php tools/logbook/example.log
 ```
 
-Visit `http://localhost:8000`. Edit `index.html` with any text editor and reload the browser. Stop the local server with Ctrl+C.
+If you already have the checkout, run `git pull --ff-only` in it and skip the clone. On Debian and Ubuntu the packages for all four projects are `git python3 php-cli iputils-ping`. The project guides cover configuration, examples and output.
 
-## Update the live website
+## Preview and publish the homepage
 
-From the repository directory:
+From the repository root, run this to preview on your LAN:
 
-```bash
-git pull --ff-only
-nano index.html
-git add index.html
-git commit -m "Update CoolCode homepage"
-git push origin main
+```sh
+python3 -m http.server 8000 --bind 0.0.0.0
 ```
 
-GitHub authentication is required for pushes. GitHub Pages will then publish the updated files automatically when configured to build from the `main` branch root. If publication fails, check **Repository Settings → Pages** and the repository's Actions build history.
+Open `http://localhost:8000/` on the Linux machine or `http://YOUR-LAN-IP:8000/` from another device. Press Ctrl+C to stop. Switchboard has its own PHP server command in its guide.
 
-## Other project
+GitHub Pages publishes the static homepage at [coolcode.ca](https://coolcode.ca/). The root `CNAME` records the custom domain, and `.nojekyll` enables static publishing. The PHP and Python tools run on the machine where you install them.
 
-[LANWatch — Linux LAN availability logger](tools/lanwatch/README.md)
+## Add another project
+
+Put the code and a short README in a new directory under `tools/`. Include a command someone can run with sample data. Add a project card to the directory in `index.html` and a row in the table above. Preview the page locally, then commit the files and push to `main`. The [Pages workflow history](https://github.com/jsdyer/jsdyer.github.io/actions) shows when the updated site is deployed.
