@@ -17,7 +17,7 @@ artifacts; Waystation preserves the websites that give those artifacts context.
 ## Try the disappearing-server demo
 
 Download the archive for your machine from the
-[Waystation v0.1.0 release](https://github.com/jsdyer/jsdyer.github.io/releases/tag/waystation-v0.1.0),
+[Waystation v0.1.1 release](https://github.com/jsdyer/jsdyer.github.io/releases/tag/waystation-v0.1.1),
 extract it, and run:
 
 ```sh
