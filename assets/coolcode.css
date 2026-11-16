@@ -85,9 +85,89 @@ figcaption span, .category span { opacity: .62; padding-inline: .3em; }
 .tool-groups { min-width: 0; display: grid; gap: 1.55rem; }
 .tool-group { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); }
 .tool-group:target { border-color: var(--accent); }
-.tool-group h3 { margin: 0; padding: .85rem 1rem; border-bottom: 1px solid var(--line); font: 700 1rem/1.3 var(--mono); letter-spacing: -.04em; }
+.tool-group h3 { display: flex; align-items: center; gap: .65rem; margin: 0; padding: .85rem 1rem; border-bottom: 1px solid var(--line); font: 700 1rem/1.3 var(--mono); letter-spacing: -.04em; }
 .tool-group ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; }
-.tool-group li { min-width: 0; padding: .85rem 1rem; background: var(--surface); box-shadow: 0 0 0 .5px var(--line); }
+.tool-group li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); align-items: start; gap: .7rem; min-width: 0; padding: .85rem 1rem; background: var(--surface); box-shadow: 0 0 0 .5px var(--line); }
+.tool-entry { min-width: 0; }
+.tool-icon {
+  --glyph-size: 1.2rem;
+  display: grid; place-items: center; width: 2rem; height: 2rem; flex: 0 0 auto;
+  color: var(--icon-ink, var(--accent));
+  background: color-mix(in srgb, currentColor 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, currentColor 30%, var(--line));
+  border-radius: 4px;
+}
+.tool-icon::before {
+  content: ""; width: var(--glyph-size); height: var(--glyph-size);
+  background: currentColor;
+  mask: url("workbench-icons.png") var(--glyph-x) var(--glyph-y) / 800% 700% no-repeat;
+}
+.tool-group h3 .tool-icon { width: 2.15rem; height: 2.15rem; --glyph-size: 1.32rem; }
+#liminal-tools { --icon-ink: #365968; }
+#explorers { --icon-ink: #76502d; }
+#places { --icon-ink: #2f6357; }
+#field-kit { --icon-ink: #515982; }
+#money { --icon-ink: #625f31; }
+#media { --icon-ink: #674562; }
+:root[data-theme="dark"] #liminal-tools { --icon-ink: #92bcc7; }
+:root[data-theme="dark"] #explorers { --icon-ink: #d1ab80; }
+:root[data-theme="dark"] #places { --icon-ink: #8bc6b3; }
+:root[data-theme="dark"] #field-kit { --icon-ink: #b0bae3; }
+:root[data-theme="dark"] #money { --icon-ink: #c2c18b; }
+:root[data-theme="dark"] #media { --icon-ink: #c5a4c4; }
+
+/* Lucide raster sprite, 8 columns by 7 rows. See workbench-icons.LICENSE.txt. */
+[data-icon="server-cog"] { --glyph-x: 0.0000%; --glyph-y: 0.0000%; }
+[data-icon="network"] { --glyph-x: 14.2857%; --glyph-y: 0.0000%; }
+[data-icon="landmark"] { --glyph-x: 28.5714%; --glyph-y: 0.0000%; }
+[data-icon="map"] { --glyph-x: 42.8571%; --glyph-y: 0.0000%; }
+[data-icon="moon-star"] { --glyph-x: 57.1429%; --glyph-y: 0.0000%; }
+[data-icon="wallet"] { --glyph-x: 71.4286%; --glyph-y: 0.0000%; }
+[data-icon="film"] { --glyph-x: 85.7143%; --glyph-y: 0.0000%; }
+[data-icon="server"] { --glyph-x: 100.0000%; --glyph-y: 0.0000%; }
+[data-icon="layout-dashboard"] { --glyph-x: 0.0000%; --glyph-y: 16.6667%; }
+[data-icon="scroll-text"] { --glyph-x: 14.2857%; --glyph-y: 16.6667%; }
+[data-icon="activity"] { --glyph-x: 28.5714%; --glyph-y: 16.6667%; }
+[data-icon="library-big"] { --glyph-x: 42.8571%; --glyph-y: 16.6667%; }
+[data-icon="package-open"] { --glyph-x: 57.1429%; --glyph-y: 16.6667%; }
+[data-icon="history"] { --glyph-x: 71.4286%; --glyph-y: 16.6667%; }
+[data-icon="cassette-tape"] { --glyph-x: 85.7143%; --glyph-y: 16.6667%; }
+[data-icon="scan-search"] { --glyph-x: 100.0000%; --glyph-y: 16.6667%; }
+[data-icon="route"] { --glyph-x: 0.0000%; --glyph-y: 33.3333%; }
+[data-icon="radar"] { --glyph-x: 14.2857%; --glyph-y: 33.3333%; }
+[data-icon="shield-alert"] { --glyph-x: 28.5714%; --glyph-y: 33.3333%; }
+[data-icon="signpost-big"] { --glyph-x: 42.8571%; --glyph-y: 33.3333%; }
+[data-icon="arrow-left-right"] { --glyph-x: 57.1429%; --glyph-y: 33.3333%; }
+[data-icon="layers"] { --glyph-x: 71.4286%; --glyph-y: 33.3333%; }
+[data-icon="wifi-off"] { --glyph-x: 85.7143%; --glyph-y: 33.3333%; }
+[data-icon="files"] { --glyph-x: 100.0000%; --glyph-y: 33.3333%; }
+[data-icon="file-text"] { --glyph-x: 0.0000%; --glyph-y: 50.0000%; }
+[data-icon="scan-text"] { --glyph-x: 14.2857%; --glyph-y: 50.0000%; }
+[data-icon="list-ordered"] { --glyph-x: 28.5714%; --glyph-y: 50.0000%; }
+[data-icon="mic-vocal"] { --glyph-x: 42.8571%; --glyph-y: 50.0000%; }
+[data-icon="gavel"] { --glyph-x: 57.1429%; --glyph-y: 50.0000%; }
+[data-icon="database"] { --glyph-x: 71.4286%; --glyph-y: 50.0000%; }
+[data-icon="archive-x"] { --glyph-x: 85.7143%; --glyph-y: 50.0000%; }
+[data-icon="building-2"] { --glyph-x: 100.0000%; --glyph-y: 50.0000%; }
+[data-icon="chart-no-axes-combined"] { --glyph-x: 0.0000%; --glyph-y: 66.6667%; }
+[data-icon="bike"] { --glyph-x: 14.2857%; --glyph-y: 66.6667%; }
+[data-icon="anchor"] { --glyph-x: 28.5714%; --glyph-y: 66.6667%; }
+[data-icon="brick-wall"] { --glyph-x: 42.8571%; --glyph-y: 66.6667%; }
+[data-icon="map-pin"] { --glyph-x: 57.1429%; --glyph-y: 66.6667%; }
+[data-icon="plane"] { --glyph-x: 71.4286%; --glyph-y: 66.6667%; }
+[data-icon="telescope"] { --glyph-x: 85.7143%; --glyph-y: 66.6667%; }
+[data-icon="satellite"] { --glyph-x: 100.0000%; --glyph-y: 66.6667%; }
+[data-icon="camera"] { --glyph-x: 0.0000%; --glyph-y: 83.3333%; }
+[data-icon="percent"] { --glyph-x: 14.2857%; --glyph-y: 83.3333%; }
+[data-icon="shopping-basket"] { --glyph-x: 28.5714%; --glyph-y: 83.3333%; }
+[data-icon="chart-candlestick"] { --glyph-x: 42.8571%; --glyph-y: 83.3333%; }
+[data-icon="calendar-days"] { --glyph-x: 57.1429%; --glyph-y: 83.3333%; }
+[data-icon="tv-minimal"] { --glyph-x: 71.4286%; --glyph-y: 83.3333%; }
+[data-icon="disc-3"] { --glyph-x: 85.7143%; --glyph-y: 83.3333%; }
+[data-icon="unlink-2"] { --glyph-x: 100.0000%; --glyph-y: 83.3333%; }
+[data-icon="file-code-2"] { --glyph-x: 0.0000%; --glyph-y: 100.0000%; }
+[data-icon="gamepad-2"] { --glyph-x: 14.2857%; --glyph-y: 100.0000%; }
+
 .tool-group a { display: flex; align-items: baseline; justify-content: space-between; gap: .55rem; font-weight: 750; line-height: 1.35; }
 .tool-group a span:first-child { overflow-wrap: anywhere; }
 .tool-group a span:last-child { color: var(--accent); font-family: var(--mono); }
