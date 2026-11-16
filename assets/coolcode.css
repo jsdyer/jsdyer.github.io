@@ -68,7 +68,7 @@ figcaption span, .category span { opacity: .62; padding-inline: .3em; }
 .research-directory > h3 { margin-bottom: 1.1rem; }
 .research-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.5vw, 20px); }
 .research-group { min-width: 0; padding: 1.1rem 1.25rem; border: 1px solid var(--line); background: #faf9ed; }
-.research-group h4 { margin: 0; color: inherit; font: 700 .86rem/1.4 var(--mono); }
+.research-group :is(h3,h4) { margin: 0; color: inherit; font: 700 .86rem/1.4 var(--mono); }
 .research-group ul { padding: 0; margin: 0; list-style: none; }
 .research-group li { padding: .75rem 0; border-top: 1px solid var(--line); }
 .research-group li:first-child { margin-top: .65rem; }
@@ -200,7 +200,7 @@ footer a { font-weight: 500; font-size: .74rem; }
   .mark { margin-right: .4rem; }
 }
 @media (max-width: 540px) {
-  nav { gap: .52rem; }
+  nav { flex-wrap: wrap; gap: .52rem; }
   .mast-inner { flex-wrap: wrap; padding-block: .75rem; gap: .7rem; }
 }
 @media (max-width: 365px) {
