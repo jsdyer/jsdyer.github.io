@@ -60,6 +60,10 @@ h1 em { font-style: normal; color: var(--signal); }
 figcaption { text-align: center; margin-top: .9rem; color: #acb7aa; font: .68rem/1.5 var(--mono); }
 figcaption span, .category span { opacity: .62; padding-inline: .3em; }
 
+.explorers { padding: clamp(32px, 4.5vw, 60px) 0; border-bottom: 1px solid var(--line); }
+.explorer-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.5vw, 20px); }
+.explorer-grid .card { display: flex; border-top: 3px solid #6c8957; }
+@media (max-width: 690px) { .explorer-grid { grid-template-columns: 1fr; } }
 .projects { padding: clamp(42px, 5vw, 76px) 0; background-image: radial-gradient(#49513c1c .6px, transparent .6px); background-size: 5px 5px; }
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
 h2 { font-weight: 720; font-size: clamp(2.1rem, 3.5vw, 3.45rem); letter-spacing: -.065em; line-height: 1.1; }
