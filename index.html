@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#17201c">
-  <meta name="description" content="Independent Linux tools for a home lab, a personal archive, and an Apache server. Source and setup notes by jsdyer.">
+  <meta name="description" content="A Linux and homelab workbench with open-source projects, browser utilities and Canadian public data explorers.">
   <title>CoolCode.ca · The Linux workbench</title>
   <link rel="alternate" type="application/rss+xml" title="CoolCode Field Notes" href="/field-notes/feed.xml">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/coolcode.css">
+  <script src="assets/tool-index.js" defer></script>
 </head>
 <body id="top">
   <a class="skip" href="#main">Skip to content</a>
@@ -16,8 +17,8 @@
     <div class="wrap mast-inner">
       <a class="wordmark" href="#top" aria-label="CoolCode.ca home"><span aria-hidden="true" class="mark">&gt;_</span>CoolCode<span class="domain">.ca</span></a>
       <nav aria-label="Main navigation">
-        <a href="#projects">Projects</a>
-        <a href="#liminal-tools">Liminal tools</a>
+        <a href="#workbench">Tool index</a>
+        <a href="#projects">Linux projects</a>
         <a href="/field-notes/">Field Notes</a>
         <a href="#run">Run locally</a>
         <a class="external" href="https://github.com/jsdyer">GitHub <span aria-hidden="true">↗</span></a>
@@ -31,8 +32,9 @@
         <div>
           <p class="byline"><span aria-hidden="true"></span>A software collection by jsdyer</p>
           <h1 id="hero-title">The Linux<br><em>workbench.</em></h1>
-          <p class="intro">Independent tools for your home lab. Search a box of old newsletters, keep a website alive offline, or see what your Apache server has been serving.</p>
-          <a class="primary" href="#projects">Explore the projects <span aria-hidden="true">↓</span></a>
+          <p class="intro">Open-source projects for your home lab, browser tools for network and file analysis, and explorers for Canadian public data.</p>
+          <div class="hero-actions"><a class="primary" href="#workbench">Find a tool <span aria-hidden="true">↓</span></a>
+            <a class="code-link" href="#homelab">From the home lab <span aria-hidden="true">↓</span></a></div>
         </div>
         <figure class="computer">
           <div class="case">
@@ -54,122 +56,10 @@
       </div>
     </section>
 
-    <section class="explorers" id="explorers" aria-labelledby="explorers-heading">
+    <section class="projects" id="homelab" aria-labelledby="homelab-heading">
       <div class="wrap">
-        <div class="section-head"><h2 id="explorers-heading">Open data explorers</h2></div>
-        <div class="explorer-grid">
-          <article class="card">
-            <div class="card-body"><p class="category">Federal government <span>/</span> Access to information</p><h3>ATIP Records Explorer</h3>
-              <p>Search completed requests, ask for a copy of records already released, or draft a new access request.</p>
-              <a class="guide" href="/atip/">Search completed requests <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-body"><p class="category">Nova Scotia <span>/</span> Marine heritage</p><h3>Shipwreck Explorer</h3>
-              <p>Search vessel histories, follow a timeline of losses, and map wreck areas along the Nova Scotia coast.</p>
-              <a class="guide" href="/shipwrecks/">Explore shipwrecks <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-body"><p class="category">Canada <span>/</span> Historic places</p><h3>Forgotten Places</h3>
-              <p>Explore military sites, industrial heritage, and traces of old settlements in the federal register.</p>
-              <a class="guide" href="/forgottenplaces/">Open the atlas <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-body"><p class="category">Federal government <span>/</span> Briefing notes</p><h3>The Briefing Room</h3>
-              <p>Search briefing note titles and reference numbers, then use what you find to draft a records request.</p>
-              <a class="guide" href="/briefings/">Search briefing notes <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-        </div>
-        <div class="research-directory">
-          <h3>More open data explorers</h3>
-          <div class="research-groups">
-            <section class="research-group">
-              <h4>Places and occurrences</h4>
-              <ul>
-                <li><a href="/strangeskies/">Strange Skies Canada <span aria-hidden="true">→</span></a><p>Search aviation occurrence reports by location, year and event.</p></li>
-                <li><a href="/namesforget/">Names That Time Forgot <span aria-hidden="true">→</span></a><p>Trace unusual and historical Canadian place names.</p></li>
-              </ul>
-            </section>
-            <section class="research-group">
-              <h4>Government records</h4>
-              <ul>
-                <li><a href="/ministersays/">What the Minister Was Prepared to Say <span aria-hidden="true">→</span></a><p>Compare prepared Question Period notes and the issues they addressed.</p></li>
-                <li><a href="/atippopularity/">The ATIP Popularity Index <span aria-hidden="true">→</span></a><p>See which released records received the most informal copy requests.</p></li>
-                <li><a href="/wrongdoings/">The Government’s Wrongdoing Files <span aria-hidden="true">→</span></a><p>Read published findings, recommendations and corrective actions.</p></li>
-              </ul>
-            </section>
-            <section class="research-group">
-              <h4>Datasets and registries</h4>
-              <ul>
-                <li><a href="/datasetexplorer/">The Government Dataset Explorer <span aria-hidden="true">→</span></a><p>Find federal datasets and their downloadable files.</p></li>
-                <li><a href="/opendatagraveyard/">The Open Data Graveyard <span aria-hidden="true">→</span></a><p>Follow the traces of entries removed from the catalogue.</p></li>
-                <li><a href="/corporateghosts/">Corporate Ghosts <span aria-hidden="true">→</span></a><p>Research federal corporations and compare official statuses.</p></li>
-                <li><a href="/canadaanalytics/">Canada.ca Pulse <span aria-hidden="true">→</span></a><p>Explore recent patterns in government website usage.</p></li>
-                <li><a href="/unreleased/">The Unreleased Worlds Index <span aria-hidden="true">→</span></a><p>Open a Canada Media Fund export to search funded games, films and digital projects.</p></li>
-              </ul>
-            </section>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="explorers" id="liminal-tools" aria-labelledby="liminal-heading">
-      <div class="wrap">
-        <div class="section-head"><h2 id="liminal-heading">Liminal tools</h2></div>
-        <div class="research-groups">
-          <section class="research-group">
-            <h3>Local file analysis</h3>
-            <ul>
-              <li><a href="/evidencelab/">Evidence Lab <span aria-hidden="true">→</span></a><p>Turn disclosure PDFs into searchable notes and page citations.</p></li>
-              <li><a href="/trackerxray/">Tracker X-Ray <span aria-hidden="true">→</span></a><p>Trace the domains, cookies, and transfers recorded in a browser HAR.</p></li>
-            </ul>
-          </section>
-          <section class="research-group">
-            <h3>Internet infrastructure</h3>
-            <ul>
-              <li><a href="/routearchaeologist/">Route Archaeologist <span aria-hidden="true">→</span></a><p>Trace BGP route history by ASN or prefix.</p></li>
-              <li><a href="/onionpulse/">Onion Pulse <span aria-hidden="true">→</span></a><p>Explore how aggregate Tor metrics change over time.</p></li>
-              <li><a href="/blockedorgone/">Blocked or Gone? <span aria-hidden="true">→</span></a><p>Compare public network-interference measurements and their coverage.</p></li>
-              <li><a href="/exploitgraveyard/">Exploit Graveyard <span aria-hidden="true">→</span></a><p>Find software with documented exploitation in CISA’s catalogue.</p></li>
-            </ul>
-          </section>
-          <section class="research-group">
-            <h3>Web and media archives</h3>
-            <ul>
-              <li><a href="/ghostlinks/">Ghost Links <span aria-hidden="true">→</span></a><p>Follow dead URLs through web archives and dated captures.</p></li>
-              <li><a href="/lostcode/">Lost Code <span aria-hidden="true">→</span></a><p>Look up archived source code and repository snapshots.</p></li>
-              <li><a href="/mediaechoes/">Media Echoes <span aria-hidden="true">→</span></a><p>Find old software, games, and digital media in the Internet Archive.</p></li>
-            </ul>
-          </section>
-        </div>
-      </div>
-    </section>
-
-    <section class="projects" id="projects" aria-labelledby="projects-heading">
-      <div class="wrap">
-        <div class="section-head"><h2 id="projects-heading">Project directory</h2><a class="code-link" href="https://github.com/jsdyer/jsdyer.github.io">Browse source <span aria-hidden="true">↗</span></a></div>
-        <div class="catalogue">
-          <article class="card">
-            <div class="cover detour-cover" aria-hidden="true">
-              <div class="detour-diagram"><i></i><b>CA</b><b>US</b><b>CA</b></div>
-            </div>
-            <div class="card-body"><p class="category">Networking <span>/</span> Browser tool</p><h3>Packet Detour</h3>
-              <p>Follow a Canadian route through Seattle, then paste your own annotated hops to see where the route changes countries.</p>
-              <a class="guide" href="/packet-detour/">Inspect a route <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="cover protocol-cover" aria-hidden="true">
-              <div class="protocol-slip"><b>HTTP/1.1</b><span>GET /</span><span>200 OK</span></div>
-            </div>
-            <div class="card-body"><p class="category">Internet protocols <span>/</span> Browser demo</p><h3>Protocol Cabinet</h3>
-              <p>Step through a DNS lookup, an HTTP request, or an SMTP conversation and read the messages each side sends.</p>
-              <a class="guide" href="/protocol-cabinet/">Open the cabinet <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
+        <div class="section-head"><h2 id="homelab-heading">From the home lab</h2><a class="code-link" href="#projects">All Linux projects <span aria-hidden="true">↓</span></a></div>
+        <div class="catalogue homelab-grid">
           <article class="card">
             <div class="cover recipes-cover" aria-hidden="true">
               <div class="rack"><div><i></i><b></b></div><div><i></i><b></b></div><div><i></i><b></b></div></div>
@@ -180,44 +70,10 @@
             </div>
           </article>
           <article class="card">
-            <div class="cover shelf-cover" aria-hidden="true"><div class="shelf-drawer"><i></i><b></b></div></div>
-            <div class="card-body"><p class="category">Archiving <span>/</span> Python + SQLite</p><h3>Archive Shelf</h3>
-              <p>Search newsletters and meeting minutes by page. Try the sample bulletin here, or index a private collection on your own Linux machine.</p>
-              <a class="guide" href="/archive-shelf/">Search the sample <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-          <article class="card">
             <div class="cover lan" aria-hidden="true"><svg viewBox="0 0 280 150" width="280" height="150" fill="none"><rect x="72" y="28" width="136" height="94" rx="8" stroke="currentColor" stroke-width="2"/><path d="M92 76L123 49L150 94L184 58M92 76L184 58M123 49L150 94" stroke="currentColor" opacity=".5"/><g fill="currentColor"><circle cx="92" cy="76" r="5"/><circle cx="123" cy="49" r="4"/><circle cx="150" cy="94" r="7"/><circle cx="184" cy="58" r="4"/></g><path d="M113 135h54" stroke="currentColor" stroke-width="3"/></svg></div>
             <div class="card-body"><p class="category">Web preservation <span>/</span> Go</p><h3>Waystation</h3>
               <p>Unplug the server. Keep the small web. Capture your sites into portable capsules, map their links, compare changes, and browse them offline.</p>
               <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation">Waystation source &amp; installation <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-          <article class="card timefold-feature">
-            <div class="cover timefold-cover" aria-hidden="true">
-              <svg class="timefold-art" viewBox="0 0 280 150" fill="none">
-                <path d="M45 108L100 39L150 97L218 42L237 120L100 39M45 108L237 120M150 97L237 120" stroke="currentColor" opacity=".5"/>
-                <g fill="currentColor"><circle cx="45" cy="108" r="7"/><circle cx="100" cy="39" r="5"/><circle cx="150" cy="97" r="9"/><circle cx="218" cy="42" r="6"/><circle cx="237" cy="120" r="4"/></g>
-                <g fill="currentColor" font-family="monospace" font-size="8"><text x="28" y="132">1989</text><text x="83" y="22">1993</text><text x="134" y="119">2007</text><text x="202" y="25">2026</text></g>
-              </svg>
-            </div>
-            <div class="card-body"><p class="category">Personal archives <span>/</span> LAMP</p><h3>Timefold</h3>
-              <p>A personal archive you can travel through. Keep photographs, Linux discoveries, game saves, and web fragments; turn the year dial and find the threads connecting them.</p>
-              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold">Timefold source &amp; installation <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="cover archive" aria-hidden="true"><div class="cassette"><div class="tape-label"><span>FIELD RECORDS</span><b>A</b></div><div class="wheels"><i></i><span></span><i></i></div><div class="tape-base"></div></div></div>
-            <div class="card-body"><p class="category">Archiving <span>/</span> Python</p><h3>Tape Index</h3>
-              <p>Fingerprint Polaroid scans, web archives, or old game saves. Verify a travel drive offline and see what changed.</p>
-              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index">Tape Index guide <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="cover switchboard" aria-hidden="true"><div class="patch"><div class="patch-vents"></div><div class="ports"><i></i><i></i><i></i><i></i></div><div class="port-labels"><b>1</b><b>2</b><b>3</b><b>4</b></div></div></div>
-            <div class="card-body"><p class="category">Self-hosting <span>/</span> PHP</p><h3>Switchboard</h3>
-              <p>Give your NAS, DNS console, and web archive a common front door. Edit a local JSON file to change the links.</p>
-              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard">Switchboard guide <span aria-hidden="true">↗</span></a>
             </div>
           </article>
           <article class="card">
@@ -227,13 +83,112 @@
               <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook">Vhost Logbook guide <span aria-hidden="true">↗</span></a>
             </div>
           </article>
-          <article class="card">
-            <div class="cover lan" aria-hidden="true"><div class="rack"><div><i></i><b></b></div><div><i></i><b></b></div><div><i></i><b></b></div></div></div>
-            <div class="card-body"><p class="category">Networking <span>/</span> Python + SQLite</p><h3>LANWatch</h3>
-              <p>Ping the devices you choose and keep a local history of replies. Look up when a router or lab machine last changed state.</p>
-              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch">LANWatch guide <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="workbench" id="workbench" aria-labelledby="workbench-heading">
+      <div class="wrap">
+        <div class="section-head"><h2 id="workbench-heading">Tool index</h2></div>
+        <form class="tool-search" id="tool-search-form" role="search" hidden>
+          <label for="tool-search">Search by name or task</label>
+          <div><input type="search" id="tool-search" autocomplete="off" placeholder="Try DNS, PDFs, or Halifax">
+            <button id="clear-tools" type="button" disabled>Clear</button></div>
+          <p id="tool-count" role="status" aria-live="polite"></p>
+        </form>
+        <div class="workbench-layout">
+          <nav class="workbench-nav" aria-label="Tool categories">
+            <ul>
+              <li><a href="#projects" data-group-link="projects">Linux &amp; self-hosting</a></li>
+              <li><a href="#liminal-tools" data-group-link="liminal-tools">Networks &amp; security</a></li>
+              <li><a href="#explorers" data-group-link="explorers">Government &amp; public records</a></li>
+              <li><a href="#places" data-group-link="places">Maps, trails &amp; history</a></li>
+              <li><a href="#field-kit" data-group-link="field-kit">Sky &amp; photography</a></li>
+              <li><a href="#money" data-group-link="money">Money &amp; markets</a></li>
+              <li><a href="#media" data-group-link="media">Media, events &amp; the old web</a></li>
+            </ul>
+          </nav>
+          <div class="tool-groups">
+            <p class="tool-empty" id="tool-empty" hidden>No tools matched. Try a shorter search or clear the filter.</p>
+            <section class="tool-group" id="projects" aria-labelledby="projects-heading" data-tool-group>
+              <h3 id="projects-heading">Linux &amp; self-hosting</h3>
+              <ul>
+                <li data-tool data-keywords="docker compose nas homelab"><a href="/rack-recipes/"><span>Rack Recipes</span><span aria-hidden="true">→</span></a><p>Plan a home server stack and export a Docker Compose starter.</p><span class="tool-mode">Browser</span></li>
+                <li data-tool data-keywords="nas dashboard homelab"><a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard"><span>Switchboard</span><span aria-hidden="true">↗</span></a><p>Build a local front door for your NAS, DNS console and other services.</p><span class="tool-mode">PHP</span></li>
+                <li data-tool data-keywords="apache logs lamp server"><a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook"><span>Vhost Logbook</span><span aria-hidden="true">↗</span></a><p>Summarize requests, status codes and traffic from Apache access logs.</p><span class="tool-mode">PHP CLI</span></li>
+                <li data-tool data-keywords="ping uptime monitoring networking"><a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch"><span>LANWatch</span><span aria-hidden="true">↗</span></a><p>Ping your devices and keep a local history of when they were reachable.</p><span class="tool-mode">Python + SQLite</span></li>
+                <li data-tool data-keywords="books newsletters full text sqlite"><a href="/archive-shelf/"><span>Archive Shelf</span><span aria-hidden="true">→</span></a><p>Search historical newsletters by page or index a private collection on Linux.</p><span class="tool-mode">Browser + Python</span></li>
+                <li data-tool data-keywords="web archive snapshots wacz offline"><a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation"><span>Waystation</span><span aria-hidden="true">↗</span></a><p>Capture websites into portable archives, map links and browse offline.</p><span class="tool-mode">Go</span></li>
+                <li data-tool data-keywords="archive lamp journal"><a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold"><span>Timefold</span><span aria-hidden="true">↗</span></a><p>Build a personal timeline of photos, game saves and web fragments.</p><span class="tool-mode">PHP + SQL</span></li>
+                <li data-tool data-keywords="hash sha256 checksum manifest backup"><a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index"><span>Tape Index</span><span aria-hidden="true">↗</span></a><p>Fingerprint and verify scans, web archives and game saves from the terminal.</p><span class="tool-mode">Python</span></li>
+              </ul>
+            </section>
+            <section class="tool-group" id="liminal-tools" aria-labelledby="liminal-tools-heading" data-tool-group>
+              <h3 id="liminal-tools-heading">Networks &amp; security</h3>
+              <ul>
+                <li data-tool data-keywords="spf dmarc dnssec rdap mta-sts mail"><a href="/dnslens/"><span>DNS Lens</span><span aria-hidden="true">→</span></a><p>Inspect DNS records, email policies and domain registration.</p></li>
+                <li data-tool data-keywords="bgp asn routing carrier peering internet"><a href="/routearchaeologist/"><span>Route Archaeologist</span><span aria-hidden="true">→</span></a><p>Trace observed BGP origins by IP prefix or ASN.</p></li>
+                <li data-tool data-keywords="har network privacy http"><a href="/trackerxray/"><span>Tracker X-Ray</span><span aria-hidden="true">→</span></a><p>Inspect HAR captures for third-party requests, cookies and analytics hosts.</p><span class="tool-mode">Local file</span></li>
+                <li data-tool data-keywords="cisa cve vulns vulnerabilities linux ransomware"><a href="/exploitgraveyard/"><span>Exploit Graveyard</span><span aria-hidden="true">→</span></a><p>Search CISA’s catalogue of known exploited vulnerabilities by product or CVE.</p></li>
+                <li data-tool data-keywords="traceroute bgp routing"><a href="/packet-detour/"><span>Packet Detour</span><span aria-hidden="true">→</span></a><p>Follow a Canadian route through Seattle or paste your own annotated hops.</p><span class="tool-mode">Browser demo</span></li>
+                <li data-tool data-keywords="network tcp dns http smtp email"><a href="/protocol-cabinet/"><span>Protocol Cabinet</span><span aria-hidden="true">→</span></a><p>Read the messages sent in a DNS lookup, HTTP request, or SMTP conversation.</p><span class="tool-mode">Browser demo</span></li>
+                <li data-tool data-keywords="tor privacy darknet infrastructure"><a href="/onionpulse/"><span>Onion Pulse</span><span aria-hidden="true">→</span></a><p>Compare Tor user, relay, bridge and onion-service measurements.</p></li>
+                <li data-tool data-keywords="censorship network interference ooni"><a href="/blockedorgone/"><span>Blocked or Gone?</span><span aria-hidden="true">→</span></a><p>Investigate interference and test coverage in public OONI measurements.</p></li>
+              </ul>
+            </section>
+            <section class="tool-group" id="explorers" aria-labelledby="explorers-heading" data-tool-group>
+              <h3 id="explorers-heading">Government &amp; public records</h3>
+              <ul>
+                <li data-tool data-keywords="foi freedom of information open government"><a href="/atip/"><span>ATIP Records Explorer</span><span aria-hidden="true">→</span></a><p>Find released records, request copies, or draft an access request.</p></li>
+                <li data-tool data-keywords="atip foi government departmental"><a href="/briefings/"><span>The Briefing Room</span><span aria-hidden="true">→</span></a><p>Search briefing note titles and reference numbers.</p></li>
+                <li data-tool data-keywords="atip pdf documents analysis"><a href="/evidencelab/"><span>Evidence Lab</span><span aria-hidden="true">→</span></a><p>Search disclosure PDFs, find dates and section references, and save page citations.</p><span class="tool-mode">Local file</span></li>
+                <li data-tool data-keywords="ati foi statistics informal"><a href="/atippopularity/"><span>The ATIP Popularity Index</span><span aria-hidden="true">→</span></a><p>See which released records received the most informal copy requests.</p></li>
+                <li data-tool data-keywords="question period minister cabinet talking points"><a href="/ministersays/"><span>What the Minister Was Prepared to Say</span><span aria-hidden="true">→</span></a><p>Compare Question Period notes and the issues they address.</p></li>
+                <li data-tool data-keywords="federal misconduct disclosures"><a href="/wrongdoings/"><span>The Government’s Wrongdoing Files</span><span aria-hidden="true">→</span></a><p>Read published findings, recommendations and corrective actions.</p></li>
+                <li data-tool data-keywords="catalogue csv api government"><a href="/datasetexplorer/"><span>The Government Dataset Explorer</span><span aria-hidden="true">→</span></a><p>Find federal datasets and their downloadable files.</p></li>
+                <li data-tool data-keywords="deleted archive datasets"><a href="/opendatagraveyard/"><span>The Open Data Graveyard</span><span aria-hidden="true">→</span></a><p>Investigate datasets removed from the federal catalogue.</p></li>
+                <li data-tool data-keywords="company registry corporation legal"><a href="/corporateghosts/"><span>Corporate Ghosts</span><span aria-hidden="true">→</span></a><p>Search Canada’s federal corporate register and compare legal statuses.</p></li>
+                <li data-tool data-keywords="government canada traffic analytics"><a href="/canadaanalytics/"><span>Canada.ca Pulse</span><span aria-hidden="true">→</span></a><p>Explore recent patterns in federal government website usage.</p></li>
+              </ul>
+            </section>
+            <section class="tool-group" id="places" aria-labelledby="places-heading" data-tool-group>
+              <h3 id="places-heading">Maps, trails &amp; history</h3>
+              <ul>
+                <li data-tool data-keywords="langley halifax vancouver nova scotia bike cycling hikes gpx"><a href="/trailglass/"><span>Trailglass</span><span aria-hidden="true">→</span></a><p>Explore cycling and trail layers and inspect a Garmin GPX ride.</p></li>
+                <li data-tool data-keywords="halifax marine atlantic shipwrecks"><a href="/shipwrecks/"><span>Shipwreck Explorer</span><span aria-hidden="true">→</span></a><p>Search Nova Scotia wrecks by area, vessel and date.</p></li>
+                <li data-tool data-keywords="heritage ghost towns military abandoned atlases"><a href="/forgottenplaces/"><span>Forgotten Places</span><span aria-hidden="true">→</span></a><p>Explore sites in Canada’s historic places register.</p></li>
+                <li data-tool data-keywords="geography settlement historical"><a href="/namesforget/"><span>Names That Time Forgot</span><span aria-hidden="true">→</span></a><p>Trace Canadian place names, features and their locations.</p></li>
+                <li data-tool data-keywords="cadors airports flight emergency"><a href="/strangeskies/"><span>Strange Skies Canada</span><span aria-hidden="true">→</span></a><p>Search aviation occurrence reports by location, year and event.</p></li>
+              </ul>
+            </section>
+            <section class="tool-group" id="field-kit" aria-labelledby="field-kit-heading" data-tool-group>
+              <h3 id="field-kit-heading">Sky &amp; photography</h3>
+              <ul>
+                <li data-tool data-keywords="astronomy clouds dslr planets moon astrophotography"><a href="/nightfinder/"><span>Nightfinder</span><span aria-hidden="true">→</span></a><p>Plan a night shoot around darkness, target positions and lens framing.</p></li>
+                <li data-tool data-keywords="iss tiangong astronomy orbit celestrak nasa"><a href="/satpasses/"><span>Satellite Pass</span><span aria-hidden="true">→</span></a><p>Calculate passes for the ISS and other satellites from your location.</p></li>
+                <li data-tool data-keywords="exif jpeg png gps crop privacy photo image histogram"><a href="/photolab/"><span>Photo Lab</span><span aria-hidden="true">→</span></a><p>Inspect metadata, edit photos and export cleaned copies on your device.</p><span class="tool-mode">Local file</span></li>
+              </ul>
+            </section>
+            <section class="tool-group" id="money" aria-labelledby="money-heading" data-tool-group>
+              <h3 id="money-heading">Money &amp; markets</h3>
+              <ul>
+                <li data-tool data-keywords="interest policy bank cad usd bonds mortgage"><a href="/bankrates/"><span>BankRate Lab</span><span aria-hidden="true">→</span></a><p>Chart Bank of Canada rates, exchange rates and yields.</p></li>
+                <li data-tool data-keywords="statcan bc ns food grocery inflation retail prices"><a href="/priceatlas/"><span>Canadian Price Atlas</span><span aria-hidden="true">→</span></a><p>Compare historical grocery prices across Canadian regions.</p></li>
+                <li data-tool data-keywords="ciro tsx short selling stocks volume"><a href="/marketshadows/"><span>Market Shadows</span><span aria-hidden="true">→</span></a><p>Compare short-sale trading and outstanding positions from CIRO reports.</p><span class="tool-mode">Local file</span></li>
+              </ul>
+            </section>
+            <section class="tool-group" id="media" aria-labelledby="media-heading" data-tool-group>
+              <h3 id="media-heading">Media, events &amp; the old web</h3>
+              <ul>
+                <li data-tool data-keywords="halifax vancouver langley venue theatre shows tickets ics"><a href="/eventradar/"><span>Event Radar</span><span aria-hidden="true">→</span></a><p>Browse local listings and keep selected events on your calendar.</p></li>
+                <li data-tool data-keywords="tv tvmaze movie films cancon cinema"><a href="/screenradar/"><span>Screen Radar</span><span aria-hidden="true">→</span></a><p>Find television and Canadian films, and keep a watchlist in this browser.</p></li>
+                <li data-tool data-keywords="software archival cd-rom web games"><a href="/mediaechoes/"><span>Media Echoes</span><span aria-hidden="true">→</span></a><p>Search the Internet Archive for old games, Flash projects and media.</p></li>
+                <li data-tool data-keywords="wayback cdx dead links common crawl"><a href="/ghostlinks/"><span>Ghost Links</span><span aria-hidden="true">→</span></a><p>Follow dead URLs through web archives and dated captures.</p></li>
+                <li data-tool data-keywords="source software heritage repositories git"><a href="/lostcode/"><span>Lost Code</span><span aria-hidden="true">→</span></a><p>Look up archived repository visits, branches and tags.</p></li>
+                <li data-tool data-keywords="cmf archived projects games"><a href="/unreleased/"><span>The Unreleased Worlds Index</span><span aria-hidden="true">→</span></a><p>Search a Canada Media Fund export for funded games, films and digital projects.</p><span class="tool-mode">Local file</span></li>
+              </ul>
+            </section>
+          </div>
         </div>
       </div>
     </section>
