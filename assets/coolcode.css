@@ -100,7 +100,7 @@ figcaption span, .category span { opacity: .62; padding-inline: .3em; }
 .tool-icon::before {
   content: ""; width: var(--glyph-size); height: var(--glyph-size);
   background: currentColor;
-  mask: url("workbench-icons.png") var(--glyph-x) var(--glyph-y) / 800% 700% no-repeat;
+  mask: url("workbench-icons.png?v=2") var(--glyph-x) var(--glyph-y) / 900% 800% no-repeat;
 }
 .tool-group h3 .tool-icon { width: 2.15rem; height: 2.15rem; --glyph-size: 1.32rem; }
 #liminal-tools { --icon-ink: #365968; }
@@ -116,57 +116,82 @@ figcaption span, .category span { opacity: .62; padding-inline: .3em; }
 :root[data-theme="dark"] #money { --icon-ink: #c2c18b; }
 :root[data-theme="dark"] #media { --icon-ink: #c5a4c4; }
 
-/* Lucide raster sprite, 8 columns by 7 rows. See workbench-icons.LICENSE.txt. */
+#security { --icon-ink: #783f39; }
+#disclosures { --icon-ink: #685937; }
+:root[data-theme="dark"] #security { --icon-ink: #dbada6; }
+:root[data-theme="dark"] #disclosures { --icon-ink: #d2c296; }
+
+/* Lucide raster sprite, 9 columns by 8 rows. See workbench-icons.LICENSE.txt. */
 [data-icon="server-cog"] { --glyph-x: 0.0000%; --glyph-y: 0.0000%; }
-[data-icon="network"] { --glyph-x: 14.2857%; --glyph-y: 0.0000%; }
-[data-icon="landmark"] { --glyph-x: 28.5714%; --glyph-y: 0.0000%; }
-[data-icon="map"] { --glyph-x: 42.8571%; --glyph-y: 0.0000%; }
-[data-icon="moon-star"] { --glyph-x: 57.1429%; --glyph-y: 0.0000%; }
-[data-icon="wallet"] { --glyph-x: 71.4286%; --glyph-y: 0.0000%; }
-[data-icon="film"] { --glyph-x: 85.7143%; --glyph-y: 0.0000%; }
-[data-icon="server"] { --glyph-x: 100.0000%; --glyph-y: 0.0000%; }
-[data-icon="layout-dashboard"] { --glyph-x: 0.0000%; --glyph-y: 16.6667%; }
-[data-icon="scroll-text"] { --glyph-x: 14.2857%; --glyph-y: 16.6667%; }
-[data-icon="activity"] { --glyph-x: 28.5714%; --glyph-y: 16.6667%; }
-[data-icon="library-big"] { --glyph-x: 42.8571%; --glyph-y: 16.6667%; }
-[data-icon="package-open"] { --glyph-x: 57.1429%; --glyph-y: 16.6667%; }
-[data-icon="history"] { --glyph-x: 71.4286%; --glyph-y: 16.6667%; }
-[data-icon="cassette-tape"] { --glyph-x: 85.7143%; --glyph-y: 16.6667%; }
-[data-icon="scan-search"] { --glyph-x: 100.0000%; --glyph-y: 16.6667%; }
-[data-icon="route"] { --glyph-x: 0.0000%; --glyph-y: 33.3333%; }
-[data-icon="radar"] { --glyph-x: 14.2857%; --glyph-y: 33.3333%; }
-[data-icon="shield-alert"] { --glyph-x: 28.5714%; --glyph-y: 33.3333%; }
-[data-icon="signpost-big"] { --glyph-x: 42.8571%; --glyph-y: 33.3333%; }
-[data-icon="arrow-left-right"] { --glyph-x: 57.1429%; --glyph-y: 33.3333%; }
-[data-icon="layers"] { --glyph-x: 71.4286%; --glyph-y: 33.3333%; }
-[data-icon="wifi-off"] { --glyph-x: 85.7143%; --glyph-y: 33.3333%; }
-[data-icon="files"] { --glyph-x: 100.0000%; --glyph-y: 33.3333%; }
-[data-icon="file-text"] { --glyph-x: 0.0000%; --glyph-y: 50.0000%; }
-[data-icon="scan-text"] { --glyph-x: 14.2857%; --glyph-y: 50.0000%; }
-[data-icon="list-ordered"] { --glyph-x: 28.5714%; --glyph-y: 50.0000%; }
-[data-icon="mic-vocal"] { --glyph-x: 42.8571%; --glyph-y: 50.0000%; }
-[data-icon="gavel"] { --glyph-x: 57.1429%; --glyph-y: 50.0000%; }
-[data-icon="database"] { --glyph-x: 71.4286%; --glyph-y: 50.0000%; }
-[data-icon="archive-x"] { --glyph-x: 85.7143%; --glyph-y: 50.0000%; }
-[data-icon="building-2"] { --glyph-x: 100.0000%; --glyph-y: 50.0000%; }
-[data-icon="chart-no-axes-combined"] { --glyph-x: 0.0000%; --glyph-y: 66.6667%; }
-[data-icon="bike"] { --glyph-x: 14.2857%; --glyph-y: 66.6667%; }
-[data-icon="anchor"] { --glyph-x: 28.5714%; --glyph-y: 66.6667%; }
-[data-icon="brick-wall"] { --glyph-x: 42.8571%; --glyph-y: 66.6667%; }
-[data-icon="map-pin"] { --glyph-x: 57.1429%; --glyph-y: 66.6667%; }
-[data-icon="plane"] { --glyph-x: 71.4286%; --glyph-y: 66.6667%; }
-[data-icon="telescope"] { --glyph-x: 85.7143%; --glyph-y: 66.6667%; }
-[data-icon="satellite"] { --glyph-x: 100.0000%; --glyph-y: 66.6667%; }
-[data-icon="camera"] { --glyph-x: 0.0000%; --glyph-y: 83.3333%; }
-[data-icon="percent"] { --glyph-x: 14.2857%; --glyph-y: 83.3333%; }
-[data-icon="shopping-basket"] { --glyph-x: 28.5714%; --glyph-y: 83.3333%; }
-[data-icon="chart-candlestick"] { --glyph-x: 42.8571%; --glyph-y: 83.3333%; }
-[data-icon="calendar-days"] { --glyph-x: 57.1429%; --glyph-y: 83.3333%; }
-[data-icon="tv-minimal"] { --glyph-x: 71.4286%; --glyph-y: 83.3333%; }
-[data-icon="disc-3"] { --glyph-x: 85.7143%; --glyph-y: 83.3333%; }
-[data-icon="unlink-2"] { --glyph-x: 100.0000%; --glyph-y: 83.3333%; }
-[data-icon="file-code-2"] { --glyph-x: 0.0000%; --glyph-y: 100.0000%; }
-[data-icon="gamepad-2"] { --glyph-x: 14.2857%; --glyph-y: 100.0000%; }
+[data-icon="server"] { --glyph-x: 12.5000%; --glyph-y: 0.0000%; }
+[data-icon="layout-dashboard"] { --glyph-x: 25.0000%; --glyph-y: 0.0000%; }
+[data-icon="scroll-text"] { --glyph-x: 37.5000%; --glyph-y: 0.0000%; }
+[data-icon="activity"] { --glyph-x: 50.0000%; --glyph-y: 0.0000%; }
+[data-icon="library-big"] { --glyph-x: 62.5000%; --glyph-y: 0.0000%; }
+[data-icon="package-open"] { --glyph-x: 75.0000%; --glyph-y: 0.0000%; }
+[data-icon="history"] { --glyph-x: 87.5000%; --glyph-y: 0.0000%; }
+[data-icon="cassette-tape"] { --glyph-x: 100.0000%; --glyph-y: 0.0000%; }
+[data-icon="network"] { --glyph-x: 0.0000%; --glyph-y: 14.2857%; }
+[data-icon="scan-search"] { --glyph-x: 12.5000%; --glyph-y: 14.2857%; }
+[data-icon="scan-line"] { --glyph-x: 25.0000%; --glyph-y: 14.2857%; }
+[data-icon="file-badge"] { --glyph-x: 37.5000%; --glyph-y: 14.2857%; }
+[data-icon="route"] { --glyph-x: 50.0000%; --glyph-y: 14.2857%; }
+[data-icon="badge-check"] { --glyph-x: 62.5000%; --glyph-y: 14.2857%; }
+[data-icon="chart-no-axes-column-decreasing"] { --glyph-x: 75.0000%; --glyph-y: 14.2857%; }
+[data-icon="layers"] { --glyph-x: 87.5000%; --glyph-y: 14.2857%; }
+[data-icon="wifi-off"] { --glyph-x: 100.0000%; --glyph-y: 14.2857%; }
+[data-icon="signpost-big"] { --glyph-x: 0.0000%; --glyph-y: 28.5714%; }
+[data-icon="arrow-left-right"] { --glyph-x: 12.5000%; --glyph-y: 28.5714%; }
+[data-icon="shield-check"] { --glyph-x: 25.0000%; --glyph-y: 28.5714%; }
+[data-icon="radar"] { --glyph-x: 37.5000%; --glyph-y: 28.5714%; }
+[data-icon="list-filter"] { --glyph-x: 50.0000%; --glyph-y: 28.5714%; }
+[data-icon="mail"] { --glyph-x: 62.5000%; --glyph-y: 28.5714%; }
+[data-icon="binary"] { --glyph-x: 75.0000%; --glyph-y: 28.5714%; }
+[data-icon="package-search"] { --glyph-x: 87.5000%; --glyph-y: 28.5714%; }
+[data-icon="shield-alert"] { --glyph-x: 100.0000%; --glyph-y: 28.5714%; }
+[data-icon="crosshair"] { --glyph-x: 0.0000%; --glyph-y: 42.8571%; }
+[data-icon="landmark"] { --glyph-x: 12.5000%; --glyph-y: 42.8571%; }
+[data-icon="files"] { --glyph-x: 25.0000%; --glyph-y: 42.8571%; }
+[data-icon="folder-search"] { --glyph-x: 37.5000%; --glyph-y: 42.8571%; }
+[data-icon="file-text"] { --glyph-x: 50.0000%; --glyph-y: 42.8571%; }
+[data-icon="scan-text"] { --glyph-x: 62.5000%; --glyph-y: 42.8571%; }
+[data-icon="list-ordered"] { --glyph-x: 75.0000%; --glyph-y: 42.8571%; }
+[data-icon="mic-vocal"] { --glyph-x: 87.5000%; --glyph-y: 42.8571%; }
+[data-icon="gavel"] { --glyph-x: 100.0000%; --glyph-y: 42.8571%; }
+[data-icon="workflow"] { --glyph-x: 0.0000%; --glyph-y: 57.1429%; }
+[data-icon="database"] { --glyph-x: 12.5000%; --glyph-y: 57.1429%; }
+[data-icon="archive-x"] { --glyph-x: 25.0000%; --glyph-y: 57.1429%; }
+[data-icon="chart-no-axes-combined"] { --glyph-x: 37.5000%; --glyph-y: 57.1429%; }
+[data-icon="file-check-2"] { --glyph-x: 50.0000%; --glyph-y: 57.1429%; }
+[data-icon="building-2"] { --glyph-x: 62.5000%; --glyph-y: 57.1429%; }
+[data-icon="messages-square"] { --glyph-x: 75.0000%; --glyph-y: 57.1429%; }
+[data-icon="hand-heart"] { --glyph-x: 87.5000%; --glyph-y: 57.1429%; }
+[data-icon="receipt-text"] { --glyph-x: 100.0000%; --glyph-y: 57.1429%; }
+[data-icon="cpu"] { --glyph-x: 0.0000%; --glyph-y: 71.4286%; }
+[data-icon="lightbulb"] { --glyph-x: 12.5000%; --glyph-y: 71.4286%; }
+[data-icon="map"] { --glyph-x: 25.0000%; --glyph-y: 71.4286%; }
+[data-icon="bike"] { --glyph-x: 37.5000%; --glyph-y: 71.4286%; }
+[data-icon="radio-tower"] { --glyph-x: 50.0000%; --glyph-y: 71.4286%; }
+[data-icon="anchor"] { --glyph-x: 62.5000%; --glyph-y: 71.4286%; }
+[data-icon="brick-wall"] { --glyph-x: 75.0000%; --glyph-y: 71.4286%; }
+[data-icon="map-pin"] { --glyph-x: 87.5000%; --glyph-y: 71.4286%; }
+[data-icon="plane"] { --glyph-x: 100.0000%; --glyph-y: 71.4286%; }
+[data-icon="moon-star"] { --glyph-x: 0.0000%; --glyph-y: 85.7143%; }
+[data-icon="telescope"] { --glyph-x: 12.5000%; --glyph-y: 85.7143%; }
+[data-icon="satellite"] { --glyph-x: 25.0000%; --glyph-y: 85.7143%; }
+[data-icon="sparkles"] { --glyph-x: 37.5000%; --glyph-y: 85.7143%; }
+[data-icon="camera"] { --glyph-x: 50.0000%; --glyph-y: 85.7143%; }
+[data-icon="wallet"] { --glyph-x: 62.5000%; --glyph-y: 85.7143%; }
+[data-icon="percent"] { --glyph-x: 75.0000%; --glyph-y: 85.7143%; }
+[data-icon="shopping-basket"] { --glyph-x: 87.5000%; --glyph-y: 85.7143%; }
+[data-icon="chart-candlestick"] { --glyph-x: 100.0000%; --glyph-y: 85.7143%; }
+[data-icon="film"] { --glyph-x: 0.0000%; --glyph-y: 100.0000%; }
+[data-icon="calendar-days"] { --glyph-x: 12.5000%; --glyph-y: 100.0000%; }
+[data-icon="tv-minimal"] { --glyph-x: 25.0000%; --glyph-y: 100.0000%; }
+[data-icon="disc-3"] { --glyph-x: 37.5000%; --glyph-y: 100.0000%; }
+[data-icon="unlink-2"] { --glyph-x: 50.0000%; --glyph-y: 100.0000%; }
+[data-icon="file-code-2"] { --glyph-x: 62.5000%; --glyph-y: 100.0000%; }
+[data-icon="gamepad-2"] { --glyph-x: 75.0000%; --glyph-y: 100.0000%; }
 
 .tool-group a { display: flex; align-items: baseline; justify-content: space-between; gap: .55rem; font-weight: 750; line-height: 1.35; }
 .tool-group a span:first-child { overflow-wrap: anywhere; }
