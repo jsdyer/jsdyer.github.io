@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#17201c">
-  <meta name="description" content="A Linux and homelab workbench with open-source projects, browser utilities and Canadian public data explorers.">
-  <title>CoolCode.ca · The Linux workbench</title>
+  <meta name="description" content="Useful browser tools, Canadian public data explorers and installable projects for your Linux machine or home lab.">
+  <title>CoolCode.ca · Browser tools & Linux projects</title>
   <link rel="alternate" type="application/rss+xml" title="CoolCode Field Notes" href="/field-notes/feed.xml">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/coolcode.css?v=2">
+  <link rel="stylesheet" href="assets/coolcode.css?v=3">
   <script src="assets/tool-index.js" defer></script>
 </head>
 <body id="top">
@@ -17,10 +17,9 @@
     <div class="wrap mast-inner">
       <a class="wordmark" href="#top" aria-label="CoolCode.ca home"><span aria-hidden="true" class="mark">&gt;_</span>CoolCode<span class="domain">.ca</span></a>
       <nav aria-label="Main navigation">
-        <a href="#workbench">Tool index</a>
-        <a href="#projects">Linux projects</a>
+        <a href="#workbench">Browser tools</a>
+        <a href="#install">Install yourself</a>
         <a href="/field-notes/">Field Notes</a>
-        <a href="#run">Run locally</a>
         <a class="external" href="https://github.com/jsdyer">GitHub <span aria-hidden="true">↗</span></a>
         <button class="theme" id="theme" type="button" hidden aria-label="Dark mode" aria-pressed="false" title="Toggle dark mode">◐</button>
       </nav>
@@ -31,10 +30,10 @@
       <div class="wrap hero-inner">
         <div>
           <p class="byline"><span aria-hidden="true"></span>A software collection by jsdyer</p>
-          <h1 id="hero-title">The Linux<br><em>workbench.</em></h1>
-          <p class="intro">Open-source projects for your home lab, browser tools for network and file analysis, and explorers for Canadian public data.</p>
-          <div class="hero-actions"><a class="primary" href="#workbench">Find a tool <span aria-hidden="true">↓</span></a>
-            <a class="code-link" href="#homelab">Home-lab picks <span aria-hidden="true">↓</span></a></div>
+          <h1 id="hero-title">Your digital<br><em>workbench.</em></h1>
+          <p class="intro">Open a browser tool and get started immediately, or install an open-source project on your own machine. Explore networks, archives and Canadian public data.</p>
+          <div class="hero-actions"><a class="primary" href="#workbench">Use in browser <span aria-hidden="true">↓</span></a>
+            <a class="code-link" href="#install">Install yourself <span aria-hidden="true">↓</span></a></div>
         </div>
         <figure class="computer">
           <div class="case">
@@ -51,36 +50,36 @@
             <div class="chin" aria-hidden="true"><span>COOLCODE / CRT</span><i></i><b></b></div>
           </div>
           <div class="stand" aria-hidden="true"></div>
-          <figcaption>Tape Index <span>/</span> sample console session</figcaption>
+          <figcaption>Tape Index <span>/</span> installable Linux tool</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="projects" id="homelab" aria-labelledby="homelab-heading">
       <div class="wrap">
-        <div class="section-head"><h2 id="homelab-heading">Featured home-lab projects</h2><a class="code-link" href="#projects">Browse the Linux index <span aria-hidden="true">↓</span></a></div>
+        <div class="section-head"><h2 id="homelab-heading">Start in your browser</h2><a class="code-link" href="#workbench">Browse all browser tools <span aria-hidden="true">↓</span></a></div>
         <div class="catalogue homelab-grid">
           <article class="card">
             <div class="cover recipes-cover" aria-hidden="true">
               <div class="rack"><div><i></i><b></b></div><div><i></i><b></b></div><div><i></i><b></b></div></div>
             </div>
-            <div class="card-body"><p class="category">Self-hosting <span>/</span> Browser tool</p><h3>Rack Recipes</h3>
+            <div class="card-body"><p class="category">Homelab planning <span>/</span> Use in browser</p><h3>Rack Recipes</h3>
               <p>Choose services for a home server, check their estimated memory use, and download a Docker Compose starter.</p>
               <a class="guide" href="/rack-recipes/">Plan a stack <span aria-hidden="true">→</span></a>
             </div>
           </article>
           <article class="card">
             <div class="cover lan" aria-hidden="true"><svg viewBox="0 0 280 150" width="280" height="150" fill="none"><rect x="72" y="28" width="136" height="94" rx="8" stroke="currentColor" stroke-width="2"/><path d="M92 76L123 49L150 94L184 58M92 76L184 58M123 49L150 94" stroke="currentColor" opacity=".5"/><g fill="currentColor"><circle cx="92" cy="76" r="5"/><circle cx="123" cy="49" r="4"/><circle cx="150" cy="94" r="7"/><circle cx="184" cy="58" r="4"/></g><path d="M113 135h54" stroke="currentColor" stroke-width="3"/></svg></div>
-            <div class="card-body"><p class="category">Web preservation <span>/</span> Go</p><h3>Waystation</h3>
-              <p>Unplug the server. Keep the small web. Capture your sites into portable capsules, map their links, compare changes, and browse them offline.</p>
-              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation">Waystation source &amp; installation <span aria-hidden="true">↗</span></a>
+            <div class="card-body"><p class="category">Networks <span>/</span> Use in browser</p><h3>DNS Lens</h3>
+              <p>Compare public resolvers and inspect DNS records, mail policies and domain registration.</p>
+              <a class="guide" href="/dnslens/">Open DNS Lens <span aria-hidden="true">→</span></a>
             </div>
           </article>
           <article class="card">
-            <div class="cover logbook" aria-hidden="true"><div class="sheet"><b>ACCESS.LOG</b><div class="book-lines"></div></div></div>
-            <div class="card-body"><p class="category">LAMP <span>/</span> PHP CLI</p><h3>Vhost Logbook</h3>
-              <p>Read an Apache access log from disk or stdin. Count requests, HTTP status classes, and bytes served for each day.</p>
-              <a class="guide" href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook">Vhost Logbook guide <span aria-hidden="true">↗</span></a>
+            <div class="cover logbook" aria-hidden="true"><div class="sheet"><b>ATIP FILES</b><div class="book-lines"></div></div></div>
+            <div class="card-body"><p class="category">Public records <span>/</span> Use in browser</p><h3>ATIP Records Explorer</h3>
+              <p>Find released federal records, request copies, or draft an access-to-information request.</p>
+              <a class="guide" href="/atip/">Explore released records <span aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -89,22 +88,42 @@
 
     <section class="workbench" id="workbench" aria-labelledby="workbench-heading">
       <div class="wrap">
-        <div class="section-head"><h2 id="workbench-heading">Tool index</h2></div>
+        <div class="section-head"><h2 id="workbench-heading">Find a tool.</h2></div>
         <form class="tool-search" id="tool-search-form" role="search" hidden>
           <label for="tool-search">Search by name or task</label>
           <div><input type="search" id="tool-search" autocomplete="off" placeholder="Try DNS, PDFs, or Halifax">
             <button id="clear-tools" type="button" disabled>Clear</button></div>
+          <div class="tool-filters" role="group" aria-label="How to use the tool">
+            <button type="button" data-access-filter="all" aria-pressed="true">All tools</button>
+            <button type="button" data-access-filter="browser" aria-pressed="false">Use in browser</button>
+            <button type="button" data-access-filter="install" aria-pressed="false">Install yourself</button>
+          </div>
           <p id="tool-count" role="status" aria-live="polite"></p>
         </form>
+        <p class="tool-empty" id="tool-empty" hidden>No tools matched. Try a shorter search or clear the filter.</p>
+        <section class="tool-collection" id="browser-tools" data-tool-collection aria-labelledby="browser-heading">
+          <div class="collection-heading"><h2 id="browser-heading">Use in your browser</h2><span class="collection-count">{{BROWSER_COUNT}} tools</span></div>
+          <p class="collection-intro">Open a tool and use it here. No installation needed. Some tools ask you to select a file or paste data.</p>
         <div class="workbench-layout">
           <nav class="workbench-nav" aria-label="Tool categories">
 {{CATEGORY_NAV}}
           </nav>
           <div class="tool-groups">
-            <p class="tool-empty" id="tool-empty" hidden>No tools matched. Try a shorter search or clear the filter.</p>
 {{TOOL_GROUPS}}
           </div>
         </div>
+        </section>
+        <section class="tool-collection install-tools" id="install" data-tool-collection aria-labelledby="install-heading">
+          <div class="collection-heading"><h2 id="install-heading">Install yourself</h2><span class="collection-count">{{INSTALL_COUNT}} projects</span></div>
+          <p class="collection-intro">Run these on your own Linux machine or home server. Links open source code and installation instructions, not a running app. Some projects also support macOS or Windows.</p>
+          <div class="tool-group" id="install-list" data-tool-group>
+            <h3 class="sr-only">Installable projects</h3>
+            <ul>
+{{INSTALL_TOOLS}}
+            </ul>
+          </div>
+          <p class="install-note">Archive Shelf has both a browser version and a Python version, so it appears in both sections. <a href="#run">Try a Linux command-line example ↓</a></p>
+        </section>
       </div>
     </section>
     <section class="notes-strip" aria-labelledby="notes-title">
@@ -118,7 +137,7 @@
     </section>
     <section class="run" id="run" aria-labelledby="run-heading">
       <div class="wrap run-inner" id="get-started">
-        <div><h2 id="run-heading">Run one locally.</h2><p>Start with Vhost Logbook. These commands use Git, the PHP CLI, and the sample Apache log included in the repository.</p></div>
+        <div><h2 id="run-heading">Try an installable tool.</h2><p>Start with Vhost Logbook. These commands use Git, the PHP CLI, and the sample Apache log included in the repository.</p></div>
         <div class="recipe"><div class="recipe-head"><span>Shell commands</span><button id="copy" type="button" hidden>Copy</button></div>
           <pre tabindex="0" aria-label="Shell commands to run Vhost Logbook"><code id="commands">git clone https://github.com/jsdyer/jsdyer.github.io.git
 cd jsdyer.github.io

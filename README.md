@@ -42,6 +42,8 @@ If you already have the checkout, run `git pull --ff-only` in it and skip the cl
 The catalogue lives in `data/tools.json`; category definitions are in
 `data/categories.json`. The page layout is `templates/index.html`.
 A Python standard-library build generates the complete static site in `dist/`.
+Visitors see browser tools first and installation-required projects in their own
+section. Explicit access metadata keeps those labels consistent; see the adding guide.
 
 ```sh
 python3 -m unittest discover -s tests -v

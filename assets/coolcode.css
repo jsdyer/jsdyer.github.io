@@ -198,6 +198,20 @@ figcaption span, .category span { opacity: .62; padding-inline: .3em; }
 .tool-group a span:last-child { color: var(--accent); font-family: var(--mono); }
 .tool-group p { margin-top: .27rem; color: var(--muted); font-size: .88rem; line-height: 1.5; }
 .tool-mode { display: block; margin-top: .42rem; color: var(--muted); font: .71rem/1.45 var(--mono); }
+.tool-mode-browser, .tool-mode-install { display: inline-block; padding: .2rem .45rem; border: 1px solid var(--line); border-radius: 3px; font-weight: 650; }
+.tool-mode-browser { color: var(--ink); background: color-mix(in srgb, var(--signal) 25%, var(--surface)); }
+.tool-mode-install { color: var(--ink); background: var(--paper); }
+.tool-requirements { display: block; margin-top: .4rem; color: var(--muted); font: .72rem/1.5 var(--mono); }
+.collection-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: .6rem 1rem; margin-bottom: .6rem; }
+.collection-heading h2 { font-size: clamp(1.7rem, 3vw, 2.7rem); }
+.collection-count { color: var(--muted); font: .8rem/1.5 var(--mono); }
+.collection-intro { max-width: 54rem; margin-bottom: 1.6rem; color: var(--muted); }
+.install-tools { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 3px solid var(--line); }
+.install-note { margin-top: 1rem; color: var(--muted); font-size: .85rem; }
+.install-note a { text-decoration: underline; text-underline-offset: .2em; }
+.tool-search .tool-filters { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .3rem; }
+.tool-search .tool-filters button { min-height: 42px; }
+.tool-filters button[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); background: color-mix(in srgb, var(--signal) 25%, var(--surface)); }
 .tool-empty { padding: .8rem 1rem; border: 1px solid var(--line); background: var(--surface); }
 
 .projects { padding: clamp(42px, 5vw, 76px) 0; background-image: radial-gradient(#49513c1c .6px, transparent .6px); background-size: 5px 5px; }

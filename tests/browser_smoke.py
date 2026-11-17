@@ -16,6 +16,9 @@ class QuietHandler(SimpleHTTPRequestHandler):
 
 def main():
     tools = json.loads((ROOT / "data/tools.json").read_text())
+    entries = len(tools) + sum("install_url" in tool for tool in tools)
+    browser_count = sum(tool["access"] == "browser" for tool in tools)
+    install_count = sum(tool["access"] == "install" or "install_url" in tool for tool in tools)
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(ROOT / "dist")))
     threading.Thread(target=server.serve_forever, daemon=True).start()
     url = f"http://127.0.0.1:{server.server_port}"
@@ -28,14 +31,32 @@ def main():
             errors = []
             page.on("pageerror", lambda error: errors.append(str(error)))
             page.goto(url)
-            assert page.locator("[data-tool]:visible").count() == len(tools)
+            assert page.locator("[data-tool]:visible").count() == entries
+            assert page.locator('#tool-count').inner_text() == f'{len(tools)} tools available'
+            assert page.locator('#browser-tools [data-access="install"]').count() == 0
+            assert page.locator('#install [data-access="browser"]').count() == 0
+            page.get_by_role('button', name='Install yourself', exact=True).click()
+            assert page.locator('[data-tool]:visible').count() == install_count
+            assert not page.locator('#browser-tools').is_visible()
+            assert page.get_by_role('link', name='Waystation', exact=True).is_visible()
+            page.locator('#tool-search').fill('Waystation')
+            assert page.locator('[data-tool]:visible').count() == 1
+            page.locator('#clear-tools').click()
+            page.get_by_role('button', name='Use in browser', exact=True).click()
+            assert page.locator('[data-tool]:visible').count() == browser_count
+            assert not page.locator('#install').is_visible()
+            page.get_by_role('button', name='All tools', exact=True).click()
+            page.locator('#tool-search').fill('Archive Shelf')
+            assert page.locator('[data-tool]:visible').count() == 2
+            assert page.locator('#tool-count').inner_text() == '1 tool found'
+            page.locator('#clear-tools').click()
             page.locator("#tool-search").fill("DNS")
             assert page.get_by_role("link", name="DNS Lens", exact=True).is_visible()
             page.locator("#tool-search").fill("zzzz-no-such-tool")
             assert page.locator("#tool-empty").is_visible()
             assert page.locator("[data-tool]:visible").count() == 0
             page.locator("#clear-tools").click()
-            assert page.locator("[data-tool]:visible").count() == len(tools)
+            assert page.locator("[data-tool]:visible").count() == entries
             page.locator("#theme").click()
             assert page.locator("html").get_attribute("data-theme") == "dark"
             page.locator("#theme").click()
@@ -44,6 +65,11 @@ def main():
             assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
             page.locator("#workbench").scroll_into_view_if_needed()
             page.screenshot(path=str(screenshots / "mobile.png"))
+            page.get_by_role('button', name='Install yourself', exact=True).click()
+            assert page.locator('[data-tool]:visible').count() == install_count
+            assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+            page.locator('#install').scroll_into_view_if_needed()
+            page.screenshot(path=str(screenshots / "mobile-install.png"))
             for tool in tools:
                 if tool["hosting"] == "local":
                     assert page.goto(url + tool["url"]).status == 200
@@ -51,7 +77,9 @@ def main():
             context = browser.new_context(java_script_enabled=False)
             nojs = context.new_page()
             nojs.goto(url)
-            assert nojs.locator("[data-tool]:visible").count() == len(tools)
+            assert nojs.locator("[data-tool]:visible").count() == entries
+            assert nojs.locator('#browser-tools').is_visible()
+            assert nojs.locator('#install').is_visible()
             context.close()
             assert not errors, errors
             browser.close()

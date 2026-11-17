@@ -14,7 +14,7 @@
     "url": "/rack-recipes/",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/rack-recipes",
     "hosting": "local",
-    "mode": "Browser"
+    "access": "browser"
   },
   {
     "id": "switchboard",
@@ -30,7 +30,8 @@
     "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard",
     "hosting": "external",
-    "mode": "PHP"
+    "access": "install",
+    "requirements": "PHP 8+"
   },
   {
     "id": "logbook",
@@ -47,7 +48,8 @@
     "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook",
     "hosting": "external",
-    "mode": "PHP CLI"
+    "access": "install",
+    "requirements": "PHP CLI 8+"
   },
   {
     "id": "lanwatch",
@@ -64,7 +66,8 @@
     "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch",
     "hosting": "external",
-    "mode": "Python + SQLite"
+    "access": "install",
+    "requirements": "Python 3, SQLite and Linux ping"
   },
   {
     "id": "archive-shelf",
@@ -82,7 +85,9 @@
     "url": "/archive-shelf/",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/archive-shelf",
     "hosting": "local",
-    "mode": "Browser + Python"
+    "access": "browser",
+    "install_url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/archive-shelf",
+    "requirements": "Python 3, SQLite FTS5 and Poppler for PDFs"
   },
   {
     "id": "waystation",
@@ -100,7 +105,8 @@
     "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation",
     "hosting": "external",
-    "mode": "Go"
+    "access": "install",
+    "requirements": "Downloadable executable for Linux, macOS or Windows"
   },
   {
     "id": "timefold",
@@ -116,7 +122,8 @@
     "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold",
     "hosting": "external",
-    "mode": "PHP + SQL"
+    "access": "install",
+    "requirements": "PHP 8.2+ and MySQL/MariaDB; optional SQLite demo"
   },
   {
     "id": "tape-index",
@@ -134,7 +141,8 @@
     "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index",
     "hosting": "external",
-    "mode": "Python"
+    "access": "install",
+    "requirements": "Python 3"
   },
   {
     "id": "dnslens",
@@ -152,7 +160,8 @@
     "icon": "scan-search",
     "url": "/dnslens/",
     "source": "https://github.com/jsdyer/dnslens",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "ipsnapshot",
@@ -171,7 +180,8 @@
     "icon": "scan-line",
     "url": "/ipsnapshot/",
     "source": "https://github.com/jsdyer/ipsnapshot",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "certtrail",
@@ -189,7 +199,8 @@
     "icon": "file-badge",
     "url": "/certtrail/",
     "source": "https://github.com/jsdyer/certtrail",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "routearchaeologist",
@@ -207,7 +218,8 @@
     "icon": "route",
     "url": "/routearchaeologist/",
     "source": "https://github.com/jsdyer/routearchaeologist",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "rpkiguard",
@@ -227,7 +239,8 @@
     "icon": "badge-check",
     "url": "/rpkiguard/",
     "source": "https://github.com/jsdyer/rpkiguard",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "outagescope",
@@ -245,7 +258,8 @@
     "icon": "chart-no-axes-column-decreasing",
     "url": "/outagescope/",
     "source": "https://github.com/jsdyer/outagescope",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "broadbandatlas",
@@ -267,7 +281,8 @@
     "icon": "network",
     "url": "/broadbandatlas/",
     "source": "https://github.com/jsdyer/broadbandatlas",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "telecompulse",
@@ -287,7 +302,8 @@
     "icon": "chart-no-axes-combined",
     "url": "/telecompulse/",
     "source": "https://github.com/jsdyer/telecompulse",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "onionpulse",
@@ -303,7 +319,8 @@
     "icon": "layers",
     "url": "/onionpulse/",
     "source": "https://github.com/jsdyer/onionpulse",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "blockedorgone",
@@ -319,7 +336,8 @@
     "icon": "wifi-off",
     "url": "/blockedorgone/",
     "source": "https://github.com/jsdyer/blockedorgone",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "packet-detour",
@@ -335,7 +353,7 @@
     "url": "/packet-detour/",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/packet-detour",
     "hosting": "local",
-    "mode": "Browser demo"
+    "access": "browser"
   },
   {
     "id": "protocol-cabinet",
@@ -354,7 +372,7 @@
     "url": "/protocol-cabinet/",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/protocol-cabinet",
     "hosting": "local",
-    "mode": "Browser demo"
+    "access": "browser"
   },
   {
     "id": "trackerxray",
@@ -371,7 +389,7 @@
     "url": "/trackerxray/",
     "source": "https://github.com/jsdyer/trackerxray",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   },
   {
     "id": "headerautopsy",
@@ -391,7 +409,7 @@
     "url": "/headerautopsy/",
     "source": "https://github.com/jsdyer/headerautopsy",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   },
   {
     "id": "mailpath",
@@ -412,7 +430,7 @@
     "url": "/mailpath/",
     "source": "https://github.com/jsdyer/mailpath",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   },
   {
     "id": "packetpocket",
@@ -432,7 +450,7 @@
     "url": "/packetpocket/",
     "source": "https://github.com/jsdyer/packetpocket",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   },
   {
     "id": "dependencyxray",
@@ -453,7 +471,7 @@
     "url": "/dependencyxray/",
     "source": "https://github.com/jsdyer/dependencyxray",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   },
   {
     "id": "exploitgraveyard",
@@ -471,7 +489,8 @@
     "icon": "shield-alert",
     "url": "/exploitgraveyard/",
     "source": "https://github.com/jsdyer/exploitgraveyard",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "patchsignal",
@@ -491,7 +510,8 @@
     "icon": "crosshair",
     "url": "/patchsignal/",
     "source": "https://github.com/jsdyer/patchsignal",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "atip",
@@ -509,7 +529,8 @@
     "icon": "files",
     "url": "/atip/",
     "source": "https://github.com/jsdyer/atip",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "governmentmemory",
@@ -529,7 +550,8 @@
     "icon": "folder-search",
     "url": "/governmentmemory/",
     "source": "https://github.com/jsdyer/governmentmemory",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "briefings",
@@ -545,7 +567,8 @@
     "icon": "file-text",
     "url": "/briefings/",
     "source": "https://github.com/jsdyer/briefings",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "evidencelab",
@@ -562,7 +585,7 @@
     "url": "/evidencelab/",
     "source": "https://github.com/jsdyer/evidencelab",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   },
   {
     "id": "atippopularity",
@@ -578,7 +601,8 @@
     "icon": "list-ordered",
     "url": "/atippopularity/",
     "source": "https://github.com/jsdyer/atippopularity",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "atipmetrics",
@@ -602,7 +626,8 @@
     "icon": "activity",
     "url": "/atipmetrics/",
     "source": "https://github.com/jsdyer/atipmetrics",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "ministersays",
@@ -620,7 +645,8 @@
     "icon": "mic-vocal",
     "url": "/ministersays/",
     "source": "https://github.com/jsdyer/ministersays",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "wrongdoings",
@@ -635,7 +661,8 @@
     "icon": "gavel",
     "url": "/wrongdoings/",
     "source": "https://github.com/jsdyer/wrongdoings",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "algorithmwatch",
@@ -654,7 +681,8 @@
     "icon": "workflow",
     "url": "/algorithmwatch/",
     "source": "https://github.com/jsdyer/algorithmwatch",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "datasetexplorer",
@@ -670,7 +698,8 @@
     "icon": "database",
     "url": "/datasetexplorer/",
     "source": "https://github.com/jsdyer/datasetexplorer",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "opendatagraveyard",
@@ -685,7 +714,8 @@
     "icon": "archive-x",
     "url": "/opendatagraveyard/",
     "source": "https://github.com/jsdyer/opendatagraveyard",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "canadaanalytics",
@@ -701,7 +731,8 @@
     "icon": "chart-no-axes-combined",
     "url": "/canadaanalytics/",
     "source": "https://github.com/jsdyer/canadaanalytics",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "corporateghosts",
@@ -717,7 +748,8 @@
     "icon": "building-2",
     "url": "/corporateghosts/",
     "source": "https://github.com/jsdyer/corporateghosts",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "lobbytrail",
@@ -734,7 +766,8 @@
     "icon": "messages-square",
     "url": "/lobbytrail/",
     "source": "https://github.com/jsdyer/lobbytrail",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "charityflows",
@@ -753,7 +786,8 @@
     "icon": "hand-heart",
     "url": "/charityflows/",
     "source": "https://github.com/jsdyer/charityflows",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "tariffxray",
@@ -773,7 +807,8 @@
     "icon": "receipt-text",
     "url": "/tariffxray/",
     "source": "https://github.com/jsdyer/tariffxray",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "gearautopsy",
@@ -791,7 +826,8 @@
     "icon": "cpu",
     "url": "/gearautopsy/",
     "source": "https://github.com/jsdyer/gearautopsy",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "recallradar",
@@ -815,7 +851,8 @@
     "icon": "shield-alert",
     "url": "/recallradar/",
     "source": "https://github.com/jsdyer/recallradar",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "patentattic",
@@ -834,7 +871,8 @@
     "icon": "lightbulb",
     "url": "/patentattic/",
     "source": "https://github.com/jsdyer/patentattic",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "trailglass",
@@ -855,7 +893,8 @@
     "icon": "bike",
     "url": "/trailglass/",
     "source": "https://github.com/jsdyer/trailglass",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "weatherarchive",
@@ -878,7 +917,8 @@
     "icon": "history",
     "url": "/weatherarchive/",
     "source": "https://github.com/jsdyer/weatherarchive",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "spectrumatlas",
@@ -898,7 +938,8 @@
     "icon": "radio-tower",
     "url": "/spectrumatlas/",
     "source": "https://github.com/jsdyer/spectrumatlas",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "shipwrecks",
@@ -914,7 +955,8 @@
     "icon": "anchor",
     "url": "/shipwrecks/",
     "source": "https://github.com/jsdyer/shipwrecks",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "forgottenplaces",
@@ -932,7 +974,8 @@
     "icon": "brick-wall",
     "url": "/forgottenplaces/",
     "source": "https://github.com/jsdyer/forgottenplaces",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "namesforget",
@@ -947,7 +990,8 @@
     "icon": "map-pin",
     "url": "/namesforget/",
     "source": "https://github.com/jsdyer/namesforget",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "strangeskies",
@@ -963,7 +1007,8 @@
     "icon": "plane",
     "url": "/strangeskies/",
     "source": "https://github.com/jsdyer/strangeskies",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "nightfinder",
@@ -981,7 +1026,8 @@
     "icon": "telescope",
     "url": "/nightfinder/",
     "source": "https://github.com/jsdyer/nightfinder",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "satpasses",
@@ -999,7 +1045,8 @@
     "icon": "satellite",
     "url": "/satpasses/",
     "source": "https://github.com/jsdyer/satpasses",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "skyarchive",
@@ -1019,7 +1066,8 @@
     "icon": "sparkles",
     "url": "/skyarchive/",
     "source": "https://github.com/jsdyer/skyarchive",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "photolab",
@@ -1041,7 +1089,7 @@
     "url": "/photolab/",
     "source": "https://github.com/jsdyer/photolab",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   },
   {
     "id": "bankrates",
@@ -1060,7 +1108,8 @@
     "icon": "percent",
     "url": "/bankrates/",
     "source": "https://github.com/jsdyer/bankrates",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "priceatlas",
@@ -1080,7 +1129,8 @@
     "icon": "shopping-basket",
     "url": "/priceatlas/",
     "source": "https://github.com/jsdyer/priceatlas",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "insolvencyatlas",
@@ -1101,7 +1151,8 @@
     "icon": "chart-no-axes-column-decreasing",
     "url": "/insolvencyatlas/",
     "source": "https://github.com/jsdyer/insolvencyatlas",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "marketshadows",
@@ -1120,7 +1171,7 @@
     "url": "/marketshadows/",
     "source": "https://github.com/jsdyer/marketshadows",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   },
   {
     "id": "eventradar",
@@ -1140,7 +1191,8 @@
     "icon": "calendar-days",
     "url": "/eventradar/",
     "source": "https://github.com/jsdyer/eventradar",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "screenradar",
@@ -1158,7 +1210,8 @@
     "icon": "tv-minimal",
     "url": "/screenradar/",
     "source": "https://github.com/jsdyer/screenradar",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "mediaechoes",
@@ -1175,7 +1228,8 @@
     "icon": "disc-3",
     "url": "/mediaechoes/",
     "source": "https://github.com/jsdyer/mediaechoes",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "ghostlinks",
@@ -1193,7 +1247,8 @@
     "icon": "unlink-2",
     "url": "/ghostlinks/",
     "source": "https://github.com/jsdyer/ghostlinks",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "lostcode",
@@ -1210,7 +1265,8 @@
     "icon": "file-code-2",
     "url": "/lostcode/",
     "source": "https://github.com/jsdyer/lostcode",
-    "hosting": "project"
+    "hosting": "project",
+    "access": "browser"
   },
   {
     "id": "unreleased",
@@ -1227,6 +1283,6 @@
     "url": "/unreleased/",
     "source": "https://github.com/jsdyer/unreleased",
     "hosting": "project",
-    "mode": "Local file"
+    "access": "browser"
   }
 ]

@@ -50,10 +50,10 @@ def validate(categories, tools, root=ROOT):
         require(isinstance(category["icon"], str) and category["icon"] in icons, f"Unknown icon for {cid}")
         category_ids.add(cid)
     ids, destinations = set(), set()
-    required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting"}
+    required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access"}
     for tool in tools:
         require(isinstance(tool, dict), "Each tool must be an object")
-        require(required <= set(tool) <= required | {"mode"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
+        require(required <= set(tool) <= required | {"requirements", "install_url"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
         tid = tool["id"]
         require(isinstance(tid, str) and SLUG.fullmatch(tid), f"Invalid tool ID: {tid!r}")
         require(tid not in ids, f"Duplicate tool ID: {tid}")
@@ -63,7 +63,14 @@ def validate(categories, tools, root=ROOT):
         require(tool["category"] in category_ids, f"{tid}: unknown category")
         require(tool["icon"] in icons, f"{tid}: unknown icon")
         require(isinstance(tool["tags"], list) and all(nonempty(t) for t in tool["tags"]), f"{tid}: tags must be an array of nonempty strings")
-        require("mode" not in tool or nonempty(tool["mode"]), f"{tid}: mode must be nonempty when supplied")
+        require(tool["access"] in ("browser", "install"), f"{tid}: access must be browser or install")
+        if tool["access"] == "install" or "install_url" in tool:
+            require(nonempty(tool.get("requirements")), f"{tid}: installation requirements must be stated")
+        else:
+            require("requirements" not in tool, f"{tid}: requirements need an installable version")
+        if "install_url" in tool:
+            require(tool["access"] == "browser" and https_url(tool["install_url"]), f"{tid}: install_url is an HTTPS guide for a browser tool's optional installable version")
+            require(tool["install_url"] != tool["url"], f"{tid}: browser and installation destinations must differ")
         require(https_url(tool["source"]), f"{tid}: source must be an HTTPS URL")
         url = tool["url"]
         require(tool["hosting"] in {"local", "project", "external"}, f"{tid}: invalid hosting")
@@ -93,10 +100,29 @@ def load_catalogue(root=ROOT):
     return categories, tools
 
 
+def render_entry(tool, access):
+    tags = escape(" ".join(tool["tags"]), quote=True)
+    icon, title, description, tid = (escape(tool[key], quote=True) for key in ("icon", "title", "description", "id"))
+    destination = tool.get("install_url", tool["url"]) if access == "install" else tool["url"]
+    url = escape(destination, quote=True)
+    arrow = "↗" if destination.startswith("https:") else "→"
+    label = "Use in browser" if access == "browser" else "Installation required"
+    detail = f'<span class="tool-requirements">{escape(tool["requirements"])}</span>' if access == "install" else ""
+    return (f'                <li data-tool data-tool-id="{tid}" data-access="{access}" data-keywords="{tags}">'
+            f'<span class="tool-icon" data-icon="{icon}" aria-hidden="true"></span><div class="tool-entry">'
+            f'<a href="{url}"><span>{title}</span><span aria-hidden="true">{arrow}</span></a>'
+            f'<p>{description}</p><span class="tool-mode tool-mode-{access}">{label}</span>{detail}</div></li>')
+
+
 def render(categories, tools, template):
+    browser_tools = [tool for tool in tools if tool["access"] == "browser"]
+    install_tools = [tool for tool in tools if tool["access"] == "install" or "install_url" in tool]
     nav = ["            <ul>"]
     groups = []
     for category in categories:
+        entries = [tool for tool in browser_tools if tool["category"] == category["id"]]
+        if not entries:
+            continue
         cid, title, icon = (escape(category[key], quote=True) for key in ("id", "title", "icon"))
         nav.append(f'              <li><a href="#{cid}" data-group-link="{cid}">{title}</a></li>')
         groups.extend([
@@ -104,17 +130,13 @@ def render(categories, tools, template):
             f'              <h3 id="{cid}-heading"><span class="tool-icon" data-icon="{icon}" aria-hidden="true"></span><span>{title}</span></h3>',
             '              <ul>',
         ])
-        for tool in tools:
-            if tool["category"] != category["id"]:
-                continue
-            tags = escape(" ".join(tool["tags"]), quote=True)
-            icon, url, title, description = (escape(tool[key], quote=True) for key in ("icon", "url", "title", "description"))
-            arrow = "↗" if tool["hosting"] == "external" else "→"
-            mode = f'<span class="tool-mode">{escape(tool["mode"])}</span>' if "mode" in tool else ""
-            groups.append(f'                <li data-tool data-keywords="{tags}"><span class="tool-icon" data-icon="{icon}" aria-hidden="true"></span><div class="tool-entry"><a href="{url}"><span>{title}</span><span aria-hidden="true">{arrow}</span></a><p>{description}</p>{mode}</div></li>')
+        groups.extend(render_entry(tool, "browser") for tool in entries)
         groups.extend(['              </ul>', '            </section>'])
     nav.append("            </ul>")
-    for token, value in {"{{CATEGORY_NAV}}": "\n".join(nav), "{{TOOL_GROUPS}}": "\n".join(groups)}.items():
+    replacements = {"{{CATEGORY_NAV}}": "\n".join(nav), "{{TOOL_GROUPS}}": "\n".join(groups),
+                    "{{INSTALL_TOOLS}}": "\n".join(render_entry(tool, "install") for tool in install_tools),
+                    "{{BROWSER_COUNT}}": str(len(browser_tools)), "{{INSTALL_COUNT}}": str(len(install_tools))}
+    for token, value in replacements.items():
         require(template.count(token) == 1, f"Template must contain {token} exactly once")
         template = template.replace(token, value)
     return template
