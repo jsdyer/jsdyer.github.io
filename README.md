@@ -39,16 +39,37 @@ If you already have the checkout, run `git pull --ff-only` in it and skip the cl
 
 ## Preview and publish the homepage
 
-From the repository root, run this to preview on your LAN:
+The catalogue lives in `data/tools.json`; category definitions are in
+`data/categories.json`. The page layout is `templates/index.html`.
+A Python standard-library build generates the complete static site in `dist/`.
 
 ```sh
-python3 -m http.server 8000 --bind 0.0.0.0
+python3 -m unittest discover -s tests -v
+python3 scripts/build.py
+python3 -m http.server 8000 --directory dist
 ```
 
-Open `http://localhost:8000/` on the Linux machine or `http://YOUR-LAN-IP:8000/` from another device. Press Ctrl+C to stop. Switchboard has its own PHP server command in its guide.
+Open `http://localhost:8000/`. Add `--bind 0.0.0.0` if you intentionally want to
+preview on your LAN. Standalone project sites are deployed separately; open their
+links on `https://coolcode.ca/` rather than this local server.
 
-GitHub Pages publishes the static homepage at [coolcode.ca](https://coolcode.ca/). The root `CNAME` records the custom domain, and `.nojekyll` enables static publishing. The PHP and Python tools run on the machine where you install them.
+PRs validate and build the site. Successful builds from `main` publish `dist/`
+through GitHub Actions. `CNAME` retains the custom domain. PHP, Python and Go tools
+run where you install them, not on GitHub Pages.
+
+See [the one-time Pages rollout](docs/pages-rollout.md) before merging the catalogue
+migration. The independent link audit reports broken or blocked URLs separately
+from publishing.
 
 ## Add another project
 
-For an installable tool, put the code and a short README under `tools/`. For a browser app, use a top-level project directory with its own `index.html` and README. Include a command someone can run with sample data. Add a project card to the directory in `index.html` and a row in the table above. Preview the page locally, then commit the files and push to `main`. The [Pages workflow history](https://github.com/jsdyer/jsdyer.github.io/actions) shows when the updated site is deployed.
+- Small static utilities can live in their own top-level directory here.
+- Substantial browser apps, data explorers and new independently released installable
+  tools get their own repositories. Existing projects keep their current homes.
+- Start new browser applications from
+  [coolcode-tool-template](https://github.com/jsdyer/coolcode-tool-template).
+- After verifying a tool's destination, add one entry to `data/tools.json`.
+
+[Adding tools](docs/adding-tools.md) documents the metadata, commands and conventions.
+Do not edit generated HTML or commit `dist/`. The featured homepage cards and this
+short installable-project table are editorial selections, not a second full catalogue.

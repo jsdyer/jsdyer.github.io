@@ -1,0 +1,1232 @@
+[
+  {
+    "id": "rack-recipes",
+    "title": "Rack Recipes",
+    "description": "Plan a home server stack and export a Docker Compose starter.",
+    "category": "projects",
+    "tags": [
+      "docker",
+      "compose",
+      "nas",
+      "homelab"
+    ],
+    "icon": "server",
+    "url": "/rack-recipes/",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/rack-recipes",
+    "hosting": "local",
+    "mode": "Browser"
+  },
+  {
+    "id": "switchboard",
+    "title": "Switchboard",
+    "description": "Build a local front door for your NAS, DNS console and other services.",
+    "category": "projects",
+    "tags": [
+      "nas",
+      "dashboard",
+      "homelab"
+    ],
+    "icon": "layout-dashboard",
+    "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard",
+    "hosting": "external",
+    "mode": "PHP"
+  },
+  {
+    "id": "logbook",
+    "title": "Vhost Logbook",
+    "description": "Summarize requests, status codes and traffic from Apache access logs.",
+    "category": "projects",
+    "tags": [
+      "apache",
+      "logs",
+      "lamp",
+      "server"
+    ],
+    "icon": "scroll-text",
+    "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook",
+    "hosting": "external",
+    "mode": "PHP CLI"
+  },
+  {
+    "id": "lanwatch",
+    "title": "LANWatch",
+    "description": "Ping your devices and keep a local history of when they were reachable.",
+    "category": "projects",
+    "tags": [
+      "ping",
+      "uptime",
+      "monitoring",
+      "networking"
+    ],
+    "icon": "activity",
+    "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch",
+    "hosting": "external",
+    "mode": "Python + SQLite"
+  },
+  {
+    "id": "archive-shelf",
+    "title": "Archive Shelf",
+    "description": "Search historical newsletters by page or index a private collection on Linux.",
+    "category": "projects",
+    "tags": [
+      "books",
+      "newsletters",
+      "full",
+      "text",
+      "sqlite"
+    ],
+    "icon": "library-big",
+    "url": "/archive-shelf/",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/archive-shelf",
+    "hosting": "local",
+    "mode": "Browser + Python"
+  },
+  {
+    "id": "waystation",
+    "title": "Waystation",
+    "description": "Capture websites into portable archives, map links and browse offline.",
+    "category": "projects",
+    "tags": [
+      "web",
+      "archive",
+      "snapshots",
+      "wacz",
+      "offline"
+    ],
+    "icon": "package-open",
+    "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation",
+    "hosting": "external",
+    "mode": "Go"
+  },
+  {
+    "id": "timefold",
+    "title": "Timefold",
+    "description": "Build a personal timeline of photos, game saves and web fragments.",
+    "category": "projects",
+    "tags": [
+      "archive",
+      "lamp",
+      "journal"
+    ],
+    "icon": "history",
+    "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold",
+    "hosting": "external",
+    "mode": "PHP + SQL"
+  },
+  {
+    "id": "tape-index",
+    "title": "Tape Index",
+    "description": "Fingerprint and verify scans, web archives and game saves from the terminal.",
+    "category": "projects",
+    "tags": [
+      "hash",
+      "sha256",
+      "checksum",
+      "manifest",
+      "backup"
+    ],
+    "icon": "cassette-tape",
+    "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index",
+    "hosting": "external",
+    "mode": "Python"
+  },
+  {
+    "id": "dnslens",
+    "title": "DNS Lens",
+    "description": "Compare public resolvers and inspect DNS records, mail policies and registration.",
+    "category": "liminal-tools",
+    "tags": [
+      "spf",
+      "dmarc",
+      "dnssec",
+      "rdap",
+      "mta-sts",
+      "mail"
+    ],
+    "icon": "scan-search",
+    "url": "/dnslens/",
+    "source": "https://github.com/jsdyer/dnslens",
+    "hosting": "project"
+  },
+  {
+    "id": "ipsnapshot",
+    "title": "IP Snapshot",
+    "description": "See ports, hostnames and vulnerability identifiers from passive InternetDB observations.",
+    "category": "liminal-tools",
+    "tags": [
+      "ip",
+      "ipv4",
+      "ipv6",
+      "shodan",
+      "osint",
+      "exposure",
+      "ports"
+    ],
+    "icon": "scan-line",
+    "url": "/ipsnapshot/",
+    "source": "https://github.com/jsdyer/ipsnapshot",
+    "hosting": "project"
+  },
+  {
+    "id": "certtrail",
+    "title": "Certificate Trail",
+    "description": "Trace issued certificates, names, issuers and dates across certificate transparency logs.",
+    "category": "liminal-tools",
+    "tags": [
+      "certificate",
+      "transparency",
+      "tls",
+      "ssl",
+      "crt.sh",
+      "subdomains"
+    ],
+    "icon": "file-badge",
+    "url": "/certtrail/",
+    "source": "https://github.com/jsdyer/certtrail",
+    "hosting": "project"
+  },
+  {
+    "id": "routearchaeologist",
+    "title": "Route Archaeologist",
+    "description": "Trace observed BGP origins by IP prefix or ASN.",
+    "category": "liminal-tools",
+    "tags": [
+      "bgp",
+      "asn",
+      "routing",
+      "carrier",
+      "peering",
+      "internet"
+    ],
+    "icon": "route",
+    "url": "/routearchaeologist/",
+    "source": "https://github.com/jsdyer/routearchaeologist",
+    "hosting": "project"
+  },
+  {
+    "id": "rpkiguard",
+    "title": "RPKI Guard",
+    "description": "Check whether a route origin ASN and prefix are authorized by published ROAs.",
+    "category": "liminal-tools",
+    "tags": [
+      "bgp",
+      "rpki",
+      "roa",
+      "asn",
+      "invalid",
+      "routing",
+      "max",
+      "length"
+    ],
+    "icon": "badge-check",
+    "url": "/rpkiguard/",
+    "source": "https://github.com/jsdyer/rpkiguard",
+    "hosting": "project"
+  },
+  {
+    "id": "outagescope",
+    "title": "Outage Scope",
+    "description": "Explore network disruptions and compare the measurement signals behind them.",
+    "category": "liminal-tools",
+    "tags": [
+      "ioda",
+      "rogers",
+      "outage",
+      "connectivity",
+      "ping",
+      "bgp"
+    ],
+    "icon": "chart-no-axes-column-decreasing",
+    "url": "/outagescope/",
+    "source": "https://github.com/jsdyer/outagescope",
+    "hosting": "project"
+  },
+  {
+    "id": "broadbandatlas",
+    "title": "Broadband Atlas",
+    "description": "Explore reported coverage, funding and nearby radio licences, with provincial plan prices.",
+    "category": "liminal-tools",
+    "tags": [
+      "ised",
+      "internet",
+      "speed",
+      "rural",
+      "fibre",
+      "broadband",
+      "coverage",
+      "providers",
+      "canada",
+      "funding"
+    ],
+    "icon": "network",
+    "url": "/broadbandatlas/",
+    "source": "https://github.com/jsdyer/broadbandatlas",
+    "hosting": "project"
+  },
+  {
+    "id": "telecompulse",
+    "title": "Telecom Pulse",
+    "description": "Compare the CRTC’s published telecommunications indicators over time.",
+    "category": "liminal-tools",
+    "tags": [
+      "crtc",
+      "telecom",
+      "broadband",
+      "mobile",
+      "wireless",
+      "regulators",
+      "statistics",
+      "canada"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/telecompulse/",
+    "source": "https://github.com/jsdyer/telecompulse",
+    "hosting": "project"
+  },
+  {
+    "id": "onionpulse",
+    "title": "Onion Pulse",
+    "description": "Compare Tor user, relay, bridge and onion-service measurements.",
+    "category": "liminal-tools",
+    "tags": [
+      "tor",
+      "privacy",
+      "darknet",
+      "infrastructure"
+    ],
+    "icon": "layers",
+    "url": "/onionpulse/",
+    "source": "https://github.com/jsdyer/onionpulse",
+    "hosting": "project"
+  },
+  {
+    "id": "blockedorgone",
+    "title": "Blocked or Gone?",
+    "description": "Investigate interference and test coverage in public OONI measurements.",
+    "category": "liminal-tools",
+    "tags": [
+      "censorship",
+      "network",
+      "interference",
+      "ooni"
+    ],
+    "icon": "wifi-off",
+    "url": "/blockedorgone/",
+    "source": "https://github.com/jsdyer/blockedorgone",
+    "hosting": "project"
+  },
+  {
+    "id": "packet-detour",
+    "title": "Packet Detour",
+    "description": "Follow a Canadian route through Seattle or paste your own annotated hops.",
+    "category": "liminal-tools",
+    "tags": [
+      "traceroute",
+      "bgp",
+      "routing"
+    ],
+    "icon": "signpost-big",
+    "url": "/packet-detour/",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/packet-detour",
+    "hosting": "local",
+    "mode": "Browser demo"
+  },
+  {
+    "id": "protocol-cabinet",
+    "title": "Protocol Cabinet",
+    "description": "Read the messages sent in a DNS lookup, HTTP request, or SMTP conversation.",
+    "category": "liminal-tools",
+    "tags": [
+      "network",
+      "tcp",
+      "dns",
+      "http",
+      "smtp",
+      "email"
+    ],
+    "icon": "arrow-left-right",
+    "url": "/protocol-cabinet/",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/protocol-cabinet",
+    "hosting": "local",
+    "mode": "Browser demo"
+  },
+  {
+    "id": "trackerxray",
+    "title": "Tracker X-Ray",
+    "description": "Inspect HAR captures for third-party requests, cookies and analytics hosts.",
+    "category": "security",
+    "tags": [
+      "har",
+      "network",
+      "privacy",
+      "http"
+    ],
+    "icon": "radar",
+    "url": "/trackerxray/",
+    "source": "https://github.com/jsdyer/trackerxray",
+    "hosting": "project",
+    "mode": "Local file"
+  },
+  {
+    "id": "headerautopsy",
+    "title": "Header Autopsy",
+    "description": "Read HTTP header values and inspect security policy, cookies and cache signals.",
+    "category": "security",
+    "tags": [
+      "har",
+      "http",
+      "headers",
+      "waf",
+      "cdn",
+      "cookies",
+      "payments"
+    ],
+    "icon": "list-filter",
+    "url": "/headerautopsy/",
+    "source": "https://github.com/jsdyer/headerautopsy",
+    "hosting": "project",
+    "mode": "Local file"
+  },
+  {
+    "id": "mailpath",
+    "title": "Mail Path",
+    "description": "Reconstruct received-email hops and the authentication results each server reported.",
+    "category": "security",
+    "tags": [
+      "email",
+      "headers",
+      "smtp",
+      "spf",
+      "dkim",
+      "dmarc",
+      "arc",
+      "privacy"
+    ],
+    "icon": "mail",
+    "url": "/mailpath/",
+    "source": "https://github.com/jsdyer/mailpath",
+    "hosting": "project",
+    "mode": "Local file"
+  },
+  {
+    "id": "packetpocket",
+    "title": "Packet Pocket",
+    "description": "Examine local packet captures for conversations, DNS, HTTP and observable TLS data.",
+    "category": "security",
+    "tags": [
+      "pcap",
+      "pcapng",
+      "wireshark",
+      "dns",
+      "tcp",
+      "udp",
+      "forensics"
+    ],
+    "icon": "binary",
+    "url": "/packetpocket/",
+    "source": "https://github.com/jsdyer/packetpocket",
+    "hosting": "project",
+    "mode": "Local file"
+  },
+  {
+    "id": "dependencyxray",
+    "title": "Dependency X-Ray",
+    "description": "Inspect dependency lockfiles and query advisories for selected packages.",
+    "category": "security",
+    "tags": [
+      "composer",
+      "npm",
+      "pypi",
+      "osv",
+      "supply",
+      "chain",
+      "security",
+      "php"
+    ],
+    "icon": "package-search",
+    "url": "/dependencyxray/",
+    "source": "https://github.com/jsdyer/dependencyxray",
+    "hosting": "project",
+    "mode": "Local file"
+  },
+  {
+    "id": "exploitgraveyard",
+    "title": "Exploit Graveyard",
+    "description": "Search CISA’s catalogue of known exploited vulnerabilities by product or CVE.",
+    "category": "security",
+    "tags": [
+      "cisa",
+      "cve",
+      "vulns",
+      "vulnerabilities",
+      "linux",
+      "ransomware"
+    ],
+    "icon": "shield-alert",
+    "url": "/exploitgraveyard/",
+    "source": "https://github.com/jsdyer/exploitgraveyard",
+    "hosting": "project"
+  },
+  {
+    "id": "patchsignal",
+    "title": "Patch Signal",
+    "description": "Look up CVEs and compare reported exploitation, EPSS estimates and advisories.",
+    "category": "security",
+    "tags": [
+      "cisa",
+      "kev",
+      "epss",
+      "cve",
+      "patch",
+      "zero",
+      "day",
+      "vulnerability"
+    ],
+    "icon": "crosshair",
+    "url": "/patchsignal/",
+    "source": "https://github.com/jsdyer/patchsignal",
+    "hosting": "project"
+  },
+  {
+    "id": "atip",
+    "title": "ATIP Records Explorer",
+    "description": "Find released records, request copies, or draft an access request.",
+    "category": "explorers",
+    "tags": [
+      "foi",
+      "freedom",
+      "of",
+      "information",
+      "open",
+      "government"
+    ],
+    "icon": "files",
+    "url": "/atip/",
+    "source": "https://github.com/jsdyer/atip",
+    "hosting": "project"
+  },
+  {
+    "id": "governmentmemory",
+    "title": "Government Memory Map",
+    "description": "Find record classes and personal information banks to reference in an access request.",
+    "category": "explorers",
+    "tags": [
+      "info",
+      "source",
+      "pib",
+      "atip",
+      "foi",
+      "retention",
+      "logs",
+      "privacy"
+    ],
+    "icon": "folder-search",
+    "url": "/governmentmemory/",
+    "source": "https://github.com/jsdyer/governmentmemory",
+    "hosting": "project"
+  },
+  {
+    "id": "briefings",
+    "title": "The Briefing Room",
+    "description": "Search briefing note titles and reference numbers.",
+    "category": "explorers",
+    "tags": [
+      "atip",
+      "foi",
+      "government",
+      "departmental"
+    ],
+    "icon": "file-text",
+    "url": "/briefings/",
+    "source": "https://github.com/jsdyer/briefings",
+    "hosting": "project"
+  },
+  {
+    "id": "evidencelab",
+    "title": "Evidence Lab",
+    "description": "Search disclosure PDFs, find dates and section references, and save page citations.",
+    "category": "explorers",
+    "tags": [
+      "atip",
+      "pdf",
+      "documents",
+      "analysis"
+    ],
+    "icon": "scan-text",
+    "url": "/evidencelab/",
+    "source": "https://github.com/jsdyer/evidencelab",
+    "hosting": "project",
+    "mode": "Local file"
+  },
+  {
+    "id": "atippopularity",
+    "title": "The ATIP Popularity Index",
+    "description": "See which released records received the most informal copy requests.",
+    "category": "explorers",
+    "tags": [
+      "ati",
+      "foi",
+      "statistics",
+      "informal"
+    ],
+    "icon": "list-ordered",
+    "url": "/atippopularity/",
+    "source": "https://github.com/jsdyer/atippopularity",
+    "hosting": "project"
+  },
+  {
+    "id": "atipmetrics",
+    "title": "ATIP Metrics",
+    "description": "Compare institutional workloads, find related records and briefing notes, and build a request draft.",
+    "category": "explorers",
+    "tags": [
+      "atip",
+      "foi",
+      "freedom",
+      "of",
+      "information",
+      "privacy",
+      "requests",
+      "backlog",
+      "extensions",
+      "statistics",
+      "processing",
+      "times"
+    ],
+    "icon": "activity",
+    "url": "/atipmetrics/",
+    "source": "https://github.com/jsdyer/atipmetrics",
+    "hosting": "project"
+  },
+  {
+    "id": "ministersays",
+    "title": "What the Minister Was Prepared to Say",
+    "description": "Compare Question Period notes and the issues they address.",
+    "category": "explorers",
+    "tags": [
+      "question",
+      "period",
+      "minister",
+      "cabinet",
+      "talking",
+      "points"
+    ],
+    "icon": "mic-vocal",
+    "url": "/ministersays/",
+    "source": "https://github.com/jsdyer/ministersays",
+    "hosting": "project"
+  },
+  {
+    "id": "wrongdoings",
+    "title": "The Government’s Wrongdoing Files",
+    "description": "Read published findings, recommendations and corrective actions.",
+    "category": "explorers",
+    "tags": [
+      "federal",
+      "misconduct",
+      "disclosures"
+    ],
+    "icon": "gavel",
+    "url": "/wrongdoings/",
+    "source": "https://github.com/jsdyer/wrongdoings",
+    "hosting": "project"
+  },
+  {
+    "id": "algorithmwatch",
+    "title": "Algorithm Watch",
+    "description": "Explore the federal AI register and find matched impact assessments.",
+    "category": "explorers",
+    "tags": [
+      "aia",
+      "ai",
+      "automated",
+      "decisions",
+      "federal",
+      "risk",
+      "privacy"
+    ],
+    "icon": "workflow",
+    "url": "/algorithmwatch/",
+    "source": "https://github.com/jsdyer/algorithmwatch",
+    "hosting": "project"
+  },
+  {
+    "id": "datasetexplorer",
+    "title": "The Government Dataset Explorer",
+    "description": "Find federal datasets and their downloadable files.",
+    "category": "explorers",
+    "tags": [
+      "catalogue",
+      "csv",
+      "api",
+      "government"
+    ],
+    "icon": "database",
+    "url": "/datasetexplorer/",
+    "source": "https://github.com/jsdyer/datasetexplorer",
+    "hosting": "project"
+  },
+  {
+    "id": "opendatagraveyard",
+    "title": "The Open Data Graveyard",
+    "description": "Investigate datasets removed from the federal catalogue.",
+    "category": "explorers",
+    "tags": [
+      "deleted",
+      "archive",
+      "datasets"
+    ],
+    "icon": "archive-x",
+    "url": "/opendatagraveyard/",
+    "source": "https://github.com/jsdyer/opendatagraveyard",
+    "hosting": "project"
+  },
+  {
+    "id": "canadaanalytics",
+    "title": "Canada.ca Pulse",
+    "description": "Explore recent patterns in federal government website usage.",
+    "category": "explorers",
+    "tags": [
+      "government",
+      "canada",
+      "traffic",
+      "analytics"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/canadaanalytics/",
+    "source": "https://github.com/jsdyer/canadaanalytics",
+    "hosting": "project"
+  },
+  {
+    "id": "corporateghosts",
+    "title": "Corporate Ghosts",
+    "description": "Search Canada’s federal corporate register and compare legal statuses.",
+    "category": "disclosures",
+    "tags": [
+      "company",
+      "registry",
+      "corporation",
+      "legal"
+    ],
+    "icon": "building-2",
+    "url": "/corporateghosts/",
+    "source": "https://github.com/jsdyer/corporateghosts",
+    "hosting": "project"
+  },
+  {
+    "id": "lobbytrail",
+    "title": "Lobby Trail",
+    "description": "Explore reported federal lobbying communications by organization, subject and institution.",
+    "category": "disclosures",
+    "tags": [
+      "lobbying",
+      "communication",
+      "canada",
+      "federal",
+      "influence"
+    ],
+    "icon": "messages-square",
+    "url": "/lobbytrail/",
+    "source": "https://github.com/jsdyer/lobbytrail",
+    "hosting": "project"
+  },
+  {
+    "id": "charityflows",
+    "title": "Charity Flows",
+    "description": "Compare Canadian charity filings and explore grants to reported recipients.",
+    "category": "disclosures",
+    "tags": [
+      "cra",
+      "t3010",
+      "charity",
+      "donation",
+      "qualified",
+      "donee",
+      "grant"
+    ],
+    "icon": "hand-heart",
+    "url": "/charityflows/",
+    "source": "https://github.com/jsdyer/charityflows",
+    "hosting": "project"
+  },
+  {
+    "id": "tariffxray",
+    "title": "Tariff X-Ray",
+    "description": "Find Canadian telecom tariff items and the regulatory decisions behind them.",
+    "category": "disclosures",
+    "tags": [
+      "bell",
+      "telus",
+      "crtc",
+      "telecom",
+      "tariff",
+      "wholesale",
+      "fibre",
+      "rates"
+    ],
+    "icon": "receipt-text",
+    "url": "/tariffxray/",
+    "source": "https://github.com/jsdyer/tariffxray",
+    "hosting": "project"
+  },
+  {
+    "id": "gearautopsy",
+    "title": "Gear Autopsy",
+    "description": "Find device filings and public FCC exhibits by model or FCC ID.",
+    "category": "disclosures",
+    "tags": [
+      "fcc",
+      "hardware",
+      "teardown",
+      "router",
+      "electronics",
+      "manual"
+    ],
+    "icon": "cpu",
+    "url": "/gearautopsy/",
+    "source": "https://github.com/jsdyer/gearautopsy",
+    "hosting": "project"
+  },
+  {
+    "id": "recallradar",
+    "title": "Recall Radar",
+    "description": "Search Canadian safety alerts and check affected vehicle makes, models and years.",
+    "category": "disclosures",
+    "tags": [
+      "health",
+      "canada",
+      "transport",
+      "canada",
+      "recalls",
+      "safety",
+      "food",
+      "appliances",
+      "cars",
+      "model",
+      "tires",
+      "alerts"
+    ],
+    "icon": "shield-alert",
+    "url": "/recallradar/",
+    "source": "https://github.com/jsdyer/recallradar",
+    "hosting": "project"
+  },
+  {
+    "id": "patentattic",
+    "title": "Patent Attic",
+    "description": "Search Canadian technology patents and open original CIPO records.",
+    "category": "disclosures",
+    "tags": [
+      "cipo",
+      "patents",
+      "invention",
+      "computing",
+      "networking",
+      "electronics",
+      "photography"
+    ],
+    "icon": "lightbulb",
+    "url": "/patentattic/",
+    "source": "https://github.com/jsdyer/patentattic",
+    "hosting": "project"
+  },
+  {
+    "id": "trailglass",
+    "title": "Trailglass",
+    "description": "Explore cycling and trail layers and inspect a Garmin GPX ride.",
+    "category": "places",
+    "tags": [
+      "langley",
+      "halifax",
+      "vancouver",
+      "nova",
+      "scotia",
+      "bike",
+      "cycling",
+      "hikes",
+      "gpx"
+    ],
+    "icon": "bike",
+    "url": "/trailglass/",
+    "source": "https://github.com/jsdyer/trailglass",
+    "hosting": "project"
+  },
+  {
+    "id": "weatherarchive",
+    "title": "Weather Archive",
+    "description": "Compare daily Canadian weather station records and monthly climate normals.",
+    "category": "places",
+    "tags": [
+      "eccc",
+      "environment",
+      "climate",
+      "historical",
+      "weather",
+      "station",
+      "rainfall",
+      "snow",
+      "temperature",
+      "langley",
+      "halifax"
+    ],
+    "icon": "history",
+    "url": "/weatherarchive/",
+    "source": "https://github.com/jsdyer/weatherarchive",
+    "hosting": "project"
+  },
+  {
+    "id": "spectrumatlas",
+    "title": "Spectrum Atlas",
+    "description": "Map published spectrum authorizations and inspect bands and frequencies.",
+    "category": "places",
+    "tags": [
+      "ised",
+      "radio",
+      "transmitters",
+      "spectrum",
+      "wireless",
+      "microwave",
+      "bc",
+      "ns"
+    ],
+    "icon": "radio-tower",
+    "url": "/spectrumatlas/",
+    "source": "https://github.com/jsdyer/spectrumatlas",
+    "hosting": "project"
+  },
+  {
+    "id": "shipwrecks",
+    "title": "Shipwreck Explorer",
+    "description": "Search Nova Scotia wrecks by area, vessel and date.",
+    "category": "places",
+    "tags": [
+      "halifax",
+      "marine",
+      "atlantic",
+      "shipwrecks"
+    ],
+    "icon": "anchor",
+    "url": "/shipwrecks/",
+    "source": "https://github.com/jsdyer/shipwrecks",
+    "hosting": "project"
+  },
+  {
+    "id": "forgottenplaces",
+    "title": "Forgotten Places",
+    "description": "Explore sites in Canada’s historic places register.",
+    "category": "places",
+    "tags": [
+      "heritage",
+      "ghost",
+      "towns",
+      "military",
+      "abandoned",
+      "atlases"
+    ],
+    "icon": "brick-wall",
+    "url": "/forgottenplaces/",
+    "source": "https://github.com/jsdyer/forgottenplaces",
+    "hosting": "project"
+  },
+  {
+    "id": "namesforget",
+    "title": "Names That Time Forgot",
+    "description": "Trace Canadian place names, features and their locations.",
+    "category": "places",
+    "tags": [
+      "geography",
+      "settlement",
+      "historical"
+    ],
+    "icon": "map-pin",
+    "url": "/namesforget/",
+    "source": "https://github.com/jsdyer/namesforget",
+    "hosting": "project"
+  },
+  {
+    "id": "strangeskies",
+    "title": "Strange Skies Canada",
+    "description": "Search aviation occurrence reports by location, year and event.",
+    "category": "places",
+    "tags": [
+      "cadors",
+      "airports",
+      "flight",
+      "emergency"
+    ],
+    "icon": "plane",
+    "url": "/strangeskies/",
+    "source": "https://github.com/jsdyer/strangeskies",
+    "hosting": "project"
+  },
+  {
+    "id": "nightfinder",
+    "title": "Nightfinder",
+    "description": "Plan a night shoot around darkness, target positions and lens framing.",
+    "category": "field-kit",
+    "tags": [
+      "astronomy",
+      "clouds",
+      "dslr",
+      "planets",
+      "moon",
+      "astrophotography"
+    ],
+    "icon": "telescope",
+    "url": "/nightfinder/",
+    "source": "https://github.com/jsdyer/nightfinder",
+    "hosting": "project"
+  },
+  {
+    "id": "satpasses",
+    "title": "Satellite Pass",
+    "description": "Calculate passes for the ISS and other satellites from your location.",
+    "category": "field-kit",
+    "tags": [
+      "iss",
+      "tiangong",
+      "astronomy",
+      "orbit",
+      "celestrak",
+      "nasa"
+    ],
+    "icon": "satellite",
+    "url": "/satpasses/",
+    "source": "https://github.com/jsdyer/satpasses",
+    "hosting": "project"
+  },
+  {
+    "id": "skyarchive",
+    "title": "Sky Archive Explorer",
+    "description": "Find selected Hubble and Webb observations and open the original archive records.",
+    "category": "field-kit",
+    "tags": [
+      "mast",
+      "hubble",
+      "jwst",
+      "webb",
+      "astronomy",
+      "fits",
+      "images",
+      "telescope"
+    ],
+    "icon": "sparkles",
+    "url": "/skyarchive/",
+    "source": "https://github.com/jsdyer/skyarchive",
+    "hosting": "project"
+  },
+  {
+    "id": "photolab",
+    "title": "Photo Lab",
+    "description": "Inspect metadata, edit photos and export cleaned copies on your device.",
+    "category": "field-kit",
+    "tags": [
+      "exif",
+      "jpeg",
+      "png",
+      "gps",
+      "crop",
+      "privacy",
+      "photo",
+      "image",
+      "histogram"
+    ],
+    "icon": "camera",
+    "url": "/photolab/",
+    "source": "https://github.com/jsdyer/photolab",
+    "hosting": "project",
+    "mode": "Local file"
+  },
+  {
+    "id": "bankrates",
+    "title": "BankRate Lab",
+    "description": "Chart Bank of Canada rates, exchange rates and yields.",
+    "category": "money",
+    "tags": [
+      "interest",
+      "policy",
+      "bank",
+      "cad",
+      "usd",
+      "bonds",
+      "mortgage"
+    ],
+    "icon": "percent",
+    "url": "/bankrates/",
+    "source": "https://github.com/jsdyer/bankrates",
+    "hosting": "project"
+  },
+  {
+    "id": "priceatlas",
+    "title": "Canadian Price Atlas",
+    "description": "Compare historical grocery prices across Canadian regions.",
+    "category": "money",
+    "tags": [
+      "statcan",
+      "bc",
+      "ns",
+      "food",
+      "grocery",
+      "inflation",
+      "retail",
+      "prices"
+    ],
+    "icon": "shopping-basket",
+    "url": "/priceatlas/",
+    "source": "https://github.com/jsdyer/priceatlas",
+    "hosting": "project"
+  },
+  {
+    "id": "insolvencyatlas",
+    "title": "Insolvency Atlas",
+    "description": "Explore insolvency counts and rates, or compare filings with grocery prices and policy rates.",
+    "category": "money",
+    "tags": [
+      "osb",
+      "consumer",
+      "business",
+      "insolvency",
+      "bankruptcy",
+      "proposal",
+      "debt",
+      "filings",
+      "industries"
+    ],
+    "icon": "chart-no-axes-column-decreasing",
+    "url": "/insolvencyatlas/",
+    "source": "https://github.com/jsdyer/insolvencyatlas",
+    "hosting": "project"
+  },
+  {
+    "id": "marketshadows",
+    "title": "Market Shadows",
+    "description": "Compare CIRO trading and short positions and rank changes between reports.",
+    "category": "money",
+    "tags": [
+      "ciro",
+      "tsx",
+      "short",
+      "selling",
+      "stocks",
+      "volume"
+    ],
+    "icon": "chart-candlestick",
+    "url": "/marketshadows/",
+    "source": "https://github.com/jsdyer/marketshadows",
+    "hosting": "project",
+    "mode": "Local file"
+  },
+  {
+    "id": "eventradar",
+    "title": "Event Radar",
+    "description": "Browse local listings and keep selected events on your calendar.",
+    "category": "media",
+    "tags": [
+      "halifax",
+      "vancouver",
+      "langley",
+      "venue",
+      "theatre",
+      "shows",
+      "tickets",
+      "ics"
+    ],
+    "icon": "calendar-days",
+    "url": "/eventradar/",
+    "source": "https://github.com/jsdyer/eventradar",
+    "hosting": "project"
+  },
+  {
+    "id": "screenradar",
+    "title": "Screen Radar",
+    "description": "Find television and Canadian films, and keep a watchlist in this browser.",
+    "category": "media",
+    "tags": [
+      "tv",
+      "tvmaze",
+      "movie",
+      "films",
+      "cancon",
+      "cinema"
+    ],
+    "icon": "tv-minimal",
+    "url": "/screenradar/",
+    "source": "https://github.com/jsdyer/screenradar",
+    "hosting": "project"
+  },
+  {
+    "id": "mediaechoes",
+    "title": "Media Echoes",
+    "description": "Search the Internet Archive for old games, Flash projects and media.",
+    "category": "media",
+    "tags": [
+      "software",
+      "archival",
+      "cd-rom",
+      "web",
+      "games"
+    ],
+    "icon": "disc-3",
+    "url": "/mediaechoes/",
+    "source": "https://github.com/jsdyer/mediaechoes",
+    "hosting": "project"
+  },
+  {
+    "id": "ghostlinks",
+    "title": "Ghost Links",
+    "description": "Follow dead URLs through web archives and dated captures.",
+    "category": "media",
+    "tags": [
+      "wayback",
+      "cdx",
+      "dead",
+      "links",
+      "common",
+      "crawl"
+    ],
+    "icon": "unlink-2",
+    "url": "/ghostlinks/",
+    "source": "https://github.com/jsdyer/ghostlinks",
+    "hosting": "project"
+  },
+  {
+    "id": "lostcode",
+    "title": "Lost Code",
+    "description": "Look up archived repository visits, branches and tags.",
+    "category": "media",
+    "tags": [
+      "source",
+      "software",
+      "heritage",
+      "repositories",
+      "git"
+    ],
+    "icon": "file-code-2",
+    "url": "/lostcode/",
+    "source": "https://github.com/jsdyer/lostcode",
+    "hosting": "project"
+  },
+  {
+    "id": "unreleased",
+    "title": "The Unreleased Worlds Index",
+    "description": "Search a Canada Media Fund export for funded games, films and digital projects.",
+    "category": "media",
+    "tags": [
+      "cmf",
+      "archived",
+      "projects",
+      "games"
+    ],
+    "icon": "gamepad-2",
+    "url": "/unreleased/",
+    "source": "https://github.com/jsdyer/unreleased",
+    "hosting": "project",
+    "mode": "Local file"
+  }
+]

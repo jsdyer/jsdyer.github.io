@@ -1,0 +1,24 @@
+# Working on CoolCode
+
+- The homepage catalogue is maintained in `data/tools.json` and `data/categories.json`.
+  Edit layout in `templates/index.html`. `dist/` is generated and must not be committed.
+- Keep existing titles, descriptions, order, category anchors, icons and URLs unless
+  the task asks to change them. Featured editorial cards live in the page template.
+- Small static utilities can live in a top-level directory in this repository.
+  Apps with their own dependencies, data refresh or release lifecycle belong in a
+  separate repository. Keep existing projects where they are unless a move is requested.
+- New standalone browser tools start from `jsdyer/coolcode-tool-template`.
+- Add one catalogue record only after checking the deployed destination. Use `local`
+  hosting for an included directory, `project` for another GitHub Pages repository,
+  and `external` for an HTTPS destination such as installation instructions.
+- Use existing icons from `assets/coolcode.css` and category IDs. Tool IDs and public
+  routes must be unique. Do not create a local directory over a project site's route.
+- Run `python3 -m unittest discover -s tests -v` and `python3 scripts/build.py`.
+  Preview using `python3 -m http.server 8000 --directory dist`.
+- Do not add a dependency or framework just to maintain the catalogue. Never make
+  the homepage build depend on fetching or rebuilding the independent tool repos.
+- Scope application tests to the application being changed. A link failure in the
+  separate network audit must not prevent a valid catalogue build from publishing.
+- Keep the existing domain and public paths. Publish only `dist/`; PRs must not deploy.
+
+See `docs/adding-tools.md` for examples and `docs/pages-rollout.md` for the publishing transition.
