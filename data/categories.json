@@ -1,0 +1,47 @@
+[
+  {
+    "id": "projects",
+    "title": "Linux & self-hosting",
+    "icon": "server-cog"
+  },
+  {
+    "id": "liminal-tools",
+    "title": "Networks & routing",
+    "icon": "network"
+  },
+  {
+    "id": "security",
+    "title": "Security & forensics",
+    "icon": "shield-check"
+  },
+  {
+    "id": "explorers",
+    "title": "Government & public records",
+    "icon": "landmark"
+  },
+  {
+    "id": "disclosures",
+    "title": "Public disclosures",
+    "icon": "file-check-2"
+  },
+  {
+    "id": "places",
+    "title": "Maps, trails & history",
+    "icon": "map"
+  },
+  {
+    "id": "field-kit",
+    "title": "Sky & photography",
+    "icon": "moon-star"
+  },
+  {
+    "id": "money",
+    "title": "Money & markets",
+    "icon": "wallet"
+  },
+  {
+    "id": "media",
+    "title": "Media, events & the old web",
+    "icon": "film"
+  }
+]

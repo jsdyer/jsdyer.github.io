@@ -3,7 +3,9 @@ name: Timefold · Check the archive
 on:
   push:
     branches: [main]
+    paths: ['tools/timefold/**', '.github/workflows/checks.yml']
   pull_request:
+    paths: ['tools/timefold/**', '.github/workflows/checks.yml']
   workflow_dispatch:
 
 permissions:
