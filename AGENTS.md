@@ -11,6 +11,10 @@
 - Add one catalogue record only after checking the deployed destination. Use `local`
   hosting for an included directory, `project` for another GitHub Pages repository,
   and `external` for an HTTPS destination such as installation instructions.
+- Always set `access` to `browser` or `install`; this is independent of `hosting`.
+  Installable projects require `requirements`. For a tool with both versions, use
+  `access: "browser"` plus `install_url` and `requirements`. Never classify file
+  uploads as installation or replace the clear access label with a language name.
 - Use existing icons from `assets/coolcode.css` and category IDs. Tool IDs and public
   routes must be unique. Do not create a local directory over a project site's route.
 - Run `python3 -m unittest discover -s tests -v` and `python3 scripts/build.py`.

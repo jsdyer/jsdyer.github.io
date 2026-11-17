@@ -14,12 +14,14 @@ class Page(HTMLParser):
         self.entries = 0
         self.ids = []
         self.hrefs = []
+        self.tools = []
         self.feed(source)
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if "data-tool" in attrs:
             self.entries += 1
+            self.tools.append(attrs)
         if "id" in attrs:
             self.ids.append(attrs["id"])
         if "href" in attrs:
@@ -38,13 +40,40 @@ class CatalogueTests(unittest.TestCase):
 
     def test_all_destinations_are_in_static_html(self):
         page = Page(render(self.categories, self.tools, self.template))
-        self.assertEqual(page.entries, len(self.tools))
+        self.assertEqual(page.entries, len(self.tools) + sum("install_url" in t for t in self.tools))
         self.assertEqual(len(page.ids), len(set(page.ids)))
         for tool in self.tools:
             self.assertIn(tool["url"], page.hrefs)
         for category in self.categories:
-            self.assertIn(category["id"], page.ids)
-            self.assertIn("#" + category["id"], page.hrefs)
+            if any(t["category"] == category["id"] and t["access"] == "browser" for t in self.tools):
+                self.assertIn(category["id"], page.ids)
+                self.assertIn("#" + category["id"], page.hrefs)
+
+    def test_access_labels_are_explicit_for_every_entry(self):
+        html = render(self.categories, self.tools, self.template)
+        page = Page(html)
+        for tool in self.tools:
+            entries = [t for t in page.tools if t["data-tool-id"] == tool["id"]]
+            expected = [tool["access"]] + (["install"] if "install_url" in tool else [])
+            self.assertCountEqual([t["data-access"] for t in entries], expected)
+        self.assertNotIn("Browser demo", html)
+        self.assertNotIn('class="tool-mode">Local file', html)
+
+    def test_dual_version_links_to_two_destinations(self):
+        archive = next(t for t in self.tools if t["id"] == "archive-shelf")
+        page = Page(render(self.categories, self.tools, self.template))
+        self.assertIn(archive["url"], page.hrefs)
+        self.assertIn(archive["install_url"], page.hrefs)
+
+    def test_installation_requires_requirements(self):
+        tool = next(t for t in self.tools if t["access"] == "install")
+        self.reject(lambda: tool.pop("requirements"), "installation requirements")
+
+    def test_access_cannot_be_omitted_or_guessed_from_hosting(self):
+        self.reject(lambda: self.tools[0].pop("access"), "Missing")
+
+    def test_install_guide_must_be_https(self):
+        self.reject(lambda: self.tools[0].update(install_url="javascript:bad()", requirements="Python"), "HTTPS guide")
 
     def test_duplicate_tool_id(self):
         self.reject(lambda: self.tools.append(copy.deepcopy(self.tools[0])), "Duplicate tool ID")
@@ -86,7 +115,7 @@ class CatalogueTests(unittest.TestCase):
         self.assertNotIn('<img src=x', html)
         self.assertNotIn('<script>bad()', html)
         self.assertIn('&lt;script&gt;bad()', html)
-        self.assertEqual(Page(html).entries, len(self.tools))
+        self.assertEqual(Page(html).entries, len(self.tools) + sum("install_url" in t for t in self.tools))
 
     def test_growing_catalogue_does_not_need_html_edits(self):
         for number in range(100):
@@ -94,7 +123,7 @@ class CatalogueTests(unittest.TestCase):
             tool.update(id=f"future-{number}", url=f"/future-{number}/", hosting="project", source=f"https://github.com/jsdyer/future-{number}")
             self.tools.append(tool)
         validate(self.categories, self.tools)
-        self.assertEqual(Page(render(self.categories, self.tools, self.template)).entries, len(self.tools))
+        self.assertEqual(Page(render(self.categories, self.tools, self.template)).entries, len(self.tools) + sum("install_url" in t for t in self.tools))
 
     def test_missing_template_marker_is_an_error(self):
         with self.assertRaisesRegex(ValueError, "exactly once"):

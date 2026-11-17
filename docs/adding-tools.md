@@ -37,14 +37,25 @@ Append a record to the appropriate place in `data/tools.json`, for example:
   "url": "/my-tool/",
   "source": "https://github.com/jsdyer/my-tool",
   "hosting": "project",
-  "mode": "Browser"
+  "access": "browser"
 }
 ```
 
-`mode` is optional. All other fields are required. Use an existing `data-icon` value
+All fields in this example are required. Use an existing `data-icon` value
 from `assets/coolcode.css`; new icons need a corresponding sprite/CSS update.
 `source` links to the repository or directory containing the code; `url` is where
 the catalogue sends the visitor. They are deliberately independent.
+
+`access` describes what the visitor needs to do, independently of where code is
+hosted. Set it explicitly to `browser` for an immediately usable web tool or `install`
+for a project that must be installed. Do not use language names, "Local file", or
+"Browser demo" as access labels. File selection does not mean installation.
+
+An installable project also requires a `requirements` string, such as `Python 3 and
+SQLite`; its `url` should open the installation guide. If a browser tool also has a
+separate installable version, keep one record with `access: "browser"`, add an HTTPS
+`install_url` and state the `requirements`. The build puts it in both sections with
+the correct destination. Search counts it as one tool, even when both versions match.
 
 For `local`, create `<slug>/index.html` and its assets here and use `/<slug>/` as
 the URL. The build includes this directory automatically. A directory cannot reuse

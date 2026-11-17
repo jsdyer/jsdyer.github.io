@@ -28,7 +28,7 @@ def check(url):
 def main():
     tools = json.loads((ROOT / "data/tools.json").read_text())
     urls = sorted({("https://coolcode.ca" + value if value.startswith("/") else value)
-                   for tool in tools for value in (tool["url"], tool["source"])})
+                   for tool in tools for value in (tool["url"], tool["source"], *([tool["install_url"]] if "install_url" in tool else []))})
     with ThreadPoolExecutor(max_workers=4) as pool:
         results = list(pool.map(check, urls))
     report = ROOT / "link-audit.json"
