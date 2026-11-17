@@ -8,6 +8,7 @@ the working tree. No user archive, credentials or running services are used.
 from __future__ import annotations
 
 import argparse
+import http.client
 import os
 from pathlib import Path
 import re
@@ -84,7 +85,8 @@ def main() -> None:
                     with urllib.request.urlopen(base + "/api.php?action=session", timeout=2) as response:
                         if response.status == 200:
                             break
-                except (urllib.error.URLError, TimeoutError):
+                except (urllib.error.URLError, OSError, http.client.HTTPException):
+                    # Docker can accept/reset a connection before Apache starts.
                     pass
                 time.sleep(0.5)
             else:
