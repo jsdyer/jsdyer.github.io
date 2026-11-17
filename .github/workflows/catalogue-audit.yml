@@ -22,7 +22,7 @@ jobs:
       - run: python3 scripts/audit_links.py
       - name: Save report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: catalogue-link-audit
           path: link-audit.json
