@@ -505,14 +505,14 @@
             "refreshed"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "days"
             ],
             "unit": "calendar days"
           },
-          "count": 2144
+          "count": 2146
         }
       ]
     },
@@ -551,7 +551,7 @@
             "capturedAt"
           ],
           "label": "Canadian sample retrieved",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [],
             "unit": "case studies",
@@ -785,7 +785,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "rows"
@@ -793,7 +793,7 @@
             "unit": "catalogued vulnerabilities",
             "measure": "length"
           },
-          "count": 1781
+          "count": 1782
         },
         {
           "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
@@ -801,7 +801,7 @@
             "released"
           ],
           "label": "Source published",
-          "value": "2026-11-13"
+          "value": "2026-11-17"
         }
       ]
     },
@@ -841,7 +841,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "rows"
@@ -849,7 +849,7 @@
             "unit": "KEV entries",
             "measure": "length"
           },
-          "count": 1781
+          "count": 1782
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -857,7 +857,7 @@
             "kevDate"
           ],
           "label": "Source published",
-          "value": "2026-11-13"
+          "value": "2026-11-17"
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -865,7 +865,7 @@
             "epssDate"
           ],
           "label": "EPSS score date",
-          "value": "2026-11-17"
+          "value": "2026-11-18"
         }
       ]
     },
@@ -1261,7 +1261,7 @@
             ],
             "unit": "disclosures"
           },
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count": 73
         },
         {
@@ -1270,7 +1270,7 @@
             "modified"
           ],
           "label": "Source updated",
-          "value": "2026-11-17"
+          "value": "2026-11-18"
         }
       ],
       "cadence": "Daily"
@@ -1417,7 +1417,7 @@
             ],
             "unit": "removed entries"
           },
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count": 3934
         },
         {
@@ -1462,7 +1462,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "series"
@@ -1633,8 +1633,8 @@
             ],
             "unit": "corporate records"
           },
-          "value": "2026-11-17",
-          "count": 1580390
+          "value": "2026-11-18",
+          "count": 1580735
         }
       ],
       "cadence": "Daily"
@@ -2175,7 +2175,7 @@
             "builtAt"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "count"
@@ -2225,14 +2225,14 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "count"
             ],
             "unit": "place-name records"
           },
-          "count": 369888
+          "count": 369896
         }
       ],
       "cadence": "Daily"
@@ -2777,7 +2777,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "tracks"
@@ -2794,7 +2794,7 @@
             0
           ],
           "label": "Observation dates",
-          "value": "2017-01-02–2026-11-16",
+          "value": "2017-01-02–2026-11-17",
           "end_path": [
             "dates",
             -1
