@@ -30,7 +30,7 @@ A tool that asks you to select a local file is still a browser tool.
 
 <!-- BEGIN BROWSER_TOOLS -->
 
-62 browser tools, grouped as on the homepage.
+65 browser tools, grouped as on the homepage.
 
 #### Homelab &amp; archiving
 
@@ -108,6 +108,9 @@ A tool that asks you to select a local file is still a browser tool.
 | [Forgotten Places](<https://coolcode.ca/forgottenplaces/>) | Explore sites in Canada’s historic places register. | [Source &amp; docs](<https://github.com/jsdyer/forgottenplaces>) |
 | [Names That Time Forgot](<https://coolcode.ca/namesforget/>) | Trace Canadian place names, features and their locations. | [Source &amp; docs](<https://github.com/jsdyer/namesforget>) |
 | [BC Place Names Explorer](<https://coolcode.ca/bcplacenames/>) | Explore nearby BC place names, official and recorded names, and naming decisions. | [Source &amp; docs](<https://github.com/jsdyer/bcplacenames>) |
+| [Hidden Water](<https://coolcode.ca/hiddenwater/>) | Explore Langley creeks, drainage channels and mapped culverts. | [Source &amp; docs](<https://github.com/jsdyer/hiddenwater>) |
+| [Halifax Time Lens](<https://coolcode.ca/halifaxtimelens/>) | Compare Halifax aerial photographs from 1947 and 1977 with a modern street map. | [Source &amp; docs](<https://github.com/jsdyer/halifaxtimelens>) |
+| [Langley Changes](<https://coolcode.ca/langleychanges/>) | Explore City and Township development applications, documents and changes over time. | [Source &amp; docs](<https://github.com/jsdyer/langleychanges>) |
 | [Strange Skies Canada](<https://coolcode.ca/strangeskies/>) | Search aviation occurrence reports by location, year and event. | [Source &amp; docs](<https://github.com/jsdyer/strangeskies>) |
 
 #### Sky &amp; photography
