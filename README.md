@@ -30,7 +30,7 @@ A tool that asks you to select a local file is still a browser tool.
 
 <!-- BEGIN BROWSER_TOOLS -->
 
-65 browser tools, grouped as on the homepage.
+70 browser tools, grouped as on the homepage.
 
 #### Homelab &amp; archiving
 
@@ -84,6 +84,8 @@ A tool that asks you to select a local file is still a browser tool.
 | [The Government Dataset Explorer](<https://coolcode.ca/datasetexplorer/>) | Find federal datasets and their downloadable files. | [Source &amp; docs](<https://github.com/jsdyer/datasetexplorer>) |
 | [The Open Data Graveyard](<https://coolcode.ca/opendatagraveyard/>) | Investigate datasets removed from the federal catalogue. | [Source &amp; docs](<https://github.com/jsdyer/opendatagraveyard>) |
 | [Canada.ca Pulse](<https://coolcode.ca/canadaanalytics/>) | Explore recent patterns in federal government website usage. | [Source &amp; docs](<https://github.com/jsdyer/canadaanalytics>) |
+| [Salmon Lines](<https://coolcode.ca/salmonlines/>) | Compare historical salmon spawning estimates by river, species and run in DFO’s Pacific region. <br> [![Read the dataset retrieval date for Salmon Lines](<https://coolcode.ca/salmonlines/data-date.svg>)](<https://coolcode.ca/salmonlines/data-date.svg>) | [Source &amp; docs](<https://github.com/jsdyer/salmonlines>) |
+| [Dataset Diff](<https://coolcode.ca/datasetdiff/>) | Compare CSV or GeoJSON snapshots by record ID and inspect changes to fields and geometry. | [Source &amp; docs](<https://github.com/jsdyer/datasetdiff>) |
 
 #### Public disclosures
 
@@ -112,6 +114,8 @@ A tool that asks you to select a local file is still a browser tool.
 | [Halifax Time Lens](<https://coolcode.ca/halifaxtimelens/>) | Compare Halifax aerial photographs from 1947 and 1977 with a modern street map. | [Source &amp; docs](<https://github.com/jsdyer/halifaxtimelens>) |
 | [Langley Changes](<https://coolcode.ca/langleychanges/>) | Explore City and Township development applications, documents and changes over time. | [Source &amp; docs](<https://github.com/jsdyer/langleychanges>) |
 | [Strange Skies Canada](<https://coolcode.ca/strangeskies/>) | Search aviation occurrence reports by location, year and event. | [Source &amp; docs](<https://github.com/jsdyer/strangeskies>) |
+| [Lightkeeper](<https://coolcode.ca/lightkeeper/>) | Explore Canadian coastal lights, play their published signals and compare nearby aids. <br> [![Read the dataset retrieval date for Lightkeeper](<https://coolcode.ca/lightkeeper/data-date.svg>)](<https://coolcode.ca/lightkeeper/data-date.svg>) | [Source &amp; docs](<https://github.com/jsdyer/lightkeeper>) |
+| [Storm Tracks](<https://coolcode.ca/stormtracks/>) | Replay Atlantic storms, compare their winds and find historical tracks near a coastal community. <br> [![Read the dataset retrieval date for Storm Tracks](<https://coolcode.ca/stormtracks/data-date.svg>)](<https://coolcode.ca/stormtracks/data-date.svg>) | [Source &amp; docs](<https://github.com/jsdyer/stormtracks>) |
 
 #### Sky &amp; photography
 
@@ -121,6 +125,7 @@ A tool that asks you to select a local file is still a browser tool.
 | [Satellite Pass](<https://coolcode.ca/satpasses/>) | Calculate passes for the ISS and other satellites from your location. | [Source &amp; docs](<https://github.com/jsdyer/satpasses>) |
 | [Sky Archive Explorer](<https://coolcode.ca/skyarchive/>) | Find selected Hubble and Webb observations and open the original archive records. | [Source &amp; docs](<https://github.com/jsdyer/skyarchive>) |
 | [Photo Lab](<https://coolcode.ca/photolab/>) | Inspect metadata, edit photos and export cleaned copies on your device. | [Source &amp; docs](<https://github.com/jsdyer/photolab>) |
+| [Otherworld Names](<https://coolcode.ca/otherworldnames/>) | Explore the origins and locations of officially named features on the Moon and Mars. <br> [![Read the dataset retrieval date for Otherworld Names](<https://coolcode.ca/otherworldnames/data-date.svg>)](<https://coolcode.ca/otherworldnames/data-date.svg>) | [Source &amp; docs](<https://github.com/jsdyer/otherworldnames>) |
 
 #### Money &amp; markets
 
@@ -152,7 +157,7 @@ publicly hosted tool: Timefold and Switchboard run on the machine where you inst
 
 <!-- BEGIN INSTALL_TOOLS -->
 
-7 installation options. Tools with both versions also appear above.
+8 installation options. Tools with both versions also appear above.
 
 | Project / installation guide | What it does | Requirements | Code / documentation |
 | --- | --- | --- | --- |
@@ -163,6 +168,7 @@ publicly hosted tool: Timefold and Switchboard run on the machine where you inst
 | [Waystation](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation>) | Capture websites into portable archives, map links and browse offline. | Downloadable executable for Linux, macOS or Windows | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation>) |
 | [Timefold](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold>) | Build a personal timeline of photos, game saves and web fragments. | PHP 8.2+ and MySQL/MariaDB; optional SQLite demo | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold>) |
 | [Tape Index](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index>) | Fingerprint and verify scans, web archives and game saves from the terminal. | Python 3 | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index>) |
+| [Dataset Diff](<https://github.com/jsdyer/datasetdiff#linux-companion>) | Compare CSV or GeoJSON snapshots by record ID and inspect changes to fields and geometry. | Linux and Node.js 24+ | [Source &amp; docs](<https://github.com/jsdyer/datasetdiff>) |
 
 <!-- END INSTALL_TOOLS -->
 

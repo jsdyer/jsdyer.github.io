@@ -67,6 +67,15 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn("(<https://example.com/a(b)%7Cc>)", text)
         self.assertNotIn("<script>", text)
 
+    def test_snapshot_images_point_at_the_tool_release_and_escape_the_alt_text(self):
+        tool = next(t.copy() for t in self.tools if t["hosting"] == "project" and t["access"] == "browser")
+        tool.update(title="River [delta] | tides", data_date_badge=True)
+        text = render_readme(SKELETON, self.categories, [tool])
+        browser, install = text.split("<!-- END BROWSER_TOOLS -->", 1)
+        self.assertIn(r"![Read the dataset retrieval date for River \[delta\] &#124; tides]", browser)
+        self.assertIn(f"(<https://coolcode.ca{tool['url']}data-date.svg>)", browser)
+        self.assertNotIn("data-date.svg", install)
+
     def test_missing_duplicate_reversed_and_overlapping_markers_are_rejected(self):
         malformed = [SKELETON.replace("<!-- END BROWSER_TOOLS -->", ""),
                      SKELETON + "<!-- BEGIN INSTALL_TOOLS -->",

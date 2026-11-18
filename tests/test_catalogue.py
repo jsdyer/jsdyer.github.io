@@ -5,7 +5,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from build import ROOT, load_catalogue, render, validate
+from build import ROOT, load_catalogue, render, render_entry, validate
 
 
 class Page(HTMLParser):
@@ -14,6 +14,7 @@ class Page(HTMLParser):
         self.entries = 0
         self.ids = []
         self.hrefs = []
+        self.images = []
         self.tools = []
         self.feed(source)
 
@@ -26,6 +27,8 @@ class Page(HTMLParser):
             self.ids.append(attrs["id"])
         if "href" in attrs:
             self.hrefs.append(attrs["href"])
+        if tag == "img":
+            self.images.append(attrs)
 
 
 class CatalogueTests(unittest.TestCase):
@@ -68,6 +71,22 @@ class CatalogueTests(unittest.TestCase):
     def test_installation_requires_requirements(self):
         tool = next(t for t in self.tools if t["access"] == "install")
         self.reject(lambda: tool.pop("requirements"), "installation requirements")
+
+    def test_data_date_is_independent_of_access_labels_and_install_destinations(self):
+        tool = next(t.copy() for t in self.tools if t["hosting"] == "project" and t["access"] == "browser")
+        tool.update(data_date_badge=True, install_url="https://example.org/install", requirements="Linux")
+        browser = Page(render_entry(tool, "browser"))
+        self.assertEqual([image["src"] for image in browser.images], [tool["url"] + "data-date.svg"])
+        self.assertIn(tool["title"], browser.images[0]["alt"])
+        self.assertIn(browser.images[0]["src"], browser.hrefs)
+        self.assertEqual(Page(render_entry(tool, "install")).images, [])
+        tool["data_date_badge"] = False
+        self.assertEqual(Page(render_entry(tool, "browser")).images, [])
+
+    def test_data_date_badges_accept_only_project_images(self):
+        tool = next(t for t in self.tools if t["hosting"] == "local")
+        self.reject(lambda: tool.update(data_date_badge="https://example.org/untrusted.svg"), "boolean")
+        self.reject(lambda: tool.update(data_date_badge=True), "project-hosted browser tool")
 
     def test_access_cannot_be_omitted_or_guessed_from_hosting(self):
         self.reject(lambda: self.tools[0].pop("access"), "Missing")
