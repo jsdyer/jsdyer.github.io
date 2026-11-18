@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123738">
+  <meta name="description" content="Find regional radio shows in Atlantic Canada, see their times where you live, and listen through the station.">
+  <title>Atlantic Dial · CoolCode</title>
+  <link rel="icon" href="../favicon.svg"><link rel="stylesheet" href="dial.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#listings">Skip to the schedule</a>
+<header><div class="wrap nav"><a href="../#media" class="brand">CoolCode<span>.ca</span></a><a href="#sources">Stations &amp; sources ↓</a></div></header>
+<main>
+  <section class="mast" aria-labelledby="title"><div class="wrap mast-grid">
+    <div><h1 id="title">Atlantic Dial<span>.</span></h1><p class="deck">Local radio from Atlantic Canada, on your clock. Find a show back home and listen with the station.</p></div>
+    <div class="receiver" id="feature" aria-live="off"><p>Reading the station schedules…</p></div>
+  </div></section>
+  <div class="wrap main-body"><section id="listings" aria-labelledby="schedule-title">
+    <div class="section-head"><h2 id="schedule-title">Programme guide</h2><p id="edition"></p></div>
+    <div class="filters">
+      <div class="filter-control"><label for="province">Province</label><select id="province"><option value="">All four provinces</option><option value="NS">Nova Scotia</option><option value="NB">New Brunswick</option><option value="PEI">Prince Edward Island</option><option value="NL">Newfoundland and Labrador</option></select></div>
+      <div class="filter-control"><label for="zone">Show times in</label><select id="zone"></select></div>
+      <label class="saved-filter"><input type="checkbox" id="saved"> Saved shows</label>
+    </div>
+    <div id="days" class="days" role="group" aria-label="Guide day"></div>
+    <p id="summary" class="list-summary" role="status"></p>
+    <div id="list" aria-labelledby="schedule-title"></div>
+    <noscript><p>Enable JavaScript to convert show times. The published schedules are available directly from the stations below.</p></noscript>
+  </section>
+  <details id="sources" class="sources"><summary>Stations &amp; sources</summary>
+    <p>The guide follows selected programmes on the stations’ usual weekly schedules. Special broadcasts can change the lineup. Each player belongs to its station.</p>
+    <ul><li><a href="https://www.seasidefm.com/staff">Seaside FM · Eastern Passage, NS</a></li><li><a href="https://www.ckjmfm.ca/en/shows/">Radio CKJM · Chéticamp, NS</a></li><li><a href="https://coastalradio.ca/schedule/">The Coast · Sydney, NS</a></li><li><a href="https://www.chmafm.com/welcome/chmamornings/">CHMA · Sackville, NB</a></li><li><a href="https://cfcy.fm/on-air/saturday-night-hoedown/">CFCY · Charlottetown, PEI</a></li><li><a href="https://vocm.com/weekends-on-vocm/">VOCM · St. John’s, NL</a></li><li><a href="https://vowr.ca/programs/">VOWR · St. John’s, NL</a></li></ul>
+    <p>Saved shows and your preferred time zone stay in this browser. <a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/atlanticdial#readme">Read the tool guide</a>.</p>
+  </details></div>
+</main>
+<footer><div class="wrap"><a href="../#media">← CoolCode catalogue</a></div></footer>
+</body></html>
