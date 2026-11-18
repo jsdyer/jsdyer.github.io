@@ -113,6 +113,7 @@ the route of a separately published project. For `external`, supply an HTTPS URL
 such as the installation guide for a command-line application.
 
 ```sh
+python3 scripts/sync_guides.py --tool my-tool
 python3 scripts/sync_readme.py
 python3 -m unittest discover -s tests -v
 python3 scripts/build.py

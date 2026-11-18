@@ -2991,6 +2991,57 @@
     }
   },
   {
+    "id": "atlanticdial",
+    "title": "Atlantic Dial",
+    "description": "Find local Atlantic Canadian radio shows, listen through the station and save an upcoming airing to your calendar.",
+    "category": "media",
+    "tags": [
+      "radio",
+      "Atlantic Canada",
+      "Maritimes",
+      "Halifax",
+      "Cape Breton",
+      "New Brunswick",
+      "Prince Edward Island",
+      "Newfoundland",
+      "Acadian",
+      "kitchen party",
+      "music",
+      "interviews"
+    ],
+    "icon": "radio-tower",
+    "url": "/atlanticdial/",
+    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/atlanticdial",
+    "hosting": "local",
+    "access": "browser",
+    "data_info": {
+      "mode": "reference",
+      "detail": "The stations publish their weekly airtimes in Atlantic or Newfoundland time, and the guide converts them to your clock.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Schedules reviewed",
+          "url": "https://coolcode.ca/atlanticdial/schedule.json",
+          "path": [
+            "reviewed"
+          ],
+          "count_at": {
+            "path": [
+              "shows"
+            ],
+            "measure": "length",
+            "unit": "programmes"
+          },
+          "value": "2026-11-18",
+          "count": 13
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose Vancouver or your device time to see when a show airs where you are. Save a favourite for return visits or download one airing to your calendar, including its station link."
+    }
+  },
+  {
     "id": "screenradar",
     "title": "Screen Radar",
     "description": "Find television and Canadian films, and keep a watchlist in this browser.",
