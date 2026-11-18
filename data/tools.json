@@ -1093,7 +1093,7 @@
             ],
             "unit": "release and month combinations"
           },
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count": 58806
         },
         {
@@ -1211,7 +1211,7 @@
             ],
             "unit": "notes"
           },
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count": 7676
         },
         {
@@ -1220,7 +1220,7 @@
             "modified"
           ],
           "label": "Source updated",
-          "value": "2026-11-17"
+          "value": "2026-11-18"
         }
       ],
       "cadence": "Daily"
@@ -2120,7 +2120,7 @@
             "checked"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "meta",
@@ -2416,14 +2416,14 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "total"
             ],
             "unit": "aviation occurrences"
           },
-          "count": 408710
+          "count": 408725
         },
         {
           "url": "https://coolcode.ca/strangeskies/data/manifest.json",
@@ -2838,7 +2838,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16",
+          "value": "2026-11-18",
           "count_at": {
             "path": [
               "products"
