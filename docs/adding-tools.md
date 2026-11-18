@@ -12,6 +12,10 @@ The featured cards are separate editorial content in `templates/index.html`.
 | Independent browser application or data explorer | Its own repository | `project` |
 | Installation guide or other external destination | Explicit HTTPS link | `external` |
 
+Tools with their own source imports, schedule checks or data transformations
+belong in their own repository. Keep that work and its tests with the tool. The
+homepage reads the tool’s published dates and counts.
+
 Existing projects keep their locations. New substantial installable apps get their
 own repository. Don't move a project just to reduce the repository count.
 

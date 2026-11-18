@@ -5,8 +5,9 @@
 - Keep existing titles, descriptions, order, category anchors, icons and URLs unless
   the task asks to change them. Featured editorial cards live in the page template.
 - Small static utilities can live in a top-level directory in this repository.
-  Apps with their own dependencies, data refresh or release lifecycle belong in a
-  separate repository. Keep existing projects where they are unless a move is requested.
+  Apps with their own source imports, schedule checks, data transformations, dependencies
+  or releases belong in a separate repository. Keep that work and its tests with the tool.
+  Keep existing projects where they are unless a move is requested.
 - New standalone browser tools start from `jsdyer/coolcode-tool-template`.
 - Add one catalogue record only after checking the deployed destination. Use `local`
   hosting for an included directory, `project` for another GitHub Pages repository,

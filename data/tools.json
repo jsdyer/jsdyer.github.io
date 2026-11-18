@@ -2993,7 +2993,7 @@
   {
     "id": "atlanticdial",
     "title": "Atlantic Dial",
-    "description": "Find local Atlantic Canadian radio shows, listen through the station and save an upcoming airing to your calendar.",
+    "description": "Find Atlantic Canadian radio shows on your clock and listen to recent episodes from local stations.",
     "category": "media",
     "tags": [
       "radio",
@@ -3007,17 +3007,21 @@
       "Acadian",
       "kitchen party",
       "music",
-      "interviews"
+      "interviews",
+      "Labrador",
+      "Inuktitut",
+      "podcasts",
+      "on demand"
     ],
     "icon": "radio-tower",
     "url": "/atlanticdial/",
-    "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/atlanticdial",
-    "hosting": "local",
+    "source": "https://github.com/jsdyer/atlanticdial",
+    "hosting": "project",
     "access": "browser",
     "data_info": {
-      "mode": "reference",
-      "detail": "The stations publish their weekly airtimes in Atlantic or Newfoundland time, and the guide converts them to your clock.",
-      "cadence": "Weekly",
+      "mode": "mixed",
+      "detail": "Stations publish the broadcast times and episode feeds. Choose your time zone or search recent recordings by title.",
+      "cadence": "Daily episode imports and weekly schedule checks",
       "probes": [
         {
           "label": "Schedules reviewed",
@@ -3033,12 +3037,28 @@
             "unit": "programmes"
           },
           "value": "2026-11-18",
-          "count": 13
+          "count": 25
+        },
+        {
+          "label": "Episode feeds retrieved",
+          "url": "https://coolcode.ca/atlanticdial/episodes.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "episodes"
+            ],
+            "measure": "length",
+            "unit": "episodes"
+          },
+          "value": "2026-11-18",
+          "count": 45
         }
       ]
     },
     "readme": {
-      "note": "Choose Vancouver or your device time to see when a show airs where you are. Save a favourite for return visits or download one airing to your calendar, including its station link."
+      "note": "Search Nain for Labrador oral histories or Inuktitut lessons, then switch to On demand to find recent local radio and two archived programmes about Halifax donairs."
     }
   },
   {

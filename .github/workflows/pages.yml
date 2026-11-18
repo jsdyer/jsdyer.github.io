@@ -27,8 +27,6 @@ jobs:
         run: python3 scripts/sync_guides.py --local --check
       - name: Test catalogue validation and rendering
         run: python3 -m unittest discover -s tests -v
-      - name: Check Atlantic Dial time zones and calendar export
-        run: node --test tests/atlanticdial.test.mjs
       - name: Build static site
         run: python3 scripts/build.py
       - name: Install browser test dependencies
