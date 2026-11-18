@@ -20,7 +20,7 @@ DATA_MODES = {
 }
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 # Retain the existing public files, including downloadable examples and tool source.
-PUBLIC_PATHS = {"assets", "field-notes", "tools", "favicon.svg", "CNAME",
+PUBLIC_PATHS = {"assets", "atlanticdial", "field-notes", "tools", "favicon.svg", "CNAME",
                 ".nojekyll", "README.md", "SECURITY.md"}
 RESERVED = PUBLIC_PATHS | {"data", "templates", "scripts", "tests", "dist", "index.html"}
 
