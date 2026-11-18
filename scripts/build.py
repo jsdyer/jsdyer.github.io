@@ -56,7 +56,7 @@ def validate(categories, tools, root=ROOT):
         require(isinstance(category["icon"], str) and category["icon"] in icons, f"Unknown icon for {cid}")
         category_ids.add(cid)
     ids, destinations = set(), set()
-    required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access"}
+    required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access", "readme"}
     for tool in tools:
         require(isinstance(tool, dict), "Each tool must be an object")
         require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
@@ -73,6 +73,10 @@ def validate(categories, tools, root=ROOT):
         info = tool.get("data_info", {})
         require(isinstance(info, dict) and info.get("mode") in DATA_MODES
                 and nonempty(info.get("detail")), f"{tid}: describe the data source and mode")
+        guide = tool["readme"]
+        require(isinstance(guide, dict) and set(guide) <= {"note", "lead"} and nonempty(guide.get("note"))
+                and ("lead" not in guide or nonempty(guide["lead"])), f"{tid}: import a practical note from the tool README")
+        require(guide["note"] not in (tool["description"], info["detail"]), f"{tid}: the README should add detail to the card")
         require(all(nonempty(info[k]) for k in ("cadence", "install_detail") if k in info),
                 f"{tid}: empty cadence or installation detail")
         probes = info.get("probes", [])

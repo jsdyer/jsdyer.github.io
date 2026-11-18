@@ -18,6 +18,10 @@
     "data_info": {
       "mode": "local",
       "detail": "Compose recipes are generated in your browser from your selected services."
+    },
+    "readme": {
+      "lead": "RAM figures are planning",
+      "note": "RAM figures are planning allowances for light use."
     }
   },
   {
@@ -39,6 +43,10 @@
     "data_info": {
       "mode": "installed",
       "detail": "Your local JSON service directory supplies the links."
+    },
+    "readme": {
+      "lead": "Each entry has a",
+      "note": "Each entry has a group, name, an absolute HTTP or HTTPS url, and an optional note."
     }
   },
   {
@@ -61,6 +69,10 @@
     "data_info": {
       "mode": "installed",
       "detail": "Your Apache access log supplies the dates and request counts."
+    },
+    "readme": {
+      "lead": "Each row gives request",
+      "note": "Each row gives request volume, counts by HTTP status family, and response-body bytes."
     }
   },
   {
@@ -83,6 +95,10 @@
     "data_info": {
       "mode": "installed",
       "detail": "Your own host probes are timestamped in a local SQLite database."
+    },
+    "readme": {
+      "lead": "Probes hosts concurrently, records",
+      "note": "Probes hosts concurrently, records each sample, and logs first observations plus UP/DOWN transitions."
     }
   },
   {
@@ -108,6 +124,9 @@
       "mode": "reference",
       "detail": "The browser edition uses a three-page fictional newsletter to demonstrate the archive.",
       "install_detail": "The Linux edition indexes your own PDF newsletters in a local SQLite database."
+    },
+    "readme": {
+      "note": "Try “dial-up” to find the matching newsletter page. The Linux edition can build the same kind of searchable shelf from your own PDFs and text files."
     }
   },
   {
@@ -131,6 +150,10 @@
     "data_info": {
       "mode": "installed",
       "detail": "Website captures and their timestamps live in your local archive."
+    },
+    "readme": {
+      "lead": "Replaying an uncaptured destination",
+      "note": "Replaying an uncaptured destination shows a local missing-page notice."
     }
   },
   {
@@ -152,6 +175,10 @@
     "data_info": {
       "mode": "installed",
       "detail": "The timeline uses your own collection or the fictional collection included with the tool."
+    },
+    "readme": {
+      "lead": "Export includes only attachments",
+      "note": "Export includes only attachments referenced by current capsules."
     }
   },
   {
@@ -175,6 +202,10 @@
     "data_info": {
       "mode": "installed",
       "detail": "The index records a SHA-256 checksum for each file you choose so you can verify it later."
+    },
+    "readme": {
+      "lead": "A moved file appears",
+      "note": "A moved file appears as MISSING under its old name and ADDED under its new one."
     }
   },
   {
@@ -198,6 +229,10 @@
     "data_info": {
       "mode": "live",
       "detail": "Each lookup requests current DNS records and domain registration data from public services."
+    },
+    "readme": {
+      "lead": "The DNSSEC AD flag",
+      "note": "The DNSSEC AD flag represents what the selected validating resolver reported."
     }
   },
   {
@@ -222,6 +257,10 @@
     "data_info": {
       "mode": "live",
       "detail": "Shodan InternetDB returns observations for one public IP without observation dates."
+    },
+    "readme": {
+      "lead": "Ports, fingerprints and CVEs",
+      "note": "Ports, fingerprints and CVEs describe source observations and associations, with coverage and freshness varying by address."
     }
   },
   {
@@ -245,6 +284,10 @@
     "data_info": {
       "mode": "mixed",
       "detail": "Certificate records come from a live crt.sh search or a JSON file you import."
+    },
+    "readme": {
+      "lead": "A validity-start-year timeline, name",
+      "note": "A validity-start-year timeline, name and issuer filters, deduplicated certificate records, name counts and a filtered CSV export help make historical results readable."
     }
   },
   {
@@ -268,6 +311,10 @@
     "data_info": {
       "mode": "live",
       "detail": "RIPEstat supplies historical route observations for your selected dates."
+    },
+    "readme": {
+      "lead": "The app compares observed",
+      "note": "The app compares observed origins and visibility and exports the selected prefix's intervals as CSV."
     }
   },
   {
@@ -293,6 +340,10 @@
     "data_info": {
       "mode": "live",
       "detail": "RIPEstat checks the submitted prefix and origin ASN on demand."
+    },
+    "readme": {
+      "lead": "Shared links populate the",
+      "note": "Shared links populate the query without transmitting it until the user selects Validate."
     }
   },
   {
@@ -316,6 +367,10 @@
     "data_info": {
       "mode": "live",
       "detail": "Georgia Tech IODA supplies outage signals for a window of up to 30 days."
+    },
+    "readme": {
+      "lead": "One disruption can affect",
+      "note": "One disruption can affect several signals, and there can be gaps and uneven coverage."
     }
   },
   {
@@ -370,6 +425,10 @@
           "value": "2026-05-05"
         }
       ]
+    },
+    "readme": {
+      "lead": "Search by community, coordinates",
+      "note": "Search by community, coordinates or hexagon ID, inspect individual cells, combine filters, and export matching records."
     }
   },
   {
@@ -413,6 +472,10 @@
           "count": 6634
         }
       ]
+    },
+    "readme": {
+      "lead": "Broadband uses usual resident",
+      "note": "Broadband uses usual resident dwellings and mobile uses population."
     }
   },
   {
@@ -452,6 +515,10 @@
           "count": 2144
         }
       ]
+    },
+    "readme": {
+      "lead": "Directory counts, measurement coverage,",
+      "note": "Directory counts, measurement coverage, and client behaviour can affect the series."
     }
   },
   {
@@ -493,6 +560,10 @@
           "count": 5
         }
       ]
+    },
+    "readme": {
+      "lead": "The lookup form opens",
+      "note": "The lookup form opens a source search for any domain and an optional country or UTC date range."
     }
   },
   {
@@ -513,6 +584,10 @@
     "data_info": {
       "mode": "local",
       "detail": "Compare three fictional routing examples or paste your own annotated hops."
+    },
+    "readme": {
+      "lead": "Paste your own rows",
+      "note": "Paste your own rows to compare the sequence of country labels and each hop’s RTT."
     }
   },
   {
@@ -536,6 +611,10 @@
     "data_info": {
       "mode": "reference",
       "detail": "Built-in DNS, HTTP and SMTP exchanges run offline."
+    },
+    "readme": {
+      "lead": "Compare a successful DNS",
+      "note": "Compare a successful DNS lookup with a missing name, fetch an HTTP document and revalidate a cached copy, or follow SMTP through mail delivery and a rejected recipient."
     }
   },
   {
@@ -557,6 +636,10 @@
     "data_info": {
       "mode": "local",
       "detail": "The browser reads requests from the HAR file you select."
+    },
+    "readme": {
+      "lead": "Use the filters to",
+      "note": "Use the filters to find new domains, missing domains, request-count changes or host changes within the same domain."
     }
   },
   {
@@ -581,6 +664,10 @@
     "data_info": {
       "mode": "local",
       "detail": "The tool reads the headers you paste or extracts them from a local HAR file."
+    },
+    "readme": {
+      "lead": "It compares cookie flag",
+      "note": "It compares cookie flag profiles without linking individual cookies."
     }
   },
   {
@@ -606,6 +693,10 @@
     "data_info": {
       "mode": "local",
       "detail": "Your browser reads the email headers you paste or the .eml file you open."
+    },
+    "readme": {
+      "lead": "The route and JSON",
+      "note": "The route and JSON export show reported relay addresses, timestamps, delays and recognized authentication claims."
     }
   },
   {
@@ -630,6 +721,10 @@
     "data_info": {
       "mode": "local",
       "detail": "Your browser reads packets from the PCAP or PCAPNG capture you select."
+    },
+    "readme": {
+      "lead": "Browse IP conversations, filter",
+      "note": "Browse IP conversations, filter packet metadata by protocol, text and elapsed time, and export matching metadata as JSON."
     }
   },
   {
@@ -655,6 +750,10 @@
     "data_info": {
       "mode": "mixed",
       "detail": "Your lockfile stays in the browser, and optional OSV lookups send the package names and versions you select."
+    },
+    "readme": {
+      "lead": "Version ranges, local paths",
+      "note": "Version ranges, local paths and unsupported tags are skipped."
     }
   },
   {
@@ -705,6 +804,10 @@
           "value": "2026-11-13"
         }
       ]
+    },
+    "readme": {
+      "lead": "Open any result for",
+      "note": "Open any result for the agency’s required action and source links, or export the filtered records as CSV."
     }
   },
   {
@@ -765,6 +868,10 @@
           "value": "2026-11-17"
         }
       ]
+    },
+    "readme": {
+      "lead": "A standalone lookup works",
+      "note": "A standalone lookup works for a CVE outside that catalogue."
     }
   },
   {
@@ -817,6 +924,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "The last unquoted word",
+      "note": "The last unquoted word matches prefixes as you type."
     }
   },
   {
@@ -868,6 +979,10 @@
         }
       ],
       "cadence": "Weekly"
+    },
+    "readme": {
+      "lead": "Each result links to",
+      "note": "Each result links to its source and offers a browser-local outline for a request, plus a topic link into the CoolCode ATIP Records Explorer."
     }
   },
   {
@@ -915,6 +1030,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "Select an institution to",
+      "note": "Select an institution to draft a request containing only its saved notes."
     }
   },
   {
@@ -936,6 +1055,10 @@
     "data_info": {
       "mode": "local",
       "detail": "Searchable PDF text and notes stay in this browser tab."
+    },
+    "readme": {
+      "lead": "Select text in the",
+      "note": "Select text in the detail and choose Pin highlighted text to attach an excerpt."
     }
   },
   {
@@ -996,6 +1119,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "The reporting periods are",
+      "note": "The reporting periods are the months when copies of completed records were requested."
     }
   },
   {
@@ -1044,6 +1171,10 @@
         }
       ],
       "cadence": "Monthly"
+    },
+    "readme": {
+      "lead": "The table is searchable,",
+      "note": "The table is searchable, sortable, linkable, and exportable as CSV."
     }
   },
   {
@@ -1093,6 +1224,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "The published dates and",
+      "note": "The published dates and ministry codes are source fields, and the interface preserves missing values."
     }
   },
   {
@@ -1139,6 +1274,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "Dates are file dates",
+      "note": "Dates are file dates from the source."
     }
   },
   {
@@ -1190,6 +1329,10 @@
         }
       ],
       "cadence": "Weekly"
+    },
+    "readme": {
+      "lead": "The source supplies status",
+      "note": "The source supplies status dates and personal-information fields, with blanks left as unreported."
     }
   },
   {
@@ -1237,6 +1380,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "Filter by format, organization",
+      "note": "Filter by format, organization and modified year."
     }
   },
   {
@@ -1283,6 +1430,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "Each entry offers links",
+      "note": "Each entry offers links to check its original URL, archived captures and related current releases."
     }
   },
   {
@@ -1344,6 +1495,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "Compare published numeric series",
+      "note": "Compare published numeric series over any portion of the rolling window, inspect the exact source values for each month, or export the comparison as a CSV."
     }
   },
   {
@@ -1410,6 +1565,10 @@
         }
       ],
       "cadence": "Monthly"
+    },
+    "readme": {
+      "lead": "Blank source values, missing",
+      "note": "Blank source values, missing years and reported numeric zeros are distinct in the table and export."
     }
   },
   {
@@ -1436,6 +1595,10 @@
       "mode": "local",
       "detail": "Both CSV or GeoJSON files stay in your browser while it matches records by the ID you choose.",
       "install_detail": "Your collector stores dated copies of a file or HTTPS feed in SQLite."
+    },
+    "readme": {
+      "lead": "The report distinguishes missing",
+      "note": "The report distinguishes missing properties from JSON null, and compares nested fields and geometry exactly."
     }
   },
   {
@@ -1475,6 +1638,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "The CSV does not",
+      "note": "The CSV does not provide a complete history of legal names."
     }
   },
   {
@@ -1539,6 +1706,10 @@
         }
       ],
       "cadence": "Weekly"
+    },
+    "readme": {
+      "lead": "Each report counts once",
+      "note": "Each report counts once even when it names multiple institutions or subjects."
     }
   },
   {
@@ -1596,6 +1767,10 @@
         }
       ],
       "cadence": "Monthly"
+    },
+    "readme": {
+      "lead": "Compare available fiscal periods,",
+      "note": "Compare available fiscal periods, inspect qualified-donee gift values, and follow recipients where their reported charity business number exactly matches the index."
     }
   },
   {
@@ -1639,6 +1814,10 @@
           "count": 28
         }
       ]
+    },
+    "readme": {
+      "lead": "Comparable entries in a",
+      "note": "Comparable entries in a details panel have the same published speed tier or charge category across orders."
     }
   },
   {
@@ -1680,6 +1859,10 @@
           "count": 14
         }
       ]
+    },
+    "readme": {
+      "lead": "Review a device record",
+      "note": "Review a device record or export visible exhibit links as CSV."
     }
   },
   {
@@ -1727,6 +1910,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "The watchlist runs on",
+      "note": "The watchlist runs on visits and has no background notifications."
     }
   },
   {
@@ -1769,6 +1956,10 @@
           "count": 22
         }
       ]
+    },
+    "readme": {
+      "lead": "Each result links to",
+      "note": "Each result links to the publication copy, its drawings where available, and the CIPO record or search."
     }
   },
   {
@@ -1815,6 +2006,10 @@
         }
       ],
       "cadence": "Weekly"
+    },
+    "readme": {
+      "lead": "Elapsed time sums intervals",
+      "note": "Elapsed time sums intervals within timed segments, excluding gaps between segments."
     }
   },
   {
@@ -1843,6 +2038,10 @@
     "data_info": {
       "mode": "live",
       "detail": "The tool requests up to 92 days of observations from Canadian weather stations for the period you choose."
+    },
+    "readme": {
+      "lead": "The CSV includes ECCC",
+      "note": "The CSV includes ECCC flags for the measurements displayed in the tool."
     }
   },
   {
@@ -1888,6 +2087,10 @@
         }
       ],
       "cadence": "Monthly"
+    },
+    "readme": {
+      "lead": "CSV exports include the",
+      "note": "CSV exports include the search centre, radius and each exported match's distance while the radius filter is active."
     }
   },
   {
@@ -1938,6 +2141,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "Choose a 25-year interval",
+      "note": "Choose a 25-year interval in the timeline or filter by era and event."
     }
   },
   {
@@ -1987,6 +2194,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "A record's map-search link",
+      "note": "A record's map-search link uses the address or locality reported by the register."
     }
   },
   {
@@ -2025,6 +2236,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "Filter by province, territory",
+      "note": "Filter by province, territory or undersea area, and open a record for source coordinates and naming information."
     }
   },
   {
@@ -2048,6 +2263,10 @@
     "data_info": {
       "mode": "live",
       "detail": "The BC Geographical Names service returns matches for the name or location you choose."
+    },
+    "readme": {
+      "lead": "Distances are straight-line distances",
+      "note": "Distances are straight-line distances to reference points."
     }
   },
   {
@@ -2090,6 +2309,10 @@
         }
       ],
       "cadence": "Weekly"
+    },
+    "readme": {
+      "lead": "Export matching records as",
+      "note": "Export matching records as CSV or GeoJSON with source IDs and retrieval time."
     }
   },
   {
@@ -2114,6 +2337,10 @@
     "data_info": {
       "mode": "live",
       "detail": "Natural Resources Canada’s 1947 and 1977 aerial images load alongside modern street tiles as you explore."
+    },
+    "readme": {
+      "lead": "Jump to the waterfront,",
+      "note": "Jump to the waterfront, North End, Dartmouth, Northwest Arm or Bedford Basin."
     }
   },
   {
@@ -2157,6 +2384,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "Save application IDs in",
+      "note": "Save application IDs in your browser, share a record, or export filtered results as CSV."
     }
   },
   {
@@ -2204,6 +2435,10 @@
         }
       ],
       "cadence": "Daily"
+    },
+    "readme": {
+      "lead": "The source category “Weather",
+      "note": "The source category “Weather balloon, meteor, rocket, CIRVIS/UFO” combines several possible observations."
     }
   },
   {
@@ -2248,6 +2483,10 @@
           "count": 6494
         }
       ]
+    },
+    "readme": {
+      "lead": "When source remarks give",
+      "note": "When source remarks give a complete sequence, the app displays the flash and eclipse durations."
     }
   },
   {
@@ -2303,6 +2542,10 @@
           "value": "1851–2025"
         }
       ]
+    },
+    "readme": {
+      "lead": "Historical coverage is incomplete,",
+      "note": "Historical coverage is incomplete, particularly at sea during early decades."
     }
   },
   {
@@ -2326,6 +2569,10 @@
     "data_info": {
       "mode": "local",
       "detail": "Sun, Moon and target positions are calculated on your device for your time and location."
+    },
+    "readme": {
+      "lead": "The display covers local",
+      "note": "The display covers local noon to the following noon, including daylight saving changes."
     }
   },
   {
@@ -2369,6 +2616,10 @@
         }
       ],
       "cadence": "Every 4 hours"
+    },
+    "readme": {
+      "lead": "Read the dated orbit",
+      "note": "Read the dated orbit epoch as well as the snapshot retrieval date, especially after maneuvers."
     }
   },
   {
@@ -2413,6 +2664,10 @@
         }
       ],
       "cadence": "Weekly"
+    },
+    "readme": {
+      "lead": "Inspect dates, coordinates, exposure",
+      "note": "Inspect dates, coordinates, exposure and wavelength fields, preview source imagery, and export filtered metadata to CSV."
     }
   },
   {
@@ -2439,6 +2694,10 @@
     "data_info": {
       "mode": "local",
       "detail": "JPEG and PNG files stay in your browser for metadata analysis and editing."
+    },
+    "readme": {
+      "lead": "Use the synthetic coast",
+      "note": "Use the synthetic coast example to try the crop drag, compare the original and export preview, read sample GPS and camera tags, and inspect luminance or RGB histograms."
     }
   },
   {
@@ -2483,6 +2742,10 @@
           "count": 11141
         }
       ]
+    },
+    "readme": {
+      "lead": "The name origins and",
+      "note": "The name origins and source country/cultural group labels come directly from the Gazetteer."
     }
   },
   {
@@ -2539,6 +2802,10 @@
         }
       ],
       "cadence": "Weekdays"
+    },
+    "readme": {
+      "lead": "Indexed FX rebases each",
+      "note": "Indexed FX rebases each series to its first available observation within the chosen date range."
     }
   },
   {
@@ -2596,6 +2863,10 @@
         }
       ],
       "cadence": "Weekly"
+    },
+    "readme": {
+      "lead": "The site labels missing",
+      "note": "The site labels missing observations, retains published package prices in exports and distinguishes the chart’s units from source units."
     }
   },
   {
@@ -2657,6 +2928,10 @@
         }
       ],
       "cadence": "Weekly"
+    },
+    "readme": {
+      "lead": "Incomplete years and missing",
+      "note": "Incomplete years and missing observations appear as gaps."
     }
   },
   {
@@ -2680,6 +2955,10 @@
     "data_info": {
       "mode": "local",
       "detail": "The tool reads your CIRO short-sale and short-position reports or a fictional sample."
+    },
+    "readme": {
+      "lead": "Search by security symbol",
+      "note": "Search by security symbol or company name, filter by listing market, and select a row to compare dates."
     }
   },
   {
@@ -2705,6 +2984,10 @@
     "data_info": {
       "mode": "live",
       "detail": "Has Things supplies Vancouver and Halifax event feeds, and Langley entries link to venue calendars."
+    },
+    "readme": {
+      "lead": "Import an .ics file",
+      "note": "Import an .ics file to search events locally."
     }
   },
   {
@@ -2728,6 +3011,10 @@
     "data_info": {
       "mode": "mixed",
       "detail": "TV searches use TVmaze, and the selected Canadian films come from Wikidata."
+    },
+    "readme": {
+      "lead": "Coverage is selective and",
+      "note": "Coverage is selective and year labels refer to initial or festival releases where known."
     }
   },
   {
@@ -2750,6 +3037,10 @@
     "data_info": {
       "mode": "live",
       "detail": "Internet Archive returns catalogue records, previews and file lists when you search."
+    },
+    "readme": {
+      "lead": "View original catalogue information,",
+      "note": "View original catalogue information, previews, and file names, then open the source item to see what can be viewed or downloaded."
     }
   },
   {
@@ -2791,6 +3082,10 @@
           "count": 8
         }
       ]
+    },
+    "readme": {
+      "lead": "Missing captures indicate gaps",
+      "note": "Missing captures indicate gaps in the evidence."
     }
   },
   {
@@ -2813,6 +3108,10 @@
     "data_info": {
       "mode": "live",
       "detail": "Software Heritage supplies archived origins, crawl visits and branches for each lookup."
+    },
+    "readme": {
+      "lead": "Try MintChip by name,",
+      "note": "Try MintChip by name, or open the archive history of Linux, PHP or DOOM directly."
     }
   },
   {
@@ -2834,6 +3133,10 @@
     "data_info": {
       "mode": "local",
       "detail": "The tool reads the Canada Media Fund project export you select on your device."
+    },
+    "readme": {
+      "lead": "Your export, searches, filters,",
+      "note": "Your export, searches, filters, and pinned items remain in the current tab."
     }
   }
 ]
