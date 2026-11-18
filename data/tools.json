@@ -994,6 +994,25 @@
     "access": "browser"
   },
   {
+    "id": "bcplacenames",
+    "title": "BC Place Names Explorer",
+    "description": "Explore nearby BC place names, official and recorded names, and naming decisions.",
+    "category": "places",
+    "tags": [
+      "bc",
+      "place names",
+      "geography",
+      "history",
+      "maps",
+      "nearby"
+    ],
+    "icon": "map",
+    "url": "/bcplacenames/",
+    "source": "https://github.com/jsdyer/bcplacenames",
+    "hosting": "project",
+    "access": "browser"
+  },
+  {
     "id": "strangeskies",
     "title": "Strange Skies Canada",
     "description": "Search aviation occurrence reports by location, year and event.",

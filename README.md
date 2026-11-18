@@ -31,6 +31,7 @@ A tool that asks you to select a local file is still a browser tool.
 | [DNS Lens](https://coolcode.ca/dnslens/) | Inspect DNS and mail policies. | [Separate repository](https://github.com/jsdyer/dnslens) |
 | [Government Memory Map](https://coolcode.ca/governmentmemory/) | Find record classes and personal information banks to reference in an access request. | [Separate repository](https://github.com/jsdyer/governmentmemory) |
 | [Shipwreck Explorer](https://coolcode.ca/shipwrecks/) | Search Nova Scotia wrecks by area, vessel and date. | [Separate repository](https://github.com/jsdyer/shipwrecks) |
+| [BC Place Names Explorer](https://coolcode.ca/bcplacenames/) | Find nearby BC names, compare official and other recorded names, inspect naming decisions, and export results. | [Separate repository](https://github.com/jsdyer/bcplacenames) |
 
 This table is a starting selection. Use the [homepage](https://coolcode.ca/) for the
 full searchable directory, including security, government, outdoors, astronomy,
