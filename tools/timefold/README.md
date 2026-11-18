@@ -185,5 +185,21 @@ php tests/run.php
 python3 tests/http_smoke.py
 ```
 
+CI runs these checks on PHP 8.2, 8.3 and 8.5 with SQLite, and PHP 8.3 and 8.5
+with MariaDB 11. It also builds the Apache and development-container Dockerfiles,
+runs storage/backup tests inside both images, and tests the real Apache HTTP API.
+Changes under `.devcontainer/` trigger these checks too.
+
+With Docker running, test the committed images or a PHP 8.5 candidate locally:
+
+```sh
+python3 tests/docker_smoke.py
+python3 tests/docker_smoke.py --php 8.5
+```
+
+The candidate changes only the base-image version in temporary Dockerfiles; it
+does not edit the application or committed Dockerfiles. Both commands use
+disposable containers and archive data, then remove their containers and images.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
 Released under the [MIT license](LICENSE), so you can modify and redistribute it.
