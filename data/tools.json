@@ -14,7 +14,11 @@
     "url": "/rack-recipes/",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/rack-recipes",
     "hosting": "local",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Compose recipes are generated in your browser from your selected services."
+    }
   },
   {
     "id": "switchboard",
@@ -31,7 +35,11 @@
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard",
     "hosting": "external",
     "access": "install",
-    "requirements": "PHP 8+"
+    "requirements": "PHP 8+",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Your local JSON service directory supplies the links."
+    }
   },
   {
     "id": "logbook",
@@ -49,7 +57,11 @@
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook",
     "hosting": "external",
     "access": "install",
-    "requirements": "PHP CLI 8+"
+    "requirements": "PHP CLI 8+",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Your Apache access log supplies the dates and request counts."
+    }
   },
   {
     "id": "lanwatch",
@@ -67,7 +79,11 @@
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch",
     "hosting": "external",
     "access": "install",
-    "requirements": "Python 3, SQLite and Linux ping"
+    "requirements": "Python 3, SQLite and Linux ping",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Your own host probes are timestamped in a local SQLite database."
+    }
   },
   {
     "id": "archive-shelf",
@@ -87,7 +103,12 @@
     "hosting": "local",
     "access": "browser",
     "install_url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/archive-shelf",
-    "requirements": "Python 3, SQLite FTS5 and Poppler for PDFs"
+    "requirements": "Python 3, SQLite FTS5 and Poppler for PDFs",
+    "data_info": {
+      "mode": "reference",
+      "detail": "The browser demo contains a three-page fictional newsletter. The Linux edition indexes your own PDFs.",
+      "install_detail": "Indexes your own PDF newsletters in a local SQLite database."
+    }
   },
   {
     "id": "waystation",
@@ -106,7 +127,11 @@
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation",
     "hosting": "external",
     "access": "install",
-    "requirements": "Downloadable executable for Linux, macOS or Windows"
+    "requirements": "Downloadable executable for Linux, macOS or Windows",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Website captures and their timestamps live in your local archive."
+    }
   },
   {
     "id": "timefold",
@@ -123,7 +148,11 @@
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold",
     "hosting": "external",
     "access": "install",
-    "requirements": "PHP 8.2+ and MySQL/MariaDB; optional SQLite demo"
+    "requirements": "PHP 8.2+ and MySQL/MariaDB; optional SQLite demo",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Your private collection supplies the timeline. A fictional collection is included."
+    }
   },
   {
     "id": "tape-index",
@@ -142,7 +171,11 @@
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index",
     "hosting": "external",
     "access": "install",
-    "requirements": "Python 3"
+    "requirements": "Python 3",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Your files supply the SHA-256 catalogue and verification results."
+    }
   },
   {
     "id": "dnslens",
@@ -161,7 +194,11 @@
     "url": "/dnslens/",
     "source": "https://github.com/jsdyer/dnslens",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "DNS-over-HTTPS and RDAP responses are requested when you run a lookup."
+    }
   },
   {
     "id": "ipsnapshot",
@@ -181,7 +218,11 @@
     "url": "/ipsnapshot/",
     "source": "https://github.com/jsdyer/ipsnapshot",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Shodan InternetDB is queried for one public IP. Observation dates are unavailable."
+    }
   },
   {
     "id": "certtrail",
@@ -200,7 +241,11 @@
     "url": "/certtrail/",
     "source": "https://github.com/jsdyer/certtrail",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Query crt.sh on demand or import certificate records from a JSON file."
+    }
   },
   {
     "id": "routearchaeologist",
@@ -219,7 +264,11 @@
     "url": "/routearchaeologist/",
     "source": "https://github.com/jsdyer/routearchaeologist",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "RIPEstat supplies historical route observations for your selected dates."
+    }
   },
   {
     "id": "rpkiguard",
@@ -240,7 +289,11 @@
     "url": "/rpkiguard/",
     "source": "https://github.com/jsdyer/rpkiguard",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "RIPEstat checks the submitted prefix and origin ASN on demand."
+    }
   },
   {
     "id": "outagescope",
@@ -259,7 +312,11 @@
     "url": "/outagescope/",
     "source": "https://github.com/jsdyer/outagescope",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Georgia Tech IODA supplies outage signals for a window of up to 30 days."
+    }
   },
   {
     "id": "broadbandatlas",
@@ -282,7 +339,22 @@
     "url": "/broadbandatlas/",
     "source": "https://github.com/jsdyer/broadbandatlas",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "ISED coverage and funding layers cover all 13 provinces and territories.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/broadbandatlas/data/index.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-16"
+        }
+      ]
+    }
   },
   {
     "id": "telecompulse",
@@ -303,7 +375,22 @@
     "url": "/telecompulse/",
     "source": "https://github.com/jsdyer/telecompulse",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CRTC coverage by census area and prices by province and survey market.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/telecompulse/data/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        }
+      ]
+    }
   },
   {
     "id": "onionpulse",
@@ -320,7 +407,22 @@
     "url": "/onionpulse/",
     "source": "https://github.com/jsdyer/onionpulse",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The Tor Project’s aggregate daily measurements run from January 2021.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/onionpulse/data/snapshot.json",
+          "path": [
+            "refreshed"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        }
+      ]
+    }
   },
   {
     "id": "blockedorgone",
@@ -337,7 +439,25 @@
     "url": "/blockedorgone/",
     "source": "https://github.com/jsdyer/blockedorgone",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "OONI measurements for five cases. The Canadian Discord window refreshes daily.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/blockedorgone/snapshots.json",
+          "path": [
+            {
+              "id": "discord-ca"
+            },
+            "capturedAt"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-17"
+        }
+      ]
+    }
   },
   {
     "id": "packet-detour",
@@ -353,7 +473,11 @@
     "url": "/packet-detour/",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/packet-detour",
     "hosting": "local",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Compare three fictional routing examples or paste your own annotated hops."
+    }
   },
   {
     "id": "protocol-cabinet",
@@ -372,7 +496,11 @@
     "url": "/protocol-cabinet/",
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/protocol-cabinet",
     "hosting": "local",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "reference",
+      "detail": "Built-in DNS, HTTP and SMTP exchanges run offline."
+    }
   },
   {
     "id": "trackerxray",
@@ -389,7 +517,11 @@
     "url": "/trackerxray/",
     "source": "https://github.com/jsdyer/trackerxray",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Your HAR file is processed in your browser."
+    }
   },
   {
     "id": "headerautopsy",
@@ -409,7 +541,11 @@
     "url": "/headerautopsy/",
     "source": "https://github.com/jsdyer/headerautopsy",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Paste headers or inspect a HAR file in your browser."
+    }
   },
   {
     "id": "mailpath",
@@ -430,7 +566,11 @@
     "url": "/mailpath/",
     "source": "https://github.com/jsdyer/mailpath",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Email headers and .eml files are processed in your browser."
+    }
   },
   {
     "id": "packetpocket",
@@ -450,7 +590,11 @@
     "url": "/packetpocket/",
     "source": "https://github.com/jsdyer/packetpocket",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Your PCAP or PCAPNG file is processed in your browser."
+    }
   },
   {
     "id": "dependencyxray",
@@ -471,7 +615,11 @@
     "url": "/dependencyxray/",
     "source": "https://github.com/jsdyer/dependencyxray",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Lockfiles stay in your browser. Optional OSV queries send selected package names and versions."
+    }
   },
   {
     "id": "exploitgraveyard",
@@ -490,7 +638,30 @@
     "url": "/exploitgraveyard/",
     "source": "https://github.com/jsdyer/exploitgraveyard",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CISA’s Known Exploited Vulnerabilities catalogue.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        },
+        {
+          "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
+          "path": [
+            "released"
+          ],
+          "label": "Source published",
+          "value": "2026-11-13"
+        }
+      ]
+    }
   },
   {
     "id": "patchsignal",
@@ -511,7 +682,30 @@
     "url": "/patchsignal/",
     "source": "https://github.com/jsdyer/patchsignal",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "CISA and FIRST snapshots with on-demand CVE and EPSS lookups.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/patchsignal/kev.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        },
+        {
+          "url": "https://coolcode.ca/patchsignal/kev.json",
+          "path": [
+            "kevDate"
+          ],
+          "label": "Source published",
+          "value": "2026-11-13"
+        }
+      ]
+    }
   },
   {
     "id": "atip",
@@ -530,7 +724,29 @@
     "url": "/atip/",
     "source": "https://github.com/jsdyer/atip",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Completed federal access-to-information request summaries in English and French.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/atip/data/manifest.json",
+          "path": [
+            "generatedAtUtc"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "total"
+            ],
+            "unit": "summaries"
+          },
+          "value": "2026-11-18",
+          "count": 206151
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "governmentmemory",
@@ -551,7 +767,30 @@
     "url": "/governmentmemory/",
     "source": "https://github.com/jsdyer/governmentmemory",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Six federal Info Source inventories of record classes and personal information banks.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/governmentmemory/records.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "notice_if": {
+            "path": [
+              "fallback"
+            ],
+            "equals": true,
+            "text": "Serving bundled data"
+          },
+          "value": "2026-11-16",
+          "notice": "Serving bundled data"
+        }
+      ],
+      "cadence": "Weekly"
+    }
   },
   {
     "id": "briefings",
@@ -568,7 +807,37 @@
     "url": "/briefings/",
     "source": "https://github.com/jsdyer/briefings",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Federal briefing note titles and reference numbers by institution.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/briefings/data/manifest.json",
+          "path": [
+            "snapshotBuilt"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "briefing notes"
+          },
+          "value": "2026-11-17",
+          "count": 161739
+        },
+        {
+          "url": "https://coolcode.ca/briefings/data/manifest.json",
+          "path": [
+            "sourceUpdated"
+          ],
+          "label": "Source updated",
+          "value": "2026-11-17"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "evidencelab",
@@ -585,7 +854,11 @@
     "url": "/evidencelab/",
     "source": "https://github.com/jsdyer/evidencelab",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Searchable PDF text and notes stay in this browser tab."
+    }
   },
   {
     "id": "atippopularity",
@@ -602,7 +875,37 @@
     "url": "/atippopularity/",
     "source": "https://github.com/jsdyer/atippopularity",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Treasury Board counts of informal copy requests for previously released packages.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/atippopularity/data/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "rows"
+            ],
+            "unit": "release and month combinations"
+          },
+          "value": "2026-11-17",
+          "count": 58806
+        },
+        {
+          "url": "https://coolcode.ca/atippopularity/data/manifest.json",
+          "path": [
+            "sourceUpdated"
+          ],
+          "label": "Source updated",
+          "value": "2026-10-07"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "atipmetrics",
@@ -627,7 +930,22 @@
     "url": "/atipmetrics/",
     "source": "https://github.com/jsdyer/atipmetrics",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Federal ATI and Privacy Act statistics, with links to completed requests and briefing titles.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/atipmetrics/data.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-16"
+        }
+      ],
+      "cadence": "Monthly"
+    }
   },
   {
     "id": "ministersays",
@@ -646,7 +964,37 @@
     "url": "/ministersays/",
     "source": "https://github.com/jsdyer/ministersays",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Bilingual federal Question Period notes and prepared responses.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/ministersays/data/manifest.json",
+          "path": [
+            "generated"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "notes"
+          },
+          "value": "2026-11-17",
+          "count": 7676
+        },
+        {
+          "url": "https://coolcode.ca/ministersays/data/manifest.json",
+          "path": [
+            "modified"
+          ],
+          "label": "Source updated",
+          "value": "2026-11-17"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "wrongdoings",
@@ -662,7 +1010,37 @@
     "url": "/wrongdoings/",
     "source": "https://github.com/jsdyer/wrongdoings",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Federally published founded-wrongdoing cases and departmental responses.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/wrongdoings/data/manifest.json",
+          "path": [
+            "generated"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "disclosures"
+          },
+          "value": "2026-11-17",
+          "count": 73
+        },
+        {
+          "url": "https://coolcode.ca/wrongdoings/data/manifest.json",
+          "path": [
+            "modified"
+          ],
+          "label": "Source updated",
+          "value": "2026-11-17"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "algorithmwatch",
@@ -682,7 +1060,30 @@
     "url": "/algorithmwatch/",
     "source": "https://github.com/jsdyer/algorithmwatch",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Government of Canada AI Register, with individually verified impact assessments.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/algorithmwatch/register.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-16"
+        },
+        {
+          "url": "https://coolcode.ca/algorithmwatch/register.json",
+          "path": [
+            "updated"
+          ],
+          "label": "Source updated",
+          "value": "2026-04-28"
+        }
+      ],
+      "cadence": "Weekly"
+    }
   },
   {
     "id": "datasetexplorer",
@@ -699,7 +1100,37 @@
     "url": "/datasetexplorer/",
     "source": "https://github.com/jsdyer/datasetexplorer",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Government of Canada Open Data Portal catalogue, including resource formats and publishers.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/datasetexplorer/data/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "catalogue entries"
+          },
+          "value": "2026-11-17",
+          "count": 48313
+        },
+        {
+          "url": "https://coolcode.ca/datasetexplorer/data/manifest.json",
+          "path": [
+            "publisherDate"
+          ],
+          "label": "Source updated",
+          "value": "2026-11-17"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "opendatagraveyard",
@@ -715,7 +1146,37 @@
     "url": "/opendatagraveyard/",
     "source": "https://github.com/jsdyer/opendatagraveyard",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Treasury Board’s published list of records removed from the federal open-data portal.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/opendatagraveyard/data/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "removed entries"
+          },
+          "value": "2026-11-17",
+          "count": 3934
+        },
+        {
+          "url": "https://coolcode.ca/opendatagraveyard/data/manifest.json",
+          "path": [
+            "publisherDate"
+          ],
+          "label": "Source updated",
+          "value": "2026-05-09"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "canadaanalytics",
@@ -732,7 +1193,30 @@
     "url": "/canadaanalytics/",
     "source": "https://github.com/jsdyer/canadaanalytics",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "ESDC monthly Canada.ca usage metrics and service measures.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/canadaanalytics/data/pulse.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        },
+        {
+          "url": "https://coolcode.ca/canadaanalytics/data/pulse.json",
+          "path": [
+            "sourceUpdated"
+          ],
+          "label": "Source updated",
+          "value": "2026-11-03"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "salmonlines",
@@ -754,7 +1238,37 @@
     "source": "https://github.com/jsdyer/salmonlines",
     "hosting": "project",
     "access": "browser",
-    "data_date_badge": true
+    "data_date_badge": true,
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "DFO Pacific salmon spawning estimates by population, waterbody and year.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/salmonlines/data/source.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "count_at": {
+            "path": [
+              "rows"
+            ],
+            "unit": "annual records"
+          },
+          "value": "2026-11-18",
+          "count": 421001
+        },
+        {
+          "url": "https://coolcode.ca/salmonlines/data/source.json",
+          "path": [
+            "edition"
+          ],
+          "label": "Source published",
+          "value": "2026-06-01"
+        }
+      ],
+      "cadence": "Monthly"
+    }
   },
   {
     "id": "datasetdiff",
@@ -775,7 +1289,12 @@
     "hosting": "project",
     "access": "browser",
     "install_url": "https://github.com/jsdyer/datasetdiff#linux-companion",
-    "requirements": "Linux and Node.js 24+"
+    "requirements": "Linux and Node.js 24+",
+    "data_info": {
+      "mode": "local",
+      "detail": "Compare two local CSV or GeoJSON files. An optional Linux collector keeps a SQLite history.",
+      "install_detail": "Your collector stores dated copies of a file or HTTPS feed in SQLite."
+    }
   },
   {
     "id": "corporateghosts",
@@ -792,7 +1311,29 @@
     "url": "/corporateghosts/",
     "source": "https://github.com/jsdyer/corporateghosts",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Four English ISED federal corporate register exports, covering active and inactive corporations.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/corporateghosts/data/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "corporate records"
+          },
+          "value": "2026-11-17",
+          "count": 1580390
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "lobbytrail",
@@ -810,7 +1351,45 @@
     "url": "/lobbytrail/",
     "source": "https://github.com/jsdyer/lobbytrail",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Federal in-house lobbying communication reports, indexed by organization.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/lobbytrail/index.json",
+          "path": [
+            "sourceDate"
+          ],
+          "label": "Source export",
+          "count_at": {
+            "path": [
+              "reports"
+            ],
+            "unit": "communication reports"
+          },
+          "notice_if": {
+            "path": [
+              "snapshotKind"
+            ],
+            "equals": "bundled",
+            "text": "Serving bundled data"
+          },
+          "value": "2026-11-09",
+          "notice": "Serving bundled data",
+          "count": 267075
+        },
+        {
+          "url": "https://coolcode.ca/lobbytrail/index.json",
+          "path": [
+            "to"
+          ],
+          "label": "Data through",
+          "value": "2026-11-06"
+        }
+      ],
+      "cadence": "Weekly"
+    }
   },
   {
     "id": "charityflows",
@@ -830,7 +1409,29 @@
     "url": "/charityflows/",
     "source": "https://github.com/jsdyer/charityflows",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CRA T3010 financial filings and qualified-donee gifts from the 2022–2024 packages.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/charityflows/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "count_at": {
+            "path": [
+              "charities"
+            ],
+            "unit": "charities"
+          },
+          "value": "2026-11-16",
+          "count": 87802
+        }
+      ],
+      "cadence": "Monthly"
+    }
   },
   {
     "id": "tariffxray",
@@ -851,7 +1452,21 @@
     "url": "/tariffxray/",
     "source": "https://github.com/jsdyer/tariffxray",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "reference",
+      "detail": "Hand-checked Bell and TELUS wholesale fibre rates from two CRTC orders.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/tariffxray/catalog.json",
+          "path": [
+            "updated"
+          ],
+          "label": "Source reviewed",
+          "value": "2026-11-16"
+        }
+      ]
+    }
   },
   {
     "id": "gearautopsy",
@@ -870,7 +1485,21 @@
     "url": "/gearautopsy/",
     "source": "https://github.com/jsdyer/gearautopsy",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "reference",
+      "detail": "Hand-reviewed FCC equipment exhibits for selected devices.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/gearautopsy/catalogue.json",
+          "path": [
+            "reviewed"
+          ],
+          "label": "Source reviewed",
+          "value": "2026-11-16"
+        }
+      ]
+    }
   },
   {
     "id": "recallradar",
@@ -895,7 +1524,29 @@
     "url": "/recallradar/",
     "source": "https://github.com/jsdyer/recallradar",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Health Canada recalls and safety alerts, with Transport Canada’s 60-day vehicle recall file.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/recallradar/data-status.json",
+          "path": [
+            "retrievedAt"
+          ],
+          "label": "Data retrieved",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "notices"
+          },
+          "value": "2026-11-18",
+          "count": 34389
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "patentattic",
@@ -915,7 +1566,21 @@
     "url": "/patentattic/",
     "source": "https://github.com/jsdyer/patentattic",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "reference",
+      "detail": "Selected Canadian patent publications, individually checked against original records.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/patentattic/catalog.json",
+          "path": [
+            "updated"
+          ],
+          "label": "Source reviewed",
+          "value": "2026-11-16"
+        }
+      ]
+    }
   },
   {
     "id": "trailglass",
@@ -937,7 +1602,22 @@
     "url": "/trailglass/",
     "source": "https://github.com/jsdyer/trailglass",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Vancouver, Langley and Halifax route extracts and optional local GPX files.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/trailglass/data/status.json",
+          "path": [
+            "oldest_retrieval"
+          ],
+          "label": "Oldest source retrieved",
+          "value": "2026-11-18"
+        }
+      ],
+      "cadence": "Weekly"
+    }
   },
   {
     "id": "weatherarchive",
@@ -961,7 +1641,11 @@
     "url": "/weatherarchive/",
     "source": "https://github.com/jsdyer/weatherarchive",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "ECCC station observations on demand. Compare up to 92 days."
+    }
   },
   {
     "id": "spectrumatlas",
@@ -982,7 +1666,22 @@
     "url": "/spectrumatlas/",
     "source": "https://github.com/jsdyer/spectrumatlas",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "ISED fixed-service and terrestrial spectrum records for BC and Nova Scotia.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/spectrumatlas/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-16"
+        }
+      ],
+      "cadence": "Monthly"
+    }
   },
   {
     "id": "shipwrecks",
@@ -999,7 +1698,32 @@
     "url": "/shipwrecks/",
     "source": "https://github.com/jsdyer/shipwrecks",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Nova Scotia Marine Heritage shipwreck records and mapped locations.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/shipwrecks/data/nearby.json",
+          "path": [
+            "meta",
+            "checked"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        },
+        {
+          "url": "https://coolcode.ca/shipwrecks/data/nearby.json",
+          "path": [
+            "meta",
+            "sourceUpdated"
+          ],
+          "label": "Source published",
+          "value": "2024-07-05"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "forgottenplaces",
@@ -1018,7 +1742,30 @@
     "url": "/forgottenplaces/",
     "source": "https://github.com/jsdyer/forgottenplaces",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Parks Canada’s federal-designation heritage register extract.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/forgottenplaces/data/manifest.json",
+          "path": [
+            "builtAt"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        },
+        {
+          "url": "https://coolcode.ca/forgottenplaces/data/manifest.json",
+          "path": [
+            "extractDate"
+          ],
+          "label": "Data through",
+          "value": "2025-12-12"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "namesforget",
@@ -1034,7 +1781,22 @@
     "url": "/namesforget/",
     "source": "https://github.com/jsdyer/namesforget",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Canadian Geographical Names Database, including undersea names.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/namesforget/data/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "bcplacenames",
@@ -1053,7 +1815,11 @@
     "url": "/bcplacenames/",
     "source": "https://github.com/jsdyer/bcplacenames",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Searches the BC Geographical Names service when you choose a name or location."
+    }
   },
   {
     "id": "hiddenwater",
@@ -1073,7 +1839,29 @@
     "url": "/hiddenwater/",
     "source": "https://github.com/jsdyer/hiddenwater",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Township channels and culverts plus Langley City watercourses.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/hiddenwater/data/status.json",
+          "path": [
+            "retrieved_at"
+          ],
+          "label": "Data retrieved",
+          "count_at": {
+            "path": [
+              "segments"
+            ],
+            "unit": "mapped segments"
+          },
+          "value": "2026-11-18",
+          "count": 28921
+        }
+      ],
+      "cadence": "Weekly"
+    }
   },
   {
     "id": "halifaxtimelens",
@@ -1093,7 +1881,11 @@
     "url": "/halifaxtimelens/",
     "source": "https://github.com/jsdyer/halifaxtimelens",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "1947 and 1977 NRCan aerial imagery and modern street tiles load as you explore."
+    }
   },
   {
     "id": "langleychanges",
@@ -1113,7 +1905,22 @@
     "url": "/langleychanges/",
     "source": "https://github.com/jsdyer/langleychanges",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Township applications and featured City records. Observed history begins November 2026.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/langleychanges/data/applications.json",
+          "path": [
+            "retrieved_at"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-18"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "strangeskies",
@@ -1130,7 +1937,30 @@
     "url": "/strangeskies/",
     "source": "https://github.com/jsdyer/strangeskies",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Transport Canada CADORS occurrence, event and aircraft records.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/strangeskies/data/manifest.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        },
+        {
+          "url": "https://coolcode.ca/strangeskies/data/manifest.json",
+          "path": [
+            "latest"
+          ],
+          "label": "Data through",
+          "value": "2026-11-12"
+        }
+      ],
+      "cadence": "Daily"
+    }
   },
   {
     "id": "lightkeeper",
@@ -1151,7 +1981,12 @@
     "source": "https://github.com/jsdyer/lightkeeper",
     "hosting": "project",
     "access": "browser",
-    "data_date_badge": true
+    "data_date_badge": true,
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Coast Guard light characteristics from three coastal volumes.",
+      "cadence": "Twice monthly"
+    }
   },
   {
     "id": "stormtracks",
@@ -1173,7 +2008,12 @@
     "source": "https://github.com/jsdyer/stormtracks",
     "hosting": "project",
     "access": "browser",
-    "data_date_badge": true
+    "data_date_badge": true,
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "NOAA IBTrACS North Atlantic tracks from completed seasons.",
+      "cadence": "Monthly"
+    }
   },
   {
     "id": "nightfinder",
@@ -1192,7 +2032,11 @@
     "url": "/nightfinder/",
     "source": "https://github.com/jsdyer/nightfinder",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Sun, Moon and target positions are calculated on your device for your time and location."
+    }
   },
   {
     "id": "satpasses",
@@ -1211,7 +2055,22 @@
     "url": "/satpasses/",
     "source": "https://github.com/jsdyer/satpasses",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CelesTrak orbital elements for six satellites. Passes are calculated locally.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/satpasses/elements.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-18"
+        }
+      ],
+      "cadence": "Every 4 hours"
+    }
   },
   {
     "id": "skyarchive",
@@ -1232,7 +2091,22 @@
     "url": "/skyarchive/",
     "source": "https://github.com/jsdyer/skyarchive",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Selected Hubble and Webb observations for five targets in MAST.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/skyarchive/catalog.json",
+          "path": [
+            "updated"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-16"
+        }
+      ],
+      "cadence": "Weekly"
+    }
   },
   {
     "id": "photolab",
@@ -1254,7 +2128,11 @@
     "url": "/photolab/",
     "source": "https://github.com/jsdyer/photolab",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "JPEG and PNG files stay in your browser for metadata analysis and editing."
+    }
   },
   {
     "id": "otherworldnames",
@@ -1276,7 +2154,12 @@
     "source": "https://github.com/jsdyer/otherworldnames",
     "hosting": "project",
     "access": "browser",
-    "data_date_badge": true
+    "data_date_badge": true,
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "IAU-adopted lunar and Martian features from the USGS Gazetteer.",
+      "cadence": "Monthly"
+    }
   },
   {
     "id": "bankrates",
@@ -1296,7 +2179,31 @@
     "url": "/bankrates/",
     "source": "https://github.com/jsdyer/bankrates",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Bank of Canada Valet interest rates, bond yields and CAD exchange rates.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/bankrates/snapshot.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-17"
+        },
+        {
+          "url": "https://coolcode.ca/bankrates/snapshot.json",
+          "path": [
+            "dates",
+            -1
+          ],
+          "label": "Data through",
+          "value": "2026-11-16"
+        }
+      ],
+      "cadence": "Weekdays"
+    }
   },
   {
     "id": "priceatlas",
@@ -1317,7 +2224,31 @@
     "url": "/priceatlas/",
     "source": "https://github.com/jsdyer/priceatlas",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Statistics Canada monthly retail prices for Canada, BC and Nova Scotia.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/priceatlas/snapshot.json",
+          "path": [
+            "built"
+          ],
+          "label": "Snapshot generated",
+          "value": "2026-11-16"
+        },
+        {
+          "url": "https://coolcode.ca/priceatlas/snapshot.json",
+          "path": [
+            "months",
+            -1
+          ],
+          "label": "Data through",
+          "value": "2026-09"
+        }
+      ],
+      "cadence": "Weekly"
+    }
   },
   {
     "id": "insolvencyatlas",
@@ -1339,7 +2270,30 @@
     "url": "/insolvencyatlas/",
     "source": "https://github.com/jsdyer/insolvencyatlas",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Office of the Superintendent of Bankruptcy monthly filings and annual rates.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/insolvencyatlas/data-status.json",
+          "path": [
+            "oldest_retrieval"
+          ],
+          "label": "Oldest source retrieved",
+          "value": "2026-11-18"
+        },
+        {
+          "url": "https://coolcode.ca/insolvencyatlas/data-status.json",
+          "path": [
+            "filings_through"
+          ],
+          "label": "Data through",
+          "value": "2026-09"
+        }
+      ],
+      "cadence": "Weekly"
+    }
   },
   {
     "id": "marketshadows",
@@ -1358,7 +2312,11 @@
     "url": "/marketshadows/",
     "source": "https://github.com/jsdyer/marketshadows",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Import your own CIRO short-sale and short-position reports. Includes a fictional sample."
+    }
   },
   {
     "id": "eventradar",
@@ -1379,7 +2337,11 @@
     "url": "/eventradar/",
     "source": "https://github.com/jsdyer/eventradar",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Has Things feeds for Vancouver and Halifax, with links to Langley venue calendars."
+    }
   },
   {
     "id": "screenradar",
@@ -1398,7 +2360,11 @@
     "url": "/screenradar/",
     "source": "https://github.com/jsdyer/screenradar",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Live TVmaze search and a handpicked Wikidata shelf of Canadian films."
+    }
   },
   {
     "id": "mediaechoes",
@@ -1416,7 +2382,11 @@
     "url": "/mediaechoes/",
     "source": "https://github.com/jsdyer/mediaechoes",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Queries Internet Archive catalogue records, previews and file lists on demand."
+    }
   },
   {
     "id": "ghostlinks",
@@ -1435,7 +2405,21 @@
     "url": "/ghostlinks/",
     "source": "https://github.com/jsdyer/ghostlinks",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Reviewed Canadian web-address histories, optional Wayback checks and local archive imports.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/ghostlinks/cases.json",
+          "path": [
+            "date"
+          ],
+          "label": "Source reviewed",
+          "value": "2026-11-16"
+        }
+      ]
+    }
   },
   {
     "id": "lostcode",
@@ -1453,7 +2437,11 @@
     "url": "/lostcode/",
     "source": "https://github.com/jsdyer/lostcode",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Queries Software Heritage for archived origins, crawl visits and branches."
+    }
   },
   {
     "id": "unreleased",
@@ -1470,6 +2458,10 @@
     "url": "/unreleased/",
     "source": "https://github.com/jsdyer/unreleased",
     "hosting": "project",
-    "access": "browser"
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Import a Canada Media Fund project export from your device."
+    }
   }
 ]

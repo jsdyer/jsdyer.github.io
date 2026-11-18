@@ -8,7 +8,7 @@
   <title>CoolCode.ca · Browser tools & Linux projects</title>
   <link rel="alternate" type="application/rss+xml" title="CoolCode Field Notes" href="/field-notes/feed.xml">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/coolcode.css?v=3">
+  <link rel="stylesheet" href="assets/coolcode.css?v=4">
   <script src="assets/tool-index.js" defer></script>
 </head>
 <body id="top">
@@ -65,6 +65,7 @@
             </div>
             <div class="card-body"><p class="category">Homelab planning <span>/</span> Use in browser</p><h3>Rack Recipes</h3>
               <p>Choose services for a home server, check their estimated memory use, and download a Docker Compose starter.</p>
+              {{FEATURE_DATA_RACK_RECIPES}}
               <a class="guide" href="/rack-recipes/">Plan a stack <span aria-hidden="true">→</span></a>
             </div>
           </article>
@@ -72,6 +73,7 @@
             <div class="cover lan" aria-hidden="true"><svg viewBox="0 0 280 150" width="280" height="150" fill="none"><rect x="72" y="28" width="136" height="94" rx="8" stroke="currentColor" stroke-width="2"/><path d="M92 76L123 49L150 94L184 58M92 76L184 58M123 49L150 94" stroke="currentColor" opacity=".5"/><g fill="currentColor"><circle cx="92" cy="76" r="5"/><circle cx="123" cy="49" r="4"/><circle cx="150" cy="94" r="7"/><circle cx="184" cy="58" r="4"/></g><path d="M113 135h54" stroke="currentColor" stroke-width="3"/></svg></div>
             <div class="card-body"><p class="category">Networks <span>/</span> Use in browser</p><h3>DNS Lens</h3>
               <p>Compare public resolvers and inspect DNS records, mail policies and domain registration.</p>
+              {{FEATURE_DATA_DNSLENS}}
               <a class="guide" href="/dnslens/">Open DNS Lens <span aria-hidden="true">→</span></a>
             </div>
           </article>
@@ -79,6 +81,7 @@
             <div class="cover logbook" aria-hidden="true"><div class="sheet"><b>ATIP FILES</b><div class="book-lines"></div></div></div>
             <div class="card-body"><p class="category">Public records <span>/</span> Use in browser</p><h3>ATIP Records Explorer</h3>
               <p>Find released federal records, request copies, or draft an access-to-information request.</p>
+              {{FEATURE_DATA_ATIP}}
               <a class="guide" href="/atip/">Explore released records <span aria-hidden="true">→</span></a>
             </div>
           </article>
@@ -122,7 +125,7 @@
 {{INSTALL_TOOLS}}
             </ul>
           </div>
-          <p class="install-note">Archive Shelf has both a browser version and a Python version, so it appears in both sections. <a href="#run">Try a Linux command-line example ↓</a></p>
+          <p class="install-note">Archive Shelf and Dataset Diff have browser and installable versions. <a href="#run">Try a Linux command-line example ↓</a></p>
         </section>
       </div>
     </section>

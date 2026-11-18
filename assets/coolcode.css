@@ -201,6 +201,10 @@ figcaption span, .category span { opacity: .62; padding-inline: .3em; }
 .tool-mode-browser, .tool-mode-install { display: inline-block; padding: .2rem .45rem; border: 1px solid var(--line); border-radius: 3px; font-weight: 650; }
 .tool-mode-browser { color: var(--ink); background: color-mix(in srgb, var(--signal) 25%, var(--surface)); }
 .tool-mode-install { color: var(--ink); background: var(--paper); }
+.tool-data { margin-top: .55rem; color: var(--muted); font: .78rem/1.5 var(--sans, sans-serif); overflow-wrap: anywhere; }
+.tool-source, .tool-dates { display: block; }
+.tool-dates { margin-top: .2rem; font: .72rem/1.5 var(--mono); }
+.card-body .tool-data { margin-bottom: .6rem; }
 .tool-requirements { display: block; margin-top: .4rem; color: var(--muted); font: .72rem/1.5 var(--mono); }
 .tool-group a.tool-data-date { display: block; width: fit-content; max-width: 100%; margin-top: .4rem; }
 .tool-data-date img { display: block; max-width: 100%; height: auto; }
