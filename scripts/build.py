@@ -80,6 +80,19 @@ def validate(categories, tools, root=ROOT):
             require(isinstance(probe, dict) and https_url(probe.get("url"))
                     and nonempty(probe.get("label")) and isinstance(probe.get("path"), list)
                     and probe["path"], f"{tid}: invalid date source")
+            if "end_path" in probe:
+                require(isinstance(probe["end_path"], list) and probe["end_path"], f"{tid}: missing coverage end")
+            if "precision" in probe:
+                require(probe["precision"] == "minute" and "end_path" not in probe, f"{tid}: invalid date precision")
+            if "allow_unknown" in probe:
+                require(type(probe["allow_unknown"]) is bool, f"{tid}: invalid allow_unknown flag")
+            if "count_at" in probe:
+                spec = probe["count_at"]
+                require(isinstance(spec, dict) and isinstance(spec.get("path"), list) and nonempty(spec.get("unit")),
+                        f"{tid}: invalid count source")
+                require(spec.get("measure") in (None, "length", "sum"), f"{tid}: invalid count measure")
+                if spec.get("measure") == "sum":
+                    require(nonempty(spec.get("field")), f"{tid}: missing count field")
         if "data_date_badge" in tool:
             require(isinstance(tool["data_date_badge"], bool), f"{tid}: data_date_badge must be a boolean")
             if tool["data_date_badge"]:
@@ -131,6 +144,8 @@ def data_date_alt(tool):
     for probe in tool["data_info"].get("probes", []):
         if probe["label"] == "Data retrieved" and probe.get("value"):
             return f'{tool["title"]} data retrieved {probe["value"]}'
+        if probe["label"] == "Data retrieved" and "value" in probe and probe["value"] is None:
+            return f"{tool['title']} retrieval date unrecorded"
     return f'Read the dataset retrieval date for {tool["title"]}'
 
 
@@ -155,8 +170,12 @@ def data_notes(tool, access):
             notes.append(f'{probe["label"]}: {probe["value"]}')
         elif probe.get("unavailable") and not probe.get("value"):
             notes.append(f'{probe["label"]}: date unavailable')
+        elif "value" in probe and probe["value"] is None and not badge_shows_date:
+            notes.append(f'{probe["label"]}: unrecorded')
         if "count" in probe:
             notes.append(f'{probe["count"]:,} {probe["count_at"]["unit"]}')
+        elif "count_at" in probe and "value" in probe:
+            notes.append(f'Count unavailable ({probe["count_at"]["unit"]})')
         if probe.get("notice") and probe["notice"] not in notes:
             notes.append(probe["notice"])
     if any(p.get("unavailable") and p.get("value") for p in info.get("probes", [])):
