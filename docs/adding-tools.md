@@ -37,7 +37,11 @@ Append a record to the appropriate place in `data/tools.json`, for example:
   "url": "/my-tool/",
   "source": "https://github.com/jsdyer/my-tool",
   "hosting": "project",
-  "access": "browser"
+  "access": "browser",
+  "data_info": {
+    "mode": "local",
+    "detail": "The selected header file is processed in the browser."
+  }
 }
 ```
 
@@ -56,6 +60,39 @@ SQLite`; its `url` should open the installation guide. If a browser tool also ha
 separate installable version, keep one record with `access: "browser"`, add an HTTPS
 `install_url` and state the `requirements`. The build puts it in both sections with
 the correct destination. Search counts it as one tool, even when both versions match.
+
+Each entry describes its inputs in `data_info`. Choose `live` for on-demand
+lookups, `local` for user inputs or calculations, `installed` for self-hosted
+data, `reference` for authored or reviewed material, `snapshot` for imported
+datasets, and `mixed` for tools combining methods. For dual-mode tools use
+`install_detail` when the locally installed version uses different data.
+
+For a snapshot, select dates from a small JSON file published with the tool.
+Give each field its actual meaning, such as “Data retrieved”, “Source published”
+or “Data through”. Record `cadence` only after checking the producer workflow.
+A source can remain unchanged across several checks. For example:
+
+```json
+{
+  "mode": "snapshot",
+  "detail": "Annual observations from the publisher's register.",
+  "cadence": "Weekly",
+  "probes": [{
+    "label": "Data retrieved",
+    "url": "https://coolcode.ca/my-tool/data/status.json",
+    "path": ["retrieved_at"],
+    "count_at": {"path": ["records"], "unit": "records"}
+  }]
+}
+```
+
+The catalogue reads these public date fields every six hours via GitHub Actions.
+`python3 scripts/refresh_dates.py` updates the cached values. The homepage
+build itself works offline. A failed date check retains the last known value
+and displays a notice. When a source explicitly serves a bundled fallback,
+a `notice_if` rule can surface that condition. Each project owns its upstream
+data acquisition. Menu entries for live queries and local files describe when
+and where the query runs.
 
 A project-hosted browser tool with a data snapshot can set `"data_date_badge": true`.
 Serve `data-date.svg` alongside the app, with a visible retrieval date and an

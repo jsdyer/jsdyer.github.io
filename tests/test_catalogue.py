@@ -62,6 +62,21 @@ class CatalogueTests(unittest.TestCase):
         self.assertNotIn("Browser demo", html)
         self.assertNotIn('class="tool-mode">Local file', html)
 
+    def test_summary_preserves_coverage_fallback_and_zero_counts(self):
+        tool = dict(self.tools[0], data_date_badge=False, data_info={
+            "mode": "snapshot", "detail": "Example records", "cadence": "Monthly",
+            "probes": [{"label": "Data through", "value": "2026-09", "unavailable": True,
+                        "notice": "Serving bundled data", "count_at": {"unit": "records"}, "count": 0}]
+        })
+        from sync_readme import describe
+        for summary in [render_entry(tool, "browser"), describe(tool, "browser")]:
+            for fact in ["Scheduled checks: monthly", "Data through: 2026-09", "0 records",
+                         "Serving bundled data", "last verified value shown"]:
+                self.assertIn(fact, summary)
+        tool["data_info"] = {"mode": "live", "detail": "Requested on use"}
+        self.assertIn("On-demand lookup", render_entry(tool, "browser"))
+        self.assertNotIn("Data retrieved", describe(tool, "browser"))
+
     def test_dual_version_links_to_two_destinations(self):
         archive = next(t for t in self.tools if t["id"] == "archive-shelf")
         page = Page(render(self.categories, self.tools, self.template))

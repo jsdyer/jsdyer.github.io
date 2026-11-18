@@ -5,7 +5,7 @@ from html import escape
 import re
 from urllib.parse import quote
 
-from build import ROOT, data_date_path, load_catalogue, require
+from build import ROOT, data_date_path, data_notes, data_summary, load_catalogue, require
 
 
 def markdown_text(value):
@@ -24,6 +24,15 @@ def link(label, destination):
     return f"[{markdown_text(label)}](<{destination}>)"
 
 
+def describe(tool, access):
+    mode, detail = data_summary(tool, access)
+    text = markdown_text(tool["description"]) + " <br> " + markdown_text(f"{mode} · {detail}")
+    notes = data_notes(tool, access)
+    if notes:
+        text += " <br> " + markdown_text(" · ".join(notes))
+    return text
+
+
 def browser_tables(categories, tools):
     browser = [tool for tool in tools if tool["access"] == "browser"]
     lines = [f"{len(browser)} browser tools, grouped as on the homepage."]
@@ -35,7 +44,7 @@ def browser_tables(categories, tools):
                       "| Tool | What it does | Code / documentation |",
                       "| --- | --- | --- |"])
         for tool in entries:
-            description = markdown_text(tool["description"])
+            description = describe(tool, "browser")
             if badge_path := data_date_path(tool):
                 image = "!" + link(f"Read the dataset retrieval date for {tool['title']}", badge_path)
                 description += f" <br> [{image}](<https://coolcode.ca{badge_path}>)"
@@ -53,7 +62,7 @@ def installation_table(tools):
     for tool in install:
         destination = tool.get("install_url", tool["url"])
         lines.append(f"| {link(tool['title'], destination)} | "
-                     f"{markdown_text(tool['description'])} | "
+                     f"{describe(tool, 'install')} | "
                      f"{markdown_text(tool['requirements'])} | "
                      f"{link('Source & docs', tool['source'])} |")
     return "\n".join(lines)

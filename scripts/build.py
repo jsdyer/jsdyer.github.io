@@ -12,6 +12,11 @@ import tempfile
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
+DATA_MODES = {
+    "snapshot": "Saved dataset", "live": "On-demand lookup", "local": "Local inputs",
+    "reference": "Reference collection", "mixed": "Multiple data sources",
+    "installed": "Self-hosted data",
+}
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 # Retain the existing public files, including downloadable examples and tool source.
 PUBLIC_PATHS = {"assets", "field-notes", "tools", "favicon.svg", "CNAME",
@@ -53,7 +58,7 @@ def validate(categories, tools, root=ROOT):
     required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access"}
     for tool in tools:
         require(isinstance(tool, dict), "Each tool must be an object")
-        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
+        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
         tid = tool["id"]
         require(isinstance(tid, str) and SLUG.fullmatch(tid), f"Invalid tool ID: {tid!r}")
         require(tid not in ids, f"Duplicate tool ID: {tid}")
@@ -64,6 +69,17 @@ def validate(categories, tools, root=ROOT):
         require(tool["icon"] in icons, f"{tid}: unknown icon")
         require(isinstance(tool["tags"], list) and all(nonempty(t) for t in tool["tags"]), f"{tid}: tags must be an array of nonempty strings")
         require(tool["access"] in ("browser", "install"), f"{tid}: access must be browser or install")
+        info = tool.get("data_info", {})
+        require(isinstance(info, dict) and info.get("mode") in DATA_MODES
+                and nonempty(info.get("detail")), f"{tid}: describe the data source and mode")
+        require(all(nonempty(info[k]) for k in ("cadence", "install_detail") if k in info),
+                f"{tid}: empty cadence or installation detail")
+        probes = info.get("probes", [])
+        require(isinstance(probes, list), f"{tid}: probes must be a list")
+        for probe in probes:
+            require(isinstance(probe, dict) and https_url(probe.get("url"))
+                    and nonempty(probe.get("label")) and isinstance(probe.get("path"), list)
+                    and probe["path"], f"{tid}: invalid date source")
         if "data_date_badge" in tool:
             require(isinstance(tool["data_date_badge"], bool), f"{tid}: data_date_badge must be a boolean")
             if tool["data_date_badge"]:
@@ -111,6 +127,45 @@ def data_date_path(tool):
     return ""
 
 
+def data_summary(tool, access):
+    info = tool["data_info"]
+    if access == "install":
+        return DATA_MODES["installed"], info.get("install_detail", info["detail"])
+    return DATA_MODES[info["mode"]], info["detail"]
+
+
+def data_notes(tool, access):
+    """Plain-text facts shared by the catalogue HTML and generated README."""
+    info = tool["data_info"]
+    if access == "install":
+        return []
+    notes = []
+    if info.get("cadence"):
+        notes.append("Scheduled checks: " + info["cadence"].lower())
+    for probe in info.get("probes", []):
+        badge_shows_date = tool.get("data_date_badge") and probe["label"] == "Data retrieved"
+        if probe.get("value") and not badge_shows_date:
+            notes.append(f'{probe["label"]}: {probe["value"]}')
+        elif probe.get("unavailable") and not probe.get("value"):
+            notes.append(f'{probe["label"]}: date unavailable')
+        if "count" in probe:
+            notes.append(f'{probe["count"]:,} {probe["count_at"]["unit"]}')
+        if probe.get("notice") and probe["notice"] not in notes:
+            notes.append(probe["notice"])
+    if any(p.get("unavailable") and p.get("value") for p in info.get("probes", [])):
+        notes.append("Date check unavailable (last verified value shown)")
+    return notes
+
+
+def render_data(tool, access):
+    mode, detail = data_summary(tool, access)
+    notes = data_notes(tool, access)
+    lines = [f'<span class="tool-source"><b>{escape(mode)}</b> · {escape(detail)}</span>']
+    if notes:
+        lines.append('<span class="tool-dates">' + ' · '.join(escape(n) for n in notes) + '</span>')
+    return '<div class="tool-data">' + "".join(lines) + '</div>'
+
+
 def render_entry(tool, access):
     tags = escape(" ".join(tool["tags"]), quote=True)
     icon, title, description, tid = (escape(tool[key], quote=True) for key in ("icon", "title", "description", "id"))
@@ -126,7 +181,7 @@ def render_entry(tool, access):
     return (f'                <li data-tool data-tool-id="{tid}" data-access="{access}" data-keywords="{tags}">'
             f'<span class="tool-icon" data-icon="{icon}" aria-hidden="true"></span><div class="tool-entry">'
             f'<a href="{url}"><span>{title}</span><span aria-hidden="true">{arrow}</span></a>'
-            f'<p>{description}</p><span class="tool-mode tool-mode-{access}">{label}</span>{detail}</div></li>')
+            f'<p>{description}</p><span class="tool-mode tool-mode-{access}">{label}</span>{detail}{render_data(tool, access)}</div></li>')
 
 
 def render(categories, tools, template):
@@ -151,6 +206,10 @@ def render(categories, tools, template):
     replacements = {"{{CATEGORY_NAV}}": "\n".join(nav), "{{TOOL_GROUPS}}": "\n".join(groups),
                     "{{INSTALL_TOOLS}}": "\n".join(render_entry(tool, "install") for tool in install_tools),
                     "{{BROWSER_COUNT}}": str(len(browser_tools)), "{{INSTALL_COUNT}}": str(len(install_tools))}
+    for tool in tools:
+        token = "{{FEATURE_DATA_" + tool["id"].upper().replace("-", "_") + "}}"
+        if token in template:
+            replacements[token] = render_data(tool, "browser")
     for token, value in replacements.items():
         require(template.count(token) == 1, f"Template must contain {token} exactly once")
         template = template.replace(token, value)
