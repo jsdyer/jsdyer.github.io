@@ -3209,5 +3209,437 @@
       "lead": "Your export, searches, filters,",
       "note": "Your export, searches, filters, and pinned items remain in the current tab."
     }
+  },
+  {
+    "id": "clamground",
+    "title": "Clam Grounds",
+    "description": "Explore modelled soft-shell clam habitat along the Maritime coast and compare historical Canadian clam landings.",
+    "category": "places",
+    "tags": [
+      "clams",
+      "Nova Scotia",
+      "Bay of Fundy",
+      "DFO",
+      "fisheries",
+      "habitat",
+      "commercial landings",
+      "Atlantic Canada",
+      "British Columbia"
+    ],
+    "icon": "anchor",
+    "url": "/clamground/",
+    "source": "https://github.com/jsdyer/clamground",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "DFO models soft-shell clam habitat and reports annual commercial landings. A 1931 fisheries return lists clam barrels and canned cases by district in Halifax and Digby.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/clamground/data/records.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "rows"
+            ],
+            "measure": "length",
+            "unit": "landings records"
+          },
+          "value": "2026-11-18",
+          "count": 280
+        },
+        {
+          "label": "Landings coverage",
+          "url": "https://coolcode.ca/clamground/data/records.json",
+          "path": [
+            "firstYear"
+          ],
+          "end_path": [
+            "lastYear"
+          ],
+          "value": "1990–2024"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Try Digby on the habitat map, then compare Nova Scotia’s landed weight and value per kilogram. The map describes soft-shell clams, while the commercial figures combine species reported as Clams. The 1931 district returns show how many barrels went to the fresh market and how many cases were canned in Halifax and Digby counties."
+    }
+  },
+  {
+    "id": "ferrycountss",
+    "title": "Ferry Counts",
+    "description": "Compare recorded boardings by direction, weekday and hour on the Halifax harbour ferries.",
+    "category": "places",
+    "tags": [
+      "Halifax",
+      "ferry",
+      "transit",
+      "ridership",
+      "Alderney",
+      "Woodside",
+      "Nova Scotia"
+    ],
+    "icon": "route",
+    "url": "/ferrycountss/",
+    "source": "https://github.com/jsdyer/ferrycountss",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Halifax Transit records passenger boardings by direction and time. The hourly averages use dates with reported counts.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/ferrycountss/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "boarding records"
+          },
+          "value": "2026-11-18",
+          "count": 52238
+        },
+        {
+          "label": "Observation period",
+          "url": "https://coolcode.ca/ferrycountss/data/status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2025-11-01–2026-10-31"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare Halifax to Alderney against the return direction on weekdays. Expand the hourly figures to see how many dates contributed to each average, or download the comparison as CSV."
+    }
+  },
+  {
+    "id": "welllayers",
+    "title": "Well Layers",
+    "description": "Compare two drillers’ logs from Langley and rural Halifax at the same depth in feet or metres.",
+    "category": "places",
+    "tags": [
+      "geology",
+      "water wells",
+      "Langley",
+      "Halifax",
+      "depth",
+      "groundwater"
+    ],
+    "icon": "layers",
+    "url": "/welllayers/",
+    "source": "https://github.com/jsdyer/welllayers",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "B.C. GWELLS and Nova Scotia’s well-log database record the depths and materials that drillers encountered.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/welllayers/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "well logs"
+          },
+          "value": "2026-11-18",
+          "count": 66
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare Langley well 48 with a Fall River log. Switch between feet and metres to see both drillers’ recorded depths on a common scale."
+    }
+  },
+  {
+    "id": "campcalendar",
+    "title": "Camp Calendar",
+    "description": "Compare how far ahead campers booked at Nova Scotia provincial parks, two parks at a time.",
+    "category": "places",
+    "tags": [
+      "Nova Scotia",
+      "parks",
+      "camping",
+      "reservations",
+      "tent",
+      "RV"
+    ],
+    "icon": "map",
+    "url": "/campcalendar/",
+    "source": "https://github.com/jsdyer/campcalendar",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Overnight reservations from Nova Scotia’s provincial parks show how far ahead campers booked their trips.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/campcalendar/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "reservations"
+          },
+          "value": "2026-11-18",
+          "count": 506927
+        },
+        {
+          "label": "Arrival years",
+          "url": "https://coolcode.ca/campcalendar/data/status.json",
+          "path": [
+            "years",
+            0
+          ],
+          "end_path": [
+            "years",
+            -1
+          ],
+          "value": "2011–2024"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Select July, RV and Friday or Saturday to compare the booking lead time at Rissers Beach with Graves Island. The percentile range covers the middle half of successful bookings."
+    }
+  },
+  {
+    "id": "snowcourses",
+    "title": "Snow Courses",
+    "description": "Compare snow depth and water content across years at British Columbia snow stations.",
+    "category": "places",
+    "tags": [
+      "snow",
+      "water",
+      "Fraser",
+      "British Columbia",
+      "surveys",
+      "winter"
+    ],
+    "icon": "layers",
+    "url": "/snowcourses/",
+    "source": "https://github.com/jsdyer/snowcourses",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Provincial surveyors measure snow courses and automated instruments report readings from Fraser basin stations.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/snowcourses/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "stations"
+          },
+          "value": "2026-11-18",
+          "count": 394
+        },
+        {
+          "label": "Latest source date",
+          "url": "https://coolcode.ca/snowcourses/status.json",
+          "path": [
+            "latest"
+          ],
+          "value": "2026-11-18"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Try Grouse Mountain’s April survey, then select Barkerville under Automated station to compare the same date across earlier winters. The table separates missing readings, reported zeros and source flags."
+    }
+  },
+  {
+    "id": "prefixdiary",
+    "title": "Prefix Diary",
+    "description": "Look up a Canadian telephone prefix, explore exchanges and follow changes between published assignments.",
+    "category": "liminal-tools",
+    "tags": [
+      "Canada",
+      "telephone",
+      "carrier",
+      "604",
+      "902",
+      "exchange"
+    ],
+    "icon": "network",
+    "url": "/prefixdiary/",
+    "source": "https://github.com/jsdyer/prefixdiary",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The Canadian Numbering Administrator publishes NPA–NXX assignments, exchange areas and company names each weekday night.",
+      "cadence": "Weekdays",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/prefixdiary/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "prefixes"
+          },
+          "value": "2026-11-18",
+          "count": 46400
+        },
+        {
+          "label": "Latest source date",
+          "url": "https://coolcode.ca/prefixdiary/status.json",
+          "path": [
+            "latest"
+          ],
+          "value": "2026-11-17"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose 902 and search Halifax to see which companies hold prefixes in that exchange. Save individual prefixes to revisit them and watch later changes to their published status or assignment."
+    }
+  },
+  {
+    "id": "coalbelow",
+    "title": "Coal Below",
+    "description": "Explore Nova Scotia’s mapped underground coal workings alongside coal seams and present-day streets.",
+    "category": "places",
+    "tags": [
+      "Nova Scotia",
+      "coal",
+      "mines",
+      "geology",
+      "history"
+    ],
+    "icon": "map",
+    "url": "/coalbelow/",
+    "source": "https://github.com/jsdyer/coalbelow",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Nova Scotia Geological Survey lines trace coal seams and polygons outline recorded underground workings.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/coalbelow/data/index.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "mapped features"
+          },
+          "value": "2026-11-18",
+          "count": 366
+        },
+        {
+          "url": "https://coolcode.ca/coalbelow/data/index.json",
+          "label": "Provincial edition",
+          "path": [
+            "edition"
+          ],
+          "value": "2026-10"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "In Springhill, toggle the seam lines and shaded workings separately, then select a workings outline to read its mapped area and mine-plan note. The three Sydney Mines, Florence and Point Aconi workings areas share a seam layer and appear together in the area selector."
+    }
+  },
+  {
+    "id": "iceweeks",
+    "title": "Ice Weeks",
+    "description": "Compare the same winter week on Canadian Ice Service concentration charts for the East Coast, including the Gulf of St. Lawrence.",
+    "category": "places",
+    "tags": [
+      "Atlantic Canada",
+      "ice",
+      "Canadian Ice Service",
+      "Gulf of St. Lawrence"
+    ],
+    "icon": "map",
+    "url": "/iceweeks/",
+    "source": "https://github.com/jsdyer/iceweeks",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Canadian Ice Service charts show weekly East Coast ice concentration across winters.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/iceweeks/data/index.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "chart dates"
+          },
+          "value": "2026-11-18",
+          "count": 55
+        },
+        {
+          "url": "https://coolcode.ca/iceweeks/data/index.json",
+          "label": "Chart issue dates",
+          "path": [
+            "first"
+          ],
+          "end_path": [
+            "latest"
+          ],
+          "value": "2024-02-12–2026-04-27"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose winters 2025–2026 and 2024–2025 and move to week 12 to compare the charts issued February 16, 2026 and February 17, 2025. An empty panel means the archive index has no chart in that week."
+    }
   }
 ]

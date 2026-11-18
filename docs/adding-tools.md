@@ -42,6 +42,7 @@ Append a record to the appropriate place in `data/tools.json`, for example:
   "source": "https://github.com/jsdyer/my-tool",
   "hosting": "project",
   "access": "browser",
+  "sync_manifest": true,
   "data_info": {
     "mode": "local",
     "detail": "The selected header file is processed in the browser."
@@ -49,7 +50,15 @@ Append a record to the appropriate place in `data/tools.json`, for example:
 }
 ```
 
-All fields in this example are required. Use an existing `data-icon` value
+Use `sync_manifest` for a new standalone tool whose repository maintains a root
+`tool.json`. The flag is optional and belongs in the hub record. The catalogue
+ID, repository name and Pages route must share the same slug. Every six hours
+the hub reads the project’s default branch and imports its title, description,
+data-source sentence (`data_info.detail`) and scheduled check cadence. Omit
+`cadence` in the project manifest when scheduled checks end. A failed import
+keeps the previous card copy and flags that project for review.
+
+Use an existing `data-icon` value
 from `assets/coolcode.css`; new icons need a corresponding sprite/CSS update.
 `source` links to the repository or directory containing the code; `url` is where
 the catalogue sends the visitor. They are deliberately independent.
@@ -117,7 +126,7 @@ the route of a separately published project. For `external`, supply an HTTPS URL
 such as the installation guide for a command-line application.
 
 ```sh
-python3 scripts/sync_guides.py --tool my-tool
+python3 scripts/sync_guides.py --with-manifests --tool my-tool
 python3 scripts/sync_readme.py
 python3 -m unittest discover -s tests -v
 python3 scripts/build.py
@@ -143,7 +152,7 @@ A missing estimate leaves a gap in the chart. A reported zero stays visible in t
 ```
 
 After adding the catalogue record or adjusting a guide, run
-`python3 scripts/sync_guides.py --tool my-tool`, then `python3 scripts/sync_readme.py`.
+`python3 scripts/sync_guides.py --with-manifests --tool my-tool`, then `python3 scripts/sync_readme.py`.
 The first command fills the required cached `readme.note` from the tool's README.
 Older guides use a short sentence prefix in `readme.lead`. Adding the markers
 supersedes the prefix. The six-hour refresh re-reads guides, keeps the last good
@@ -158,8 +167,10 @@ Commit the metadata, regenerated `README.md` and any actual source changes toget
 never commit `dist/` or edit a generated homepage. PR checks run
 `python3 scripts/sync_readme.py --check` and reject missing or stale README entries
 before building the site. Only `main` publishes.
-Changing an existing standalone app does not require updating the catalogue unless
-its title, description, destination or other listing metadata changes.
+For an opted-in project, update the short listing copy in its own `tool.json` and
+the practical note in its README. Edit the hub when registering or moving a tool,
+changing its data mode, or changing a date or count probe. The hub manages the
+destination, category, probe definitions and cached measurements.
 
 ## Shared conventions
 

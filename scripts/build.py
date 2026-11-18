@@ -41,6 +41,16 @@ def https_url(value):
     return parsed.scheme == "https" and bool(parsed.hostname) and parsed.username is None and parsed.password is None
 
 
+def manifest_slug(tool):
+    slug = tool.get("id")
+    require(isinstance(slug, str) and SLUG.fullmatch(slug)
+            and tool.get("source") == f"https://github.com/jsdyer/{slug}"
+            and tool.get("url") == f"/{slug}/" and tool.get("hosting") == "project"
+            and tool.get("access") == "browser",
+            f"{slug}: manifest sync requires a matching jsdyer project repository, browser route and ID")
+    return slug
+
+
 def validate(categories, tools, root=ROOT):
     require(isinstance(categories, list) and categories, "categories.json must contain a nonempty array")
     require(isinstance(tools, list) and tools, "tools.json must contain a nonempty array")
@@ -59,7 +69,7 @@ def validate(categories, tools, root=ROOT):
     required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access", "readme"}
     for tool in tools:
         require(isinstance(tool, dict), "Each tool must be an object")
-        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
+        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info", "sync_manifest"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
         tid = tool["id"]
         require(isinstance(tid, str) and SLUG.fullmatch(tid), f"Invalid tool ID: {tid!r}")
         require(tid not in ids, f"Duplicate tool ID: {tid}")
@@ -70,6 +80,10 @@ def validate(categories, tools, root=ROOT):
         require(tool["icon"] in icons, f"{tid}: unknown icon")
         require(isinstance(tool["tags"], list) and all(nonempty(t) for t in tool["tags"]), f"{tid}: tags must be an array of nonempty strings")
         require(tool["access"] in ("browser", "install"), f"{tid}: access must be browser or install")
+        if "sync_manifest" in tool:
+            require(type(tool["sync_manifest"]) is bool, f"{tid}: sync_manifest must be a boolean")
+            if tool["sync_manifest"]:
+                manifest_slug(tool)
         info = tool.get("data_info", {})
         require(isinstance(info, dict) and info.get("mode") in DATA_MODES
                 and nonempty(info.get("detail")), f"{tid}: describe the data source and mode")

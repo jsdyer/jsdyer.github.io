@@ -10,6 +10,7 @@ on:
       - '.github/workflows/catalogue-freshness.yml'
       - 'scripts/refresh_dates.py'
       - 'scripts/sync_guides.py'
+      - 'scripts/sync_manifests.py'
 
 concurrency:
   group: catalogue-data-dates
@@ -35,10 +36,10 @@ jobs:
           python-version: '3.12'
       - name: Read dates and counts from published tools
         run: python3 scripts/refresh_dates.py
-      - name: Read the guide note from each tool README
+      - name: Read tool README notes and opted-in project listing copy
         id: guides
         continue-on-error: true
-        run: python3 scripts/sync_guides.py
+        run: python3 scripts/sync_guides.py --with-manifests
       - name: Regenerate the catalogue and run its checks
         run: |
           python3 scripts/sync_readme.py
@@ -52,12 +53,12 @@ jobs:
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add data/tools.json README.md
-            git commit -m "Sync catalogue dates and tool guide notes"
+            git commit -m "Sync catalogue dates, listing copy and tool guide notes"
             git push origin HEAD:main
             gh workflow run pages.yml --ref main
           elif [ "${GITHUB_RUN_ATTEMPT}" -gt 1 ]; then
             gh workflow run pages.yml --ref main
           fi
-      - name: Report any tool guides that need review
+      - name: Report any tool guides or manifests that need review
         if: steps.guides.outcome == 'failure'
         run: exit 1

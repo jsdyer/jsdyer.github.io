@@ -12,6 +12,7 @@ from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
 from build import ROOT
+from sync_manifests import import_manifests
 
 BEGIN = "<!-- coolcode:guide -->"
 END = "<!-- /coolcode:guide -->"
@@ -97,8 +98,10 @@ def import_notes(tools, read=guide_source):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tool", action="append", help="Import only this catalogue ID (repeatable)")
-    parser.add_argument("--check", action="store_true", help="Verify the saved notes without changing them")
+    parser.add_argument("--check", action="store_true", help="Verify the saved copy without changing it")
     parser.add_argument("--local", action="store_true", help="Check only guides in this checkout")
+    parser.add_argument("--with-manifests", action="store_true",
+                        help="Also import listing copy from opted-in standalone project manifests")
     args = parser.parse_args()
     path = ROOT / "data/tools.json"
     original = path.read_bytes()
@@ -109,10 +112,12 @@ def main():
     selected = [tool for tool in tools if (not wanted or tool["id"] in wanted) and
                 (not args.local or tool["source"].startswith("https://github.com/jsdyer/jsdyer.github.io/tree/main/"))]
     errors = import_notes(selected)
+    if args.with_manifests:
+        errors.extend(import_manifests(selected))
     revised = (json.dumps(tools, ensure_ascii=False, indent=2) + "\n").encode()
     if revised != original:
         if args.check:
-            errors.append("Saved README notes differ; run scripts/sync_guides.py and scripts/sync_readme.py")
+            errors.append("Saved guide or listing copy differs; rerun the import and scripts/sync_readme.py")
         else:
             with TemporaryDirectory(dir=path.parent) as tmp:
                 output = Path(tmp) / path.name
@@ -123,7 +128,7 @@ def main():
                 output.replace(path)
     for error in errors:
         print(error, file=sys.stderr)
-    print(f"Checked {len(selected)} tool guides; {len(errors)} require attention.")
+    print(f"Checked {len(selected)} tool guides; {len(errors)} issues require attention.")
     return bool(errors)
 
 
