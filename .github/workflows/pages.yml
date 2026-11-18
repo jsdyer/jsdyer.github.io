@@ -21,6 +21,8 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+      - name: Check README tool directory is in sync
+        run: python3 scripts/sync_readme.py --check
       - name: Test catalogue validation and rendering
         run: python3 -m unittest discover -s tests -v
       - name: Build static site
