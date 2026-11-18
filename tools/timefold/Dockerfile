@@ -1,4 +1,4 @@
-FROM php:8.3-apache-bookworm
+FROM php:8.5-apache-bookworm
 
 # PDO SQLite and fileinfo ship in the official PHP image; only MySQL needs adding.
 RUN docker-php-ext-install pdo_mysql \
