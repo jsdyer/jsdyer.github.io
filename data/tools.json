@@ -735,6 +735,49 @@
     "access": "browser"
   },
   {
+    "id": "salmonlines",
+    "title": "Salmon Lines",
+    "description": "Compare historical salmon spawning estimates by river, species and run in DFO’s Pacific region.",
+    "category": "explorers",
+    "tags": [
+      "British Columbia",
+      "salmon",
+      "DFO",
+      "rivers",
+      "NuSEDS",
+      "escapement",
+      "spawning",
+      "Fraser"
+    ],
+    "icon": "activity",
+    "url": "/salmonlines/",
+    "source": "https://github.com/jsdyer/salmonlines",
+    "hosting": "project",
+    "access": "browser",
+    "data_date_badge": true
+  },
+  {
+    "id": "datasetdiff",
+    "title": "Dataset Diff",
+    "description": "Compare CSV or GeoJSON snapshots by record ID and inspect changes to fields and geometry.",
+    "category": "explorers",
+    "tags": [
+      "csv",
+      "geojson",
+      "sqlite",
+      "changes",
+      "open data",
+      "snapshots"
+    ],
+    "icon": "file-check-2",
+    "url": "/datasetdiff/",
+    "source": "https://github.com/jsdyer/datasetdiff",
+    "hosting": "project",
+    "access": "browser",
+    "install_url": "https://github.com/jsdyer/datasetdiff#linux-companion",
+    "requirements": "Linux and Node.js 24+"
+  },
+  {
     "id": "corporateghosts",
     "title": "Corporate Ghosts",
     "description": "Search Canada’s federal corporate register and compare legal statuses.",
@@ -1090,6 +1133,49 @@
     "access": "browser"
   },
   {
+    "id": "lightkeeper",
+    "title": "Lightkeeper",
+    "description": "Explore Canadian coastal lights, play their published signals and compare nearby aids.",
+    "category": "places",
+    "tags": [
+      "British Columbia",
+      "Nova Scotia",
+      "Atlantic Canada",
+      "lighthouses",
+      "buoys",
+      "Coast Guard",
+      "signals"
+    ],
+    "icon": "anchor",
+    "url": "/lightkeeper/",
+    "source": "https://github.com/jsdyer/lightkeeper",
+    "hosting": "project",
+    "access": "browser",
+    "data_date_badge": true
+  },
+  {
+    "id": "stormtracks",
+    "title": "Storm Tracks",
+    "description": "Replay Atlantic storms, compare their winds and find historical tracks near a coastal community.",
+    "category": "places",
+    "tags": [
+      "Atlantic",
+      "hurricanes",
+      "NOAA",
+      "Nova Scotia",
+      "Halifax",
+      "weather",
+      "cyclones",
+      "IBTrACS"
+    ],
+    "icon": "map",
+    "url": "/stormtracks/",
+    "source": "https://github.com/jsdyer/stormtracks",
+    "hosting": "project",
+    "access": "browser",
+    "data_date_badge": true
+  },
+  {
     "id": "nightfinder",
     "title": "Nightfinder",
     "description": "Plan a night shoot around darkness, target positions and lens framing.",
@@ -1169,6 +1255,28 @@
     "source": "https://github.com/jsdyer/photolab",
     "hosting": "project",
     "access": "browser"
+  },
+  {
+    "id": "otherworldnames",
+    "title": "Otherworld Names",
+    "description": "Explore the origins and locations of officially named features on the Moon and Mars.",
+    "category": "field-kit",
+    "tags": [
+      "Moon",
+      "Mars",
+      "planetary names",
+      "USGS",
+      "IAU",
+      "craters",
+      "astronomy",
+      "name origins"
+    ],
+    "icon": "moon-star",
+    "url": "/otherworldnames/",
+    "source": "https://github.com/jsdyer/otherworldnames",
+    "hosting": "project",
+    "access": "browser",
+    "data_date_badge": true
   },
   {
     "id": "bankrates",

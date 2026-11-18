@@ -8,6 +8,8 @@ import time
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from build import data_date_path
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -28,7 +30,9 @@ def check(url):
 def main():
     tools = json.loads((ROOT / "data/tools.json").read_text())
     urls = sorted({("https://coolcode.ca" + value if value.startswith("/") else value)
-                   for tool in tools for value in (tool["url"], tool["source"], *([tool["install_url"]] if "install_url" in tool else []))})
+                   for tool in tools
+                   for value in (tool["url"], tool["source"], tool.get("install_url"), data_date_path(tool))
+                   if value})
     with ThreadPoolExecutor(max_workers=4) as pool:
         results = list(pool.map(check, urls))
     report = ROOT / "link-audit.json"

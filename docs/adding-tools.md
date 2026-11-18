@@ -57,6 +57,12 @@ separate installable version, keep one record with `access: "browser"`, add an H
 `install_url` and state the `requirements`. The build puts it in both sections with
 the correct destination. Search counts it as one tool, even when both versions match.
 
+A project-hosted browser tool with a data snapshot can set `"data_date_badge": true`.
+Serve `data-date.svg` alongside the app, with a visible retrieval date and an
+accessible title generated from the snapshot metadata. The homepage and README
+display this image. Refreshing the tool updates the date independently of a
+catalogue release. Put publisher revision dates and coverage in the tool itself.
+
 For `local`, create `<slug>/index.html` and its assets here and use `/<slug>/` as
 the URL. The build includes this directory automatically. A directory cannot reuse
 the route of a separately published project. For `external`, supply an HTTPS URL,

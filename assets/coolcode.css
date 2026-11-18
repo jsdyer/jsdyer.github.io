@@ -202,6 +202,8 @@ figcaption span, .category span { opacity: .62; padding-inline: .3em; }
 .tool-mode-browser { color: var(--ink); background: color-mix(in srgb, var(--signal) 25%, var(--surface)); }
 .tool-mode-install { color: var(--ink); background: var(--paper); }
 .tool-requirements { display: block; margin-top: .4rem; color: var(--muted); font: .72rem/1.5 var(--mono); }
+.tool-group a.tool-data-date { display: block; width: fit-content; max-width: 100%; margin-top: .4rem; }
+.tool-data-date img { display: block; max-width: 100%; height: auto; }
 .collection-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: .6rem 1rem; margin-bottom: .6rem; }
 .collection-heading h2 { font-size: clamp(1.7rem, 3vw, 2.7rem); }
 .collection-count { color: var(--muted); font: .8rem/1.5 var(--mono); }

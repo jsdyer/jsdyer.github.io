@@ -53,7 +53,7 @@ def validate(categories, tools, root=ROOT):
     required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access"}
     for tool in tools:
         require(isinstance(tool, dict), "Each tool must be an object")
-        require(required <= set(tool) <= required | {"requirements", "install_url"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
+        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
         tid = tool["id"]
         require(isinstance(tid, str) and SLUG.fullmatch(tid), f"Invalid tool ID: {tid!r}")
         require(tid not in ids, f"Duplicate tool ID: {tid}")
@@ -64,6 +64,11 @@ def validate(categories, tools, root=ROOT):
         require(tool["icon"] in icons, f"{tid}: unknown icon")
         require(isinstance(tool["tags"], list) and all(nonempty(t) for t in tool["tags"]), f"{tid}: tags must be an array of nonempty strings")
         require(tool["access"] in ("browser", "install"), f"{tid}: access must be browser or install")
+        if "data_date_badge" in tool:
+            require(isinstance(tool["data_date_badge"], bool), f"{tid}: data_date_badge must be a boolean")
+            if tool["data_date_badge"]:
+                require(tool["hosting"] == "project" and tool["access"] == "browser",
+                        f"{tid}: data_date_badge requires a project-hosted browser tool")
         if tool["access"] == "install" or "install_url" in tool:
             require(nonempty(tool.get("requirements")), f"{tid}: installation requirements must be stated")
         else:
@@ -100,6 +105,12 @@ def load_catalogue(root=ROOT):
     return categories, tools
 
 
+def data_date_path(tool):
+    if tool.get("data_date_badge"):
+        return tool["url"] + "data-date.svg"
+    return ""
+
+
 def render_entry(tool, access):
     tags = escape(" ".join(tool["tags"]), quote=True)
     icon, title, description, tid = (escape(tool[key], quote=True) for key in ("icon", "title", "description", "id"))
@@ -108,6 +119,10 @@ def render_entry(tool, access):
     arrow = "↗" if destination.startswith("https:") else "→"
     label = "Use in browser" if access == "browser" else "Installation required"
     detail = f'<span class="tool-requirements">{escape(tool["requirements"])}</span>' if access == "install" else ""
+    if access == "browser" and (badge_path := data_date_path(tool)):
+        badge_url = escape(badge_path, quote=True)
+        detail = (f'<a class="tool-data-date" href="{badge_url}">'
+                  f'<img src="{badge_url}" alt="Read the dataset retrieval date for {title}" loading="lazy"></a>')
     return (f'                <li data-tool data-tool-id="{tid}" data-access="{access}" data-keywords="{tags}">'
             f'<span class="tool-icon" data-icon="{icon}" aria-hidden="true"></span><div class="tool-entry">'
             f'<a href="{url}"><span>{title}</span><span aria-hidden="true">{arrow}</span></a>'
