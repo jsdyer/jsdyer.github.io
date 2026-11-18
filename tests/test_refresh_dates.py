@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from refresh_dates import AllowedRedirects, badge_metadata, check_url, refresh, select, source_date
+from refresh_dates import AllowedRedirects, badge_metadata, check_url, refresh, select, source_date, probe_date, record_count, update_probe
 
 
 class CatalogueDateTests(unittest.TestCase):
@@ -30,6 +30,35 @@ class CatalogueDateTests(unittest.TestCase):
                       '<!broken>'):
             with self.subTest(wrong=wrong), self.assertRaises(ValueError):
                 badge_metadata(wrong)
+
+    def test_coverage_and_subdaily_timestamps(self):
+        span = {'path': ['start'], 'end_path': ['end']}
+        self.assertEqual(probe_date(span, {'start': 1851, 'end': 2025}), '1851–2025')
+        self.assertEqual(probe_date(span, {'start': '2025-03', 'end': '2025-03'}), '2025-03')
+        for end in (1800, '2025-01'):
+            with self.subTest(end=end), self.assertRaises(ValueError):
+                probe_date(span, {'start': 1900, 'end': end})
+        subdaily = {'path': ['when'], 'precision': 'minute'}
+        self.assertEqual(probe_date(subdaily, {'when': '2025-12-31T19:35:40-07:00'}), '2026-01-01 02:35 UTC')
+        self.assertEqual(probe_date(subdaily, {'when': '2026-02-01'}), '2026-02-01')
+        with self.assertRaises(ValueError):
+            probe_date(subdaily, {'when': '2026-02-01T03:15:01'})
+
+    def test_counts_do_not_treat_missing_parts_as_zero(self):
+        spec = {'path': [], 'measure': 'sum', 'field': 'rows'}
+        self.assertEqual(record_count({'west': {'rows': 9}, 'east': {'rows': 0}}, spec), 9)
+        for rows in ([{'rows': True}], [{'x': 25}], ['9'], [{'rows': -1}]):
+            with self.subTest(rows=rows):
+                self.assertIsNone(record_count(rows, spec))
+        self.assertEqual(record_count([{}, {}], {'path': [], 'measure': 'length'}), 2)
+
+    def test_undated_replacement_clears_previous_date_but_retains_new_count(self):
+        probe = {'path': ['retrieved'], 'value': '2025-01-01', 'allow_unknown': True,
+                 'count_at': {'path': ['rows'], 'unit': 'records'}}
+        update_probe(probe, {'retrieved': None, 'rows': 38})
+        self.assertIsNone(probe['value'])
+        self.assertEqual(probe['count'], 38)
+        self.assertNotIn('unavailable', probe)
 
     def test_paths_require_a_unique_match(self):
         data = {'cases': [{'id': 'A', 'dates': [2024, 2026]}, {'id': 'B'}]}

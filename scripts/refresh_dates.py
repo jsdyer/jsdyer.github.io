@@ -4,7 +4,7 @@
 import argparse
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from email.utils import parsedate_to_datetime
 from http.client import HTTPException
 import json
@@ -120,8 +120,41 @@ def source_date(value):
     raise ValueError(f'Unrecognized publisher date {value!r}')
 
 
+def probe_date(probe, document):
+    raw = select(document, probe['path'])
+    if raw is None and probe.get('allow_unknown'):
+        return None
+    start = source_date(raw)
+    if 'end_path' in probe:
+        end = source_date(select(document, probe['end_path']))
+        if len(start) != len(end) or end < start:
+            raise ValueError(f'Inconsistent coverage dates: {start} to {end}')
+        return start if start == end else f'{start}–{end}'
+    if probe.get('precision') == 'minute' and isinstance(raw, str) and len(raw) > 10:
+        timestamp = datetime.fromisoformat(raw.replace('Z', '+00:00'))
+        if timestamp.tzinfo is None:
+            raise ValueError('Minute precision requires a timezone in the source')
+        return timestamp.astimezone(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+    return start
+
+
+def record_count(document, spec):
+    values = select(document, spec['path']) if spec['path'] else document
+    measure = spec.get('measure')
+    if measure == 'length' and isinstance(values, (list, dict)):
+        return len(values)
+    if measure == 'sum' and isinstance(values, (list, dict)):
+        rows = values.values() if isinstance(values, dict) else values
+        counts = [row.get(spec['field']) if isinstance(row, dict) else None for row in rows]
+        if all(type(n) is int and n >= 0 for n in counts):
+            return sum(counts)
+    if measure is None and type(values) is int and values >= 0:
+        return values
+    return None
+
+
 def update_probe(probe, document):
-    value = source_date(select(document, probe['path']))
+    value = probe_date(probe, document)
     condition = probe.get('notice_if')
     notice = None
     if condition:
@@ -137,12 +170,10 @@ def update_probe(probe, document):
     probe.pop('count', None)
     if 'count_at' in probe:
         try:
-            count = select(document, probe['count_at']['path'])
+            count = record_count(document, probe['count_at'])
         except (KeyError, TypeError, ValueError):
             count = None
-        if probe['count_at'].get('measure') == 'length':
-            count = len(count) if isinstance(count, list) else None
-        if type(count) is int and count >= 0:
+        if count is not None:
             probe['count'] = count
     if notice:
         probe['notice'] = notice

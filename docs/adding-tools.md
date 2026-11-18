@@ -100,7 +100,12 @@ accessible title generated from the snapshot metadata. The homepage and README
 display this image. Add a probe for the same SVG URL with `"path": ["retrieved"]`
 to include its date in the alternative text. Refreshing the tool updates the visible
 badge independently of the catalogue. A JSON probe can report an integer count
-or use `"measure": "length"` inside `count_at` to count an array of records.
+or use `"measure": "length"` in `count_at` to count an array or keyed collection.
+Use `"measure": "sum"` with a `field` to add validated nonnegative counts across
+regional shards. An `end_path` pairs dates of the same precision into a coverage
+range. A subdaily feed can set `"precision": "minute"` to display a timezone-aware
+timestamp in UTC. With `"allow_unknown": true`, an explicit null source date
+clears the previous edition's date. A failed network check preserves the prior value.
 
 For `local`, create `<slug>/index.html` and its assets here and use `/<slug>/` as
 the URL. The build includes this directory automatically. A directory cannot reuse

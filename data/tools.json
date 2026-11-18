@@ -342,7 +342,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "ISED coverage and funding layers cover all 13 provinces and territories.",
+      "detail": "ISED broadband coverage and funding layers by province and territory.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -351,7 +351,23 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "regions"
+            ],
+            "unit": "provinces and territories",
+            "measure": "length"
+          },
+          "count": 13
+        },
+        {
+          "url": "https://coolcode.ca/broadbandatlas/data/index.json",
+          "path": [
+            "coverageDate"
+          ],
+          "label": "Coverage file date",
+          "value": "2026-05-05"
         }
       ]
     }
@@ -387,7 +403,14 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "places"
+            ],
+            "unit": "coverage areas"
+          },
+          "count": 6634
         }
       ]
     }
@@ -419,7 +442,14 @@
             "refreshed"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "days"
+            ],
+            "unit": "calendar days"
+          },
+          "count": 2144
         }
       ]
     }
@@ -442,7 +472,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "OONI measurements for five cases. The Canadian Discord window refreshes daily.",
+      "detail": "Published OONI case studies, with a daily check of the Canadian Discord window.",
       "cadence": "Daily",
       "probes": [
         {
@@ -453,8 +483,14 @@
             },
             "capturedAt"
           ],
-          "label": "Data retrieved",
-          "value": "2026-11-17"
+          "label": "Canadian sample retrieved",
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [],
+            "unit": "case studies",
+            "measure": "length"
+          },
+          "count": 5
         }
       ]
     }
@@ -650,7 +686,15 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "rows"
+            ],
+            "unit": "catalogued vulnerabilities",
+            "measure": "length"
+          },
+          "count": 1781
         },
         {
           "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
@@ -694,7 +738,15 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "rows"
+            ],
+            "unit": "KEV entries",
+            "measure": "length"
+          },
+          "count": 1781
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -703,6 +755,14 @@
           ],
           "label": "Source published",
           "value": "2026-11-13"
+        },
+        {
+          "url": "https://coolcode.ca/patchsignal/kev.json",
+          "path": [
+            "epssDate"
+          ],
+          "label": "EPSS score date",
+          "value": "2026-11-17"
         }
       ]
     }
@@ -743,6 +803,17 @@
           },
           "value": "2026-11-18",
           "count": 206151
+        },
+        {
+          "url": "https://coolcode.ca/atip/data/manifest.json",
+          "path": [
+            "minDate"
+          ],
+          "label": "Request months",
+          "end_path": [
+            "maxDate"
+          ],
+          "value": "2011-01–2026-11"
         }
       ],
       "cadence": "Daily"
@@ -909,6 +980,19 @@
           ],
           "label": "Source updated",
           "value": "2026-10-07"
+        },
+        {
+          "url": "https://coolcode.ca/atippopularity/data/manifest.json",
+          "path": [
+            "months",
+            0
+          ],
+          "label": "Reported months",
+          "end_path": [
+            "months",
+            -1
+          ],
+          "value": "2019-09–2026-09"
         }
       ],
       "cadence": "Daily"
@@ -948,7 +1032,15 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "years"
+            ],
+            "unit": "fiscal years",
+            "measure": "length"
+          },
+          "count": 4
         }
       ],
       "cadence": "Monthly"
@@ -1078,7 +1170,15 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "AI register entries",
+            "measure": "length"
+          },
+          "count": 412
         },
         {
           "url": "https://coolcode.ca/algorithmwatch/register.json",
@@ -1211,7 +1311,15 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "series"
+            ],
+            "unit": "metric series",
+            "measure": "length"
+          },
+          "count": 539
         },
         {
           "url": "https://coolcode.ca/canadaanalytics/data/pulse.json",
@@ -1220,6 +1328,19 @@
           ],
           "label": "Source updated",
           "value": "2026-11-03"
+        },
+        {
+          "url": "https://coolcode.ca/canadaanalytics/data/pulse.json",
+          "path": [
+            "months",
+            0
+          ],
+          "label": "Reporting months",
+          "end_path": [
+            "months",
+            -1
+          ],
+          "value": "2023-11–2026-10"
         }
       ],
       "cadence": "Daily"
@@ -1263,6 +1384,7 @@
             "unit": "annual records"
           },
           "value": "2026-11-18",
+          "allow_unknown": true,
           "count": 421001
         },
         {
@@ -1272,6 +1394,19 @@
           ],
           "label": "Source published",
           "value": "2026-06-01"
+        },
+        {
+          "url": "https://coolcode.ca/salmonlines/data/source.json",
+          "path": [
+            "years",
+            0
+          ],
+          "label": "Analysis years",
+          "end_path": [
+            "years",
+            1
+          ],
+          "value": "1920–2025"
         }
       ],
       "cadence": "Monthly"
@@ -1427,7 +1562,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CRA T3010 financial filings and qualified-donee gifts from the 2022–2024 packages.",
+      "detail": "CRA T3010 financial filings and gifts to qualified donees.",
       "probes": [
         {
           "url": "https://coolcode.ca/charityflows/manifest.json",
@@ -1443,6 +1578,21 @@
           },
           "value": "2026-11-16",
           "count": 87802
+        },
+        {
+          "url": "https://coolcode.ca/charityflows/manifest.json",
+          "path": [
+            "covered",
+            0,
+            0
+          ],
+          "label": "Filing years",
+          "end_path": [
+            "covered",
+            -1,
+            0
+          ],
+          "value": "2022–2024"
         }
       ],
       "cadence": "Monthly"
@@ -1478,7 +1628,15 @@
             "updated"
           ],
           "label": "Source reviewed",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "rate entries",
+            "measure": "length"
+          },
+          "count": 28
         }
       ]
     }
@@ -1511,7 +1669,15 @@
             "reviewed"
           ],
           "label": "Source reviewed",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "devices"
+            ],
+            "unit": "devices",
+            "measure": "length"
+          },
+          "count": 14
         }
       ]
     }
@@ -1592,7 +1758,15 @@
             "updated"
           ],
           "label": "Source reviewed",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "selected patent publications",
+            "measure": "length"
+          },
+          "count": 22
         }
       ]
     }
@@ -1628,7 +1802,16 @@
             "oldest_retrieval"
           ],
           "label": "Oldest source retrieved",
-          "value": "2026-11-18"
+          "value": "2026-11-18",
+          "count_at": {
+            "path": [
+              "regions"
+            ],
+            "unit": "mapped trail segments",
+            "measure": "sum",
+            "field": "segments"
+          },
+          "count": 6236
         }
       ],
       "cadence": "Weekly"
@@ -1692,7 +1875,16 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "shards"
+            ],
+            "unit": "published spectrum records",
+            "measure": "sum",
+            "field": "count"
+          },
+          "count": 298391
         }
       ],
       "cadence": "Monthly"
@@ -1725,7 +1917,15 @@
             "checked"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "meta",
+              "count"
+            ],
+            "unit": "shipwreck records"
+          },
+          "count": 4939
         },
         {
           "url": "https://coolcode.ca/shipwrecks/data/nearby.json",
@@ -1768,7 +1968,14 @@
             "builtAt"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "heritage records"
+          },
+          "count": 2527
         },
         {
           "url": "https://coolcode.ca/forgottenplaces/data/manifest.json",
@@ -1807,7 +2014,14 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "place-name records"
+          },
+          "count": 369888
         }
       ],
       "cadence": "Daily"
@@ -1931,7 +2145,15 @@
             "retrieved_at"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-18"
+          "value": "2026-11-18",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "planning records",
+            "measure": "length"
+          },
+          "count": 644
         }
       ],
       "cadence": "Daily"
@@ -1963,7 +2185,14 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "total"
+            ],
+            "unit": "aviation occurrences"
+          },
+          "count": 408710
         },
         {
           "url": "https://coolcode.ca/strangeskies/data/manifest.json",
@@ -2003,12 +2232,20 @@
       "cadence": "Twice monthly",
       "probes": [
         {
-          "url": "https://coolcode.ca/lightkeeper/data-date.svg",
+          "url": "https://coolcode.ca/lightkeeper/data-status.json",
           "path": [
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-18"
+          "value": "2026-11-18",
+          "allow_unknown": true,
+          "count_at": {
+            "path": [
+              "lights"
+            ],
+            "unit": "positioned lights"
+          },
+          "count": 6494
         }
       ]
     }
@@ -2040,12 +2277,30 @@
       "cadence": "Monthly",
       "probes": [
         {
-          "url": "https://coolcode.ca/stormtracks/data-date.svg",
+          "url": "https://coolcode.ca/stormtracks/data-status.json",
           "path": [
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-18"
+          "value": "2026-11-18",
+          "count_at": {
+            "path": [
+              "tracks"
+            ],
+            "unit": "storm tracks"
+          },
+          "count": 2275
+        },
+        {
+          "url": "https://coolcode.ca/stormtracks/data-status.json",
+          "path": [
+            "firstSeason"
+          ],
+          "label": "Seasons",
+          "end_path": [
+            "lastSeason"
+          ],
+          "value": "1851–2025"
         }
       ]
     }
@@ -2093,7 +2348,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CelesTrak orbital elements for six satellites. Passes are calculated locally.",
+      "detail": "CelesTrak orbital elements. Passes for your location are calculated locally.",
       "probes": [
         {
           "url": "https://coolcode.ca/satpasses/elements.json",
@@ -2101,7 +2356,16 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-18"
+          "value": "2026-11-18 13:02 UTC",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "objects"
+            ],
+            "unit": "satellites",
+            "measure": "length"
+          },
+          "count": 6
         }
       ],
       "cadence": "Every 4 hours"
@@ -2137,7 +2401,15 @@
             "updated"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "selected observations",
+            "measure": "length"
+          },
+          "count": 30
         }
       ],
       "cadence": "Weekly"
@@ -2196,12 +2468,19 @@
       "cadence": "Monthly",
       "probes": [
         {
-          "url": "https://coolcode.ca/otherworldnames/data-date.svg",
+          "url": "https://coolcode.ca/otherworldnames/data-status.json",
           "path": [
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-18"
+          "value": "2026-11-18",
+          "count_at": {
+            "path": [
+              "features"
+            ],
+            "unit": "named features"
+          },
+          "count": 11141
         }
       ]
     }
@@ -2235,16 +2514,28 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17"
+          "value": "2026-11-17",
+          "count_at": {
+            "path": [
+              "tracks"
+            ],
+            "unit": "rate series",
+            "measure": "length"
+          },
+          "count": 9
         },
         {
           "url": "https://coolcode.ca/bankrates/snapshot.json",
           "path": [
             "dates",
-            -1
+            0
           ],
-          "label": "Data through",
-          "value": "2026-11-16"
+          "label": "Observation dates",
+          "value": "2017-01-02–2026-11-16",
+          "end_path": [
+            "dates",
+            -1
+          ]
         }
       ],
       "cadence": "Weekdays"
@@ -2280,16 +2571,28 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "products"
+            ],
+            "unit": "products",
+            "measure": "length"
+          },
+          "count": 110
         },
         {
           "url": "https://coolcode.ca/priceatlas/snapshot.json",
           "path": [
             "months",
-            -1
+            0
           ],
-          "label": "Data through",
-          "value": "2026-09"
+          "label": "Price observations",
+          "value": "2017-01–2026-09",
+          "end_path": [
+            "months",
+            -1
+          ]
         }
       ],
       "cadence": "Weekly"
@@ -2326,15 +2629,31 @@
             "oldest_retrieval"
           ],
           "label": "Oldest source retrieved",
-          "value": "2026-11-18"
+          "value": "2026-11-18",
+          "count_at": {
+            "path": [
+              "sources"
+            ],
+            "unit": "source workbooks",
+            "measure": "length"
+          },
+          "count": 2
         },
         {
           "url": "https://coolcode.ca/insolvencyatlas/data-status.json",
           "path": [
             "filings_through"
           ],
-          "label": "Data through",
+          "label": "Monthly filings through",
           "value": "2026-09"
+        },
+        {
+          "url": "https://coolcode.ca/insolvencyatlas/data-status.json",
+          "path": [
+            "rates_through"
+          ],
+          "label": "Annual rates through",
+          "value": "2025"
         }
       ],
       "cadence": "Weekly"
@@ -2461,7 +2780,15 @@
             "date"
           ],
           "label": "Source reviewed",
-          "value": "2026-11-16"
+          "value": "2026-11-16",
+          "count_at": {
+            "path": [
+              "cases"
+            ],
+            "unit": "address histories",
+            "measure": "length"
+          },
+          "count": 8
         }
       ]
     }
