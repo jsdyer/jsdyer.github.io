@@ -27,6 +27,7 @@ def link(label, destination):
 def describe(tool, access):
     mode, detail = data_summary(tool, access)
     text = markdown_text(tool["description"]) + " <br> " + markdown_text(f"{mode} · {detail}")
+    text += " " + markdown_text(tool["readme"]["note"])
     notes = data_notes(tool, access)
     if notes:
         text += " <br> " + markdown_text(" · ".join(notes))

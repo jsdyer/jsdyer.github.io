@@ -20,6 +20,10 @@
 - After catalogue edits, run `python3 scripts/sync_readme.py` and commit the updated
   `README.md` with the metadata. The marked tool tables are generated; do not edit
   them by hand. CI checks they match the catalogue. Keep detailed tool guides separate.
+- On additions and on changes to inputs, results, coverage or update behaviour, revise
+  the tool's own README. Include a useful example or interpretation in its marked
+  guide excerpt. Keep the homepage task and data-source sentences brief. Run
+  `python3 scripts/sync_guides.py --tool TOOL_ID` before regenerating the root README.
 - Run `python3 -m unittest discover -s tests -v` and `python3 scripts/build.py`.
   Preview using `python3 -m http.server 8000 --directory dist`.
 - Do not add a dependency or framework just to maintain the catalogue. Never make

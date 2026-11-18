@@ -124,7 +124,27 @@ project routes are deployed independently and will return 404 on this local serv
 check those at `https://coolcode.ca/<repo>/`. The homepage contains the complete
 catalogue even with JavaScript disabled.
 
-The README briefly documents every catalogue tool using the same metadata.
+Each tool's own README explains how to try it, where inputs come from, what the
+results mean and when the source is refreshed, wherever those details apply.
+When changing the tool, update the affected explanation there. The homepage
+shows the task, one source sentence, and any applicable date and count.
+The catalogue README also includes one practical note from the tool's own guide.
+Wrap one or two plain-text sentences in these markers in that guide:
+
+```markdown
+<!-- coolcode:guide -->
+A missing estimate leaves a gap in the chart. A reported zero stays visible in the CSV.
+<!-- /coolcode:guide -->
+```
+
+After adding the catalogue record or adjusting a guide, run
+`python3 scripts/sync_guides.py --tool my-tool`, then `python3 scripts/sync_readme.py`.
+The first command fills the required cached `readme.note` from the tool's README.
+Older guides use a short sentence prefix in `readme.lead`. Adding the markers
+supersedes the prefix. The six-hour refresh re-reads guides, keeps the last good
+note when a source is unavailable or ambiguous, and flags it for review.
+Local guide changes are checked on pull requests. Builds use the cached notes offline.
+
 `scripts/sync_readme.py` regenerates only its marked browser/install tables; keep
 detailed usage instructions in each tool's own guide. Do not edit the generated
 tables manually.

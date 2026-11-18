@@ -23,6 +23,8 @@ jobs:
           python-version: '3.12'
       - name: Check README tool directory is in sync
         run: python3 scripts/sync_readme.py --check
+      - name: Check catalogue excerpts against the tool guides in this checkout
+        run: python3 scripts/sync_guides.py --local --check
       - name: Test catalogue validation and rendering
         run: python3 -m unittest discover -s tests -v
       - name: Build static site
