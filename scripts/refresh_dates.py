@@ -14,6 +14,7 @@ import sys
 from tempfile import TemporaryDirectory
 from urllib.parse import unquote, urlsplit
 from urllib.request import build_opener, HTTPRedirectHandler, Request
+from xml.etree import ElementTree
 
 
 CATALOGUE = Path(__file__).resolve().parents[1] / 'data' / 'tools.json'
@@ -42,14 +43,34 @@ class AllowedRedirects(HTTPRedirectHandler):
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
-def fetch_json(url):
+def badge_metadata(payload):
+    """Read only the accessible retrieval title from a first-party date image."""
+    try:
+        svg = ElementTree.fromstring(payload)
+    except ElementTree.ParseError as exc:
+        raise ValueError('Invalid date badge XML') from exc
+    namespace = '{http://www.w3.org/2000/svg}'
+    titles = svg.findall(namespace + 'title')
+    if svg.tag != namespace + 'svg' or len(titles) != 1:
+        raise ValueError('Expected one SVG retrieval title')
+    match = re.fullmatch(r'Data retrieved\s+(?:·\s*)?([0-9]{4}-[0-9]{2}-[0-9]{2})',
+                         (titles[0].text or '').strip())
+    if not match:
+        raise ValueError('Unrecognized date badge title')
+    return {'retrieved': date.fromisoformat(match[1]).isoformat()}
+
+
+def fetch_metadata(url):
     check_url(url)
-    request = Request(url, headers={'Accept': 'application/json', 'User-Agent': 'CoolCode catalogue dates/1.0'})
+    is_badge = urlsplit(url).path.endswith('/data-date.svg')
+    limit = 8192 if is_badge else MAX_BYTES
+    media_type = 'image/svg+xml' if is_badge else 'application/json'
+    request = Request(url, headers={'Accept': media_type, 'User-Agent': 'CoolCode catalogue dates/1.0'})
     with build_opener(AllowedRedirects()).open(request, timeout=TIMEOUT) as response:
-        payload = response.read(MAX_BYTES + 1)
-    if len(payload) > MAX_BYTES:
-        raise ValueError(f'JSON exceeds the {MAX_BYTES // 1024**2} MiB limit')
-    return json.loads(payload)
+        payload = response.read(limit + 1)
+    if len(payload) > limit:
+        raise ValueError(f'Metadata exceeds the {limit:,}-byte limit')
+    return badge_metadata(payload) if is_badge else json.loads(payload)
 
 
 def select(document, path):
@@ -119,6 +140,8 @@ def update_probe(probe, document):
             count = select(document, probe['count_at']['path'])
         except (KeyError, TypeError, ValueError):
             count = None
+        if probe['count_at'].get('measure') == 'length':
+            count = len(count) if isinstance(count, list) else None
         if type(count) is int and count >= 0:
             probe['count'] = count
     if notice:
@@ -127,7 +150,7 @@ def update_probe(probe, document):
         probe.pop('notice', None)
 
 
-def refresh(tools, fetch=fetch_json):
+def refresh(tools, fetch=fetch_metadata):
     """Fetch each distinct URL once. Return per-probe warnings; failures retain prior dates."""
     grouped = defaultdict(list)
     for tool in tools:
