@@ -17,11 +17,11 @@ Jump to: [Tools](#find-a-tool) · [Repository map](#where-the-code-lives) ·
 
 ## Find a tool
 
-Every catalogue tool is listed briefly below. These tables are generated from the
-same names, descriptions, categories, links and requirements as the polished
-[homepage](https://coolcode.ca/). Follow **Source & docs** or an installation guide
-for each project's detailed instructions. Update the catalogue once, then regenerate
-these tables; the PR checks reject an out-of-date directory.
+The [homepage](https://coolcode.ca/) shows what each tool does, where its data comes
+from and any published dates or counts. This directory adds a practical detail from
+each tool’s own README. Follow **Source & docs** or the installation guide for the
+full instructions. A scheduled check imports updated guide notes every six hours.
+The [adding and updating guide](docs/adding-tools.md) covers changes to either listing.
 
 ### Use in your browser
 
@@ -30,7 +30,7 @@ A tool that asks you to select a local file is still a browser tool.
 
 <!-- BEGIN BROWSER_TOOLS -->
 
-70 browser tools, grouped as on the homepage.
+71 browser tools, grouped as on the homepage.
 
 #### Homelab &amp; archiving
 
@@ -141,6 +141,7 @@ A tool that asks you to select a local file is still a browser tool.
 | Tool | What it does | Code / documentation |
 | --- | --- | --- |
 | [Event Radar](<https://coolcode.ca/eventradar/>) | Browse local listings and keep selected events on your calendar. <br> On-demand lookup · Has Things supplies Vancouver and Halifax event feeds, and Langley entries link to venue calendars. Import an .ics file to search events locally. | [Source &amp; docs](<https://github.com/jsdyer/eventradar>) |
+| [Atlantic Dial](<https://coolcode.ca/atlanticdial/>) | Find local Atlantic Canadian radio shows, listen through the station and save an upcoming airing to your calendar. <br> Reference collection · The stations publish their weekly airtimes in Atlantic or Newfoundland time, and the guide converts them to your clock. Choose Vancouver or your device time to see when a show airs where you are. Save a favourite for return visits or download one airing to your calendar, including its station link. <br> Scheduled checks: weekly · Schedules reviewed: 2026-11-18 · 13 programmes | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/atlanticdial>) |
 | [Screen Radar](<https://coolcode.ca/screenradar/>) | Find television and Canadian films, and keep a watchlist in this browser. <br> Multiple data sources · TV searches use TVmaze, and the selected Canadian films come from Wikidata. Coverage is selective and year labels refer to initial or festival releases where known. | [Source &amp; docs](<https://github.com/jsdyer/screenradar>) |
 | [Media Echoes](<https://coolcode.ca/mediaechoes/>) | Search the Internet Archive for old games, Flash projects and media. <br> On-demand lookup · Internet Archive returns catalogue records, previews and file lists when you search. View original catalogue information, previews, and file names, then open the source item to see what can be viewed or downloaded. | [Source &amp; docs](<https://github.com/jsdyer/mediaechoes>) |
 | [Ghost Links](<https://coolcode.ca/ghostlinks/>) | Follow dead URLs through web archives and dated captures. <br> Multiple data sources · Reviewed Canadian web-address histories can be explored alongside optional Wayback checks or local imports. Missing captures indicate gaps in the evidence. <br> Source reviewed: 2026-11-16 · 8 address histories | [Source &amp; docs](<https://github.com/jsdyer/ghostlinks>) |
