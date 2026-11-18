@@ -8,6 +8,7 @@ try { preferences = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch 
 const saved = new Set(Array.isArray(preferences.saved) ? preferences.saved : []);
 let selection = "today";
 let data, cache, cacheKey;
+const textFormats = new Map();
 
 function node(tag, text, className) {
   const element = document.createElement(tag);
@@ -32,7 +33,9 @@ function button(text, handler, className = "quiet-button") {
   return control;
 }
 function fmt(ms, timeZone, options) {
-  return new Intl.DateTimeFormat("en-CA", {timeZone, ...options}).format(ms);
+  const key = timeZone + JSON.stringify(options);
+  if (!textFormats.has(key)) textFormats.set(key, new Intl.DateTimeFormat("en-CA", {timeZone, ...options}));
+  return textFormats.get(key).format(ms);
 }
 function dayName(date, options) {
   return fmt(Date.parse(date + "T12:00:00Z"), "UTC", options);
@@ -93,6 +96,7 @@ function renderFeature(rows, now, zone) {
 function airingRow(row, now, zone) {
   const {show, station} = row;
   const article = node("article", undefined, "airing");
+  article.dataset.airing = show.id + "-" + row.start;
   const clock = node("div", undefined, "clock");
   clock.append(node("p", times(row, zone), "time"));
   const home = fmt(row.start, station.zone, {weekday:"short",hour:"numeric",minute:"2-digit",timeZoneName:"short"});
@@ -173,15 +177,28 @@ try {
   const date = dayName(data.reviewed, {month:"short",day:"numeric",year:"numeric"});
   el("edition").textContent = data.shows.length + " programmes · " + Object.keys(data.stations).length + " stations · Schedules reviewed " + date;
   render();
-  // Update the guide on the next minute without interrupting a button or saved-show interaction.
-  let lastMinute = Math.floor(Date.now() / 60000);
-  setInterval(() => {
-    const minute = Math.floor(Date.now() / 60000);
-    if (lastMinute !== minute && !document.hidden && !el("list").contains(document.activeElement)) {
-      lastMinute = minute;
-      render();
+  let lastCheck = Date.now();
+  function refreshAtBoundary() {
+    if (document.hidden) return;
+    const now = Date.now(), zone = el("zone").value;
+    const previous = lastCheck;
+    lastCheck = now;
+    const crossed = time => previous < time && time <= now;
+    if (now >= previous && dateAt(now, zone) === dateAt(previous, zone) &&
+        !cache.some(row => crossed(row.start) || crossed(row.end))) return;
+
+    const active = document.activeElement;
+    const row = active.closest("article.airing");
+    const index = row ? [...row.querySelectorAll("a,button")].indexOf(active) : -1;
+    render();
+    if (index !== -1) {
+      const match = [...el("list").querySelectorAll("article.airing")].find(item => item.dataset.airing === row.dataset.airing);
+      const target = match?.querySelectorAll("a,button")[index] || el("days").querySelector('[aria-pressed="true"]');
+      target.focus({preventScroll: true});
     }
-  }, 10000);
+  }
+  setInterval(refreshAtBoundary, 15000);
+  document.addEventListener("visibilitychange", refreshAtBoundary);
 } catch {
   el("feature").textContent = "The schedule is unavailable.";
   el("summary").textContent = "Use the station links below, or reload to try the guide again.";
