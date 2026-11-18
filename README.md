@@ -17,28 +17,132 @@ Jump to: [Tools](#find-a-tool) · [Repository map](#where-the-code-lives) ·
 
 ## Find a tool
 
+Every catalogue tool is listed briefly below. These tables are generated from the
+same names, descriptions, categories, links and requirements as the polished
+[homepage](https://coolcode.ca/). Follow **Source & docs** or an installation guide
+for each project's detailed instructions. Update the catalogue once, then regenerate
+these tables; the PR checks reject an out-of-date directory.
+
 ### Use in your browser
 
 These tools open immediately without installing a server or command-line program.
 A tool that asks you to select a local file is still a browser tool.
 
-| Tool | What you can do | Source |
-| --- | --- | --- |
-| [Packet Detour](https://coolcode.ca/packet-detour/) | Explore Canadian routing examples and inspect your own annotated hops. | [Included here](packet-detour/README.md) |
-| [Protocol Cabinet](https://coolcode.ca/protocol-cabinet/) | Step through DNS, HTTP and SMTP exchanges. | [Included here](protocol-cabinet/README.md) |
-| [Rack Recipes](https://coolcode.ca/rack-recipes/) | Plan a home server stack and export a Docker Compose starter. | [Included here](rack-recipes/README.md) |
-| [Archive Shelf demo](https://coolcode.ca/archive-shelf/) | Search a fictional newsletter; an installable version is available below. | [Browser files](archive-shelf/) |
-| [DNS Lens](https://coolcode.ca/dnslens/) | Inspect DNS and mail policies. | [Separate repository](https://github.com/jsdyer/dnslens) |
-| [Government Memory Map](https://coolcode.ca/governmentmemory/) | Find record classes and personal information banks to reference in an access request. | [Separate repository](https://github.com/jsdyer/governmentmemory) |
-| [Shipwreck Explorer](https://coolcode.ca/shipwrecks/) | Search Nova Scotia wrecks by area, vessel and date. | [Separate repository](https://github.com/jsdyer/shipwrecks) |
-| [BC Place Names Explorer](https://coolcode.ca/bcplacenames/) | Find nearby BC names, compare official and other recorded names, inspect naming decisions, and export results. | [Separate repository](https://github.com/jsdyer/bcplacenames) |
-| [Hidden Water](https://coolcode.ca/hiddenwater/) | Explore Langley creeks, drainage channels and mapped culverts. | [Separate repository](https://github.com/jsdyer/hiddenwater) |
-| [Halifax Time Lens](https://coolcode.ca/halifaxtimelens/) | Compare Halifax aerial photographs from 1947 and 1977 with a modern street map. | [Separate repository](https://github.com/jsdyer/halifaxtimelens) |
-| [Langley Changes](https://coolcode.ca/langleychanges/) | Explore City and Township development applications, documents and changes over time. | [Separate repository](https://github.com/jsdyer/langleychanges) |
+<!-- BEGIN BROWSER_TOOLS -->
 
-This table is a starting selection. Use the [homepage](https://coolcode.ca/) for the
-full searchable directory, including security, government, outdoors, astronomy,
-finance and media tools.
+65 browser tools, grouped as on the homepage.
+
+#### Homelab &amp; archiving
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [Rack Recipes](<https://coolcode.ca/rack-recipes/>) | Plan a home server stack and export a Docker Compose starter. | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/rack-recipes>) |
+| [Archive Shelf](<https://coolcode.ca/archive-shelf/>) | Search historical newsletters by page or index a private collection on Linux. | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/archive-shelf>) |
+
+#### Networks &amp; routing
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [DNS Lens](<https://coolcode.ca/dnslens/>) | Compare public resolvers and inspect DNS records, mail policies and registration. | [Source &amp; docs](<https://github.com/jsdyer/dnslens>) |
+| [IP Snapshot](<https://coolcode.ca/ipsnapshot/>) | See ports, hostnames and vulnerability identifiers from passive InternetDB observations. | [Source &amp; docs](<https://github.com/jsdyer/ipsnapshot>) |
+| [Certificate Trail](<https://coolcode.ca/certtrail/>) | Trace issued certificates, names, issuers and dates across certificate transparency logs. | [Source &amp; docs](<https://github.com/jsdyer/certtrail>) |
+| [Route Archaeologist](<https://coolcode.ca/routearchaeologist/>) | Trace observed BGP origins by IP prefix or ASN. | [Source &amp; docs](<https://github.com/jsdyer/routearchaeologist>) |
+| [RPKI Guard](<https://coolcode.ca/rpkiguard/>) | Check whether a route origin ASN and prefix are authorized by published ROAs. | [Source &amp; docs](<https://github.com/jsdyer/rpkiguard>) |
+| [Outage Scope](<https://coolcode.ca/outagescope/>) | Explore network disruptions and compare the measurement signals behind them. | [Source &amp; docs](<https://github.com/jsdyer/outagescope>) |
+| [Broadband Atlas](<https://coolcode.ca/broadbandatlas/>) | Explore reported coverage, funding and nearby radio licences, with provincial plan prices. | [Source &amp; docs](<https://github.com/jsdyer/broadbandatlas>) |
+| [Telecom Pulse](<https://coolcode.ca/telecompulse/>) | Compare the CRTC’s published telecommunications indicators over time. | [Source &amp; docs](<https://github.com/jsdyer/telecompulse>) |
+| [Onion Pulse](<https://coolcode.ca/onionpulse/>) | Compare Tor user, relay, bridge and onion-service measurements. | [Source &amp; docs](<https://github.com/jsdyer/onionpulse>) |
+| [Blocked or Gone?](<https://coolcode.ca/blockedorgone/>) | Investigate interference and test coverage in public OONI measurements. | [Source &amp; docs](<https://github.com/jsdyer/blockedorgone>) |
+| [Packet Detour](<https://coolcode.ca/packet-detour/>) | Follow a Canadian route through Seattle or paste your own annotated hops. | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/packet-detour>) |
+| [Protocol Cabinet](<https://coolcode.ca/protocol-cabinet/>) | Read the messages sent in a DNS lookup, HTTP request, or SMTP conversation. | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/protocol-cabinet>) |
+
+#### Security &amp; forensics
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [Tracker X-Ray](<https://coolcode.ca/trackerxray/>) | Inspect HAR captures for third-party requests, cookies and analytics hosts. | [Source &amp; docs](<https://github.com/jsdyer/trackerxray>) |
+| [Header Autopsy](<https://coolcode.ca/headerautopsy/>) | Read HTTP header values and inspect security policy, cookies and cache signals. | [Source &amp; docs](<https://github.com/jsdyer/headerautopsy>) |
+| [Mail Path](<https://coolcode.ca/mailpath/>) | Reconstruct received-email hops and the authentication results each server reported. | [Source &amp; docs](<https://github.com/jsdyer/mailpath>) |
+| [Packet Pocket](<https://coolcode.ca/packetpocket/>) | Examine local packet captures for conversations, DNS, HTTP and observable TLS data. | [Source &amp; docs](<https://github.com/jsdyer/packetpocket>) |
+| [Dependency X-Ray](<https://coolcode.ca/dependencyxray/>) | Inspect dependency lockfiles and query advisories for selected packages. | [Source &amp; docs](<https://github.com/jsdyer/dependencyxray>) |
+| [Exploit Graveyard](<https://coolcode.ca/exploitgraveyard/>) | Search CISA’s catalogue of known exploited vulnerabilities by product or CVE. | [Source &amp; docs](<https://github.com/jsdyer/exploitgraveyard>) |
+| [Patch Signal](<https://coolcode.ca/patchsignal/>) | Look up CVEs and compare reported exploitation, EPSS estimates and advisories. | [Source &amp; docs](<https://github.com/jsdyer/patchsignal>) |
+
+#### Government &amp; public records
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [ATIP Records Explorer](<https://coolcode.ca/atip/>) | Find released records, request copies, or draft an access request. | [Source &amp; docs](<https://github.com/jsdyer/atip>) |
+| [Government Memory Map](<https://coolcode.ca/governmentmemory/>) | Find record classes and personal information banks to reference in an access request. | [Source &amp; docs](<https://github.com/jsdyer/governmentmemory>) |
+| [The Briefing Room](<https://coolcode.ca/briefings/>) | Search briefing note titles and reference numbers. | [Source &amp; docs](<https://github.com/jsdyer/briefings>) |
+| [Evidence Lab](<https://coolcode.ca/evidencelab/>) | Search disclosure PDFs, find dates and section references, and save page citations. | [Source &amp; docs](<https://github.com/jsdyer/evidencelab>) |
+| [The ATIP Popularity Index](<https://coolcode.ca/atippopularity/>) | See which released records received the most informal copy requests. | [Source &amp; docs](<https://github.com/jsdyer/atippopularity>) |
+| [ATIP Metrics](<https://coolcode.ca/atipmetrics/>) | Compare institutional workloads, find related records and briefing notes, and build a request draft. | [Source &amp; docs](<https://github.com/jsdyer/atipmetrics>) |
+| [What the Minister Was Prepared to Say](<https://coolcode.ca/ministersays/>) | Compare Question Period notes and the issues they address. | [Source &amp; docs](<https://github.com/jsdyer/ministersays>) |
+| [The Government’s Wrongdoing Files](<https://coolcode.ca/wrongdoings/>) | Read published findings, recommendations and corrective actions. | [Source &amp; docs](<https://github.com/jsdyer/wrongdoings>) |
+| [Algorithm Watch](<https://coolcode.ca/algorithmwatch/>) | Explore the federal AI register and find matched impact assessments. | [Source &amp; docs](<https://github.com/jsdyer/algorithmwatch>) |
+| [The Government Dataset Explorer](<https://coolcode.ca/datasetexplorer/>) | Find federal datasets and their downloadable files. | [Source &amp; docs](<https://github.com/jsdyer/datasetexplorer>) |
+| [The Open Data Graveyard](<https://coolcode.ca/opendatagraveyard/>) | Investigate datasets removed from the federal catalogue. | [Source &amp; docs](<https://github.com/jsdyer/opendatagraveyard>) |
+| [Canada.ca Pulse](<https://coolcode.ca/canadaanalytics/>) | Explore recent patterns in federal government website usage. | [Source &amp; docs](<https://github.com/jsdyer/canadaanalytics>) |
+
+#### Public disclosures
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [Corporate Ghosts](<https://coolcode.ca/corporateghosts/>) | Search Canada’s federal corporate register and compare legal statuses. | [Source &amp; docs](<https://github.com/jsdyer/corporateghosts>) |
+| [Lobby Trail](<https://coolcode.ca/lobbytrail/>) | Explore reported federal lobbying communications by organization, subject and institution. | [Source &amp; docs](<https://github.com/jsdyer/lobbytrail>) |
+| [Charity Flows](<https://coolcode.ca/charityflows/>) | Compare Canadian charity filings and explore grants to reported recipients. | [Source &amp; docs](<https://github.com/jsdyer/charityflows>) |
+| [Tariff X-Ray](<https://coolcode.ca/tariffxray/>) | Find Canadian telecom tariff items and the regulatory decisions behind them. | [Source &amp; docs](<https://github.com/jsdyer/tariffxray>) |
+| [Gear Autopsy](<https://coolcode.ca/gearautopsy/>) | Find device filings and public FCC exhibits by model or FCC ID. | [Source &amp; docs](<https://github.com/jsdyer/gearautopsy>) |
+| [Recall Radar](<https://coolcode.ca/recallradar/>) | Search Canadian safety alerts and check affected vehicle makes, models and years. | [Source &amp; docs](<https://github.com/jsdyer/recallradar>) |
+| [Patent Attic](<https://coolcode.ca/patentattic/>) | Search Canadian technology patents and open original CIPO records. | [Source &amp; docs](<https://github.com/jsdyer/patentattic>) |
+
+#### Maps, trails &amp; history
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [Trailglass](<https://coolcode.ca/trailglass/>) | Explore cycling and trail layers and inspect a Garmin GPX ride. | [Source &amp; docs](<https://github.com/jsdyer/trailglass>) |
+| [Weather Archive](<https://coolcode.ca/weatherarchive/>) | Compare daily Canadian weather station records and monthly climate normals. | [Source &amp; docs](<https://github.com/jsdyer/weatherarchive>) |
+| [Spectrum Atlas](<https://coolcode.ca/spectrumatlas/>) | Map published spectrum authorizations and inspect bands and frequencies. | [Source &amp; docs](<https://github.com/jsdyer/spectrumatlas>) |
+| [Shipwreck Explorer](<https://coolcode.ca/shipwrecks/>) | Search Nova Scotia wrecks by area, vessel and date. | [Source &amp; docs](<https://github.com/jsdyer/shipwrecks>) |
+| [Forgotten Places](<https://coolcode.ca/forgottenplaces/>) | Explore sites in Canada’s historic places register. | [Source &amp; docs](<https://github.com/jsdyer/forgottenplaces>) |
+| [Names That Time Forgot](<https://coolcode.ca/namesforget/>) | Trace Canadian place names, features and their locations. | [Source &amp; docs](<https://github.com/jsdyer/namesforget>) |
+| [BC Place Names Explorer](<https://coolcode.ca/bcplacenames/>) | Explore nearby BC place names, official and recorded names, and naming decisions. | [Source &amp; docs](<https://github.com/jsdyer/bcplacenames>) |
+| [Hidden Water](<https://coolcode.ca/hiddenwater/>) | Explore Langley creeks, drainage channels and mapped culverts. | [Source &amp; docs](<https://github.com/jsdyer/hiddenwater>) |
+| [Halifax Time Lens](<https://coolcode.ca/halifaxtimelens/>) | Compare Halifax aerial photographs from 1947 and 1977 with a modern street map. | [Source &amp; docs](<https://github.com/jsdyer/halifaxtimelens>) |
+| [Langley Changes](<https://coolcode.ca/langleychanges/>) | Explore City and Township development applications, documents and changes over time. | [Source &amp; docs](<https://github.com/jsdyer/langleychanges>) |
+| [Strange Skies Canada](<https://coolcode.ca/strangeskies/>) | Search aviation occurrence reports by location, year and event. | [Source &amp; docs](<https://github.com/jsdyer/strangeskies>) |
+
+#### Sky &amp; photography
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [Nightfinder](<https://coolcode.ca/nightfinder/>) | Plan a night shoot around darkness, target positions and lens framing. | [Source &amp; docs](<https://github.com/jsdyer/nightfinder>) |
+| [Satellite Pass](<https://coolcode.ca/satpasses/>) | Calculate passes for the ISS and other satellites from your location. | [Source &amp; docs](<https://github.com/jsdyer/satpasses>) |
+| [Sky Archive Explorer](<https://coolcode.ca/skyarchive/>) | Find selected Hubble and Webb observations and open the original archive records. | [Source &amp; docs](<https://github.com/jsdyer/skyarchive>) |
+| [Photo Lab](<https://coolcode.ca/photolab/>) | Inspect metadata, edit photos and export cleaned copies on your device. | [Source &amp; docs](<https://github.com/jsdyer/photolab>) |
+
+#### Money &amp; markets
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [BankRate Lab](<https://coolcode.ca/bankrates/>) | Chart Bank of Canada rates, exchange rates and yields. | [Source &amp; docs](<https://github.com/jsdyer/bankrates>) |
+| [Canadian Price Atlas](<https://coolcode.ca/priceatlas/>) | Compare historical grocery prices across Canadian regions. | [Source &amp; docs](<https://github.com/jsdyer/priceatlas>) |
+| [Insolvency Atlas](<https://coolcode.ca/insolvencyatlas/>) | Explore insolvency counts and rates, or compare filings with grocery prices and policy rates. | [Source &amp; docs](<https://github.com/jsdyer/insolvencyatlas>) |
+| [Market Shadows](<https://coolcode.ca/marketshadows/>) | Compare CIRO trading and short positions and rank changes between reports. | [Source &amp; docs](<https://github.com/jsdyer/marketshadows>) |
+
+#### Media, events &amp; the old web
+
+| Tool | What it does | Code / documentation |
+| --- | --- | --- |
+| [Event Radar](<https://coolcode.ca/eventradar/>) | Browse local listings and keep selected events on your calendar. | [Source &amp; docs](<https://github.com/jsdyer/eventradar>) |
+| [Screen Radar](<https://coolcode.ca/screenradar/>) | Find television and Canadian films, and keep a watchlist in this browser. | [Source &amp; docs](<https://github.com/jsdyer/screenradar>) |
+| [Media Echoes](<https://coolcode.ca/mediaechoes/>) | Search the Internet Archive for old games, Flash projects and media. | [Source &amp; docs](<https://github.com/jsdyer/mediaechoes>) |
+| [Ghost Links](<https://coolcode.ca/ghostlinks/>) | Follow dead URLs through web archives and dated captures. | [Source &amp; docs](<https://github.com/jsdyer/ghostlinks>) |
+| [Lost Code](<https://coolcode.ca/lostcode/>) | Look up archived repository visits, branches and tags. | [Source &amp; docs](<https://github.com/jsdyer/lostcode>) |
+| [The Unreleased Worlds Index](<https://coolcode.ca/unreleased/>) | Search a Canada Media Fund export for funded games, films and digital projects. | [Source &amp; docs](<https://github.com/jsdyer/unreleased>) |
+
+<!-- END BROWSER_TOOLS -->
 
 ### Install yourself
 
@@ -46,15 +150,21 @@ These projects need software on your computer, NAS or server. Their names below
 open installation instructions. A web interface does not necessarily mean a
 publicly hosted tool: Timefold and Switchboard run on the machine where you install them.
 
-| Project | What you can do | Requirements / way to run |
-| --- | --- | --- |
-| [Archive Shelf](tools/archive-shelf/README.md) | Search newsletters and meeting minutes by page and open the original PDF at the passage you found. | Python 3, SQLite FTS5 and Poppler for PDFs |
-| [Waystation](tools/waystation/README.md) | Capture websites into verifiable capsules, compare changes and replay them offline. | One downloadable Go executable for Linux, macOS or Windows |
-| [Timefold](tools/timefold/README.md) | Browse a private archive of photographs, notes, game saves and web fragments. | Docker Compose, or PHP 8.2+ with Apache and MySQL/MariaDB; optional SQLite demo |
-| [Tape Index](tools/tape-index/README.md) | Verify a collection of files against a SHA-256 manifest. | Python 3 |
-| [Switchboard](tools/switchboard/README.md) | Serve a LAN start page linking to your NAS and other services. | PHP 8+ |
-| [Vhost Logbook](tools/logbook/README.md) | Summarize Apache requests, status codes and traffic. | PHP CLI 8+ |
-| [LANWatch](tools/lanwatch/README.md) | Check chosen hosts and keep their availability history. | Python 3, SQLite and Linux `ping` |
+<!-- BEGIN INSTALL_TOOLS -->
+
+7 installation options. Tools with both versions also appear above.
+
+| Project / installation guide | What it does | Requirements | Code / documentation |
+| --- | --- | --- | --- |
+| [Switchboard](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard>) | Build a local front door for your NAS, DNS console and other services. | PHP 8+ | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/switchboard>) |
+| [Vhost Logbook](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook>) | Summarize requests, status codes and traffic from Apache access logs. | PHP CLI 8+ | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/logbook>) |
+| [LANWatch](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch>) | Ping your devices and keep a local history of when they were reachable. | Python 3, SQLite and Linux ping | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/lanwatch>) |
+| [Archive Shelf](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/archive-shelf>) | Search historical newsletters by page or index a private collection on Linux. | Python 3, SQLite FTS5 and Poppler for PDFs | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/archive-shelf>) |
+| [Waystation](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation>) | Capture websites into portable archives, map links and browse offline. | Downloadable executable for Linux, macOS or Windows | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation>) |
+| [Timefold](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold>) | Build a personal timeline of photos, game saves and web fragments. | PHP 8.2+ and MySQL/MariaDB; optional SQLite demo | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold>) |
+| [Tape Index](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index>) | Fingerprint and verify scans, web archives and game saves from the terminal. | Python 3 | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/tape-index>) |
+
+<!-- END INSTALL_TOOLS -->
 
 GitHub Pages serves static files; it does not execute these PHP, Python or Go apps.
 Downloading their source is separate from installing and starting them.
@@ -84,6 +194,7 @@ and has an [RSS feed](https://coolcode.ca/field-notes/feed.xml).
 | [templates/index.html](templates/index.html) | Homepage layout and featured editorial cards |
 | [assets/](assets/) | Shared site styles, icons and browser scripts |
 | [scripts/build.py](scripts/build.py) | Validates the listings and generates the static site |
+| [scripts/sync_readme.py](scripts/sync_readme.py) | Regenerates the README tool tables from the same catalogue; `--check` detects drift |
 | `dist/` | Generated site output; do not edit or commit it |
 | `packet-detour/`, `protocol-cabinet/`, `rack-recipes/`, `archive-shelf/` | Browser tools included in this repository |
 | [tools/](tools/) | Installable projects, their source, examples and guides |
@@ -115,6 +226,7 @@ installation-required projects have their own section.
 From the repository root, with Git and Python 3 available:
 
 ```sh
+python3 scripts/sync_readme.py
 python3 -m unittest discover -s tests -v
 python3 scripts/build.py
 python3 -m http.server 8000 --bind 127.0.0.1 --directory dist
@@ -125,13 +237,16 @@ anything. Open separate project tools at their `https://coolcode.ca/` addresses.
 PHP and Docker are not needed to build this static homepage.
 
 When a pull request (PR) is opened or updated, [pages.yml](.github/workflows/pages.yml)
-validates the listings, builds the site and checks it in a browser. A PR is a proposed
+checks that this README matches the listings, builds the site and checks it in a browser.
+A PR is a proposed
 change on a separate branch; it does not change the live homepage. Its `deploy` job
 is deliberately **skipped**. The run saves `catalogue-preview` (the generated files)
 and `catalogue-browser-checks` (screenshots) as downloadable Actions artifacts.
 
-After a merge into `main`, the workflow runs again and publishes `dist/` to GitHub
-Pages if the build and checks succeed. Follow progress in the
+After a merge into `main`, GitHub shows the new README immediately. The workflow
+then runs again and publishes `dist/` to GitHub Pages if the build and checks succeed.
+The homepage can therefore appear later than the README; it may also need a browser
+refresh after publication. Follow progress in the
 [Actions tab](https://github.com/jsdyer/jsdyer.github.io/actions).
 The [Pages rollout guide](docs/pages-rollout.md) records the publishing setup.
 
@@ -156,7 +271,7 @@ an app and making requests to it.
 
 | Workflow | When it runs / what it does |
 | --- | --- |
-| [Catalogue · Check and publish](.github/workflows/pages.yml) | PRs and changes on `main`: validates metadata, builds the homepage and tests search/access filters in a browser. Publishes only from `main`. |
+| [Catalogue · Check and publish](.github/workflows/pages.yml) | PRs and changes on `main`: checks README/catalogue agreement, validates metadata, builds the homepage and tests search/access filters in a browser. Publishes only from `main`. |
 | [Timefold · Check the archive](.github/workflows/checks.yml) | Changes to Timefold, `.devcontainer/` or this workflow: PHP 8.2/8.3/8.5 with SQLite, PHP 8.3/8.5 with MariaDB 11, and Docker build-and-smoke tests for both the Apache app and development images. |
 | [Waystation · Test and package](.github/workflows/waystation.yml) | Relevant Waystation changes: tests on Linux and Windows and builds portable downloads. Eligible main/tag pushes publish a release when its version is not already released. |
 | [Pack a Timefold release](.github/workflows/release.yml) | A `timefold-v*` tag or manual run: tests and packages source with a checksum. A matching tag publishes a GitHub release. |
@@ -242,7 +357,9 @@ is required for browsing CoolCode or building its homepage. See the
 3. Add one record to `data/tools.json`. Set `access: "browser"` for immediate use or
    `access: "install"` with `requirements` for installation. Archive Shelf demonstrates
    a browser tool with an additional `install_url` for its installable version.
-4. Run the homepage tests and build above, review the result, and open a PR.
+4. Run `python3 scripts/sync_readme.py`, then the homepage tests and build above.
+   Review and commit the regenerated `README.md` alongside the catalogue changes
+   in the same PR. Do not edit the generated tool tables by hand.
 
 `hosting` describes the destination: `local` means files included in this repository,
 `project` means a separate GitHub Pages project, and `external` means an explicit HTTPS

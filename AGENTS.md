@@ -17,6 +17,9 @@
   uploads as installation or replace the clear access label with a language name.
 - Use existing icons from `assets/coolcode.css` and category IDs. Tool IDs and public
   routes must be unique. Do not create a local directory over a project site's route.
+- After catalogue edits, run `python3 scripts/sync_readme.py` and commit the updated
+  `README.md` with the metadata. The marked tool tables are generated; do not edit
+  them by hand. CI checks they match the catalogue. Keep detailed tool guides separate.
 - Run `python3 -m unittest discover -s tests -v` and `python3 scripts/build.py`.
   Preview using `python3 -m http.server 8000 --directory dist`.
 - Do not add a dependency or framework just to maintain the catalogue. Never make

@@ -63,6 +63,7 @@ the route of a separately published project. For `external`, supply an HTTPS URL
 such as the installation guide for a command-line application.
 
 ```sh
+python3 scripts/sync_readme.py
 python3 -m unittest discover -s tests -v
 python3 scripts/build.py
 python3 -m http.server 8000 --directory dist
@@ -73,8 +74,15 @@ project routes are deployed independently and will return 404 on this local serv
 check those at `https://coolcode.ca/<repo>/`. The homepage contains the complete
 catalogue even with JavaScript disabled.
 
-Commit the metadata and any actual source changes; never commit `dist/` or edit a
-generated homepage. PR checks validate and build the site. Only `main` publishes.
+The README briefly documents every catalogue tool using the same metadata.
+`scripts/sync_readme.py` regenerates only its marked browser/install tables; keep
+detailed usage instructions in each tool's own guide. Do not edit the generated
+tables manually.
+
+Commit the metadata, regenerated `README.md` and any actual source changes together;
+never commit `dist/` or edit a generated homepage. PR checks run
+`python3 scripts/sync_readme.py --check` and reject missing or stale README entries
+before building the site. Only `main` publishes.
 Changing an existing standalone app does not require updating the catalogue unless
 its title, description, destination or other listing metadata changes.
 
