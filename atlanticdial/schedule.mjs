@@ -1,7 +1,21 @@
 const dayMs = 86_400_000;
 const formatters = new Map();
+const pacificCutover = Date.parse("2026-03-08T10:00:00Z");
+const oldPacificRules = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "America/Vancouver", hour: "2-digit", hourCycle: "h23"
+}).format(Date.parse("2026-11-18T12:00:00Z")) !== "05";
+
+// BC moved to year-round UTC−7 in March 2026. Some otherwise modern browsers
+// still carry the previous winter rule. Keep historical dates and newer tzdata.
+export function zoneAt(instant, zone) {
+  if (oldPacificRules && (zone === "America/Vancouver" || zone === "Canada/Pacific") && instant >= pacificCutover) {
+    return "Etc/GMT+7";
+  }
+  return zone;
+}
 
 function civilParts(instant, zone) {
+  zone = zoneAt(instant, zone);
   if (!formatters.has(zone)) {
     formatters.set(zone, new Intl.DateTimeFormat("en-CA", {
       timeZone: zone, calendar: "gregory", numberingSystem: "latn", hourCycle: "h23",

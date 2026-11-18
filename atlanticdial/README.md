@@ -18,6 +18,8 @@ Airings are calculated for the listener's next seven calendar days using IANA ti
 
 ## Maintaining the guide
 
+Vancouver uses UTC−7 throughout the year following B.C.'s March 2026 clock change. The guide checks the browser's Vancouver rule and corrects older time-zone data for dates after the change. [B.C. time policy](https://www2.gov.bc.ca/gov/content/governments/celebrating-british-columbia/daylight-saving-time)
+
 Check a show's title, day, start and end against its official schedule. Verify that the listening link opens the station's own player or the page that hosts it. Edit the existing show ID when a programme moves so saved favourites continue to work. Set the review date after checking the edition, and revise this README when coverage or interpretation changes. The page computes the programme and its time from the published weekly schedule each time it opens.
 
 The shared weekly catalogue audit checks source text for the listed slots and flags changed or unavailable pages. A successful check leaves the editorial review date intact. When a schedule changes, update its time and the adjacent source evidence in the same edit.

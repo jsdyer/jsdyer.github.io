@@ -24,8 +24,9 @@ def check_atlantic_dial(browser, url, screenshots):
     page.get_by_role("button", name="Show all seven days").wait_for()
     page.screenshot(path=str(screenshots / "atlantic-dial-desktop.png"))
     page.get_by_label("Province", exact=True).select_option("PEI")
-    page.get_by_label("Show times in").select_option("America/St_Johns")
     row = page.locator("article.airing").filter(has_text="Saturday Night Hoedown").first
+    assert "3:00" in row.locator(".time").inner_text()
+    page.get_by_label("Show times in").select_option("America/St_Johns")
     assert "6:30" in row.locator(".time").inner_text()
     row.get_by_role("button", name="Save show Saturday Night Hoedown").click()
     page.get_by_label("Saved shows", exact=True).check()

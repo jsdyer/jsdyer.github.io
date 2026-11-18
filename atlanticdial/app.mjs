@@ -1,4 +1,4 @@
-import {dateAt, dayAfter, week, onDate, ical} from "./schedule.mjs";
+import {dateAt, dayAfter, week, onDate, ical, zoneAt} from "./schedule.mjs";
 
 const el = id => document.getElementById(id);
 const storageKey = "coolcode:atlanticdial:preferences";
@@ -33,6 +33,7 @@ function button(text, handler, className = "quiet-button") {
   return control;
 }
 function fmt(ms, timeZone, options) {
+  timeZone = zoneAt(ms, timeZone);
   const key = timeZone + JSON.stringify(options);
   if (!textFormats.has(key)) textFormats.set(key, new Intl.DateTimeFormat("en-CA", {timeZone, ...options}));
   return textFormats.get(key).format(ms);

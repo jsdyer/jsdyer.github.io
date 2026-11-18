@@ -26,6 +26,11 @@ test("Atlantic, Newfoundland and DST offsets use the station's calendar", () => 
   assert.equal(instantAt("2026-03-08","02:30","America/Halifax"), null);
   assert.equal(instantAt("2026-11-01","01:30","America/Halifax"), Date.parse("2026-11-01T04:30Z"));
 });
+test("Vancouver stays at UTC−7 in winter after BC's 2026 change", () => {
+  assert.equal(instantAt("2026-11-21","15:00","America/Vancouver"), Date.parse("2026-11-21T22:00:00Z"));
+  assert.equal(instantAt("2025-11-21","14:00","America/Vancouver"), Date.parse("2025-11-21T22:00:00Z"));
+  assert.equal(dateAt(Date.parse("2026-11-21T07:30:00Z"),"America/Vancouver"),"2026-11-21");
+});
 test("the Saturday Cabin Party stays in the guide early on Sunday until its end", () => {
   const now = Date.parse("2026-11-22T04:00Z");
   const row = week(data, now, "America/St_Johns").find(a => a.show.id === "cabin" && a.start <= now && a.end > now);
