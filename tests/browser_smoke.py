@@ -35,6 +35,20 @@ def main():
             assert page.locator('#tool-count').inner_text() == f'{len(tools)} tools available'
             assert page.locator('#browser-tools [data-access="install"]').count() == 0
             assert page.locator('#install [data-access="browser"]').count() == 0
+            storm = page.locator('[data-tool-id="stormtracks"]')
+            summary = storm.locator("summary")
+            assert storm.locator(".tool-source").is_visible()
+            assert "storm tracks" in storm.locator(".tool-dates").inner_text()
+            assert storm.locator(".tool-dates time").is_visible()
+            assert not storm.locator("dl").is_visible()
+            storm.screenshot(path=str(screenshots / "storm-tracks.png"))
+            summary.focus()
+            summary.press("Enter")
+            assert storm.get_by_text("Seasons", exact=True).is_visible()
+            assert storm.get_by_text("Scheduled checks", exact=True).is_visible()
+            summary.press("Space")
+            assert not storm.locator("dl").is_visible()
+            assert not page.locator('[data-tool-id="datasetdiff"] .tool-dates').count()
             page.get_by_role('button', name='Install yourself', exact=True).click()
             assert page.locator('[data-tool]:visible').count() == install_count
             assert not page.locator('#browser-tools').is_visible()
@@ -62,7 +76,11 @@ def main():
             page.locator("#theme").click()
             page.screenshot(path=str(screenshots / "desktop.png"), full_page=True)
             page.set_viewport_size({"width": 390, "height": 844})
+            summary.click()
+            assert storm.get_by_text("Seasons", exact=True).is_visible()
             assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+            storm.screenshot(path=str(screenshots / "storm-tracks-mobile-details.png"))
+            summary.click()
             page.locator("#workbench").scroll_into_view_if_needed()
             page.screenshot(path=str(screenshots / "mobile.png"))
             page.get_by_role('button', name='Install yourself', exact=True).click()
@@ -80,6 +98,8 @@ def main():
             assert nojs.locator("[data-tool]:visible").count() == entries
             assert nojs.locator('#browser-tools').is_visible()
             assert nojs.locator('#install').is_visible()
+            nojs.locator('[data-tool-id="stormtracks"] summary').click()
+            assert nojs.locator('[data-tool-id="stormtracks"] dl').is_visible()
             context.close()
             assert not errors, errors
             browser.close()

@@ -69,13 +69,32 @@ class CatalogueTests(unittest.TestCase):
                         "notice": "Serving bundled data", "count_at": {"unit": "records"}, "count": 0}]
         })
         from sync_readme import describe
-        for summary in [render_entry(tool, "browser"), describe(tool, "browser")]:
-            for fact in ["Scheduled checks: monthly", "Data through: 2026-09", "0 records",
-                         "Serving bundled data", "last verified value shown"]:
-                self.assertIn(fact, summary)
+        html = render_entry(tool, "browser")
+        visible, extra = html.split('<details ', 1)
+        for fact in ["Data through 2026-09", "0 records", "Serving bundled data", "last verified value shown"]:
+            self.assertIn(fact, visible)
+        self.assertIn('<dt>Scheduled checks</dt><dd>Monthly</dd>', extra)
+        for fact in ["Scheduled checks: monthly", "Data through: 2026-09", "0 records", "Serving bundled data"]:
+            self.assertIn(fact, describe(tool, "browser"))
         tool["data_info"] = {"mode": "live", "detail": "Requested on use"}
         self.assertIn("On-demand lookup", render_entry(tool, "browser"))
+        self.assertNotIn("<details", render_entry(tool, "browser"))
         self.assertNotIn("Data retrieved", describe(tool, "browser"))
+
+    def test_compact_dates_keep_their_meaning_and_precision(self):
+        tool = dict(self.tools[0], data_info={"mode": "snapshot", "detail": "A & B", "probes": [
+            {"label": "Oldest source retrieved", "value": "2026-11-18 04:02 UTC"},
+            {"label": "Seasons", "value": "1851–2025", "count": 2, "count_at": {"unit": "tracks"}}
+        ]})
+        visible, extra = render_entry(tool, "browser").split('<details ', 1)
+        self.assertIn('A &amp; B', visible)
+        self.assertIn('Oldest source retrieved <time datetime="2026-11-18T04:02Z">Nov 18, 2026, 04:02 UTC</time>', visible)
+        self.assertIn('2 tracks', visible)
+        self.assertNotIn('1851', visible)
+        self.assertIn('<dt>Seasons</dt><dd>1851–2025</dd>', extra)
+        probe = tool["data_info"]["probes"][0]
+        probe.update(label="Snapshot generated", value=None)
+        self.assertIn('Snapshot built unrecorded', render_entry(tool, "browser"))
 
     def test_dual_version_links_to_two_destinations(self):
         archive = next(t for t in self.tools if t["id"] == "archive-shelf")

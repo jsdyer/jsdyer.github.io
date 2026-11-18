@@ -106,8 +106,8 @@
     "requirements": "Python 3, SQLite FTS5 and Poppler for PDFs",
     "data_info": {
       "mode": "reference",
-      "detail": "The browser demo contains a three-page fictional newsletter. The Linux edition indexes your own PDFs.",
-      "install_detail": "Indexes your own PDF newsletters in a local SQLite database."
+      "detail": "The browser edition uses a three-page fictional newsletter to demonstrate the archive.",
+      "install_detail": "The Linux edition indexes your own PDF newsletters in a local SQLite database."
     }
   },
   {
@@ -151,7 +151,7 @@
     "requirements": "PHP 8.2+ and MySQL/MariaDB; optional SQLite demo",
     "data_info": {
       "mode": "installed",
-      "detail": "Your private collection supplies the timeline. A fictional collection is included."
+      "detail": "The timeline uses your own collection or the fictional collection included with the tool."
     }
   },
   {
@@ -174,7 +174,7 @@
     "requirements": "Python 3",
     "data_info": {
       "mode": "installed",
-      "detail": "Your files supply the SHA-256 catalogue and verification results."
+      "detail": "The index records a SHA-256 checksum for each file you choose so you can verify it later."
     }
   },
   {
@@ -197,7 +197,7 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "DNS-over-HTTPS and RDAP responses are requested when you run a lookup."
+      "detail": "Each lookup requests current DNS records and domain registration data from public services."
     }
   },
   {
@@ -221,7 +221,7 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Shodan InternetDB is queried for one public IP. Observation dates are unavailable."
+      "detail": "Shodan InternetDB returns observations for one public IP without observation dates."
     }
   },
   {
@@ -244,7 +244,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Query crt.sh on demand or import certificate records from a JSON file."
+      "detail": "Certificate records come from a live crt.sh search or a JSON file you import."
     }
   },
   {
@@ -342,7 +342,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "ISED broadband coverage and funding layers by province and territory.",
+      "detail": "ISED maps broadband coverage and funded projects across Canada’s provinces and territories.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -394,7 +394,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CRTC coverage by census area and prices by province and survey market.",
+      "detail": "CRTC survey data show coverage by census area and prices by province and survey market.",
       "cadence": "Weekly",
       "probes": [
         {
@@ -433,7 +433,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "The Tor Project’s aggregate daily measurements run from January 2021.",
+      "detail": "Tor Project measurements show daily network activity from January 2021 onward.",
       "cadence": "Daily",
       "probes": [
         {
@@ -472,7 +472,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Published OONI case studies, with a daily check of the Canadian Discord window.",
+      "detail": "OONI case studies supply the historical measurements, and a daily check updates the Canadian Discord example.",
       "cadence": "Daily",
       "probes": [
         {
@@ -556,7 +556,7 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Your HAR file is processed in your browser."
+      "detail": "The browser reads requests from the HAR file you select."
     }
   },
   {
@@ -580,7 +580,7 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Paste headers or inspect a HAR file in your browser."
+      "detail": "The tool reads the headers you paste or extracts them from a local HAR file."
     }
   },
   {
@@ -605,7 +605,7 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Email headers and .eml files are processed in your browser."
+      "detail": "Your browser reads the email headers you paste or the .eml file you open."
     }
   },
   {
@@ -629,7 +629,7 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Your PCAP or PCAPNG file is processed in your browser."
+      "detail": "Your browser reads packets from the PCAP or PCAPNG capture you select."
     }
   },
   {
@@ -654,7 +654,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Lockfiles stay in your browser. Optional OSV queries send selected package names and versions."
+      "detail": "Your lockfile stays in the browser, and optional OSV lookups send the package names and versions you select."
     }
   },
   {
@@ -677,7 +677,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CISA’s Known Exploited Vulnerabilities catalogue.",
+      "detail": "CISA’s catalogue lists vulnerabilities that have been exploited in the wild.",
       "cadence": "Daily",
       "probes": [
         {
@@ -729,7 +729,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "CISA and FIRST snapshots with on-demand CVE and EPSS lookups.",
+      "detail": "The tool combines CISA’s exploited-vulnerability list with FIRST’s exploit-probability scores and supports individual lookups.",
       "cadence": "Daily",
       "probes": [
         {
@@ -787,7 +787,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Completed federal access-to-information request summaries in English and French.",
+      "detail": "Federal departments publish summaries of completed access-to-information requests in English and French.",
       "probes": [
         {
           "url": "https://coolcode.ca/atip/data/manifest.json",
@@ -841,7 +841,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Six federal Info Source inventories of record classes and personal information banks.",
+      "detail": "Six federal Info Source inventories describe the records and personal information banks each institution holds.",
       "probes": [
         {
           "url": "https://coolcode.ca/governmentmemory/records.json",
@@ -888,7 +888,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Federal briefing note titles and reference numbers by institution.",
+      "detail": "Federal departments publish briefing note titles, reference numbers and the institutions that prepared them.",
       "probes": [
         {
           "url": "https://coolcode.ca/briefings/data/manifest.json",
@@ -956,7 +956,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Treasury Board counts of informal copy requests for previously released packages.",
+      "detail": "Treasury Board records how often people request copies of previously released access-to-information packages.",
       "probes": [
         {
           "url": "https://coolcode.ca/atippopularity/data/manifest.json",
@@ -1024,7 +1024,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Federal ATI and Privacy Act statistics, with links to completed requests and briefing titles.",
+      "detail": "Treasury Board workbooks report access and privacy requests by institution and fiscal year.",
       "probes": [
         {
           "url": "https://coolcode.ca/atipmetrics/data.json",
@@ -1066,7 +1066,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Bilingual federal Question Period notes and prepared responses.",
+      "detail": "Federal departments publish bilingual Question Period notes with prepared ministerial responses.",
       "probes": [
         {
           "url": "https://coolcode.ca/ministersays/data/manifest.json",
@@ -1112,7 +1112,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Federally published founded-wrongdoing cases and departmental responses.",
+      "detail": "Federal disclosures describe founded wrongdoing and the department’s response.",
       "probes": [
         {
           "url": "https://coolcode.ca/wrongdoings/data/manifest.json",
@@ -1162,7 +1162,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Government of Canada AI Register, with individually verified impact assessments.",
+      "detail": "Entries from Canada’s AI Register link to verified impact assessments where available.",
       "probes": [
         {
           "url": "https://coolcode.ca/algorithmwatch/register.json",
@@ -1210,7 +1210,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Government of Canada Open Data Portal catalogue, including resource formats and publishers.",
+      "detail": "Canada’s Open Government Portal lists each dataset’s publisher and available file formats.",
       "probes": [
         {
           "url": "https://coolcode.ca/datasetexplorer/data/manifest.json",
@@ -1256,7 +1256,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Treasury Board’s published list of records removed from the federal open-data portal.",
+      "detail": "Treasury Board lists records removed from the federal open-data portal.",
       "probes": [
         {
           "url": "https://coolcode.ca/opendatagraveyard/data/manifest.json",
@@ -1303,7 +1303,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "ESDC monthly Canada.ca usage metrics and service measures.",
+      "detail": "Employment and Social Development Canada publishes monthly measures of Canada.ca usage and services.",
       "probes": [
         {
           "url": "https://coolcode.ca/canadaanalytics/data/pulse.json",
@@ -1369,7 +1369,7 @@
     "data_date_badge": true,
     "data_info": {
       "mode": "snapshot",
-      "detail": "DFO Pacific salmon spawning estimates by population, waterbody and year.",
+      "detail": "Fisheries and Oceans Canada records Pacific salmon spawning estimates by population, waterbody and year.",
       "probes": [
         {
           "url": "https://coolcode.ca/salmonlines/data/source.json",
@@ -1434,7 +1434,7 @@
     "requirements": "Linux and Node.js 24+",
     "data_info": {
       "mode": "local",
-      "detail": "Compare two local CSV or GeoJSON files. An optional Linux collector keeps a SQLite history.",
+      "detail": "Both CSV or GeoJSON files stay in your browser while it matches records by the ID you choose.",
       "install_detail": "Your collector stores dated copies of a file or HTTPS feed in SQLite."
     }
   },
@@ -1456,7 +1456,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Four English ISED federal corporate register exports, covering active and inactive corporations.",
+      "detail": "Four federal registry exports from ISED cover active and inactive corporations.",
       "probes": [
         {
           "url": "https://coolcode.ca/corporateghosts/data/manifest.json",
@@ -1496,7 +1496,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Federal in-house lobbying communication reports, indexed by organization.",
+      "detail": "Federal lobbying reports identify the organizations reporting in-house communications with public office holders.",
       "probes": [
         {
           "url": "https://coolcode.ca/lobbytrail/index.json",
@@ -1562,7 +1562,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CRA T3010 financial filings and gifts to qualified donees.",
+      "detail": "CRA charity filings report finances and gifts to qualified donees.",
       "probes": [
         {
           "url": "https://coolcode.ca/charityflows/manifest.json",
@@ -1620,7 +1620,7 @@
     "access": "browser",
     "data_info": {
       "mode": "reference",
-      "detail": "Hand-checked Bell and TELUS wholesale fibre rates from two CRTC orders.",
+      "detail": "The listed Bell and TELUS wholesale fibre rates come from two CRTC orders.",
       "probes": [
         {
           "url": "https://coolcode.ca/tariffxray/catalog.json",
@@ -1661,7 +1661,7 @@
     "access": "browser",
     "data_info": {
       "mode": "reference",
-      "detail": "Hand-reviewed FCC equipment exhibits for selected devices.",
+      "detail": "The tool links selected devices to their reviewed FCC equipment exhibits.",
       "probes": [
         {
           "url": "https://coolcode.ca/gearautopsy/catalogue.json",
@@ -1708,7 +1708,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Health Canada recalls and safety alerts, with Transport Canada’s 60-day vehicle recall file.",
+      "detail": "Health Canada recall notices appear alongside Transport Canada’s 60-day vehicle recall file.",
       "probes": [
         {
           "url": "https://coolcode.ca/recallradar/data-status.json",
@@ -1750,7 +1750,7 @@
     "access": "browser",
     "data_info": {
       "mode": "reference",
-      "detail": "Selected Canadian patent publications, individually checked against original records.",
+      "detail": "Each selected Canadian patent publication has been checked against its original record.",
       "probes": [
         {
           "url": "https://coolcode.ca/patentattic/catalog.json",
@@ -1794,7 +1794,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Vancouver, Langley and Halifax route extracts and optional local GPX files.",
+      "detail": "Routes come from Vancouver, Langley and Halifax map data or a GPX file you import.",
       "probes": [
         {
           "url": "https://coolcode.ca/trailglass/data/status.json",
@@ -1842,7 +1842,7 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "ECCC station observations on demand. Compare up to 92 days."
+      "detail": "The tool requests up to 92 days of observations from Canadian weather stations for the period you choose."
     }
   },
   {
@@ -1867,7 +1867,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "ISED fixed-service and terrestrial spectrum records for BC and Nova Scotia.",
+      "detail": "ISED records identify fixed-service and terrestrial radio assignments in BC and Nova Scotia.",
       "probes": [
         {
           "url": "https://coolcode.ca/spectrumatlas/manifest.json",
@@ -1908,7 +1908,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Nova Scotia Marine Heritage shipwreck records and mapped locations.",
+      "detail": "Nova Scotia’s Marine Heritage database documents wrecks and gives map positions where known.",
       "probes": [
         {
           "url": "https://coolcode.ca/shipwrecks/data/nearby.json",
@@ -1960,7 +1960,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Parks Canada’s federal-designation heritage register extract.",
+      "detail": "Parks Canada’s register supplies the records of federally designated heritage places.",
       "probes": [
         {
           "url": "https://coolcode.ca/forgottenplaces/data/manifest.json",
@@ -2006,7 +2006,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Canadian Geographical Names Database, including undersea names.",
+      "detail": "The Canadian Geographical Names Database supplies names for land and underwater features.",
       "probes": [
         {
           "url": "https://coolcode.ca/namesforget/data/manifest.json",
@@ -2047,7 +2047,7 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Searches the BC Geographical Names service when you choose a name or location."
+      "detail": "The BC Geographical Names service returns matches for the name or location you choose."
     }
   },
   {
@@ -2071,7 +2071,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Township channels and culverts plus Langley City watercourses.",
+      "detail": "Township maps show drainage channels and culverts, and City of Langley maps show watercourses.",
       "probes": [
         {
           "url": "https://coolcode.ca/hiddenwater/data/status.json",
@@ -2113,7 +2113,7 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "1947 and 1977 NRCan aerial imagery and modern street tiles load as you explore."
+      "detail": "Natural Resources Canada’s 1947 and 1977 aerial images load alongside modern street tiles as you explore."
     }
   },
   {
@@ -2137,7 +2137,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Township applications and featured City records. Observed history begins November 2026.",
+      "detail": "Township applications and selected City records provide a local history of changes observed since November 2026.",
       "probes": [
         {
           "url": "https://coolcode.ca/langleychanges/data/applications.json",
@@ -2177,7 +2177,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Transport Canada CADORS occurrence, event and aircraft records.",
+      "detail": "Transport Canada’s CADORS reports describe aviation occurrences, events and the aircraft involved.",
       "probes": [
         {
           "url": "https://coolcode.ca/strangeskies/data/manifest.json",
@@ -2228,7 +2228,7 @@
     "data_date_badge": true,
     "data_info": {
       "mode": "snapshot",
-      "detail": "Coast Guard light characteristics from three coastal volumes.",
+      "detail": "The Coast Guard’s List of Lights gives each light’s position, colour and flash pattern.",
       "cadence": "Twice monthly",
       "probes": [
         {
@@ -2273,7 +2273,7 @@
     "data_date_badge": true,
     "data_info": {
       "mode": "snapshot",
-      "detail": "NOAA IBTrACS North Atlantic tracks from completed seasons.",
+      "detail": "NOAA’s North Atlantic storm records give each storm’s track and its recorded strength along the way.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -2348,7 +2348,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CelesTrak orbital elements. Passes for your location are calculated locally.",
+      "detail": "Your browser uses orbital elements from CelesTrak to calculate satellite passes for your location.",
       "probes": [
         {
           "url": "https://coolcode.ca/satpasses/elements.json",
@@ -2393,7 +2393,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Selected Hubble and Webb observations for five targets in MAST.",
+      "detail": "The MAST archive supplies selected Hubble and Webb observations of five targets.",
       "probes": [
         {
           "url": "https://coolcode.ca/skyarchive/catalog.json",
@@ -2464,7 +2464,7 @@
     "data_date_badge": true,
     "data_info": {
       "mode": "snapshot",
-      "detail": "IAU-adopted lunar and Martian features from the USGS Gazetteer.",
+      "detail": "The USGS gazetteer records the origins of IAU-approved names for features on the Moon and Mars.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -2506,7 +2506,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Bank of Canada Valet interest rates, bond yields and CAD exchange rates.",
+      "detail": "The Bank of Canada publishes the interest rates, bond yields and Canadian-dollar exchange rates shown here.",
       "probes": [
         {
           "url": "https://coolcode.ca/bankrates/snapshot.json",
@@ -2563,7 +2563,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Statistics Canada monthly retail prices for Canada, BC and Nova Scotia.",
+      "detail": "Statistics Canada publishes monthly retail prices for Canada, BC and Nova Scotia.",
       "probes": [
         {
           "url": "https://coolcode.ca/priceatlas/snapshot.json",
@@ -2621,7 +2621,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Office of the Superintendent of Bankruptcy monthly filings and annual rates.",
+      "detail": "The Office of the Superintendent of Bankruptcy publishes monthly filing counts and annual insolvency rates.",
       "probes": [
         {
           "url": "https://coolcode.ca/insolvencyatlas/data-status.json",
@@ -2679,7 +2679,7 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Import your own CIRO short-sale and short-position reports. Includes a fictional sample."
+      "detail": "The tool reads your CIRO short-sale and short-position reports or a fictional sample."
     }
   },
   {
@@ -2704,7 +2704,7 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Has Things feeds for Vancouver and Halifax, with links to Langley venue calendars."
+      "detail": "Has Things supplies Vancouver and Halifax event feeds, and Langley entries link to venue calendars."
     }
   },
   {
@@ -2727,7 +2727,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Live TVmaze search and a handpicked Wikidata shelf of Canadian films."
+      "detail": "TV searches use TVmaze, and the selected Canadian films come from Wikidata."
     }
   },
   {
@@ -2749,7 +2749,7 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Queries Internet Archive catalogue records, previews and file lists on demand."
+      "detail": "Internet Archive returns catalogue records, previews and file lists when you search."
     }
   },
   {
@@ -2772,7 +2772,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Reviewed Canadian web-address histories, optional Wayback checks and local archive imports.",
+      "detail": "Reviewed Canadian web-address histories can be explored alongside optional Wayback checks or local imports.",
       "probes": [
         {
           "url": "https://coolcode.ca/ghostlinks/cases.json",
@@ -2812,7 +2812,7 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Queries Software Heritage for archived origins, crawl visits and branches."
+      "detail": "Software Heritage supplies archived origins, crawl visits and branches for each lookup."
     }
   },
   {
@@ -2833,7 +2833,7 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Import a Canada Media Fund project export from your device."
+      "detail": "The tool reads the Canada Media Fund project export you select on your device."
     }
   }
 ]

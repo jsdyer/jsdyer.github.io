@@ -2,6 +2,7 @@
 """Validate the catalogue and build the static site; Python standard library only."""
 import argparse
 from collections import Counter
+from datetime import date
 from html import escape
 import json
 from pathlib import Path
@@ -156,40 +157,95 @@ def data_summary(tool, access):
     return DATA_MODES[info["mode"]], info["detail"]
 
 
-def data_notes(tool, access):
-    """Plain-text facts shared by the catalogue HTML and generated README."""
+def data_facts(tool, access):
+    """Collect the source values once for both the homepage and the README."""
     info = tool["data_info"]
     if access == "install":
-        return []
-    notes = []
-    if info.get("cadence"):
-        notes.append("Scheduled checks: " + info["cadence"].lower())
+        return [], [], []
+    dates, counts, notices = [], [], []
     for probe in info.get("probes", []):
-        badge_shows_date = tool.get("data_date_badge") and probe["label"] == "Data retrieved"
-        if probe.get("value") and not badge_shows_date:
-            notes.append(f'{probe["label"]}: {probe["value"]}')
-        elif probe.get("unavailable") and not probe.get("value"):
-            notes.append(f'{probe["label"]}: date unavailable')
-        elif "value" in probe and probe["value"] is None and not badge_shows_date:
-            notes.append(f'{probe["label"]}: unrecorded')
+        value = probe.get("value")
+        if value or probe.get("unavailable") or "value" in probe:
+            dates.append((probe["label"], value or ("date unavailable" if probe.get("unavailable") else "unrecorded")))
         if "count" in probe:
-            notes.append(f'{probe["count"]:,} {probe["count_at"]["unit"]}')
+            counts.append(f'{probe["count"]:,} {probe["count_at"]["unit"]}')
         elif "count_at" in probe and "value" in probe:
-            notes.append(f'Count unavailable ({probe["count_at"]["unit"]})')
-        if probe.get("notice") and probe["notice"] not in notes:
-            notes.append(probe["notice"])
+            counts.append(f'Count unavailable ({probe["count_at"]["unit"]})')
+        if probe.get("notice") and probe["notice"] not in notices:
+            notices.append(probe["notice"])
     if any(p.get("unavailable") and p.get("value") for p in info.get("probes", [])):
-        notes.append("Date check unavailable (last verified value shown)")
-    return notes
+        notices.append("Date check unavailable (last verified value shown)")
+    return dates, counts, notices
 
 
-def render_data(tool, access):
+def data_notes(tool, access):
+    dates, counts, notices = data_facts(tool, access)
+    cadence = tool["data_info"].get("cadence") if access == "browser" else None
+    notes = ["Scheduled checks: " + cadence.lower()] if cadence else []
+    for label, value in dates:
+        if label != "Data retrieved" or not tool.get("data_date_badge") or value == "date unavailable":
+            notes.append(f"{label}: {value}")
+    return notes + counts + notices
+
+
+def display_date(value):
+    """Keep partial dates and ranges in their original precision."""
+    match = re.fullmatch(r"(\d{4}-\d{2}-\d{2})(?: (\d{2}:\d{2}) UTC)?", value)
+    if not match:
+        return escape(value)
+    day, clock = match.groups()
+    try:
+        parsed = date.fromisoformat(day)
+    except ValueError:
+        return escape(value)
+    text = f"{parsed:%b} {parsed.day}, {parsed.year}"
+    timestamp = day
+    if clock:
+        text += f", {clock} UTC"
+        timestamp = f"{day}T{clock}Z"
+    return f'<time datetime="{timestamp}">{text}</time>'
+
+
+def render_data(tool, access, *, show_access=False):
     mode, detail = data_summary(tool, access)
-    notes = data_notes(tool, access)
-    lines = [f'<span class="tool-source"><b>{escape(mode)}</b> · {escape(detail)}</span>']
-    if notes:
-        lines.append('<span class="tool-dates">' + ' · '.join(escape(n) for n in notes) + '</span>')
-    return '<div class="tool-data">' + "".join(lines) + '</div>'
+    dates, counts, notices = data_facts(tool, access)
+    lines = ['<div class="tool-data"><div class="tool-evidence">',
+             f'<p class="tool-source"><span class="sr-only">{escape(mode)}. </span>{escape(detail)}</p>']
+    facts = []
+    if counts:
+        facts.append(f'<strong>{escape(counts[0])}</strong>')
+    if dates:
+        label, value = dates[0]
+        label = {"Data retrieved": "Retrieved", "Snapshot generated": "Snapshot built"}.get(label, label)
+        facts.append(f'<span>{escape(label)} {display_date(value)}</span>')
+    if facts:
+        lines.append('<div class="tool-dates">' + ''.join(facts) + '</div>')
+    lines.extend(f'<p class="tool-notice">{escape(notice)}</p>' for notice in notices)
+    lines.append('</div>')
+
+    cadence = tool["data_info"].get("cadence") if access == "browser" else None
+    badge = data_date_path(tool) if access == "browser" else ""
+    has_details = cadence or badge or len(dates) > 1 or len(counts) > 1
+    if show_access or has_details:
+        lines.append('<div class="tool-foot">')
+        if show_access:
+            label = "Use in browser" if access == "browser" else "Installation required"
+            lines.append(f'<span class="tool-mode tool-mode-{access}">{label}</span>')
+        if has_details:
+            lines.append(f'<details class="tool-details"><summary>Data details<span class="sr-only"> for {escape(tool["title"])}</span></summary>')
+            rows = [(escape(label), display_date(value)) for label, value in dates[1:]]
+            rows.extend(("Count", escape(count)) for count in counts[1:])
+            if cadence:
+                rows.append(("Scheduled checks", escape(cadence)))
+            if badge:
+                url = escape(badge, quote=True)
+                rows.append(("Tool’s date badge", f'<a class="tool-data-date" href="{url}">'
+                             f'<img src="{url}" alt="{escape(data_date_alt(tool), quote=True)}" loading="lazy"></a>'))
+            lines.append('<dl>' + ''.join(f'<div><dt>{label}</dt><dd>{value}</dd></div>' for label, value in rows) + '</dl></details>')
+        lines.append('</div>')
+    if show_access and access == "install":
+        lines.append(f'<span class="tool-requirements">{escape(tool["requirements"])}</span>')
+    return ''.join(lines) + '</div>'
 
 
 def render_entry(tool, access):
@@ -198,16 +254,10 @@ def render_entry(tool, access):
     destination = tool.get("install_url", tool["url"]) if access == "install" else tool["url"]
     url = escape(destination, quote=True)
     arrow = "↗" if destination.startswith("https:") else "→"
-    label = "Use in browser" if access == "browser" else "Installation required"
-    detail = f'<span class="tool-requirements">{escape(tool["requirements"])}</span>' if access == "install" else ""
-    if access == "browser" and (badge_path := data_date_path(tool)):
-        badge_url = escape(badge_path, quote=True)
-        detail = (f'<a class="tool-data-date" href="{badge_url}">'
-                  f'<img src="{badge_url}" alt="{escape(data_date_alt(tool), quote=True)}" loading="lazy"></a>')
     return (f'                <li data-tool data-tool-id="{tid}" data-access="{access}" data-keywords="{tags}">'
             f'<span class="tool-icon" data-icon="{icon}" aria-hidden="true"></span><div class="tool-entry">'
             f'<a href="{url}"><span>{title}</span><span aria-hidden="true">{arrow}</span></a>'
-            f'<p>{description}</p><span class="tool-mode tool-mode-{access}">{label}</span>{detail}{render_data(tool, access)}</div></li>')
+            f'<p>{description}</p>{render_data(tool, access, show_access=True)}</div></li>')
 
 
 def render(categories, tools, template):
