@@ -75,6 +75,9 @@ class ReadmeTests(unittest.TestCase):
         self.assertIn(r"![Read the dataset retrieval date for River \[delta\] &#124; tides]", browser)
         self.assertIn(f"(<https://coolcode.ca{tool['url']}data-date.svg>)", browser)
         self.assertNotIn("data-date.svg", install)
+        tool["data_info"] = dict(tool["data_info"], probes=[{"label": "Data retrieved", "value": "2026-11-18"}])
+        text = render_readme(SKELETON, self.categories, [tool])
+        self.assertIn(r"![River \[delta\] &#124; tides data retrieved 2026-11-18]", text)
 
     def test_missing_duplicate_reversed_and_overlapping_markers_are_rejected(self):
         malformed = [SKELETON.replace("<!-- END BROWSER_TOOLS -->", ""),

@@ -5,7 +5,7 @@ from html import escape
 import re
 from urllib.parse import quote
 
-from build import ROOT, data_date_path, data_notes, data_summary, load_catalogue, require
+from build import ROOT, data_date_alt, data_date_path, data_notes, data_summary, load_catalogue, require
 
 
 def markdown_text(value):
@@ -46,7 +46,7 @@ def browser_tables(categories, tools):
         for tool in entries:
             description = describe(tool, "browser")
             if badge_path := data_date_path(tool):
-                image = "!" + link(f"Read the dataset retrieval date for {tool['title']}", badge_path)
+                image = "!" + link(data_date_alt(tool), badge_path)
                 description += f" <br> [{image}](<https://coolcode.ca{badge_path}>)"
             lines.append(f"| {link(tool['title'], tool['url'])} | "
                          f"{description} | "

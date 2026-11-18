@@ -97,8 +97,10 @@ and where the query runs.
 A project-hosted browser tool with a data snapshot can set `"data_date_badge": true`.
 Serve `data-date.svg` alongside the app, with a visible retrieval date and an
 accessible title generated from the snapshot metadata. The homepage and README
-display this image. Refreshing the tool updates the date independently of a
-catalogue release. Put publisher revision dates and coverage in the tool itself.
+display this image. Add a probe for the same SVG URL with `"path": ["retrieved"]`
+to include its date in the alternative text. Refreshing the tool updates the visible
+badge independently of the catalogue. A JSON probe can report an integer count
+or use `"measure": "length"` inside `count_at` to count an array of records.
 
 For `local`, create `<slug>/index.html` and its assets here and use `/<slug>/` as
 the URL. The build includes this directory automatically. A directory cannot reuse

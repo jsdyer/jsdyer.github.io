@@ -127,6 +127,13 @@ def data_date_path(tool):
     return ""
 
 
+def data_date_alt(tool):
+    for probe in tool["data_info"].get("probes", []):
+        if probe["label"] == "Data retrieved" and probe.get("value"):
+            return f'{tool["title"]} data retrieved {probe["value"]}'
+    return f'Read the dataset retrieval date for {tool["title"]}'
+
+
 def data_summary(tool, access):
     info = tool["data_info"]
     if access == "install":
@@ -177,7 +184,7 @@ def render_entry(tool, access):
     if access == "browser" and (badge_path := data_date_path(tool)):
         badge_url = escape(badge_path, quote=True)
         detail = (f'<a class="tool-data-date" href="{badge_url}">'
-                  f'<img src="{badge_url}" alt="Read the dataset retrieval date for {title}" loading="lazy"></a>')
+                  f'<img src="{badge_url}" alt="{escape(data_date_alt(tool), quote=True)}" loading="lazy"></a>')
     return (f'                <li data-tool data-tool-id="{tid}" data-access="{access}" data-keywords="{tags}">'
             f'<span class="tool-icon" data-icon="{icon}" aria-hidden="true"></span><div class="tool-entry">'
             f'<a href="{url}"><span>{title}</span><span aria-hidden="true">{arrow}</span></a>'

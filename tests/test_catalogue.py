@@ -93,6 +93,9 @@ class CatalogueTests(unittest.TestCase):
         browser = Page(render_entry(tool, "browser"))
         self.assertEqual([image["src"] for image in browser.images], [tool["url"] + "data-date.svg"])
         self.assertIn(tool["title"], browser.images[0]["alt"])
+        tool["data_info"] = dict(tool["data_info"], probes=[{"label": "Data retrieved", "value": "2026-11-18"}])
+        dated = Page(render_entry(tool, "browser"))
+        self.assertEqual(dated.images[0]["alt"], tool["title"] + " data retrieved 2026-11-18")
         self.assertIn(browser.images[0]["src"], browser.hrefs)
         self.assertEqual(Page(render_entry(tool, "install")).images, [])
         tool["data_date_badge"] = False

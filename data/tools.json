@@ -775,9 +775,9 @@
         {
           "url": "https://coolcode.ca/governmentmemory/records.json",
           "path": [
-            "built"
+            "retrievedAt"
           ],
-          "label": "Snapshot generated",
+          "label": "Data retrieved",
           "notice_if": {
             "path": [
               "fallback"
@@ -785,8 +785,15 @@
             "equals": true,
             "text": "Serving bundled data"
           },
-          "value": "2026-11-16",
-          "notice": "Serving bundled data"
+          "value": "2026-11-18",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "measure": "length",
+            "unit": "records"
+          },
+          "count": 306
         }
       ],
       "cadence": "Weekly"
@@ -1359,6 +1366,14 @@
         {
           "url": "https://coolcode.ca/lobbytrail/index.json",
           "path": [
+            "retrievedAt"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-18"
+        },
+        {
+          "url": "https://coolcode.ca/lobbytrail/index.json",
+          "path": [
             "sourceDate"
           ],
           "label": "Source export",
@@ -1373,10 +1388,10 @@
               "snapshotKind"
             ],
             "equals": "bundled",
-            "text": "Serving bundled data"
+            "text": "Verified saved export"
           },
           "value": "2026-11-16",
-          "notice": "Serving bundled data",
+          "notice": "Verified saved export",
           "count": 269615
         },
         {
@@ -1985,7 +2000,17 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Coast Guard light characteristics from three coastal volumes.",
-      "cadence": "Twice monthly"
+      "cadence": "Twice monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/lightkeeper/data-date.svg",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-18"
+        }
+      ]
     }
   },
   {
@@ -2012,7 +2037,17 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "NOAA IBTrACS North Atlantic tracks from completed seasons.",
-      "cadence": "Monthly"
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/stormtracks/data-date.svg",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-18"
+        }
+      ]
     }
   },
   {
@@ -2158,7 +2193,17 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "IAU-adopted lunar and Martian features from the USGS Gazetteer.",
-      "cadence": "Monthly"
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/otherworldnames/data-date.svg",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-18"
+        }
+      ]
     }
   },
   {

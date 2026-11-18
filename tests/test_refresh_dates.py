@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from refresh_dates import AllowedRedirects, check_url, refresh, select, source_date
+from refresh_dates import AllowedRedirects, badge_metadata, check_url, refresh, select, source_date
 
 
 class CatalogueDateTests(unittest.TestCase):
@@ -19,6 +19,17 @@ class CatalogueDateTests(unittest.TestCase):
         for raw in ('2026-02-29', '2026-13', '0000', 'today', True, None, '2026-11-17T99:00'):
             with self.subTest(raw=raw), self.assertRaises(ValueError):
                 source_date(raw)
+
+    def test_date_badges_use_only_the_retrieval_title(self):
+        def svg(title):
+            return f'<svg xmlns="http://www.w3.org/2000/svg"><title>{title}</title><text>2030-02-01</text></svg>'
+        for title in ('Data retrieved · 2026-11-18', 'Data retrieved 2026-11-18'):
+            self.assertEqual(badge_metadata(svg(title)), {'retrieved': '2026-11-18'})
+        for wrong in (svg('Data built 2020-01-01'), svg('Data retrieved 2026-02-29'),
+                      svg('Data retrieved · 2026-11'), '<html><title>Data retrieved 2026-11-18</title></html>',
+                      '<!broken>'):
+            with self.subTest(wrong=wrong), self.assertRaises(ValueError):
+                badge_metadata(wrong)
 
     def test_paths_require_a_unique_match(self):
         data = {'cases': [{'id': 'A', 'dates': [2024, 2026]}, {'id': 'B'}]}
@@ -75,6 +86,10 @@ class CatalogueDateTests(unittest.TestCase):
         document.update(through='2026-04', rows=-1)
         refresh(tools, fetch)
         self.assertNotIn('count', ok)
+        ok['count_at']['measure'] = 'length'
+        document['rows'] = [{'id': 2}, {'id': 3}]
+        refresh(tools, fetch)
+        self.assertEqual(ok['count'], 2)
         self.assertNotIn('notice', ok)
         self.assertNotIn('unavailable', broken)
         self.assertEqual(broken['value'], '2026-04')
