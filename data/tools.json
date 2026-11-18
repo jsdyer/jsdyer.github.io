@@ -1013,6 +1013,66 @@
     "access": "browser"
   },
   {
+    "id": "hiddenwater",
+    "title": "Hidden Water",
+    "description": "Explore Langley creeks, drainage channels and mapped culverts.",
+    "category": "places",
+    "tags": [
+      "bc",
+      "Langley",
+      "watercourses",
+      "creeks",
+      "culverts",
+      "drainage",
+      "Willoughby"
+    ],
+    "icon": "map",
+    "url": "/hiddenwater/",
+    "source": "https://github.com/jsdyer/hiddenwater",
+    "hosting": "project",
+    "access": "browser"
+  },
+  {
+    "id": "halifaxtimelens",
+    "title": "Halifax Time Lens",
+    "description": "Compare Halifax aerial photographs from 1947 and 1977 with a modern street map.",
+    "category": "places",
+    "tags": [
+      "nova scotia",
+      "Halifax",
+      "Dartmouth",
+      "aerial photos",
+      "1947",
+      "1977",
+      "history"
+    ],
+    "icon": "map",
+    "url": "/halifaxtimelens/",
+    "source": "https://github.com/jsdyer/halifaxtimelens",
+    "hosting": "project",
+    "access": "browser"
+  },
+  {
+    "id": "langleychanges",
+    "title": "Langley Changes",
+    "description": "Explore City and Township development applications, documents and changes over time.",
+    "category": "places",
+    "tags": [
+      "bc",
+      "Langley City",
+      "Township of Langley",
+      "development",
+      "planning",
+      "rezoning",
+      "applications"
+    ],
+    "icon": "map",
+    "url": "/langleychanges/",
+    "source": "https://github.com/jsdyer/langleychanges",
+    "hosting": "project",
+    "access": "browser"
+  },
+  {
     "id": "strangeskies",
     "title": "Strange Skies Canada",
     "description": "Search aviation occurrence reports by location, year and event.",
