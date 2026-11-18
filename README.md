@@ -32,6 +32,9 @@ A tool that asks you to select a local file is still a browser tool.
 | [Government Memory Map](https://coolcode.ca/governmentmemory/) | Find record classes and personal information banks to reference in an access request. | [Separate repository](https://github.com/jsdyer/governmentmemory) |
 | [Shipwreck Explorer](https://coolcode.ca/shipwrecks/) | Search Nova Scotia wrecks by area, vessel and date. | [Separate repository](https://github.com/jsdyer/shipwrecks) |
 | [BC Place Names Explorer](https://coolcode.ca/bcplacenames/) | Find nearby BC names, compare official and other recorded names, inspect naming decisions, and export results. | [Separate repository](https://github.com/jsdyer/bcplacenames) |
+| [Hidden Water](https://coolcode.ca/hiddenwater/) | Explore Langley creeks, drainage channels and mapped culverts. | [Separate repository](https://github.com/jsdyer/hiddenwater) |
+| [Halifax Time Lens](https://coolcode.ca/halifaxtimelens/) | Compare Halifax aerial photographs from 1947 and 1977 with a modern street map. | [Separate repository](https://github.com/jsdyer/halifaxtimelens) |
+| [Langley Changes](https://coolcode.ca/langleychanges/) | Explore City and Township development applications, documents and changes over time. | [Separate repository](https://github.com/jsdyer/langleychanges) |
 
 This table is a starting selection. Use the [homepage](https://coolcode.ca/) for the
 full searchable directory, including security, government, outdoors, astronomy,
