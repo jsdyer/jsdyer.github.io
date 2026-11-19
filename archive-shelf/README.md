@@ -24,3 +24,5 @@ From the repository root, rebuild the searchable index and the HTML issue direct
 python3 tools/archive-shelf/build_public_index.py
 python3 tools/archive-shelf/build_public_index.py --check
 ```
+
+Search reports the number of pages examined. A search for **cat** matches the **Cat. no.** printed in Statistics Canada’s recurring catalogue label. Select **Exclude printed catalogue labels** to search the remaining text. The original PDF and full page transcript always preserve the printed label. This option carries through to public search links and JSON exports.

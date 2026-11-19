@@ -5,6 +5,7 @@ const form = byId('search-form');
 const query = byId('query');
 const collection = byId('collection');
 const issue = byId('issue');
+const skipCatalogue = byId('skip-catalogue');
 const results = byId('results');
 const pageSize = 12;
 const byteLimit = 12 * 1024 * 1024;
@@ -15,6 +16,7 @@ const publicPages = archiveIssues.flatMap(record => {
     date: record.date,
     number: index + 1,
     body,
+    article: body.replace(/Statistics Canada\s*[-–—]\s*Cat\.\s*no\.\s*11-001[-A-Z]*/gi, ' '),
     pdf: record.file + '#page=' + (index + 1),
     original: record.original
   }));
@@ -54,6 +56,10 @@ function excerpt(body, match) {
   ];
 }
 
+function searchableText(page) {
+  return page.pdf && skipCatalogue.checked ? page.article : page.body;
+}
+
 function rowFor(page) {
   const row = el('li');
   const body = el('div');
@@ -67,7 +73,8 @@ function rowFor(page) {
     heading.textContent = page.title;
   }
   const passage = el('p');
-  const [before, match, after] = excerpt(page.body, pattern && pattern.exec(page.body));
+  const text = searchableText(page);
+  const [before, match, after] = excerpt(text, pattern && pattern.exec(text));
   passage.append(before);
   if (match) passage.append(el('mark', match));
   passage.append(after);
@@ -97,16 +104,32 @@ function render() {
   pattern = phrasePattern(term);
   const browse = !local && !term && !issue.value;
   byId('issue-filter').hidden = local;
+  byId('catalogue-option').hidden = local;
   byId('import-panel').hidden = !local;
   byId('examples').hidden = local;
   byId('issues').hidden = !browse;
   byId('result-panel').hidden = browse;
   byId('clear').hidden = !term;
   const pages = local ? localPages : publicPages;
-  hits = pages.filter(page =>
-    (local || !issue.value || page.date === issue.value)
-    && (!term || (pattern && pattern.test(page.body)))
-  );
+  const scope = pages.filter(page => local || !issue.value || page.date === issue.value);
+  hits = scope.filter(page => !term || (pattern && pattern.test(searchableText(page))));
+  const footerOnly = !local && pattern ? scope.filter(page => pattern.test(page.body) && !pattern.test(page.article)).length : 0;
+  const note = byId('scope-note');
+  note.textContent = '';
+  if (term) {
+    note.append('Searched ' + scope.length + ' pages in ' + (local ? 'your files.' : issue.value ? 'this issue of The Daily.' : 'nine issues of The Daily.'));
+    if (footerOnly) {
+      note.append(' ' + footerOnly + (footerOnly === 1 ? ' page matches' : ' pages match') + ' only in the printed catalogue label. ');
+      const toggle = el('button', skipCatalogue.checked ? 'Include catalogue labels' : 'Hide catalogue labels', 'reset');
+      toggle.type = 'button';
+      toggle.addEventListener('click', () => {
+        skipCatalogue.checked = !skipCatalogue.checked;
+        search(query.value);
+        skipCatalogue.focus();
+      });
+      note.append(toggle);
+    }
+  }
   results.replaceChildren();
   displayed = 0;
   const count = hits.length + (hits.length === 1 ? ' page' : ' pages');
@@ -118,7 +141,9 @@ function render() {
     showMore();
   } else {
     const hint = local && !localPages.length ? 'Choose files above to search this tab’s collection.'
-      : 'Try a shorter phrase or clear the search to browse pages.';
+      : local ? 'Try another word or add a file that contains this phrase.'
+      : issue.value ? 'Choose All issues to search the rest of the collection.'
+      : 'Try broadband or dial-up, or choose Browse originals.';
     results.append(el('li', hint, 'empty'));
   }
 }
@@ -126,7 +151,7 @@ function render() {
 function updateAddress() {
   const url = new URL(location.href);
   const isPublic = collection.value === 'public';
-  for (const [name, value] of [['q', term], ['issue', issue.value]]) {
+  for (const [name, value] of [['q', term], ['issue', issue.value], ['body', skipCatalogue.checked ? '1' : '']]) {
     if (isPublic && value) url.searchParams.set(name, value);
     else url.searchParams.delete(name);
   }
@@ -142,6 +167,7 @@ function search(value) {
 function readAddress() {
   const params = new URLSearchParams(location.search);
   collection.value = 'public';
+  skipCatalogue.checked = params.get('body') === '1';
   const date = params.get('issue');
   issue.value = archiveIssues.some(record => record.date === date) ? date : '';
   query.value = (params.get('q') || '').trim().slice(0, 200);
@@ -175,6 +201,7 @@ collection.addEventListener('change', () => {
   search('');
 });
 issue.addEventListener('change', () => search(query.value));
+skipCatalogue.addEventListener('change', () => search(query.value));
 byId('files').addEventListener('change', async event => {
   const input = event.target;
   const files = Array.from(input.files);
@@ -237,13 +264,15 @@ byId('forget').addEventListener('click', () => {
 
 byId('export').addEventListener('click', () => {
   const records = hits.map(page => {
-    const record = {document: page.title, page: page.number, excerpt: excerpt(page.body, pattern && pattern.exec(page.body)).join('')};
+    const text = searchableText(page);
+    const record = {document: page.title, page: page.number, excerpt: excerpt(text, pattern && pattern.exec(text)).join('')};
     if (page.pdf) Object.assign(record, {publisher: 'Statistics Canada', issue_date: page.date,
       page_url: new URL(page.pdf, location.href).href, original_pdf: page.original});
     return record;
   });
   const output = {query: term, results: records};
   if (collection.value === 'public') {
+    output.include_catalogue_labels = !skipCatalogue.checked;
     output.attribution = 'Adapted from Statistics Canada, The Daily, issue dates cited in each result. This does not constitute an endorsement by Statistics Canada of this product.';
     output.licence = 'https://www.statcan.gc.ca/en/terms-conditions/open-licence';
   }

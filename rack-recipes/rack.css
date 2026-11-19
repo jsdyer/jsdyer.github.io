@@ -111,3 +111,6 @@ summary { font-size: 1.02rem; color: var(--pine); }
   .service-settings { grid-template-columns: 1fr 1.4fr; }
   .service-settings strong { grid-column: 1 / -1; }
 }
+
+.choices h3 { margin: 1.1rem 0 0; color: var(--pine); font: 700 .82rem var(--mono); }
+.choices label { padding-block: 11px; }

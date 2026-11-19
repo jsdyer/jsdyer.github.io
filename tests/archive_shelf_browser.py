@@ -38,7 +38,18 @@ def check_archive_shelf(browser, base, screenshots):
     page.locator("#browse").click()
     assert page.locator("#issues").is_visible()
 
+    page.goto(base + "/archive-shelf/?q=cat")
+    assert "66 pages matching" in page.locator("#summary").inner_text()
+    assert "75 pages" in page.locator("#scope-note").inner_text()
+    page.get_by_role("button", name="Hide catalogue labels").click()
+    assert "0 pages matching" in page.locator("#summary").inner_text()
+    assert "body=1" in page.url
+    page.reload()
+    assert page.locator("#skip-catalogue").is_checked()
+    page.get_by_role("button", name="Include catalogue labels").click()
+    assert "66 pages matching" in page.locator("#summary").inner_text()
     page.select_option("#collection", "local")
+    assert page.locator("#catalogue-option").is_hidden()
     requests = []
     page.on("request", lambda request: requests.append(request.url))
     page.locator("#files").set_input_files([

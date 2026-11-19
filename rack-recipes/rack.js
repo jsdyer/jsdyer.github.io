@@ -16,19 +16,19 @@ function element(tag, text, className) {
   return node;
 }
 
-function addChoice(service) {
+function addChoice(service, group) {
   const label = document.createElement("label");
   const input = document.createElement("input");
   input.type = "checkbox";
   input.id = service.id;
-  input.checked = service.initial;
+  input.checked = Boolean(service.initial);
   input.setAttribute("aria-labelledby", service.id + "-title");
   const body = document.createElement("span");
   const title = element("strong", service.title);
   title.id = service.id + "-title";
   body.append(title, element("small", service.purpose));
   label.append(input, body, element("span", service.memory + " MiB", "size"));
-  choose.append(label);
+  group.append(label);
 }
 
 function addSettings(service) {
@@ -61,12 +61,14 @@ function memoryLabel(mib) {
 }
 
 function render() {
-  const active = services.filter((service, index) => {
+  const active = services.filter(service => {
     const checked = byId(service.id).checked;
-    rackUnits[index].classList.toggle("active", checked);
     byId(service.id + "-settings").hidden = !checked;
     return checked;
   });
+  for (const unit of rackUnits) {
+    unit.classList.toggle("active", active.some(service => service.group === unit.dataset.group));
+  }
   const capacity = Number(ram.value) * 1024;
   const used = active.reduce((sum, service) => sum + service.memory, 0);
   const balance = capacity - used - systemReserve;
@@ -111,14 +113,25 @@ function render() {
       choice.storage === "folder" ? "./data/" + service.id + "/" + v : v);
     line.append(element("span", (choice.storage === "folder" ? "Folders: " : "Volume keys: ") +
       locations.join(", "), "setup"));
+    if (service.media) line.append(element("span", "Read-only media folder · " + service.media.split(":")[0], "setup"));
+    if (service.guide) {
+      const guide = element("a", "Installation guide");
+      guide.href = service.guide;
+      line.append(guide);
+    }
     startup.append(line);
   }
   feedback.textContent = "";
 }
 
-for (const service of services) {
-  addChoice(service);
-  addSettings(service);
+for (const group of ["Library", "Operations", "Personal"]) {
+  const section = document.createElement("section");
+  section.append(element("h3", group));
+  choose.append(section);
+  for (const service of services.filter(service => service.group === group)) {
+    addChoice(service, section);
+    addSettings(service);
+  }
 }
 byId("settings").addEventListener("input", render);
 byId("open-recipe").addEventListener("click", () => byId("recipe-file").click());

@@ -36,7 +36,7 @@ A tool that asks you to select a local file is still a browser tool.
 
 | Tool | What it does | Code / documentation |
 | --- | --- | --- |
-| [Rack Recipes](<https://coolcode.ca/rack-recipes/>) | Plan or reopen a Docker Compose stack, choose host ports and storage, and export the edited configuration. <br> Local inputs · The browser generates Compose YAML from selected services and reads earlier Rack Recipes exports. Move FreshRSS to host port 8181 if 8080 is occupied, choose project folders for its data, then reopen the downloaded Compose file to revise the plan. | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/rack-recipes>) |
+| [Rack Recipes](<https://coolcode.ca/rack-recipes/>) | Plan a homelab from 12 self-hosted services, choose ports and storage, and export or reopen the Compose file. <br> Local inputs · Upstream container guides supply the images, ports and data paths. The planner estimates memory for your selections. Plan a media server or monitoring stack from 12 services, change ports and storage, and reopen the exported Compose file later. | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/rack-recipes>) |
 | [Archive Shelf](<https://coolcode.ca/archive-shelf/>) | Find early Canadian internet survey results by page or search your own collection. <br> Reference collection · Nine complete issues of Statistics Canada’s The Daily provide 75 searchable pages published from July 2001 to September 2010. Search “dial-up” to compare page 2 of the July 26, 2001 issue with page 5 of the September 23, 2003 issue. Open the PDF at either page or download the matching citations. | [Source &amp; docs](<https://github.com/jsdyer/jsdyer.github.io/tree/main/archive-shelf>) |
 
 #### Networks &amp; routing

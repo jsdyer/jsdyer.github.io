@@ -7,9 +7,9 @@
   <meta name="description" content="Search the original pages of Statistics Canada's The Daily on Canadian internet adoption from 2001 to 2010, or search your own documents privately.">
   <title>Archive Shelf · CoolCode.ca</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="shelf.css">
-  <script src="archive-pages.js" defer></script>
-  <script src="shelf.js" defer></script>
+  <link rel="stylesheet" href="shelf.css?v=20261119">
+  <script src="archive-pages.js?v=9issues" defer></script>
+  <script src="shelf.js?v=20261119" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to search</a>
@@ -38,6 +38,7 @@
             <label>Collection<select id="collection"><option value="public">The Daily · Statistics Canada</option><option value="local">Your files · this tab</option></select></label>
             <label id="issue-filter">Issue<select id="issue"><option value="">All issues</option></select></label>
           </div>
+          <label id="catalogue-option"><input id="skip-catalogue" type="checkbox"> Exclude printed catalogue labels from search</label>
           <div id="import-panel" hidden>
             <label for="files">Add UTF-8 text or Markdown files</label>
             <input id="files" type="file" multiple accept=".txt,.md,.markdown">
@@ -52,6 +53,7 @@
         <noscript><p>Browse the complete issues below. Each PDF contains searchable text.</p></noscript>
         <div id="result-panel" hidden>
           <div class="results-head"><h3 id="summary" aria-live="polite" aria-atomic="true"></h3><button class="reset" id="clear" type="button" hidden>Clear search</button></div>
+          <p id="scope-note"></p>
           <ol class="results" id="results"></ol>
           <div class="actions"><button type="button" id="more" class="reset" hidden>Show more pages</button><button type="button" id="export" class="reset" hidden>Download results (JSON)</button></div>
         </div>
