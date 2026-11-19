@@ -5223,5 +5223,544 @@
     "readme": {
       "note": "Search for Sechelt, then compare its community intensity with the preferred Canadian and US magnitudes. Change the minimum response count to see which places are supported by many independent submissions."
     }
+  },
+  {
+    "id": "aircheckdiary",
+    "title": "Aircheck Diary",
+    "description": "Compare what Halifax and Vancouver logged at the same local hour, find a favourite title and open its original broadcast records.",
+    "category": "media",
+    "tags": [
+      "television",
+      "Canada",
+      "CRTC",
+      "Halifax",
+      "Vancouver",
+      "CBC",
+      "CTV"
+    ],
+    "icon": "tv-minimal",
+    "url": "/aircheckdiary/",
+    "source": "https://github.com/jsdyer/aircheckdiary",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CRTC television logs cover two Halifax and two Vancouver stations, starting with all 30 reporting dates in September 2026.",
+      "cadence": "Monthly import",
+      "probes": [
+        {
+          "label": "Latest broadcast date",
+          "url": "https://coolcode.ca/aircheckdiary/data/archive.json",
+          "path": [
+            "last"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "program starts"
+          },
+          "value": "2026-09-30",
+          "count": 5749
+        },
+        {
+          "label": "Source retrieved",
+          "url": "https://coolcode.ca/aircheckdiary/data/archive.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "stationDays"
+            ],
+            "unit": "station-days"
+          },
+          "value": "2026-11-19",
+          "count": 120
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare September 1, 2026 at 8 p.m. Halifax’s CJCH logged Password while Vancouver’s CIVT logged Jeopardy! Masters. At 10 p.m. the titles trade places. Open a program’s source rows to see the commercial spots and segments filed inside its slot."
+    }
+  },
+  {
+    "id": "committeereceipt",
+    "title": "Committee Receipt",
+    "description": "Trace a question from a House of Commons hearing to the page where officials answered it.",
+    "category": "explorers",
+    "tags": [
+      "Parliament",
+      "OGGO",
+      "committee evidence",
+      "procurement",
+      "Phoenix",
+      "written answers"
+    ],
+    "icon": "landmark",
+    "url": "/committeereceipt/",
+    "source": "https://github.com/jsdyer/committeereceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "House of Commons transcripts and written follow-ups trace nine questions at four Government Operations hearings from March to May 2020.",
+      "probes": [
+        {
+          "label": "Collection reviewed",
+          "url": "https://coolcode.ca/committeereceipt/receipts.json",
+          "path": [
+            "reviewed"
+          ],
+          "count_at": {
+            "path": [
+              "cases"
+            ],
+            "measure": "length",
+            "unit": "exchanges"
+          },
+          "value": "2026-11-19",
+          "count": 9
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Look up the tugboat challenge to find the roughly $193,000 on page 2 of the May 22 email. The department measured costs through March 31, and the reply came 71 days after the question."
+    }
+  },
+  {
+    "id": "donairafterdark",
+    "title": "Donair After Dark",
+    "description": "Price your usual donair order and see which Halifax counters list pickup hours for the time you choose.",
+    "category": "places",
+    "tags": [
+      "Halifax",
+      "Nova Scotia",
+      "donair",
+      "food",
+      "pickup",
+      "late night"
+    ],
+    "icon": "map-pin",
+    "url": "/donairafterdark/",
+    "source": "https://github.com/jsdyer/donairafterdark",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Halifax shop menus supply counter prices, sauce sizes and weekly pickup hours.",
+      "cadence": "Weekly change checks; manual price review",
+      "probes": [
+        {
+          "label": "Menus verified",
+          "url": "https://coolcode.ca/donairafterdark/data/status.json",
+          "path": [
+            "verified"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "branches"
+          },
+          "value": "2026-11-19",
+          "count": 5
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Try Saturday at 12:45 a.m. to see Friday’s hours carry past midnight at Tony’s and Metro Pizza. Compare two entry-size donairs with the smallest extra sauce, or request exactly 4 oz to see which menus publish that portion. Save your usual basket on this device."
+    }
+  },
+  {
+    "id": "paperchequetrail",
+    "title": "Paper Cheque Trail",
+    "description": "Compare the number, value and share of paper cheques issued by Canadian federal programs each month.",
+    "category": "explorers",
+    "tags": [
+      "cheques",
+      "direct deposit",
+      "Receiver General",
+      "OAS",
+      "Canada Pension Plan"
+    ],
+    "icon": "landmark",
+    "url": "/paperchequetrail/",
+    "source": "https://github.com/jsdyer/paperchequetrail",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The Receiver General publishes monthly domestic payment counts and amounts by department, product and payment method.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/paperchequetrail/data/index.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "row_count"
+            ],
+            "unit": "payment records"
+          },
+          "value": "2026-11-19",
+          "count": 20677
+        },
+        {
+          "url": "https://coolcode.ca/paperchequetrail/data/index.json",
+          "label": "Payment months",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "through"
+          ],
+          "value": "2018-04–2026-10"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "In October 2026, Old Age Security issued 172,555 cheques among 7,554,966 payments. Switch to count share to see 2.28%, compare it with CPP and open the monthly values for the source row behind either figure."
+    }
+  },
+  {
+    "id": "sameflight",
+    "title": "Same Flight",
+    "description": "Compare the decisions and individual orders published about passengers on the same departure.",
+    "category": "explorers",
+    "tags": [
+      "airlines",
+      "passenger complaints",
+      "CTA",
+      "flight number",
+      "compensation",
+      "orders"
+    ],
+    "icon": "plane",
+    "url": "/sameflight/",
+    "source": "https://github.com/jsdyer/sameflight",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "CTA summaries cover nine departures on December 23, 2023 and January 27, 2024. Compare published decisions and orders, or import a filtered agency export locally.",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/sameflight/departures.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "departures"
+            ],
+            "measure": "length",
+            "unit": "departures"
+          },
+          "value": "2026-11-19",
+          "count": 9
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Flair F81100 from Montréal to Fort Lauderdale has 22 inconvenience-compensation decisions and four dismissals. On WestJet WS1877 from Kahului to Vancouver, seven decisions contain 13 order rows. Filter the issue or remedy to see how a single decision can appear in several counts."
+    }
+  },
+  {
+    "id": "lastrefill",
+    "title": "Last Refill",
+    "description": "Find the longest gap between mapped drinking fountains on a private Vancouver GPX route.",
+    "category": "places",
+    "tags": [
+      "Vancouver",
+      "water",
+      "GPX",
+      "cycling",
+      "washrooms"
+    ],
+    "icon": "route",
+    "url": "/lastrefill/",
+    "source": "https://github.com/jsdyer/lastrefill",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "City of Vancouver fountain, washroom, boundary and bikeway records are matched to a local route.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/lastrefill/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "mapped facilities"
+          },
+          "value": "2026-11-19",
+          "count": 439
+        },
+        {
+          "label": "Fountain source update",
+          "url": "https://coolcode.ca/lastrefill/status.json",
+          "path": [
+            "dates",
+            "fountains"
+          ],
+          "count_at": {
+            "path": [
+              "fountains"
+            ],
+            "unit": "fountains"
+          },
+          "value": "2022-06-27",
+          "count": 278
+        },
+        {
+          "label": "Washroom source update",
+          "url": "https://coolcode.ca/lastrefill/status.json",
+          "path": [
+            "dates",
+            "washrooms"
+          ],
+          "count_at": {
+            "path": [
+              "washrooms"
+            ],
+            "unit": "washrooms"
+          },
+          "value": "2026-11-14",
+          "count": 161
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "On the English Bay ride, compare posted year-round fountains with all mapped seasons. The Second Beach pool-deck fountain appears in the second view. Open a GPX to see distances along your own track, washroom hours and the kilometres where Vancouver’s municipal coverage ends."
+    }
+  },
+  {
+    "id": "metermath",
+    "title": "Meter Math",
+    "description": "Compare entire-visit parking costs and posted restrictions at Vancouver meter zones.",
+    "category": "money",
+    "tags": [
+      "parking",
+      "Vancouver",
+      "meters",
+      "rates",
+      "transportation"
+    ],
+    "icon": "receipt-text",
+    "url": "/metermath/",
+    "source": "https://github.com/jsdyer/metermath",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "City of Vancouver meter records supply time-of-day rates, duration limits and restrictions.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/metermath/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "in-service meter records"
+          },
+          "value": "2026-11-19",
+          "count": 3129
+        },
+        {
+          "label": "Meter source update",
+          "url": "https://coolcode.ca/metermath/status.json",
+          "path": [
+            "latest"
+          ],
+          "value": "2026-11-16"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Try a Friday from 5:30 to 7 p.m. near the Vancouver Art Gallery. Compare the two featured zones, then expand a meter row to see the charge on either side of 6 p.m. Switch the result group to see which posted limits or restrictions affect the same visit."
+    }
+  },
+  {
+    "id": "signalwalk",
+    "title": "Signal Walk",
+    "description": "Align two Android cellular surveys at named checkpoints to compare signal, serving-cell changes and phone state.",
+    "category": "liminal-tools",
+    "tags": [
+      "Network Survey",
+      "Android",
+      "cellular",
+      "LTE",
+      "5G",
+      "signal strength",
+      "registration",
+      "CSV"
+    ],
+    "icon": "radio-tower",
+    "url": "/signalwalk/",
+    "source": "https://github.com/jsdyer/signalwalk",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Android Network Survey LTE, NR and phone-state CSVs are read in your browser.",
+      "probes": [
+        {
+          "label": "CSV formats checked",
+          "url": "https://coolcode.ca/signalwalk/data/formats.json",
+          "path": [
+            "reviewed"
+          ],
+          "count_at": {
+            "path": [
+              "formats"
+            ],
+            "measure": "length",
+            "unit": "CSV formats"
+          },
+          "value": "2026-11-19",
+          "count": 3
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Select each walk’s LTE, NR and phone-state CSVs together, then enter the elapsed time for the same landmark in both recordings. The report uses relative times and numeric checkpoint labels so locations and identifiers stay out of the export."
+    }
+  },
+  {
+    "id": "lastmilepercentile",
+    "title": "Last-Mile Percentile",
+    "description": "Compare your download or upload speed with tests on the same network in a Canadian city.",
+    "category": "liminal-tools",
+    "tags": [
+      "internet speed",
+      "speed test",
+      "Canada",
+      "ASN",
+      "ISP",
+      "M-Lab",
+      "bandwidth"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/lastmilepercentile/",
+    "source": "https://github.com/jsdyer/lastmilepercentile",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Measurement Lab publishes monthly speed percentiles and test counts by city and network.",
+      "cadence": "Weekly checks for complete monthly files",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/lastmilepercentile/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "cohorts"
+            ],
+            "unit": "monthly comparison groups"
+          },
+          "value": "2026-11-19",
+          "count": 9773
+        },
+        {
+          "label": "Test months",
+          "url": "https://coolcode.ca/lastmilepercentile/data/status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2026-07–2026-09"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a month, city and network, then enter your speed in Mbps. Each comparison shows the two published boundaries around your result and the number of tests behind them."
+    }
+  },
+  {
+    "id": "drivecohort",
+    "title": "Drive Cohort",
+    "description": "Look up an exact drive model in Backblaze’s quarterly fleet history and compare two local SMART reports.",
+    "category": "projects",
+    "tags": [
+      "hard drives",
+      "Backblaze",
+      "NAS",
+      "SMART",
+      "failure rates",
+      "storage"
+    ],
+    "icon": "database",
+    "url": "/drivecohort/",
+    "source": "https://github.com/jsdyer/drivecohort",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Backblaze’s quarterly production fleet tables supply model counts, drive-days and failures. Optional smartctl reports stay on your device.",
+      "cadence": "Monthly for quarterly reports",
+      "probes": [
+        {
+          "label": "Source period",
+          "url": "https://coolcode.ca/drivecohort/data/status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2025-01-01–2026-06-30"
+        },
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/drivecohort/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "rows"
+            ],
+            "unit": "model-quarters"
+          },
+          "value": "2026-11-19",
+          "count": 188
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Look up ST12000NM0007 and compare Q1 and Q2 2025. Backblaze recorded 24 failures across 92,483 drive-days in Q1 and nine across 91,801 in Q2. Bring two smartctl JSON files from the same disk to see what changed on your own device."
+    }
   }
 ]
