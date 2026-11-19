@@ -45,7 +45,7 @@ function tf_directories(array $config): void
 function tf_db(array $config): PDO
 {
     if ($config['dsn'] === '' || $config['password_hash'] === '') {
-        throw new TimefoldError('Timefold is not initialized. Run php bin/timefold.php init --sqlite --demo on the server.', 503);
+        throw new TimefoldError('Timefold is not initialized. Run php bin/timefold.php init --sqlite on the server.', 503);
     }
     if (!str_starts_with($config['dsn'], 'mysql:') && !str_starts_with($config['dsn'], 'sqlite:')) {
         throw new TimefoldError('Use a MySQL/MariaDB or SQLite PDO connection.', 503);

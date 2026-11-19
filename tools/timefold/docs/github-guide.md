@@ -1,10 +1,10 @@
 # Your GitHub workshop
 
-Timefold includes a few GitHub features you can actually try. Everything in this guide uses fictional demo data; keep your real archive in `var/`, outside Git.
+Timefold includes a few GitHub features you can actually try. The archive starts empty. To explore public records, import the linked web standards CSV from the light table. Keep your personal archive in `var/`, outside Git.
 
 ## Open a private playground with Codespaces
 
-[Create a Timefold Codespace](https://codespaces.new/jsdyer/jsdyer.github.io?ref=main) or choose **Code → Codespaces → Create codespace on main** in the CoolCode repository. GitHub opens an editor and terminal in your browser. The development container installs PHP, initializes a SQLite archive with fictional capsules, and starts the app on port **8000**.
+[Create a Timefold Codespace](https://codespaces.new/jsdyer/jsdyer.github.io?ref=main) or choose **Code → Codespaces → Create codespace on main** in the CoolCode repository. GitHub opens an editor and terminal in your browser. The development container installs PHP, initializes a SQLite archive for your own records, and starts the app on port **8000**.
 
 The creation log prints a generated owner password. If you missed it, open a terminal and run:
 

@@ -179,6 +179,15 @@ def exercise(base: str) -> None:
         check(len(browser.capsules()) == count_before_import, "invalid backup does not partially write records")
         verify_backup_attacks(browser, backup, count_before_import)
 
+        timeline = f'date,title,note\n1996-12-17,{prefix} spreadsheet,"local, original"\n'.encode()
+        fields_csv = {"backup": ("timeline.csv", timeline, "text/csv")}
+        browser.multipart("import", {}, fields_csv)
+        spreadsheet = find(prefix + " spreadsheet")
+        created_ids.append(spreadsheet["id"])
+        check(spreadsheet["note"] == "local, original", "CSV upload preserves quoted cells")
+        browser.multipart("import", {}, fields_csv)
+        check(len(browser.capsules()) == count_before_import + 1, "identical CSV uploads skip duplicate rows")
+
         stranger = Browser(base)
         stranger.request("file&id=" + second["id"], expected=401)
         browser.json("logout", {})

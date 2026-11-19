@@ -5,6 +5,9 @@ import json
 from pathlib import Path
 import threading
 from playwright.sync_api import sync_playwright
+from archive_shelf_browser import check_archive_shelf
+from protocol_captures_browser import check_protocols
+from rack_recipes_browser import check_rack_recipes
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -91,6 +94,7 @@ def main():
             for tool in tools:
                 if tool["hosting"] == "local":
                     assert page.goto(url + tool["url"]).status == 200
+            check_rack_recipes(page, url)
             assert page.goto(url + "/field-notes/").status == 200
             context = browser.new_context(java_script_enabled=False)
             nojs = context.new_page()
@@ -100,7 +104,12 @@ def main():
             assert nojs.locator('#install').is_visible()
             nojs.locator('[data-tool-id="stormtracks"] summary').click()
             assert nojs.locator('[data-tool-id="stormtracks"] dl').is_visible()
+            nojs.goto(url + "/archive-shelf/")
+            assert nojs.locator("#issues").is_visible()
+            assert nojs.locator(".issue-list li a").count() == 18
             context.close()
+            check_protocols(browser,url)
+            check_archive_shelf(browser,url,screenshots)
             assert not errors, errors
             browser.close()
         print("Browser checks passed: search, clear, theme, mobile, local pages and no-JS catalogue")

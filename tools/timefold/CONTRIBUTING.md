@@ -3,7 +3,7 @@
 No package manager or asset build is involved. Edit a file and refresh.
 
 1. Create a branch: `git switch -c my-darkroom`.
-2. Run the local demo from the README, using sample data.
+2. Run the local archive from the README and import the web standards CSV.
 3. Change the UI in `public/assets/` or the rules in `app/`.
 4. Run `php tests/run.php` and `python3 tests/http_smoke.py`.
 5. Push the branch and open a pull request. The Actions tab shows the PHP and

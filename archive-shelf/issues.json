@@ -1,0 +1,65 @@
+[
+  {
+    "date": "2001-07-26",
+    "topic": "Household internet use in 2000",
+    "file": "issues/the-daily-2001-07-26.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2001-7-26-eng.pdf",
+    "sha256": "10b8ffde4d75a6fa77d73f12e885b1f80bb4faa201cbe9d83401e21b6e443636"
+  },
+  {
+    "date": "2002-07-25",
+    "topic": "Household internet use in 2001",
+    "file": "issues/the-daily-2002-07-25.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2002-7-25-eng.pdf",
+    "sha256": "a3fc9831c3735243109d781d195b09bf7e4a33f57ec077e26e042a3a39f7a45b"
+  },
+  {
+    "date": "2003-09-23",
+    "topic": "Broadband adoption, 1999–2002",
+    "file": "issues/the-daily-2003-09-23.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2003-9-23-eng.pdf",
+    "sha256": "0f8663b25e794ae6d7f397329095be103e1a2a00b75b2f98f5f1181b8a391342"
+  },
+  {
+    "date": "2003-12-11",
+    "topic": "Online shopping by households in 2002",
+    "file": "issues/the-daily-2003-12-11.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2003-12-11-eng.pdf",
+    "sha256": "55b821fe128d050c80256ad4b4ac1bb1847c20812f5a6a56e5da1b2e1c484cd8"
+  },
+  {
+    "date": "2006-08-02",
+    "topic": "Internet use and time use in 2005",
+    "file": "issues/the-daily-2006-08-02.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2006-8-2-eng.pdf",
+    "sha256": "89fce3b7415cb937e2d8cb734f3c5a077cdbe6c2cae00eb1ea30257f05a76a40"
+  },
+  {
+    "date": "2006-08-15",
+    "topic": "Canadian Internet Use Survey, 2005",
+    "file": "issues/the-daily-2006-08-15.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2006-8-15-eng.pdf",
+    "sha256": "0024c2b77b0afc6890809083ba80a4efe94d228c56e0a7dd95f7022cbb3d6b9e"
+  },
+  {
+    "date": "2008-06-12",
+    "topic": "Canadian Internet Use Survey, 2007",
+    "file": "issues/the-daily-2008-06-12.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2008-6-12-eng.pdf",
+    "sha256": "10878f9d90dfc087d066147f10b1dc7b69b236f4211de1fcf44937017315210d"
+  },
+  {
+    "date": "2010-05-10",
+    "topic": "Canadian Internet Use Survey, 2009",
+    "file": "issues/the-daily-2010-05-10.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2010-5-10-eng.pdf",
+    "sha256": "7af7443894ee0c85ea32d8bc3fcb8dfd4f110dbe9a4eda67cc32964d25371de7"
+  },
+  {
+    "date": "2010-09-27",
+    "topic": "Online shopping in 2009",
+    "file": "issues/the-daily-2010-09-27.pdf",
+    "original": "https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2010-9-27-eng.pdf",
+    "sha256": "d8dda4e3c297c2c473cee99ec251746243cdb59e5c0a9c5cd39c433cb133923a"
+  }
+]

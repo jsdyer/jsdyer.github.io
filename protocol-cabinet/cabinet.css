@@ -83,3 +83,12 @@ dd { margin: .3rem 0 0; }
   .protocols span { font-size: .75rem; }
   .annotation { padding: 1rem; }
 }
+.input-panel { margin-top: 1rem; padding: 1rem; background: #f8f4e9; border: 1px solid var(--line); }
+.input-panel p:first-child { margin-top: 0; }
+.input-panel details,.input-panel button { margin-top: .7rem; }
+.input-panel label,.input-panel textarea { display:block; margin-block:.5rem; }
+.input-panel textarea { width:100%; font: .9rem/1.5 var(--mono); }
+.input-panel button { min-height:40px; padding:.45rem .8rem; cursor:pointer; }
+#jump { max-width: min(80vw,40rem); }
+#notice:empty {display:none}
+#meaning,#stamp {overflow-wrap:anywhere}

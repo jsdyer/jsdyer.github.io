@@ -149,6 +149,15 @@ function filterAndRender() {
   $('#active-filter').hidden = !active.length;
   $('#active-filter').textContent = active.length ? `EXPLORING: ${active.join(' / ')}` : '';
   $('#empty-state').hidden = state.filtered.length > 0;
+  if (!state.filtered.length) {
+    const firstUse = !state.capsules.length;
+    $('#empty-title').textContent = firstUse ? 'Start your timeline' : 'No matching capsules';
+    $('#empty-help').textContent = firstUse
+      ? 'Add a capsule or import a CSV with date and title columns. Use YYYY-MM-DD for each date.'
+      : 'Try another year or clear your filters.';
+    $('#empty-reset').hidden = firstUse;
+    $('#empty-import').hidden = !firstUse;
+  }
   $('#capsule-grid').replaceChildren(...state.filtered.map((c, i) => makeCard(c, i)));
   $('#capsule-grid').hidden = state.view !== 'table';
   $('#graph-view').hidden = state.view !== 'graph' || !state.filtered.length;
@@ -532,22 +541,23 @@ $('#backup-button').addEventListener('click', () => {
   window.location.assign('api.php?action=export');
   toast('Preparing your portable backup. Keep it somewhere safe.');
 });
+$('#empty-import').addEventListener('click', () => $('#backup-file').click());
 $('#import-button').addEventListener('click', () => $('#backup-file').click());
 $('#backup-file').addEventListener('change', async event => {
   const file = event.target.files[0];
   if (!file) return;
-  if (!confirm(`Import capsules from “${file.name}”? Timefold will merge the backup into this archive. Export a backup first if you want a copy of the current state.`)) { event.target.value = ''; return; }
+  if (!confirm(`Import capsules from “${file.name}”? Timefold will add new records to this archive and skip duplicates.`)) { event.target.value = ''; return; }
   const form = new FormData();
   form.append('backup', file);
   const button = $('#import-button');
   button.disabled = true;
+  $('#empty-import').disabled = true;
   try {
     const data = await request('import', { method: 'POST', form });
     await refreshArchive();
-    const count = data.imported ?? data.count;
-    toast(count !== undefined ? `Backup imported: ${count} capsule${count === 1 ? '' : 's'} added.` : 'Backup imported. Your capsules are ready to explore.');
+    toast(`Imported ${data.imported}. Skipped ${data.skipped} existing records.`);
   } catch (error) { toast(error.message); }
-  finally { button.disabled = false; event.target.value = ''; }
+  finally { button.disabled = false; $('#empty-import').disabled = false; event.target.value = ''; }
 });
 $('#print-button').addEventListener('click', () => window.print());
 

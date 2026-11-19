@@ -2,7 +2,7 @@
   {
     "id": "rack-recipes",
     "title": "Rack Recipes",
-    "description": "Plan a home server stack and export a Docker Compose starter.",
+    "description": "Plan or reopen a Docker Compose stack, choose host ports and storage, and export the edited configuration.",
     "category": "projects",
     "tags": [
       "docker",
@@ -17,11 +17,11 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Compose recipes are generated in your browser from your selected services."
+      "detail": "The browser generates Compose YAML from selected services and reads earlier Rack Recipes exports."
     },
     "readme": {
       "lead": "RAM figures are planning",
-      "note": "RAM figures are planning allowances for light use."
+      "note": "Move FreshRSS to host port 8181 if 8080 is occupied, choose project folders for its data, then reopen the downloaded Compose file to revise the plan."
     }
   },
   {
@@ -104,7 +104,7 @@
   {
     "id": "archive-shelf",
     "title": "Archive Shelf",
-    "description": "Search historical newsletters by page or index a private collection on Linux.",
+    "description": "Find early Canadian internet survey results by page or search your own collection.",
     "category": "projects",
     "tags": [
       "books",
@@ -122,11 +122,11 @@
     "requirements": "Python 3, SQLite FTS5 and Poppler for PDFs",
     "data_info": {
       "mode": "reference",
-      "detail": "The browser edition uses a three-page fictional newsletter to demonstrate the archive.",
+      "detail": "Nine complete issues of Statistics Canada’s The Daily provide 75 searchable pages published from July 2001 to September 2010.",
       "install_detail": "The Linux edition indexes your own PDF newsletters in a local SQLite database."
     },
     "readme": {
-      "note": "Try “dial-up” to find the matching newsletter page. The Linux edition can build the same kind of searchable shelf from your own PDFs and text files."
+      "note": "Search “dial-up” to compare page 2 of the July 26, 2001 issue with page 5 of the September 23, 2003 issue. Open the PDF at either page or download the matching citations."
     }
   },
   {
@@ -153,13 +153,13 @@
     },
     "readme": {
       "lead": "Replaying an uncaptured destination",
-      "note": "Replaying an uncaptured destination shows a local missing-page notice."
+      "note": "Capture a site before and after a change, then compare the two snapshot IDs to see which URLs appeared, disappeared or changed content."
     }
   },
   {
     "id": "timefold",
     "title": "Timefold",
-    "description": "Build a personal timeline of photos, game saves and web fragments.",
+    "description": "Import a personal timeline, connect dated records and browse the files attached to each event.",
     "category": "projects",
     "tags": [
       "archive",
@@ -171,14 +171,14 @@
     "source": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold",
     "hosting": "external",
     "access": "install",
-    "requirements": "PHP 8.2+ and MySQL/MariaDB; optional SQLite demo",
+    "requirements": "PHP 8.2+ with SQLite or MySQL/MariaDB",
     "data_info": {
       "mode": "installed",
-      "detail": "The timeline uses your own collection or the fictional collection included with the tool."
+      "detail": "Your records and timeline spreadsheets populate the archive. An optional collection links seven dated W3C recommendations."
     },
     "readme": {
       "lead": "Export includes only attachments",
-      "note": "Export includes only attachments referenced by current capsules."
+      "note": "Import a timeline CSV with dates and titles. Reopening the same file skips existing records, including capsules you have since edited."
     }
   },
   {
@@ -211,7 +211,7 @@
   {
     "id": "dnslens",
     "title": "DNS Lens",
-    "description": "Compare public resolvers and inspect DNS records, mail policies and registration.",
+    "description": "Check a website or mail domain, look up an exact DNS record and compare a saved report with a new reading.",
     "category": "liminal-tools",
     "tags": [
       "spf",
@@ -228,11 +228,10 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Each lookup requests current DNS records and domain registration data from public services."
+      "detail": "Google Public DNS or Cloudflare returns the requested records. Full reports also query registration services."
     },
     "readme": {
-      "lead": "The DNSSEC AD flag",
-      "note": "The DNSSEC AD flag represents what the selected validating resolver reported."
+      "note": "Download a DNS report before changing a domain, repeat the lookup afterwards and open the earlier JSON to see which answers changed at the same resolver."
     }
   },
   {
@@ -569,7 +568,7 @@
   {
     "id": "packet-detour",
     "title": "Packet Detour",
-    "description": "Follow a Canadian route through Seattle or paste your own annotated hops.",
+    "description": "Inspect Canadian traceroute measurements and annotate the hops in your own route.",
     "category": "liminal-tools",
     "tags": [
       "traceroute",
@@ -582,18 +581,17 @@
     "hosting": "local",
     "access": "browser",
     "data_info": {
-      "mode": "local",
-      "detail": "Compare three fictional routing examples or paste your own annotated hops."
+      "mode": "mixed",
+      "detail": "RIPE Atlas recorded the Vancouver and Montréal routes to K-root on October 1, 2025. You can also enter your own hop notes."
     },
     "readme": {
-      "lead": "Paste your own rows",
-      "note": "Paste your own rows to compare the sequence of country labels and each hop’s RTT."
+      "note": "Compare measured hop timings from Vancouver and Montréal, open the exact RIPE Atlas result, then annotate known countries and see where a route’s evidence runs out."
     }
   },
   {
     "id": "protocol-cabinet",
     "title": "Protocol Cabinet",
-    "description": "Read the messages sent in a DNS lookup, HTTP request, or SMTP conversation.",
+    "description": "Find slow HTTP requests, read DNS answers and follow recorded email delivery hops.",
     "category": "liminal-tools",
     "tags": [
       "network",
@@ -609,12 +607,11 @@
     "hosting": "local",
     "access": "browser",
     "data_info": {
-      "mode": "reference",
-      "detail": "Built-in DNS, HTTP and SMTP exchanges run offline."
+      "mode": "mixed",
+      "detail": "Inspect a local HAR, DNS JSON or email header, or request a live HTTP or DNS response."
     },
     "readme": {
-      "lead": "Compare a successful DNS",
-      "note": "Compare a successful DNS lookup with a missing name, fetch an HTTP document and revalidate a cached copy, or follow SMTP through mail delivery and a rejected recipient."
+      "note": "Open a browser HAR and sort by slowest request, inspect the answer rows in a DNS Lens export, or open an email’s original headers to read its recorded handoffs in delivery order."
     }
   },
   {
@@ -663,11 +660,11 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "The tool reads the headers you paste or extracts them from a local HAR file."
+      "detail": "Inspect pasted headers, a local HAR or a dated HTTP redirect and its final response."
     },
     "readme": {
       "lead": "It compares cookie flag",
-      "note": "It compares cookie flag profiles without linking individual cookies."
+      "note": "Choose Compare two responses and open the captured redirect and page. The path without a final slash returned 301. The destination returned 200 and a max-age of 600 seconds."
     }
   },
   {
@@ -749,11 +746,11 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Your lockfile stays in the browser, and optional OSV lookups send the package names and versions you select."
+      "detail": "Inspect your lockfile or compare two published project manifests. Optional OSV lookups send only the packages and versions you select."
     },
     "readme": {
       "lead": "Version ranges, local paths",
-      "note": "Version ranges, local paths and unsupported tags are skipped."
+      "note": "Compare pip 25.3 and 26.3, then filter for unchanged versions or inspect earlier versions no longer present. The package lists record what pip bundled in each release."
     }
   },
   {
@@ -1017,8 +1014,8 @@
             ],
             "unit": "briefing notes"
           },
-          "value": "2026-11-17",
-          "count": 161739
+          "value": "2026-11-18",
+          "count": 161747
         },
         {
           "url": "https://coolcode.ca/briefings/data/manifest.json",
@@ -1026,7 +1023,7 @@
             "sourceUpdated"
           ],
           "label": "Source updated",
-          "value": "2026-11-17"
+          "value": "2026-11-18"
         }
       ],
       "cadence": "Daily"
@@ -1054,11 +1051,11 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Searchable PDF text and notes stay in this browser tab."
+      "detail": "Read a local PDF or investigate the 230-page Nova Scotia bridge-inspection disclosure 2020-00906-TIR. Your annotations stay in this tab."
     },
     "readme": {
       "lead": "Select text in the",
-      "note": "Select text in the detail and choose Pin highlighted text to attach an excerpt."
+      "note": "Open the 2020 Nova Scotia bridge release and search Allain Creek. Physical PDF page 2 lists both a Level 1 and a Level 2 inspection. Pin the page to keep the citation in your evidence brief."
     }
   },
   {
@@ -1367,8 +1364,8 @@
             ],
             "unit": "catalogue entries"
           },
-          "value": "2026-11-17",
-          "count": 48313
+          "value": "2026-11-18",
+          "count": 48327
         },
         {
           "url": "https://coolcode.ca/datasetexplorer/data/manifest.json",
@@ -1376,7 +1373,7 @@
             "publisherDate"
           ],
           "label": "Source updated",
-          "value": "2026-11-17"
+          "value": "2026-11-18"
         }
       ],
       "cadence": "Daily"
@@ -1598,7 +1595,7 @@
     },
     "readme": {
       "lead": "The report distinguishes missing",
-      "note": "The report distinguishes missing properties from JSON null, and compares nested fields and geometry exactly."
+      "note": "Compare the 2020 and 2023 Nova Scotia bridge releases by record_id. Four of the nine Annapolis County bridges changed Level 1 rating. Open ANN002 to see Anderson Brook Bridge move from 3 to 2."
     }
   },
   {
@@ -1965,7 +1962,7 @@
   {
     "id": "trailglass",
     "title": "Trailglass",
-    "description": "Explore cycling and trail layers and inspect a Garmin GPX ride.",
+    "description": "Explore municipal trails, download mapped segments as GPX and inspect your own recorded rides.",
     "category": "places",
     "tags": [
       "langley",
@@ -1985,7 +1982,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Routes come from Vancouver, Langley and Halifax map data or a GPX file you import.",
+      "detail": "Vancouver, Langley and Halifax publish the mapped segments. Activity times and elevations come from GPX files you open.",
       "probes": [
         {
           "url": "https://coolcode.ca/trailglass/data/status.json",
@@ -1993,7 +1990,7 @@
             "oldest_retrieval"
           ],
           "label": "Oldest source retrieved",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "regions"
@@ -2009,13 +2006,14 @@
     },
     "readme": {
       "lead": "Elapsed time sums intervals",
-      "note": "Elapsed time sums intervals within timed segments, excluding gaps between segments."
-    }
+      "note": "Select a map segment to download its GPX with the municipality, source record and licence. The inspector also reads local GPX activities with recorded times and elevations."
+    },
+    "sync_manifest": true
   },
   {
     "id": "weatherarchive",
     "title": "Weather Archive",
-    "description": "Compare daily Canadian weather station records and monthly climate normals.",
+    "description": "Compare Canadian weather stations over months or years and export the daily observations.",
     "category": "places",
     "tags": [
       "eccc",
@@ -2037,11 +2035,10 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "The tool requests up to 92 days of observations from Canadian weather stations for the period you choose."
+      "detail": "Environment and Climate Change Canada supplies daily readings and monthly station normals. Each comparison can cover up to 30 years."
     },
     "readme": {
-      "lead": "The CSV includes ECCC",
-      "note": "The CSV includes ECCC flags for the measurements displayed in the tool."
+      "note": "Compare all of 2024 at Langley and Halifax, inspect the daily table one month at a time and download both stations in a single CSV. Blank measurements keep their place in the record."
     }
   },
   {
@@ -2326,7 +2323,7 @@
   {
     "id": "halifaxtimelens",
     "title": "Halifax Time Lens",
-    "description": "Compare Halifax aerial mosaics and find nearby archival photographs from 1955 and 2001.",
+    "description": "Compare Halifax in 1947 and 1977, trace four places through archival photographs, and save nearby photo references to a map-ready notebook.",
     "category": "places",
     "tags": [
       "canada",
@@ -2341,7 +2338,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "NRCan aerial mosaics and a modern street map stream on demand. Nearby photographs come from a refreshed Halifax Municipal Archives index.",
+      "detail": "NRCan aerial mosaics, digitized Halifax Municipal Archives photographs and a weekly municipal photo index anchor each comparison.",
       "cadence": "Weekly",
       "probes": [
         {
@@ -2363,7 +2360,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose Halifax Ferry Terminal in Photographs near this point, select a one-kilometre radius, and compare the indexed photo years. Pan or click the map to search a different location. Open any linked archival reference to see the original catalogue entry."
+      "note": "Start with Cogswell and Scotia Square to compare the blocks before clearance with the 1977 mosaic, then open the 1961 photograph and the later demolition view. At the ferry terminal, see the closest 1955 and 2001 archive references within one kilometre, show the indexed points on both maps, and save references to a downloadable GeoJSON notebook."
     }
   },
   {
@@ -2653,7 +2650,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-18 13:02 UTC",
+          "value": "2026-11-18 22:56 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -2723,7 +2720,7 @@
   {
     "id": "photolab",
     "title": "Photo Lab",
-    "description": "Inspect metadata, edit photos and export cleaned copies on your device.",
+    "description": "Compare photo metadata across a collection, crop individual images and export clean copies.",
     "category": "field-kit",
     "tags": [
       "exif",
@@ -2743,12 +2740,12 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "JPEG and PNG files stay in your browser for metadata analysis and editing."
+      "detail": "Your JPEG and PNG files stay on this device. The included Apollo 8 photograph comes from NASA."
     },
     "readme": {
-      "lead": "Use the synthetic coast",
-      "note": "Use the synthetic coast example to try the crop drag, compare the original and export preview, read sample GPS and camera tags, and inspect luminance or RGB histograms."
-    }
+      "note": "Open a group of photos to compare camera names, capture times and GPS presence. Download the inventory as CSV or select a filename to crop and export a clean copy."
+    },
+    "sync_manifest": true
   },
   {
     "id": "otherworldnames",
@@ -3006,7 +3003,7 @@
   {
     "id": "marketshadows",
     "title": "Market Shadows",
-    "description": "Compare CIRO trading and short positions and rank changes between reports.",
+    "description": "Compare CIRO short-sale and short-position reports by security, market and reporting period.",
     "category": "money",
     "tags": [
       "ciro",
@@ -3023,11 +3020,10 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "The tool reads your CIRO short-sale and short-position reports or a fictional sample."
+      "detail": "Open CIRO short-sale and short-position files or paste rows from an original report."
     },
     "readme": {
-      "lead": "Search by security symbol",
-      "note": "Search by security symbol or company name, filter by listing market, and select a row to compare dates."
+      "note": "Open the same CIRO report type for two dates, then choose a baseline under Changes between reports. Trading volume shows shares sold short during a period. A consolidated position shows shares held short at the reporting date."
     }
   },
   {
@@ -3121,13 +3117,29 @@
             "measure": "length",
             "unit": "episodes"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 45
+        },
+        {
+          "label": "Field recordings indexed",
+          "url": "https://coolcode.ca/atlanticdial/recordings.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "recordings"
+            ],
+            "measure": "length",
+            "unit": "recordings"
+          },
+          "value": "2026-11-19",
+          "count": 117
         }
       ]
     },
     "readme": {
-      "note": "Search Nain for Labrador oral histories or Inuktitut lessons, then switch to On demand to find recent local radio and two archived programmes about Halifax donairs."
+      "note": "Search Nain for Labrador broadcasts, or open Field recordings and search William Riley to hear him sing in Cherry Brook. Each recording opens at its original tape cue. On demand includes two programmes about Halifax donairs."
     }
   },
   {
@@ -3282,7 +3294,7 @@
   {
     "id": "clamground",
     "title": "Clam Grounds",
-    "description": "Explore modelled soft-shell clam habitat along the Maritime coast and compare historical Canadian clam landings.",
+    "description": "Explore Maritime soft-shell clam habitat, compare provincial landing histories and read Nova Scotia’s 1931 district returns.",
     "category": "places",
     "tags": [
       "clams",
@@ -3302,7 +3314,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "DFO models soft-shell clam habitat and reports annual commercial landings. A 1931 fisheries return lists clam barrels and canned cases by district in Halifax and Digby.",
+      "detail": "DFO reports habitat and annual commercial landings. The 1931 fisheries return gives clam barrels and canned cases for ten Nova Scotia counties.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -3336,7 +3348,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Try Digby on the habitat map, then compare Nova Scotia’s landed weight and value per kilogram. The map describes soft-shell clams, while the commercial figures combine species reported as Clams. The 1931 district returns show how many barrels went to the fresh market and how many cases were canned in Halifax and Digby counties."
+      "note": "Compare Nova Scotia and New Brunswick over the same years to see where DFO published landings or withheld them. For a local historical view, choose a county in the 1931 returns and check its barrels or canned cases against the linked scan of page 84."
     }
   },
   {
@@ -4017,7 +4029,7 @@
   {
     "id": "libraryworkbench",
     "title": "Library Workbench",
-    "description": "Find a library workspace for a tape, recording or scan, then explore how Vancouver and Nova Scotia report library use.",
+    "description": "Match a tape to a Vancouver lab station, estimate transfer time and storage, and compare library use in Vancouver and Nova Scotia.",
     "category": "places",
     "tags": [
       "libraries",
@@ -4033,7 +4045,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Halifax and Vancouver equipment guides, Vancouver’s 2023–24 lab use, and a regional survey of Nova Scotia libraries.",
+      "detail": "Library equipment and transfer guides, Vancouver lab activity and Nova Scotia’s regional library survey supply the estimates and comparisons.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -4055,13 +4067,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose a recording or digitization task to see the equipment, what to bring, and the official booking route in each city. Switch between Vancouver labs to compare 2023 and 2024 sessions or hours. In the Nova Scotia survey, choose Halifax in 2024–25 to put opening hours, programs and attendance alongside Halifax’s annual report and download a data-request draft about the different counts."
+      "note": "Try a PAL Hi8 cassette in the Vancouver transfer planner. Enter 60, 90, 45 for three tapes to see 3 h 15 min of real-time copying and roughly 13 GB of storage before setup and saving. Explore Regular 8 film, quarter-inch audio reels or floppy disks in the equipment directory. In the activity table, minutes per session relates reported hours to sessions. Select Halifax in 2024–25 to compare its survey and annual-report figures."
     }
   },
   {
     "id": "shopfrontdiary",
     "title": "Shopfront Diary",
-    "description": "Follow a shop or street address through historic Halifax and Vancouver directories and open the page behind each listing.",
+    "description": "Compare two historic directories address by address to trace shops, neighbours and recorded vacancies in Halifax and Vancouver.",
     "category": "places",
     "tags": [
       "Halifax",
@@ -4077,7 +4089,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Selected food trades and neighbours from Halifax and Vancouver directory editions, 1890–1909.",
+      "detail": "Digitized Halifax and Vancouver directories supply selected shop listings and their printed source pages from 1890–1909.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -4093,19 +4105,19 @@
             "unit": "directory listings"
           },
           "value": "2026-11-19",
-          "count": 27
+          "count": 49
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Search “oyster” to find Charlie Aucoin’s Rialto, then open 44–46 Upper Water to see the later directory entry. In Vancouver, 608 Granville links John Oben’s 1906 entry to a 1908 delicatessen listing. An empty edition means the sampled pages have no entry for that address. The Halifax city archive provides a conversion list for comparing historical street numbers with modern ones."
+      "note": "Compare Halifax’s 1890–91 and 1899–1900 directories to find the explicit vacancies at 80 and 100–102 Upper Water. On the same street, see both listed occupants at number 54, alongside the earlier 54–56 range. Compare Vancouver in 1901 and 1903 to see John Oben listed at 413 Hastings W in both, alongside different second shop addresses. Each entry links to its source page."
     }
   },
   {
     "id": "transferwindow",
     "title": "Transfer Window",
-    "description": "Compare scheduled route 555 connections, walking time and missed-transfer waits at Carvolth and Lougheed.",
+    "description": "See how many scheduled 555 transfers survive a delay at Carvolth or Lougheed and how much time a missed connection adds.",
     "category": "places",
     "tags": [
       "TransLink",
@@ -4155,7 +4167,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Try a 555 arrival at Lougheed, select your onward train, then add a five-minute delay to see which scheduled departures remain reachable."
+      "note": "Choose a morning or evening arrival window at Carvolth or Lougheed. Compare two- to twenty-minute delays to see how many connections hold and which arrivals face the longest added wait."
     }
   },
   {
@@ -4427,7 +4439,7 @@
   {
     "id": "routemirror",
     "title": "Route Mirror",
-    "description": "Find Metro Vancouver bus routes whose busier direction reverses between the morning and afternoon peaks.",
+    "description": "See which Metro Vancouver bus routes switch their busier direction between peaks and which repeat the pattern every year.",
     "category": "places",
     "tags": [
       "TransLink",
@@ -4476,7 +4488,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start with route 555 on fall weekdays. Compare earlier years, or open the reversal ranking to find other routes with a pronounced morning and afternoon switch."
+      "note": "Start with route 555 on fall weekdays to see how its westbound morning lead and eastbound afternoon lead change across years. Open the repeat-reversal ranking to compare its smallest lead with other routes."
     }
   },
   {

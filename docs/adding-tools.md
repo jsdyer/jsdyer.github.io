@@ -187,3 +187,7 @@ destination, category, probe definitions and cached measurements.
 The catalogue build is offline. The separate link-audit workflow reports network
 failures without blocking catalogue deployment. HTTP success alone does not verify
 that an application or its data is correct.
+
+## Verify the first visit
+
+Open the public entry point in a clean browser. A visitor should be able to investigate an identifiable public record, request a real reading or supply their own supported input. Exercise that path before updating the listing. Give dated excerpts and reduced datasets an original source, coverage and units. Treat missing observations, empty results and failed requests as distinct states. Synthetic fixtures belong in tests. Where an optional tutorial is relevant, keep the primary workflow and catalogue description focused on the visitor’s actual task.

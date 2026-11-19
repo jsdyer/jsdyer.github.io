@@ -4,13 +4,13 @@
   "forwardPorts": [8000],
   "portsAttributes": {
     "8000": {
-      "label": "Timefold demo",
+      "label": "Timefold archive",
       "onAutoForward": "notify",
       "visibility": "private",
       "protocol": "http"
     }
   },
-  "postCreateCommand": "cd tools/timefold && php bin/timefold.php init --sqlite --demo",
+  "postCreateCommand": "cd tools/timefold && php bin/timefold.php init --sqlite",
   "postStartCommand": "cd tools/timefold && nohup php -S 0.0.0.0:8000 -t public >/tmp/timefold-server.log 2>&1 &",
   "customizations": {
     "vscode": {

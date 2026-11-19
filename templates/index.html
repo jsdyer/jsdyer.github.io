@@ -132,19 +132,19 @@
     <section class="notes-strip" aria-labelledby="notes-title">
       <div class="wrap notes-row">
         <div class="notes-label"><h2 id="notes-title"><a href="/field-notes/">Field Notes</a></h2><a class="code-link" href="/field-notes/feed.xml">RSS feed <span aria-hidden="true">↗</span></a></div>
-        <article><p class="category"><time datetime="2026-11-12">12 November 2026</time> <span>/</span> Archiving</p>
+        <article><p class="category"><time datetime="2026-11-19">19 November 2026</time> <span>/</span> Archiving</p>
           <h3><a href="/field-notes/finding-the-dial-up-page/">Finding the dial-up page <span aria-hidden="true">→</span></a></h3>
-          <p>Follow a phrase from a search box to page two of a 1998-style community bulletin. Then try the same search in a Linux terminal.</p>
+          <p>Find dial-up access in Statistics Canada’s early internet surveys. Open the original PDF pages, then repeat the search on Linux.</p>
         </article>
       </div>
     </section>
     <section class="run" id="run" aria-labelledby="run-heading">
       <div class="wrap run-inner" id="get-started">
-        <div><h2 id="run-heading">Try an installable tool.</h2><p>Start with Vhost Logbook. These commands use Git, the PHP CLI, and the sample Apache log included in the repository.</p></div>
+        <div><h2 id="run-heading">Try an installable tool.</h2><p>Start with Vhost Logbook. Run these commands on your Apache server with PHP CLI. Use the path to a readable access log for your virtual host.</p></div>
         <div class="recipe"><div class="recipe-head"><span>Shell commands</span><button id="copy" type="button" hidden>Copy</button></div>
           <pre tabindex="0" aria-label="Shell commands to run Vhost Logbook"><code id="commands">git clone https://github.com/jsdyer/jsdyer.github.io.git
 cd jsdyer.github.io
-php tools/logbook/logbook.php tools/logbook/example.log</code></pre>
+php tools/logbook/logbook.php /var/log/apache2/access.log</code></pre>
           <span id="copy-state" class="sr-only" aria-live="polite"></span>
         </div>
       </div>

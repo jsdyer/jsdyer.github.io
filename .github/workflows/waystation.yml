@@ -114,4 +114,4 @@ jobs:
           fi
           gh release create "$tag" dist/* --target "$GITHUB_SHA" --latest=false \
             --title "Waystation v$version" \
-            --notes "A pocket internet for your homelab. Capture server-rendered sites, compare snapshots, verify content, and replay offline. Extract the build for your machine and run waystation demo. Source and hacking guide: https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation"
+            --notes "A pocket internet for your homelab. Capture server-rendered sites, compare snapshots, verify content, and replay offline. Extract the build for your machine, capture a site you own and open it with waystation serve. Source and hacking guide: https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/waystation"

@@ -33,13 +33,13 @@ password out of the command line and shell history:
 read -rs -p 'Database password: ' TIMEFOLD_DB_PASSWORD
 export TIMEFOLD_DB_PASSWORD
 TIMEFOLD_DSN='mysql:host=localhost;dbname=timefold;charset=utf8mb4' \
-TIMEFOLD_DB_USER=timefold php bin/timefold.php init --demo
+TIMEFOLD_DB_USER=timefold php bin/timefold.php init
 unset TIMEFOLD_DB_PASSWORD
 ```
 
 Save the generated owner password printed by `init`. It is stored as a hash.
 Database credentials are saved in `config.local.php`, which is outside the
-document root and ignored by Git. Leave off `--demo` to start with no samples.
+document root and ignored by Git. Add `--reference` on first initialization for the sourced web standards timeline.
 
 Allow Apache to read configuration and write private storage:
 

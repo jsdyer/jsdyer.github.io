@@ -14,21 +14,21 @@ capsule on a travel drive and bring that little web with you.
 This belongs beside [Timefold](../timefold/): Timefold organizes personal
 artifacts; Waystation preserves the websites that give those artifacts context.
 
-## Try the disappearing-server demo
+## Capture a real site
 
-Download the archive for your machine from the
-[Waystation v0.1.1 release](https://github.com/jsdyer/jsdyer.github.io/releases/tag/waystation-v0.1.1),
-extract it, and run:
+Download and extract the [Waystation release for your machine](https://github.com/jsdyer/jsdyer.github.io/releases/tag/waystation-v0.1.2). From that directory you can archive the public CoolCode field notes, or substitute the URL of your own site.
 
 ```sh
-./waystation demo
+./waystation capture --label "CoolCode field notes" --depth 1 --max-resources 25 https://coolcode.ca/field-notes/
+./waystation list
+./waystation serve
 ```
 
-On Windows, use `./waystation.exe demo` in PowerShell. Open
-**http://127.0.0.1:8787/**. The demo creates a temporary local website, captures
-two editions, and **shuts the original server down before the viewer starts**.
-Browse the preserved site, inspect its link map, and compare the two editions.
-The sample is fictional and does not read personal files or contact the internet.
+On Windows use `./waystation.exe` in PowerShell. Open **http://127.0.0.1:8787/**, choose the saved capsule and inspect its captured pages and outgoing links. Capture the same site later and use the two snapshot IDs to compare changes.
+
+<!-- coolcode:guide -->
+Capture a site before and after a change, then compare the two snapshot IDs to see which URLs appeared, disappeared or changed content.
+<!-- /coolcode:guide -->
 
 Runtime requirements: the executable and a writable directory. No database,
 PHP, Node, Docker, browser driver, account, or background service. Linux,
@@ -42,7 +42,7 @@ Install [Go 1.26 or newer](https://go.dev/dl/), then:
 git clone https://github.com/jsdyer/jsdyer.github.io.git
 cd jsdyer.github.io/tools/waystation
 go build -mod=vendor -trimpath -o waystation .
-./waystation demo
+./waystation --help
 ```
 
 On Windows, build with `-o waystation.exe`. The only third-party package is the

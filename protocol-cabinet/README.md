@@ -1,19 +1,13 @@
 # Protocol Cabinet
 
-A pocket reference for three network protocols. Compare a successful DNS lookup with a missing name, fetch an HTTP document and revalidate a cached copy, or follow SMTP through mail delivery and a rejected recipient.
+[Open Protocol Cabinet](https://coolcode.ca/protocol-cabinet/) to inspect real protocol evidence. Choose HTTP, DNS or Email. Both live buttons perform read-only requests when clicked. File and paste workflows run locally and accept up to 8 MiB.
 
-Open [the demo](https://coolcode.ca/protocol-cabinet/) or open `index.html` locally. Pick a protocol and an exchange, then step forward or jump directly to a message. Each message has field notes explaining what to look for. The protocol and exchange are shareable in the URL fragment, such as `#http/cached`.
+<!-- coolcode:guide -->
+Open a browser HAR and sort by slowest request, inspect the answer rows in a DNS Lens export, or open an email’s original headers to read its recorded handoffs in delivery order.
+<!-- /coolcode:guide -->
 
-The static page runs on GitHub Pages and works without a build step. The messages and addresses are fixtures. DNS appears as selected decoded fields. HTTP and SMTP display line breaks as text. All interactions run locally in the browser.
+* **HTTP** accepts browser HAR exports and can fetch this page’s live HEAD response. Search by hostname or status, compare request timings, and step through selected response headers. A missing timing remains unreported. Query strings, cookies, authorization and bodies are omitted from the viewer.
+* **DNS** accepts a single JSON DNS-over-HTTPS reply or the primary view of a downloaded [DNS Lens report](https://coolcode.ca/dnslens/). It shows the recorded return code, answer types, TTLs and DNSSEC AD flag. A live Google Public DNS lookup for CoolCode is available.
+* **Email** accepts an EML file or pasted original headers. It unfolds Received fields, reverses their order to start at the earliest recorded hop and shows the text behind each handoff. A server’s claim and timestamp can be incomplete or inaccurate.
 
-## Editing
-
-Add or revise exchanges in `exchanges.js`. Each step supplies a direction, title, payload, explanation, and annotated field. The interface generates its exchange and message selectors from these fixtures.
-
-## References
-
-- [DNS message format, RFC 1035](https://www.rfc-editor.org/rfc/rfc1035#section-4)
-- [Negative DNS caching, RFC 2308](https://www.rfc-editor.org/rfc/rfc2308)
-- [HTTP/1.1 message format, RFC 9112](https://www.rfc-editor.org/rfc/rfc9112#section-2)
-- [HTTP conditional requests, RFC 9110](https://www.rfc-editor.org/rfc/rfc9110#section-13)
-- [SMTP, RFC 5321](https://www.rfc-editor.org/rfc/rfc5321#section-3)
+For a local preview, serve the repository over HTTP. Compatibility links such as `#http/cached` open the corresponding protocol.
