@@ -3249,7 +3249,7 @@
             "measure": "length",
             "unit": "landings records"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 280
         },
         {
@@ -3362,14 +3362,14 @@
             ],
             "unit": "well logs"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 66
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare Langley well 48 with a Fall River log. Switch between feet and metres to see both drillers’ recorded depths on a common scale."
+      "note": "Compare Langley well 48 with a Fall River log. Switch between feet and metres to see both drillers’ recorded depths on a common scale. The aligned table splits the pair at each recorded boundary and flags depths beyond the shorter log."
     }
   },
   {
@@ -3640,6 +3640,287 @@
     "sync_manifest": true,
     "readme": {
       "note": "Choose winters 2025–2026 and 2024–2025 and move to week 12 to compare the charts issued February 16, 2026 and February 17, 2025. An empty panel means the archive index has no chart in that week."
+    }
+  },
+  {
+    "id": "ferryrecord",
+    "title": "Ferry Record",
+    "description": "Trace service on a BC ferry route, compare quarters and read the original operations reports.",
+    "category": "places",
+    "tags": [
+      "BC Ferries",
+      "Bowen Island",
+      "Snug Cove",
+      "Horseshoe Bay",
+      "ferry",
+      "operations",
+      "transit"
+    ],
+    "icon": "route",
+    "url": "/ferryrecord/",
+    "source": "https://github.com/jsdyer/ferryrecord",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "BC Ferries reports actual round trips and vehicle capacity by route. A 2013 provincial briefing documents passenger-only services to Bowen Island.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/ferryrecord/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "route-quarter records"
+          },
+          "value": "2026-11-19",
+          "count": 225
+        },
+        {
+          "label": "Report quarters",
+          "url": "https://coolcode.ca/ferryrecord/data/edition.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2024-06-30–2026-06-30"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "On Route 08, compare the quarters ending June 2025 and June 2026. The operator recorded 1,386 and 1,384 round trips respectively, while passenger totals rose from 374,200 to 387,857."
+    }
+  },
+  {
+    "id": "schoolhouseledger",
+    "title": "Schoolhouse Ledger",
+    "description": "Compare enrolment, daily attendance and spending in historic Lower Mainland schools.",
+    "category": "places",
+    "tags": [
+      "Langley",
+      "Surrey",
+      "public schools",
+      "history",
+      "attendance",
+      "education"
+    ],
+    "icon": "map",
+    "url": "/schoolhouseledger/",
+    "source": "https://github.com/jsdyer/schoolhouseledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "BC’s 1894–95 schools report records enrolment and average attendance across school years, alongside each school’s expenditure in the report year.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/schoolhouseledger/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "school-year records"
+          },
+          "value": "2026-11-19",
+          "count": 38
+        },
+        {
+          "label": "School years ending",
+          "url": "https://coolcode.ca/schoolhouseledger/data/edition.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "1890–1895"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "In 1894–95 Langley enrolled 32 pupils and averaged 19.79 present each day. Langley East enrolled 23 and averaged 12.85. Earlier attendance tables and the report-year financial figures cover different periods."
+    }
+  },
+  {
+    "id": "spillledger",
+    "title": "Spill Ledger",
+    "description": "Follow marine pollution incidents in BC and Nova Scotia through claims, offers and recoveries.",
+    "category": "disclosures",
+    "tags": [
+      "coast",
+      "claims",
+      "Bridgewater",
+      "oil",
+      "harbours",
+      "Nova Scotia",
+      "British Columbia"
+    ],
+    "icon": "file-check-2",
+    "url": "/spillledger/",
+    "source": "https://github.com/jsdyer/spillledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "A federal compensation fund’s 2023–24 report lists incidents and financial decisions, including preventive responses and cases with several claimants.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/spillledger/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "incidents"
+          },
+          "value": "2026-11-19",
+          "count": 81
+        },
+        {
+          "label": "Report fiscal year ending",
+          "url": "https://coolcode.ca/spillledger/data/edition.json",
+          "path": [
+            "start"
+          ],
+          "value": "2024"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "The June 2015 Farley Mowat incident in Shelburne has separate claims by the town and the Canadian Coast Guard. Select the incident to compare the amounts submitted and offered, alongside the shared recovery entry."
+    }
+  },
+  {
+    "id": "pantryprices",
+    "title": "Pantry Prices",
+    "description": "Price a grocery basket in two historical years using Canada’s published urban retail averages.",
+    "category": "money",
+    "tags": [
+      "Canada",
+      "food",
+      "prices",
+      "Statistics Canada",
+      "historical groceries",
+      "butter",
+      "flour"
+    ],
+    "icon": "wallet",
+    "url": "/pantryprices/",
+    "source": "https://github.com/jsdyer/pantryprices",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The Dominion Bureau of Statistics published retail prices by weight or dozen. Each ingredient opens the original table for its price series.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/pantryprices/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "item-year prices"
+          },
+          "value": "2026-11-19",
+          "count": 230
+        },
+        {
+          "label": "Price years",
+          "url": "https://coolcode.ca/pantryprices/data/edition.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "1914–1959"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "One pound of butter and five pounds of flour cost 53.6¢ in 1914 and 46.0¢ in 1935 at the published urban Canadian averages. Change either quantity to see how much that ingredient contributes."
+    }
+  },
+  {
+    "id": "bridgeledger",
+    "title": "Bridge Ledger",
+    "description": "Look up historical Nova Scotia bridge inspections and compare dated ratings on the same scale.",
+    "category": "disclosures",
+    "tags": [
+      "Nova Scotia",
+      "Halifax",
+      "Annapolis",
+      "bridges",
+      "inspections",
+      "FOIPOP",
+      "public works"
+    ],
+    "icon": "landmark",
+    "url": "/bridgeledger/",
+    "source": "https://github.com/jsdyer/bridgeledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Two provincial information releases record bridge inspection dates, types and ratings. The NS Structures Database supplies locations by structure ID.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/bridgeledger/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "inspection records"
+          },
+          "value": "2026-11-19",
+          "count": 1619
+        },
+        {
+          "label": "Release years",
+          "url": "https://coolcode.ca/bridgeledger/data/edition.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2020–2023"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Anderson Brook Bridge in Annapolis County received a general rating of Good on April 22, 2020 and Fair on April 26, 2023. Its detailed inspections use a separate scale. The place link comes from a unique match on the provincial structure ID."
     }
   }
 ]
