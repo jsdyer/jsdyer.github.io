@@ -2702,7 +2702,7 @@
             "updated"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-16",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "records"
@@ -2753,7 +2753,7 @@
   {
     "id": "otherworldnames",
     "title": "Otherworld Names",
-    "description": "Explore the origins and locations of officially named features on the Moon and Mars.",
+    "description": "Explore named features on the Moon and Mars, and find low-angle sunlight at lunar craters from Langley or Halifax.",
     "category": "field-kit",
     "tags": [
       "Moon",
@@ -2763,36 +2763,55 @@
       "IAU",
       "craters",
       "astronomy",
-      "name origins"
+      "name origins",
+      "JPL Horizons",
+      "lunar observing",
+      "science"
     ],
     "icon": "moon-star",
     "url": "/otherworldnames/",
     "source": "https://github.com/jsdyer/otherworldnames",
     "hosting": "project",
     "access": "browser",
-    "data_date_badge": true,
     "data_info": {
       "mode": "snapshot",
-      "detail": "The USGS gazetteer records the origins of IAU-approved names for features on the Moon and Mars.",
+      "detail": "USGS/IAU feature centres and JPL Horizons ephemerides support the lunar observing planner. Hourly ECCC cloud forecasts are available on demand.",
       "cadence": "Monthly",
       "probes": [
         {
+          "label": "Data retrieved",
           "url": "https://coolcode.ca/otherworldnames/data-status.json",
           "path": [
             "retrieved"
           ],
-          "label": "Data retrieved",
-          "value": "2026-11-18",
           "count_at": {
             "path": [
               "features"
             ],
             "unit": "named features"
           },
+          "value": "2026-11-18",
           "count": 11141
+        },
+        {
+          "label": "Horizons retrieved",
+          "url": "https://coolcode.ca/otherworldnames/crater-light-status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "evenings"
+            ],
+            "unit": "site-evenings"
+          },
+          "value": "2026-11-19",
+          "count": 284
         }
       ]
     },
+    "sync_manifest": true,
+    "data_date_badge": true,
     "readme": {
       "lead": "The name origins and",
       "note": "The name origins and source country/cultural group labels come directly from the Gazetteer."
@@ -4557,6 +4576,547 @@
     "sync_manifest": true,
     "readme": {
       "note": "Choose Lake Banook, compare April 18 and August 14, 2023 at 10 metres, and switch between oxygen and temperature. The plot and table include only measured depths."
+    }
+  },
+  {
+    "id": "forecastreceipt",
+    "title": "Forecast Receipt",
+    "description": "See how a five-day temperature forecast holds up against hourly readings at Langley Regional and Halifax Stanfield.",
+    "category": "places",
+    "tags": [
+      "weather",
+      "forecasts",
+      "stations",
+      "temperature",
+      "science"
+    ],
+    "icon": "history",
+    "url": "/forecastreceipt/",
+    "source": "https://github.com/jsdyer/forecastreceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Six-hourly forecast receipts are matched to hourly temperatures from Environment and Climate Change Canada at two airports.",
+      "cadence": "Every six hours",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/forecastreceipt/data/index.json",
+          "path": [
+            "last_capture"
+          ],
+          "label": "Latest capture",
+          "count_at": {
+            "path": [
+              "receipts"
+            ],
+            "unit": "station forecasts",
+            "measure": "length"
+          },
+          "value": "2026-11-19 04:43 UTC",
+          "precision": "minute",
+          "count": 2
+        },
+        {
+          "url": "https://coolcode.ca/forecastreceipt/data/index.json",
+          "path": [
+            "first_capture"
+          ],
+          "label": "Archive began",
+          "count_at": {
+            "path": [
+              "forecast_points"
+            ],
+            "unit": "forecast points"
+          },
+          "value": "2026-11-19",
+          "count": 80
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose an airport and compare the 0–24-hour and 96–120-hour results for one provider. Check each matched count and inspect the largest revision to see two predictions for the same local weather hour."
+    }
+  },
+  {
+    "id": "auroratrace",
+    "title": "Aurora Trace",
+    "description": "Pick a May or October 2024 storm night and trace its solar eruptions and magnetic signals across Canada.",
+    "category": "explorers",
+    "tags": [
+      "space weather",
+      "Canada",
+      "magnetometers",
+      "NASA",
+      "Kp",
+      "Victoria",
+      "St. John's",
+      "science"
+    ],
+    "icon": "activity",
+    "url": "/auroratrace/",
+    "source": "https://github.com/jsdyer/auroratrace",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "NASA DONKI links solar eruptions to two 2024 storms, with Canadian ground measurements from INTERMAGNET.",
+      "cadence": "Monthly archive check",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/auroratrace/data/archive.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "station averages"
+          },
+          "value": "2026-11-19",
+          "count": 2016
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose May 10 or October 10, then select the first peak Kp interval to read both observatories at the same time. At 21:00 UTC on May 10, Victoria’s northward field was 160 nT below its reference while St. John’s was 354 nT above its own."
+    }
+  },
+  {
+    "id": "fossilneighbours",
+    "title": "Fossil Neighbours",
+    "description": "Explore the fossils recorded at Joggins and Haslam, then compare Canadian collections whose ages overlap.",
+    "category": "places",
+    "tags": [
+      "paleontology",
+      "Canada",
+      "Joggins",
+      "Haslam",
+      "fossils",
+      "geology",
+      "science"
+    ],
+    "icon": "layers",
+    "url": "/fossilneighbours/",
+    "source": "https://github.com/jsdyer/fossilneighbours",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Paleobiology Database collections, occurrence identifications and references document the Joggins and Haslam formations and selected age peers.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/fossilneighbours/data/index.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "occurrence records"
+          },
+          "value": "2026-11-19",
+          "count": 509
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start at Coal Mine Point in the Joggins Formation and search for Hylonomus to see how several reported names resolve to one accepted taxon. Switch to Haslam on Vancouver Island to compare its much younger collections with Canadian collections whose age ranges overlap."
+    }
+  },
+  {
+    "id": "sunledger",
+    "title": "Sun Ledger",
+    "description": "Compare the solar energy reaching Langley and Halifax by month and year, alongside NASA’s clear-sky estimate.",
+    "category": "field-kit",
+    "tags": [
+      "solar energy",
+      "NASA POWER",
+      "Langley",
+      "Halifax",
+      "sunlight",
+      "climate",
+      "science"
+    ],
+    "icon": "lightbulb",
+    "url": "/sunledger/",
+    "source": "https://github.com/jsdyer/sunledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "NASA POWER supplies monthly all-sky and clear-sky solar energy for grid areas around Langley, BC, and Halifax, NS.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/sunledger/data/solar.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "paired months"
+          },
+          "value": "2026-11-19",
+          "count": 307
+        },
+        {
+          "label": "Solar record",
+          "url": "https://coolcode.ca/sunledger/data/solar.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2001-01-01–2026-07-31"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "In the 2001–2020 average, December brings 0.68 kWh/m²/day to Langley and 1.14 to Halifax. Select June to see the two sites nearly coincide, then open the monthly ledger to inspect the individual years."
+    }
+  },
+  {
+    "id": "planetpapers",
+    "title": "Planet Papers",
+    "description": "Compare published measurements of the same exoplanet, with uncertainties and links to the original papers.",
+    "category": "field-kit",
+    "tags": [
+      "exoplanets",
+      "astronomy",
+      "NASA",
+      "uncertainty",
+      "research",
+      "science"
+    ],
+    "icon": "telescope",
+    "url": "/planetpapers/",
+    "source": "https://github.com/jsdyer/planetpapers",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "NASA Exoplanet Archive Planetary Systems rows preserve separately cited measurements, uncertainties and limits for each planet.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/planetpapers/data/index.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "published solutions"
+          },
+          "value": "2026-11-19",
+          "count": 38804
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Select TRAPPIST-1 e and compare the mass estimates from Gillon (2017), Grimm (2018) and Agol (2021). The plot and table preserve each paper’s uncertainties, while the other solutions remain visible when that paper has no mass estimate."
+    }
+  },
+  {
+    "id": "masspeaks",
+    "title": "Mass Peaks",
+    "description": "Find particle peaks by comparing pairs of muons with opposite and matching charges.",
+    "category": "explorers",
+    "tags": [
+      "CERN",
+      "particle physics",
+      "muons",
+      "science"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/masspeaks/",
+    "source": "https://github.com/jsdyer/masspeaks",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CERN’s CMS outreach sample supplies the reconstructed mass and charges of two muons in 100,000 collision events.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/masspeaks/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "collision events"
+          },
+          "value": "2026-11-19",
+          "count": 100000
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Select the J/ψ window, 0.10 GeV/c² bins and both charge selections. In the 3.00 to under 3.10 interval there are 4,512 opposite-charge and 558 same-charge pairs. Switch to percentages to compare each bin with its full charge sample."
+    }
+  },
+  {
+    "id": "airpair",
+    "title": "Air Pair",
+    "description": "Compare hourly fine-particle measurements with air-quality model estimates at Langley Central and Lake Major.",
+    "category": "places",
+    "tags": [
+      "air quality",
+      "PM2.5",
+      "pollution",
+      "CAMS",
+      "OpenWeather",
+      "Langley",
+      "Nova Scotia",
+      "atmospheric science",
+      "science"
+    ],
+    "icon": "activity",
+    "url": "/airpair/",
+    "source": "https://github.com/jsdyer/airpair",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Daily checks pair B.C. and Nova Scotia station measurements with Copernicus CAMS Global estimates from Open-Meteo. Each station shows its own source dates.",
+      "cadence": "Daily; Nova Scotia releases validated data annually",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/airpair/data/pairs.json",
+          "label": "Data retrieved",
+          "path": [
+            "catalog",
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "catalog",
+              "pairedHours"
+            ],
+            "unit": "paired station-hours"
+          },
+          "value": "2026-11-19",
+          "count": 503
+        },
+        {
+          "url": "https://coolcode.ca/airpair/data/pairs.json",
+          "label": "Latest Langley reading",
+          "path": [
+            "catalog",
+            "langleyLatest"
+          ],
+          "value": "2026-11-19"
+        },
+        {
+          "url": "https://coolcode.ca/airpair/data/pairs.json",
+          "label": "Latest Lake Major reading",
+          "path": [
+            "catalog",
+            "lakeMajorLatest"
+          ],
+          "value": "2026-01-01"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose Lake Major and May–June 2023 to inspect the hour of the measured particle peak and compare it with the CAMS estimate at the same UTC hour. Langley refreshes from preliminary readings, while Lake Major’s latest validated week follows the provincial annual release. The count includes each paired station-hour once across all displayed weeks."
+    }
+  },
+  {
+    "id": "flybyfiles",
+    "title": "Flyby Files",
+    "description": "Check which asteroids were observed before their closest approach to Earth.",
+    "category": "field-kit",
+    "tags": [
+      "asteroids",
+      "JPL",
+      "near-Earth objects",
+      "science"
+    ],
+    "icon": "telescope",
+    "url": "/flybyfiles/",
+    "source": "https://github.com/jsdyer/flybyfiles",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "JPL’s encounter and orbit records give passage times, distances and first observation dates for selected near-Earth asteroids.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/flybyfiles/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "encounters"
+          },
+          "value": "2026-11-19",
+          "count": 6
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose 2020 QG and compare the date-only orbit record with JPL’s account of the discovery image. Then select After to find 2020 VT4, whose first observation in the present orbit is dated the following day."
+    }
+  },
+  {
+    "id": "plumediary",
+    "title": "Plume Diary",
+    "description": "Compare satellite views of the Fraser River mouth with daily flow measured upstream at Hope.",
+    "category": "places",
+    "tags": [
+      "Fraser River",
+      "BC",
+      "NASA",
+      "hydrology",
+      "science"
+    ],
+    "icon": "layers",
+    "url": "/plumediary/",
+    "source": "https://github.com/jsdyer/plumediary",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "NASA Terra/MODIS true-colour images show the delta at the same scale. Water Survey of Canada supplies daily mean discharge upstream.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/plumediary/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "satellite scenes"
+          },
+          "value": "2026-11-19",
+          "count": 4
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare June 21 and June 28, 2021 at the same image scale. Hope measured 6,970 and 7,650 m³/s on those dates. Try the earlier-flow selector to see how an assumed travel time changes the comparison."
+    }
+  },
+  {
+    "id": "chirproom",
+    "title": "Chirp Room",
+    "description": "Align the Hanford and Livingston gravitational-wave traces and listen to the final moment of GW150914.",
+    "category": "field-kit",
+    "tags": [
+      "LIGO",
+      "gravitational waves",
+      "audio",
+      "science"
+    ],
+    "icon": "activity",
+    "url": "/chirproom/",
+    "source": "https://github.com/jsdyer/chirproom",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "GWOSC supplies calibrated strain from the two LIGO detectors. Each displayed trace is filtered from its own 32-second record.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/chirproom/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "detector records"
+          },
+          "value": "2026-11-19",
+          "count": 2
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Use Apply published alignment to move Livingston seven milliseconds later and reverse its polarity. Compare the waveform correlation around merger, then play the one-second stereo extract. Audio starts only when you press Play."
+    }
+  },
+  {
+    "id": "quakeecho",
+    "title": "Quake Echo",
+    "description": "Compare agency estimates of the same Sunshine Coast earthquake and explore where people reported feeling it.",
+    "category": "places",
+    "tags": [
+      "BC",
+      "earthquakes",
+      "Sunshine Coast",
+      "USGS",
+      "science"
+    ],
+    "icon": "activity",
+    "url": "/quakeecho/",
+    "source": "https://github.com/jsdyer/quakeecho",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Earthquakes Canada publishes a reviewed event bulletin. USGS supplies its preferred estimate, dated products and public intensity reports.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/quakeecho/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "reported areas"
+          },
+          "value": "2026-11-19",
+          "count": 144
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search for Sechelt, then compare its community intensity with the preferred Canadian and US magnitudes. Change the minimum response count to see which places are supported by many independent submissions."
     }
   }
 ]
