@@ -2,12 +2,14 @@
 
 Each proposal starts from the tool’s public guide. The rows below track future investigations for existing tools. Historical comparisons that need a new source or another edition identify what to collect.
 
+[Completed investigations and working examples](november-tool-audit.md)
+
 ## Where to go deeper
 
 | Tool | Proposed investigation |
 | --- | --- |
 | [BC Place Names Explorer](https://coolcode.ca/bcplacenames/) | Build a naming history for a single Fraser Valley feature from the province’s linked name records. Put each dated decision on one timeline and group undated names separately. |
-| [Well Layers](https://coolcode.ca/welllayers/) | For a chosen depth in Fall River or Langley, show the original material descriptions across every sampled log reaching that depth. Count gaps, overlapping intervals and shallow holes separately. |
+| [Well Layers](https://coolcode.ca/welllayers/) | Extend the existing depth comparison into a continuous coverage profile for each community. At each depth, show how many logs still report a known material, with links back to their drillers’ descriptions. |
 | [ATIP Records Explorer](https://coolcode.ca/atip/) | Give saved requests a local copy-request ledger with request date, reply date and package filename. Export outstanding requests by institution with their original reference numbers. |
 | [Schoolhouse Ledger](https://coolcode.ca/schoolhouseledger/) | Pair two Langley school entries with both scanned report pages. Calculate the change in average attendance divided by enrolment across years where both figures exist. |
 | [Postmark Places](https://coolcode.ca/postmarkplaces/) | Transcribe an archival mail-route timetable for a route serving Langley or Dartmouth. Place its stops and travel times alongside the office names used that year. |

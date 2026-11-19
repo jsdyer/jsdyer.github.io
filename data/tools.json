@@ -8,7 +8,10 @@
       "docker",
       "compose",
       "nas",
-      "homelab"
+      "homelab",
+      "compose.yaml",
+      "bind mount",
+      "host port"
     ],
     "icon": "server",
     "url": "/rack-recipes/",
@@ -111,7 +114,11 @@
       "newsletters",
       "full",
       "text",
-      "sqlite"
+      "sqlite",
+      "Statistics Canada",
+      "household internet",
+      "dial-up",
+      "The Daily"
     ],
     "icon": "library-big",
     "url": "/archive-shelf/",
@@ -164,7 +171,9 @@
     "tags": [
       "archive",
       "lamp",
-      "journal"
+      "journal",
+      "timeline CSV",
+      "W3C"
     ],
     "icon": "history",
     "url": "https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/timefold",
@@ -211,7 +220,7 @@
   {
     "id": "dnslens",
     "title": "DNS Lens",
-    "description": "Check a website or mail domain, look up an exact DNS record and compare a saved report with a new reading.",
+    "description": "Look up website, mail and exact-name DNS records, compare resolvers and compare saved reports.",
     "category": "liminal-tools",
     "tags": [
       "spf",
@@ -219,7 +228,11 @@
       "dnssec",
       "rdap",
       "mta-sts",
-      "mail"
+      "mail",
+      "SRV",
+      "DNS changes",
+      "www",
+      "mail setup"
     ],
     "icon": "scan-search",
     "url": "/dnslens/",
@@ -228,11 +241,12 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Google Public DNS or Cloudflare returns the requested records. Full reports also query registration services."
+      "detail": "Choose Google or Cloudflare for current DNS replies. Full reports include registration data, and saved JSON comparisons run in your browser."
     },
     "readme": {
       "note": "Download a DNS report before changing a domain, repeat the lookup afterwards and open the earlier JSON to see which answers changed at the same resolver."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "ipsnapshot",
@@ -573,7 +587,11 @@
     "tags": [
       "traceroute",
       "bgp",
-      "routing"
+      "routing",
+      "RIPE Atlas",
+      "K-root",
+      "Vancouver",
+      "Montréal"
     ],
     "icon": "signpost-big",
     "url": "/packet-detour/",
@@ -599,7 +617,11 @@
       "dns",
       "http",
       "smtp",
-      "email"
+      "email",
+      "HAR",
+      "email headers",
+      "DNS JSON",
+      "HTTP timing"
     ],
     "icon": "arrow-left-right",
     "url": "/protocol-cabinet/",
@@ -617,7 +639,7 @@
   {
     "id": "trackerxray",
     "title": "Tracker X-Ray",
-    "description": "Inspect HAR captures for third-party requests, cookies and analytics hosts.",
+    "description": "Inspect a browser HAR or the requests recorded while this page loaded.",
     "category": "security",
     "tags": [
       "har",
@@ -632,11 +654,10 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "The browser reads requests from the HAR file you select."
+      "detail": "A local HAR supplies request details. The live page view uses same-origin timing entries observed by your own browser."
     },
     "readme": {
-      "lead": "Use the filters to",
-      "note": "Use the filters to find new domains, missing domains, request-count changes or host changes within the same domain."
+      "note": "Inspect this page’s load to see the requests your browser measured for Tracker X-Ray itself. To compare another site before and after a consent choice, export two sanitized HAR files from the same starting page and open them under Compare two HAR captures."
     }
   },
   {
@@ -670,7 +691,7 @@
   {
     "id": "mailpath",
     "title": "Mail Path",
-    "description": "Reconstruct received-email hops and the authentication results each server reported.",
+    "description": "Trace the relay hops and authentication results recorded in the headers of an email you received.",
     "category": "security",
     "tags": [
       "email",
@@ -689,17 +710,16 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Your browser reads the email headers you paste or the .eml file you open."
+      "detail": "Open an email or paste its original headers. Relay times and reported authentication results are read locally."
     },
     "readme": {
-      "lead": "The route and JSON",
-      "note": "The route and JSON export show reported relay addresses, timestamps, delays and recognized authentication claims."
+      "note": "Copy the Received and Authentication-Results fields from a message you received, including indented continuation lines. The timeline shows which servers recorded each hop and the delay between their timestamps."
     }
   },
   {
     "id": "packetpocket",
     "title": "Packet Pocket",
-    "description": "Examine local packet captures for conversations, DNS, HTTP and observable TLS data.",
+    "description": "Compare capture traffic, inspect both directions of a conversation and export filtered packet or aggregate reports.",
     "category": "security",
     "tags": [
       "pcap",
@@ -708,7 +728,10 @@
       "dns",
       "tcp",
       "udp",
-      "forensics"
+      "forensics",
+      "capture comparison",
+      "traffic rate",
+      "wire bytes"
     ],
     "icon": "binary",
     "url": "/packetpocket/",
@@ -717,12 +740,12 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Your browser reads packets from the PCAP or PCAPNG capture you select."
+      "detail": "Your browser reads local PCAP and PCAPNG files. A second capture supplies aggregate rates and protocol shares for comparison."
     },
     "readme": {
-      "lead": "Browse IP conversations, filter",
-      "note": "Browse IP conversations, filter packet metadata by protocol, text and elapsed time, and export matching metadata as JSON."
-    }
+      "note": "Compare two captures by protocol share and traffic rate, then select a conversation in the first capture to see its two directions. Export a filtered aggregate report to share counts and relative time bins without addresses or hostnames."
+    },
+    "sync_manifest": true
   },
   {
     "id": "dependencyxray",
@@ -756,7 +779,7 @@
   {
     "id": "exploitgraveyard",
     "title": "Exploit Graveyard",
-    "description": "Search CISA’s catalogue of known exploited vulnerabilities by product or CVE.",
+    "description": "Search Canadian Cyber Centre notices and see which cited vulnerabilities also appear in CISA KEV.",
     "category": "security",
     "tags": [
       "cisa",
@@ -764,7 +787,11 @@
       "vulns",
       "vulnerabilities",
       "linux",
-      "ransomware"
+      "ransomware",
+      "Canadian Centre for Cyber Security",
+      "Cyber Centre",
+      "CCCS",
+      "advisories"
     ],
     "icon": "shield-alert",
     "url": "/exploitgraveyard/",
@@ -773,39 +800,47 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CISA’s catalogue lists vulnerabilities that have been exploited in the wild.",
+      "detail": "Cyber Centre alerts and advisories are matched to CISA’s known-exploited catalogue by the CVE identifiers printed in each Canadian notice.",
       "cadence": "Daily",
       "probes": [
         {
-          "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
+          "url": "https://coolcode.ca/exploitgraveyard/data/canada.json",
           "path": [
-            "built"
+            "checked"
           ],
-          "label": "Snapshot generated",
-          "value": "2026-11-18",
+          "label": "Canadian notices checked",
           "count_at": {
             "path": [
-              "rows"
+              "notices"
             ],
-            "unit": "catalogued vulnerabilities",
-            "measure": "length"
+            "measure": "length",
+            "unit": "Canadian notices"
           },
-          "count": 1782
+          "value": "2026-11-19",
+          "count": 6536
         },
         {
           "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
           "path": [
             "released"
           ],
-          "label": "Source published",
-          "value": "2026-11-17"
+          "label": "CISA catalogue released",
+          "count_at": {
+            "path": [
+              "rows"
+            ],
+            "measure": "length",
+            "unit": "KEV entries"
+          },
+          "value": "2026-11-18",
+          "count": 1786
         }
       ]
     },
     "readme": {
-      "lead": "Open any result for",
-      "note": "Open any result for the agency’s required action and source links, or export the filtered records as CSV."
-    }
+      "note": "Open AV25-769 to see the Cyber Centre’s November 18, 2025 Fortinet notice. Expand its cited identifier, CVE-2025-58034, to see CISA’s listing date and the Canadian notices that name the same CVE."
+    },
+    "sync_manifest": true
   },
   {
     "id": "patchsignal",
@@ -2013,7 +2048,7 @@
   {
     "id": "weatherarchive",
     "title": "Weather Archive",
-    "description": "Compare Canadian weather stations over months or years and export the daily observations.",
+    "description": "Compare up to 30 years of daily Canadian station weather, inspect monthly tables and export measurements with their flags.",
     "category": "places",
     "tags": [
       "eccc",
@@ -2035,11 +2070,12 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Environment and Climate Change Canada supplies daily readings and monthly station normals. Each comparison can cover up to 30 years."
+      "detail": "ECCC supplies daily records and available monthly normals. The tool follows every results page for the selected stations and dates."
     },
     "readme": {
       "note": "Compare all of 2024 at Langley and Halifax, inspect the daily table one month at a time and download both stations in a single CSV. Blank measurements keep their place in the record."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "spectrumatlas",
@@ -2329,7 +2365,11 @@
       "canada",
       "local",
       "public data",
-      "halifax"
+      "halifax",
+      "Cogswell",
+      "Scotia Square",
+      "Dartmouth ferry",
+      "Shannon Park"
     ],
     "icon": "map",
     "url": "/halifaxtimelens/",
@@ -3076,7 +3116,10 @@
       "Labrador",
       "Inuktitut",
       "podcasts",
-      "on demand"
+      "on demand",
+      "field recordings",
+      "Helen Creighton",
+      "Cherry Brook"
     ],
     "icon": "radio-tower",
     "url": "/atlanticdial/",
@@ -3433,7 +3476,7 @@
   {
     "id": "welllayers",
     "title": "Well Layers",
-    "description": "Compare two drillers’ logs from Langley and rural Halifax at the same depth in feet or metres.",
+    "description": "Pick a depth to read every sampled Langley and rural Halifax well log, or compare two drillers’ exact intervals side by side.",
     "category": "places",
     "tags": [
       "geology",
@@ -3441,7 +3484,10 @@
       "Langley",
       "Halifax",
       "depth",
-      "groundwater"
+      "groundwater",
+      "borehole",
+      "interval",
+      "Hammonds Plains"
     ],
     "icon": "layers",
     "url": "/welllayers/",
@@ -3450,7 +3496,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "B.C. GWELLS and Nova Scotia’s well-log database record the depths and materials that drillers encountered.",
+      "detail": "B.C. GWELLS descriptions and Nova Scotia well-log material codes supply source intervals, gaps and drilling observations.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -3472,7 +3518,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare Langley well 48 with a Fall River log. Switch between feet and metres to see both drillers’ recorded depths on a common scale. The aligned table splits the pair at each recorded boundary and flags depths beyond the shorter log."
+      "note": "At 20 m, Langley 30145 records “coarse sand” and Hammonds Plains 000119 records “shale / unknown”. Use the paired example to read both intervals, then open the all-logs table to see what every sampled well records at that same depth. Switch units without moving the selected physical depth. The table distinguishes explicit unknown terms, an empty material field, overlapping intervals, gaps and the end of a log."
     }
   },
   {
@@ -3589,7 +3635,7 @@
   {
     "id": "prefixdiary",
     "title": "Prefix Diary",
-    "description": "Look up a Canadian telephone prefix, explore exchanges and follow changes between published assignments.",
+    "description": "Look up Canadian telephone assignments and trace IPv4 or IPv6 registration blocks across ARIN reports.",
     "category": "liminal-tools",
     "tags": [
       "Canada",
@@ -3597,7 +3643,12 @@
       "carrier",
       "604",
       "902",
-      "exchange"
+      "exchange",
+      "IPv4",
+      "IPv6",
+      "ARIN",
+      "CIDR",
+      "address allocation"
     ],
     "icon": "network",
     "url": "/prefixdiary/",
@@ -3606,7 +3657,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "The Canadian Numbering Administrator publishes NPA–NXX assignments, exchange areas and company names each weekday night.",
+      "detail": "The Canadian Numbering Administrator supplies telephone assignments. ARIN publishes dated IPv4 and IPv6 delegations by registration economy.",
       "cadence": "Weekdays",
       "probes": [
         {
@@ -3621,7 +3672,7 @@
             ],
             "unit": "prefixes"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 46400
         },
         {
@@ -3630,13 +3681,28 @@
           "path": [
             "latest"
           ],
-          "value": "2026-11-17"
+          "value": "2026-11-18"
+        },
+        {
+          "label": "IP report date",
+          "url": "https://coolcode.ca/prefixdiary/ip/status.json",
+          "path": [
+            "latest"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "IP registration records"
+          },
+          "value": "2026-11-18",
+          "count": 10276
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose 902 and search Halifax to see which companies hold prefixes in that exchange. Save individual prefixes to revisit them and watch later changes to their published status or assignment."
+      "note": "Search 902 and Halifax for telephone assignments. In Canadian IP registrations, compare UBC’s IPv4 block or BCNET’s IPv6 block in the 2016, 2020 and latest ARIN editions, then open its observed routing history."
     }
   },
   {
@@ -3915,7 +3981,7 @@
   {
     "id": "pantryprices",
     "title": "Pantry Prices",
-    "description": "Price a grocery basket in two historical years using Canada’s published urban retail averages.",
+    "description": "Compare Canadian grocery baskets across historical years, recent months and provincial retail prices.",
     "category": "money",
     "tags": [
       "Canada",
@@ -3924,7 +3990,11 @@
       "Statistics Canada",
       "historical groceries",
       "butter",
-      "flour"
+      "flour",
+      "grocery basket",
+      "grocery prices",
+      "retail scanner",
+      "1960s"
     ],
     "icon": "wallet",
     "url": "/pantryprices/",
@@ -3933,11 +4003,11 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "The Dominion Bureau of Statistics published retail prices by weight or dozen. Each ingredient opens the original table for its price series.",
+      "detail": "Published urban annual prices and two distinct Statistics Canada monthly grocery price tables retain their own package sizes and methods.",
       "cadence": "Monthly",
       "probes": [
         {
-          "label": "Data retrieved",
+          "label": "Monthly tables retrieved",
           "url": "https://coolcode.ca/pantryprices/data/edition.json",
           "path": [
             "retrieved"
@@ -3946,27 +4016,27 @@
             "path": [
               "count"
             ],
-            "unit": "item-year prices"
+            "unit": "published prices"
           },
           "value": "2026-11-19",
-          "count": 230
+          "count": 19733
         },
         {
-          "label": "Price years",
+          "label": "Retail scanner months",
           "url": "https://coolcode.ca/pantryprices/data/edition.json",
           "path": [
-            "start"
+            "recentStart"
           ],
           "end_path": [
-            "end"
+            "recentEnd"
           ],
-          "value": "1914–1959"
+          "value": "2017-01–2026-09"
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "One pound of butter and five pounds of flour cost 53.6¢ in 1914 and 46.0¢ in 1935 at the published urban Canadian averages. Change either quantity to see how much that ingredient contributes."
+      "note": "One 454 g butter, one 675 g white bread and a dozen eggs totalled $9.69 in September 2017 and $13.99 in September 2026 at Canadian scanner averages. Choose a province to compare its prices, or select an earlier price series to explore the published urban and national records back to 1914."
     }
   },
   {
