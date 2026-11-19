@@ -5762,5 +5762,1035 @@
     "readme": {
       "note": "Look up ST12000NM0007 and compare Q1 and Q2 2025. Backblaze recorded 24 failures across 92,483 drive-days in Q1 and nine across 91,801 in Q2. Bring two smartctl JSON files from the same disk to see what changed on your own device."
     }
+  },
+  {
+    "id": "federal-property-atlas",
+    "title": "Federal Property Atlas",
+    "description": "Locate federal parcels by community, custodian and legal interest. Inspect building area and follow a property into the federal heritage and contaminated-sites records.",
+    "category": "places",
+    "tags": [
+      "property",
+      "federal land",
+      "real estate",
+      "heritage",
+      "BC",
+      "Nova Scotia"
+    ],
+    "icon": "map",
+    "url": "/federal-property-atlas/",
+    "source": "https://github.com/jsdyer/federal-property-atlas",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Treasury Board lists land, buildings and custodians in BC and Nova Scotia. Reviewed Parks Canada records identify selected heritage designations.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/federal-property-atlas/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "parcel records"
+          },
+          "value": "2026-11-19",
+          "count": 4336
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search Fisgard in British Columbia and open property 17454. The March 2026 heritage directory links this property to a national historic site, a classified federal heritage building and a heritage lighthouse."
+    }
+  },
+  {
+    "id": "inflation-basket",
+    "title": "Inflation Basket",
+    "description": "Compare the change in your own spending basket with official provincial or Canadian inflation over the same months.",
+    "category": "money",
+    "tags": [
+      "inflation",
+      "CPI",
+      "spending",
+      "prices"
+    ],
+    "icon": "shopping-basket",
+    "url": "/inflation-basket/",
+    "source": "https://github.com/jsdyer/inflation-basket",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Statistics Canada publishes monthly price indexes for eight spending categories and all-items CPI, with separate basket weights.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/inflation-basket/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "index observations"
+          },
+          "value": "2026-11-19",
+          "count": 29502
+        },
+        {
+          "url": "https://coolcode.ca/inflation-basket/data/status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "label": "Coverage",
+          "value": "2002-01–2026-10"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Set every category except food to zero to isolate food inflation. In BC from October 2025 to October 2026 the food index rose 2.37% and the official all-items index rose 2.51%. The contribution table shows exactly which spending categories drive a custom result."
+    }
+  },
+  {
+    "id": "spectrum-explorer",
+    "title": "Spectrum Explorer",
+    "description": "Look up a Canadian frequency band and compare published transmitter records by province and territory.",
+    "category": "liminal-tools",
+    "tags": [
+      "Canada",
+      "spectrum",
+      "radio",
+      "ISED",
+      "allocation"
+    ],
+    "icon": "radio-tower",
+    "url": "/spectrum-explorer/",
+    "source": "https://github.com/jsdyer/spectrum-explorer",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "ISED’s Canadian allocation table is paired with counts from the terrestrial spectrum licence site extract.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/spectrum-explorer/data/status.json",
+          "label": "Source retrieved",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "allocation bands"
+          },
+          "value": "2026-11-19",
+          "count": 535
+        },
+        {
+          "url": "https://coolcode.ca/spectrum-explorer/data/status.json",
+          "label": "Site extract",
+          "path": [
+            "edition"
+          ],
+          "count_at": {
+            "path": [
+              "assignment_count"
+            ],
+            "unit": "transmitter rows"
+          },
+          "value": "2026-11-03",
+          "count": 2108492
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter 3550 MHz to open the 3500–3650 MHz band. Compare BC and Nova Scotia in the regional table and follow the link to Spectrum Atlas to inspect individual sites."
+    }
+  },
+  {
+    "id": "asn-canada",
+    "title": "ASN Canada",
+    "description": "Find a Canadian-registered network and compare its visible IPv4 and IPv6 announcements.",
+    "category": "liminal-tools",
+    "tags": [
+      "ASN",
+      "BGP",
+      "RIPE",
+      "internet routing",
+      "Canada"
+    ],
+    "icon": "network",
+    "url": "/asn-canada/",
+    "source": "https://github.com/jsdyer/asn-canada",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "RIPEstat lists Canadian ASN registrations and routing visibility. RIPE RIS supplies prefix counts by family and advertisement length.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/asn-canada/data/status.json",
+          "path": [
+            "registry"
+          ],
+          "label": "Registry date",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "registered ASNs"
+          },
+          "value": "2026-11-17",
+          "count": 2529
+        },
+        {
+          "url": "https://coolcode.ca/asn-canada/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-19"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Try AS852. The November 19, 2026 RIS tables show 683 IPv4 prefixes and 30 IPv6 prefixes for TELUS after the ten-peer threshold. Switch address family to inspect its advertised prefix lengths or open the RIPEstat source."
+    }
+  },
+  {
+    "id": "cancon-atlas",
+    "title": "CanCon Atlas",
+    "description": "Find a recording in the CRTC music database and inspect its Canadian-content decision, language and release details.",
+    "category": "media",
+    "tags": [
+      "Canada",
+      "music",
+      "MAPL",
+      "radio",
+      "CRTC"
+    ],
+    "icon": "disc-3",
+    "url": "/cancon-atlas/",
+    "source": "https://github.com/jsdyer/cancon-atlas",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The CRTC publishes selection-level Canadian-content decisions, artists, languages, release dates and recording identifiers.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/cancon-atlas/data/status.json",
+          "label": "Source retrieved",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "recording rows"
+          },
+          "value": "2026-11-19",
+          "count": 19687
+        },
+        {
+          "url": "https://coolcode.ca/cancon-atlas/data/status.json",
+          "label": "CRTC edition",
+          "path": [
+            "edition"
+          ],
+          "value": "2026-10-22"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search the October 2026 edition for Gord Bamford or paste an ISRC. The count shows matching selection rows. Browse different recordings of the same song and check each row’s Canadian-content status."
+    }
+  },
+  {
+    "id": "census-lens",
+    "title": "Census Lens",
+    "description": "Compare two Canadian communities on population, housing, income, education and language using the 2021 Census.",
+    "category": "explorers",
+    "tags": [
+      "census",
+      "housing",
+      "population",
+      "income",
+      "municipalities"
+    ],
+    "icon": "building-2",
+    "url": "/census-lens/",
+    "source": "https://github.com/jsdyer/census-lens",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Statistics Canada’s 2021 Census Profile supplies 16 indicators for communities, metropolitan areas, provinces and territories across Canada.",
+      "cadence": "Quarterly source verification",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/census-lens/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "places"
+          },
+          "value": "2026-11-19",
+          "count": 5335
+        },
+        {
+          "url": "https://coolcode.ca/census-lens/data/status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "label": "Coverage",
+          "value": "2016–2021"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search Langley and switch between the district municipality and the city. The 2021 Census reports 132,603 residents in the district municipality and 28,963 in the city. Compare either one with Halifax Regional Municipality, then select median age or the tenant share."
+    }
+  },
+  {
+    "id": "housing-pulse",
+    "title": "Housing Pulse",
+    "description": "Compare housing construction, vacancy and rent in Halifax, Vancouver and other Canadian markets.",
+    "category": "money",
+    "tags": [
+      "housing",
+      "rent",
+      "vacancy",
+      "construction",
+      "CMHC"
+    ],
+    "icon": "building-2",
+    "url": "/housing-pulse/",
+    "source": "https://github.com/jsdyer/housing-pulse",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CMHC surveys and Statistics Canada rent estimates cover construction, vacancy, completed inventory and quarterly asking and paid rents.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/housing-pulse/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "published observations"
+          },
+          "value": "2026-11-19",
+          "count": 518276
+        },
+        {
+          "url": "https://coolcode.ca/housing-pulse/data/status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "label": "Coverage",
+          "value": "1948-01–2026-10"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare Halifax and Vancouver for a two-bedroom apartment in the second quarter of 2026. Average asking rents were $2,400 and $3,030, while average paid rents were $1,770 and $2,470. Switch to rental housing starts to explore a different source and monthly reporting period."
+    }
+  },
+  {
+    "id": "freenet-echo",
+    "title": "FreeNet Echo",
+    "description": "Compare archived homepages and documented services of community networks in Halifax, Vancouver and Ottawa.",
+    "category": "media",
+    "tags": [
+      "Canada",
+      "community networks",
+      "Halifax",
+      "Vancouver",
+      "Ottawa",
+      "FreeNet"
+    ],
+    "icon": "history",
+    "url": "/freenet-echo/",
+    "source": "https://github.com/jsdyer/freenet-echo",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Internet Archive capture metadata and the networks’ own histories document homepages, services and milestones.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/freenet-echo/data/status.json",
+          "label": "Source retrieved",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "indexed captures"
+          },
+          "value": "2026-11-19",
+          "count": 5649
+        },
+        {
+          "url": "https://coolcode.ca/freenet-echo/data/status.json",
+          "label": "Capture dates",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "1996-10-31–2026-10-12"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Pick Halifax and Vancouver, then select a year to compare the available homepage captures. Follow a dated snapshot or inspect the source explaining when each network offered a service."
+    }
+  },
+  {
+    "id": "toxic-ground",
+    "title": "Toxic Ground",
+    "description": "Trace the investigation of a recorded site. Compare its contaminants, annual expenditures and highest completed management step across fiscal years.",
+    "category": "places",
+    "tags": [
+      "environment",
+      "contaminated sites",
+      "expenditures",
+      "BC",
+      "Nova Scotia"
+    ],
+    "icon": "layers",
+    "url": "/toxic-ground/",
+    "source": "https://github.com/jsdyer/toxic-ground",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The Federal Contaminated Sites Inventory reports site status, contaminants, fiscal expenditures and management steps in BC and Nova Scotia.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/toxic-ground/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "sites"
+          },
+          "value": "2026-11-19",
+          "count": 6670
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search Halifax for Willow Park (4327) - TEME North Site. Its fiscal rows let you compare remediation spending with the highest completed step. Use the federal site ID to revisit the same entry after a source update."
+    }
+  },
+  {
+    "id": "surplus-crown",
+    "title": "Surplus Crown",
+    "description": "Follow federal sale listings, land identified for housing and Nova Scotia’s recorded land disposals. See which source supports each status and price.",
+    "category": "places",
+    "tags": [
+      "surplus",
+      "land bank",
+      "property disposal",
+      "real estate",
+      "Nova Scotia"
+    ],
+    "icon": "building-2",
+    "url": "/surplus-crown/",
+    "source": "https://github.com/jsdyer/surplus-crown",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "PSPC publishes federal sale listings and housing land-bank records. Nova Scotia reports completed provincial property disposals by fiscal year.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/surplus-crown/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "records"
+          },
+          "value": "2026-11-19",
+          "count": 279
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search Upper Tantallon to compare the Nova Scotia disposal files and the contract prices recorded for different parcels. Choose Federal sale listing to see asking prices separately. Provincial files have no parcel coordinates."
+    }
+  },
+  {
+    "id": "cloud-ledger",
+    "title": "Cloud Ledger",
+    "description": "Compare federal contract disclosures for selected cloud and IT suppliers by department, reporting quarter and instrument.",
+    "category": "disclosures",
+    "tags": [
+      "cloud",
+      "contracts",
+      "amendments",
+      "procurement",
+      "IT"
+    ],
+    "icon": "database",
+    "url": "/cloud-ledger/",
+    "source": "https://github.com/jsdyer/cloud-ledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Treasury Board contract disclosures preserve filed vendor names and distinguish original awards from amendments.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/cloud-ledger/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "disclosures"
+          },
+          "value": "2026-11-19",
+          "count": 5501
+        },
+        {
+          "label": "Reporting quarters",
+          "url": "https://coolcode.ca/cloud-ledger/data/status.json",
+          "path": [
+            "periodStart"
+          ],
+          "end_path": [
+            "periodEnd"
+          ],
+          "value": "2021-04-01–2026-09-30"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Filter to ThinkOn and open reference C-2026-2027-Q2-00919. The RCMP reported an original contract value of $192,894.74 in 2026–27 Q2. Selecting amendments instead shows the signed changes disclosed for that vendor."
+    }
+  },
+  {
+    "id": "ccts-ledger",
+    "title": "CCTS Ledger",
+    "description": "Compare telecom providers across CCTS annual reports and examine the issues raised in an official workbook privately.",
+    "category": "explorers",
+    "tags": [
+      "telecom",
+      "complaints",
+      "CCTS",
+      "provider",
+      "Bell",
+      "TELUS"
+    ],
+    "icon": "messages-square",
+    "url": "/ccts-ledger/",
+    "source": "https://github.com/jsdyer/ccts-ledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "CCTS annual reports supply provider counts and outcome rates. Local files add the issue detail from its downloadable workbooks.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/ccts-ledger/data/index.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "provider-year entries"
+          },
+          "value": "2026-11-19",
+          "count": 30
+        },
+        {
+          "label": "Report periods",
+          "url": "https://coolcode.ca/ccts-ledger/data/index.json",
+          "path": [
+            "first"
+          ],
+          "end_path": [
+            "latest"
+          ],
+          "value": "2022-08-01–2025-07-31"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare Rogers in 2023–24 with the Rogers/Shaw entry in 2024–25, where the published accepted count was 6,485. Open a complaint issues workbook to filter by provider, province and service and count distinct complaints separately from issue rows."
+    }
+  },
+  {
+    "id": "pipeda-findings",
+    "title": "PIPEDA Findings",
+    "description": "Search published Canadian privacy investigations, compare issue-level findings and save citations to the original records.",
+    "category": "explorers",
+    "tags": [
+      "privacy",
+      "complaints",
+      "PIPEDA",
+      "access",
+      "consent",
+      "retention"
+    ],
+    "icon": "gavel",
+    "url": "/pipeda-findings/",
+    "source": "https://github.com/jsdyer/pipeda-findings",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The federal Privacy Commissioner’s business investigations catalogue supplies publication dates, document types and original decisions.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/pipeda-findings/data/index.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "published records"
+          },
+          "value": "2026-11-19",
+          "count": 173
+        },
+        {
+          "label": "Publication dates",
+          "url": "https://coolcode.ca/pipeda-findings/data/index.json",
+          "path": [
+            "earliest"
+          ],
+          "end_path": [
+            "latest"
+          ],
+          "value": "2001-04-20–2026-10-26"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search for Bell and open report 2026-003. Its access-response deadline, cellphone-log procedures and openness issue have separate conclusions. The record gives both the findings date and the publication date."
+    }
+  },
+  {
+    "title": "Grid Dark",
+    "description": "Compare power restoration bulletins with regional internet measurements during two Canadian storms.",
+    "category": "liminal-tools",
+    "icon": "activity",
+    "tags": [
+      "internet outages",
+      "electricity",
+      "IODA",
+      "Fiona",
+      "British Columbia",
+      "Nova Scotia"
+    ],
+    "id": "grid-dark",
+    "url": "/grid-dark/",
+    "hosting": "project",
+    "access": "browser",
+    "source": "https://github.com/jsdyer/grid-dark",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Utility bulletins supply dated customer counts. Georgia Tech IODA measurements show how the provincial internet signal compared with its preceding week.",
+      "cadence": "Daily for internet measurements",
+      "probes": [
+        {
+          "label": "Internet data retrieved",
+          "url": "https://coolcode.ca/grid-dark/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "bulletins"
+            ],
+            "unit": "utility bulletins"
+          },
+          "value": "2026-11-19",
+          "count": 10
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "During Fiona, Nova Scotia’s lowest hourly active-probing signal was 46.0% of its reference median, while the lowest routing signal was 93.4%. Switch measurements, then select a dated utility row to inspect what each source recorded around the same hour."
+    }
+  },
+  {
+    "id": "gc-subdomain-watch",
+    "title": "GC Subdomain Watch",
+    "description": "Compare the official web addresses of Canadian institutions across dated federal directories.",
+    "category": "liminal-tools",
+    "tags": [
+      "Canada.ca",
+      "directory",
+      "certificates",
+      "RSS",
+      "domains"
+    ],
+    "icon": "history",
+    "url": "/gc-subdomain-watch/",
+    "source": "https://github.com/jsdyer/gc-subdomain-watch",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Archived and current Canada.ca directories supply institutional links. Cert Spotter supplies certificate summaries for four named public homepages.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/gc-subdomain-watch/data.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "directory entries"
+          },
+          "value": "2026-11-19",
+          "count": 215
+        },
+        {
+          "url": "https://coolcode.ca/gc-subdomain-watch/data.json",
+          "path": [
+            "first"
+          ],
+          "end_path": [
+            "latest_change"
+          ],
+          "label": "Saved editions",
+          "value": "2023-11-20–2026-11-19"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare the 2023 and current directory, then filter by destination changes. The two recorded dates bound the change. Each result links to the editions used, and the RSS feed carries observed changes."
+    }
+  },
+  {
+    "id": "ix-ledger",
+    "title": "IX Ledger",
+    "description": "Compare Canadian internet exchanges across dated snapshots and find which networks appeared, left or changed their listed connections.",
+    "category": "liminal-tools",
+    "tags": [
+      "peering",
+      "VANIX",
+      "CANIX",
+      "TorIX",
+      "internet exchanges"
+    ],
+    "icon": "network",
+    "url": "/ix-ledger/",
+    "source": "https://github.com/jsdyer/ix-ledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CAIDA’s dated PeeringDB archives record exchange locations, network names and self-reported interface speeds.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/ix-ledger/data/status.json",
+          "path": [
+            "end"
+          ],
+          "label": "Latest snapshot",
+          "count_at": {
+            "path": [
+              "memberships"
+            ],
+            "unit": "ASN and exchange pairs"
+          },
+          "value": "2026-11-18",
+          "count": 931
+        },
+        {
+          "url": "https://coolcode.ca/ix-ledger/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-19"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "VANIX had 48 listed ASNs in the November 1, 2018 snapshot and 79 on November 18, 2026. Compare the two editions, then choose Appeared to inspect the individual networks behind the change."
+    }
+  },
+  {
+    "id": "boomerang-meter",
+    "title": "Boomerang Meter",
+    "description": "Compare Canadian anchor pairs and inspect the exchange evidence on their published internet paths.",
+    "category": "liminal-tools",
+    "tags": [
+      "traceroute",
+      "routing",
+      "RIPE Atlas",
+      "Canada",
+      "internet exchange"
+    ],
+    "icon": "route",
+    "url": "/boomerang-meter/",
+    "source": "https://github.com/jsdyer/boomerang-meter",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Completed RIPE Atlas traces are compared with same-day PeeringDB exchange member addresses and facility countries.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/boomerang-meter/data/status.json",
+          "path": [
+            "end"
+          ],
+          "label": "Latest sample",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "trace observations"
+          },
+          "value": "2026-11-18",
+          "count": 7545
+        },
+        {
+          "url": "https://coolcode.ca/boomerang-meter/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "value": "2026-11-19"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "On November 18, 2026 all eight completed traces from Beauharnois AS16276 to Vancouver AS396993 matched a DE-CIX New York member interface. The eight reverse traces reached Beauharnois with no exchange match. Compare the directions and open their original Atlas results."
+    }
+  },
+  {
+    "id": "hosted-where",
+    "title": "Hosted Where",
+    "description": "Compare what Canadian institutions disclose about a service provider, mail gateway and storage location.",
+    "category": "liminal-tools",
+    "tags": [
+      "Canada",
+      "hosting",
+      "universities",
+      "mail",
+      "data residency"
+    ],
+    "icon": "network",
+    "url": "/hosted-where/",
+    "source": "https://github.com/jsdyer/hosted-where",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Institutional service guides document hosting and storage. Public MX answers for named mail services identify the receiving gateway.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/hosted-where/data.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "service records"
+          },
+          "value": "2026-11-19",
+          "count": 9
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare Dalhousie email with University of Victoria OneDrive. One guide identifies the mail provider, while the other explicitly locates stored files in Canada. The MX interpreter also accepts records pasted privately."
+    }
+  },
+  {
+    "id": "gc-domain-graveyard",
+    "title": "GC Domain Graveyard",
+    "description": "Recover a Canadian public website from an old name or address and open a dated archival copy.",
+    "category": "media",
+    "tags": [
+      "Canada",
+      "archived websites",
+      "Library and Archives Canada",
+      "Wayback",
+      "web history"
+    ],
+    "icon": "archive-x",
+    "url": "/gc-domain-graveyard/",
+    "source": "https://github.com/jsdyer/gc-domain-graveyard",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Library and Archives Canada identifies historic sites. The Internet Archive supplies additional replay dates for the original URLs.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/gc-domain-graveyard/data.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "historic resources"
+          },
+          "value": "2026-11-19",
+          "count": 9
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search for Wheat Board and open a year from the capture timeline. The date belongs to a saved page. The curator’s featured copy and the latest check of the old address have separate labels."
+    }
+  },
+  {
+    "title": "Tide & Dark",
+    "description": "Find photography windows when a modeled Canadian low tide overlaps darkness and a dim Moon.",
+    "category": "field-kit",
+    "icon": "moon-star",
+    "tags": [
+      "tide",
+      "astronomy",
+      "Halifax",
+      "Vancouver",
+      "photography"
+    ],
+    "id": "tide-and-dark",
+    "url": "/tide-and-dark/",
+    "hosting": "project",
+    "access": "browser",
+    "source": "https://github.com/jsdyer/tide-and-dark",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "TICON-3 coastal gauge constants produce independent low-tide estimates at seven Canadian sites. Solar altitude and lunar illumination are calculated for each station.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Prediction dates",
+          "url": "https://coolcode.ca/tide-and-dark/status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "through"
+          ],
+          "value": "2026-09-01–2027-12-31"
+        },
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/tide-and-dark/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "modeled low tides"
+          },
+          "value": "2026-11-19",
+          "count": 6454
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Try Halifax starting December 1, 2026 with astronomical darkness, at most 25% lunar illumination and one hour on either side of low tide. The December 3 local evening window surrounds a modeled 10:08 p.m. low with a roughly 22% illuminated Moon."
+    }
   }
 ]
