@@ -8,6 +8,7 @@
   <title>Rack Recipes · CoolCode.ca</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="rack.css">
+  <script src="recipe.js" defer></script>
   <script src="rack.js" defer></script>
 </head>
 <body>
@@ -37,6 +38,13 @@
           <legend>Services</legend>
           <div class="choices" id="services"></div>
         </fieldset>
+        <section class="panel" aria-labelledby="ports-heading">
+          <h2 id="ports-heading">Ports and storage</h2>
+          <div id="settings"></div>
+          <p id="settings-empty" class="hint" hidden>Select a service to configure it.</p>
+          <p class="hint">Choose unused ports on the Docker host. Project folders live under <code>./data/</code> beside the Compose file.</p>
+          <p id="config-error" class="notice" role="status" hidden></p>
+        </section>
         <section class="panel memory" aria-labelledby="memory-heading">
           <div class="panel-head"><h2 id="memory-heading">Memory budget</h2><label>Host RAM
             <select id="ram">
@@ -59,6 +67,11 @@
           <pre tabindex="0" aria-label="Generated Docker Compose file"><code id="preview"></code></pre>
           <div class="actions"><button type="button" id="download">Download YAML <span aria-hidden="true">↓</span></button><button type="button" id="copy">Copy YAML</button></div>
         </section>
+        <div class="panel reopen">
+          <button type="button" id="open-recipe">Open a saved recipe</button>
+          <input type="file" id="recipe-file" accept=".yaml,.yml,text/yaml,application/yaml" hidden>
+          <p class="hint">Restore the planner settings from a Rack Recipes YAML file on your device. Manual YAML edits stay in the original file.</p>
+        </div>
         <details class="run" open>
           <summary>Run this recipe</summary>
           <div id="instructions">
@@ -66,7 +79,7 @@
             <pre><code>docker compose config --quiet
 docker compose up -d</code></pre>
             <ul id="startup"></ul>
-            <p class="hint">Open these addresses on the Docker host. Data stays in local named volumes. Run <code>docker compose stop</code> to pause the stack.</p>
+            <p class="hint">Open these addresses on the Docker host. The selected volumes or project folders hold your service data. Run <code>docker compose stop</code> to pause the stack.</p>
           </div>
           <p id="empty-instructions" hidden>Select a service to see its setup steps.</p>
         </details>

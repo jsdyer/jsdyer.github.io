@@ -8,6 +8,7 @@
   <title>Packet Detour · CoolCode.ca</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="packet.css">
+  <script src="measurements.js" defer></script>
   <script src="packet.js" defer></script>
 </head>
 <body>
@@ -20,22 +21,22 @@
     <div class="hero wrap">
       <p class="kicker">Networking / Route notebook</p>
       <h1>Packet Detour<span aria-hidden="true">.</span></h1>
-      <p>Follow a packet’s route across Canada. Compare hop locations and round-trip times, or bring your own annotated trace.</p>
+      <p>Compare recorded Vancouver and Montréal routes to K-root, inspect hop timings, or annotate a trace of your own.</p>
     </div>
   </header>
   <main class="wrap layout" id="notebook">
     <noscript>Enable JavaScript to open the interactive notebook. All route notes are processed in your browser.</noscript>
     <aside>
-      <h2 class="kicker">Illustrative routes</h2>
-      <div class="selector" id="samples" aria-label="Choose a sample route"></div>
+      <h2 class="kicker">Captured routes</h2>
+      <div class="selector" id="samples" aria-label="Choose a recorded RIPE Atlas route"></div>
       <a class="paste-link" href="#editor">Enter your own notes ↓</a>
     </aside>
     <section class="paper" aria-labelledby="route-title">
       <div class="intro">
-        <p class="kicker" id="source-label">Hand-labelled example</p>
-        <h2 id="route-title" tabindex="-1">Via Seattle</h2>
+        <p class="kicker" id="source-label">Recorded measurement</p>
+        <h2 id="route-title" tabindex="-1">Vancouver → K-root</h2>
         <p id="reading"></p>
-        <p class="path-label" id="path"></p>
+        <p class="path-label" id="path"></p><a id="source" hidden>Original RIPE Atlas result ↗</a>
       </div>
       <dl class="totals">
         <div><dt>Adjacent country changes</dt><dd id="changes">—</dd></div>
@@ -49,7 +50,7 @@
           <thead><tr><th scope="col">Hop</th><th scope="col">Location note</th><th scope="col">Country</th><th scope="col" class="timing">RTT (ms)</th></tr></thead>
           <tbody id="hops"></tbody>
         </table>
-        <p class="legend">Bars show round-trip time from the source to each hop, scaled to the largest timed hop in this route.</p>
+        <p class="legend">Recorded traces use the median of the successful replies at each hop. Bars show round-trip time from the source to each hop, scaled to the largest timed hop in this route.</p>
       </div>
       <div class="editor" id="editor">
         <h3>Your route notes</h3>

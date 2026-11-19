@@ -1,28 +1,5 @@
 "use strict";
 
-const services = [
-  {
-    id: "freshrss", title: "FreshRSS", purpose: "Bring your RSS feeds into one reading room.",
-    memory: 512, image: "freshrss/freshrss:latest", port: 8080, internalPort: 80,
-    volumes: { feeds: "/var/www/FreshRSS/data", extensions: "/var/www/FreshRSS/extensions" },
-    environment: { CRON_MIN: "13,43" }, initial: true,
-    setup: "Complete the installer and choose SQLite for storage."
-  },
-  {
-    id: "linkding", title: "linkding", purpose: "Tag, search and keep your own bookmark collection.",
-    memory: 384, image: "sissbruecker/linkding:latest", port: 9090, internalPort: 9090,
-    volumes: { bookmarks: "/etc/linkding/data" }, initial: false,
-    setup: "Create your first user in the terminal, then sign in.",
-    command: "docker compose exec linkding python manage.py createsuperuser"
-  },
-  {
-    id: "uptime-kuma", title: "Uptime Kuma", purpose: "Keep a local record of service uptime.",
-    memory: 512, image: "louislam/uptime-kuma:2", port: 3001, internalPort: 3001,
-    volumes: { uptime: "/app/data" }, initial: true,
-    setup: "Create the admin account and add your first monitor."
-  }
-];
-
 const byId = id => document.getElementById(id);
 const choose = byId("services");
 const ram = byId("ram");
@@ -54,38 +31,29 @@ function addChoice(service) {
   choose.append(label);
 }
 
-function compose(active) {
-  const lines = ["services:"];
-  for (const service of active) {
-    lines.push(
-      "  " + service.id + ":",
-      "    image: " + service.image,
-      "    restart: unless-stopped",
-      "    ports:",
-      '      - "127.0.0.1:' + service.port + ':' + service.internalPort + '"',
-      "    volumes:"
-    );
-    for (const [volume, mount] of Object.entries(service.volumes)) {
-      lines.push("      - " + volume + ":" + mount);
-    }
-    if (service.environment) {
-      lines.push("    environment:");
-      for (const [key, value] of Object.entries(service.environment)) {
-        lines.push("      " + key + ': "' + value + '"');
-      }
-    }
-  }
-  lines.push("", "volumes:");
-  for (const service of active) {
-    for (const volume of Object.keys(service.volumes)) lines.push("  " + volume + ": {}");
-  }
-  // First-run steps travel with the file when it leaves the planner.
-  lines.push("", "# From this directory: docker compose config --quiet && docker compose up -d");
-  for (const service of active) {
-    lines.push("# " + service.title + " • http://127.0.0.1:" + service.port + " — " + service.setup);
-    if (service.command) lines.push("# " + service.command);
-  }
-  return lines.join("\n") + "\n";
+function addSettings(service) {
+  const line = element("div", "", "service-settings");
+  line.id = service.id + "-settings";
+  const heading = element("strong", service.title);
+  const portLabel = element("label", "Host port");
+  const port = document.createElement("input");
+  port.type = "number";
+  port.id = service.id + "-port";
+  port.min = "1";
+  port.max = "65535";
+  port.step = "1";
+  port.value = service.port;
+  port.setAttribute("aria-label", service.title + " host port");
+  portLabel.append(port);
+  const storageLabel = element("label", "Store data in");
+  const storage = document.createElement("select");
+  storage.id = service.id + "-storage";
+  storage.setAttribute("aria-label", service.title + " storage");
+  storage.add(new Option("Docker volumes", "volume"));
+  storage.add(new Option("Project folders", "folder"));
+  storageLabel.append(storage);
+  line.append(heading, portLabel, storageLabel);
+  byId("settings").append(line);
 }
 
 function memoryLabel(mib) {
@@ -96,6 +64,7 @@ function render() {
   const active = services.filter((service, index) => {
     const checked = byId(service.id).checked;
     rackUnits[index].classList.toggle("active", checked);
+    byId(service.id + "-settings").hidden = !checked;
     return checked;
   });
   const capacity = Number(ram.value) * 1024;
@@ -112,26 +81,68 @@ function render() {
   byId("count").textContent = count;
   byId("summary").textContent = count + " selected. " + memoryLabel(Math.abs(balance)) +
     (balance < 0 ? " over budget." : " available.");
-  recipe = active.length ? compose(active) : "";
-  preview.textContent = recipe || "# Select a service to generate your recipe.";
+  byId("settings-empty").hidden = active.length > 0;
+  const plan = { version: 1, ram: Number(ram.value), services: active.map(({ id }) => ({
+    id, port: byId(id + "-port").valueAsNumber, storage: byId(id + "-storage").value,
+  })) };
+  let error = "";
+  recipe = "";
+  if (active.length) {
+    try { recipe = exportRecipe(plan); }
+    catch (problem) { error = problem.message; }
+  }
+  byId("config-error").hidden = !error;
+  byId("config-error").textContent = error;
+  preview.textContent = recipe || (error ? "# Resolve the port or storage setting above." : "# Select a service to generate your recipe.");
   byId("download").disabled = !recipe;
   byId("copy").disabled = !recipe;
   byId("instructions").hidden = !recipe;
-  byId("empty-instructions").hidden = Boolean(recipe);
+  byId("empty-instructions").hidden = active.length > 0;
   const startup = byId("startup");
   startup.replaceChildren();
-  for (const service of active) {
-    const address = "http://127.0.0.1:" + service.port;
+  for (const choice of recipe ? plan.services : []) {
+    const service = services.find((s) => s.id === choice.id);
+    const address = "http://127.0.0.1:" + choice.port;
     const line = document.createElement("li");
     line.append(element("strong", service.title), " · ", element("code", address),
       element("span", service.setup, "setup"));
     if (service.command) line.append(element("code", service.command, "command"));
+    const locations = Object.keys(service.volumes).map((v) =>
+      choice.storage === "folder" ? "./data/" + service.id + "/" + v : v);
+    line.append(element("span", (choice.storage === "folder" ? "Folders: " : "Volume keys: ") +
+      locations.join(", "), "setup"));
     startup.append(line);
   }
   feedback.textContent = "";
 }
 
-for (const service of services) addChoice(service);
+for (const service of services) {
+  addChoice(service);
+  addSettings(service);
+}
+byId("settings").addEventListener("input", render);
+byId("open-recipe").addEventListener("click", () => byId("recipe-file").click());
+byId("recipe-file").addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+  try {
+    const { plan, legacy } = readRecipe(await file.text(), Number(ram.value));
+    for (const service of services) {
+      const choice = plan.services.find((s) => s.id === service.id);
+      byId(service.id).checked = Boolean(choice);
+      byId(service.id + "-port").value = choice?.port ?? service.port;
+      byId(service.id + "-storage").value = choice?.storage ?? "volume";
+    }
+    ram.value = plan.ram;
+    render();
+    feedback.textContent = legacy ? "Opened an earlier recipe. It uses the current host RAM setting." :
+      "Opened the saved Rack Recipes settings.";
+  } catch (error) {
+    feedback.textContent = error.message;
+  } finally {
+    event.target.value = "";
+  }
+});
 choose.addEventListener("change", render);
 ram.addEventListener("change", render);
 byId("download").addEventListener("click", () => {

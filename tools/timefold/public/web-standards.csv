@@ -1,0 +1,8 @@
+date,title,kind,note,tags,source
+1996-12-17,CSS Level 1,web,The first CSS recommendation describes how a browser applies style rules to a structured document.,"styles, markup",https://www.w3.org/TR/REC-CSS1-961217
+1998-02-10,XML 1.0,web,"This edition specifies the syntax for XML documents, including elements, attributes and well-formedness.","markup, documents",https://www.w3.org/TR/1998/REC-xml-19980210
+1999-12-24,HTML 4.01,web,"This HTML edition describes document structure, forms and presentation, including style sheets.","markup, documents, styles",https://www.w3.org/TR/1999/REC-html401-19991224/
+2001-09-04,SVG 1.0,web,SVG defines a language for describing two-dimensional graphics in XML.,"graphics, markup",https://www.w3.org/TR/2001/REC-SVG-20010904/
+2008-12-11,WCAG 2.0,web,This edition groups accessibility guidance under four principles and specifies testable success criteria.,"accessibility, documents",https://www.w3.org/TR/2008/REC-WCAG20-20081211/
+2014-10-28,HTML5,web,"The HTML5 recommendation defines HTML elements and APIs including canvas, video and audio.","markup, graphics, documents",https://www.w3.org/TR/2014/REC-html5-20141028/
+2023-10-05,WCAG 2.2,web,"This edition adds criteria covering topics such as focus visibility, dragging movements and target size.","accessibility, documents",https://www.w3.org/TR/2023/REC-WCAG22-20231005/

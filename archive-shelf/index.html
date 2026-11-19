@@ -4,59 +4,85 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1d2922">
-  <meta name="description" content="Search a fictional community-network newsletter by page. Try Archive Shelf on CoolCode.ca, then index a document collection on your own Linux machine.">
+  <meta name="description" content="Search the original pages of Statistics Canada's The Daily on Canadian internet adoption from 2001 to 2010, or search your own documents privately.">
   <title>Archive Shelf · CoolCode.ca</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="shelf.css">
-  <script src="sample-pages.js" defer></script>
+  <script src="archive-pages.js" defer></script>
   <script src="shelf.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to search</a>
-  <header>
-    <div class="wrap mast">
-      <a class="brand" href="../" aria-label="CoolCode.ca home"><b aria-hidden="true">&gt;_</b>CoolCode<span>.ca</span></a>
-      <nav aria-label="Main navigation"><a href="../#projects">Projects</a><a href="../field-notes/">Field Notes</a></nav>
-    </div>
-  </header>
+  <header><div class="wrap mast">
+    <a class="brand" href="../" aria-label="CoolCode.ca home"><b aria-hidden="true">&gt;_</b>CoolCode<span>.ca</span></a>
+    <nav aria-label="Main navigation"><a href="../#projects">Projects</a><a href="../field-notes/">Field Notes</a></nav>
+  </div></header>
   <main id="main">
-    <div class="hero">
-      <div class="wrap hero-grid">
-        <div class="intro">
-          <a class="back" href="../#projects">← Project directory</a>
-          <h1>Archive Shelf<span>.</span></h1>
-          <p>Search an old newsletter and jump to the page that carries the story. This public sample comes from a fictional community network.</p>
-        </div>
-        <aside class="issue" aria-label="Sample publication">
-          <p class="serial">November 1998 <span>Issue 04</span></p>
-          <h2>Rainline</h2>
-          <p class="press">Community Network Bulletin</p>
-          <div class="issue-foot"><span>3 pages</span><a href="sample/rainline-bulletin.pdf">Open PDF ↗</a></div>
-        </aside>
+    <div class="hero"><div class="wrap hero-grid">
+      <div class="intro">
+        <a class="back" href="../#projects">← Project directory</a>
+        <h1>Archive Shelf<span>.</span></h1>
+        <p>How did Canadians get online? Follow the transition from dial-up to broadband in the original pages of Statistics Canada’s <cite>The Daily</cite>.</p>
       </div>
-    </div>
+      <aside class="issue" aria-label="Public collection">
+        <p class="serial">Statistics Canada <span>2001–2010</span></p>
+        <h2>The Daily</h2><p class="press">Canadian internet use</p>
+        <div class="issue-foot"><span>Selected issues</span><a href="#issues" id="browse">Browse originals ↓</a></div>
+      </aside>
+    </div></div>
     <div class="wrap workspace">
       <section aria-labelledby="search-title">
-        <h2 id="search-title">Search the bulletin</h2>
+        <h2 id="search-title">Search the archive</h2>
         <form id="search-form" role="search" hidden>
+          <div class="filters">
+            <label>Collection<select id="collection"><option value="public">The Daily · Statistics Canada</option><option value="local">Your files · this tab</option></select></label>
+            <label id="issue-filter">Issue<select id="issue"><option value="">All issues</option></select></label>
+          </div>
+          <div id="import-panel" hidden>
+            <label for="files">Add UTF-8 text or Markdown files</label>
+            <input id="files" type="file" multiple accept=".txt,.md,.markdown">
+            <p>Files and searches stay in this tab. Add up to 12 MiB and 2,500 pages. Form-feed characters separate pages. Closing or refreshing the tab clears your files.</p>
+            <p id="import-status" role="status"></p>
+            <button type="button" id="forget" class="reset" hidden>Remove all files</button>
+          </div>
           <label for="query">Word or phrase</label>
-          <div class="search-row"><input id="query" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. dial-up" maxlength="200"><button type="submit">Search</button></div>
-          <div class="examples" aria-label="Example searches"><span>Try</span><button type="button" data-term="dial-up">dial-up</button><button type="button" data-term="tape rotation">tape rotation</button><button type="button" data-term="reading room">reading room</button></div>
+          <div class="search-row"><input id="query" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. broadband" maxlength="200"><button type="submit">Search</button></div>
+          <div class="examples" id="examples" aria-label="Example searches"><span>Try</span><button type="button" data-term="dial-up">dial-up</button><button type="button" data-term="broadband">broadband</button><button type="button" data-term="online shopping">online shopping</button></div>
         </form>
-        <noscript><p>Open one of the three source pages below, or search the text in your PDF reader.</p></noscript>
-        <div class="results-head"><h3 id="summary" aria-live="polite" aria-atomic="true">All 3 pages</h3><button class="reset" id="clear" type="button" hidden>Clear search</button></div>
-        <ol class="results" id="results">
-          <li><span class="folio">Page 1</span><div><h4><a href="sample/rainline-bulletin.pdf#page=1">The reading room</a></h4><p>We moved the reading room into the old post office on Alder Street.</p></div></li>
-          <li><span class="folio">Page 2</span><div><h4><a href="sample/rainline-bulletin.pdf#page=2">Two lines after dark</a></h4><p>The second dial-up line opens at seven each evening.</p></div></li>
-          <li><span class="folio">Page 3</span><div><h4><a href="sample/rainline-bulletin.pdf#page=3">The Friday shelf</a></h4><p>Tape rotation begins after the Friday mail run.</p></div></li>
-        </ol>
+        <noscript><p>Browse the complete issues below. Each PDF contains searchable text.</p></noscript>
+        <div id="result-panel" hidden>
+          <div class="results-head"><h3 id="summary" aria-live="polite" aria-atomic="true"></h3><button class="reset" id="clear" type="button" hidden>Clear search</button></div>
+          <ol class="results" id="results"></ol>
+          <div class="actions"><button type="button" id="more" class="reset" hidden>Show more pages</button><button type="button" id="export" class="reset" hidden>Download results (JSON)</button></div>
+        </div>
+        <section id="issues" aria-labelledby="issues-heading">
+          <h3 id="issues-heading">Original issues</h3>
+          <p>The topics below identify the internet coverage in each issue. Search covers every physical page, including other releases published that day.</p>
+          <ul class="issue-list">
+<!-- issue list -->
+<li><div><strong>26 July 2001</strong><span>Household internet use in 2000</span></div><div><a href="issues/the-daily-2001-07-26.pdf">PDF · 11 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2001-7-26-eng.pdf">Government archive</a></div></li>
+<li><div><strong>25 July 2002</strong><span>Household internet use in 2001</span></div><div><a href="issues/the-daily-2002-07-25.pdf">PDF · 7 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2002-7-25-eng.pdf">Government archive</a></div></li>
+<li><div><strong>23 September 2003</strong><span>Broadband adoption, 1999–2002</span></div><div><a href="issues/the-daily-2003-09-23.pdf">PDF · 8 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2003-9-23-eng.pdf">Government archive</a></div></li>
+<li><div><strong>11 December 2003</strong><span>Online shopping by households in 2002</span></div><div><a href="issues/the-daily-2003-12-11.pdf">PDF · 10 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2003-12-11-eng.pdf">Government archive</a></div></li>
+<li><div><strong>2 August 2006</strong><span>Internet use and time use in 2005</span></div><div><a href="issues/the-daily-2006-08-02.pdf">PDF · 5 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2006-8-2-eng.pdf">Government archive</a></div></li>
+<li><div><strong>15 August 2006</strong><span>Canadian Internet Use Survey, 2005</span></div><div><a href="issues/the-daily-2006-08-15.pdf">PDF · 10 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2006-8-15-eng.pdf">Government archive</a></div></li>
+<li><div><strong>12 June 2008</strong><span>Canadian Internet Use Survey, 2007</span></div><div><a href="issues/the-daily-2008-06-12.pdf">PDF · 11 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2008-6-12-eng.pdf">Government archive</a></div></li>
+<li><div><strong>10 May 2010</strong><span>Canadian Internet Use Survey, 2009</span></div><div><a href="issues/the-daily-2010-05-10.pdf">PDF · 6 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2010-5-10-eng.pdf">Government archive</a></div></li>
+<li><div><strong>27 September 2010</strong><span>Online shopping in 2009</span></div><div><a href="issues/the-daily-2010-09-27.pdf">PDF · 7 pages</a> <a href="https://publications.gc.ca/collections/collection_2017/statcan/11-001/CS11-001-2010-9-27-eng.pdf">Government archive</a></div></li>
+<!-- /issue list -->
+          </ul>
+        </section>
       </section>
-      <aside class="guide" aria-labelledby="local-heading">
-        <span aria-hidden="true" class="shell-sign">&gt;_</span>
-        <h2 id="local-heading">On your own shelf</h2>
-        <p>Point the Linux tool at PDFs, plain text, or Markdown files. It keeps the search index on your machine.</p>
-        <a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/archive-shelf">Linux setup &amp; source ↗</a>
-        <a href="../field-notes/">Read the Field Notes →</a>
+      <aside class="guide" aria-label="Working with the archive">
+        <h2>Where the pages come from</h2>
+        <p>Adapted from Statistics Canada, <cite>The Daily</cite>, catalogue 11-001, selected issues from July 2001 to September 2010. This does not constitute an endorsement by Statistics Canada of this product.</p>
+        <p>Source PDFs are reproduced and distributed on an “as is” basis with the permission of Statistics Canada. Search excerpts come from the PDFs. Use the originals to read tables in their printed layout.</p>
+        <a href="https://publications.gc.ca/site/eng/9.827951/publication.html">Government catalogue ↗</a>
+        <a href="https://www.statcan.gc.ca/en/terms-conditions/open-licence">Statistics Canada Open Licence ↗</a>
+        <a href="../field-notes/finding-the-dial-up-page/">Finding the dial-up page →</a>
+        <h2>Your own collection</h2>
+        <p>Search text files in this tab, or use the Linux edition to index a folder of PDFs, plain text and Markdown on your machine.</p>
+        <a href="https://github.com/jsdyer/jsdyer.github.io/tree/main/tools/archive-shelf">Linux setup and source ↗</a>
       </aside>
     </div>
   </main>

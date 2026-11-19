@@ -2,6 +2,7 @@
 declare(strict_types=1);
 /** Dependency-free domain/storage regression tests. Always use a temporary SQLite DB. */
 require_once __DIR__ . '/../app/backup.php';
+require_once __DIR__ . '/../app/timeline.php';
 
 $checks = 0;
 function check(bool $condition, string $message): void
@@ -151,6 +152,24 @@ try {
     check(password_verify('Changed-test-password-2031', $rewritten_config['password_hash']), 'password CLI stores a hash of the new password');
     check($rewritten_config['dsn'] === $config['dsn'], 'password CLI preserves the archive database connection');
     check(!str_contains($cli_output, 'Changed-test-password-2031'), 'password CLI does not echo passwords supplied through stdin');
+    $timeline = $temporary . '/timeline.csv';
+    file_put_contents($timeline, "\xEF\xBB\xBFtitle,date,note,tags\r\n".'"A, B",2000-02-29,"quoted ""word""'."\n".'second line","web, archive"'."\r\n");
+    $result = tf_import_csv($db, $timeline);
+    check($result === ['imported' => 1, 'skipped' => 0], 'UTF-8 BOM and multiline spreadsheet fields import');
+    $row = array_values(array_filter(tf_list($db), fn($c) => $c['title'] === 'A, B'))[0];
+    check($row['tags'] === ['web', 'archive'] && $row['note'] === "quoted \"word\"\nsecond line", 'timeline retains quoted text and tags');
+    tf_save($db, $config, array_replace($row, ['title' => 'Changed after import']));
+    check(tf_import_csv($db, $timeline) === ['imported' => 0, 'skipped' => 1], 'reimport preserves edited capsules');
+    $existing = count(tf_list($db));
+    file_put_contents($timeline, "date,title\n2025-01-01,First\n2025-02-30,Invalid date\n");
+    rejects(fn() => tf_import_csv($db, $timeline), 'invalid late CSV date rejected');
+    check(count(tf_list($db)) === $existing, 'invalid CSV leaves no partial rows');
+    file_put_contents($timeline, "date,date,title\n");
+    rejects(fn() => tf_import_csv($db, $timeline), 'duplicate CSV headers rejected');
+    file_put_contents($timeline, "date,title\n");
+    rejects(fn() => tf_import_csv($db, $timeline), 'empty timeline rejected');
+    $reference = tf_import_csv($db, __DIR__ . '/../public/web-standards.csv');
+    check($reference['imported'] === 7, 'all seven sourced publication records load');
     unset($db);
     echo "PASS: $checks domain and storage checks\n";
 } finally {

@@ -9,7 +9,7 @@ find a connection across distant years.
 
 Built for the independent spirit of [CoolCode.ca](https://coolcode.ca/): small
 Linux tools, personal archives, home labs, and software you can understand and
-change. The included examples are fictional, not recovered personal memories.
+change. Start with your own records or explore the publication dates of seven W3C recommendations.
 
 PHP + Apache + MySQL/MariaDB. Plain JavaScript and CSS. **No Composer, npm,
 framework, CDN, API key, telemetry, or external service.** SQLite is an optional
@@ -17,15 +17,6 @@ shortcut for trying the same application without a database server.
 
 Install Timefold locally or on your Apache server. GitHub Pages hosts the
 CoolCode.ca catalogue; the archive needs PHP and a database to run.
-
-![Timefold light table](docs/timefold.png)
-
-<details>
-<summary>See the constellation</summary>
-
-![Capsules connected by their shared tags](docs/constellation.png)
-
-</details>
 
 ## Start in a few minutes
 
@@ -45,11 +36,11 @@ docker compose up -d --build
 ```
 
 Open **http://localhost:8080** and enter the owner password you put in `.env`.
-The first launch includes fictional examples. See `docker compose logs app`
+The first launch opens an empty archive. See `docker compose logs app`
 if the page is still starting. The database and original attachments persist
 in named volumes across rebuilds and restarts.
 
-Set `TIMEFOLD_SEED_DEMO=0` in `.env` **before the first launch** to start empty.
+Set `TIMEFOLD_SEED_DEMO=1` in `.env` **before the first launch** to include the sourced web standards timeline.
 Changing this setting later does not delete anything. `docker compose down`
 stops the app and preserves data. Keep the volumes unless you intend to erase
 the archive; `down -v` deletes them.
@@ -60,20 +51,22 @@ Requires PHP 8.2+ with PDO SQLite and Fileinfo (on Debian/Ubuntu:
 `sudo apt install php-cli php-sqlite3`). From the repository directory:
 
 ```sh
-php bin/timefold.php init --sqlite --demo
+php bin/timefold.php init --sqlite
 php -S 127.0.0.1:8000 -t public
 ```
 
 Open **http://localhost:8000** and use the generated password printed by `init`.
-Leave off `--demo` for an empty archive. Initialization is idempotent; it does
+Add `--reference` on first initialization to include the W3C records. The earlier `--demo` option also loads this timeline on a new archive. Initialization is idempotent; it does
 not reset an existing archive. The PHP development server is for local use.
 
 Or choose **Code → Codespaces → Create codespace on main** on GitHub. The
-included dev container sets up the same SQLite demo and forwards port 8000
+included dev container sets up the same empty SQLite archive and forwards port 8000
 privately. Its terminal shows the generated password. GitHub's Codespaces
 usage allowance applies to this optional path.
 
 ## Take your first trip
+
+Add your first capsule or import a spreadsheet before turning the year dial.
 
 1. Move **Turn back the clock** to an earlier year. Only capsules dated up to
    that year remain; this is a date filter, not a history of past edits.
@@ -95,6 +88,18 @@ capsules tell different stories about the same file.
 The constellation shows at most 120 filtered capsules to keep it readable.
 The light table and export retain the full collection. On a large collection,
 use the year, kind, tag, or text filters to explore a smaller constellation.
+
+## Import a spreadsheet timeline
+
+<!-- coolcode:guide -->
+Import a timeline CSV with dates and titles. Reopening the same file skips existing records, including capsules you have since edited.
+<!-- /coolcode:guide -->
+
+Save your spreadsheet as UTF-8 CSV. Choose **Import** on the light table, or run `php bin/timefold.php import-csv your-timeline.csv`. Each row makes one capsule. Dates use YYYY-MM-DD. The required headers are `date` and `title`. Add any of `note`, `kind` (note, web, photo or save), `tags` (comma-separated inside one quoted cell) and `source` (a citation, URL or location). A blank kind defaults to note. To attach a file, open an imported capsule and choose **Edit**.
+
+The [web standards timeline](public/web-standards.csv) includes seven W3C recommendations from 1996 through 2023. Each row links to its dated edition. Import the file, choose the accessibility tag and compare the 2008 and 2023 guidelines. The CSV is also available from the light table.
+
+Each CSV can contain up to 10,000 records and 8 MiB. A malformed record cancels the whole import. Identical rows share an ID. Changing a row in the CSV creates a new capsule. Use **Edit** to update an existing one.
 
 ## Keep an independent backup
 

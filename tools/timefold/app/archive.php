@@ -150,12 +150,3 @@ function tf_delete(PDO $db, string $id): void
     if ($stmt->rowCount() === 0) { throw new TimefoldError('That capsule no longer exists.', 404); }
     // Bytes are retained until an explicit maintenance run, allowing safe concurrent readers/imports.
 }
-
-function tf_demo(PDO $db): void
-{
-    require_once __DIR__ . '/demo.php';
-    foreach (tf_demo_capsules() as $input) {
-        tf_write($db, tf_validate($input), ['file_name' => '', 'file_mime' => '', 'file_size' => 0, 'sha256' => '']);
-    }
-    $db->exec("UPDATE timefold_meta SET meta_value = '1' WHERE meta_key = 'demo'");
-}

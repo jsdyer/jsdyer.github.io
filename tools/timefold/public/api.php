@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/../app/backup.php';
+require_once __DIR__ . '/../app/timeline.php';
 
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
@@ -89,7 +90,10 @@ try {
     }
     if ($action === 'import') {
         $upload = $_FILES['backup'] ?? null;
-        if (!$upload || ($upload['error'] ?? 1) !== UPLOAD_ERR_OK) { throw new TimefoldError('Choose a .timefold.ndjson backup. Check the PHP post/upload limits if the upload failed.', 413); }
+        if (!$upload || ($upload['error'] ?? 1) !== UPLOAD_ERR_OK) { throw new TimefoldError('Choose a timeline CSV or .timefold.ndjson backup. Check the PHP post/upload limits if the upload failed.', 413); }
+        if (strtolower(pathinfo($upload['name'], PATHINFO_EXTENSION)) === 'csv') {
+            tf_json(tf_import_csv($db, $upload['tmp_name']));
+        }
         if (filesize($upload['tmp_name']) > TIMEFOLD_WEB_BACKUP_LIMIT) { throw new TimefoldError('Browser imports are limited to 64 MiB. Use the CLI import command for a larger backup.', 413); }
         tf_json(tf_import($db, $config, $upload['tmp_name']));
     }

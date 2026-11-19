@@ -4,7 +4,7 @@ cd /var/www/html
 
 # Database health is checked by Compose before this entrypoint is started.
 if [ "${TIMEFOLD_SEED_DEMO:-0}" = 1 ]; then
-    php bin/timefold.php init --demo
+    php bin/timefold.php init --reference
 else
     php bin/timefold.php init
 fi

@@ -1,22 +1,13 @@
 # Packet Detour
 
-An offline, browser-based Canadian routing notebook. The three samples use invented locations and round-trip times to illustrate a detour via Seattle, a route with Canadian labels throughout, and a route with missing locations.
+[Open the route notebook](https://coolcode.ca/packet-detour/) to compare two archived Canadian measurements, or enter your own annotated hops. Both recorded routes target K-root on October 1, 2025 UTC.
 
-Open `index.html` locally or visit [Packet Detour on CoolCode](https://coolcode.ca/packet-detour/). Choose an example to load its ledger and editable notes. Paste your own rows to compare the sequence of country labels and each hop’s RTT. All processing happens in the tab. Reloading restores the Seattle example.
+<!-- coolcode:guide -->
+Compare measured hop timings from Vancouver and Montréal, open the exact RIPE Atlas result, then annotate known countries and see where a route’s evidence runs out.
+<!-- /coolcode:guide -->
 
-## Note format
+The snapshots come from RIPE Atlas built-in traceroute measurement 5001. Each result links to its exact probe and measurement time. The ledger shows the responding addresses and the median RTT among timed replies at each hop. Empty hops have no reported RTT. An IP address alone does not establish a physical location. Country labels are intentionally blank until you provide them. Adjacent-country changes require two neighbouring known labels.
 
-Supply one hop per line in traversal order. Separate the three fields with pipes or tabs. Blank lines are ignored.
+Paste or edit one row per hop as `location | country | RTT`, using a two-letter country code and milliseconds, or `?` for either unknown. Tab-separated input also works. Edits remain in this tab. Each recorded trace remains available offline.
 
-```text
-Langley access | CA | 1.8
-Unlocated hop | ? | 9.1
-Seattle transit | US | 13.4
-Victoria destination | CA | 25.1
-```
-
-The location is free text of up to 100 characters. The country is a user-supplied two-letter label or `?`. RTT accepts 0–60,000 milliseconds with up to three decimal places, or `?`. The ledger accepts up to 128 hops. Invalid notes produce a line-specific message where possible and preserve the last valid ledger.
-
-The change count compares adjacent, known country labels. For `CA → ? → US → CA`, it counts one adjacent change, from US to CA. Missing locations, incomplete traces and inaccurate geolocation limit what these notes can establish. The bars use per-hop round-trip times from the source. A difference between bars cannot establish the latency of the link between those routers.
-
-The application uses plain HTML, CSS and JavaScript and performs no probes, API requests or automatic geolocation. For real regional measurements and traceroute methodology, see [RIPE Atlas Region Meshes](https://atlas.ripe.net/docs/tools-and-code/region-meshes).
+[Measurement 5001](https://atlas.ripe.net/measurements/5001/) · [Vancouver anchor](https://atlas.ripe.net/probes/6493/) · [Montréal anchor](https://atlas.ripe.net/probes/6498/).

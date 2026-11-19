@@ -100,3 +100,14 @@ summary { font-size: 1.02rem; color: var(--pine); }
   .size { grid-column: 2; }
   .back { font-size: .69rem; }
 }
+
+.service-settings { display: grid; grid-template-columns: minmax(0, 1fr) minmax(4.8rem, .7fr) minmax(8.6rem, 1fr); gap: .65rem; align-items: end; border-bottom: 1px dashed var(--line); padding: .8rem 0; }
+.service-settings strong { align-self: center; font-size: .9rem; }
+.service-settings label { font-size: .75rem; font-weight: 600; }
+.service-settings input, .service-settings select { display: block; box-sizing: border-box; width: 100%; margin-top: .2rem; min-height: 2.15rem; }
+.service-settings input { border: 1px solid #a8b59a; border-radius: 3px; padding: .3rem .45rem; font: .84rem var(--mono); color: var(--ink); }
+.reopen button { background: var(--card); color: var(--pine); border: 1px solid var(--pine); }
+@media (max-width: 430px) {
+  .service-settings { grid-template-columns: 1fr 1.4fr; }
+  .service-settings strong { grid-column: 1 / -1; }
+}

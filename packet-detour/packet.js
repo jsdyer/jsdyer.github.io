@@ -1,43 +1,19 @@
 "use strict";
 
-const samples = [
-  {
-    title: "Via Seattle",
-    endpoints: "Langley → Victoria",
-    notes: [
-      "Langley access | CA | 1.8",
-      "Vancouver aggregation | CA | 3.2",
-      "Seattle transit | US | 13.4",
-      "Vancouver return | CA | 20.8",
-      "Victoria destination | CA | 25.1"
-    ]
-  },
-  {
-    title: "Across Canada",
-    endpoints: "Calgary → Toronto",
-    notes: [
-      "Calgary access | CA | 2.1",
-      "Regina transit | CA | 12.3",
-      "Winnipeg transit | CA | 19.2",
-      "Toronto destination | CA | 39.6"
-    ]
-  },
-  {
-    title: "A missing hop",
-    endpoints: "Montréal → Halifax",
-    notes: [
-      "Montréal access | CA | 1.5",
-      "No reply | ? | ?",
-      "Unlocated router | ? | 19.1",
-      "Halifax destination | CA | 28.7"
-    ]
-  }
-];
+function atlasHops(measurement) {
+  return measurement.hops.map(hop=>{
+    const times=hop.replies.map(reply=>reply.rtt).sort((a,b)=>a-b);
+    const middle=Math.floor(times.length/2);
+    const median=times.length ? times.length%2 ? times[middle] : (times[middle-1]+times[middle])/2 : null;
+    return {number:hop.hop,location:[...new Set(hop.replies.map(r=>r.from))].join(', ') || 'No timed reply',
+      country:'?',rtt:median,time:median===null?'?':String(Number(median.toFixed(3)))};
+  });
+}
 
 const byId = (id) => document.getElementById(id);
 const notes = byId("notes");
 const error = byId("error");
-const sampleButtons = [];
+const measuredButtons = [];
 
 function parseNotes(input) {
   if (input.length > 16000) throw new Error("Use 16,000 characters or fewer.");
@@ -95,7 +71,8 @@ function render(title, source, hops) {
   byId("route-title").textContent = title;
   byId("reading").textContent = describeRoute(hops, gapCount, changes);
   byId("path").textContent = "Country sequence · " + sequence.join(" → ");
-  byId("changes").textContent = changes;
+  const adjacentKnown = hops.some((hop,i)=>i>0 && hop.country!=='?' && hops[i-1].country!=='?');
+  byId("changes").textContent = adjacentKnown ? changes : 'Unknown';
   byId("gaps").textContent = gapCount;
   byId("final-rtt").textContent = last.rtt === null ? "Unknown" : last.time + " ms";
   const rows = document.createDocumentFragment();
@@ -104,7 +81,7 @@ function render(title, source, hops) {
     if (changesCountry(hops[i - 1], hop)) row.className = "crossing";
     const index = document.createElement("th");
     index.scope = "row";
-    index.textContent = String(i + 1).padStart(2, "0");
+    index.textContent = String(hop.number ?? i + 1).padStart(2, "0");
     row.append(index);
     for (const value of [hop.location, hop.country, hop.rtt === null ? "—" : hop.time]) {
       const cell = document.createElement("td");
@@ -127,26 +104,26 @@ function render(title, source, hops) {
   byId("hops").replaceChildren(rows);
 }
 
-function selectSample(index) {
-  const sample = samples[index];
-  for (const [i, button] of sampleButtons.entries()) button.setAttribute("aria-pressed", String(i === index));
-  notes.value = sample.notes.join("\n");
-  notes.removeAttribute("aria-invalid");
-  error.textContent = "";
-  render(sample.title, "Illustrative route · " + sample.endpoints, parseNotes(notes.value));
-  byId("notice").textContent = sample.title + " loaded, " + sample.notes.length + " hops.";
+function selectMeasurement(index) {
+  const measurement=measuredRoutes[index];
+  const hops=atlasHops(measurement);
+  measuredButtons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));
+  error.textContent='';
+  notes.removeAttribute('aria-invalid');
+  notes.value=hops.map(hop=>[hop.location,hop.country,hop.time].join(' | ')).join('\n');
+  render(measurement.city+' → K-root','RIPE Atlas · probe '+measurement.probe,hops);
+  byId('reading').textContent='This trace recorded '+hops.length+' hops. '+hops.filter(hop=>hop.rtt===null).length+' had no timed reply. The probe location is published by RIPE Atlas. Router countries are unverified.';
+  byId('path').textContent=new Date(measurement.timestamp*1000).toISOString()+' · Destination '+measurement.destination;
+  const source=byId('source');source.href=measurement.source;source.hidden=false;
+  byId('changes').textContent='Unknown';
+  byId('notice').textContent='Loaded the recorded '+measurement.city+' measurement.';
 }
-
-for (const [i, sample] of samples.entries()) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.textContent = sample.title;
-  const endpoints = document.createElement("small");
-  endpoints.textContent = sample.endpoints;
-  button.append(endpoints);
-  button.addEventListener("click", () => selectSample(i));
-  byId("samples").append(button);
-  sampleButtons.push(button);
+for (const [i,measurement] of measuredRoutes.entries()) {
+  const button=document.createElement('button');
+  button.type='button';button.textContent=measurement.city;
+  const sub=document.createElement('small');sub.textContent='RIPE Atlas · '+measurement.probe;
+  button.append(sub);button.addEventListener('click',()=>selectMeasurement(i));
+  byId('samples').append(button);measuredButtons.push(button);
 }
 
 byId("note-form").addEventListener("submit", event => {
@@ -162,10 +139,11 @@ byId("note-form").addEventListener("submit", event => {
   }
   error.textContent = "";
   notes.removeAttribute("aria-invalid");
-  for (const button of sampleButtons) button.setAttribute("aria-pressed", "false");
+  byId('source').hidden=true;
+  for (const button of measuredButtons) button.setAttribute("aria-pressed", "false");
   render("Your annotated route", "Local notes", hops);
   byId("notice").textContent = "Analyzed " + hops.length + (hops.length === 1 ? " hop." : " hops.");
   byId("route-title").focus();
 });
 
-selectSample(0);
+selectMeasurement(0);

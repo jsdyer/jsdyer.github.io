@@ -10,9 +10,9 @@
       <title>Finding the dial-up page</title>
       <link>https://coolcode.ca/field-notes/finding-the-dial-up-page/</link>
       <guid isPermaLink="true">https://coolcode.ca/field-notes/finding-the-dial-up-page/</guid>
-      <pubDate>Thu, 12 Nov 2026 00:00:00 -0700</pubDate>
+      <pubDate>Thu, 19 Nov 2026 00:00:00 -0700</pubDate>
       <category>Archiving</category>
-      <description>Recover a modem reference from page two of a fictional community-network newsletter. Try the search in your browser, then repeat it locally with Python, Poppler and SQLite.</description>
+      <description>Find dial-up in Statistics Canada’s archived internet surveys and read the original PDF pages. Repeat the search locally with Python, Poppler and SQLite.</description>
     </item>
   </channel>
 </rss>

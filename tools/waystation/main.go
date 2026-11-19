@@ -28,7 +28,6 @@ const help = `WAYSTATION — your pocket internet
 
 Capture your own server-rendered sites. Unplug the server. Keep browsing.
 
-  waystation demo                         build two sample capsules and browse
   waystation capture [flags] URL [URL...]  preserve explicit origins
   waystation serve [flags]                open the read-only archive viewer
   waystation list [flags]                 show saved snapshots
@@ -36,6 +35,7 @@ Capture your own server-rendered sites. Unplug the server. Keep browsing.
   waystation diff [flags] BEFORE AFTER    show URL-level changes as JSON
   waystation verify [flags] ID            check content hashes and lengths
   waystation export [flags] ID            create a portable capsule ZIP
+  waystation demo                         optional offline self-test
   waystation version
 
 Every data command accepts --store DIR (default: ./waystation-data).
@@ -162,7 +162,7 @@ func run(ctx context.Context, args []string) error {
 			return err
 		}
 		if len(snaps) == 0 {
-			fmt.Println("No capsules yet. Try waystation demo.")
+			fmt.Println("No capsules yet. Use waystation capture URL to archive a site.")
 			return nil
 		}
 		for _, snap := range snaps {

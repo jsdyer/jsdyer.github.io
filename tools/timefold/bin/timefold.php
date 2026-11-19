@@ -2,6 +2,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/../app/backup.php';
+require_once __DIR__ . '/../app/timeline.php';
 
 function cli_password(array $args): string
 {
@@ -39,11 +40,12 @@ try {
     $command = array_shift($args) ?? 'help';
     if ($command === 'help' || $command === '--help') {
         echo "Timefold " . TIMEFOLD_VERSION . "\n\n";
-        echo "  php bin/timefold.php init --sqlite [--demo] [--password-stdin]\n";
-        echo "  php bin/timefold.php init [--demo] [--password-stdin]  # MySQL via TIMEFOLD_* env\n";
+        echo "  php bin/timefold.php init --sqlite [--reference] [--password-stdin]\n";
+        echo "  php bin/timefold.php init [--reference] [--password-stdin]  # MySQL via TIMEFOLD_* env\n";
         echo "  php bin/timefold.php password [--password-stdin]\n";
         echo "  php bin/timefold.php export PATH.timefold.ndjson\n";
         echo "  php bin/timefold.php import PATH.timefold.ndjson\n";
+        echo "  php bin/timefold.php import-csv PATH.csv\n";
         echo "  php bin/timefold.php verify\n\n";
         echo "Environment: TIMEFOLD_DSN, TIMEFOLD_DB_USER, TIMEFOLD_DB_PASSWORD,\n";
         echo "TIMEFOLD_PASSWORD or TIMEFOLD_PASSWORD_HASH, TIMEFOLD_DATA_DIR,\n";
@@ -58,7 +60,7 @@ try {
             if ($config['dsn'] !== '' && !str_starts_with($config['dsn'], 'sqlite:')) { throw new TimefoldError('A MySQL DSN is already configured; omit --sqlite or use a separate config/data directory.'); }
             $config['dsn'] = $config['dsn'] ?: 'sqlite:' . $config['data_dir'] . '/timefold.sqlite';
         }
-        if ($config['dsn'] === '') { throw new TimefoldError('Set TIMEFOLD_DSN for MySQL, or pass --sqlite for a local demo.'); }
+        if ($config['dsn'] === '') { throw new TimefoldError('Set TIMEFOLD_DSN for MySQL, or pass --sqlite for a local archive.'); }
         $envPassword = getenv('TIMEFOLD_PASSWORD');
         if ($envPassword !== false && $envPassword !== '' && (strlen($envPassword) < 12 || strlen($envPassword) > 4096)) { throw new TimefoldError('TIMEFOLD_PASSWORD must be between 12 and 4096 bytes.'); }
         $chosen = in_array('--password-stdin', $args, true) ? cli_password($args) : null;
@@ -71,15 +73,14 @@ try {
         }
         $db = tf_db($config);
         $new = tf_schema($db);
-        if ($new && in_array('--demo', $args, true)) {
-            $db->beginTransaction();
-            tf_demo($db);
-            $db->commit();
+        $reference = in_array('--reference', $args, true) || in_array('--demo', $args, true);
+        if ($new && $reference) {
+            $seed = tf_import_csv($db, TIMEFOLD_ROOT . '/public/web-standards.csv');
+            echo "Added " . $seed['imported'] . " sourced web standards records.\n";
         }
         $envComplete = getenv('TIMEFOLD_DSN') && (getenv('TIMEFOLD_PASSWORD') || getenv('TIMEFOLD_PASSWORD_HASH'));
         if (!$envComplete || $chosen !== null) { cli_write_config($config); }
         echo $new ? "Archive initialized.\n" : "Archive already initialized; existing capsules preserved.\n";
-        if ($new && in_array('--demo', $args, true)) { echo "Added 16 fictional demo capsules.\n"; }
         if ($generated !== null) { echo "Owner password: " . $generated . "\nSave this password in your password manager.\n"; }
         if ($chosen !== null) { echo "Owner password set from stdin.\n"; }
         echo "Web root: public/\nLocal preview: php -S 127.0.0.1:8080 -t public\n";
@@ -111,6 +112,11 @@ try {
         catch (Throwable $e) { fclose($output); unlink($path); throw $e; }
         fclose($output);
         echo "Exported complete archive to " . $path . "\n";
+        exit;
+    }
+    if ($command === 'import-csv') {
+        $result = tf_import_csv($db, $args[0] ?? '');
+        echo "Imported " . $result['imported'] . "; skipped " . $result['skipped'] . " existing record(s).\n";
         exit;
     }
     if ($command === 'import') {
