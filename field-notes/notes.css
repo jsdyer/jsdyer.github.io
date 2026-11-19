@@ -75,3 +75,8 @@ pre code { font-size: inherit; overflow-wrap: normal; }
   .prose h2 { break-after: avoid; font-size: 17pt; }
   pre { white-space: pre-wrap; overflow-wrap: anywhere; color: #000; background: #fff; border: 1px solid #777; }
 }
+
+.guide-nav ul { display: flex; flex-wrap: wrap; gap: .55rem 1.3rem; padding: 0; list-style: none; }
+.guide-nav a { font-size: .92rem; }
+.field-guide { max-width: 77ch; }
+.field-guide h3 { margin: 1.4rem 0 .45rem; line-height: 1.3; }
