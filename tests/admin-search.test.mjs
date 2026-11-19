@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { readSearchReport } from "../admin/search-report.mjs";
+import { readQueryReport, readSearchReport } from "../admin/search-report.mjs";
 
 const catalog = [{ id: "nightfinder", title: "Nightfinder", access: "browser" },
                  { id: "install", title: "Install guide", access: "install" }];
@@ -28,4 +28,13 @@ test("rejects wrong dimension or malformed CSV", () => {
   for (const csv of ['Queries,Clicks,Impressions\nhello,2,3', 'Top pages,Clicks,Impressions\n"oops,2,3',
                        'Top pages,Clicks,Impressions\n"url"x,2,3'])
     assert.throws(() => readSearchReport(csv, catalog));
+});
+
+test("organizes actual query rows without assigning them to arbitrary pages", () => {
+  const csv = 'Requêtes les plus fréquentes;Clics;Impressions;Position moyenne\n"Halifax; port";2;10;3,5\nlangley;0;0;\n;1;2;1\nbad;?;4;1';
+  assert.deepEqual(readQueryReport(csv), { queries: [
+    {phrase: "Halifax; port", clicks: 2, impressions: 10, ctr: 0.2, position: 3.5},
+    {phrase: "langley", clicks: 0, impressions: 0, ctr: null, position: null},
+  ], invalid: 2 });
+  assert.throws(() => readQueryReport("Top pages,Clicks,Impressions"));
 });

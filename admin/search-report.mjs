@@ -30,12 +30,12 @@ function csvRows(input) {
     } else if (afterQuote && /[ \t]/.test(char)) {
       continue;
     } else if (afterQuote || char === '"') {
-      throw new Error("The CSV has a misplaced quotation mark. Export the Pages report again.");
+      throw new Error("The CSV has a misplaced quotation mark. Export the report again.");
     } else {
       value += char;
     }
   }
-  if (quoted) throw new Error("The CSV ends inside a quoted field. Export the complete Pages report.");
+  if (quoted) throw new Error("The CSV ends inside a quoted field. Export the complete report.");
   finishRow();
   return { rows, delimiter };
 }
@@ -45,6 +45,33 @@ function count(value) {
   if (!/^(?:\d+|\d{1,3}(?:,\d{3})+)$/.test(number)) return null;
   const parsed = Number(number.replaceAll(",", ""));
   return Number.isSafeInteger(parsed) ? parsed : null;
+}
+
+function positivePosition(value, delimiter) {
+  const text = value?.trim() || "";
+  const position = Number(delimiter === ";" ? text.replace(",", ".") : text);
+  return Number.isFinite(position) && position > 0 ? position : null;
+}
+
+export function readQueryReport(input) {
+  const { rows, delimiter } = csvRows(input);
+  const header = (rows.shift() || []).map(cell => cell.trim().toLowerCase());
+  const column = (...names) => header.findIndex(label => names.includes(label));
+  const query = column("top queries", "query", "queries", "requêtes", "requêtes les plus fréquentes", "principales requêtes", "requêtes les plus populaires");
+  const clicks = column("clicks", "clics"), impressions = column("impressions");
+  const position = column("position", "average position", "position moyenne");
+  if (query < 0 || clicks < 0 || impressions < 0) {
+    throw new Error("Choose Queries.csv from the Search Console Performance export. It must include search phrases, clicks and impressions.");
+  }
+  const queries = [];
+  let invalid = 0;
+  for (const row of rows) {
+    const phrase = row[query]?.trim(), c = count(row[clicks]), n = count(row[impressions]);
+    if (!phrase || c === null || n === null) { invalid++; continue; }
+    queries.push({ phrase, clicks: c, impressions: n, ctr: n ? c / n : null,
+      position: positivePosition(row[position], delimiter) });
+  }
+  return { queries, invalid };
 }
 
 export function readSearchReport(input, catalog) {
@@ -72,9 +99,8 @@ export function readSearchReport(input, catalog) {
     const group = groups.get(slug) || { id: slug, title: titles.get(slug), clicks: 0, impressions: 0, weighted: 0, positioned: 0 };
     group.clicks += c;
     group.impressions += n;
-    const posText = row[position]?.trim() || "";
-    const p = Number(delimiter === ";" ? posText.replace(",", ".") : posText);
-    if (p > 0 && Number.isFinite(p)) {
+    const p = positivePosition(row[position], delimiter);
+    if (p !== null) {
       group.positioned += n;
       group.weighted += n * p;
     }

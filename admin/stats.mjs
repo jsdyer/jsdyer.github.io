@@ -1,5 +1,5 @@
 import { publicIssues } from "./public-issues.mjs";
-import { readSearchReport } from "./search-report.mjs";
+import { readQueryReport, readSearchReport } from "./search-report.mjs";
 
 const number = new Intl.NumberFormat("en-CA");
 const percent = new Intl.NumberFormat("en-CA", { style: "percent", maximumFractionDigits: 1 });
@@ -98,6 +98,58 @@ function searchConsole(parent, catalog) {
   });
 }
 
+function searchPhrases(parent) {
+  const group = section(parent, "Google search phrases");
+  group.append(el("p", "Import Queries.csv from the same Search Console export. For the phrases that led to one tool, first filter by its page in Search Console, then export. Google omits some infrequent phrases. Your file stays in this tab."));
+  const file = el("input");
+  file.type = "file";
+  file.accept = ".csv,text/csv";
+  const filter = el("input");
+  filter.type = "search";
+  const order = choice([["clicks", "Most clicks"], ["impressions", "Most impressions"]]);
+  const controls = el("div", undefined, "stats-toolbar");
+  controls.append(field("Find a search phrase", filter), field("Sort phrases", order));
+  const state = status(), output = el("div");
+  controls.hidden = true;
+  group.append(field("Import Queries.csv", file), controls, state, output);
+  let rows = [], skipped = 0;
+  function show() {
+    const needle = filter.value.trim().toLocaleLowerCase("en-CA");
+    const matches = rows.filter(r => r.phrase.toLocaleLowerCase("en-CA").includes(needle));
+    const metric = order.value;
+    matches.sort((a, b) => b[metric] - a[metric] || b.clicks - a.clicks || b.impressions - a.impressions || a.phrase.localeCompare(b.phrase));
+    const visible = matches.slice(0, 100);
+    state.textContent = `Showing ${number.format(visible.length)} of ${number.format(matches.length)} matching phrases in this export.`
+      + (skipped ? ` ${number.format(skipped)} unreadable rows excluded.` : "");
+    output.replaceChildren();
+    if (visible.length) output.append(table("Google Search queries", ["Search phrase", "Clicks", "Impressions", "CTR", "Average position"],
+      visible.map(r => [r.phrase, number.format(r.clicks), number.format(r.impressions),
+        r.ctr === null ? "—" : percent.format(r.ctr), r.position === null ? "—" : r.position.toFixed(1)])));
+  }
+  filter.addEventListener("input", show);
+  order.addEventListener("change", show);
+  file.addEventListener("change", async () => {
+    const selected = file.files[0];
+    rows = [];
+    skipped = 0;
+    filter.value = "";
+    controls.hidden = true;
+    state.textContent = "";
+    output.replaceChildren();
+    if (!selected) return;
+    try {
+      const report = readQueryReport(await selected.text());
+      if (file.files[0] !== selected) return;
+      rows = report.queries;
+      skipped = report.invalid;
+      controls.hidden = !rows.length;
+      show();
+    } catch (error) {
+      if (file.files[0] === selected) state.textContent = error.message;
+    }
+  });
+}
+
 function renderTraffic(target, rows, titles) {
   const values = new Map(rows.map(row => [row.tool, row.views]));
   const all = [...new Set([...titles.keys(), ...values.keys()])].map(id => ({
@@ -153,6 +205,7 @@ export async function initializeStats(catalog) {
     field("Read-only GitHub token for private reports", token), controls, notice, results);
   publicIssues(root, catalog);
   searchConsole(root, catalog);
+  searchPhrases(root);
 
   load.disabled = true;
   clear.hidden = true;
