@@ -428,7 +428,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "regions"
@@ -573,7 +573,7 @@
             "capturedAt"
           ],
           "label": "Canadian sample retrieved",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [],
             "unit": "case studies",
@@ -826,7 +826,7 @@
             "unit": "Canadian notices"
           },
           "value": "2026-11-19",
-          "count": 6536
+          "count": 6545
         },
         {
           "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
@@ -906,7 +906,7 @@
             "epssDate"
           ],
           "label": "EPSS score date",
-          "value": "2026-11-18"
+          "value": "2026-11-19"
         }
       ]
     },
@@ -949,8 +949,8 @@
             ],
             "unit": "summaries"
           },
-          "value": "2026-11-18",
-          "count": 206151
+          "value": "2026-11-19",
+          "count": 206220
         },
         {
           "url": "https://coolcode.ca/atip/data/manifest.json",
@@ -1008,7 +1008,7 @@
             "equals": true,
             "text": "Serving bundled data"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "records"
@@ -1058,8 +1058,8 @@
             ],
             "unit": "briefing notes"
           },
-          "value": "2026-11-18",
-          "count": 161747
+          "value": "2026-11-19",
+          "count": 161760
         },
         {
           "url": "https://coolcode.ca/briefings/data/manifest.json",
@@ -1067,7 +1067,7 @@
             "sourceUpdated"
           ],
           "label": "Source updated",
-          "value": "2026-11-18"
+          "value": "2026-11-19"
         }
       ],
       "cadence": "Daily"
@@ -1134,7 +1134,7 @@
             ],
             "unit": "release and month combinations"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 58806
         },
         {
@@ -1200,7 +1200,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "years"
@@ -1252,7 +1252,7 @@
             ],
             "unit": "notes"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 7676
         },
         {
@@ -1261,7 +1261,7 @@
             "modified"
           ],
           "label": "Source updated",
-          "value": "2026-11-18"
+          "value": "2026-11-19"
         }
       ],
       "cadence": "Daily"
@@ -1302,7 +1302,7 @@
             ],
             "unit": "disclosures"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 73
         },
         {
@@ -1311,7 +1311,7 @@
             "modified"
           ],
           "label": "Source updated",
-          "value": "2026-11-18"
+          "value": "2026-11-19"
         }
       ],
       "cadence": "Daily"
@@ -1350,7 +1350,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "records"
@@ -1408,7 +1408,7 @@
             ],
             "unit": "catalogue entries"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 48327
         },
         {
@@ -1458,7 +1458,7 @@
             ],
             "unit": "removed entries"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 3934
         },
         {
@@ -1503,7 +1503,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "series"
@@ -1675,7 +1675,7 @@
             "unit": "federal records"
           },
           "value": "2026-11-19",
-          "count": 1580735
+          "count": 1580976
         },
         {
           "label": "Nova Scotia register",
@@ -1803,7 +1803,7 @@
             ],
             "unit": "charities"
           },
-          "value": "2026-11-16",
+          "value": "2026-11-19",
           "count": 87802
         },
         {
@@ -1961,8 +1961,8 @@
             ],
             "unit": "notices"
           },
-          "value": "2026-11-18",
-          "count": 34389
+          "value": "2026-11-19",
+          "count": 34398
         }
       ],
       "cadence": "Daily"
@@ -2231,7 +2231,7 @@
             "builtAt"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "count"
@@ -2281,7 +2281,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "count"
@@ -2460,7 +2460,7 @@
             "unit": "planning records",
             "measure": "length"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 644
         },
         {
@@ -2476,7 +2476,7 @@
             "unit": "listed permit folders"
           },
           "value": "2026-11-19",
-          "count": 2091
+          "count": 2082
         }
       ]
     },
@@ -2511,14 +2511,14 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "total"
             ],
             "unit": "aviation occurrences"
           },
-          "count": 408725
+          "count": 408731
         },
         {
           "url": "https://coolcode.ca/strangeskies/data/manifest.json",
@@ -2716,7 +2716,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-19 07:24 UTC",
+          "value": "2026-11-19 17:22 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -2908,7 +2908,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "tracks"
@@ -2925,7 +2925,7 @@
             0
           ],
           "label": "Observation dates",
-          "value": "2017-01-02–2026-11-17",
+          "value": "2017-01-02–2026-11-18",
           "end_path": [
             "dates",
             -1
@@ -2969,7 +2969,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "products"
@@ -3031,7 +3031,7 @@
             "oldest_retrieval"
           ],
           "label": "Oldest source retrieved",
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count_at": {
             "path": [
               "sources"
@@ -3731,7 +3731,7 @@
             ],
             "unit": "IP registration records"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 10276
         }
       ]
@@ -4732,8 +4732,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-19 04:43 UTC",
-          "count": 2
+          "value": "2026-11-19 15:41 UTC",
+          "count": 4
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -4748,7 +4748,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 80
+          "count": 160
         }
       ]
     },
