@@ -1,0 +1,11 @@
+# Site administration
+
+Open [the owner dashboard](https://coolcode.ca/admin/) to set four featured tools in display order. Fixed mode always serves lineup A. A/B mode splits new browser tabs approximately evenly between A and B and keeps a tab’s choice for the experiment. Visitors with disabled JavaScript see the server-rendered A lineup. An active-lineup change in the dashboard generates a new experiment identifier.
+
+Copy the configuration into GitHub’s editor, or publish from the dashboard with a fine-grained token limited to this repository and Contents read/write. The dashboard sends the publishing token directly to GitHub, clears it after use and checks for overlapping changes. A commit triggers the existing Pages build. If the branch uses required reviews, use the GitHub editor to open a pull request. Manual edits to data/featured.json should give a changed test a fresh experiment ID.
+
+The statistics panel distinguishes tool page opens, featured-card impressions and clicks, and Google organic clicks. Reloading a tool counts as another open when measurement is active. A card impression is counted when it enters the viewport and a click is counted once per card per page load. Browsers that disable JavaScript, opt out, or block the counter can be absent from these totals. The independently deployed tools send only their catalogue ID. A tool visit can originate anywhere.
+
+Visitors can use Report an issue inside a tool even when that tool’s JavaScript has failed. The reporting page labels the available submission method and which reports are public. Avoid requesting credentials, files or precise locations. The admin page itself is excluded from the sitemap and marked noindex. Write permission and private data access are enforced by the services receiving the requests.
+
+Open the existing coolcode.ca property in [Google Search Console](https://search.google.com/search-console?resource_id=sc-domain%3Acoolcode.ca). In Sitemaps, submit https://coolcode.ca/sitemap.xml once. GitHub Pages regenerates the file on future catalogue builds. For organic search performance, choose the date range, open Performance → Search results, export CSV, and import the Pages.csv file into the dashboard. No Google Analytics tag is required for this import.

@@ -4,12 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#17201c">
-  <meta name="description" content="Useful browser tools, Canadian public data explorers and installable projects for your Linux machine or home lab.">
-  <title>CoolCode.ca · Browser tools & Linux projects</title>
+  <title>CoolCode · Canadian public data, browser tools and Linux projects</title>
+  <meta name="description" content="Explore Canadian public records, find events, plan a night under the stars and investigate networks with free browser tools from CoolCode.">
+  <link rel="canonical" href="https://coolcode.ca/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CoolCode">
+  <meta property="og:title" content="CoolCode · Canadian public data and browser tools">
+  <meta property="og:description" content="Explore Canadian public records, find events, plan a night under the stars and investigate networks with free browser tools from CoolCode.">
+  <meta property="og:url" content="https://coolcode.ca/">
+  <meta property="og:image" content="https://coolcode.ca/assets/coolcode-share.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="CoolCode.ca — Canadian public data and browser tools, with its terminal prompt logo.">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="alternate" type="application/rss+xml" title="CoolCode Field Notes" href="/field-notes/feed.xml">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/coolcode.css?v=5">
+  <link rel="stylesheet" href="assets/coolcode.css?v=6">
+  <script src="assets/featured.js" defer></script>
   <script src="assets/tool-index.js" defer></script>
+  <script src="/assets/tool-metrics.js" defer referrerpolicy="no-referrer"></script>
 </head>
 <body id="top">
   <a class="skip" href="#main">Skip to content</a>
@@ -31,7 +44,7 @@
         <div>
           <p class="byline"><span aria-hidden="true"></span>A software collection by jsdyer</p>
           <h1 id="hero-title">Your digital<br><em>workbench.</em></h1>
-          <p class="intro">Open a browser tool and get started immediately, or install an open-source project on your own machine. Explore networks, archives and Canadian public data.</p>
+          <p class="intro">Explore {{TOOL_TOTAL}} tools from an independent Canadian developer. Compare public records, find local events, explore the night sky, or investigate a network.</p>
           <div class="hero-actions"><a class="primary" href="#workbench">Use in browser <span aria-hidden="true">↓</span></a>
             <a class="code-link" href="#install">Install yourself <span aria-hidden="true">↓</span></a></div>
         </div>
@@ -58,34 +71,7 @@
     <section class="projects" id="homelab" aria-labelledby="homelab-heading">
       <div class="wrap">
         <div class="section-head"><h2 id="homelab-heading">Start in your browser</h2><a class="code-link" href="#workbench">Browse all browser tools <span aria-hidden="true">↓</span></a></div>
-        <div class="catalogue homelab-grid">
-          <article class="card">
-            <div class="cover recipes-cover" aria-hidden="true">
-              <div class="rack"><div><i></i><b></b></div><div><i></i><b></b></div><div><i></i><b></b></div></div>
-            </div>
-            <div class="card-body"><p class="category">Homelab planning <span>/</span> Use in browser</p><h3>Rack Recipes</h3>
-              <p>Choose from 12 services for a home server, budget memory and download the Compose file with ports, storage and setup steps.</p>
-              {{FEATURE_DATA_RACK_RECIPES}}
-              <a class="guide" href="/rack-recipes/">Plan a stack <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="cover lan" aria-hidden="true"><svg viewBox="0 0 280 150" width="280" height="150" fill="none"><rect x="72" y="28" width="136" height="94" rx="8" stroke="currentColor" stroke-width="2"/><path d="M92 76L123 49L150 94L184 58M92 76L184 58M123 49L150 94" stroke="currentColor" opacity=".5"/><g fill="currentColor"><circle cx="92" cy="76" r="5"/><circle cx="123" cy="49" r="4"/><circle cx="150" cy="94" r="7"/><circle cx="184" cy="58" r="4"/></g><path d="M113 135h54" stroke="currentColor" stroke-width="3"/></svg></div>
-            <div class="card-body"><p class="category">Networks <span>/</span> Use in browser</p><h3>DNS Lens</h3>
-              <p>Compare public resolvers and inspect DNS records, mail policies and domain registration.</p>
-              {{FEATURE_DATA_DNSLENS}}
-              <a class="guide" href="/dnslens/">Open DNS Lens <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-          <article class="card">
-            <div class="cover logbook" aria-hidden="true"><div class="sheet"><b>ATIP FILES</b><div class="book-lines"></div></div></div>
-            <div class="card-body"><p class="category">Public records <span>/</span> Use in browser</p><h3>ATIP Records Explorer</h3>
-              <p>Find released federal records, request copies, or draft an access-to-information request.</p>
-              {{FEATURE_DATA_ATIP}}
-              <a class="guide" href="/atip/">Explore released records <span aria-hidden="true">→</span></a>
-            </div>
-          </article>
-        </div>
+{{FEATURED_GRID}}
       </div>
     </section>
 
@@ -150,7 +136,7 @@ php tools/logbook/logbook.php /var/log/apache2/access.log</code></pre>
       </div>
     </section>
   </main>
-  <footer><div class="wrap footer-inner"><a class="foot-brand" href="#top">CoolCode.ca</a><a href="https://www.gnu.org/philosophy/free-sw.html">GNU free software philosophy <span aria-hidden="true">↗</span></a><a href="https://github.com/jsdyer/jsdyer.github.io">Site source <span aria-hidden="true">↗</span></a></div></footer>
+  <footer><div class="wrap footer-inner"><a class="foot-brand" href="#top">CoolCode.ca</a><a href="/about/">About CoolCode</a><a href="/report/">Report a problem</a><a href="https://www.gnu.org/philosophy/free-sw.html">GNU free software philosophy <span aria-hidden="true">↗</span></a><a href="https://github.com/jsdyer/jsdyer.github.io">Site source <span aria-hidden="true">↗</span></a></div></footer>
   <script>
     const themeButton = document.getElementById('theme');
     function setTheme(theme) {

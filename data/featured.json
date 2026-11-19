@@ -1,0 +1,6 @@
+{
+  "mode": "fixed",
+  "experiment": "homepage-launch",
+  "a": ["nightfinder", "eventradar", "dnslens", "atip"],
+  "b": ["exploitgraveyard", "inflation-basket", "dnslens", "atip"]
+}

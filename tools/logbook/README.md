@@ -17,3 +17,5 @@ gzip -dc /var/log/apache2/access.log.2.gz | php tools/logbook/logbook.php -
 Reads standard Apache Common and Combined formats, plus Combined with a leading virtual-host field. Dates follow the offset recorded in each line. Files containing multiple hosts produce one combined report. Apache's `%b` dash contributes zero body bytes. Headers and transport overhead are outside this measure.
 
 Input is read one line at a time. You can save the report by redirecting standard output to a text file. Exit status is `0` for a complete report, `1` when any lines were skipped, and `2` for an argument or I/O error. The footer gives the line counts.
+
+[Report a problem with this tool](https://coolcode.ca/report/?tool=logbook).

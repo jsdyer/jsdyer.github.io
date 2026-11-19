@@ -6,6 +6,8 @@ from pathlib import Path
 import threading
 from playwright.sync_api import sync_playwright
 from archive_shelf_browser import check_archive_shelf
+from featured_browser import check_featured
+from report_browser import check_report
 from protocol_captures_browser import check_protocols
 from rack_recipes_browser import check_rack_recipes
 
@@ -108,6 +110,8 @@ def main():
             assert nojs.locator("#issues").is_visible()
             assert nojs.locator(".issue-list li a").count() == 18
             context.close()
+            check_featured(browser, url)
+            check_report(browser, url)
             check_protocols(browser,url)
             check_archive_shelf(browser,url,screenshots)
             assert not errors, errors

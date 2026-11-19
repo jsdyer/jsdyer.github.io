@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<title>Site administration · CoolCode</title>
+<link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/assets/desk.css">
+<script type="module" src="./admin.mjs"></script>
+</head><body>
+<a class="skip" href="#main">Skip to administration</a>
+<header><div class="bar"><a href="/" class="brand">CoolCode.ca</a><nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a></nav></div></header>
+<main id="main">
+<h1>Site administration</h1>
+<p id="health" aria-live="polite">Loading the published catalogue…</p>
+<section id="featured"><h2>Featured tools</h2>
+<form id="lineup"><fieldset disabled id="controls">
+<label for="mode">Homepage display</label><select id="mode"><option value="fixed">Show lineup A to everyone</option><option value="ab">Test A and B, split 50/50 by browser tab</option></select>
+<div class="lineups"><section><h3>Lineup A</h3><div id="a"></div></section><section id="b-panel"><h3>Lineup B</h3><div id="b"></div></section></div>
+<p id="edition"></p>
+<details><summary>Publish with GitHub</summary><p>Use a fine-grained token limited to <strong>jsdyer/jsdyer.github.io</strong> with Contents read and write. This field sends it directly to GitHub for this change and clears it after use. You can also copy the configuration and paste it into GitHub’s editor.</p>
+<label for="github-token">GitHub token for publishing</label>
+<input type="password" id="github-token" autocomplete="off" spellcheck="false">
+<button type="submit">Publish featured tools</button>
+</details>
+<div class="actions"><button id="copy" type="button">Copy lineup JSON</button><a href="https://github.com/jsdyer/jsdyer.github.io/edit/main/data/featured.json" target="_blank" rel="noopener noreferrer">Open GitHub editor</a></div>
+<pre id="copy-fallback" hidden tabindex="0"></pre>
+</fieldset></form>
+<p id="save-status" role="status"></p></section>
+<div id="statistics"><h2>Statistics and issue reports</h2><p>Loading the reporting dashboard…</p></div>
+<noscript><p>Enable JavaScript to use the dashboard, or <a href="https://github.com/jsdyer/jsdyer.github.io/edit/main/data/featured.json">edit the featured lineup on GitHub</a>.</p></noscript>
+<footer><a href="/sitemap.xml">Sitemap</a><a href="https://search.google.com/search-console?resource_id=sc-domain%3Acoolcode.ca">Google Search Console</a><a href="/report/">Report an issue</a></footer>
+</main></body></html>

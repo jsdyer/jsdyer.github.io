@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,follow">
+  <title>Report a problem with a tool · CoolCode</title>
+  <meta name="description" content="Tell CoolCode about a broken feature, a data correction or an accessibility problem.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/desk.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="report.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to report</a>
+  <header><div class="bar"><a class="brand" href="/">CoolCode.ca</a><a href="/#workbench">Browse tools</a></div></header>
+  <main id="main">
+    <h1>Report a problem</h1>
+    <p class="intro">Tell the CoolCode maintainer about a tool, its data, or the website.</p>
+    <div id="tool-picker" hidden>
+      <label for="tool">Which tool?</label>
+      <select id="tool" name="tool" required aria-describedby="catalogue-note"></select>
+      <p id="catalogue-note" class="hint" hidden></p>
+    </div>
+    <form id="report-form" class="panel" hidden>
+      <p>Send a private report without an account.</p>
+      <label for="category">Type of problem</label>
+      <select id="category" name="category" required></select>
+      <label for="message">What happened?</label>
+      <p class="hint" id="message-hint">Describe what you did, what you expected and what you saw. For a data correction, include the source or record reference. Leave out personal details, credentials and private files.</p>
+      <textarea id="message" rows="7" maxlength="2000" required aria-describedby="message-hint"></textarea>
+      <div class="trap" aria-hidden="true">
+        <label for="website">Leave this field empty</label>
+        <input id="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <button id="send-report" type="submit">Send private report</button>
+    </form>
+    <noscript><p>The GitHub link below works without JavaScript.</p></noscript>
+    <p id="report-status" role="status" tabindex="-1"></p>
+    <details id="public-fallback" open><summary>Report through GitHub</summary>
+      <p>GitHub issues are public and require a GitHub account. Share only information you want to publish.</p>
+      <p><a id="github" href="https://github.com/jsdyer/jsdyer.github.io/issues/new">Open a public issue on GitHub</a></p>
+    </details>
+  </main>
+</body>
+</html>

@@ -68,3 +68,5 @@ python3 -m unittest discover -s tests -v
 ## Privacy
 
 The code is public, but the **host list, probe history, and database stay on your Linux machine**. Do not commit your database, CSV export, or personal inventory into the public repository. This project is offered as a small learning utility, not a replacement for a full monitoring stack.
+
+[Report a problem with this tool](https://coolcode.ca/report/?tool=lanwatch).

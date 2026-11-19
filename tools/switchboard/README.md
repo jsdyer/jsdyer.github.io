@@ -30,3 +30,5 @@ Each entry has a `group`, `name`, an absolute HTTP or HTTPS `url`, and an option
 On a PHP-enabled virtual host, set the document root to the absolute path of `tools/switchboard/public`. Set `SWITCHBOARD_CONFIG` in the environment of the PHP handler to the absolute path of your private JSON file. With PHP-FPM this can be a pool setting such as `env[SWITCHBOARD_CONFIG] = /etc/switchboard/services.json`. Give the PHP worker read access to that file, and reload the relevant service after changing its configuration.
 
 Anyone who can reach this page can see the links. Use the same LAN, VPN, or web server access controls as the rest of your internal dashboard. Keep real service inventories outside the public document root and this public Git repository.
+
+[Report a problem with this tool](https://coolcode.ca/report/?tool=switchboard).

@@ -36,3 +36,24 @@ In `jsdyer/coolcode-tool-template`, enable **Settings → General → Template r
 The template itself does not need Pages enabled. A repository created from it must
 enable **Settings → Pages → Source → GitHub Actions** and then run the Pages workflow.
 Templates copy files, not repository settings or later template changes.
+
+## Search discovery
+
+Every hub build publishes a [sitemap](https://coolcode.ca/sitemap.xml) and
+[robots.txt](https://coolcode.ca/robots.txt). The sitemap includes the homepage, local
+and independently deployed browser tools in the catalogue, and each published
+Field Notes article and its index. Use a stable page URL for an article that
+answers a distinct question. URL fragments continue to work for sharing tool
+settings. Dataset retrieval dates stay on the tool cards.
+
+1. In Google Search Console, select the existing **coolcode.ca** property and open
+   **Sitemaps**. Submit `https://coolcode.ca/sitemap.xml` once it opens publicly.
+   The same address updates whenever a catalogue build is published.
+2. Open the submitted sitemap to review its status. Use **URL inspection** on the
+   homepage and on an individual tool to see what Google fetched and which
+   canonical URL it selected.
+3. In **Performance → Search results**, filter by a tool's page URL and examine
+   its queries, impressions, clicks and click-through rate. Give a new property
+   time to collect data. Search Console reports visits from Google Search.
+
+[Google’s sitemap submission guide](https://support.google.com/webmasters/answer/7451001)

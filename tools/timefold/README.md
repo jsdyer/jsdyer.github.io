@@ -208,3 +208,5 @@ disposable containers and archive data, then remove their containers and images.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
 Released under the [MIT license](LICENSE), so you can modify and redistribute it.
+
+[Report a problem with this tool](https://coolcode.ca/report/?tool=timefold).

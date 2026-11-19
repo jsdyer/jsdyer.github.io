@@ -2661,7 +2661,7 @@
   {
     "id": "nightfinder",
     "title": "Nightfinder",
-    "description": "Find a continuous dark observing session and check target altitude, compass direction and camera framing.",
+    "description": "Find astronomical darkness, target altitude and camera framing for Canadian communities or your own coordinates.",
     "category": "field-kit",
     "tags": [
       "astronomy",
@@ -2669,7 +2669,10 @@
       "dslr",
       "planets",
       "moon",
-      "astrophotography"
+      "astrophotography",
+      "Canada",
+      "night sky",
+      "observing sites"
     ],
     "icon": "telescope",
     "url": "/nightfinder/",
@@ -2678,7 +2681,7 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Sun, Moon and target positions are calculated on your device for the selected site and observing window."
+      "detail": "GeoNames supplies Canadian community centres and time zones. Sun, Moon and target positions are calculated on your device."
     },
     "readme": {
       "note": "Choose 30, 60, 90 or 120 minutes and optionally require the Moon below the horizon. Nightfinder ranks each target’s continuous dark session by its lowest sampled altitude. Select a target to move the chart to its start, read the compass bearing, and download the sessions with the plan."
@@ -3092,7 +3095,7 @@
   {
     "id": "eventradar",
     "title": "Event Radar",
-    "description": "Browse local listings and keep selected events on your calendar.",
+    "description": "Find shows and community events in 37 Canadian cities and save outings from several cities to one calendar.",
     "category": "media",
     "tags": [
       "halifax",
@@ -3102,7 +3105,17 @@
       "theatre",
       "shows",
       "tickets",
-      "ics"
+      "ics",
+      "Canada",
+      "Toronto",
+      "Montréal",
+      "Calgary",
+      "Ottawa",
+      "St. John’s",
+      "Iqaluit",
+      "Whitehorse",
+      "Yellowknife",
+      "calendar"
     ],
     "icon": "calendar-days",
     "url": "/eventradar/",
@@ -3111,11 +3124,11 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Has Things supplies Vancouver and Halifax event feeds, and Langley entries link to venue calendars."
+      "detail": "Has Things supplies local showtimes across all ten provinces and three territories. Langley links to venue calendars."
     },
     "readme": {
-      "lead": "Import an .ics file",
-      "note": "Import an .ics file to search events locally."
+      "lead": "Choose a city grouped by province",
+      "note": "Choose a city grouped by province or territory, filter its showtimes, then add selections from several cities to one calendar."
     }
   },
   {

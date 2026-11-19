@@ -10,7 +10,8 @@ import re
 import shutil
 import subprocess
 import tempfile
-from urllib.parse import urlsplit
+from urllib.parse import quote, urlsplit
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_MODES = {
@@ -20,7 +21,7 @@ DATA_MODES = {
 }
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 # Retain the existing public files, including downloadable examples and tool source.
-PUBLIC_PATHS = {"assets", "field-notes", "tools", "favicon.svg", "CNAME",
+PUBLIC_PATHS = {"admin", "report", "metrics", "about", "assets", "field-notes", "tools", "favicon.svg", "CNAME",
                 ".nojekyll", "README.md", "SECURITY.md"}
 RESERVED = PUBLIC_PATHS | {"data", "templates", "scripts", "tests", "dist", "index.html"}
 
@@ -278,7 +279,56 @@ def render_entry(tool, access):
             f'<p>{description}</p>{render_data(tool, access, show_access=True)}</div></li>')
 
 
-def render(categories, tools, template):
+def validate_featured(config, tools):
+    require(isinstance(config, dict) and set(config) == {"mode", "experiment", "a", "b"},
+            "featured.json requires mode, experiment, a and b")
+    require(config["mode"] in ("fixed", "ab"), "Featured mode must be fixed or ab")
+    experiment = config["experiment"]
+    require(isinstance(experiment, str) and len(experiment) <= 48 and SLUG.fullmatch(experiment),
+            "Featured experiment must be a lowercase slug up to 48 characters")
+    browser_ids = {tool["id"] for tool in tools if tool["access"] == "browser"}
+    for variant in ("a", "b"):
+        ids = config[variant]
+        require(isinstance(ids, list) and len(ids) == 4
+                and all(isinstance(tid, str) and tid in browser_ids for tid in ids)
+                and len(set(ids)) == 4, f"Featured lineup {variant} requires four distinct browser tool IDs")
+    require(config["mode"] != "ab" or config["a"] != config["b"],
+            "A/B mode requires two different featured lineups")
+
+
+def render_featured(config, categories, tools):
+    validate_featured(config, tools)
+    by_id = {tool["id"]: tool for tool in tools}
+    category_titles = {category["id"]: category["title"] for category in categories}
+
+    def cards(ids):
+        parts = []
+        for tid in ids:
+            tool = by_id[tid]
+            title = escape(tool["title"])
+            category = escape(category_titles[tool["category"]])
+            url = escape(tool["url"], quote=True)
+            parts.append(
+                f'<article class="card" data-featured-card="{tid}">'
+                f'<div class="cover" data-featured-category="{tool["category"]}" aria-hidden="true">'
+                f'<span class="tool-icon" data-icon="{tool["icon"]}"></span></div>'
+                f'<div class="card-body"><p class="category">{category}</p><h3>{title}</h3>'
+                f'<p>{escape(tool["description"])}</p>{render_data(tool, "browser")}'
+                f'<a class="guide" data-featured-tool="{tid}" href="{url}">Open {title} '
+                f'<span aria-hidden="true">→</span></a></div></article>'
+            )
+        return "\n".join(parts)
+
+    grid = (f'<div class="catalogue" data-featured-grid data-mode="{config["mode"]}" '
+            f'data-experiment="{config["experiment"]}" data-variant="a">\n{cards(config["a"])}\n</div>')
+    if config["mode"] == "ab":
+        grid += '\n<template id="featured-lineup-b">\n' + cards(config["b"]) + '\n</template>'
+    return grid
+
+
+def render(categories, tools, template, *, featured=None, root=ROOT):
+    if featured is None:
+        featured = json.loads((root / "data/featured.json").read_text(encoding="utf-8"))
     browser_tools = [tool for tool in tools if tool["access"] == "browser"]
     install_tools = [tool for tool in tools if tool["access"] == "install" or "install_url" in tool]
     nav = ["            <ul>"]
@@ -300,19 +350,36 @@ def render(categories, tools, template):
     replacements = {"{{CATEGORY_NAV}}": "\n".join(nav), "{{TOOL_GROUPS}}": "\n".join(groups),
                     "{{INSTALL_TOOLS}}": "\n".join(render_entry(tool, "install") for tool in install_tools),
                     "{{BROWSER_COUNT}}": str(len(browser_tools)), "{{INSTALL_COUNT}}": str(len(install_tools))}
-    for tool in tools:
-        token = "{{FEATURE_DATA_" + tool["id"].upper().replace("-", "_") + "}}"
-        if token in template:
-            replacements[token] = render_data(tool, "browser")
+    replacements["{{FEATURED_GRID}}"] = render_featured(featured, categories, tools)
+    template = template.replace("{{TOOL_TOTAL}}", str(len(tools)))
     for token, value in replacements.items():
         require(template.count(token) == 1, f"Template must contain {token} exactly once")
         template = template.replace(token, value)
     return template
 
 
+def write_search_files(stage, tools):
+    origin = "https://coolcode.ca"
+    # Project sites deploy separately and do not have directories in the hub.
+    routes = {"/"} | {t["url"] for t in tools
+                      if t["access"] == "browser" and t["hosting"] in {"local", "project"}}
+    if (stage / "about/index.html").is_file():
+        routes.add("/about/")
+    for article in (stage / "field-notes").rglob("index.html"):
+        routes.add("/" + quote(article.parent.relative_to(stage).as_posix()) + "/")
+
+    sitemap = ElementTree.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+    for route in sorted(routes):
+        entry = ElementTree.SubElement(sitemap, "url")
+        ElementTree.SubElement(entry, "loc").text = origin + route
+    ElementTree.indent(sitemap)
+    ElementTree.ElementTree(sitemap).write(stage / "sitemap.xml", encoding="utf-8", xml_declaration=True)
+    (stage / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {origin}/sitemap.xml\n", encoding="utf-8")
+
+
 def build(root=ROOT):
     categories, tools = load_catalogue(root)
-    page = render(categories, tools, (root / "templates/index.html").read_text(encoding="utf-8"))
+    page = render(categories, tools, (root / "templates/index.html").read_text(encoding="utf-8"), root=root)
     public = PUBLIC_PATHS | {t["url"].strip("/") for t in tools if t["hosting"] == "local"}
     # Match the tracked site, also allowing new, non-ignored local files in previews.
     files = subprocess.check_output(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"], cwd=root).decode().split("\0")
@@ -332,6 +399,10 @@ def build(root=ROOT):
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)
         (stage / "index.html").write_text(page, encoding="utf-8")
+        catalog = [{key: tool[key] for key in ("id", "title", "access")} for tool in tools]
+        (stage / "assets/tool-catalog.json").write_text(json.dumps(catalog, ensure_ascii=False), encoding="utf-8")
+        shutil.copyfile(root / "data/featured.json", stage / "admin/featured.json")
+        write_search_files(stage, tools)
         require((stage / "CNAME").read_text().strip() == "coolcode.ca", "Keep the CoolCode custom domain")
         for tool in tools:
             if tool["hosting"] == "local":

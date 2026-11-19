@@ -41,3 +41,5 @@ A moved file appears as `MISSING` under its old name and `ADDED` under its new o
 The manifest's parent directory must exist outside the collection and support hard links (for example, ext4). Creation publishes the completed manifest atomically and requires an unused filename. Keep a trusted copy of it. For a collection that changes while you work, catalog a filesystem snapshot or pause writers first.
 
 Exit codes are `0` for successful creation or a complete match, `1` for differences and `2` for a usage, read or write error.
+
+[Report a problem with this tool](https://coolcode.ca/report/?tool=tape-index).

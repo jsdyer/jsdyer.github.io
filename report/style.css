@@ -1,0 +1,10 @@
+.bar, main { max-width: 44rem; }
+.intro { font-size: 1.1rem; }
+form.panel { display: grid; gap: .3rem; }
+.hint { margin: .2rem 0 .5rem; font-size: .94rem; }
+select, textarea { width: 100%; }
+textarea { resize: vertical; }
+button { justify-self: start; margin-top: 1rem; }
+.trap { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); }
+#report-status:empty { margin: 0; }
+#report-status:not(:empty) { padding: .7rem 1rem; border-inline-start: 3px solid #68894c; }

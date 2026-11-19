@@ -2,7 +2,9 @@
 
 The catalogue is curated in `data/tools.json`. Category IDs, titles, icons and order
 are in `data/categories.json`. Array order controls listing order within each category.
-The featured cards are separate editorial content in `templates/index.html`.
+The four featured cards use the same catalogue records. Edit `data/featured.json` to choose their order.
+Use four distinct browser tool IDs in each lineup. Fixed mode displays `a`. In `ab` mode each browser tab receives
+one of the two lineups for its session. Set a fresh experiment ID when changing the lineups to keep results interpretable.
 
 ## Choose a home
 

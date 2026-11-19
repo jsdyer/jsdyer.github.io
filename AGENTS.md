@@ -3,7 +3,7 @@
 - The homepage catalogue is maintained in `data/tools.json` and `data/categories.json`.
   Edit layout in `templates/index.html`. `dist/` is generated and must not be committed.
 - Keep existing titles, descriptions, order, category anchors, icons and URLs unless
-  the task asks to change them. Featured editorial cards live in the page template.
+  the task asks to change them. The homepage renders its four featured tools from `data/featured.json`.
 - Small static utilities can live in a top-level directory in this repository.
   Apps with their own source imports, schedule checks, data transformations, dependencies
   or releases belong in a separate repository. Keep that work and its tests with the tool.

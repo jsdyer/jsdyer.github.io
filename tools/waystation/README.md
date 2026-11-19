@@ -183,3 +183,5 @@ release yet, with archives and SHA-256 checksums. Existing releases are never
 replaced. Tags named `waystation-v*` can also trigger the workflow.
 
 MIT licensed; the vendored Go HTML parser retains its BSD-style license.
+
+[Report a problem with this tool](https://coolcode.ca/report/?tool=waystation).
