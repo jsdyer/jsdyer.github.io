@@ -456,7 +456,7 @@
   {
     "id": "telecompulse",
     "title": "Telecom Pulse",
-    "description": "Compare the CRTC’s published telecommunications indicators over time.",
+    "description": "Compare local broadband coverage with the provider offers behind each provincial price average.",
     "category": "liminal-tools",
     "tags": [
       "crtc",
@@ -475,7 +475,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CRTC survey data show coverage by census area and prices by province and survey market.",
+      "detail": "CRTC coverage estimates use census areas. Plan prices come from offers in named survey communities.",
       "cadence": "Weekly",
       "probes": [
         {
@@ -484,26 +484,26 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-17",
           "count_at": {
             "path": [
               "places"
             ],
             "unit": "coverage areas"
           },
+          "value": "2026-11-19",
           "count": 6634
         }
       ]
     },
     "readme": {
-      "lead": "Broadband uses usual resident",
-      "note": "Broadband uses usual resident dwellings and mobile uses population."
-    }
+      "note": "Open the Oxford example, then expand the provider offers and switch between 2024 and 2025. The province’s survey average changes with the mix of offers in Bear River, Mahone Bay and Wedgeport."
+    },
+    "sync_manifest": true
   },
   {
     "id": "onionpulse",
     "title": "Onion Pulse",
-    "description": "Compare Tor user, relay, bridge and onion-service measurements.",
+    "description": "Explore changes in Tor use and compare spikes with documented network events.",
     "category": "liminal-tools",
     "tags": [
       "tor",
@@ -518,7 +518,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Tor Project measurements show daily network activity from January 2021 onward.",
+      "detail": "Tor estimates clients from directory requests. Event notes and daily values help explain unusual counts.",
       "cadence": "Daily",
       "probes": [
         {
@@ -527,21 +527,21 @@
             "refreshed"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
           "count_at": {
             "path": [
               "days"
             ],
             "unit": "calendar days"
           },
+          "value": "2026-11-19",
           "count": 2146
         }
       ]
     },
     "readme": {
-      "lead": "Directory counts, measurement coverage,",
-      "note": "Directory counts, measurement coverage, and client behaviour can affect the series."
-    }
+      "note": "Open the October 2026 Canada event to compare the peak against nearby days, download the daily values, and read why older Tor clients inflated request counts."
+    },
+    "sync_manifest": true
   },
   {
     "id": "blockedorgone",
@@ -847,14 +847,14 @@
       ]
     },
     "readme": {
-      "note": "Open AV25-769 to see the Cyber Centre’s November 18, 2025 Fortinet notice. Expand its cited identifier, CVE-2025-58034, to see CISA’s listing date and the Canadian notices that name the same CVE."
+      "note": "Open AV25-769 to see the Cyber Centre’s November 18, 2025 Fortinet notice. Expand its cited identifier, CVE-2025-58034, to see CISA’s listing date and the Canadian notices that name the same CVE. Use Patch Signal for the affected-version record and recent FIRST EPSS estimates when reviewing a specific CVE."
     },
     "sync_manifest": true
   },
   {
     "id": "patchsignal",
     "title": "Patch Signal",
-    "description": "Look up CVEs and compare reported exploitation, EPSS estimates and advisories.",
+    "description": "Look up a CVE from your software inventory, check affected versions and follow patch guidance.",
     "category": "security",
     "tags": [
       "cisa",
@@ -873,7 +873,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "The tool combines CISA’s exploited-vulnerability list with FIRST’s exploit-probability scores and supports individual lookups.",
+      "detail": "CVE records, CISA’s exploited-vulnerability catalogue and FIRST’s EPSS scores describe each identifier.",
       "cadence": "Daily",
       "probes": [
         {
@@ -882,7 +882,6 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
           "count_at": {
             "path": [
               "rows"
@@ -890,7 +889,8 @@
             "unit": "KEV entries",
             "measure": "length"
           },
-          "count": 1782
+          "value": "2026-11-19",
+          "count": 1786
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -898,7 +898,7 @@
             "kevDate"
           ],
           "label": "Source published",
-          "value": "2026-11-17"
+          "value": "2026-11-18"
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -911,9 +911,9 @@
       ]
     },
     "readme": {
-      "lead": "A standalone lookup works",
-      "note": "A standalone lookup works for a CVE outside that catalogue."
-    }
+      "note": "Start with a CVE from your inventory. Compare affected versions, CISA’s required action when listed, and changes in FIRST’s EPSS estimate. The Canadian notices link carries that identifier to The Exploit Graveyard to find Cyber Centre alerts and advisories that cite it."
+    },
+    "sync_manifest": true
   },
   {
     "id": "atip",
@@ -1080,7 +1080,7 @@
   {
     "id": "evidencelab",
     "title": "Evidence Lab",
-    "description": "Search disclosure PDFs, find dates and section references, and save page citations.",
+    "description": "Find the page that answers a question in a PDF and export its citation, excerpt and your notes.",
     "category": "explorers",
     "tags": [
       "atip",
@@ -1095,12 +1095,12 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Read a local PDF or investigate the 230-page Nova Scotia bridge-inspection disclosure 2020-00906-TIR. Your annotations stay in this tab."
+      "detail": "Two guided questions use Nova Scotia’s 230-page 2020 bridge disclosure. You can also open a searchable PDF privately in your browser."
     },
     "readme": {
-      "lead": "Select text in the",
-      "note": "Open the 2020 Nova Scotia bridge release and search Allain Creek. Physical PDF page 2 lists both a Level 1 and a Level 2 inspection. Pin the page to keep the citation in your evidence brief."
-    }
+      "note": "Choose the Allain Creek question to find the April 20, 2020 Level 1 and July 16, 2019 Level 2 inspection dates on physical PDF page 2. Choose Annapolis Tidal Gate for page 3. Inspect the rows, pin the supporting lines, add your own note and download a Markdown brief with the release record and physical page citations."
+    },
+    "sync_manifest": true
   },
   {
     "id": "atippopularity",
@@ -1545,7 +1545,7 @@
   {
     "id": "salmonlines",
     "title": "Salmon Lines",
-    "description": "Compare historical Pacific salmon spawning estimates and explore the Chilliwack River records behind a fish-passage case study.",
+    "description": "Read annual Pacific salmon returns for a river, compare spawning estimates and inspect survey records.",
     "category": "explorers",
     "tags": [
       "British Columbia",
@@ -1608,7 +1608,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Select Chilliwack River coho to see which survey years precede the Bench Road repair, then open the provincial crossing records."
+      "note": "Read the latest and preceding estimates for one river, population and measure. For Chilliwack River coho, compare the survey years with the Bench Road repair timeline."
     },
     "data_date_badge": true
   },
@@ -1645,7 +1645,7 @@
   {
     "id": "corporateghosts",
     "title": "Corporate Ghosts",
-    "description": "Search Canada’s federal corporate register and compare legal statuses.",
+    "description": "Search federal corporations, current and historical BC registrations, and Nova Scotia co-operatives by name or registry ID.",
     "category": "disclosures",
     "tags": [
       "company",
@@ -1659,31 +1659,46 @@
     "hosting": "project",
     "access": "browser",
     "data_info": {
-      "mode": "snapshot",
-      "detail": "Four federal registry exports from ISED cover active and inactive corporations.",
+      "mode": "mixed",
+      "detail": "Federal register snapshots, live BC OrgBook search and the published Nova Scotia co-operative list cover different jurisdictions.",
       "probes": [
         {
+          "label": "Federal snapshot",
           "url": "https://coolcode.ca/corporateghosts/data/manifest.json",
           "path": [
             "built"
           ],
-          "label": "Snapshot generated",
           "count_at": {
             "path": [
               "count"
             ],
-            "unit": "corporate records"
+            "unit": "federal records"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-19",
           "count": 1580735
+        },
+        {
+          "label": "Nova Scotia register",
+          "url": "https://coolcode.ca/corporateghosts/ns-coops.json",
+          "path": [
+            "as_of"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "co-operatives"
+          },
+          "value": "2026-06-08",
+          "count": 369
         }
       ],
-      "cadence": "Daily"
+      "cadence": "Daily federal build"
     },
     "readme": {
-      "lead": "The CSV does not",
-      "note": "The CSV does not provide a complete history of legal names."
-    }
+      "note": "Open BC historical registrations and look for GLOBAL TELEGRAPH LIMITED (BC0401241). In Nova Scotia, ABC HOUSING CO-OPERATIVE LIMITED is registry ID 3057952. Take an NS ID to RJSC Connect for the official file."
+    },
+    "sync_manifest": true
   },
   {
     "id": "lobbytrail",
@@ -1817,7 +1832,7 @@
   {
     "id": "tariffxray",
     "title": "Tariff X-Ray",
-    "description": "Find Canadian telecom tariff items and the regulatory decisions behind them.",
+    "description": "See what internet providers pay Bell and TELUS for Canadian wholesale fibre access, capacity and installation.",
     "category": "disclosures",
     "tags": [
       "bell",
@@ -1857,9 +1872,9 @@
       ]
     },
     "readme": {
-      "lead": "Comparable entries in a",
-      "note": "Comparable entries in a details panel have the same published speed tier or charge category across orders."
-    }
+      "note": "An internet provider pays Bell or TELUS for use of its Canadian network. For Bell in Ontario and Quebec, the 2026 order lists CAD $68.26 per access in the 3–1,500 Mbps tier, with capacity and installation priced separately."
+    },
+    "sync_manifest": true
   },
   {
     "id": "gearautopsy",
@@ -1960,7 +1975,7 @@
   {
     "id": "patentattic",
     "title": "Patent Attic",
-    "description": "Search Canadian technology patents and open original CIPO records.",
+    "description": "Look up Canadian pre-grant applications by title, applicant, IPC class or number, and explore older technology publications.",
     "category": "disclosures",
     "tags": [
       "cipo",
@@ -1977,36 +1992,36 @@
     "hosting": "project",
     "access": "browser",
     "data_info": {
-      "mode": "reference",
-      "detail": "Each selected Canadian patent publication has been checked against its original record.",
+      "mode": "snapshot",
+      "detail": "CIPO’s weekly pre-grant queue and 22 individually checked technology publications are searchable collections.",
       "probes": [
         {
-          "url": "https://coolcode.ca/patentattic/catalog.json",
+          "label": "Pre-grant workbook",
+          "url": "https://coolcode.ca/patentattic/manifest.json",
           "path": [
-            "updated"
+            "date"
           ],
-          "label": "Source reviewed",
-          "value": "2026-11-16",
           "count_at": {
             "path": [
-              "records"
+              "count"
             ],
-            "unit": "selected patent publications",
-            "measure": "length"
+            "unit": "pre-grant applications"
           },
-          "count": 22
+          "value": "2026-11-17",
+          "count": 14556
         }
-      ]
+      ],
+      "cadence": "Weekly"
     },
     "readme": {
-      "lead": "Each result links to",
-      "note": "Each result links to the publication copy, its drawings where available, and the CIPO record or search."
-    }
+      "note": "Search 3016489 to inspect the Gearing System application in the November 17, 2026 pre-grant edition, or G01S to find applications in its IPC subclass. Each queue entry identifies the final fee date, applicant, classification and queue position. For the historical collection choose Selected technology publications and search Autofocus."
+    },
+    "sync_manifest": true
   },
   {
     "id": "trailglass",
     "title": "Trailglass",
-    "description": "Explore municipal trails, download mapped segments as GPX and inspect your own recorded rides.",
+    "description": "Follow municipal trails on a street map, download mapped segments as GPX and inspect your own recorded rides.",
     "category": "places",
     "tags": [
       "langley",
@@ -2026,7 +2041,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Vancouver, Langley and Halifax publish the mapped segments. Activity times and elevations come from GPX files you open.",
+      "detail": "Municipal trail segments appear over OpenStreetMap streets. Local GPX files supply their own coordinates, times and elevations.",
       "probes": [
         {
           "url": "https://coolcode.ca/trailglass/data/status.json",
@@ -2049,8 +2064,7 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "lead": "Elapsed time sums intervals",
-      "note": "Select a map segment to download its GPX with the municipality, source record and licence. The inspector also reads local GPX activities with recorded times and elevations."
+      "note": "Follow municipal routes against the street map. Select a map segment to download its GPX with the municipality, source record and licence. The inspector also reads local GPX activities with recorded times and elevations."
     },
     "sync_manifest": true
   },
@@ -2089,7 +2103,7 @@
   {
     "id": "spectrumatlas",
     "title": "Spectrum Atlas",
-    "description": "Map published spectrum authorizations and inspect bands and frequencies.",
+    "description": "Find licensed radio sites and compare frequency assignments across Canada.",
     "category": "places",
     "tags": [
       "ised",
@@ -2108,7 +2122,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "ISED records identify fixed-service and terrestrial radio assignments in BC and Nova Scotia.",
+      "detail": "ISED’s two technical extracts cover all ten provinces and three territories. Filter the selected region by frequency, site or distance.",
       "probes": [
         {
           "url": "https://coolcode.ca/spectrumatlas/manifest.json",
@@ -2116,7 +2130,6 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-16",
           "count_at": {
             "path": [
               "shards"
@@ -2125,20 +2138,21 @@
             "measure": "sum",
             "field": "count"
           },
-          "count": 298391
+          "value": "2026-11-19",
+          "count": 2218198
         }
       ],
       "cadence": "Monthly"
     },
     "readme": {
-      "lead": "CSV exports include the",
-      "note": "CSV exports include the search centre, radius and each exported match's distance while the radius filter is active."
-    }
+      "note": "Choose Nunavut and the Iqaluit city preset, then switch from fixed authorizations to terrestrial sites. The radius sorts matches by straight-line distance from the selected centre. Export the matching coordinates and frequencies."
+    },
+    "sync_manifest": true
   },
   {
     "id": "shipwrecks",
     "title": "Shipwreck Explorer",
-    "description": "Search Nova Scotia wrecks by area, vessel and date.",
+    "description": "Search Nova Scotia shipwreck reports and explore documented wreck sites near Tobermory, Ontario.",
     "category": "places",
     "tags": [
       "halifax",
@@ -2153,7 +2167,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Nova Scotia’s Marine Heritage database documents wrecks and gives map positions where known.",
+      "detail": "Nova Scotia’s marine heritage register and Parks Canada’s Fathom Five guides supply two regional collections.",
       "probes": [
         {
           "url": "https://coolcode.ca/shipwrecks/data/nearby.json",
@@ -2162,7 +2176,6 @@
             "checked"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-18",
           "count_at": {
             "path": [
               "meta",
@@ -2170,7 +2183,8 @@
             ],
             "unit": "shipwreck records"
           },
-          "count": 4939
+          "value": "2026-11-19",
+          "count": 4957
         },
         {
           "url": "https://coolcode.ca/shipwrecks/data/nearby.json",
@@ -2178,16 +2192,16 @@
             "meta",
             "sourceUpdated"
           ],
-          "label": "Source published",
+          "label": "Nova Scotia source updated",
           "value": "2024-07-05"
         }
       ],
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "Choose a 25-year interval",
-      "note": "Choose a 25-year interval in the timeline or filter by era and event."
-    }
+      "note": "Choose Ontario · Tobermory to map 18 Parks Canada sites. Open Arabia to see its recorded loss and the original site guide, or return to the Nova Scotia archive to compare wrecks around Sable Island."
+    },
+    "sync_manifest": true
   },
   {
     "id": "forgottenplaces",
@@ -2368,7 +2382,7 @@
   {
     "id": "halifaxtimelens",
     "title": "Halifax Time Lens",
-    "description": "Compare Halifax in 1947 and 1977, trace four places through archival photographs, and save nearby photo references to a map-ready notebook.",
+    "description": "Compare Halifax aerials from 1947 and 1977 with a 2025 satellite view and find nearby archival photographs.",
     "category": "places",
     "tags": [
       "canada",
@@ -2387,7 +2401,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "NRCan aerial mosaics, digitized Halifax Municipal Archives photographs and a weekly municipal photo index anchor each comparison.",
+      "detail": "NRCan aerial mosaics, a dated Copernicus Sentinel-2C image and Halifax Municipal Archives photographs anchor the comparison.",
       "cadence": "Weekly",
       "probes": [
         {
@@ -2409,7 +2423,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start with Cogswell and Scotia Square to compare the blocks before clearance with the 1977 mosaic, then open the 1961 photograph and the later demolition view. At the ferry terminal, see the closest 1955 and 2001 archive references within one kilometre, show the indexed points on both maps, and save references to a downloadable GeoJSON notebook."
+      "note": "Choose the 2025 satellite layer on either side to compare the harbour with an earlier aerial mosaic. Start with Cogswell and Scotia Square to compare the blocks before clearance with the 1977 mosaic, then open the 1961 photograph and the later demolition view. At the ferry terminal, see the closest 1955 and 2001 archive references within one kilometre, show the indexed points on both maps, and save references to a downloadable GeoJSON notebook."
     }
   },
   {
@@ -2647,7 +2661,7 @@
   {
     "id": "nightfinder",
     "title": "Nightfinder",
-    "description": "Plan a night shoot around darkness, target positions and lens framing.",
+    "description": "Find a continuous dark observing session and check target altitude, compass direction and camera framing.",
     "category": "field-kit",
     "tags": [
       "astronomy",
@@ -2664,12 +2678,12 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Sun, Moon and target positions are calculated on your device for your time and location."
+      "detail": "Sun, Moon and target positions are calculated on your device for the selected site and observing window."
     },
     "readme": {
-      "lead": "The display covers local",
-      "note": "The display covers local noon to the following noon, including daylight saving changes."
-    }
+      "note": "Choose 30, 60, 90 or 120 minutes and optionally require the Moon below the horizon. Nightfinder ranks each target’s continuous dark session by its lowest sampled altitude. Select a target to move the chart to its start, read the compass bearing, and download the sessions with the plan."
+    },
+    "sync_manifest": true
   },
   {
     "id": "satpasses",
@@ -2769,7 +2783,7 @@
   {
     "id": "photolab",
     "title": "Photo Lab",
-    "description": "Compare photo metadata across a collection, crop individual images and export clean copies.",
+    "description": "Adjust light and colour, crop and resize photos, compare metadata and export clean copies locally.",
     "category": "field-kit",
     "tags": [
       "exif",
@@ -2792,14 +2806,14 @@
       "detail": "Your JPEG and PNG files stay on this device. The included Apollo 8 photograph comes from NASA."
     },
     "readme": {
-      "note": "Open a group of photos to compare camera names, capture times and GPS presence. Download the inventory as CSV or select a filename to crop and export a clean copy."
+      "note": "Open a group of photos to compare camera names, capture times and GPS presence. Select a photo to adjust exposure, contrast, saturation and warmth. Compare original tones on the same crop, rotate or flip, and download the edited pixels."
     },
     "sync_manifest": true
   },
   {
     "id": "otherworldnames",
     "title": "Otherworld Names",
-    "description": "Explore named features on the Moon and Mars, and find low-angle sunlight at lunar craters from Langley or Halifax.",
+    "description": "Compare shared Moon and Mars names, explore their origins, and find low-angle sunlight at lunar craters from Langley or Halifax.",
     "category": "field-kit",
     "tags": [
       "Moon",
@@ -2859,8 +2873,7 @@
     "sync_manifest": true,
     "data_date_badge": true,
     "readme": {
-      "lead": "The name origins and",
-      "note": "The name origins and source country/cultural group labels come directly from the Gazetteer."
+      "note": "Open One name, two worlds and compare Balboa. The lunar crater honours Vasco Nuñez de Balboa, while its Martian namesake takes its name from a town in Panama. Try Copernicus or Adams, then locate either feature in the atlas. The November edition has 134 shared spellings after excluding lettered satellite features."
     }
   },
   {
@@ -3052,7 +3065,7 @@
   {
     "id": "marketshadows",
     "title": "Market Shadows",
-    "description": "Compare CIRO short-sale and short-position reports by security, market and reporting period.",
+    "description": "Read CIRO short-sale summaries, signed trading corrections and short positions in your browser.",
     "category": "money",
     "tags": [
       "ciro",
@@ -3069,11 +3082,12 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Open CIRO short-sale and short-position files or paste rows from an original report."
+      "detail": "Open CIRO summary, trading corrections and position files or paste original report rows."
     },
     "readme": {
-      "note": "Open the same CIRO report type for two dates, then choose a baseline under Changes between reports. Trading volume shows shares sold short during a period. A consolidated position shows shares held short at the reporting date."
-    }
+      "note": "Open a CIRO corrections CSV to see the signed change in shares alongside the original trade period. For summaries or positions, open two reporting dates to rank changes by security."
+    },
+    "sync_manifest": true
   },
   {
     "id": "eventradar",
@@ -3224,7 +3238,7 @@
   {
     "id": "mediaechoes",
     "title": "Media Echoes",
-    "description": "Search the Internet Archive for old games, Flash projects and media.",
+    "description": "Pinpoint old software, Flash projects and media by title, creator, collection, year and exclusions.",
     "category": "media",
     "tags": [
       "software",
@@ -3243,9 +3257,9 @@
       "detail": "Internet Archive returns catalogue records, previews and file lists when you search."
     },
     "readme": {
-      "lead": "View original catalogue information,",
-      "note": "View original catalogue information, previews, and file names, then open the source item to see what can be viewed or downloaded."
-    }
+      "note": "Use Encarta software · 1995 to narrow the search to software records with Encarta in the title and a catalogue date in 1995. The source search included Microsoft Encarta ’95 (1995 MPEG Edition), identifier encarta95. Inspect its files or refine the search by creator. The Myst software · 1993 and Homestar Runner · Flash shortcuts also combine title and collection or year filters."
+    },
+    "sync_manifest": true
   },
   {
     "id": "ghostlinks",
@@ -3346,7 +3360,7 @@
   {
     "id": "clamground",
     "title": "Clam Grounds",
-    "description": "Explore Maritime soft-shell clam habitat, compare provincial landing histories and read Nova Scotia’s 1931 district returns.",
+    "description": "Explore Maritime clam habitat, reported and confidential landings, and Nova Scotia’s 1931 returns.",
     "category": "places",
     "tags": [
       "clams",
@@ -3400,7 +3414,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare Nova Scotia and New Brunswick over the same years to see where DFO published landings or withheld them. For a local historical view, choose a county in the 1931 returns and check its barrels or canned cases against the linked scan of page 84."
+      "note": "Compare Nova Scotia and New Brunswick over the same years to see where DFO published landings or marked them x for confidentiality. For a local historical view, choose a county in the 1931 returns and check its barrels or canned cases against the linked scan of page 84."
     }
   },
   {
@@ -3591,7 +3605,7 @@
   {
     "id": "snowcourses",
     "title": "Snow Courses",
-    "description": "Compare snow depth and water content across years at British Columbia snow stations.",
+    "description": "Follow a winter at a B.C. snow station and compare snow depth or water equivalent with earlier seasons.",
     "category": "places",
     "tags": [
       "snow",
@@ -3638,7 +3652,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Try Grouse Mountain’s April survey, then select Barkerville under Automated station to compare the same date across earlier winters. The table separates missing readings, reported zeros and source flags."
+      "note": "Try Grouse Mountain’s April survey, then select Barkerville under Automated station to compare the same date across earlier winters. Follow the full October–September season against earlier same-period medians, inspect sample sizes and share the station, measurement, date and year in one link."
     }
   },
   {
@@ -3717,7 +3731,7 @@
   {
     "id": "coalbelow",
     "title": "Coal Below",
-    "description": "Explore Nova Scotia’s mapped underground coal workings alongside coal seams and present-day streets.",
+    "description": "Explore Nova Scotia coal seams and underground workings against modern streets, then inspect the original provincial records.",
     "category": "places",
     "tags": [
       "Nova Scotia",
@@ -3733,7 +3747,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Nova Scotia Geological Survey lines trace coal seams and polygons outline recorded underground workings.",
+      "detail": "Nova Scotia Geological Survey coal seam and mine workings layers appear over an OpenStreetMap basemap.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -3763,7 +3777,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "In Springhill, toggle the seam lines and shaded workings separately, then select a workings outline to read its mapped area and mine-plan note. The three Sydney Mines, Florence and Point Aconi workings areas share a seam layer and appear together in the area selector."
+      "note": "Start with modern streets and landmarks beneath the Springhill coalfield. Toggle the seam lines and shaded workings separately, then select a workings outline to read its mapped area and mine-plan note. The three Sydney Mines, Florence and Point Aconi workings areas share a seam layer and appear together in the area selector."
     }
   },
   {
@@ -4108,7 +4122,7 @@
   {
     "id": "libraryworkbench",
     "title": "Library Workbench",
-    "description": "Match a tape to a Vancouver lab station, estimate transfer time and storage, and compare library use in Vancouver and Nova Scotia.",
+    "description": "Check whether a 3D print fits Halifax or Richmond library limits, estimate Richmond’s fee, or plan a Vancouver tape transfer.",
     "category": "places",
     "tags": [
       "libraries",
@@ -4124,7 +4138,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Library equipment and transfer guides, Vancouver lab activity and Nova Scotia’s regional library survey supply the estimates and comparisons.",
+      "detail": "Library equipment guides, Vancouver usage reports and the Nova Scotia library survey supply the project planners and comparisons.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -4146,7 +4160,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Try a PAL Hi8 cassette in the Vancouver transfer planner. Enter 60, 90, 45 for three tapes to see 3 h 15 min of real-time copying and roughly 13 GB of storage before setup and saving. Explore Regular 8 film, quarter-inch audio reels or floppy disks in the equipment directory. In the activity table, minutes per session relates reported hours to sessions. Select Halifax in 2024–25 to compare its survey and annual-report figures."
+      "note": "Enter 90 minutes and 30 grams in the 3D print planner. This fits Halifax’s published under-two-hour service and gives a CAD $6.50 estimate in Richmond. At 120 minutes, only the Richmond option meets the published time limit. Try a PAL Hi8 cassette in the Vancouver transfer planner. Enter 60, 90, 45 for three tapes to see 3 h 15 min of real-time copying and roughly 13 GB of storage before setup and saving. Explore Regular 8 film, quarter-inch audio reels or floppy disks in the equipment directory. In the activity table, minutes per session relates reported hours to sessions. Select Halifax in 2024–25 to compare its survey and annual-report figures."
     }
   },
   {
@@ -4369,7 +4383,7 @@
   {
     "id": "crossingrecord",
     "title": "Crossing Record",
-    "description": "Compare ICBC crash counts at Langley intersections before and after documented road work.",
+    "description": "Map Langley junctions and compare ICBC crash counts before and after documented road work.",
     "category": "explorers",
     "tags": [
       "langley",
@@ -4383,7 +4397,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "ICBC crash records are grouped by named junction and year, with Langley City project records for selected locations.",
+      "detail": "ICBC supplies approximate junction coordinates and yearly crash counts. Langley City project records identify selected road improvements.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -4416,13 +4430,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose a Langley junction and compare annual averages on either side of a reference year. Douglas Crescent at 203 Street and 56 Avenue at 201A Street have linked, completed city projects. The project year is excluded from both periods. Counts represent crashes reported to ICBC, and the view shows how many years support each average."
+      "note": "Select a dot on the junction map or search by road name. Choose a Langley junction and compare annual averages on either side of a reference year. Douglas Crescent at 203 Street and 56 Avenue at 201A Street have linked, completed city projects. The project year is excluded from both periods. Counts represent crashes reported to ICBC, and the view shows how many years support each average."
     }
   },
   {
     "id": "parkvisits",
     "title": "Park Visits",
-    "description": "Compare annual attendance at Fort Langley, Halifax Citadel and ten other Parks Canada places.",
+    "description": "Compare annual visits at Parks Canada places across the country using trend lines and fiscal-year comparisons.",
     "category": "explorers",
     "tags": [
       "places",
@@ -4452,7 +4466,7 @@
             "unit": "places"
           },
           "value": "2026-11-19",
-          "count": 12
+          "count": 134
         },
         {
           "label": "Coverage",
@@ -4469,13 +4483,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start with Fort Langley and Halifax Citadel, pick a fiscal year, then compare both places across the full table. Counts represent visits and can include repeat visitors. The twelve-place selection also covers BC, Nova Scotia, New Brunswick, PEI and Alberta."
+      "note": "Start with Fort Langley and Halifax Citadel, pick a fiscal year, then compare their trend lines, year bars and full annual table. Counts represent visits and can include repeat visitors. Try Jasper and Gros Morne, or the northern parks Aulavik and Ivvavik."
     }
   },
   {
     "id": "streetworkdiary",
     "title": "Streetwork Diary",
-    "description": "Compare Halifax street-service requests, closures and published resolution fields by community and week.",
+    "description": "Map Halifax street-service requests by community and compare closures and published resolution fields across two weeks.",
     "category": "places",
     "tags": [
       "halifax",
@@ -4490,7 +4504,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Halifax Cityworks intake records joined to published custom-field names for two reporting weeks.",
+      "detail": "Cityworks request counts are mapped to Halifax’s published community boundaries and joined to municipal custom-field records.",
       "cadence": "Weekly",
       "probes": [
         {
@@ -4512,7 +4526,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start with street-surface requests for April 1–7, 2025. Compare closed counts, published resolution coverage and custom-field coverage, then switch to another request type."
+      "note": "Choose a shaded community to filter the records for that area. Start with street-surface requests for April 1–7, 2025. Compare closed counts, published resolution coverage and custom-field coverage, then switch to another request type."
     }
   },
   {
@@ -4633,7 +4647,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Municipal LakeWatchers depth readings for Dartmouth’s Banook and Albro monitoring stations.",
+      "detail": "Municipal LakeWatchers measurements cover Halifax-area deep-water stations with repeat sampling visits.",
       "cadence": "Weekly",
       "probes": [
         {
@@ -4649,7 +4663,7 @@
             "unit": "readings"
           },
           "value": "2026-11-19",
-          "count": 184
+          "count": 9461
         },
         {
           "label": "Sample dates",
@@ -4660,7 +4674,7 @@
           "end_path": [
             "end"
           ],
-          "value": "2022-04-27–2024-09-03"
+          "value": "2022-04-25–2024-09-12"
         }
       ]
     },
@@ -4672,7 +4686,7 @@
   {
     "id": "forecastreceipt",
     "title": "Forecast Receipt",
-    "description": "See how a five-day temperature forecast holds up against hourly readings at Langley Regional and Halifax Stanfield.",
+    "description": "Follow one weather hour at Langley or Halifax from its first saved temperature forecast through later revisions to the airport reading.",
     "category": "places",
     "tags": [
       "weather",
@@ -4704,8 +4718,8 @@
             "unit": "station forecasts",
             "measure": "length"
           },
-          "value": "2026-11-19 04:43 UTC",
           "precision": "minute",
+          "value": "2026-11-19 04:43 UTC",
           "count": 2
         },
         {
@@ -4727,13 +4741,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose an airport and compare the 0–24-hour and 96–120-hour results for one provider. Check each matched count and inspect the largest revision to see two predictions for the same local weather hour."
+      "note": "Choose a receipt and a station-local hour. The hour history links every available prediction for that hour, its lead time and its error when ECCC has an unflagged reading. The first Langley GFS receipt predicted 3.8 °C for 06:00 UTC on November 19, 2026."
     }
   },
   {
     "id": "auroratrace",
     "title": "Aurora Trace",
-    "description": "Pick a May or October 2024 storm night and trace its solar eruptions and magnetic signals across Canada.",
+    "description": "See when a 2024 magnetic storm affected Victoria and St. John’s most differently, and inspect the readings on each coast.",
     "category": "explorers",
     "tags": [
       "space weather",
@@ -4774,7 +4788,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose May 10 or October 10, then select the first peak Kp interval to read both observatories at the same time. At 21:00 UTC on May 10, Victoria’s northward field was 160 nT below its reference while St. John’s was 354 nT above its own."
+      "note": "Jump to the largest coast-to-coast difference. On October 10 at 23:25 UTC, Victoria was 552 nT above its reference and St. John’s was 622 nT below. Each Kp value covers three hours, while the station readings cover five minutes."
     }
   },
   {
@@ -5033,13 +5047,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose Lake Major and May–June 2023 to inspect the hour of the measured particle peak and compare it with the CAMS estimate at the same UTC hour. Langley refreshes from preliminary readings, while Lake Major’s latest validated week follows the provincial annual release. The count includes each paired station-hour once across all displayed weeks."
+      "note": "Open the May 2023 Lake Major peak. Compare the model at the monitor’s highest hour and check how often they crossed 25 µg/m³ together. Change the comparison level or station and inspect daily errors to see which days account for the largest errors."
     }
   },
   {
     "id": "flybyfiles",
     "title": "Flyby Files",
-    "description": "Check which asteroids were observed before their closest approach to Earth.",
+    "description": "See which of six close-passing asteroids astronomers discovered before the flyby, and when old images changed the record.",
     "category": "field-kit",
     "tags": [
       "asteroids",
@@ -5076,13 +5090,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose 2020 QG and compare the date-only orbit record with JPL’s account of the discovery image. Then select After to find 2020 VT4, whose first observation in the present orbit is dated the following day."
+      "note": "Choose 2024 MK. Its present orbit uses a measurement from 2014, while JPL dates its discovery to thirteen days before the 2024 flyby. For 2020 QG, the discovery image came about six hours after closest approach. All six cases link to a NASA or ESA discovery account."
     }
   },
   {
     "id": "plumediary",
     "title": "Plume Diary",
-    "description": "Compare satellite views of the Fraser River mouth with daily flow measured upstream at Hope.",
+    "description": "Compare the Fraser River’s visible plume on two satellite dates and test whether earlier upstream flows change the story.",
     "category": "places",
     "tags": [
       "Fraser River",
@@ -5120,13 +5134,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare June 21 and June 28, 2021 at the same image scale. Hope measured 6,970 and 7,650 m³/s on those dates. Try the earlier-flow selector to see how an assumed travel time changes the comparison."
+      "note": "On June 21 and 28, 2021 the Hope gauge was 680 m³/s higher on the second date. Test all five travel-time assumptions, then compare the green-brown coastal band on June 21 with the lighter patch extending southwest on June 28. The June 14 image shows how cloud can hide the river mouth."
     }
   },
   {
     "id": "chirproom",
     "title": "Chirp Room",
-    "description": "Align the Hanford and Livingston gravitational-wave traces and listen to the final moment of GW150914.",
+    "description": "Can two distant detectors pick out the same black-hole merger? Align the traces and compare their agreement with an earlier recording window.",
     "category": "field-kit",
     "tags": [
       "LIGO",
@@ -5163,7 +5177,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Use Apply published alignment to move Livingston seven milliseconds later and reverse its polarity. Compare the waveform correlation around merger, then play the one-second stereo extract. Audio starts only when you press Play."
+      "note": "Compare the unadjusted, published and custom alignments over two equal 170 ms windows. Apply the seven-millisecond shift and polarity reversal to see what changes near the merger and earlier in the recording. Press Play to hear the one-second stereo extract."
     }
   },
   {
