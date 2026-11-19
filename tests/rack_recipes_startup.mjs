@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
@@ -61,6 +61,10 @@ try {
     assert.equal(ports[0].host_ip, '127.0.0.1');
     assert.equal(Number(ports[0].published), port);
     assert.equal(ports[0].target, internalPort);
+    // Create the documented media folders as the host user before Docker binds them.
+    for (const mount of config.services[id].volumes) {
+      if (mount.type === 'bind') mkdirSync(mount.source, { recursive: true });
+    }
     try {
       compose(['up', '--detach', '--no-deps', id], 160_000);
       running.push(service);
