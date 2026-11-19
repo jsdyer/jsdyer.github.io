@@ -1,0 +1,34 @@
+name: Rack Recipes · Start the containers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - rack-recipes/recipe.js
+      - tests/rack_recipes_startup.mjs
+      - .github/workflows/rack-recipes-startup.yml
+  pull_request:
+    paths:
+      - rack-recipes/recipe.js
+      - tests/rack_recipes_startup.mjs
+      - .github/workflows/rack-recipes-startup.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  startup:
+    name: First-run HTTP · ${{ matrix.group }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [Library, Operations, Personal]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Start the exported recipe and check its loopback addresses
+        run: node tests/rack_recipes_startup.mjs "${{ matrix.group }}"
