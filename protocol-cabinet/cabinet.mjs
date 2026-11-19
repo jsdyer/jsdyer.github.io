@@ -63,6 +63,12 @@ $('live').onclick=async()=>{
     if(ticket===generation) display(rows,label);
   }catch(e){if(ticket===generation) $('notice').textContent='Live request failed. '+e.message+' You can still open a local capture.';}
 };
-for(const b of document.querySelectorAll('[data-protocol]')) b.onclick=()=>{location.hash=b.dataset.protocol;};
+for (const button of document.querySelectorAll('[data-protocol]')) {
+  button.onclick=()=>{
+    if (mode===button.dataset.protocol) return;
+    history.pushState(null,'','#'+button.dataset.protocol);
+    choose();
+  };
+}
 $('filter').oninput=filter; $('sort').onchange=filter; $('jump').onchange=()=>show(Number($('jump').value));
 $('previous').onclick=()=>show(position-1); $('forward').onclick=()=>show(position+1); window.addEventListener('hashchange',choose);choose();

@@ -1,5 +1,6 @@
 """Exercise local protocol inputs and the archived Canadian routing measurements."""
 import json
+from playwright.sync_api import expect
 
 def check_protocols(browser, url):
     page = browser.new_page(viewport={"width": 390, "height": 844})
@@ -29,9 +30,11 @@ def check_protocols(browser, url):
         page.locator('[data-protocol="smtp"]').click()
         page.locator('#paste').fill('Received: from two by three; Wed, 01 Jan 2020 12:01:00 GMT\nReceived: from one\n by two; Wed, 01 Jan 2020 12:00:00 GMT\n\nbody')
         page.locator('#read').click()
-        assert 'Hop 1 · two' in page.locator('#direction').inner_text()
+        expect(page.locator('#notice')).to_have_text('Pasted capture')
+        expect(page.locator('#count')).to_have_text('2 of 2 entries')
+        expect(page.locator('#direction')).to_have_text('Hop 1 · two')
         page.locator('#forward').click()
-        assert 'Hop 2 · three' in page.locator('#direction').inner_text()
+        expect(page.locator('#direction')).to_have_text('Hop 2 · three')
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
         page.goto(url + '/packet-detour/')
         assert page.locator('#hops tr').count() == 13
