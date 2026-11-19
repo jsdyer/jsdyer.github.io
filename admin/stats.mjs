@@ -1,3 +1,4 @@
+import { publicIssues } from "./public-issues.mjs";
 import { readSearchReport } from "./search-report.mjs";
 
 const number = new Intl.NumberFormat("en-CA");
@@ -150,6 +151,7 @@ export async function initializeStats(catalog) {
   const results = el("div");
   access.append(el("p", "The collector verifies the owner's identity. Use a read-only GitHub token for private reporting. It is sent to the collector to verify with GitHub and is kept only in this tab's memory. Use the separate publishing control to change a lineup."),
     field("Read-only GitHub token for private reports", token), controls, notice, results);
+  publicIssues(root, catalog);
   searchConsole(root, catalog);
 
   load.disabled = true;
