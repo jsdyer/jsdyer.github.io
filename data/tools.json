@@ -1504,7 +1504,7 @@
   {
     "id": "salmonlines",
     "title": "Salmon Lines",
-    "description": "Compare historical salmon spawning estimates by river, species and run in DFO’s Pacific region.",
+    "description": "Compare historical Pacific salmon spawning estimates and explore the Chilliwack River records behind a fish-passage case study.",
     "category": "explorers",
     "tags": [
       "British Columbia",
@@ -1521,10 +1521,9 @@
     "source": "https://github.com/jsdyer/salmonlines",
     "hosting": "project",
     "access": "browser",
-    "data_date_badge": true,
     "data_info": {
       "mode": "snapshot",
-      "detail": "Fisheries and Oceans Canada records Pacific salmon spawning estimates by population, waterbody and year.",
+      "detail": "DFO’s NuSEDS records spawning estimates by population, waterbody and year, with separate fields for adult spawners and total returns.",
       "probes": [
         {
           "url": "https://coolcode.ca/salmonlines/data/source.json",
@@ -1566,10 +1565,11 @@
       ],
       "cadence": "Monthly"
     },
+    "sync_manifest": true,
     "readme": {
-      "lead": "Blank source values, missing",
-      "note": "Blank source values, missing years and reported numeric zeros are distinct in the table and export."
-    }
+      "note": "Select Chilliwack River coho to see which survey years precede the Bench Road repair, then open the provincial crossing records."
+    },
+    "data_date_badge": true
   },
   {
     "id": "datasetdiff",
@@ -2272,7 +2272,7 @@
   {
     "id": "hiddenwater",
     "title": "Hidden Water",
-    "description": "Explore Langley creeks, drainage channels and mapped culverts.",
+    "description": "Explore mapped Langley waterways and follow a Fraser Valley fish crossing from barrier assessment to completed repair.",
     "category": "places",
     "tags": [
       "bc",
@@ -2290,14 +2290,14 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Township maps show drainage channels and culverts, and City of Langley maps show watercourses.",
+      "detail": "Langley maps trace channels and culverts. BC fish-passage records document the assessment, habitat and repair of crossing 1474.",
       "probes": [
         {
           "url": "https://coolcode.ca/hiddenwater/data/status.json",
           "path": [
             "retrieved_at"
           ],
-          "label": "Data retrieved",
+          "label": "Waterways retrieved",
           "count_at": {
             "path": [
               "segments"
@@ -2306,28 +2306,33 @@
           },
           "value": "2026-11-18",
           "count": 28921
+        },
+        {
+          "url": "https://coolcode.ca/hiddenwater/data/status.json",
+          "path": [
+            "crossing_retrieved"
+          ],
+          "label": "Fish passage retrieved",
+          "value": "2026-11-19"
         }
       ],
       "cadence": "Weekly"
     },
+    "sync_manifest": true,
     "readme": {
-      "lead": "Export matching records as",
-      "note": "Export matching records as CSV or GeoJSON with source IDs and retrieval time."
+      "note": "At Chilliwack Bench, compare the verified habitat length in the database with the length of habitat the project report says became accessible."
     }
   },
   {
     "id": "halifaxtimelens",
     "title": "Halifax Time Lens",
-    "description": "Compare Halifax aerial photographs from 1947 and 1977 with a modern street map.",
+    "description": "Compare Halifax aerial mosaics and find nearby archival photographs from 1955 and 2001.",
     "category": "places",
     "tags": [
-      "nova scotia",
-      "Halifax",
-      "Dartmouth",
-      "aerial photos",
-      "1947",
-      "1977",
-      "history"
+      "canada",
+      "local",
+      "public data",
+      "halifax"
     ],
     "icon": "map",
     "url": "/halifaxtimelens/",
@@ -2335,27 +2340,42 @@
     "hosting": "project",
     "access": "browser",
     "data_info": {
-      "mode": "live",
-      "detail": "Natural Resources Canada’s 1947 and 1977 aerial images load alongside modern street tiles as you explore."
+      "mode": "mixed",
+      "detail": "NRCan aerial mosaics and a modern street map stream on demand. Nearby photographs come from a refreshed Halifax Municipal Archives index.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Photo index retrieved",
+          "url": "https://coolcode.ca/halifaxtimelens/data/photos.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "photographs"
+          },
+          "value": "2026-11-19",
+          "count": 340
+        }
+      ]
     },
+    "sync_manifest": true,
     "readme": {
-      "lead": "Jump to the waterfront,",
-      "note": "Jump to the waterfront, North End, Dartmouth, Northwest Arm or Bedford Basin."
+      "note": "Choose Halifax Ferry Terminal in Photographs near this point, select a one-kilometre radius, and compare the indexed photo years. Pan or click the map to search a different location. Open any linked archival reference to see the original catalogue entry."
     }
   },
   {
     "id": "langleychanges",
     "title": "Langley Changes",
-    "description": "Explore City and Township development applications, documents and changes over time.",
+    "description": "Follow Langley development applications and see when Township building permits appeared or left the active list.",
     "category": "places",
     "tags": [
-      "bc",
-      "Langley City",
-      "Township of Langley",
-      "development",
-      "planning",
-      "rezoning",
-      "applications"
+      "canada",
+      "local",
+      "public data",
+      "langley"
     ],
     "icon": "map",
     "url": "/langleychanges/",
@@ -2364,15 +2384,15 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Township applications and selected City records provide a local history of changes observed since November 2026.",
+      "cadence": "Daily",
+      "detail": "City and Township planning records include application status and original documents. The Township active permit list provides folder numbers, issue dates, project descriptions and civic addresses.",
       "probes": [
         {
           "url": "https://coolcode.ca/langleychanges/data/applications.json",
           "path": [
             "retrieved_at"
           ],
-          "label": "Data retrieved",
-          "value": "2026-11-18",
+          "label": "Planning records retrieved",
           "count_at": {
             "path": [
               "records"
@@ -2380,14 +2400,29 @@
             "unit": "planning records",
             "measure": "length"
           },
+          "value": "2026-11-18",
           "count": 644
+        },
+        {
+          "url": "https://coolcode.ca/langleychanges/data/permits.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Permit list checked",
+          "count_at": {
+            "path": [
+              "listed_folders"
+            ],
+            "unit": "listed permit folders"
+          },
+          "value": "2026-11-19",
+          "count": 2091
         }
-      ],
-      "cadence": "Daily"
+      ]
     },
+    "sync_manifest": true,
     "readme": {
-      "lead": "Save application IDs in",
-      "note": "Save application IDs in your browser, share a record, or export filtered results as CSV."
+      "note": "Search a street to see which permit folders were listed there, then open a folder to compare its issue date with the first and last times CoolCode saw it."
     }
   },
   {
@@ -2492,7 +2527,7 @@
   {
     "id": "stormtracks",
     "title": "Storm Tracks",
-    "description": "Replay Atlantic storms, compare their winds and find historical tracks near a coastal community.",
+    "description": "Replay Atlantic storm tracks and compare how high the water rose above predicted tides during Fiona and Dorian.",
     "category": "places",
     "tags": [
       "Atlantic",
@@ -2509,10 +2544,9 @@
     "source": "https://github.com/jsdyer/stormtracks",
     "hosting": "project",
     "access": "browser",
-    "data_date_badge": true,
     "data_info": {
       "mode": "snapshot",
-      "detail": "NOAA’s North Atlantic storm records give each storm’s track and its recorded strength along the way.",
+      "detail": "NOAA tracks describe storm positions and winds. Canadian Hydrographic Service gauges show measured water levels alongside tide predictions.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -2520,7 +2554,7 @@
           "path": [
             "retrieved"
           ],
-          "label": "Data retrieved",
+          "label": "Tracks retrieved",
           "value": "2026-11-18",
           "count_at": {
             "path": [
@@ -2540,13 +2574,29 @@
             "lastSeason"
           ],
           "value": "1851–2025"
+        },
+        {
+          "url": "https://coolcode.ca/stormtracks/data-status.json",
+          "path": [
+            "harboursRetrieved"
+          ],
+          "label": "Harbour data retrieved",
+          "value": "2026-11-19",
+          "count_at": {
+            "path": [
+              "harbourWindows"
+            ],
+            "unit": "storm windows"
+          },
+          "count": 2
         }
       ]
     },
+    "sync_manifest": true,
     "readme": {
-      "lead": "Historical coverage is incomplete,",
-      "note": "Historical coverage is incomplete, particularly at sea during early decades."
-    }
+      "note": "Move through a 48-hour storm window to compare the same quarter hour at each gauge and see how many readings support each peak."
+    },
+    "data_date_badge": true
   },
   {
     "id": "nightfinder",
@@ -3273,7 +3323,7 @@
   {
     "id": "ferrycountss",
     "title": "Ferry Counts",
-    "description": "Compare recorded boardings by direction, weekday and hour on the Halifax harbour ferries.",
+    "description": "Compare hourly passenger patterns on Halifax harbour ferries and Vancouver’s SeaBus.",
     "category": "places",
     "tags": [
       "Halifax",
@@ -3282,7 +3332,10 @@
       "ridership",
       "Alderney",
       "Woodside",
-      "Nova Scotia"
+      "Nova Scotia",
+      "Vancouver",
+      "SeaBus",
+      "British Columbia"
     ],
     "icon": "route",
     "url": "/ferrycountss/",
@@ -3291,11 +3344,11 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Halifax Transit records passenger boardings by direction and time. The hourly averages use dates with reported counts.",
-      "cadence": "Weekly",
+      "detail": "Halifax Transit supplies dated boarding counts and TransLink publishes seasonal SeaBus averages by hour and direction.",
+      "cadence": "Weekly Halifax · Monthly SeaBus edition check",
       "probes": [
         {
-          "label": "Data retrieved",
+          "label": "Halifax retrieved",
           "url": "https://coolcode.ca/ferrycountss/data/status.json",
           "path": [
             "retrieved"
@@ -3319,12 +3372,31 @@
             "end"
           ],
           "value": "2025-11-01–2026-10-31"
+        },
+        {
+          "label": "SeaBus retrieved",
+          "url": "https://coolcode.ca/ferrycountss/data/seabus-status.json",
+          "path": [
+            "retrieved"
+          ],
+          "value": "2026-11-19"
+        },
+        {
+          "label": "SeaBus coverage",
+          "url": "https://coolcode.ca/ferrycountss/data/seabus-status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2023–2025"
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare Halifax to Alderney against the return direction on weekdays. Expand the hourly figures to see how many dates contributed to each average, or download the comparison as CSV."
+      "note": "Compare Halifax to Alderney against the return direction on weekdays. Expand the hourly figures to see how many dates contributed to each average, or download the comparison as CSV. Switch to Vancouver Harbour to compare SeaBus volumes by direction, season and day type."
     }
   },
   {
@@ -3921,6 +3993,570 @@
     "sync_manifest": true,
     "readme": {
       "note": "Anderson Brook Bridge in Annapolis County received a general rating of Good on April 22, 2020 and Fair on April 26, 2023. Its detailed inspections use a separate scale. The place link comes from a unique match on the provincial structure ID."
+    }
+  },
+  {
+    "id": "libraryworkbench",
+    "title": "Library Workbench",
+    "description": "Find a library workspace for a tape, recording or scan, then explore how Vancouver and Nova Scotia report library use.",
+    "category": "places",
+    "tags": [
+      "libraries",
+      "Halifax",
+      "Vancouver",
+      "digitization",
+      "program attendance"
+    ],
+    "icon": "library-big",
+    "url": "/libraryworkbench/",
+    "source": "https://github.com/jsdyer/libraryworkbench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Halifax and Vancouver equipment guides, Vancouver’s 2023–24 lab use, and a regional survey of Nova Scotia libraries.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Survey retrieved",
+          "url": "https://coolcode.ca/libraryworkbench/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "library-region years"
+          },
+          "value": "2026-11-19",
+          "count": 54
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a recording or digitization task to see the equipment, what to bring, and the official booking route in each city. Switch between Vancouver labs to compare 2023 and 2024 sessions or hours. In the Nova Scotia survey, choose Halifax in 2024–25 to put opening hours, programs and attendance alongside Halifax’s annual report and download a data-request draft about the different counts."
+    }
+  },
+  {
+    "id": "shopfrontdiary",
+    "title": "Shopfront Diary",
+    "description": "Follow a shop or street address through historic Halifax and Vancouver directories and open the page behind each listing.",
+    "category": "places",
+    "tags": [
+      "Halifax",
+      "Vancouver",
+      "food",
+      "city directories",
+      "history"
+    ],
+    "icon": "map",
+    "url": "/shopfrontdiary/",
+    "source": "https://github.com/jsdyer/shopfrontdiary",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Selected food trades and neighbours from Halifax and Vancouver directory editions, 1890–1909.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/shopfrontdiary/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "directory listings"
+          },
+          "value": "2026-11-19",
+          "count": 27
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search “oyster” to find Charlie Aucoin’s Rialto, then open 44–46 Upper Water to see the later directory entry. In Vancouver, 608 Granville links John Oben’s 1906 entry to a 1908 delicatessen listing. An empty edition means the sampled pages have no entry for that address. The Halifax city archive provides a conversion list for comparing historical street numbers with modern ones."
+    }
+  },
+  {
+    "id": "transferwindow",
+    "title": "Transfer Window",
+    "description": "Compare scheduled route 555 connections, walking time and missed-transfer waits at Carvolth and Lougheed.",
+    "category": "places",
+    "tags": [
+      "TransLink",
+      "Langley",
+      "Carvolth",
+      "Lougheed",
+      "555",
+      "GTFS"
+    ],
+    "icon": "route",
+    "url": "/transferwindow/",
+    "source": "https://github.com/jsdyer/transferwindow",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "TransLink’s static GTFS timetable supplies scheduled 555 arrivals, onward departures, bays and service-date exceptions.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/transferwindow/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "routes"
+            ],
+            "unit": "transit routes"
+          },
+          "value": "2026-11-19",
+          "count": 8
+        },
+        {
+          "label": "Coverage",
+          "url": "https://coolcode.ca/transferwindow/data/status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2026-09-07–2027-01-03"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Try a 555 arrival at Lougheed, select your onward train, then add a five-minute delay to see which scheduled departures remain reachable."
+    }
+  },
+  {
+    "id": "seabusclock",
+    "title": "SeaBus Clock",
+    "description": "Find the busiest SeaBus hours by direction and see the scheduled gap between sailings.",
+    "category": "places",
+    "tags": [
+      "TransLink",
+      "SeaBus",
+      "Vancouver",
+      "North Vancouver",
+      "ferry",
+      "ridership"
+    ],
+    "icon": "route",
+    "url": "/seabusclock/",
+    "source": "https://github.com/jsdyer/seabusclock",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "TransLink publishes seasonal hourly SeaBus volumes and a separate timetable for Waterfront and Lonsdale Quay.",
+      "cadence": "Daily timetable · Monthly performance check",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/seabusclock/data/seabus-status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "hourly volume records"
+          },
+          "value": "2026-11-19",
+          "count": 697
+        },
+        {
+          "label": "Coverage",
+          "url": "https://coolcode.ca/seabusclock/data/seabus-status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2023–2025"
+        },
+        {
+          "label": "Timetable retrieved",
+          "url": "https://coolcode.ca/seabusclock/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "value": "2026-11-19"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare fall weekday volumes in each direction, then select a terminal and service date to see the scheduled wait after a missed sailing."
+    }
+  },
+  {
+    "id": "dispatchledger",
+    "title": "Dispatch Ledger",
+    "description": "Compare Halifax police service demand by agency, reporting channel and period.",
+    "category": "disclosures",
+    "tags": [
+      "halifax",
+      "police",
+      "service"
+    ],
+    "icon": "scroll-text",
+    "url": "/dispatchledger/",
+    "source": "https://github.com/jsdyer/dispatchledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Halifax Board of Police Commissioners reports provide service counts by agency and separate district crime totals.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/dispatchledger/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "patrol divisions"
+          },
+          "value": "2026-11-19",
+          "count": 9
+        },
+        {
+          "label": "Coverage",
+          "url": "https://coolcode.ca/dispatchledger/data/edition.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2024-01–2025-06"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare public-generated calls, proactive calls and online reports from January through June in two years. Switch between regional police, the RCMP Halifax Regional Detachment and the published combined figures. The district table counts recorded crime in 2025 and uses a different unit from the service table."
+    }
+  },
+  {
+    "id": "crossingrecord",
+    "title": "Crossing Record",
+    "description": "Compare ICBC crash counts at Langley intersections before and after documented road work.",
+    "category": "explorers",
+    "tags": [
+      "langley",
+      "roads",
+      "crashes"
+    ],
+    "icon": "signpost-big",
+    "url": "/crossingrecord/",
+    "source": "https://github.com/jsdyer/crossingrecord",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "ICBC crash records are grouped by named junction and year, with Langley City project records for selected locations.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/crossingrecord/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "junctions"
+          },
+          "value": "2026-11-19",
+          "count": 1245
+        },
+        {
+          "label": "Coverage",
+          "url": "https://coolcode.ca/crossingrecord/data/edition.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2021–2025"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a Langley junction and compare annual averages on either side of a reference year. Douglas Crescent at 203 Street and 56 Avenue at 201A Street have linked, completed city projects. The project year is excluded from both periods. Counts represent crashes reported to ICBC, and the view shows how many years support each average."
+    }
+  },
+  {
+    "id": "parkvisits",
+    "title": "Park Visits",
+    "description": "Compare annual attendance at Fort Langley, Halifax Citadel and ten other Parks Canada places.",
+    "category": "explorers",
+    "tags": [
+      "places",
+      "parks",
+      "attendance"
+    ],
+    "icon": "landmark",
+    "url": "/parkvisits/",
+    "source": "https://github.com/jsdyer/parkvisits",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Parks Canada publishes fiscal-year visits for each place, including reporting gaps and temporary closures.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/parkvisits/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "places"
+          },
+          "value": "2026-11-19",
+          "count": 12
+        },
+        {
+          "label": "Coverage",
+          "url": "https://coolcode.ca/parkvisits/data/edition.json",
+          "path": [
+            "coverageStart"
+          ],
+          "end_path": [
+            "coverageEnd"
+          ],
+          "value": "2001-04-01–2026-03-31"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with Fort Langley and Halifax Citadel, pick a fiscal year, then compare both places across the full table. Counts represent visits and can include repeat visitors. The twelve-place selection also covers BC, Nova Scotia, New Brunswick, PEI and Alberta."
+    }
+  },
+  {
+    "id": "streetworkdiary",
+    "title": "Streetwork Diary",
+    "description": "Compare Halifax street-service requests, closures and published resolution fields by community and week.",
+    "category": "places",
+    "tags": [
+      "halifax",
+      "municipal",
+      "streets",
+      "service requests"
+    ],
+    "icon": "map",
+    "url": "/streetworkdiary/",
+    "source": "https://github.com/jsdyer/streetworkdiary",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Halifax Cityworks intake records joined to published custom-field names for two reporting weeks.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Cityworks data retrieved",
+          "url": "https://coolcode.ca/streetworkdiary/data/requests.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "requests"
+          },
+          "value": "2026-11-19",
+          "count": 276
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with street-surface requests for April 1–7, 2025. Compare closed counts, published resolution coverage and custom-field coverage, then switch to another request type."
+    }
+  },
+  {
+    "id": "routemirror",
+    "title": "Route Mirror",
+    "description": "Find Metro Vancouver bus routes whose busier direction reverses between the morning and afternoon peaks.",
+    "category": "places",
+    "tags": [
+      "TransLink",
+      "Langley",
+      "crowding",
+      "ridership",
+      "buses"
+    ],
+    "icon": "route",
+    "url": "/routemirror/",
+    "source": "https://github.com/jsdyer/routemirror",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "TransLink publishes average peak passenger loads by route, direction, time band, season, day type and year.",
+      "cadence": "Monthly edition check",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/routemirror/data/loads-status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "peak-load records"
+          },
+          "value": "2026-11-19",
+          "count": 12901
+        },
+        {
+          "label": "Coverage",
+          "url": "https://coolcode.ca/routemirror/data/loads-status.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2023–2025"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with route 555 on fall weekdays. Compare earlier years, or open the reversal ranking to find other routes with a pronounced morning and afternoon switch."
+    }
+  },
+  {
+    "id": "postmarkplaces",
+    "title": "Postmark Places",
+    "description": "Read a historic postmark by matching its name and date to documented post-office openings, renamings and closures.",
+    "category": "places",
+    "tags": [
+      "Langley",
+      "post offices",
+      "postal history",
+      "place names",
+      "Dartmouth",
+      "Halifax"
+    ],
+    "icon": "map",
+    "url": "/postmarkplaces/",
+    "source": "https://github.com/jsdyer/postmarkplaces",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Langley and Dartmouth heritage reports document office names, openings, closures and moves.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/postmarkplaces/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "post offices"
+          },
+          "value": "2026-11-19",
+          "count": 12
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare the “Langley Prairie” postmark in 1910 and 1912. The earlier office became Murrayville on May 16, 1911, the day a different office took the Langley Prairie name. Browse Dartmouth’s history to see how its post office moved between a general store and a purpose-built building. Approximate openings and undocumented closures are labelled on the cards."
+    }
+  },
+  {
+    "id": "lakeprofiles",
+    "title": "Lake Profiles",
+    "description": "Compare dissolved oxygen and temperature at measured depths on different Halifax lake visits.",
+    "category": "places",
+    "tags": [
+      "halifax",
+      "lakes",
+      "water",
+      "environment"
+    ],
+    "icon": "map",
+    "url": "/lakeprofiles/",
+    "source": "https://github.com/jsdyer/lakeprofiles",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Municipal LakeWatchers depth readings for Dartmouth’s Banook and Albro monitoring stations.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Municipal profiles retrieved",
+          "url": "https://coolcode.ca/lakeprofiles/data/profiles.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "readings"
+          },
+          "value": "2026-11-19",
+          "count": 184
+        },
+        {
+          "label": "Sample dates",
+          "url": "https://coolcode.ca/lakeprofiles/data/profiles.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2022-04-27–2024-09-03"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose Lake Banook, compare April 18 and August 14, 2023 at 10 metres, and switch between oxygen and temperature. The plot and table include only measured depths."
     }
   }
 ]
