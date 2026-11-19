@@ -96,3 +96,7 @@ select:focus-visible, summary:focus-visible { outline: 3px solid #b65814; outlin
 .results .transcript { background: #fffef7; padding: .8rem; white-space: pre-wrap; }
 .results h4 { overflow-wrap: anywhere; }
 .guide h2:not(:first-child) { margin-top: 1.4rem; border-top: 1px solid #acb69d; padding-top: 1rem; }
+
+#catalogue-option { display: flex; align-items: center; gap: .5rem; font-weight: 500; margin: .75rem 0; }
+#catalogue-option[hidden], #scope-note:empty { display: none; }
+#skip-catalogue { flex: none; padding: 0; width: 1.1rem; height: 1.1rem; margin: 0; }

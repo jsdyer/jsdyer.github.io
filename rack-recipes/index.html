@@ -7,9 +7,9 @@
   <meta name="theme-color" content="#173a31">
   <title>Rack Recipes · CoolCode.ca</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="rack.css">
-  <script src="recipe.js" defer></script>
-  <script src="rack.js" defer></script>
+  <link rel="stylesheet" href="rack.css?v=12">
+  <script src="recipe.js?v=12" defer></script>
+  <script src="rack.js?v=12" defer></script>
 </head>
 <body>
   <header class="masthead">
@@ -26,16 +26,16 @@
         <p class="lede">Pick services for a small Linux host, budget the memory, and take the Compose file home.</p>
       </div>
       <div class="rack" aria-hidden="true">
-        <div class="rack-unit"><b></b><span>FEEDS</span><i></i><em></em></div>
-        <div class="rack-unit"><b></b><span>LINKS</span><i></i><em></em></div>
-        <div class="rack-unit"><b></b><span>UPTIME</span><i></i><em></em></div>
+        <div class="rack-unit" data-group="Library"><b></b><span>LIBRARY</span><i></i><em></em></div>
+        <div class="rack-unit" data-group="Operations"><b></b><span>OPERATIONS</span><i></i><em></em></div>
+        <div class="rack-unit" data-group="Personal"><b></b><span>PERSONAL</span><i></i><em></em></div>
       </div>
     </section>
     <noscript><p class="notice">Enable JavaScript to choose services and generate your Compose file.</p></noscript>
     <div class="bench" id="bench" hidden>
       <div class="controls">
         <fieldset class="panel">
-          <legend>Services</legend>
+          <legend>Choose from 12 services</legend>
           <div class="choices" id="services"></div>
         </fieldset>
         <section class="panel" aria-labelledby="ports-heading">
@@ -50,6 +50,7 @@
             <select id="ram">
               <option value="1">1 GiB</option><option value="2">2 GiB</option>
               <option value="4" selected>4 GiB</option><option value="8">8 GiB</option><option value="16">16 GiB</option>
+              <option value="32">32 GiB</option><option value="64">64 GiB</option><option value="128">128 GiB</option>
             </select></label></div>
           <div class="meter" aria-hidden="true"><span id="system-bar"></span><span id="apps-bar"></span></div>
           <ul class="numbers">

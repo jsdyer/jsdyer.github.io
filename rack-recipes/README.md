@@ -1,9 +1,9 @@
 # Rack Recipes
 
-A browser-based Compose planner for a small Linux homelab. Pick FreshRSS, linkding or Uptime Kuma, budget RAM, assign host ports and choose where each service stores its data. Copy or download the generated YAML. Recipe files and selections stay on your device.
+A browser-based Compose planner for a small Linux homelab. Choose among twelve services for a media library, monitoring, development and personal records, budget RAM, assign host ports and choose where each service stores its data. Copy or download the generated YAML. Recipe files and selections stay on your device.
 
 <!-- coolcode:guide -->
-Move FreshRSS to host port 8181 if 8080 is occupied, choose project folders for its data, then reopen the downloaded Compose file to revise the plan.
+Plan a media server or monitoring stack from 12 services, change ports and storage, and reopen the exported Compose file later.
 <!-- /coolcode:guide -->
 
 ## Try it
@@ -25,6 +25,15 @@ docker compose ps
 | FreshRSS | `http://127.0.0.1:8080` | Open the installer, select SQLite and create your account. Feed refreshes are scheduled twice hourly. |
 | linkding | `http://127.0.0.1:9090` | Run `docker compose exec linkding python manage.py createsuperuser` and respond to its prompts. |
 | Uptime Kuma | `http://127.0.0.1:3001` | Open the local setup page, create an administrator and add a monitor. |
+| [Gitea](https://docs.gitea.com/installation/install-with-docker/) | `http://127.0.0.1:3000` | Choose SQLite3 in the installer, enter the address shown here as the base URL and clone repositories over HTTP. |
+| [Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/) | `http://127.0.0.1:3030` | Sign in, change the initial admin password and add a data source. For project folders, give container user 472 write access first. |
+| [changedetection.io](https://github.com/dgtlmoon/changedetection.io) | `http://127.0.0.1:5000` | Add a public page URL as a watch. The included HTTP fetcher works with pages served as HTML. |
+| [ntfy](https://docs.ntfy.sh/install/) | `http://127.0.0.1:8085` | Subscribe to a topic in the web interface, then publish a test message to that topic using the same local server. |
+| [Navidrome](https://www.navidrome.org/docs/installation/docker/) | `http://127.0.0.1:4533` | Put readable music files in ./media/music before startup, then create the admin account and scan the library. |
+| [Audiobookshelf](https://www.audiobookshelf.org/docs/) | `http://127.0.0.1:13378` | Put readable books in ./media/audiobooks. Create the first user and add /audiobooks as an audiobook library. |
+| [Actual Budget](https://actualbudget.org/docs/install/docker/) | `http://127.0.0.1:5006` | Open the loopback address on your host, set a server password and create or import a budget. |
+| [Mealie](https://mealie.io/documentation/getting-started/installation/sqlite/) | `http://127.0.0.1:9925` | Use the first-login instructions in the installation guide, change the account password and import your first recipe. |
+| [Memos](https://usememos.com/docs/deploy/docker) | `http://127.0.0.1:5230` | Open the setup page and register the first administrator. |
 
 The table shows default ports. Published ports bind to IPv4 loopback on the Docker host. Change a host port in the planner to update its mapping, setup address and download together. Two selected services sharing a host port block the export. Check other applications on the host for additional conflicts. On a remote host, forward the chosen port over SSH to use it from a workstation. Choose Docker volumes for Compose-managed storage, or project folders for bind mounts under `./data/<service>/<volume>/` beside the YAML file. The setup panel lists the volume keys or folder paths for each selected service. Switching this setting on an existing deployment points the service to a different location. Migrate the data separately if you intend to keep it. Run `docker compose stop` to pause the services and `docker compose start` to resume. The selected image tags follow upstream releases; pin a tested version or digest for repeatable deployments.
 

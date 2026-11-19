@@ -2,7 +2,7 @@
   {
     "id": "rack-recipes",
     "title": "Rack Recipes",
-    "description": "Plan or reopen a Docker Compose stack, choose host ports and storage, and export the edited configuration.",
+    "description": "Plan a homelab from 12 self-hosted services, choose ports and storage, and export or reopen the Compose file.",
     "category": "projects",
     "tags": [
       "docker",
@@ -11,7 +11,16 @@
       "homelab",
       "compose.yaml",
       "bind mount",
-      "host port"
+      "host port",
+      "Grafana",
+      "Gitea",
+      "Navidrome",
+      "Audiobookshelf",
+      "ntfy",
+      "Mealie",
+      "Memos",
+      "Actual Budget",
+      "changedetection"
     ],
     "icon": "server",
     "url": "/rack-recipes/",
@@ -20,11 +29,11 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "The browser generates Compose YAML from selected services and reads earlier Rack Recipes exports."
+      "detail": "Upstream container guides supply the images, ports and data paths. The planner estimates memory for your selections."
     },
     "readme": {
       "lead": "RAM figures are planning",
-      "note": "Move FreshRSS to host port 8181 if 8080 is occupied, choose project folders for its data, then reopen the downloaded Compose file to revise the plan."
+      "note": "Plan a media server or monitoring stack from 12 services, change ports and storage, and reopen the exported Compose file later."
     }
   },
   {
