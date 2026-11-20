@@ -16,6 +16,7 @@ function node(tag, text) {
 function select(label, options) {
   const wrapper = node('label', label + ' ');
   const input = node('select');
+  input.setAttribute('aria-label', label);
   for (const [value, title] of options) input.add(new Option(title, value));
   wrapper.append(input);
   return {wrapper, input};
