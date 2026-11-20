@@ -1409,7 +1409,7 @@
             "unit": "catalogue entries"
           },
           "value": "2026-11-19",
-          "count": 48327
+          "count": 48350
         },
         {
           "url": "https://coolcode.ca/datasetexplorer/data/manifest.json",
@@ -1417,7 +1417,7 @@
             "publisherDate"
           ],
           "label": "Source updated",
-          "value": "2026-11-18"
+          "value": "2026-11-19"
         }
       ],
       "cadence": "Daily"
@@ -2716,7 +2716,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-19 17:22 UTC",
+          "value": "2026-11-20 01:46 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -3196,7 +3196,7 @@
             "measure": "length",
             "unit": "episodes"
           },
-          "value": "2026-11-19",
+          "value": "2026-11-20",
           "count": 45
         },
         {
@@ -3650,7 +3650,7 @@
             ],
             "unit": "stations"
           },
-          "value": "2026-11-18",
+          "value": "2026-11-20",
           "count": 394
         },
         {
@@ -3659,7 +3659,7 @@
           "path": [
             "latest"
           ],
-          "value": "2026-11-18"
+          "value": "2026-11-19"
         }
       ]
     },
@@ -4732,8 +4732,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-19 15:41 UTC",
-          "count": 4
+          "value": "2026-11-20 00:35 UTC",
+          "count": 6
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -4748,7 +4748,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 160
+          "count": 240
         }
       ]
     },
@@ -5522,7 +5522,7 @@
             ],
             "unit": "mapped facilities"
           },
-          "value": "2026-11-19",
+          "value": "2026-11-20",
           "count": 439
         },
         {
@@ -5598,7 +5598,7 @@
             ],
             "unit": "in-service meter records"
           },
-          "value": "2026-11-19",
+          "value": "2026-11-20",
           "count": 3129
         },
         {
