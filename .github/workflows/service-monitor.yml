@@ -1,0 +1,26 @@
+name: CoolCode service checks
+
+on:
+  schedule:
+    - cron: '37 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/service-monitor.yml'
+      - 'admin/service-checks.mjs'
+      - 'assets/service.mjs'
+      - 'scripts/check_services.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - run: node scripts/check_services.mjs

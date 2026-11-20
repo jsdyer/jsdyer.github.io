@@ -1,5 +1,6 @@
 import {sameSettings, makeSettings} from './lineup.mjs';
 import {initializeStats} from './stats.mjs';
+import {initializeServiceStatus} from './service-status.mjs';
 import {initializeActivity} from './activity.mjs';
 const $ = id => document.getElementById(id);
 const api = 'https://api.github.com/repos/jsdyer/jsdyer.github.io/contents/data/featured.json';
@@ -68,4 +69,5 @@ export async function openDashboard(session, initialMetrics) {
   bind();
   initializeStats(catalog, session, initialMetrics);
   initializeActivity(session.signal);
+  initializeServiceStatus(session.signal);
 }

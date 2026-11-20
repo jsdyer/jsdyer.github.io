@@ -23,7 +23,7 @@
 </section>
 <div id="dashboard" hidden></div>
 <template id="dashboard-layout">
-<nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a><a href="#activity">Update log</a><button type="button" id="sign-out">Lock admin</button></nav>
+<nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a><a href="#activity">Update log</a><a href="#services">Service status</a><button type="button" id="sign-out">Lock admin</button></nav>
 <p id="health" aria-live="polite">Loading the published catalogue…</p>
 <section id="featured"><h2>Featured tools</h2>
 <form id="lineup"><fieldset disabled id="controls">
@@ -35,6 +35,14 @@
 <pre id="copy-fallback" hidden tabindex="0"></pre>
 </fieldset></form>
 <p id="save-status" role="status"></p></section>
+<section id="services"><h2>Service status</h2><details id="service-panel"><summary>View service checks</summary>
+<h3>From this browser</h3>
+<p>Elapsed time includes the network request and reading the response. The visitor API checks that D1 can query the expected tables.</p>
+<button type="button" id="run-service-checks">Check again</button><p id="service-message" role="status"></p><div id="service-results"></div>
+<h3>External checks</h3><p>GitHub Actions checks the same endpoints hourly, including while the admin is closed. Open a run for individual results.</p>
+<div id="service-history"></div>
+<p><a href="https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml">External check history</a> · <a href="https://www.githubstatus.com/">GitHub platform status</a> · <a href="https://www.cloudflarestatus.com/">Cloudflare platform status</a></p>
+</details></section>
 <section id="activity"><h2>Update log</h2><details id="activity-panel"><summary>Browse update history</summary><div id="activity-body"></div></details></section>
 <div id="statistics"><h2>Statistics and issue reports</h2><p>Loading the reporting dashboard…</p></div>
 

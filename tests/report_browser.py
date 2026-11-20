@@ -88,6 +88,19 @@ def check_admin_traffic(browser, url):
         key.fill("test-credential")
         unlock.click()
         page.get_by_text("Private reports loaded.").wait_for()
+        # Monitor requests are public. Only the normal owner routes receive a key.
+        public_headers = {"Access-Control-Allow-Origin": "*"}
+        def public_probe(route):
+            assert "authorization" not in route.request.headers
+            route.fulfill(status=503, headers=public_headers, body="unavailable")
+        page.route("https://coolcode.ca/**", public_probe)
+        page.route("https://collector.test/health", lambda r: r.fulfill(json={"ok": True}, headers=public_headers))
+        page.route("**/actions/workflows/service-monitor.yml/runs?**",
+                   lambda r: r.fulfill(json={"workflow_runs": []}, headers=public_headers))
+        page.get_by_role("link", name="Service status", exact=True).click()
+        page.get_by_text("3 of 4 checks need review.", exact=False).wait_for()
+        page.get_by_text("No external checks recorded yet.").wait_for()
+        assert "Passed" in page.locator("#service-results").inner_text()
         history_urls = []
         def runs(route):
             assert "authorization" not in route.request.headers
