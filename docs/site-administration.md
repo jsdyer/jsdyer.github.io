@@ -18,7 +18,11 @@ Open the existing coolcode.ca property in [Google Search Console](https://search
 
 ## Update log
 
-After signing in, open **Update log → Browse update history**. Choose the catalogue or a tool to read its public GitHub Actions history, filter failed or cancelled runs, or switch to its source commits. Open a run to inspect its steps. Projects in the main repository share workflow history, while their source history follows their own directory.
+After signing in, open **Update log → Browse update history**. The **Catalogue refresh journal** records each six-hour check of the metadata published by the tools. The newest attempts appear first. Use **Needs attention** for an unavailable source or unsuccessful workflow. Filter by project to see which checks for that tool changed. Open an entry for the before-and-after values or the failure reason. A check can recover while the date and record count stay the same. A successful workflow can also have unavailable sources.
+
+Each attempt with a completed metadata step saves its UTC time, per-tool coverage and check results on the `catalogue-refresh-log` branch. The latest 120 saved attempts are available from the dashboard. The accompanying GitHub workflow lookup covers up to 100 recent runs. If an attempt stopped before it could record its checks or predates the journal, open its workflow link to investigate. The journal covers catalogue metadata. Independent tool collectors and deployments have their own histories.
+
+Switch **History** to **Workflow runs** to read a project's public GitHub Actions history, filter failed or cancelled runs, or switch to its source commits. Open a run to inspect its steps. Projects in the main repository share workflow history, while their source history follows their own directory.
 
 **Catalogue changes → Show what changed** compares the recorded tool entries before and after a commit. It includes reported dates, counts, unavailable or recovered checks, additions, removals and listing edits. **Featured lineup changes** links to each committed configuration change. These public histories come directly from GitHub and include existing records. The log loads on demand in pages of 20 and offers links to GitHub when its public API is rate-limited.
 
@@ -30,8 +34,20 @@ Open **Service status** to check the production homepage, tool catalogue, search
 
 The [external monitor](https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml) runs the same checks at minute 37 each hour and supports manual runs. Each run summary lists the HTTP status, elapsed time and result for each endpoint. The admin shows the last 24 available runs and flags a gap of over two hours. Run counts are samples rather than a measurement of continuous uptime. GitHub keeps the workflow history accessible directly if Pages or admin authentication is unavailable.
 
+**Provider incidents** shows the component status for GitHub Pages, Actions and API Requests, and for Cloudflare Workers and D1. Active incidents link to the provider’s report. Use the browser and external service checks above to see whether the reported incident affected a specific CoolCode endpoint.
+
+## Cloudflare usage
+
+**Cloudflare usage → View the last 24 hours** queries Cloudflare for the visitor API’s request count, runtime outcomes and outbound subrequests, plus queries and rows read or written for the reporting database. Counts cover a rolling UTC window. Health checks and administrative requests can contribute. Use **Tool traffic** for per-tool opens. Each provider dataset can load independently.
+
+The on-demand metrics Worker is maintained in `services/cloudflare-admin/worker.mjs` and uses the name `coolcode-admin-metrics` on the same Cloudflare account. Its `COLLECTOR` service binding targets `coolcode-visitor-api` and delegates owner verification to the existing private stats route. Its `ANALYTICS_SQL` Analytics SQL binding queries fixed aggregate statements. `REPORTS_DATABASE_ID` selects the UUID of `coolcode-reports`. The dashboard sends the current tab's credential only when you open or refresh this panel. Locking the admin clears the session. Deploy changes to this companion separately from GitHub Pages.
+
+To enable it yourself, open a checkout of this repository and run `python services/cloudflare-admin/deploy.py` (on Windows, `py services/cloudflare-admin/deploy.py`). The script prompts locally for your Cloudflare account ID, the UUID shown on the **coolcode-reports** D1 overview, and a Cloudflare API token scoped to that account with **Workers Scripts Write**. It uploads the companion and enables its workers.dev URL. The token stays in the local process. Use your usual GitHub sign-in when you return to the admin and click **Refresh Cloudflare usage**. The links to the Workers and D1 dashboards also work independently.
+
 ## Genre usage and GitHub interest
 
 After signing in, **Stats & reports → Genre usage and GitHub interest** ranks the current catalogue genres by recorded browser-tool opens in the selected 7 or 28 days. Active tools have at least one open. The leading tool’s share uses all opens in that genre as the denominator, and ties are indicated. A dash means there is no denominator. Install-only projects do not contribute to the browser-tool totals.
 
 Use **Compare tool opens with GitHub interest**, choose a genre and tool, then **Load GitHub traffic**. The browser requests the selected repository’s 14-day views, unique visitors, full clones and unique cloners directly from GitHub with the signed-in token. The repository must be included in a fine-grained token with **Administration: read**. The genre table uses the existing reporting permissions. Shared-repository tools show repository-wide traffic and install-only projects have no CoolCode pageview measure. Counts are independent and are not joined across visitors or added together.
+
+Expand **Daily GitHub traffic** after loading a repository to see the reported UTC dates for views and full clones, their daily unique counts and the busiest dates. Missing figures appear as a dash.

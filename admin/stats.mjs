@@ -1,4 +1,4 @@
-import { genreUsage, repoFromSource, gitTraffic } from "./interest.mjs";
+import { dailyTraffic, genreUsage, repoFromSource, gitTraffic } from "./interest.mjs";
 import { publicIssues } from "./public-issues.mjs";
 import { readQueryReport, readSearchReport } from "./search-report.mjs";
 
@@ -200,6 +200,42 @@ function renderDaily(target, metrics) {
   target.append(details);
 }
 
+function renderGitHubDays(output, results) {
+  const series = ["views", "clones"].map((metric, i) => dailyTraffic(results[i].value, metric));
+  const dates = [...new Set(series.flatMap(s => s ? [...s.series.keys()] : []))].sort().reverse();
+  for (const [i, s] of series.entries()) {
+    const name = i ? "clones" : "views";
+    if (!s) {
+      if (results[i].status === "fulfilled") output.append(el("p", "Daily breakdown unavailable for " + name + "."));
+    } else if (s.peakDays.length) {
+      output.append(el("p", "Peak reported " + name + " · " + number.format(s.peak) + " on " + s.peakDays.join(", ") + " (UTC)."));
+    } else if (!s.series.size) {
+      output.append(el("p", "GitHub returned no daily rows for " + name + "."));
+    }
+  }
+  if (!dates.length) return;
+  const details = el("details");
+  details.append(el("summary", "Daily GitHub traffic"));
+  details.append(el("p", "Dates with at least one reported measure are shown. A dash means no daily figure was available. GitHub counts unique visitors and cloners separately within each period."));
+  const max = Math.max(1, ...series.map(s => s?.peak || 0));
+  const rows = dates.map(day => {
+    const cells = [day];
+    for (const s of series) {
+      const entry = s?.series.get(day);
+      if (!entry) { cells.push("—", "—"); continue; }
+      const cell = el("span"), bar = el("meter");
+      bar.max = max;
+      bar.value = entry.count;
+      bar.setAttribute("aria-hidden", "true");
+      cell.append(number.format(entry.count) + " ", bar);
+      cells.push(cell, number.format(entry.uniques));
+    }
+    return cells;
+  });
+  details.append(table("GitHub daily counts", ["UTC date", "Views", "Unique visitors", "Full clones", "Unique cloners"], rows));
+  output.append(details);
+}
+
 function renderInterests(target, catalog, metrics, session) {
   const groups = genreUsage(catalog, metrics.tools);
   target.append(table("Usage by catalogue genre · " + metrics.days + " days",
@@ -260,6 +296,7 @@ function renderInterests(target, catalog, metrics, session) {
     output.replaceChildren(table("GitHub repository traffic · last 14 days", ["Metric","Total","Unique"], rows));
     for (const message of new Set(results.filter(r => r.status === "rejected").map(r => r.reason.message)))
       output.append(el("p", message));
+    renderGitHubDays(output, results);
     output.append(el("p", "GitHub counts visitors and cloners separately. Automated clones can contribute. These counts cannot be matched to individual CoolCode visits."));
     load.disabled = false;
   });

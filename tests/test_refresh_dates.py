@@ -1,10 +1,14 @@
+import json
 from pathlib import Path
+from tempfile import TemporaryDirectory
+from urllib.error import HTTPError
 import sys
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from refresh_dates import check_summary, AllowedRedirects, badge_metadata, check_url, refresh, select, source_date, probe_date, record_count, update_probe
+from save_refresh_history import LIMIT, save
+from refresh_dates import observation, update_catalogue, check_summary, AllowedRedirects, badge_metadata, check_url, refresh, select, source_date, probe_date, record_count, update_probe
 
 
 class CatalogueDateTests(unittest.TestCase):
@@ -18,6 +22,56 @@ class CatalogueDateTests(unittest.TestCase):
         self.assertIn('1 changed or recovered · 1 unchanged · 1 unavailable', result)
         self.assertIn('count 0 → 2, check recovered', result)
         self.assertIn('three &lt;timed out&gt;', result)
+
+    def test_journal_distinguishes_unavailable_and_recovered_checks(self):
+        before = {('one', 0): ('Retrieved', '2026', 0, None, False),
+                  ('two', 0): ('Coverage', '2025', 1, None, True),
+                  ('two', 1): ('Published', '2025', None, None, False),
+                  ('three', 0): ('Coverage', '2025', 4, None, False),
+                  ('four', 0): ('Coverage', '2025', 0, None, False)}
+        after = dict(before)
+        after['one', 0] = ('Retrieved', '2026', 2, 'New sample', False)
+        after['two', 0] = ('Coverage', None, 1, None, False)
+        after['three', 0] = ('Coverage', '2025', 4, None, True)
+        report = observation(before, after, {('three', 0): 'Source request failed'})
+        self.assertEqual(report['counts'], dict(changed=1, recovered=1, unchanged=2, unavailable=1))
+        self.assertEqual(report['checked_by_tool'], {'one': 1, 'two': 2, 'three': 1, 'four': 1})
+        details = {d['tool']: d for d in report['details']}
+        self.assertEqual(details['one']['fields'], {'count': [0, 2], 'notice': [None, 'New sample']})
+        self.assertEqual(details['two']['fields'], {'date': ['2025', None]})
+        self.assertEqual(details['two']['status'], 'recovered')
+        self.assertEqual(details['three']['fields'], {})
+        self.assertEqual(details['three']['reason'], 'Source request failed')
+
+    def test_capture_unchanged_run_and_retain_distinct_attempts(self):
+        with TemporaryDirectory() as tmp:
+            catalogue, entry, history = (Path(tmp) / name for name in ('tools.json', 'entry.json', 'history.json'))
+            catalogue.write_text('[]\n')
+            with patch.dict('os.environ', GITHUB_RUN_ID='456', GITHUB_RUN_ATTEMPT='2'):
+                self.assertEqual(update_catalogue(catalogue, entry), [])
+            captured = json.loads(entry.read_text())
+            self.assertEqual((captured['run_id'], captured['attempt']), ('456', 2))
+            self.assertEqual(sum(captured['counts'].values()), 0)
+            self.assertRegex(captured['checked_at'], r'Z$')
+            save(history, dict(captured, attempt=1))
+            save(history, captured)
+            save(history, captured)
+            self.assertEqual([r['attempt'] for r in json.loads(history.read_text())['runs']], [2, 1])
+            for i in range(LIMIT + 1):
+                save(history, dict(captured, run_id=str(1000 + i)))
+            runs = json.loads(history.read_text())['runs']
+            self.assertEqual(len(runs), LIMIT)
+            self.assertEqual(runs[0]['run_id'], str(1000 + LIMIT))
+            self.assertEqual(runs[-1]['run_id'], '1001')
+
+    def test_unavailable_reason_excludes_raw_source_data(self):
+        source = 'https://coolcode.ca/example/date.json'
+        tool = {'id': 'one', 'data_info': {'probes': [{'label': 'Coverage', 'path': ['year'], 'url': source}]}}
+        problems = {}
+        refresh([tool], Mock(side_effect=HTTPError(source, 404, 'missing', None, None)), problems)
+        self.assertEqual(problems['one', 0], 'Source returned HTTP 404')
+        refresh([tool], lambda url: {}, problems)
+        self.assertEqual(problems['one', 0], 'Published field could not be read')
 
     def test_dates_preserve_resolution_and_source_calendar_day(self):
         examples = [(2018, '2018'), ('2024-02', '2024-02'), ('April 2026', '2026-04'),

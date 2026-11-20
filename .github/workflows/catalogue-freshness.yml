@@ -9,6 +9,7 @@ on:
     paths:
       - '.github/workflows/catalogue-freshness.yml'
       - 'scripts/refresh_dates.py'
+      - 'scripts/save_refresh_history.py'
       - 'scripts/sync_guides.py'
       - 'scripts/sync_manifests.py'
 
@@ -35,7 +36,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Read dates and counts from published tools
-        run: python3 scripts/refresh_dates.py
+        id: metadata
+        run: python3 scripts/refresh_dates.py --journal-entry "$RUNNER_TEMP/metadata-entry.json"
       - name: Read tool README notes and opted-in project listing copy
         id: guides
         continue-on-error: true
@@ -62,3 +64,24 @@ jobs:
       - name: Report any tool guides or manifests that need review
         if: steps.guides.outcome == 'failure'
         run: exit 1
+
+      - name: Record this metadata check in the refresh journal
+        if: ${{ !cancelled() && steps.metadata.outcome == 'success' }}
+        run: |
+          branch=catalogue-refresh-log
+          folder="$RUNNER_TEMP/refresh-journal"
+          base=HEAD
+          if git ls-remote --exit-code --heads origin "refs/heads/$branch" > /dev/null; then
+            git fetch --no-tags --depth=1 origin "refs/heads/$branch"
+            base=FETCH_HEAD
+          else
+            status=$?
+            if [ "$status" -ne 2 ]; then exit "$status"; fi
+          fi
+          git worktree add --detach "$folder" "$base"
+          python3 scripts/save_refresh_history.py "$folder/refresh-history.json" "$RUNNER_TEMP/metadata-entry.json"
+          git -C "$folder" add -- refresh-history.json
+          if ! git -C "$folder" diff --cached --quiet; then
+            git -C "$folder" -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "Record metadata check $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT"
+            git push origin "$(git -C "$folder" rev-parse HEAD):refs/heads/$branch"
+          fi

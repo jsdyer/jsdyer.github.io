@@ -97,6 +97,30 @@ def check_admin_traffic(browser, url):
         page.route("https://collector.test/health", lambda r: r.fulfill(json={"ok": True}, headers=public_headers))
         page.route("**/actions/workflows/service-monitor.yml/runs?**",
                    lambda r: r.fulfill(json={"workflow_runs": []}, headers=public_headers))
+        # Operational usage is loaded only by the signed-in Cloudflare panel.
+        cloudflare_requests = []
+        def cloudflare_usage(route):
+            headers = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Authorization"}
+            if route.request.method == "OPTIONS":
+                route.fulfill(status=204, headers=headers)
+                return
+            if not route.request.headers.get("authorization"):
+                route.fulfill(status=401, json={"error": "Owner sign-in required."}, headers=headers)
+                return
+            assert route.request.headers.get("authorization") == "Bearer test-credential"
+            cloudflare_requests.append(route.request.url)
+            payload = {"start": "2026-11-18T12:00:00Z", "end": "2026-11-19T12:00:00Z",
+                       "worker": {"requests": 10, "subrequests": 2, "outcomes": [{"status": "ok", "requests": 10}]},
+                       "database": None if len(cloudflare_requests) == 1 else
+                       {"readQueries": 5, "writeQueries": 1, "rowsRead": 17, "rowsWritten": 2}}
+            route.fulfill(json=payload, headers=headers)
+        page.route("https://coolcode-admin-metrics.jeffdyer.workers.dev/**", cloudflare_usage)
+        page.get_by_role("link", name="Cloudflare usage", exact=True).click()
+        page.get_by_text("D1 measurements unavailable for this interval.").wait_for()
+        assert "10" in page.get_by_role("table", name="Visitor API", exact=True).inner_text()
+        page.get_by_role("button", name="Refresh Cloudflare usage").click()
+        page.get_by_role("table", name="D1 reporting database").wait_for()
+        assert len(cloudflare_requests) == 2
         page.get_by_role("link", name="Service status", exact=True).click()
         page.get_by_text("3 of 4 checks need review.", exact=False).wait_for()
         page.get_by_text("No external checks recorded yet.").wait_for()
@@ -109,7 +133,32 @@ def check_admin_traffic(browser, url):
                 "total_count": 1, "workflow_runs": [{"name": "Data refresh", "conclusion": "failure",
                 "event": "schedule", "created_at": "2026-11-18T00:00:00Z", "html_url": "https://github.com/"}]})
         page.route("https://api.github.com/repos/jsdyer/*/actions/runs?**", runs)
+        # The first view joins each saved refresh to its exact public workflow attempt.
+        def refresh_runs(route):
+            assert "authorization" not in route.request.headers
+            route.fulfill(headers=public_headers, json={"workflow_runs": [
+                {"id": 731, "run_attempt": 2, "conclusion": "failure", "created_at": "2026-11-19T01:00:00Z"},
+                {"id": 700, "run_attempt": 1, "conclusion": "success", "created_at": "2026-11-18T01:00:00Z"}]})
+        def refresh_history(route):
+            assert "authorization" not in route.request.headers
+            route.fulfill(headers=public_headers, json={"version": 1, "runs": [
+                {"run_id": "731", "attempt": 2, "checked_at": "2026-11-19T02:00:00Z",
+                 "counts": {"changed": 1, "unchanged": 2, "recovered": 0, "unavailable": 0},
+                 "checked_by_tool": {"nightfinder": 2, "welllayers": 1},
+                 "details": [{"tool": "nightfinder", "label": "Sites", "status": "changed", "fields": {"count": [0, 2]}}]}]})
+        page.route("**/actions/workflows/catalogue-freshness.yml/runs?**", refresh_runs)
+        page.route("**/catalogue-refresh-log/refresh-history.json", refresh_history)
         page.get_by_role("link", name="Update log").click()
+        page.get_by_role("link", name="Run 731, attempt 2", exact=True).wait_for()
+        page.get_by_label("Refresh results").select_option("attention")
+        assert page.get_by_role("link", name="Run 700", exact=True).count() == 0
+        page.get_by_text("Inspect 1 check", exact=True).click()
+        assert "count 0 → 2" in page.locator("#activity-body").inner_text()
+        page.get_by_label("Project", exact=True).select_option("welllayers")
+        page.get_by_label("Refresh results").select_option("unchanged")
+        assert "Well Layers · 0 changed · 0 recovered · 0 unavailable · 1 unchanged" in page.locator("#activity-body").inner_text()
+        page.get_by_label("Project", exact=True).select_option("")
+        page.get_by_label("History", exact=True).select_option("runs")
         page.get_by_role("link", name="Data refresh", exact=True).wait_for()
         with page.expect_response(lambda response: "/nightfinder/actions/runs?" in response.url):
             page.get_by_label("Project", exact=True).select_option("nightfinder")
