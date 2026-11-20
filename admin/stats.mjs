@@ -219,78 +219,35 @@ function renderExperiments(target, rows, cards, names) {
   }
 }
 
-export async function initializeStats(catalog) {
+export function initializeStats(catalog, session, initialMetrics) {
   const root = document.getElementById("statistics");
   root.replaceChildren(el("h2", "Statistics and issue reports"));
   const names = new Map(catalog.filter(t => t.access === "browser").map(t => [t.id, t.title]));
   const access = section(root, "Private reports");
-  const token = el("input");
-  token.type = "password";
-  token.autocomplete = "off";
-  token.spellcheck = false;
   const period = choice([["7", "Last 7 days"], ["28", "Last 28 days"]]);
-  const load = button("Load private reports"), clear = button("Clear private reports");
+  const load = button("Refresh reports");
   const controls = el("div", undefined, "stats-toolbar");
-  controls.append(field("Reporting period", period), load, clear);
+  controls.append(field("Reporting period", period), load);
   const notice = status();
   const results = el("div");
-  access.append(el("p", "The collector verifies the owner's identity. Use a read-only GitHub token for private reporting. It is sent to the collector to verify with GitHub and is kept only in this tab's memory. Use the separate publishing control to change a lineup."),
-    field("Read-only GitHub token for private reports", token), controls, notice, results);
+  access.append(controls, notice, results);
   publicIssues(root, catalog);
   searchConsole(root, catalog);
   searchPhrases(root);
 
-  load.disabled = true;
-  clear.hidden = true;
-  let available = false;
-  try {
-    const { SERVICE } = await import("../assets/service.mjs");
-    available = Boolean(SERVICE) && new URL(SERVICE).protocol === "https:";
-  } catch { /* The Google Search import also works before collector activation. */ }
-  if (!available) {
-    notice.textContent = "Live collection is awaiting activation. Historical tool visits are unavailable. The local Search Console import and featured lineup controls work independently.";
-    load.disabled = token.disabled = period.disabled = true;
-    return;
-  }
-  load.disabled = false;
-  notice.textContent = "Load private reports to see observations collected since activation.";
-  let serial = 0, credential = "";
-  function reset() {
-    serial++;
-    token.value = "";
-    credential = "";
-    results.replaceChildren();
-    clear.hidden = true;
-    load.disabled = false;
-    notice.textContent = "Private reports are closed.";
-  }
-  clear.hidden = true;
-  window.addEventListener("pagehide", reset);
-  clear.addEventListener("click", reset);
-  token.addEventListener("keydown", event => {
-    if (event.key === "Enter") { event.preventDefault(); load.click(); }
-  });
-  period.addEventListener("change", () => { if (credential) refresh(); });
-  load.addEventListener("click", () => {
-    const provided = token.value.trim();
-    if (provided) credential = provided;
-    token.value = "";
-    if (credential) refresh();
-    else {
-      notice.textContent = "Enter your reporting credential.";
-      token.focus();
-    }
-  });
+  let serial = 0;
+  period.addEventListener("change", () => refresh());
+  load.addEventListener("click", () => refresh());
+  refresh(initialMetrics);
 
-  async function refresh() {
+  async function refresh(savedMetrics) {
     const request = ++serial;
     load.disabled = true;
-    clear.hidden = false;
     notice.textContent = "Loading private reports…";
     results.replaceChildren();
     try {
-      const [metrics, reports] = await Promise.all([getMetrics(credential, period.value), getReports(credential)]);
-      if (serial !== request) return;
+      const [metrics, reports] = await Promise.all([savedMetrics || getMetrics(session, period.value), getReports(session)]);
+      if (serial !== request || session.signal.aborted) return;
       const traffic = section(results, "Tool traffic");
       traffic.append(el("p", "Pageviews count successful reports from instrumented tool pages. Returning visitors and reloads can count again. Older visits and browsers that block reporting are absent."));
       renderTraffic(traffic, metrics.tools, names);
@@ -301,16 +258,17 @@ export async function initializeStats(catalog) {
       renderInbox(inbox, reports, names, async (action, id, newStatus) => {
         action.disabled = true;
         try {
-          await setReportStatus(credential, id, newStatus);
+          await setReportStatus(session, id, newStatus);
           if (serial === request) await refresh();
         } catch (error) {
+          if (error.status === 401 || error.status === 403) return session.lock();
           if (serial === request) { notice.textContent = error.message; action.disabled = false; }
         }
       });
       notice.textContent = "Private reports loaded.";
     } catch (error) {
-      if (serial !== request) return;
-      if (error.status === 401 || error.status === 403) { credential = ""; token.focus(); }
+      if (serial !== request || session.signal.aborted) return;
+      if (error.status === 401 || error.status === 403) return session.lock();
       notice.textContent = error.message;
     } finally {
       if (serial === request) load.disabled = false;
@@ -318,14 +276,14 @@ export async function initializeStats(catalog) {
   }
 }
 
-async function privateRequest(path, credential, init = {}) {
+async function privateRequest(path, session, init = {}) {
   const { SERVICE } = await import("../assets/service.mjs");
   const base = new URL(SERVICE);
   if (base.protocol !== "https:") throw new Error("The private reporting service is unavailable.");
   const response = await fetch(new URL(path, base), {
     method: init.method || "GET", body: init.body, credentials: "omit", cache: "no-store",
-    redirect: "error", referrerPolicy: "no-referrer", signal: AbortSignal.timeout(15000),
-    headers: { Authorization: "Bearer " + credential, ...(init.body && { "Content-Type": "application/json" }) },
+    redirect: "error", referrerPolicy: "no-referrer", signal: AbortSignal.any([session.signal, AbortSignal.timeout(15000)]),
+    headers: { Authorization: "Bearer " + session.token, ...(init.body && { "Content-Type": "application/json" }) },
   });
   if (!response.ok) {
     const message = response.status === 401 || response.status === 403
@@ -360,18 +318,18 @@ function renderInbox(target, reports, names, apply) {
   target.append(list);
 }
 
-async function getMetrics(credential, days) {
-  const data = await privateRequest("/admin/stats?days=" + encodeURIComponent(days), credential);
+export async function getMetrics(session, days) {
+  const data = await privateRequest("/admin/stats?days=" + encodeURIComponent(days), session);
   if (!Array.isArray(data.tools) || !Array.isArray(data.experiments)) throw new Error("The service returned an unreadable traffic report.");
   return data;
 }
-async function getReports(credential) {
-  const data = await privateRequest("/admin/reports", credential);
+async function getReports(session) {
+  const data = await privateRequest("/admin/reports", session);
   if (!Array.isArray(data.reports)) throw new Error("The service returned an unreadable issue list.");
   return data.reports;
 }
-async function setReportStatus(credential, id, status) {
-  return privateRequest("/admin/reports/" + encodeURIComponent(id), credential, {
+async function setReportStatus(session, id, status) {
+  return privateRequest("/admin/reports/" + encodeURIComponent(id), session, {
     method: "PATCH", body: JSON.stringify({ status }),
   });
 }

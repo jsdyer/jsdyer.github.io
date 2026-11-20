@@ -196,7 +196,7 @@ Use the catalogue ID as the first path segment for a browser tool (for example, 
 
 The production Cloudflare Worker `coolcode-visitor-api` keeps an explicit `toolList` of accepted catalogue IDs. For each new ID, add its quoted slug to that array and deploy the Worker. The same list validates visit counts and private issue submissions. An existing ID continues to work when only its data, features or title changes. Install-only listings can receive issue reports, while browsing their external installation guides produces no CoolCode tool pageviews.
 
-To verify, open the new browser tool with counting enabled and inspect the `POST /event` request for a successful response. In the owner dashboard, load private reports and search Tool traffic for the tool. A catalogue listing alone does not confirm that the collector accepts its events.
+To verify, open the new browser tool with counting enabled and inspect the `POST /event` request for a successful response. Sign in to the owner dashboard and search Tool traffic for the tool. A catalogue listing alone does not confirm that the collector accepts its events.
 
 ## Verify the first visit
 
