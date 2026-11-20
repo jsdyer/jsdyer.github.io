@@ -42,3 +42,47 @@ def check_report(browser, url):
         assert "nightfinder" in args["title"][0].lower()
     finally:
         context.close()
+    check_admin_traffic(browser, url)
+
+
+def check_admin_traffic(browser, url):
+    """Exercise both reporting periods with private statistics served locally."""
+    page = browser.new_page()
+    try:
+        # Use a dedicated HTTPS origin so the test never reaches the collector.
+        page.route("**/assets/service.mjs", lambda route: route.fulfill(
+            content_type="text/javascript", body='export const SERVICE = "https://collector.test";'))
+
+        def collector(route):
+            headers = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Authorization"}
+            if route.request.method == "OPTIONS":
+                route.fulfill(status=204, headers=headers)
+                return
+            if "/admin/stats?" in route.request.url:
+                days = 28 if route.request.url.endswith("days=28") else 7
+                lineup = {"experiment": "test", "variant": "a", "impressions": 4, "clicks": 1}
+                payload = {"days": days, "through": "2026-11-19",
+                           "tools": [{"tool": "nightfinder", "views": 3}, {"tool": "atip", "views": 1}],
+                           "daily": [{"day": "2026-11-19", "views": 4}],
+                           "experiments": [lineup], "cards": [dict(lineup, tool="nightfinder")]}
+            else:
+                payload = {"reports": []}
+            route.fulfill(json=payload, headers=headers)
+
+        page.route("https://collector.test/**", collector)
+        page.goto(url + "/admin/")
+        page.get_by_label("Read-only GitHub token for private reports").fill("test-credential")
+        page.get_by_role("button", name="Load private reports").click()
+        page.get_by_text("Private reports loaded.").wait_for()
+        page.get_by_label("Find a tool").fill("nightfinder")
+        assert "75%" in page.get_by_role("table", name="Recorded tool pageviews").inner_text()
+        page.get_by_text("Daily tool opens ·", exact=False).click()
+        assert page.locator("meter").evaluate_all("(bars) => bars.map(b => b.value)") == [0]*6 + [4]
+        page.get_by_text("See individual featured cards").click()
+        assert "25%" in page.get_by_role("table", name="Featured tool performance").inner_text()
+        page.get_by_label("Reporting period").select_option("28")
+        page.wait_for_function("document.querySelectorAll('meter').length === 28")
+        page.get_by_role("button", name="Clear private reports").click()
+        assert page.locator("meter").count() == 0
+    finally:
+        page.close()

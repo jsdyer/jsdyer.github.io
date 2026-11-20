@@ -190,6 +190,14 @@ The catalogue build is offline. The separate link-audit workflow reports network
 failures without blocking catalogue deployment. HTTP success alone does not verify
 that an application or its data is correct.
 
+## Enable usage counts and private issue reports
+
+Use the catalogue ID as the first path segment for a browser tool (for example, `/nightfinder/`). The standalone template build adds the shared `/assets/tool-metrics.js` script and the `/report/?tool=ID` link. For a custom build, include the script once with `defer` and add the issue link to the published HTML. The counter reads the ID from the URL. Check the deployed page as well as its catalogue entry.
+
+The production Cloudflare Worker `coolcode-visitor-api` keeps an explicit `toolList` of accepted catalogue IDs. For each new ID, add its quoted slug to that array and deploy the Worker. The same list validates visit counts and private issue submissions. An existing ID continues to work when only its data, features or title changes. Install-only listings can receive issue reports, while browsing their external installation guides produces no CoolCode tool pageviews.
+
+To verify, open the new browser tool with counting enabled and inspect the `POST /event` request for a successful response. In the owner dashboard, load private reports and search Tool traffic for the tool. A catalogue listing alone does not confirm that the collector accepts its events.
+
 ## Verify the first visit
 
 Open the public entry point in a clean browser. A visitor should be able to investigate an identifiable public record, request a real reading or supply their own supported input. Exercise that path before updating the listing. Give dated excerpts and reduced datasets an original source, coverage and units. Treat missing observations, empty results and failed requests as distinct states. Synthetic fixtures belong in tests. Where an optional tutorial is relevant, keep the primary workflow and catalogue description focused on the visitor’s actual task.

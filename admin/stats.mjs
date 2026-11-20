@@ -167,15 +167,39 @@ function renderTraffic(target, rows, titles) {
     const q = search.value.trim().toLocaleLowerCase("en-CA");
     const filtered = all.filter(row => (display.value === "all" || row.views)
       && (row.title + " " + row.id).toLocaleLowerCase("en-CA").includes(q));
-    if (filtered.length) output.replaceChildren(table("Recorded tool pageviews", ["Tool", "Pageviews"],
-      filtered.map(r => [r.title, number.format(r.views)])));
+    if (filtered.length) output.replaceChildren(table("Recorded tool pageviews", ["Tool", "Pageviews", "Share of all opens"],
+      filtered.map(r => [r.title, number.format(r.views), rate(r.views, total)])));
     else output.replaceChildren(el("p", q ? "No matching tools in this view. Choose Every tool to include zero counts." : "No tool pageviews were recorded in this period."));
   }
   display.addEventListener("change", show);
   search.addEventListener("input", show);
   show();
 }
-function renderExperiments(target, rows) {
+function renderDaily(target, metrics) {
+  if (!Array.isArray(metrics.daily) || ![7, 28].includes(metrics.days)) return;
+  const through = Date.parse(metrics.through + "T00:00:00Z");
+  if (!Number.isFinite(through)) return;
+  const counts = new Map(metrics.daily.map(row => [row.day, row.views]));
+  const days = Array.from({length: metrics.days}, (_, index) => {
+    const day = new Date(through - (metrics.days - 1 - index) * 86400000).toISOString().slice(0, 10);
+    return {day, views: counts.get(day) || 0};
+  });
+  const peak = Math.max(...days.map(row => row.views));
+  const details = el("details");
+  details.append(el("summary", "Daily tool opens · " + days[0].day + " to " + metrics.through + " (UTC)"));
+  details.append(el("p", "Across all tools. The current UTC day is still accumulating. A zero means no opens were recorded that day."));
+  details.append(table("Daily recorded pageviews", ["UTC date", "Pageviews", "Relative to busiest day"], days.map(row => {
+    const bar = el("meter");
+    bar.min = 0;
+    bar.max = peak || 1;
+    bar.value = row.views;
+    bar.setAttribute("aria-label", row.day + " recorded pageviews");
+    return [row.day, number.format(row.views), bar];
+  })));
+  target.append(details);
+}
+
+function renderExperiments(target, rows, cards, names) {
   if (!rows.length) {
     target.append(el("p", "No featured lineup impressions or clicks were recorded in this period."));
     return;
@@ -184,6 +208,15 @@ function renderExperiments(target, rows) {
     row.experiment, row.variant.toUpperCase(), number.format(row.impressions), number.format(row.clicks), rate(row.clicks, row.impressions),
   ])));
   target.append(el("p", "Compare lineups from the same experiment and date range. Small samples can change after only a few clicks. The rate divides recorded card clicks by recorded card impressions. Each card can contribute one of each per homepage load. Reloads and blocked requests affect these totals."));
+  if (cards?.length) {
+    const details = el("details");
+    details.append(el("summary", "See individual featured cards"));
+    details.append(table("Featured tool performance", ["Tool", "Experiment", "Lineup", "Impressions", "Clicks", "Clicks per impression"], cards.map(row => [
+      names.get(row.tool) || row.tool, row.experiment, row.variant.toUpperCase(),
+      number.format(row.impressions), number.format(row.clicks), rate(row.clicks, row.impressions),
+    ])));
+    target.append(details);
+  }
 }
 
 export async function initializeStats(catalog) {
@@ -261,8 +294,9 @@ export async function initializeStats(catalog) {
       const traffic = section(results, "Tool traffic");
       traffic.append(el("p", "Pageviews count successful reports from instrumented tool pages. Returning visitors and reloads can count again. Older visits and browsers that block reporting are absent."));
       renderTraffic(traffic, metrics.tools, names);
+      renderDaily(traffic, metrics);
       const features = section(results, "Featured lineup performance");
-      renderExperiments(features, metrics.experiments);
+      renderExperiments(features, metrics.experiments, metrics.cards, names);
       const inbox = section(results, "Site issue inbox");
       renderInbox(inbox, reports, names, async (action, id, newStatus) => {
         action.disabled = true;
