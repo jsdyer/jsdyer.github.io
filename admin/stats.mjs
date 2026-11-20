@@ -1,3 +1,4 @@
+import { genreUsage, repoFromSource, gitTraffic } from "./interest.mjs";
 import { publicIssues } from "./public-issues.mjs";
 import { readQueryReport, readSearchReport } from "./search-report.mjs";
 
@@ -199,6 +200,71 @@ function renderDaily(target, metrics) {
   target.append(details);
 }
 
+function renderInterests(target, catalog, metrics, session) {
+  const groups = genreUsage(catalog, metrics.tools);
+  target.append(table("Usage by catalogue genre · " + metrics.days + " days",
+    ["Genre", "Tool opens", "Active / listed browser tools", "Leading tool", "Leader’s share"],
+    groups.map(group => [
+      group.genre, number.format(group.total), group.active + " / " + group.size,
+      group.leaders.length > 1 ? group.leaders[0] + " (+" + (group.leaders.length - 1) + " tied)" : group.leaders[0] || "—",
+      rate(group.peak, group.total),
+    ])));
+  target.append(el("p", "An active tool had at least one recorded open. The leader’s share is its fraction of opens within that genre. Only currently listed browser tools are grouped."));
+
+  const details = el("details"), output = el("div"), siteCount = el("p");
+  const visible = catalog.slice().sort((a,b) => a.title.localeCompare(b.title));
+  const genre = choice([["","All genres"], ...[...new Set(visible.map(t => t.genre || "Unclassified"))].sort().map(g => [g,g])]);
+  const tool = choice([]);
+  const load = button("Load GitHub traffic");
+  const filters = el("div", undefined, "stats-toolbar");
+  genre.setAttribute("aria-label", "Comparison genre");
+  tool.setAttribute("aria-label", "Comparison tool");
+  filters.append(field("Comparison genre", genre), field("Comparison tool", tool), load);
+  output.setAttribute("role", "status");
+  details.append(el("summary", "Compare tool opens with GitHub interest"), filters, siteCount, output);
+  target.append(details);
+  let pending;
+  function selection() {
+    pending?.abort();
+    const selected = visible.find(t => t.id === tool.value);
+    const repo = repoFromSource(selected?.source);
+    load.disabled = !repo;
+    output.replaceChildren();
+    if (!selected) { siteCount.textContent = ""; return; }
+    const opens = metrics.tools.find(row => row.tool === selected.id)?.views || 0;
+    const local = selected.access === "browser" ? number.format(opens) + " recorded CoolCode opens in " + metrics.days + " days." : "Install-only project. CoolCode does not measure guide visits.";
+    const shared = repo === "jsdyer.github.io" ? " Counts cover the entire shared site repository." : "";
+    siteCount.textContent = local + (repo ? " GitHub source: jsdyer/" + repo + "." + shared : " No supported GitHub repository is listed.");
+  }
+  function populateTools() {
+    const options = visible.filter(t => !genre.value || (t.genre || "Unclassified") === genre.value);
+    tool.replaceChildren(...options.map(t => new Option(t.title,t.id)));
+    selection();
+  }
+  genre.addEventListener("change", populateTools);
+  tool.addEventListener("change", selection);
+  populateTools();
+  load.addEventListener("click", async () => {
+    const repo = repoFromSource(visible.find(t => t.id === tool.value)?.source);
+    if (!repo) return;
+    pending?.abort();
+    pending = new AbortController();
+    const signal = pending.signal;
+    load.disabled = true;
+    output.textContent = "Loading GitHub’s last 14 days…";
+    const results = await Promise.allSettled(["views","clones"].map(type => gitTraffic(repo, type, session, signal)));
+    if (signal.aborted || session.signal.aborted || !target.isConnected) return;
+    const rows = results.map((r,i) => [i ? "Full clones" : "Repository views",
+      r.status === "fulfilled" ? number.format(r.value.count) : "Unavailable",
+      r.status === "fulfilled" ? number.format(r.value.uniques) : "—"]);
+    output.replaceChildren(table("GitHub repository traffic · last 14 days", ["Metric","Total","Unique"], rows));
+    for (const message of new Set(results.filter(r => r.status === "rejected").map(r => r.reason.message)))
+      output.append(el("p", message));
+    output.append(el("p", "GitHub counts visitors and cloners separately. Automated clones can contribute. These counts cannot be matched to individual CoolCode visits."));
+    load.disabled = false;
+  });
+}
+
 function renderExperiments(target, rows, cards, names) {
   if (!rows.length) {
     target.append(el("p", "No featured lineup impressions or clicks were recorded in this period."));
@@ -252,6 +318,7 @@ export function initializeStats(catalog, session, initialMetrics) {
       traffic.append(el("p", "Pageviews count successful reports from instrumented tool pages. Returning visitors and reloads can count again. Older visits and browsers that block reporting are absent."));
       renderTraffic(traffic, metrics.tools, names);
       renderDaily(traffic, metrics);
+      renderInterests(section(results, "Genre usage and GitHub interest"), catalog, metrics, session);
       const features = section(results, "Featured lineup performance");
       renderExperiments(features, metrics.experiments, metrics.cards, names);
       const inbox = section(results, "Site issue inbox");

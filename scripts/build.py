@@ -399,7 +399,9 @@ def build(root=ROOT):
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)
         (stage / "index.html").write_text(page, encoding="utf-8")
-        catalog = [{key: tool[key] for key in ("id", "title", "access")} for tool in tools]
+        category_titles = {category["id"]: category["title"] for category in categories}
+        catalog = [{**{key: tool[key] for key in ("id", "title", "access", "source")},
+                    "genre": category_titles[tool["category"]]} for tool in tools]
         (stage / "assets/tool-catalog.json").write_text(json.dumps(catalog, ensure_ascii=False), encoding="utf-8")
         activity_tools = [{
             "id": tool["id"], "title": tool["title"], "source": tool["source"],

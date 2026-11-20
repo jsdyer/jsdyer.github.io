@@ -115,6 +115,29 @@ def check_admin_traffic(browser, url):
             page.get_by_label("Project", exact=True).select_option("nightfinder")
         page.wait_for_function("document.querySelector('#activity-body [role=status]').textContent.startsWith('Page 1')")
         assert any("/nightfinder/actions/runs" in u for u in history_urls)
+        genre_table = page.get_by_role("table", name="Usage by catalogue genre · 7 days")
+        assert "Nightfinder" in genre_table.inner_text()
+        panel = page.get_by_text("Compare tool opens with GitHub interest", exact=True)
+        panel.click()
+        page.get_by_label("Comparison tool", exact=True).select_option("nightfinder")
+        def repo_traffic(route):
+            headers = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "Authorization"}
+            if route.request.method == "OPTIONS":
+                route.fulfill(status=204, headers=headers)
+            else:
+                assert route.request.headers.get("authorization") == "Bearer test-credential"
+                if route.request.url.endswith("/views"):
+                    route.fulfill(headers=headers, json={"count": 17, "uniques": 6})
+                else:
+                    route.fulfill(status=403, headers=headers, json={})
+        page.route("https://api.github.com/repos/jsdyer/nightfinder/traffic/*", repo_traffic)
+        page.get_by_role("button", name="Load GitHub traffic").click()
+        repo_table = page.get_by_role("table", name="GitHub repository traffic · last 14 days")
+        assert "17" in repo_table.inner_text()
+        assert "Unavailable" in repo_table.inner_text()
+        page.get_by_label("Comparison tool", exact=True).select_option("rack-recipes")
+        assert repo_table.count() == 0
+        page.get_by_text("Counts cover the entire shared site repository.", exact=False).wait_for()
         page.get_by_label("Find a tool").fill("nightfinder")
         assert "75%" in page.get_by_role("table", name="Recorded tool pageviews").inner_text()
         page.get_by_text("Daily tool opens ·", exact=False).click()
