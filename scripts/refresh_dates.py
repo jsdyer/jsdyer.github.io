@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 import sys
 from tempfile import TemporaryDirectory
+from urllib.error import HTTPError
 from urllib.parse import unquote, urlsplit
 from urllib.request import build_opener, HTTPRedirectHandler, Request
 from xml.etree import ElementTree
@@ -183,12 +184,12 @@ def update_probe(probe, document):
         probe.pop('notice', None)
 
 
-def refresh(tools, fetch=fetch_metadata):
+def refresh(tools, fetch=fetch_metadata, problems=None):
     """Fetch each distinct URL once. Return per-probe warnings; failures retain prior dates."""
     grouped = defaultdict(list)
     for tool in tools:
-        for probe in tool.get('data_info', {}).get('probes', []):
-            grouped[probe['url']].append((tool['id'], probe))
+        for index, probe in enumerate(tool.get('data_info', {}).get('probes', [])):
+            grouped[probe['url']].append((tool['id'], index, probe))
 
     warnings = []
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
@@ -200,7 +201,13 @@ def refresh(tools, fetch=fetch_metadata):
                 document = job.result()
             except (HTTPException, OSError, ValueError, RecursionError) as exc:
                 problem = str(exc)
-            for tool_id, probe in grouped[url]:
+                if isinstance(exc, HTTPError):
+                    reason = f'Source returned HTTP {exc.code}'
+                elif isinstance(exc, (OSError, HTTPException)):
+                    reason = 'Source request failed'
+                else:
+                    reason = 'Invalid source response'
+            for tool_id, index, probe in grouped[url]:
                 error = problem
                 if error is None:
                     try:
@@ -209,6 +216,8 @@ def refresh(tools, fetch=fetch_metadata):
                         error = str(exc)
                 if error is not None:
                     probe['unavailable'] = True
+                    if problems is not None:
+                        problems[tool_id, index] = reason if problem is not None else 'Published field could not be read'
                     warnings.append(f"{tool_id} — {probe['label']} ({url}): {error}")
     return sorted(warnings)
 
@@ -219,36 +228,61 @@ def probe_states(tools):
             for tool in tools for index, probe in enumerate(tool.get('data_info', {}).get('probes', []))}
 
 
-def check_summary(before, after, warnings):
-    changed, unchanged, unavailable = [], 0, 0
+def observation(before, after, problems):
+    counts = dict.fromkeys(('changed', 'recovered', 'unchanged', 'unavailable'), 0)
+    details = []
+    checked_by_tool = defaultdict(int)
     for key, current in sorted(after.items()):
-        label, value, count, notice, failed = current
+        checked_by_tool[key[0]] += 1
         previous = before[key]
-        if failed:
-            unavailable += 1
-        elif current == previous:
-            unchanged += 1
+        if current[4]:
+            status = 'unavailable'
+        elif previous[4]:
+            status = 'recovered'
+        elif previous != current:
+            status = 'changed'
         else:
-            fields = []
-            for name, old, new in zip(('date', 'count', 'notice'), previous[1:4], (value, count, notice)):
-                if old != new:
-                    fields.append(f"{name} {old if old is not None else '—'} → {new if new is not None else '—'}")
-            if previous[4]:
-                fields.append('check recovered')
-            changed.append(f"{key[0]} · {label} · {', '.join(fields)}")
+            status = 'unchanged'
+        counts[status] += 1
+        if status == 'unchanged':
+            continue
+        fields = {name: [old, new]
+                  for name, old, new in zip(('date', 'count', 'notice'), previous[1:4], current[1:4])
+                  if old != new}
+        detail = {'tool': key[0], 'label': current[0], 'status': status, 'fields': fields}
+        if key in problems:
+            detail['reason'] = problems[key]
+        details.append(detail)
+    return {'counts': counts, 'details': details, 'checked_by_tool': dict(checked_by_tool)}
+
+
+def check_summary(before, after, warnings):
+    report = observation(before, after, {})
+    counts = report['counts']
+    changed = []
+    for detail in report['details']:
+        if detail['status'] == 'unavailable':
+            continue
+        fields = [f"{name} {old if old is not None else '—'} → {new if new is not None else '—'}"
+                  for name, (old, new) in detail['fields'].items()]
+        if detail['status'] == 'recovered':
+            fields.append('check recovered')
+        changed.append(f"{detail['tool']} · {detail['label']} · {', '.join(fields)}")
     lines = ['## Published metadata checks', '',
-             f'{len(changed)} changed or recovered · {unchanged} unchanged · {unavailable} unavailable', '']
+             f"{len(changed)} changed or recovered · {counts['unchanged']} unchanged · {counts['unavailable']} unavailable", '']
     for title, rows in [('Changes', changed), ('Unavailable checks', warnings)]:
         if rows:
             lines.extend([f'### {title}', '<pre>', *(escape(row[:800]) for row in rows), '</pre>', ''])
     return '\n'.join(lines) + '\n'
 
 
-def update_catalogue(path):
+def update_catalogue(path, journal_entry=None):
     original = path.read_bytes()
     tools = json.loads(original)
     before = probe_states(tools)
-    warnings = refresh(tools)
+    problems = {}
+    warnings = refresh(tools, problems=problems)
+    after = probe_states(tools)
     revised = (json.dumps(tools, ensure_ascii=False, indent=2) + '\n').encode()
     if path.read_bytes() != original:
         raise ValueError('The catalogue changed during retrieval. Retry using the new version.')
@@ -260,17 +294,23 @@ def update_catalogue(path):
             temporary.replace(path)
     if summary := os.environ.get('GITHUB_STEP_SUMMARY'):
         with open(summary, 'a', encoding='utf-8') as output:
-            output.write(check_summary(before, probe_states(tools), warnings))
+            output.write(check_summary(before, after, warnings))
+    if journal_entry is not None:
+        entry = observation(before, after, problems)
+        entry.update(run_id=str(int(os.environ['GITHUB_RUN_ID'])), attempt=int(os.environ['GITHUB_RUN_ATTEMPT']),
+                     checked_at=datetime.now(timezone.utc).isoformat(timespec='seconds').replace('+00:00', 'Z'))
+        journal_entry.write_text(json.dumps(entry, ensure_ascii=False) + '\n', encoding='utf-8')
     return warnings
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--catalogue', type=Path, default=CATALOGUE)
+    parser.add_argument('--journal-entry', type=Path, help='Write metadata observations for the current GitHub run attempt')
     parser.add_argument('--strict', action='store_true', help='Exit nonzero after writing partial results if a probe failed')
     args = parser.parse_args()
     try:
-        warnings = update_catalogue(args.catalogue)
+        warnings = update_catalogue(args.catalogue, args.journal_entry)
     except (OSError, KeyError, TypeError, ValueError) as exc:
         parser.exit(1, f'Could not update catalogue: {exc}\n')
     for warning in warnings:

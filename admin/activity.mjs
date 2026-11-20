@@ -1,3 +1,5 @@
+import {loadRefreshes, matchingRefreshes, refreshFilters, refreshWorkflow, renderRefresh} from './refresh-journal.mjs';
+
 const hub = 'jsdyer.github.io';
 const perPage = 20;
 
@@ -95,14 +97,16 @@ export function initializeActivity(sessionSignal) {
   function setup(tools) {
     const scope = select('Project', [['', 'CoolCode catalogue and site'], ...tools.slice()
       .sort((a,b) => a.title.localeCompare(b.title)).map(t => [t.id, t.title])]);
-    const kind = select('History', [['runs','Workflow runs'], ['commits','Source changes'],
+    const kind = select('History', [['journal','Catalogue refresh journal'], ['runs','Workflow runs'], ['commits','Source changes'],
       ['catalogue','Catalogue changes'], ['lineups','Featured lineup changes']]);
     const outcomes = select('Show runs', [['','All outcomes'], ['failure','Failures'], ['cancelled','Cancelled']]);
+    const filter = select('Refresh results', refreshFilters);
+    const titles = new Map(tools.map(tool => [tool.id, tool.title]));
     const actions = node('div');
     actions.className = 'stats-toolbar';
     const refresh = node('button','Refresh history');
     const previous = node('button','Newer'), next = node('button','Older');
-    actions.append(scope.wrapper, kind.wrapper, outcomes.wrapper, refresh);
+    actions.append(kind.wrapper, scope.wrapper, filter.wrapper, outcomes.wrapper, refresh);
     const status = node('p');
     status.setAttribute('role','status');
     const results = node('ol'), source = node('p');
@@ -115,8 +119,9 @@ export function initializeActivity(sessionSignal) {
       for (const t of missing) list.append(node('li', t.title + ' · ' + t.unavailable.join(', ')));
       warnings.append(list);
     }
-    root.replaceChildren(warnings, actions, status, results, previous, next, source);
-    let page = 1, active;
+    const note = node('p', 'Each catalogue refresh checks the dates and counts published by the tools. Expand a run to see the earlier and later readings. Choose Workflow runs for an individual tool’s own updates.');
+    root.replaceChildren(actions, note, status, results, previous, next, source, warnings);
+    let page = 1, active, journalCache;
     async function show() {
       active?.abort();
       active = new AbortController();
@@ -125,11 +130,35 @@ export function initializeActivity(sessionSignal) {
       const target = selected ? sourceScope(selected.source) : {repo:hub, path:''};
       const mode = kind.input.value, runs = mode === 'runs';
       const central = mode === 'lineups' || mode === 'catalogue';
+      const journal = mode === 'journal';
       outcomes.wrapper.hidden = !runs;
+      filter.wrapper.hidden = !journal;
+      note.hidden = !journal;
+      scope.input.options[0].textContent = journal ? 'All tools' : 'CoolCode catalogue and site';
       scope.input.disabled = central;
       results.replaceChildren();
       source.replaceChildren();
       previous.disabled = next.disabled = true;
+      if (journal) {
+        source.append(link('Open catalogue refresh runs on GitHub', refreshWorkflow));
+        status.textContent = 'Loading catalogue refreshes…';
+        try {
+          const data = journalCache || await loadRefreshes(signal);
+          if (signal.aborted) return;
+          journalCache = data;
+          const entries = matchingRefreshes(data.entries, filter.input.value, scope.input.value);
+          const rows = entries.slice((page - 1) * perPage, page * perPage);
+          for (const entry of rows) results.append(renderRefresh(entry, titles, scope.input.value));
+          previous.disabled = page === 1;
+          next.disabled = page * perPage >= entries.length;
+          const count = entries.length ? 'Page ' + page + ' · ' + entries.length + ' matching attempts.' : 'No matching attempts.';
+          const note = selected ? ' Only attempts with recorded checks for this tool are included.' : '';
+          status.textContent = [count, ...data.notices].join(' ') + note;
+        } catch (error) {
+          if (!signal.aborted) status.textContent = error.message;
+        }
+        return;
+      }
       if (!target && !central) { status.textContent = 'This project has no supported GitHub source.'; return; }
       const repo = central ? hub : target.repo;
       const web = 'https://github.com/jsdyer/' + repo;
@@ -184,13 +213,13 @@ export function initializeActivity(sessionSignal) {
         if (!signal.aborted) previous.disabled = page === 1;
       }
     }
-    for (const input of [scope.input, kind.input, outcomes.input]) {
+    for (const input of [scope.input, kind.input, outcomes.input, filter.input]) {
       input.addEventListener('change', () => {
         if (input === kind.input && ['catalogue','lineups'].includes(input.value)) scope.input.value = '';
         page = 1; show();
       });
     }
-    refresh.addEventListener('click', () => { page = 1; show(); });
+    refresh.addEventListener('click', () => { journalCache = undefined; page = 1; show(); });
     previous.addEventListener('click', () => { page--; show(); });
     next.addEventListener('click', () => { page++; show(); });
     show();

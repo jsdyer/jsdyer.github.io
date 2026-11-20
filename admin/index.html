@@ -16,14 +16,14 @@
 <label for="owner-token">Owner GitHub token</label>
 <input type="password" id="owner-token" required autocomplete="off" spellcheck="false">
 <button id="unlock" type="submit" disabled>Unlock admin</button>
-<p>This tab sends your token to the CoolCode collector to verify your GitHub identity. Your read-only token opens reports. To publish lineups too, use a fine-grained token limited to jsdyer/jsdyer.github.io with Contents read/write. Publishing and optional repository traffic lookups send the same token to GitHub. Repository traffic requires Administration read access to the selected repository.</p>
+<p>This tab sends your token to the CoolCode collector to verify your GitHub identity. Your read-only token opens reports. To publish lineups too, use a fine-grained token limited to jsdyer/jsdyer.github.io with Contents read/write. Opening Cloudflare usage also sends the token to CoolCode’s admin metrics Worker for the same owner check. Publishing and optional repository traffic lookups send the token to GitHub. Repository traffic requires Administration read access to the selected repository.</p>
 <p id="sign-in-status" role="status"></p>
 </form>
 <noscript>Enable JavaScript to sign in.</noscript>
 </section>
 <div id="dashboard" hidden></div>
 <template id="dashboard-layout">
-<nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a><a href="#activity">Update log</a><a href="#services">Service status</a><button type="button" id="sign-out">Lock admin</button></nav>
+<nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a><a href="#activity">Update log</a><a href="#services">Service status</a><a href="#cloudflare">Cloudflare usage</a><button type="button" id="sign-out">Lock admin</button></nav>
 <p id="health" aria-live="polite">Loading the published catalogue…</p>
 <section id="featured"><h2>Featured tools</h2>
 <form id="lineup"><fieldset disabled id="controls">
@@ -41,7 +41,14 @@
 <button type="button" id="run-service-checks">Check again</button><p id="service-message" role="status"></p><div id="service-results"></div>
 <h3>External checks</h3><p>GitHub Actions checks the same endpoints hourly, including while the admin is closed. Open a run for individual results.</p>
 <div id="service-history"></div>
-<p><a href="https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml">External check history</a> · <a href="https://www.githubstatus.com/">GitHub platform status</a> · <a href="https://www.cloudflarestatus.com/">Cloudflare platform status</a></p>
+<p><a href="https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml">External check history</a></p>
+<h3>Provider incidents</h3><p>GitHub and Cloudflare publish service-wide status for the components CoolCode uses.</p><div id="provider-status" aria-live="polite"></div>
+</details></section>
+<section id="cloudflare"><h2>Cloudflare usage</h2><details id="cloudflare-panel"><summary>View the last 24 hours</summary>
+<p>Cloudflare measures requests to the visitor API and queries against its reporting database. For visits to individual tools, use <a href="#statistics">Stats &amp; reports</a>.</p>
+<button id="refresh-cloudflare" type="button">Refresh Cloudflare usage</button>
+<p role="status" id="cloudflare-message"></p><div id="cloudflare-results"></div>
+<p><a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages">Workers dashboard</a> · <a href="https://dash.cloudflare.com/?to=/:account/workers/d1">D1 dashboard</a> · <a href="https://github.com/jsdyer/jsdyer.github.io/blob/main/docs/site-administration.md#cloudflare-usage">Connect live usage</a></p>
 </details></section>
 <section id="activity"><h2>Update log</h2><details id="activity-panel"><summary>Browse update history</summary><div id="activity-body"></div></details></section>
 <div id="statistics"><h2>Statistics and issue reports</h2><p>Loading the reporting dashboard…</p></div>

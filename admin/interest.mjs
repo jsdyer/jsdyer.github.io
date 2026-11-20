@@ -25,6 +25,24 @@ export function repoFromSource(source) {
   return match?.[1] || null;
 }
 
+// The traffic endpoints can return different sets of dates. Preserve explicit zeroes.
+export function dailyTraffic(report, metric) {
+  if (!Array.isArray(report?.[metric])) return null;
+  const series = new Map();
+  for (const row of report[metric]) {
+    const instant = new Date(row?.timestamp);
+    if (typeof row?.timestamp !== 'string' || !Number.isFinite(instant.getTime())
+        || ![row.count, row.uniques].every(n => Number.isSafeInteger(n) && n >= 0)) return null;
+    const day = instant.toISOString().slice(0, 10);
+    if (series.has(day)) return null;
+    series.set(day, {count:row.count, uniques:row.uniques});
+  }
+  const peak = Math.max(0, ...[...series.values()].map(row => row.count));
+  const peakDays = [...series].filter(([, row]) => peak > 0 && row.count === peak)
+    .map(([day]) => day).sort();
+  return {series, peak, peakDays};
+}
+
 export async function gitTraffic(repo, metric, session, signal) {
   if (!/^[a-z0-9][a-z0-9.-]*$/i.test(repo) || !['views','clones'].includes(metric)) {
     throw Error('Unsupported repository or traffic metric.');
