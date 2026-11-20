@@ -1,5 +1,6 @@
 import {sameSettings, makeSettings} from './lineup.mjs';
 import {initializeStats} from './stats.mjs';
+import {initializeActivity} from './activity.mjs';
 const $ = id => document.getElementById(id);
 const api = 'https://api.github.com/repos/jsdyer/jsdyer.github.io/contents/data/featured.json';
 export async function openDashboard(session, initialMetrics) {
@@ -66,4 +67,5 @@ export async function openDashboard(session, initialMetrics) {
   $('health').textContent=catalog.length+' catalogue tools · '+browser+' available in the browser · '+(catalog.length-browser)+' install-only projects';
   bind();
   initializeStats(catalog, session, initialMetrics);
+  initializeActivity(session.signal);
 }

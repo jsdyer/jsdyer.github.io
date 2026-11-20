@@ -4,10 +4,21 @@ import unittest
 from unittest.mock import Mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from refresh_dates import AllowedRedirects, badge_metadata, check_url, refresh, select, source_date, probe_date, record_count, update_probe
+from refresh_dates import check_summary, AllowedRedirects, badge_metadata, check_url, refresh, select, source_date, probe_date, record_count, update_probe
 
 
 class CatalogueDateTests(unittest.TestCase):
+    def test_summary_distinguishes_recovered_unchanged_and_failed(self):
+        before = {('one', 0): ('Retrieved', '2026-01', 0, None, True),
+                  ('two', 0): ('Coverage', '2025', None, None, False),
+                  ('three', 0): ('Coverage', '2025', None, None, True)}
+        after = dict(before)
+        after[('one', 0)] = ('Retrieved', '2026-01', 2, None, False)
+        result = check_summary(before, after, ['three <timed out>'])
+        self.assertIn('1 changed or recovered · 1 unchanged · 1 unavailable', result)
+        self.assertIn('count 0 → 2, check recovered', result)
+        self.assertIn('three &lt;timed out&gt;', result)
+
     def test_dates_preserve_resolution_and_source_calendar_day(self):
         examples = [(2018, '2018'), ('2024-02', '2024-02'), ('April 2026', '2026-04'),
                     ('2024-02-29', '2024-02-29'), ('June 1, 2026', '2026-06-01'),

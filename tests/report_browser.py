@@ -88,6 +88,20 @@ def check_admin_traffic(browser, url):
         key.fill("test-credential")
         unlock.click()
         page.get_by_text("Private reports loaded.").wait_for()
+        history_urls = []
+        def runs(route):
+            assert "authorization" not in route.request.headers
+            history_urls.append(route.request.url)
+            route.fulfill(headers={"Access-Control-Allow-Origin": "*"}, json={
+                "total_count": 1, "workflow_runs": [{"name": "Data refresh", "conclusion": "failure",
+                "event": "schedule", "created_at": "2026-11-18T00:00:00Z", "html_url": "https://github.com/"}]})
+        page.route("https://api.github.com/repos/jsdyer/*/actions/runs?**", runs)
+        page.get_by_role("link", name="Update log").click()
+        page.get_by_role("link", name="Data refresh", exact=True).wait_for()
+        with page.expect_response(lambda response: "/nightfinder/actions/runs?" in response.url):
+            page.get_by_label("Project", exact=True).select_option("nightfinder")
+        page.wait_for_function("document.querySelector('#activity-body [role=status]').textContent.startsWith('Page 1')")
+        assert any("/nightfinder/actions/runs" in u for u in history_urls)
         page.get_by_label("Find a tool").fill("nightfinder")
         assert "75%" in page.get_by_role("table", name="Recorded tool pageviews").inner_text()
         page.get_by_text("Daily tool opens ·", exact=False).click()

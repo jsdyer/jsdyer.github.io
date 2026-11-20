@@ -23,7 +23,7 @@
 </section>
 <div id="dashboard" hidden></div>
 <template id="dashboard-layout">
-<nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a><button type="button" id="sign-out">Lock admin</button></nav>
+<nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a><a href="#activity">Update log</a><button type="button" id="sign-out">Lock admin</button></nav>
 <p id="health" aria-live="polite">Loading the published catalogue…</p>
 <section id="featured"><h2>Featured tools</h2>
 <form id="lineup"><fieldset disabled id="controls">
@@ -35,6 +35,7 @@
 <pre id="copy-fallback" hidden tabindex="0"></pre>
 </fieldset></form>
 <p id="save-status" role="status"></p></section>
+<section id="activity"><h2>Update log</h2><details id="activity-panel"><summary>Browse update history</summary><div id="activity-body"></div></details></section>
 <div id="statistics"><h2>Statistics and issue reports</h2><p>Loading the reporting dashboard…</p></div>
 
 <footer><a href="/sitemap.xml">Sitemap</a><a href="https://search.google.com/search-console?resource_id=sc-domain%3Acoolcode.ca">Google Search Console</a><a href="/report/">Report an issue</a></footer>

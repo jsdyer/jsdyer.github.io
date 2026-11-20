@@ -15,3 +15,11 @@ In **Statistics and issue reports**, select 7 or 28 days. **Tool traffic** ranks
 When adding a catalogue ID, follow [Enable usage counts and private issue reports](adding-tools.md#enable-usage-counts-and-private-issue-reports) to register it with the collector.
 
 Open the existing coolcode.ca property in [Google Search Console](https://search.google.com/search-console?resource_id=sc-domain%3Acoolcode.ca). In Sitemaps, submit https://coolcode.ca/sitemap.xml once. GitHub Pages regenerates the file on future catalogue builds. For organic search performance, choose the date range, open Performance → Search results, export CSV, and import the Pages.csv file into the dashboard. Import Queries.csv to search phrases and sort by clicks or impressions. To investigate one tool, filter its page in Search Console before exporting. Both files stay in your browser tab.
+
+## Update log
+
+After signing in, open **Update log → Browse update history**. Choose the catalogue or a tool to read its public GitHub Actions history, filter failed or cancelled runs, or switch to its source commits. Open a run to inspect its steps. Projects in the main repository share workflow history, while their source history follows their own directory.
+
+**Catalogue changes → Show what changed** compares the recorded tool entries before and after a commit. It includes reported dates, counts, unavailable or recovered checks, additions, removals and listing edits. **Featured lineup changes** links to each committed configuration change. These public histories come directly from GitHub and include existing records. The log loads on demand in pages of 20 and offers links to GitHub when its public API is rate-limited.
+
+The six-hour catalogue workflow checks metadata published by the tools. Each independent tool has its own update process. The catalogue can retain an earlier reading when a probe fails. Expand **Unavailable catalogue checks** for the flags in the latest published snapshot. Catalogue refreshes running the updated script also write changed, unchanged and unavailable probe totals to the GitHub run summary. A source commit records a repository change. The Pages deployment result records whether a release succeeded. Private inbox actions and manual Cloudflare edits are outside this GitHub history.

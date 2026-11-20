@@ -401,6 +401,12 @@ def build(root=ROOT):
         (stage / "index.html").write_text(page, encoding="utf-8")
         catalog = [{key: tool[key] for key in ("id", "title", "access")} for tool in tools]
         (stage / "assets/tool-catalog.json").write_text(json.dumps(catalog, ensure_ascii=False), encoding="utf-8")
+        activity_tools = [{
+            "id": tool["id"], "title": tool["title"], "source": tool["source"],
+            "unavailable": [probe["label"] for probe in tool["data_info"].get("probes", [])
+                            if probe.get("unavailable")],
+        } for tool in tools]
+        (stage / "admin/activity-tools.json").write_text(json.dumps(activity_tools, ensure_ascii=False), encoding="utf-8")
         shutil.copyfile(root / "data/featured.json", stage / "admin/featured.json")
         write_search_files(stage, tools)
         require((stage / "CNAME").read_text().strip() == "coolcode.ca", "Keep the CoolCode custom domain")

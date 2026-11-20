@@ -7,7 +7,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timezone
 from email.utils import parsedate_to_datetime
 from http.client import HTTPException
+from html import escape
 import json
+import os
 from pathlib import Path
 import re
 import sys
@@ -211,9 +213,41 @@ def refresh(tools, fetch=fetch_metadata):
     return sorted(warnings)
 
 
+def probe_states(tools):
+    return {(tool['id'], index): (probe['label'], probe.get('value'), probe.get('count'),
+                                  probe.get('notice'), bool(probe.get('unavailable')))
+            for tool in tools for index, probe in enumerate(tool.get('data_info', {}).get('probes', []))}
+
+
+def check_summary(before, after, warnings):
+    changed, unchanged, unavailable = [], 0, 0
+    for key, current in sorted(after.items()):
+        label, value, count, notice, failed = current
+        previous = before[key]
+        if failed:
+            unavailable += 1
+        elif current == previous:
+            unchanged += 1
+        else:
+            fields = []
+            for name, old, new in zip(('date', 'count', 'notice'), previous[1:4], (value, count, notice)):
+                if old != new:
+                    fields.append(f"{name} {old if old is not None else '—'} → {new if new is not None else '—'}")
+            if previous[4]:
+                fields.append('check recovered')
+            changed.append(f"{key[0]} · {label} · {', '.join(fields)}")
+    lines = ['## Published metadata checks', '',
+             f'{len(changed)} changed or recovered · {unchanged} unchanged · {unavailable} unavailable', '']
+    for title, rows in [('Changes', changed), ('Unavailable checks', warnings)]:
+        if rows:
+            lines.extend([f'### {title}', '<pre>', *(escape(row[:800]) for row in rows), '</pre>', ''])
+    return '\n'.join(lines) + '\n'
+
+
 def update_catalogue(path):
     original = path.read_bytes()
     tools = json.loads(original)
+    before = probe_states(tools)
     warnings = refresh(tools)
     revised = (json.dumps(tools, ensure_ascii=False, indent=2) + '\n').encode()
     if path.read_bytes() != original:
@@ -224,6 +258,9 @@ def update_catalogue(path):
             temporary.write_bytes(revised)
             temporary.chmod(path.stat().st_mode & 0o777)
             temporary.replace(path)
+    if summary := os.environ.get('GITHUB_STEP_SUMMARY'):
+        with open(summary, 'a', encoding='utf-8') as output:
+            output.write(check_summary(before, probe_states(tools), warnings))
     return warnings
 
 
