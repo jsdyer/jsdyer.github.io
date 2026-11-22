@@ -26,7 +26,7 @@ function reply(request, status, data) {
 async function verifyOwner(env, authorization) {
   try {
     const response = await env.COLLECTOR.fetch(new Request(ownerCheck, {
-      headers: {Origin: origin, Authorization: authorization}, redirect: 'error',
+      headers: {Origin: origin, Authorization: authorization}, redirect: 'manual',
       signal: AbortSignal.timeout(12000),
     }));
     if (response.status === 401 || response.status === 403) return response.status;
@@ -39,6 +39,25 @@ async function verifyOwner(env, authorization) {
   }
 }
 
+class MetricFailure extends Error {
+  constructor(code) {
+    super(code);
+    this.code = code;
+  }
+}
+
+async function readRows(env, query, params) {
+  if (typeof env.ANALYTICS_SQL?.query !== 'function') throw new MetricFailure('analytics_binding_missing');
+  let result;
+  try {
+    result = await env.ANALYTICS_SQL.query({query, params});
+  } catch (error) {
+    throw new MetricFailure(error?.retryable === true ? 'query_retryable' : 'query_failed');
+  }
+  if (!Array.isArray(result?.data)) throw new MetricFailure('invalid_result');
+  return result.data;
+}
+
 function count(value) {
   if (typeof value === 'string' && /^\d+$/.test(value)) value = Number(value);
   if (!Number.isSafeInteger(value) || value < 0) throw Error('Invalid count');
@@ -46,11 +65,9 @@ function count(value) {
 }
 
 async function workerMetrics(env, start, end) {
-  const result = await env.ANALYTICS_SQL.query({query: workerQuery,
-    params: {start, end, script: 'coolcode-visitor-api'}});
-  if (!Array.isArray(result?.data)) throw Error('Missing results');
+  const rows = await readRows(env, workerQuery, {start, end, script: 'coolcode-visitor-api'});
   let requests = 0, subrequests = 0;
-  const outcomes = result.data.map(row => {
+  const outcomes = rows.map(row => {
     if (typeof row.status !== 'string' || !row.status) throw Error('Missing outcome');
     const total = count(row.requests);
     requests += total;
@@ -62,11 +79,10 @@ async function workerMetrics(env, start, end) {
 }
 
 async function databaseMetrics(env, start, end) {
-  if (!env.REPORTS_DATABASE_ID) throw Error('Missing database selection');
-  const result = await env.ANALYTICS_SQL.query({query: databaseQuery,
-    params: {start, end, db: env.REPORTS_DATABASE_ID}});
-  if (!Array.isArray(result?.data) || result.data.length !== 1) throw Error('Missing result');
-  const row = result.data[0];
+  if (!env.REPORTS_DATABASE_ID) throw new MetricFailure('database_id_missing');
+  const rows = await readRows(env, databaseQuery, {start, end, db: env.REPORTS_DATABASE_ID});
+  if (rows.length !== 1) throw new MetricFailure('invalid_result');
+  const row = rows[0];
   const batches = count(row.batches);
   const totals = {};
   for (const field of ['readQueries', 'writeQueries', 'rowsRead', 'rowsWritten']) {
@@ -85,18 +101,25 @@ export default {
     const authorization = request.headers.get('Authorization');
     if (!/^Bearer [^\s,]+$/i.test(authorization || '')) return reply(request, 401, {error: 'Owner sign-in required.'});
     const access = await verifyOwner(env, authorization);
+    if (access === 503) return reply(request, access, {code: 'owner_verification_unavailable', error: 'Owner verification unavailable.'});
     if (access !== 200) return reply(request, access,
-      {error: access === 401 || access === 403 ? 'Owner access denied.' : 'Owner verification unavailable.'});
+      {error: access === 429 ? 'Too many owner verification requests.' : 'Owner access denied.'});
 
     const now = Date.now();
     const start = new Date(now - 86400000).toISOString(), end = new Date(now).toISOString();
     const [worker, database] = await Promise.allSettled([
       workerMetrics(env, start, end), databaseMetrics(env, start, end),
     ]);
-    if (worker.status === 'rejected' && database.status === 'rejected') {
-      return reply(request, 503, {error: 'Cloudflare analytics are unavailable.'});
+    const issues = {};
+    for (const [name, group] of Object.entries({worker, database})) {
+      if (group.status === 'rejected') {
+        issues[name] = group.reason instanceof MetricFailure ? group.reason.code : 'invalid_result';
+      }
     }
-    return reply(request, 200, {start, end,
+    if (worker.status === 'rejected' && database.status === 'rejected') {
+      return reply(request, 503, {code: 'analytics_unavailable', error: 'Cloudflare analytics are unavailable.', issues});
+    }
+    return reply(request, 200, {start, end, ...(Object.keys(issues).length ? {issues} : {}),
       worker: worker.status === 'fulfilled' ? worker.value : null,
       database: database.status === 'fulfilled' ? database.value : null});
   },
