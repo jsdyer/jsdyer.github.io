@@ -34,6 +34,8 @@ Open **Service status** to check the production homepage, tool catalogue, search
 
 The [external monitor](https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml) runs the same checks at minute 37 each hour and supports manual runs. Each run summary lists the HTTP status, elapsed time and result for each endpoint. The admin shows the last 24 available runs and flags a gap of over two hours. Run counts are samples rather than a measurement of continuous uptime. GitHub keeps the workflow history accessible directly if Pages or admin authentication is unavailable.
 
+Choose **Check from across Canada** for fresh results from public Globalping probes in Vancouver, Toronto and Halifax. The browser requests only DNS A records and HTTPS for the homepage and the visitor API health path. Each row gives the requested city, actual probe network, response and total time. “No probe returned” means the service supplied no matching measurement for that city. The [daily 15:23 UTC workflow](https://github.com/jsdyer/jsdyer.github.io/actions/workflows/canada-probes.yml) runs the same checks, writes the table to its run summary and retains a JSON artifact for 30 days. Both entry points work without registering with Globalping. Each complete run uses up to 12 public probe tests.
+
 **Provider incidents** shows the component status for GitHub Pages, Actions and API Requests, and for Cloudflare Workers and D1. Active incidents link to the provider’s report. Use the browser and external service checks above to see whether the reported incident affected a specific CoolCode endpoint.
 
 ## Cloudflare usage
@@ -42,7 +44,26 @@ The [external monitor](https://github.com/jsdyer/jsdyer.github.io/actions/workfl
 
 The on-demand metrics Worker is maintained in `services/cloudflare-admin/worker.mjs` and uses the name `coolcode-admin-metrics` on the same Cloudflare account. Its `COLLECTOR` service binding targets `coolcode-visitor-api` and delegates owner verification to the existing private stats route. Its `ANALYTICS_SQL` Analytics SQL binding queries fixed aggregate statements. `REPORTS_DATABASE_ID` selects the UUID of `coolcode-reports`. The dashboard sends the current tab's credential only when you open or refresh this panel. Locking the admin clears the session. Deploy changes to this companion separately from GitHub Pages.
 
-To enable it yourself, open a checkout of this repository and run `python services/cloudflare-admin/deploy.py` (on Windows, `py services/cloudflare-admin/deploy.py`). The script prompts locally for your Cloudflare account ID, the UUID shown on the **coolcode-reports** D1 overview, and a Cloudflare API token scoped to that account with **Workers Scripts Write**. It uploads the companion and enables its workers.dev URL. The token stays in the local process. Use your usual GitHub sign-in when you return to the admin and click **Refresh Cloudflare usage**. The links to the Workers and D1 dashboards also work independently.
+### Activate the metrics Worker on Windows
+
+1. In the Cloudflare dashboard select the account that runs **coolcode-visitor-api**. Copy its **Account ID** from the account overview. Under **Storage & databases → D1 → coolcode-reports**, copy **Database ID** (a UUID).
+2. Go to [My Profile → API Tokens](https://dash.cloudflare.com/profile/api-tokens), **Create Token → Create Custom Token**. Choose **Account → Workers Scripts → Edit** (“Workers Scripts Write” in the API), restrict **Account Resources** to this account, and give the token a short expiry. Copy it for the next step.
+3. Open PowerShell in a current checkout of **jsdyer/jsdyer.github.io**. If you don't have one, download and extract [main as ZIP](https://github.com/jsdyer/jsdyer.github.io/archive/refs/heads/main.zip) and open the extracted folder containing `services`. With Python 3 installed, run:
+
+   ```powershell
+   py services/cloudflare-admin/deploy.py
+   ```
+
+4. At the three local prompts enter the Account ID, Database ID and temporary Cloudflare token. The script uploads the companion named **coolcode-admin-metrics**, configures its three bindings and enables its workers.dev address. The deployment token can be revoked after success.
+5. Open [CoolCode admin → Cloudflare usage](https://coolcode.ca/admin/#cloudflare), sign in with your usual CoolCode GitHub credential and click **Refresh Cloudflare usage**. A signed-in result shows the 24-hour window and counts. To check just the endpoint without sharing any token, use:
+
+   ```powershell
+   curl.exe -i -H "Origin: https://coolcode.ca" https://coolcode-admin-metrics.jeffdyer.workers.dev/admin/cloudflare
+   ```
+
+   Expect HTTP 401 with `Owner sign-in required.` A 404 means that this address or route is unavailable. A 503 after sign-in requires checking the companion's bindings or provider analytics.
+
+**Manual dashboard editing.** Open or create a separate Worker named **coolcode-admin-metrics**, deploy [worker.mjs](../services/cloudflare-admin/worker.mjs) as a JavaScript module, and enable its workers.dev address. Under bindings, add a **Service binding** named `COLLECTOR` targeting `coolcode-visitor-api` and an **Analytics SQL** binding named `ANALYTICS_SQL`. Under variables, add a **Text** variable `REPORTS_DATABASE_ID` containing the D1 UUID. If the dashboard does not offer Analytics SQL, use the script. The companion uses the service binding for your existing sign-in and the analytics binding to query Cloudflare at runtime.
 
 ## Genre usage and GitHub interest
 

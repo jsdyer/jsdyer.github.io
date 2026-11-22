@@ -42,6 +42,11 @@
 <h3>External checks</h3><p>GitHub Actions checks the same endpoints hourly, including while the admin is closed. Open a run for individual results.</p>
 <div id="service-history"></div>
 <p><a href="https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml">External check history</a></p>
+<h3>How does CoolCode look from across Canada?</h3>
+<p>Ask public Globalping probes in Vancouver, Toronto and Halifax to resolve the homepage and visitor API and request each over HTTPS. A city may have no probe available. Times include the probe’s network path.</p>
+<button type="button" id="run-canada">Check from across Canada</button>
+<p id="canada-status" role="status"></p><div id="canada-results" style="overflow-x:auto"></div>
+<p><a href="https://github.com/jsdyer/jsdyer.github.io/actions/workflows/canada-probes.yml">Daily Canadian probe results and downloads</a></p>
 <h3>Provider incidents</h3><p>GitHub and Cloudflare publish service-wide status for the components CoolCode uses.</p><div id="provider-status" aria-live="polite"></div>
 </details></section>
 <section id="cloudflare"><h2>Cloudflare usage</h2><details id="cloudflare-panel"><summary>View the last 24 hours</summary>
