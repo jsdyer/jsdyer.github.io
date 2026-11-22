@@ -8361,7 +8361,7 @@
       ]
     },
     "readme": {
-      "note": "Compare the latest accepted report for each species at the two exact hotspots, then filter to shared species, one coast's feed, or eBird notable species. The daily capture covers the previous 30 days; shorter windows are anchored to that capture date. Species counts are recent-feed counts, not seasonal or historical totals. Missing reports do not establish absence, and observer effort differs. Download the filtered derived CSV or a JSON snapshot; reopening either file happens only in the browser tab."
+      "note": "Compare the latest accepted report for each species at the two exact hotspots, then filter to shared species, one coast's feed, or eBird notable species. The full 30-day view preserves every report returned by eBird's rolling source window; shorter windows are anchored to that capture date. Species counts are recent-feed counts, not seasonal or historical totals. Missing reports do not establish absence, and observer effort differs. Download the filtered derived CSV or a JSON snapshot; reopening either file happens only in the browser tab."
     },
     "sync_manifest": true
   }
