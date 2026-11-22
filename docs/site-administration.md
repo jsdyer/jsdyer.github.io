@@ -44,26 +44,41 @@ Choose **Check from across Canada** for fresh results from public Globalping pro
 
 The on-demand metrics Worker is maintained in `services/cloudflare-admin/worker.mjs` and uses the name `coolcode-admin-metrics` on the same Cloudflare account. Its `COLLECTOR` service binding targets `coolcode-visitor-api` and delegates owner verification to the existing private stats route. Its `ANALYTICS_SQL` Analytics SQL binding queries fixed aggregate statements. `REPORTS_DATABASE_ID` selects the UUID of `coolcode-reports`. The dashboard sends the current tab's credential only when you open or refresh this panel. Locking the admin clears the session. Deploy changes to this companion separately from GitHub Pages.
 
+### Register a new tool with the visitor API
+
+In the **coolcode-visitor-api** Worker, add each new catalogue slug once to `const toolList` and click **Deploy**. For the four economics tools, the entries are `"releasereceipt"`, `"scorecard"`, `"exportneighbours"` and `"metroeconomy"`. This list lets the collector accept visits and private reports for those tools. This is the entire Worker registration step for these four published tools. To verify one, open its public page and look for a successful collector request in your browser's Network tab, or check its next tool-traffic report. [Catalogue guide](adding-tools.md)
+
+### Activate the metrics Worker on Linux
+
+This one-time deployment enables **Cloudflare usage** in the admin. The companion runs at `coolcode-admin-metrics.jeffdyer.workers.dev`, an address issued by Cloudflare in the account that already runs the visitor API.
+
+1. Select that account in the Cloudflare dashboard. Copy its **Account ID**. Open **Storage & databases → D1 → coolcode-reports** and copy **Database ID** (the UUID).
+2. Open [My Profile → API Tokens](https://dash.cloudflare.com/profile/api-tokens), click **Create Token**, name it `coolcode-metrics-deploy` and start from scratch. If the form currently says **Edit Zone policy** and **Choose a zone resource**, click the **red trash can** on that policy card. Add an **Account** policy. The **+ Add more** inside the zone card adds another zone rule.
+3. In the Account policy choose **Include → Specific account** and select the account from step 1. Search the permission groups for **Workers Scripts** and select **Edit** (API name **Workers Scripts Write**). Set a short expiration, choose **Continue to summary**, confirm that only the intended account and permission appear, then click **Create Token** and copy the secret. This permission can deploy scripts across that account while the token is valid. [Cloudflare token instructions](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)
+4. In a Linux shell, use the following commands for a fresh checkout. If you already have a current checkout, run just the last command from its root.
+
+   ```bash
+   git clone https://github.com/jsdyer/jsdyer.github.io.git
+   cd jsdyer.github.io
+   python3 services/cloudflare-admin/deploy.py
+   ```
+
+5. Enter the Account ID, Database ID and Cloudflare token when prompted. The script makes two Cloudflare API requests. The first uploads [worker.mjs](../services/cloudflare-admin/worker.mjs) and configures its bindings. The second enables the public workers.dev address with preview URLs disabled. The token stays in the local process. Your DNS, domain records, and D1 tables are outside these requests. [Deployment script](../services/cloudflare-admin/deploy.py)
+6. Open [CoolCode admin → Cloudflare usage](https://coolcode.ca/admin/#cloudflare), use your ordinary GitHub owner sign-in, expand **View the last 24 hours** and click **Refresh Cloudflare usage**. A successful result shows the time window and counts. After verification, revoke the temporary Cloudflare token.
+
+To check the companion's address before signing in, run this in Linux:
+
+```bash
+curl -i -H 'Origin: https://coolcode.ca' https://coolcode-admin-metrics.jeffdyer.workers.dev/admin/cloudflare
+```
+
+HTTP 401 with `Owner sign-in required.` is the expected response without the admin credential. A 404 means the address or route is unavailable. A 503 after sign-in calls for checking the bindings and provider analytics.
+
 ### Activate the metrics Worker on Windows
 
-1. In the Cloudflare dashboard select the account that runs **coolcode-visitor-api**. Copy its **Account ID** from the account overview. Under **Storage & databases → D1 → coolcode-reports**, copy **Database ID** (a UUID).
-2. Go to [My Profile → API Tokens](https://dash.cloudflare.com/profile/api-tokens), **Create Token → Create Custom Token**. Choose **Account → Workers Scripts → Edit** (“Workers Scripts Write” in the API), restrict **Account Resources** to this account, and give the token a short expiry. Copy it for the next step.
-3. Open PowerShell in a current checkout of **jsdyer/jsdyer.github.io**. If you don't have one, download and extract [main as ZIP](https://github.com/jsdyer/jsdyer.github.io/archive/refs/heads/main.zip) and open the extracted folder containing `services`. With Python 3 installed, run:
+The same steps work with `py services/cloudflare-admin/deploy.py` in a current checkout or the extracted [main ZIP](https://github.com/jsdyer/jsdyer.github.io/archive/refs/heads/main.zip). Use `curl.exe` for the endpoint check.
 
-   ```powershell
-   py services/cloudflare-admin/deploy.py
-   ```
-
-4. At the three local prompts enter the Account ID, Database ID and temporary Cloudflare token. The script uploads the companion named **coolcode-admin-metrics**, configures its three bindings and enables its workers.dev address. The deployment token can be revoked after success.
-5. Open [CoolCode admin → Cloudflare usage](https://coolcode.ca/admin/#cloudflare), sign in with your usual CoolCode GitHub credential and click **Refresh Cloudflare usage**. A signed-in result shows the 24-hour window and counts. To check just the endpoint without sharing any token, use:
-
-   ```powershell
-   curl.exe -i -H "Origin: https://coolcode.ca" https://coolcode-admin-metrics.jeffdyer.workers.dev/admin/cloudflare
-   ```
-
-   Expect HTTP 401 with `Owner sign-in required.` A 404 means that this address or route is unavailable. A 503 after sign-in requires checking the companion's bindings or provider analytics.
-
-**Manual dashboard editing.** Open or create a separate Worker named **coolcode-admin-metrics**, deploy [worker.mjs](../services/cloudflare-admin/worker.mjs) as a JavaScript module, and enable its workers.dev address. Under bindings, add a **Service binding** named `COLLECTOR` targeting `coolcode-visitor-api` and an **Analytics SQL** binding named `ANALYTICS_SQL`. Under variables, add a **Text** variable `REPORTS_DATABASE_ID` containing the D1 UUID. If the dashboard does not offer Analytics SQL, use the script. The companion uses the service binding for your existing sign-in and the analytics binding to query Cloudflare at runtime.
+**Dashboard editing.** To do the deployment by hand, open or create a separate Worker named **coolcode-admin-metrics** and deploy [worker.mjs](../services/cloudflare-admin/worker.mjs) as a JavaScript module. Enable its workers.dev address. Add a **Service binding** named `COLLECTOR` targeting `coolcode-visitor-api` (checks the usual owner sign-in), an **Analytics SQL** binding named `ANALYTICS_SQL` (reads Cloudflare's metrics) and a **Text** variable `REPORTS_DATABASE_ID` containing the UUID (selects the reporting database). If the dashboard does not offer the Analytics SQL binding, the Linux script sets all three in the upload.
 
 ## Genre usage and GitHub interest
 
@@ -75,9 +90,35 @@ Expand **Daily GitHub traffic** after loading a repository to see the reported U
 
 ## Collector alerts, visual checks and dataset releases
 
-| Service | One-time setup | How to verify |
-| --- | --- | --- |
-| Forecast Receipt → Healthchecks.io | Create a cron check for `17 */6 * * *` in UTC with 90 minutes of grace, enable email, and save the full private ping URL as `HEALTHCHECKS_PING_URL` in [Forecast Receipt's Actions secrets](https://github.com/jsdyer/forecastreceipt/settings/secrets/actions). | Manually run [Browser tool · Check and publish](https://github.com/jsdyer/forecastreceipt/actions) on main. Look for the success ping in your check after the archived receipts have been verified. |
-| Well Layers and Halifax Time Lens → Percy | Create one Percy Web project for each repository, connect each to GitHub and put that project's `PERCY_TOKEN` in the corresponding Actions secrets for [Well Layers](https://github.com/jsdyer/welllayers/settings/secrets/actions) and [Halifax Time Lens](https://github.com/jsdyer/halifaxtimelens/settings/secrets/actions). | Run each repo’s Pages workflow on main for a baseline. Future same-repo pull requests can compare the same wells and the same Halifax waterfront at phone and desktop widths. The `browser-checks` Actions artifacts contain the PNGs even before connecting Percy. |
-| Release Receipt → Zenodo | Connect GitHub in [Zenodo’s repository settings](https://zenodo.org/account/settings/github/) and enable `jsdyer/releasereceipt`. The first [dataset release](https://github.com/jsdyer/releasereceipt/releases/tag/dataset-2026.11.22) is already available on GitHub. | After enabling the repo, run [Publish dataset release](https://github.com/jsdyer/releasereceipt/actions/workflows/dataset-release.yml) on main with a new unused version, such as `2026.11.22.1`. Open the record on Zenodo and check the public DOI and downloadable files. |
-| Google Dataset Search | The [download directory](https://coolcode.ca/datasets/) links to tool pages with public dataset metadata and downloads. | Inspect the landing pages in [Search Console](https://search.google.com/search-console) and check the [sitemap](https://coolcode.ca/sitemap.xml). Indexing happens on Google's schedule. |
+### Forecast Receipt and Healthchecks.io
+
+GitHub Actions already runs `python3 scripts/collect.py` at 00:17, 06:17, 12:17 and 18:17 UTC. Its verification step checks that the expected forecasts for both stations reached the repository. Its final monitoring step sends Healthchecks.io a success or failure signal. Your Linux crontab needs no entry. [Actual GitHub workflow and commands](https://github.com/jsdyer/forecastreceipt/blob/main/.github/workflows/pages.yml)
+
+1. Open your project in [Healthchecks.io](https://healthchecks.io/projects/), add a check named **Forecast Receipt**, and edit its schedule. Select **Cron**. In **Cron Expression** enter exactly `17 */6 * * *`. Select **UTC** under **Server's Time Zone** and **90 minutes** under **Grace Time**. The expression is the entire field. It tells Healthchecks when to expect GitHub's signal.
+2. Enable an email notification integration for that check. Copy the complete **Ping URL** from the check, including its private identifier.
+3. Open [Forecast Receipt’s Actions secrets](https://github.com/jsdyer/forecastreceipt/settings/secrets/actions) → **New repository secret**. Enter **Name** `HEALTHCHECKS_PING_URL` and paste the URL under **Secret**. Click **Add secret**.
+4. Open [Browser tool · Check and publish](https://github.com/jsdyer/forecastreceipt/actions/workflows/pages.yml) → **Run workflow** → branch **main** → **Run workflow**. In Healthchecks open the check's log and look for the first successful ping. A run that never starts will leave a missing ping and trigger an alert after the grace period. [Healthchecks schedule fields](https://healthchecks.io/docs/configuring_checks/)
+
+### Percy screenshot comparisons
+
+1. In Percy’s **Setup a new project** form, select **Web App**, enter **welllayers** for Project name, select **Percy** under **Run visual tests on**, leave Labels empty and select **Git** under **Baseline management**. Click **Create Project**.
+2. Open that project's **Settings**, copy its **Project token** and add it as a **New repository secret** named `PERCY_TOKEN` in [Well Layers’ Actions secrets](https://github.com/jsdyer/welllayers/settings/secrets/actions).
+3. Repeat those two steps for **halifaxtimelens**, placing the second project's token in [Halifax Time Lens’s Actions secrets](https://github.com/jsdyer/halifaxtimelens/settings/secrets/actions).
+4. To display Percy results on pull requests, enable the Percy GitHub integration and link each Percy project to its matching `jsdyer` repository. [Percy’s GitHub integration](https://www.browserstack.com/docs/percy/integrations/github)
+5. Open [Well Layers’ workflow](https://github.com/jsdyer/welllayers/actions/workflows/pages.yml) and [Halifax Time Lens’s workflow](https://github.com/jsdyer/halifaxtimelens/actions/workflows/pages.yml) in turn. Click **Run workflow**, choose **main**, then **Run workflow**. Each Percy project should show its first baseline with a phone and desktop snapshot. Future same-repository pull requests compare the same wells and Halifax waterfront view.
+
+### Zenodo dataset archive (optional)
+
+Zenodo keeps a fixed copy of a published dataset and gives it a permanent identifier called a DOI that readers can cite. The [first Release Receipt dataset](https://github.com/jsdyer/releasereceipt/releases/tag/dataset-2026.11.22) is already downloadable from GitHub. To archive the next edition on Zenodo:
+
+1. Sign in to [Zenodo’s GitHub settings](https://zenodo.org/account/settings/github/) with the GitHub account that owns the repository. Authorize access, sync the repository list and enable **jsdyer/releasereceipt**.
+2. Open [Publish dataset release](https://github.com/jsdyer/releasereceipt/actions/workflows/dataset-release.yml). Click **Run workflow**, choose **main**, and enter a new version such as `2026.11.22.1` if that version is unused. Click **Run workflow** to publish.
+3. In Zenodo, open the resulting record, verify its data files and copy its DOI. Each later release can receive its own version DOI. [Zenodo instructions](https://help.zenodo.org/docs/github/enable-repository/)
+
+### Google Dataset Search
+
+Google reads the dataset descriptions and download links on each linked [CoolCode dataset page](https://coolcode.ca/datasets/) when it crawls the website. Publishing a copy to Google is unnecessary. In [Search Console](https://search.google.com/search-console), select the **coolcode.ca** property and open **Sitemaps**. If it already shows the site sitemap as **Success**, setup is complete. Otherwise enter `https://coolcode.ca/sitemap.xml` in **Add a new sitemap** and submit. Google's later inclusion of any individual dataset is a separate decision. [Google’s dataset documentation](https://developers.google.com/search/docs/appearance/structured-data/dataset)
+
+### Sentry browser errors (optional)
+
+A Sentry project collects JavaScript errors from visitors once its browser SDK is connected. For a first project, go to **Projects → Create Project**, select **Browser JavaScript** (plain JavaScript), choose a team, and name the project `coolcode-browser`. Under **Settings → Projects → coolcode-browser → Client Keys (DSN)**, copy the **public DSN**, the URL identifying the event destination. The CoolCode browser integration still needs that DSN and an SDK configuration. A test error appearing in the Sentry project’s **Issues** view will confirm the connection after implementation.
