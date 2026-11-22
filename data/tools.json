@@ -1170,8 +1170,8 @@
             ],
             "unit": "briefing notes"
           },
-          "value": "2026-11-20",
-          "count": 161760
+          "value": "2026-11-21",
+          "count": 161791
         },
         {
           "url": "https://coolcode.ca/briefings/data/manifest.json",
@@ -1179,7 +1179,7 @@
             "sourceUpdated"
           ],
           "label": "Source updated",
-          "value": "2026-11-20"
+          "value": "2026-11-21"
         }
       ],
       "cadence": "Daily"
@@ -1520,8 +1520,8 @@
             ],
             "unit": "catalogue entries"
           },
-          "value": "2026-11-20",
-          "count": 48354
+          "value": "2026-11-21",
+          "count": 48350
         },
         {
           "url": "https://coolcode.ca/datasetexplorer/data/manifest.json",
@@ -1529,7 +1529,7 @@
             "publisherDate"
           ],
           "label": "Source updated",
-          "value": "2026-11-20"
+          "value": "2026-11-21"
         }
       ],
       "cadence": "Daily"
@@ -2828,7 +2828,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-21 16:08 UTC",
+          "value": "2026-11-22 06:47 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -3308,7 +3308,7 @@
             "measure": "length",
             "unit": "episodes"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 45
         },
         {
@@ -3771,7 +3771,7 @@
           "path": [
             "latest"
           ],
-          "value": "2026-11-20"
+          "value": "2026-11-21"
         }
       ]
     },
@@ -4844,8 +4844,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-21 19:11 UTC",
-          "count": 14
+          "value": "2026-11-22 06:42 UTC",
+          "count": 16
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -4860,7 +4860,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 560
+          "count": 640
         }
       ]
     },
@@ -5666,7 +5666,7 @@
             ],
             "unit": "washrooms"
           },
-          "value": "2026-11-14",
+          "value": "2026-11-21",
           "count": 161
         }
       ]
