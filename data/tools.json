@@ -533,7 +533,7 @@
             ],
             "unit": "calendar days"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 2149
         }
       ]
@@ -573,7 +573,7 @@
             "capturedAt"
           ],
           "label": "Canadian sample retrieved",
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count_at": {
             "path": [],
             "unit": "case studies",
@@ -825,7 +825,7 @@
             "measure": "length",
             "unit": "Canadian notices"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 6547
         },
         {
@@ -889,7 +889,7 @@
             "unit": "KEV entries",
             "measure": "length"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 1790
         },
         {
@@ -906,7 +906,7 @@
             "epssDate"
           ],
           "label": "EPSS score date",
-          "value": "2026-11-21"
+          "value": "2026-11-22"
         }
       ]
     },
@@ -1239,7 +1239,7 @@
             ],
             "unit": "summaries"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 206348
         },
         {
@@ -1424,7 +1424,7 @@
             ],
             "unit": "release and month combinations"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 58806
         },
         {
@@ -1542,7 +1542,7 @@
             ],
             "unit": "notes"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 7676
         },
         {
@@ -1551,7 +1551,7 @@
             "modified"
           ],
           "label": "Source updated",
-          "value": "2026-11-21"
+          "value": "2026-11-22"
         }
       ],
       "cadence": "Daily"
@@ -1592,7 +1592,7 @@
             ],
             "unit": "disclosures"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 73
         },
         {
@@ -1601,7 +1601,7 @@
             "modified"
           ],
           "label": "Source updated",
-          "value": "2026-11-21"
+          "value": "2026-11-22"
         }
       ],
       "cadence": "Daily"
@@ -1748,7 +1748,7 @@
             ],
             "unit": "removed entries"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 3934
         },
         {
@@ -1793,7 +1793,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count_at": {
             "path": [
               "series"
@@ -1964,7 +1964,7 @@
             ],
             "unit": "federal records"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 1581309
         },
         {
@@ -2251,7 +2251,7 @@
             ],
             "unit": "notices"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 34417
         }
       ],
@@ -2473,7 +2473,7 @@
             ],
             "unit": "shipwreck records"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 4957
         },
         {
@@ -2521,7 +2521,7 @@
             "builtAt"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count_at": {
             "path": [
               "count"
@@ -2571,7 +2571,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count_at": {
             "path": [
               "count"
@@ -2750,7 +2750,7 @@
             "unit": "planning records",
             "measure": "length"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 644
         },
         {
@@ -2765,7 +2765,7 @@
             ],
             "unit": "listed permit folders"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 2082
         }
       ]
@@ -2801,7 +2801,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count_at": {
             "path": [
               "total"
@@ -3006,7 +3006,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-22 06:47 UTC",
+          "value": "2026-11-22 16:17 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -3198,7 +3198,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-20",
+          "value": "2026-11-22",
           "count_at": {
             "path": [
               "tracks"
@@ -3215,7 +3215,7 @@
             0
           ],
           "label": "Observation dates",
-          "value": "2017-01-02–2026-11-19",
+          "value": "2017-01-02–2026-11-20",
           "end_path": [
             "dates",
             -1
@@ -4559,7 +4559,7 @@
             ],
             "unit": "transit routes"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 8
         },
         {
@@ -4635,7 +4635,7 @@
           "path": [
             "retrieved"
           ],
-          "value": "2026-11-21"
+          "value": "2026-11-22"
         }
       ]
     },
@@ -5036,8 +5036,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-22 06:42 UTC",
-          "count": 16
+          "value": "2026-11-22 19:33 UTC",
+          "count": 18
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -5052,7 +5052,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 640
+          "count": 720
         }
       ]
     },
@@ -5339,7 +5339,7 @@
             ],
             "unit": "paired station-hours"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 503
         },
         {
@@ -5349,7 +5349,7 @@
             "catalog",
             "langleyLatest"
           ],
-          "value": "2026-11-21"
+          "value": "2026-11-22"
         },
         {
           "url": "https://coolcode.ca/airpair/data/pairs.json",
@@ -6798,7 +6798,7 @@
             ],
             "unit": "utility bulletins"
           },
-          "value": "2026-11-21",
+          "value": "2026-11-22",
           "count": 10
         }
       ]
@@ -6949,8 +6949,8 @@
             ],
             "unit": "trace observations"
           },
-          "value": "2026-11-19",
-          "count": 10012
+          "value": "2026-11-20",
+          "count": 12520
         },
         {
           "url": "https://coolcode.ca/boomerang-meter/data/status.json",
@@ -6958,7 +6958,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-21"
+          "value": "2026-11-22"
         }
       ]
     },
@@ -7368,8 +7368,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-22 13:00 UTC",
-          "count": 72
+          "value": "2026-11-22 13:25 UTC",
+          "count": 171
         }
       ]
     },
@@ -8015,7 +8015,6 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "One owned-site MDN reference; government collection is paused and SSL Labs remains permission-gated.",
-      "cadence": "Weekly",
       "probes": [
         {
           "url": "https://coolcode.ca/govgrade/data/index.json",
@@ -8038,8 +8037,8 @@
             "text": "Government targets paused"
           },
           "value": "2026-11-22 14:59 UTC",
-          "count": 1,
-          "notice": "Government targets paused"
+          "notice": "Government targets paused",
+          "count": 1
         }
       ]
     },
@@ -8067,7 +8066,6 @@
     "data_info": {
       "mode": "mixed",
       "detail": "Saved endoflife.date support windows are matched to a private inventory in your browser.",
-      "cadence": "Weekly",
       "probes": [
         {
           "url": "https://coolcode.ca/rackexpiry/data/index.json",
@@ -8112,7 +8110,6 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Public iNaturalist fungi observations from 2023–2025 in fixed Langley and Halifax areas, rechecked weekly with retained captures.",
-      "cadence": "Weekly",
       "probes": [
         {
           "url": "https://coolcode.ca/mushroomcalendar/data/index.json",
@@ -8155,7 +8152,6 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Dated BC Laws CiviX XML captures of four privacy statutes and regulations, under the King’s Printer Licence.",
-      "cadence": "Weekly",
       "probes": [
         {
           "url": "https://coolcode.ca/lawdelta/data/index.json",
@@ -8199,7 +8195,6 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Weekly xeno-canto API v3 snapshots of six bird species in British Columbia and Atlantic Canada, with original audio and recording-level licences.",
-      "cadence": "Weekly",
       "probes": [
         {
           "url": "https://coolcode.ca/dawnchorus/data/index.json",
@@ -8243,7 +8238,6 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Daily Cloudflare Radar captures of hourly HTTP traffic and IP shares, with Canadian outage annotations and retained history.",
-      "cadence": "Daily",
       "probes": [
         {
           "url": "https://coolcode.ca/radarscope/data/index.json",
@@ -8288,7 +8282,6 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Dated GBIF samples compare historic preserved specimens with modern biodiversity records around Langley and Halifax; source totals, licences and sampling limits stay visible.",
-      "cadence": "Monthly",
       "probes": [
         {
           "url": "https://coolcode.ca/museumdrawer/data/index.json",
@@ -8311,8 +8304,8 @@
             "text": "Capped samples; see source totals"
           },
           "value": "2026-11-22 15:13 UTC",
-          "count": 3187,
-          "notice": "Capped samples; see source totals"
+          "notice": "Capped samples; see source totals",
+          "count": 3187
         }
       ]
     },
@@ -8340,7 +8333,6 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "A daily derived eBird API comparison of the latest reports at Iona Beach and Hartlen Point within 30 days; not historical totals.",
-      "cadence": "Daily",
       "probes": [
         {
           "url": "https://coolcode.ca/hotspotledger/data/index.json",
