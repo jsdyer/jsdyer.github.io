@@ -7906,5 +7906,463 @@
     "readme": {
       "note": "Search a department, statute or subject and open the original order. The weekly diary identifies newly observed and changed entries. Approval date is separate from the date the order first appeared in our archive."
     }
+  },
+  {
+    "id": "maplephish",
+    "title": "Maple Phish",
+    "description": "Canadian-brand phishing signals, with evidence kept in context.",
+    "category": "security",
+    "tags": [
+      "phishing",
+      "Canada",
+      "threat intelligence",
+      "evidence"
+    ],
+    "icon": "scan-search",
+    "url": "/maplephish/",
+    "source": "https://github.com/jsdyer/maplephish",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Daily derived PhishStats summaries and separately labelled URLhaus malware signals; URL-level imports stay in your browser.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/maplephish/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Source checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "aggregate cohorts"
+          },
+          "value": "2026-11-22 15:07 UTC",
+          "count": 12
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose a brand to inspect derived phishing counts, report-month groups and hosting-ASN groups. Import a PhishStats JSON array or URLhaus response locally to inspect defanged URLs, report dates and supplied registrar data. Brand-token matches are unverified candidates; URLhaus malware is always separate from phishing."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "scanreceipt",
+    "title": "Scan Receipt",
+    "description": "A dated receipt for what a website loaded.",
+    "category": "security",
+    "tags": [
+      "urlscan",
+      "web privacy",
+      "network requests",
+      "evidence"
+    ],
+    "icon": "scan-search",
+    "url": "/scanreceipt/",
+    "source": "https://github.com/jsdyer/scanreceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Daily owned-domain urlscan search status plus local evidence imports and comparisons; no new scans or public receipt republication.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/scanreceipt/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Search checked",
+          "precision": "minute",
+          "notice_if": {
+            "path": [
+              "status"
+            ],
+            "equals": "import ready",
+            "text": "Local evidence workbench"
+          },
+          "value": "2026-11-22 15:06 UTC",
+          "notice": "Local evidence workbench"
+        }
+      ]
+    },
+    "readme": {
+      "note": "Open an existing public urlscan result, copy its full Result API JSON into the local workbench, then save a sanitized receipt. Import two receipts to compare destination hosts, requests and statuses. Scan time is distinct from collection time; a changed request does not prove tracking or removal."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "govgrade",
+    "title": "Gov Grade",
+    "description": "Compare dated security assessments and locally imported reports.",
+    "category": "security",
+    "tags": [
+      "canada",
+      "security",
+      "observatory",
+      "tls"
+    ],
+    "icon": "shield-check",
+    "url": "/govgrade/",
+    "source": "https://github.com/jsdyer/govgrade",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "One owned-site MDN reference; government collection is paused and SSL Labs remains permission-gated.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/govgrade/data/index.json",
+          "path": [
+            "captured_at"
+          ],
+          "label": "Captured",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "available_count"
+            ],
+            "unit": "available assessment"
+          },
+          "notice_if": {
+            "path": [
+              "status"
+            ],
+            "equals": "partial",
+            "text": "Government targets paused"
+          },
+          "value": "2026-11-22 14:59 UTC",
+          "count": 1,
+          "notice": "Government targets paused"
+        }
+      ]
+    },
+    "readme": {
+      "note": "Start with the operator-owned CoolCode reference, inspect the provider's individual header findings, and export a dated CSV. The five government sites are explicitly ungraded because their automated collection is paused. Import an existing MDN `/analyze` JSON report for a tab-only, unverified-host comparison. Assessment dates differ from capture dates; provider grades are never combined into a security score."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "rackexpiry",
+    "title": "Rack Expiry",
+    "description": "Match your software inventory to published support windows and plan the next upgrade.",
+    "category": "projects",
+    "tags": [
+      "software",
+      "homelab",
+      "support",
+      "inventory"
+    ],
+    "icon": "server",
+    "url": "/rackexpiry/",
+    "source": "https://github.com/jsdyer/rackexpiry",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Saved endoflife.date support windows are matched to a private inventory in your browser.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/rackexpiry/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Catalogue checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "products"
+          },
+          "value": "2026-11-22 15:03 UTC",
+          "count": 25
+        }
+      ]
+    },
+    "readme": {
+      "note": "Add an asset label, software product and installed version. Rack Expiry matches the longest numeric release cycle from a saved endoflife.date catalogue, then sorts support-ended and upcoming deadlines first. Choose an assessment date, inspect the release reference, and export results as CSV. Imports accept simple three-column CSV (asset,product,version) or a JSON array; exported CSV files include evidence columns and can be imported again using their named inventory fields. CSV prefixes formula-leading cells for spreadsheet safety, which can alter labels on reimport; choose **Save inventory JSON** for a lossless backup and exact roundtrip. Inventory stays in memory until **Save on this device**; only that explicit action writes namespaced local storage. No inventory fields are uploaded. The example stack is illustrative. Standard upstream support, active support and extended support differ: purchased entitlements and distribution backports must be checked separately. Unknown versions stay unknown. Numeric prefix matching requires an entirely numeric installed version; nonnumeric release-cycle names match exactly, ignoring case. Prerelease or malformed suffixes are not treated as stable releases. A support deadline is not proof of an exploitable vulnerability. Upstream deadline dates are the last supported day (the status changes the following day). Boolean-only statuses with no known end date are used only on the catalogue check date, so historical or future assessments remain unknown instead of inventing coverage. The API’s `isMaintained` flag can include extended support and is not used to infer standard support. The selected product catalogue refreshes Mondays at 10:43 UTC. Changed catalogues are retained as immutable compressed JSON archives with hashes, dates and a change feed; a first capture is a baseline, not retroactive history. The public app works from the last validated saved snapshot. No API key is needed."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "mushroomcalendar",
+    "title": "Mushroom Calendar",
+    "description": "Explore when local fungi were observed around Langley and Halifax, with seasonal patterns, quality filters and a privacy-conscious map.",
+    "category": "places",
+    "tags": [
+      "fungi",
+      "inaturalist",
+      "seasons",
+      "langley",
+      "halifax"
+    ],
+    "icon": "calendar-days",
+    "url": "/mushroomcalendar/",
+    "source": "https://github.com/jsdyer/mushroomcalendar",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Public iNaturalist fungi observations from 2023–2025 in fixed Langley and Halifax areas, rechecked weekly with retained captures.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/mushroomcalendar/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Source checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "licensed observations"
+          },
+          "value": "2026-11-22 15:12 UTC",
+          "count": 14825
+        }
+      ]
+    },
+    "readme": {
+      "note": "Start with research-grade observations, compare the monthly share on each coast, then select a month or taxon to inspect its records. The 2023–2025 calendar describes observation activity, not abundance, edibility or a forecast; obscured records have month-only dates and never appear on the map."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "lawdelta",
+    "title": "Law Delta",
+    "description": "Track section-level changes across dated captures of selected British Columbia laws.",
+    "category": "explorers",
+    "tags": [
+      "british-columbia",
+      "legislation",
+      "changes"
+    ],
+    "icon": "gavel",
+    "url": "/lawdelta/",
+    "source": "https://github.com/jsdyer/lawdelta",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Dated BC Laws CiviX XML captures of four privacy statutes and regulations, under the King’s Printer Licence.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/lawdelta/data/index.json",
+          "path": [
+            "captured_at"
+          ],
+          "label": "Captured",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "sections and schedules"
+          },
+          "value": "2026-11-22 14:56 UTC",
+          "count": 207
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose one of the two privacy Acts or their regulations, then search a printed section number or a word such as “consent”. The first capture is a baseline with no invented earlier version. Later captures can show added, removed and changed sections side by side. Capture dates are observation dates, while effective-date annotations come separately from the official XML. Read the linked BC Laws source before relying on a change; this is not legal advice."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "dawnchorus",
+    "title": "Dawn Chorus",
+    "description": "Listen to the same bird species across Atlantic and Pacific Canada, with recording-level provenance.",
+    "category": "places",
+    "tags": [
+      "birds",
+      "audio",
+      "Canada",
+      "comparison"
+    ],
+    "icon": "mic-vocal",
+    "url": "/dawnchorus/",
+    "source": "https://github.com/jsdyer/dawnchorus",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Weekly xeno-canto API v3 snapshots of six bird species in British Columbia and Atlantic Canada, with original audio and recording-level licences.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/dawnchorus/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Source checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "recordings"
+          },
+          "value": "2026-11-22 15:05 UTC",
+          "count": 345
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose a species to compare original xeno-canto recordings from British Columbia and Atlantic Canada. Filter by sound, recording month or quality, switch between source recordings, and export attributed metadata. Six focal species and the first 100 records per species/province query form a bounded sample; different individuals, dates, equipment and habitats mean these examples do not establish regional dialects. Cards show recording dates separately from upload dates, plus recordist, source and individual licence. The initial page honestly shows a pending state until its first authenticated collection; a previously saved Dawn Chorus JSON snapshot can also be opened locally."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "radarscope",
+    "title": "Radar Scope",
+    "description": "Read Canadian internet traffic and disruption signals through Cloudflare Radar observations.",
+    "category": "liminal-tools",
+    "tags": [
+      "internet",
+      "Canada",
+      "Cloudflare Radar",
+      "traffic"
+    ],
+    "icon": "radar",
+    "url": "/radarscope/",
+    "source": "https://github.com/jsdyer/radarscope",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Daily Cloudflare Radar captures of hourly HTTP traffic and IP shares, with Canadian outage annotations and retained history.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/radarscope/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Source checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "hourly traffic points"
+          },
+          "value": "2026-11-22 15:17 UTC",
+          "count": 501
+        }
+      ]
+    },
+    "readme": {
+      "note": "Inspect seven days of hourly Canadian HTTP traffic and compare its daily rhythm with the United States or United Kingdom. Each country is normalized independently to its own maximum (0–1), so the curves compare shape, not traffic volume or market share. IPv4/IPv6 percentages describe the observed HTTP request mix. Canadian outage annotations cover a separate 30-day source window and are not an exhaustive outage register. Choose a retained capture, inspect gaps and source dates, or open/export a local snapshot without an API key in your browser."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "museumdrawer",
+    "title": "Museum Drawer",
+    "description": "Open a local cabinet of historic specimens and modern biodiversity records around Langley and Halifax.",
+    "category": "places",
+    "tags": [
+      "biodiversity",
+      "GBIF",
+      "museum",
+      "Langley",
+      "Halifax"
+    ],
+    "icon": "library-big",
+    "url": "/museumdrawer/",
+    "source": "https://github.com/jsdyer/museumdrawer",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Dated GBIF samples compare historic preserved specimens with modern biodiversity records around Langley and Halifax; source totals, licences and sampling limits stay visible.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/museumdrawer/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Source checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "sampled records"
+          },
+          "notice_if": {
+            "path": [
+              "status"
+            ],
+            "equals": "sampled",
+            "text": "Capped samples; see source totals"
+          },
+          "value": "2026-11-22 15:13 UTC",
+          "count": 3187,
+          "notice": "Capped samples; see source totals"
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose Langley or Halifax, then compare historic preserved specimens (1700–1999) with modern records (2000 onward). Up to 300 records per time band are retained; these capped API-order samples are not representative surveys. Filter by taxon, source, licence or coordinate quality, inspect an attributed record card, and export the selection. The coarse map and decade chart show only the selected capture’s retained records, not every GBIF match or a population trend."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "hotspotledger",
+    "title": "Hotspot Ledger",
+    "description": "Compare recent bird reports from Iona Beach and Hartlen Point, with a clear view of shared species and notable sightings.",
+    "category": "places",
+    "tags": [
+      "birds",
+      "eBird",
+      "Canada",
+      "hotspots"
+    ],
+    "icon": "map-pin",
+    "url": "/hotspotledger/",
+    "source": "https://github.com/jsdyer/hotspotledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "A daily derived eBird API comparison of the latest reports at Iona Beach and Hartlen Point within 30 days; not historical totals.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/hotspotledger/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Source checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "reported species"
+          },
+          "value": "2026-11-22 15:17 UTC",
+          "count": 145
+        }
+      ]
+    },
+    "readme": {
+      "note": "Compare the latest accepted report for each species at the two exact hotspots, then filter to shared species, one coast's feed, or eBird notable species. The daily capture covers the previous 30 days; shorter windows are anchored to that capture date. Species counts are recent-feed counts, not seasonal or historical totals. Missing reports do not establish absence, and observer effort differs. Download the filtered derived CSV or a JSON snapshot; reopening either file happens only in the browser tab."
+    },
+    "sync_manifest": true
   }
 ]
