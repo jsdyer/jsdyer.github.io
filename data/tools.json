@@ -4307,7 +4307,7 @@
   {
     "id": "pantryprices",
     "title": "Pantry Prices",
-    "description": "Compare Canadian grocery baskets across historical years, recent months and provincial retail prices.",
+    "description": "Compare Canadian grocery baskets across time and follow world coffee prices to supermarket shelves in BC and Nova Scotia.",
     "category": "money",
     "tags": [
       "Canada",
@@ -4317,10 +4317,7 @@
       "historical groceries",
       "butter",
       "flour",
-      "grocery basket",
-      "grocery prices",
-      "retail scanner",
-      "1960s"
+      "coffee"
     ],
     "icon": "wallet",
     "url": "/pantryprices/",
@@ -4329,8 +4326,8 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Published urban annual prices and two distinct Statistics Canada monthly grocery price tables retain their own package sizes and methods.",
-      "cadence": "Monthly",
+      "detail": "Historical surveys and Statistics Canada scanner prices track groceries. World Bank and Bank of Canada monthly data put Arabica and provincial coffee prices on a common baseline.",
+      "cadence": "Twice monthly",
       "probes": [
         {
           "label": "Monthly tables retrieved",
@@ -4344,7 +4341,7 @@
             ],
             "unit": "published prices"
           },
-          "value": "2026-11-19",
+          "value": "2026-11-22",
           "count": 19733
         },
         {
@@ -4357,12 +4354,29 @@
             "recentEnd"
           ],
           "value": "2017-01–2026-09"
+        },
+        {
+          "label": "Coffee comparison months",
+          "url": "https://coolcode.ca/pantryprices/data/coffee.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2017-01–2026-09"
         }
       ]
     },
+    "dataset": {
+      "title": "Arabica benchmark and retail coffee in BC and Nova Scotia",
+      "file": "data/coffee.csv",
+      "format": "CSV",
+      "section": "coffee"
+    },
     "sync_manifest": true,
     "readme": {
-      "note": "One 454 g butter, one 675 g white bread and a dozen eggs totalled $9.69 in September 2017 and $13.99 in September 2026 at Canadian scanner averages. Choose a province to compare its prices, or select an earlier price series to explore the published urban and national records back to 1914."
+      "note": "One 454 g butter, one 675 g white bread and a dozen eggs totalled $9.69 in September 2017 and $13.99 in September 2026 at Canadian scanner averages. Choose a province to compare its prices, or select an earlier price series to explore the published urban and national records back to 1914. In Commodity to shelf, choose a base month to see when Arabica, BC and Nova Scotia retail coffee first rose or fell by the same percentage."
     }
   },
   {
@@ -7094,6 +7108,228 @@
     "sync_manifest": true,
     "readme": {
       "note": "Try Halifax starting December 1, 2026 with astronomical darkness, at most 25% lunar illumination and one hour on either side of low tide. The December 3 local evening window surrounds a modeled 10:08 p.m. low with a roughly 22% illuminated Moon."
+    }
+  },
+  {
+    "id": "releasereceipt",
+    "title": "Release Receipt",
+    "description": "See how Canada's monthly GDP growth estimates changed across Statistics Canada releases.",
+    "category": "money",
+    "tags": [
+      "GDP",
+      "Statistics Canada",
+      "economic data",
+      "revisions"
+    ],
+    "icon": "receipt-text",
+    "url": "/releasereceipt/",
+    "source": "https://github.com/jsdyer/releasereceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Statistics Canada’s archived monthly GDP tables show what each release reported for the same month.",
+      "cadence": "Twice weekly",
+      "probes": [
+        {
+          "label": "Sources checked",
+          "url": "https://coolcode.ca/releasereceipt/receipts.json",
+          "path": [
+            "checked"
+          ],
+          "count_at": {
+            "path": [
+              "releases"
+            ],
+            "measure": "length",
+            "unit": "release bulletins"
+          },
+          "value": "2026-11-22",
+          "count": 13
+        }
+      ]
+    },
+    "dataset": {
+      "title": "Canadian monthly GDP growth as originally published",
+      "file": "receipts.csv",
+      "format": "CSV"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a reference month and an industry group to see the six-month window of growth estimates printed in successive Statistics Canada bulletins. The tool measures the difference between the first regular table and the latest archived table in percentage points. Select a month in the revision ranking to see the dated evidence, or download the figures and their source links."
+    }
+  },
+  {
+    "id": "scorecard",
+    "title": "Policy Rate Scorecard",
+    "description": "Compare market participants’ published rate forecasts with the Bank of Canada’s next decisions.",
+    "category": "money",
+    "tags": [
+      "monetary policy",
+      "forecasts",
+      "interest rates",
+      "Bank of Canada"
+    ],
+    "icon": "percent",
+    "url": "/scorecard/",
+    "source": "https://github.com/jsdyer/scorecard",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Quarterly Bank of Canada survey medians are matched to dated policy decisions and checked weekly.",
+      "cadence": "Checked weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/scorecard/data/scorecard.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "receipts"
+            ],
+            "measure": "length",
+            "unit": "forecast receipts"
+          },
+          "value": "2026-11-22",
+          "count": 49
+        }
+      ]
+    },
+    "dataset": {
+      "title": "Bank of Canada survey forecasts and subsequent rate decisions",
+      "file": "data/scorecard.json",
+      "format": "JSON"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Pick a decision month to see the eligible survey medians, respondent counts and middle halves of responses. Switch to the last public forecast per decision to see how often it matched and the average size of a miss. Download either view as CSV."
+    }
+  },
+  {
+    "id": "exportneighbours",
+    "title": "Export Neighbours",
+    "description": "Explore where Canadian provinces send lobster, lumber and other domestic exports, and see which destinations gain or lose share.",
+    "category": "money",
+    "tags": [
+      "exports",
+      "international trade",
+      "Statistics Canada",
+      "Nova Scotia",
+      "British Columbia",
+      "lobster",
+      "softwood lumber"
+    ],
+    "icon": "chart-candlestick",
+    "url": "/exportneighbours/",
+    "source": "https://github.com/jsdyer/exportneighbours",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Weekly checks for monthly releases",
+      "detail": "Statistics Canada customs records show monthly domestic export value by province of origin, product and destination.",
+      "probes": [
+        {
+          "label": "Trade data retrieved",
+          "url": "https://coolcode.ca/exportneighbours/data/edition.json",
+          "path": [
+            "retrieved"
+          ],
+          "value": "2026-11-22",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "published trade cells"
+          },
+          "count": 85828
+        },
+        {
+          "label": "Trade months",
+          "url": "https://coolcode.ca/exportneighbours/data/edition.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "end"
+          ],
+          "value": "2023-01–2026-09"
+        }
+      ]
+    },
+    "dataset": {
+      "title": "Canadian exports by province, product and destination",
+      "file": "data/exports.csv.gz",
+      "format": "compressed CSV"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a province, product and month to see where its domestic exports went. Compare a single month or January through the selected month with the same period one year earlier. Follow one destination’s share across months, inspect the CAD values behind the chart, or download every destination in your comparison. The Nova Scotia preset covers live, fresh or chilled lobster. The British Columbia preset covers five softwood lumber codes."
+    }
+  },
+  {
+    "id": "metroeconomy",
+    "title": "Metro Economy",
+    "description": "Compare employment and unemployment across Canadian metropolitan areas and see how their labour markets changed.",
+    "category": "money",
+    "tags": [
+      "Statistics Canada",
+      "jobs",
+      "labour force",
+      "employment",
+      "unemployment",
+      "Halifax",
+      "Vancouver"
+    ],
+    "icon": "chart-candlestick",
+    "url": "/metroeconomy/",
+    "source": "https://github.com/jsdyer/metroeconomy",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Statistics Canada’s Labour Force Survey provides monthly, seasonally adjusted three-month averages for seven labour market indicators.",
+      "cadence": "Checked weekly",
+      "probes": [
+        {
+          "label": "Snapshot retrieved",
+          "url": "https://coolcode.ca/metroeconomy/data/summary.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "metro areas"
+          },
+          "value": "2026-11-22",
+          "count": 41
+        },
+        {
+          "label": "Months covered",
+          "url": "https://coolcode.ca/metroeconomy/data/summary.json",
+          "path": [
+            "start"
+          ],
+          "end_path": [
+            "through"
+          ],
+          "value": "2011-01–2026-10"
+        }
+      ]
+    },
+    "dataset": {
+      "title": "Canadian metropolitan labour market estimates",
+      "file": "data/metro-economy.csv",
+      "format": "CSV"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare Halifax with Vancouver or Abbotsford–Mission. Pick a month to see how many people were working or looking for work and how their share of the labour force changed. Share the selected comparison or download the underlying monthly estimates."
     }
   }
 ]
