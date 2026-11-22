@@ -7331,5 +7331,140 @@
     "readme": {
       "note": "Compare Halifax with Vancouver or Abbotsford–Mission. Pick a month to see how many people were working or looking for work and how their share of the labour force changed. Share the selected comparison or download the underlying monthly estimates."
     }
+  },
+  {
+    "id": "transitreceipt",
+    "title": "Transit Receipt",
+    "description": "Save bus arrival predictions and compare them with later vehicle sightings at selected stops.",
+    "category": "places",
+    "tags": [
+      "transit",
+      "Halifax",
+      "TransLink",
+      "arrivals",
+      "forecasts"
+    ],
+    "icon": "history",
+    "url": "/transitreceipt/",
+    "source": "https://github.com/jsdyer/transitreceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Saved Halifax bus arrival estimates are compared with later vehicle sightings; TransLink collection is optional.",
+      "cadence": "Hourly, ten one-minute samples",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/transitreceipt/data/index.json",
+          "path": [
+            "collection",
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "archive_count"
+            ],
+            "unit": "saved receipts"
+          },
+          "value": "2026-11-22 13:00 UTC",
+          "count": 72
+        }
+      ]
+    },
+    "readme": {
+      "note": "Start with a Halifax stop, then choose a saved prediction receipt. A positive difference means the first retained vehicle sighting was later than the estimate. A missing sighting stays unmatched; it never becomes an on-time arrival."
+    }
+  },
+  {
+    "id": "tidereceipt",
+    "title": "Tide Receipt",
+    "description": "Save tomorrow’s tide predictions and compare them with measured water levels at Vancouver and Halifax.",
+    "category": "places",
+    "tags": [
+      "tides",
+      "Vancouver",
+      "Halifax",
+      "water levels",
+      "forecasts"
+    ],
+    "icon": "history",
+    "url": "/tidereceipt/",
+    "source": "https://github.com/jsdyer/tidereceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Canadian Hydrographic Service tide predictions are saved before their target hours and matched to gauge readings.",
+      "cadence": "Every six hours",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/tidereceipt/data/index.json",
+          "path": [
+            "collection",
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "archive_count"
+            ],
+            "unit": "saved receipts"
+          },
+          "value": "2026-11-22 12:54 UTC",
+          "count": 3
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose a gauge and a saved receipt. A prediction of 3.2 m followed by a 3.5 m gauge reading gives a −0.3 m signed difference. That residual includes non-tidal effects and is not a storm-surge forecast score."
+    }
+  },
+  {
+    "id": "gridreceipt",
+    "title": "Grid Receipt",
+    "description": "Track Ontario electricity demand forecasts against subsequently reported hourly demand.",
+    "category": "explorers",
+    "tags": [
+      "electricity",
+      "Ontario",
+      "IESO",
+      "demand",
+      "forecasts"
+    ],
+    "icon": "history",
+    "url": "/gridreceipt/",
+    "source": "https://github.com/jsdyer/gridreceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "IESO hourly average demand forecasts are compared with subsequently reported Ontario electricity demand.",
+      "cadence": "Every three hours",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/gridreceipt/data/index.json",
+          "path": [
+            "collection",
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "archive_count"
+            ],
+            "unit": "saved receipts"
+          },
+          "value": "2026-11-22 12:52 UTC",
+          "count": 11
+        }
+      ]
+    },
+    "readme": {
+      "note": "Select a saved forecast issue. Positive error means the forecast exceeded reported demand. Archived source issues are marked separately from forecasts captured live; both use the same hourly average demand series."
+    }
   }
 ]
