@@ -25,6 +25,30 @@ function metrics(caption, rows) {
   return table;
 }
 
+function datasetIssue(label, code) {
+  const reasons = {
+    analytics_binding_missing: 'Check the ANALYTICS_SQL binding on the companion Worker.',
+    database_id_missing: 'Set REPORTS_DATABASE_ID to the reporting database UUID on the companion.',
+    query_failed: 'Cloudflare declined the analytics query. Check the companion version and the dataset in Cloudflare.',
+    query_retryable: 'Try refreshing the panel again in a moment.',
+    invalid_result: 'The analytics response did not contain the expected counts.'
+  };
+  return label + ' measurements unavailable. ' + (reasons[code] || 'Check the provider dashboard for this interval.');
+}
+
+export function usageFailure(status, body) {
+  if (status === 503 && (body?.code === 'owner_verification_unavailable' || body?.error === 'Owner verification unavailable.')) {
+    return 'The metrics Worker could not verify your sign-in with the visitor API (HTTP 503). Open Connect live usage for the verifyOwner fix.';
+  }
+  if (status === 503 && (body?.code === 'analytics_unavailable' || body?.error === 'Cloudflare analytics are unavailable.')) {
+    return 'Sign-in succeeded. Cloudflare usage queries failed (HTTP 503). ' +
+      [datasetIssue('Worker', body?.issues?.worker), datasetIssue('D1', body?.issues?.database)].join(' ');
+  }
+  if (status === 403) return 'The metrics Worker denied access. Check the owner account used for this admin session.';
+  if (status === 429) return 'The metrics Worker reached a request limit. Try refreshing in a moment.';
+  return 'Cloudflare usage is unavailable (HTTP ' + status + '). Check the provider dashboards or Connect live usage below.';
+}
+
 export function initializeCloudflareUsage(session) {
   const panel = document.getElementById('cloudflare-panel');
   const message = document.getElementById('cloudflare-message');
@@ -50,8 +74,12 @@ export function initializeCloudflareUsage(session) {
       if (session.signal.aborted) return;
       const response = await fetch(endpoint, {...options, headers: {Authorization: 'Bearer ' + session.token}});
       if (response.status === 401) return session.lock();
-      if (!response.ok) throw Error('Cloudflare usage is unavailable (HTTP ' + response.status + ').');
-      const {start, end, worker, database} = await response.json();
+      if (!response.ok) {
+        const detail = await response.json().catch(() => null);
+        if (!session.signal.aborted) message.textContent = usageFailure(response.status, detail);
+        return;
+      }
+      const {start, end, worker, database, issues} = await response.json();
       if (session.signal.aborted) return;
       if (![start, end].every(date => typeof date === 'string' && Number.isFinite(Date.parse(date)))) throw Error();
       const utc = date => new Date(date).toISOString().slice(0, 16).replace('T', ' ');
@@ -62,16 +90,15 @@ export function initializeCloudflareUsage(session) {
         if (worker.outcomes.length) results.append(metrics('Worker requests by execution outcome',
           worker.outcomes.map(row => [row.status, row.requests])));
         results.append(element('p', 'A Worker can finish normally while returning an HTTP error. Outbound subrequests include calls the Worker makes to other services.'));
-      } else results.append(element('p', 'Worker measurements unavailable for this interval.'));
+      } else results.append(element('p', datasetIssue('Worker', issues?.worker)));
       const dbFields = ['readQueries', 'writeQueries', 'rowsRead', 'rowsWritten'];
       if (counts(database, dbFields)) {
         results.append(metrics('D1 reporting database', [['Read queries', database.readQueries],
           ['Write queries', database.writeQueries], ['Rows read', database.rowsRead], ['Rows written', database.rowsWritten]]));
         results.append(element('p', 'One query can read many rows. These counts include admin and service checks.'));
-      } else results.append(element('p', 'D1 measurements unavailable for this interval.'));
-    } catch (error) {
-      if (!session.signal.aborted) message.textContent = (error.message?.startsWith('Cloudflare usage is unavailable')
-        ? error.message : 'Could not retrieve Cloudflare usage.') + ' Open the Workers or D1 dashboard below, or use Connect live usage to check setup.';
+      } else results.append(element('p', datasetIssue('D1', issues?.database)));
+    } catch {
+      if (!session.signal.aborted) message.textContent = 'Could not retrieve Cloudflare usage. Check the provider dashboards or Connect live usage below.';
     } finally {
       if (!session.signal.aborted) button.disabled = false;
     }
