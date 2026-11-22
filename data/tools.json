@@ -916,6 +916,106 @@
     "sync_manifest": true
   },
   {
+    "id": "fraudpulse",
+    "title": "FraudPulse Canada",
+    "description": "Explore Canadian fraud reports, losses, police-reported cybercrime and business cyber security data.",
+    "category": "security",
+    "tags": [
+      "fraud",
+      "cybercrime",
+      "Canada",
+      "losses",
+      "police",
+      "open data"
+    ],
+    "icon": "shield-alert",
+    "url": "/fraudpulse/",
+    "source": "https://github.com/jsdyer/fraudpulse",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Weekly",
+      "detail": "RCMP fraud reports, Statistics Canada police and business cybercrime tables, and CISA exploited-vulnerability data; checked weekly with separate coverage dates.",
+      "probes": [
+        {
+          "label": "Sources checked",
+          "url": "https://coolcode.ca/fraudpulse/data/manifest.json",
+          "path": [
+            "checkedAt"
+          ],
+          "count_at": {
+            "path": [
+              "sources"
+            ],
+            "measure": "length",
+            "unit": "official feeds"
+          },
+          "value": "2026-11-22",
+          "count": 11
+        },
+        {
+          "label": "CAFC extract coverage",
+          "url": "https://coolcode.ca/fraudpulse/data/manifest.json",
+          "path": [
+            "sources",
+            {
+              "id": "cafc"
+            },
+            "coverageStart"
+          ],
+          "end_path": [
+            "sources",
+            {
+              "id": "cafc"
+            },
+            "coverageEnd"
+          ],
+          "count_at": {
+            "path": [
+              "sources",
+              {
+                "id": "cafc"
+              },
+              "canadaRecordCount"
+            ],
+            "unit": "Canadian report records"
+          },
+          "notice_if": {
+            "path": [
+              "sources",
+              {
+                "id": "cafc"
+              },
+              "status"
+            ],
+            "equals": "stale",
+            "text": "CAFC publication is delayed; the source check date is not a newer reporting period."
+          },
+          "value": "2021-01-01–2025-09-30",
+          "count": 266553,
+          "notice": "CAFC publication is delayed; the source check date is not a newer reporting period."
+        },
+        {
+          "label": "Quarterly police data through",
+          "url": "https://coolcode.ca/fraudpulse/data/manifest.json",
+          "path": [
+            "sources",
+            {
+              "id": "police-quarterly"
+            },
+            "coverageEnd"
+          ],
+          "value": "2026-06-30"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with Canadian Anti-Fraud Centre reports and filter by receipt date, province, category or contact method; compare reporting frequency with reported dollar losses. Police incidents, business survey estimates and global exploited vulnerabilities have separate views and denominators. Source-check dates mean that publication was checked, not that new incidents were published; the Sources view records coverage, limitations and snapshot changes."
+    }
+  },
+  {
     "id": "atip",
     "title": "ATIP Records Explorer",
     "description": "Find released records, request copies, or draft an access request.",
