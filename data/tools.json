@@ -1028,6 +1028,184 @@
     }
   },
   {
+    "id": "registrarwatch",
+    "title": "RegistrarWatch",
+    "description": "Compare reported phishing domains across registrars, adjust for portfolio size and trace each registrar across quarters.",
+    "category": "security",
+    "tags": [
+      "phishing",
+      "registrars",
+      "DNS abuse",
+      "domains",
+      "IANA"
+    ],
+    "icon": "scan-search",
+    "url": "/registrarwatch/",
+    "source": "https://github.com/jsdyer/registrarwatch",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Eight gTLD registrars are tracked in Interisle quarterly phishing data. Load a public source CSV locally for the full table.",
+      "probes": [
+        {
+          "label": "Snapshot updated",
+          "url": "https://coolcode.ca/registrarwatch/data/index.json",
+          "path": [
+            "updated"
+          ],
+          "count_at": {
+            "path": [
+              "quarters"
+            ],
+            "measure": "length",
+            "unit": "quarters"
+          },
+          "value": "2026-11-22",
+          "count": 6
+        }
+      ]
+    },
+    "readme": {
+      "note": "Search a registrar name or IANA ID, then select its row to compare quarters. Rates are per 10,000 managed gTLD domains. Start with eight tracked registrars or load the publisher’s original CSV locally to explore all published registrar rows for that quarter."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "scamtrace",
+    "title": "ScamTrace",
+    "description": "Trace Canadian scam warnings and takedowns through dated public records, then add your own observations.",
+    "category": "security",
+    "tags": [
+      "impersonation",
+      "phishing",
+      "takedowns",
+      "timeline",
+      "Canada",
+      "public records"
+    ],
+    "icon": "scan-search",
+    "url": "/scamtrace/",
+    "source": "https://github.com/jsdyer/scamtrace",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Reviewed notices from Canadian venues, regulators and public bodies, with optional timeline entries kept in the current tab.",
+      "probes": [
+        {
+          "label": "Sources reviewed",
+          "url": "https://coolcode.ca/scamtrace/data/cases.json",
+          "path": [
+            "reviewed"
+          ],
+          "count_at": {
+            "path": [
+              "cases"
+            ],
+            "measure": "length",
+            "unit": "case files"
+          },
+          "value": "2026-11-22",
+          "count": 7
+        }
+      ]
+    },
+    "readme": {
+      "note": "Compare Capilano’s warning with Manitoba’s Rotor Investments alert to see which source actually confirms a domain suspension. Add dated observations to a case in the current tab and export its timeline before leaving."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "abusepulse",
+    "title": "AbusePulse",
+    "description": "Explore Canadian spam reporting and enforcement trends across CRTC reporting periods.",
+    "category": "security",
+    "tags": [
+      "spam",
+      "phishing",
+      "CRTC",
+      "Canada",
+      "enforcement"
+    ],
+    "icon": "activity",
+    "url": "/abusepulse/",
+    "source": "https://github.com/jsdyer/abusepulse",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Reviewed six-month snapshots from the CRTC Spam Reporting Centre and CASL enforcement reports.",
+      "probes": [
+        {
+          "label": "Sources reviewed",
+          "url": "https://coolcode.ca/abusepulse/data/snapshots.json",
+          "path": [
+            "reviewed"
+          ],
+          "count_at": {
+            "path": [
+              "periods"
+            ],
+            "measure": "length",
+            "unit": "reporting periods"
+          },
+          "value": "2026-11-22",
+          "count": 12
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose one of 12 reporting periods to inspect online-form message channels, SMS spam types, ranked scam categories and published enforcement measures. Compare half-years by intake, weekly average, notices to produce or preservation demands. Download a long-form CSV with original category labels, units, qualifiers and official source links. The records panel links to an existing ISED release summary and identifies the missing monthly phishing counts and category definitions for a focused CRTC request."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "phishintel",
+    "title": "PhishIntel",
+    "description": "Explore Canadian phishing advisories, impersonation reports and measured outcomes from the Cyber Centre.",
+    "category": "security",
+    "tags": [
+      "phishing",
+      "Canada",
+      "impersonation",
+      "MFA",
+      "advisories",
+      "cybercrime"
+    ],
+    "icon": "scan-search",
+    "url": "/phishintel/",
+    "source": "https://github.com/jsdyer/phishintel",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Selected Canadian public advisories and 10 cumulative quarterly observations from the Cyber Centre’s phishing study.",
+      "probes": [
+        {
+          "label": "Sources reviewed",
+          "url": "https://coolcode.ca/phishintel/data/advisories.json",
+          "path": [
+            "reviewed"
+          ],
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "measure": "length",
+            "unit": "publications"
+          },
+          "value": "2026-11-22",
+          "count": 11
+        }
+      ]
+    },
+    "readme": {
+      "note": "Compare cumulative outcomes in the Cyber Centre’s study of phishing against cloud sign-ins, then search official Canadian publications by topic, publisher or evidence type. Download the study table or filtered citations as CSV. Each research question points back to the publication that leaves it open."
+    },
+    "sync_manifest": true
+  },
+  {
     "id": "atip",
     "title": "ATIP Records Explorer",
     "description": "Find released records, request copies, or draft an access request.",
