@@ -36,7 +36,7 @@ test('authenticated GET queries the fixed script and database over the same 24 h
   assert.equal(Date.parse(data.end) - Date.parse(data.start), 86400000);
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url, 'https://coolcode-visitor-api.jeffdyer.workers.dev/admin/stats?days=7');
-  assert.equal(calls[0].redirect, 'error');
+  assert.equal(calls[0].redirect, 'manual');
   assert.deepEqual(Object.fromEntries(calls[0].headers), {authorization: headers.Authorization, origin});
   assert.equal(queries.length, 2);
   for (const {query, params} of queries) {
@@ -70,6 +70,7 @@ test('path, method, origin, sign-in and preflight checks run before the collecto
 test('owner check failures never trigger analytics or forward private response content', async () => {
   for (const [reply, status] of [
     [new Response('upstream private text', {status: 401}), 401],
+    [Response.redirect('https://example.invalid/', 302), 503],
     [new Response('upstream private text', {status: 403}), 403],
     [new Response('upstream private text', {status: 429}), 429],
     [new Response('upstream private text', {status: 500}), 503],
@@ -79,7 +80,9 @@ test('owner check failures never trigger analytics or forward private response c
     const response = await companion.fetch(new Request(path, {headers}), env);
     assert.equal(response.status, status);
     assert.equal(queries.length, 0);
-    assert.doesNotMatch(await response.text(), /upstream private text/);
+    const data = await response.json();
+    if (status === 503) assert.equal(data.code, 'owner_verification_unavailable');
+    assert.doesNotMatch(JSON.stringify(data), /upstream private text|example\.invalid/);
   }
 });
 
@@ -97,6 +100,7 @@ test('partial analytics leave only the failed metric group unavailable', async (
     const data = await response.json();
     assert.equal(response.status, 200);
     assert.equal(data[failed], null);
+    assert.deepEqual(data.issues, {[failed]: 'query_failed'});
     assert.ok(data[failed === 'worker' ? 'database' : 'worker']);
     assert.doesNotMatch(JSON.stringify(data), /secret SQL error/);
   }
@@ -113,5 +117,21 @@ test('empty time windows are distinguishable from missing or invalid metrics', a
   incomplete.ANALYTICS_SQL.query = async () => ({data: [{requests: null, rowsRead: null}]});
   const failed = await companion.fetch(new Request(path, {headers}), incomplete);
   assert.equal(failed.status, 503);
-  assert.deepEqual(await failed.json(), {error: 'Cloudflare analytics are unavailable.'});
+  assert.deepEqual(await failed.json(), {code:'analytics_unavailable', error: 'Cloudflare analytics are unavailable.',
+    issues:{worker:'invalid_result', database:'invalid_result'}});
+});
+
+test('reports missing bindings and retryable errors only after checking the owner', async () => {
+  const {env, calls} = setup();
+  delete env.ANALYTICS_SQL;
+  delete env.REPORTS_DATABASE_ID;
+  const response = await companion.fetch(new Request(path, {headers}), env);
+  assert.equal(response.status, 503);
+  assert.equal(calls.length, 1);
+  assert.deepEqual((await response.json()).issues, {worker:'analytics_binding_missing', database:'database_id_missing'});
+  const second = setup().env;
+  second.ANALYTICS_SQL.query = async () => { throw Object.assign(Error('private provider detail'), {retryable: true}); };
+  const data = await (await companion.fetch(new Request(path, {headers}), second)).json();
+  assert.deepEqual(data.issues, {worker:'query_retryable', database:'query_retryable'});
+  assert.doesNotMatch(JSON.stringify(data), /private provider detail/);
 });

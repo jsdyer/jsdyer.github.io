@@ -44,6 +44,18 @@ Choose **Check from across Canada** for fresh results from public Globalping pro
 
 The on-demand metrics Worker is maintained in `services/cloudflare-admin/worker.mjs` and uses the name `coolcode-admin-metrics` on the same Cloudflare account. Its `COLLECTOR` service binding targets `coolcode-visitor-api` and delegates owner verification to the existing private stats route. Its `ANALYTICS_SQL` Analytics SQL binding queries fixed aggregate statements. `REPORTS_DATABASE_ID` selects the UUID of `coolcode-reports`. The dashboard sends the current tab's credential only when you open or refresh this panel. Locking the admin clears the session. Deploy changes to this companion separately from GitHub Pages.
 
+### Fix a 503 after deploying the metrics Worker
+
+If private reports load but the usage panel says the companion could not verify your sign-in, open **Workers & Pages → coolcode-admin-metrics → Edit code**. Inside `verifyOwner`, use `redirect: 'manual'` in the request to `COLLECTOR`. Earlier editions used `'error'`, which Cloudflare's runtime rejects before it contacts the visitor API. Click **Deploy** and refresh **Cloudflare usage**. You can also paste the [current companion module](../services/cloudflare-admin/worker.mjs) into that same editor and deploy it. Existing bindings survive a code-only update. [Cloudflare Request reference](https://developers.cloudflare.com/workers/runtime-apis/request/)
+
+To test the verification step from Linux, use this literal placeholder:
+
+```bash
+curl -i -H 'Origin: https://coolcode.ca' -H 'Authorization: Bearer diagnostic-placeholder' https://coolcode-admin-metrics.jeffdyer.workers.dev/admin/cloudflare
+```
+
+The repaired Worker returns **401** for that placeholder. Use your existing sign-in in the admin to verify that the real 24-hour counts load. If the panel instead says **Sign-in succeeded**, use the Worker and D1 messages to identify which analytics query or binding needs attention.
+
 ### Register a new tool with the visitor API
 
 In the **coolcode-visitor-api** Worker, add each new catalogue slug once to `const toolList` and click **Deploy**. For the four economics tools, the entries are `"releasereceipt"`, `"scorecard"`, `"exportneighbours"` and `"metroeconomy"`. This list lets the collector accept visits and private reports for those tools. This is the entire Worker registration step for these four published tools. To verify one, open its public page and look for a successful collector request in your browser's Network tab, or check its next tool-traffic report. [Catalogue guide](adding-tools.md)
@@ -119,6 +131,6 @@ Zenodo keeps a fixed copy of a published dataset and gives it a permanent identi
 
 Google reads the dataset descriptions and download links on each linked [CoolCode dataset page](https://coolcode.ca/datasets/) when it crawls the website. Publishing a copy to Google is unnecessary. In [Search Console](https://search.google.com/search-console), select the **coolcode.ca** property and open **Sitemaps**. If it already shows the site sitemap as **Success**, setup is complete. Otherwise enter `https://coolcode.ca/sitemap.xml` in **Add a new sitemap** and submit. Google's later inclusion of any individual dataset is a separate decision. [Google’s dataset documentation](https://developers.google.com/search/docs/appearance/structured-data/dataset)
 
-### Sentry browser errors (optional)
+### Sentry browser errors
 
-A Sentry project collects JavaScript errors from visitors once its browser SDK is connected. For a first project, go to **Projects → Create Project**, select **Browser JavaScript** (plain JavaScript), choose a team, and name the project `coolcode-browser`. Under **Settings → Projects → coolcode-browser → Client Keys (DSN)**, copy the **public DSN**, the URL identifying the event destination. The CoolCode browser integration still needs that DSN and an SDK configuration. A test error appearing in the Sentry project’s **Issues** view will confirm the connection after implementation.
+The public catalogue, Release Receipt, Policy Rate Scorecard, Export Neighbours, Metro Economy, Pantry Prices, Well Layers and Halifax Time Lens send selected JavaScript errors to the CoolCode Sentry project. Open that project’s **Issues** view and filter by tool. Reports use a known source file and line number. The filter discards exception messages, form data and URL query strings. The admin, report form and local-file utilities are outside this rollout. The shared browser code respects Do Not Track and Global Privacy Control. [Public site privacy information](https://coolcode.ca/about/)
