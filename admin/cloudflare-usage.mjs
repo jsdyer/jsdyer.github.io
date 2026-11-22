@@ -33,7 +33,8 @@ function datasetIssue(label, code) {
     query_retryable: 'Try refreshing the panel again in a moment.',
     invalid_result: 'The analytics response did not contain the expected counts.'
   };
-  return label + ' measurements unavailable. ' + (reasons[code] || 'Check the provider dashboard for this interval.');
+  const message = label + ' measurements unavailable for this interval.';
+  return Object.hasOwn(reasons, code) ? message + ' ' + reasons[code] : message;
 }
 
 export function usageFailure(status, body) {
