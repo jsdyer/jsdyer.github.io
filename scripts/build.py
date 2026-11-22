@@ -23,7 +23,7 @@ SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 # Retain the existing public files, including downloadable examples and tool source.
 PUBLIC_PATHS = {"admin", "report", "metrics", "about", "assets", "field-notes", "tools", "favicon.svg", "CNAME",
                 ".nojekyll", "README.md", "SECURITY.md"}
-RESERVED = PUBLIC_PATHS | {"data", "templates", "scripts", "tests", "dist", "index.html"}
+RESERVED = PUBLIC_PATHS | {"datasets", "data", "templates", "scripts", "tests", "dist", "index.html"}
 
 
 def require(condition, message):
@@ -70,7 +70,7 @@ def validate(categories, tools, root=ROOT):
     required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access", "readme"}
     for tool in tools:
         require(isinstance(tool, dict), "Each tool must be an object")
-        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info", "sync_manifest"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
+        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info", "sync_manifest", "dataset"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
         tid = tool["id"]
         require(isinstance(tid, str) and SLUG.fullmatch(tid), f"Invalid tool ID: {tid!r}")
         require(tid not in ids, f"Duplicate tool ID: {tid}")
@@ -88,6 +88,14 @@ def validate(categories, tools, root=ROOT):
         info = tool.get("data_info", {})
         require(isinstance(info, dict) and info.get("mode") in DATA_MODES
                 and nonempty(info.get("detail")), f"{tid}: describe the data source and mode")
+        if "dataset" in tool:
+            dataset = tool["dataset"]
+            require(tool["access"] == "browser" and tool["hosting"] in {"local", "project"}
+                    and isinstance(dataset, dict) and {"title", "file", "format"} <= set(dataset) <= {"title", "file", "format", "section"}
+                    and all(nonempty(value) for value in dataset.values()), f"{tid}: invalid dataset entry")
+            require("section" not in dataset or SLUG.fullmatch(dataset["section"]), f"{tid}: invalid dataset section")
+            require(re.fullmatch(r"(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)+", dataset["file"]),
+                    f"{tid}: dataset file must be a relative download inside the project")
         guide = tool["readme"]
         require(isinstance(guide, dict) and set(guide) <= {"note", "lead"} and nonempty(guide.get("note"))
                 and ("lead" not in guide or nonempty(guide["lead"])), f"{tid}: import a practical note from the tool README")
@@ -358,6 +366,22 @@ def render(categories, tools, template, *, featured=None, root=ROOT):
     return template
 
 
+def render_datasets(template, tools):
+    entries = []
+    for tool in sorted((t for t in tools if "dataset" in t), key=lambda t: t["dataset"]["title"]):
+        data = tool["dataset"]
+        landing = escape(tool["url"] + ("#" + data["section"] if "section" in data else ""), quote=True)
+        title = escape(data["title"])
+        download = escape(tool["url"] + data["file"], quote=True)
+        entries.append(
+            f'<section><h2><a href="{landing}">{title}</a></h2>'
+            f'<p>{escape(tool["data_info"]["detail"])}</p>'
+            f'<p><a href="{landing}">Explore in {escape(tool["title"])}</a> · '
+            f'<a href="{download}">Download {escape(data["format"])}</a></p></section>'
+        )
+    return template.replace("{{DATASET_ENTRIES}}", "\n".join(entries))
+
+
 def write_search_files(stage, tools):
     origin = "https://coolcode.ca"
     # Project sites deploy separately and do not have directories in the hub.
@@ -365,6 +389,8 @@ def write_search_files(stage, tools):
                       if t["access"] == "browser" and t["hosting"] in {"local", "project"}}
     if (stage / "about/index.html").is_file():
         routes.add("/about/")
+    if (stage / "datasets/index.html").is_file():
+        routes.add("/datasets/")
     for article in (stage / "field-notes").rglob("index.html"):
         routes.add("/" + quote(article.parent.relative_to(stage).as_posix()) + "/")
 
@@ -410,6 +436,9 @@ def build(root=ROOT):
         } for tool in tools]
         (stage / "admin/activity-tools.json").write_text(json.dumps(activity_tools, ensure_ascii=False), encoding="utf-8")
         shutil.copyfile(root / "data/featured.json", stage / "admin/featured.json")
+        (stage / "datasets").mkdir()
+        dataset_template = (root / "templates/datasets.html").read_text(encoding="utf-8")
+        (stage / "datasets/index.html").write_text(render_datasets(dataset_template, tools), encoding="utf-8")
         write_search_files(stage, tools)
         require((stage / "CNAME").read_text().strip() == "coolcode.ca", "Keep the CoolCode custom domain")
         for tool in tools:

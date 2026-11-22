@@ -22,13 +22,17 @@ export function initializeCanadaChecks(sessionSignal) {
         const tr = body.insertRow();
         for (const value of [row.city, row.probeCity ? [row.probeCity,row.network,'AS' + row.asn].join(' · ') : '—',
           row.check, row.target, row.status, row.ms == null ? '—' : row.ms + ' ms']) tr.insertCell().textContent = value;
-        if (row.id) {
+        if (row.id && row.probeCity) {
           const link = document.createElement('a');
           link.href = 'https://globalping.io?measurement=' + encodeURIComponent(row.id);
           link.textContent = row.status; tr.cells[4].replaceChildren(link);
         }
       }
-      status.textContent = 'Checked ' + new Date(checkedAt).toLocaleString() + '.';
+      const observed = rows.filter(row => row.probeCity).length;
+      const unavailable = rows.filter(row => row.status === 'No probe returned').length;
+      const errors = rows.filter(row => row.collectionError).length;
+      status.textContent = new Date(checkedAt).toLocaleString() + ' · ' + observed + ' probe results · ' +
+        unavailable + ' without a matching probe · ' + errors + ' collection errors.';
       outlet.replaceChildren(table);
     } catch {
       if (!sessionSignal.aborted) status.textContent = 'The regional check could not finish. Try again or open the scheduled results.';

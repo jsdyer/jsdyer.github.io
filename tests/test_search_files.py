@@ -5,7 +5,7 @@ import unittest
 from xml.etree import ElementTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from build import write_search_files
+from build import render_datasets, write_search_files
 
 
 class SearchFilesTests(unittest.TestCase):
@@ -18,7 +18,7 @@ class SearchFilesTests(unittest.TestCase):
         ]
         with tempfile.TemporaryDirectory() as temp:
             stage = Path(temp)
-            for path in ["field-notes", "field-notes/reading", "admin", "tools/example"]:
+            for path in ["datasets", "field-notes", "field-notes/reading", "admin", "tools/example"]:
                 (stage / path).mkdir(parents=True)
                 (stage / path / "index.html").write_text("<!doctype html>")
             write_search_files(stage, tools)
@@ -27,7 +27,16 @@ class SearchFilesTests(unittest.TestCase):
             self.assertEqual(
                 [el.text for el in sitemap.findall("s:url/s:loc", ns)],
                 ["https://coolcode.ca" + path for path in
-                 ["/", "/field-notes/", "/field-notes/reading/", "/from-another-repo/", "/shared/"]],
+                 ["/", "/datasets/", "/field-notes/", "/field-notes/reading/", "/from-another-repo/", "/shared/"]],
             )
             self.assertEqual((stage / "robots.txt").read_text().splitlines(),
                              ["User-agent: *", "Allow: /", "Sitemap: https://coolcode.ca/sitemap.xml"])
+
+    def test_collection_links_separate_tool_section_and_direct_download(self):
+        tools = [{"id": "example", "url": "/example/", "title": "Example", "data_info": {"detail": "Published rates."},
+                  "dataset": {"title": "Rate series", "file": "data/rates.csv", "format": "CSV", "section": "rates"}},
+                 {"id": "calculator"}]
+        page = render_datasets("{{DATASET_ENTRIES}}", tools)
+        self.assertIn('href="/example/#rates"', page)
+        self.assertIn('href="/example/data/rates.csv"', page)
+        self.assertNotIn("calculator", page)
