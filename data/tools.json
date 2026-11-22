@@ -7466,5 +7466,445 @@
     "readme": {
       "note": "Select a saved forecast issue. Positive error means the forecast exceeded reported demand. Archived source issues are marked separately from forecasts captured live; both use the same hourly average demand series."
     }
+  },
+  {
+    "id": "govtrackercensus",
+    "title": "Gov Tracker Census",
+    "description": "Who else does a government homepage contact? Compare observed requests, scripts and cookies across a fixed public website sample.",
+    "category": "security",
+    "tags": [
+      "govtrackercensus",
+      "security",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/govtrackercensus/",
+    "source": "https://github.com/jsdyer/govtrackercensus",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Weekly passive browser observations of 15 federal, BC and Nova Scotia homepages.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/govtrackercensus/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "homepages",
+            "measure": "length"
+          },
+          "value": "2026-11-22 13:48 UTC",
+          "count": 15
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose a jurisdiction and open an institution row to inspect its request destinations and cookie names. A third-party request is not proof of tracking. Unavailable scans stay visibly unavailable."
+    }
+  },
+  {
+    "id": "contractpatterns",
+    "title": "Contract Patterns",
+    "description": "Follow awards, amendments and repeated vendor relationships. Find patterns worth checking against the original disclosures.",
+    "category": "disclosures",
+    "tags": [
+      "contractpatterns",
+      "disclosures",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/contractpatterns/",
+    "source": "https://github.com/jsdyer/contractpatterns",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Federal contract disclosures for a rolling year, with reported amendments and award clusters.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/contractpatterns/data/history.json",
+          "path": [
+            -1,
+            "captured_at"
+          ],
+          "label": "Latest capture",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              -1,
+              "count"
+            ],
+            "unit": "disclosures"
+          },
+          "value": "2026-11-22 14:04 UTC",
+          "count": 67724
+        }
+      ]
+    },
+    "readme": {
+      "note": "Set a 7-, 30- or 90-day window and an amount band to find repeated awards to the same normalized vendor within a department. Open a row for reported amendments; these patterns are leads, not findings of contract splitting."
+    }
+  },
+  {
+    "id": "maplehosting",
+    "title": "Maple Hosting Index",
+    "description": "A dated sample of .ca domains, observed through DNS. Explore the networks and estimated countries behind their public addresses.",
+    "category": "liminal-tools",
+    "tags": [
+      "maplehosting",
+      "liminal-tools",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/maplehosting/",
+    "source": "https://github.com/jsdyer/maplehosting",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Monthly DNS, ASN and IP-country observations for 100 .ca domains from a dated Tranco list.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/maplehosting/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": ".ca domains",
+            "measure": "length"
+          },
+          "value": "2026-11-22 14:01 UTC",
+          "count": 100
+        }
+      ]
+    },
+    "readme": {
+      "note": "Compare the first 100 .ca domains in a dated Tranco ranking. Open a domain for A/AAAA answers, origin ASNs and DB-IP Country Lite country estimates. Multiple networks can serve one domain, so shares may overlap."
+    }
+  },
+  {
+    "id": "atipdecisions",
+    "title": "ATIP Decision Lens",
+    "description": "Read the published outcomes of access complaints. Compare institutions, issues and findings while keeping the original reports close.",
+    "category": "explorers",
+    "tags": [
+      "atipdecisions",
+      "explorers",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/atipdecisions/",
+    "source": "https://github.com/jsdyer/atipdecisions",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Published Information Commissioner decisions and final reports, with visible extraction coverage.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/atipdecisions/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "published decisions",
+            "measure": "length"
+          },
+          "value": "2026-11-22 14:01 UTC",
+          "count": 1344
+        }
+      ]
+    },
+    "readme": {
+      "note": "Filter an institution and Act section, then open a decision for its published finding and original report. Listing/release dates are separate from decision dates. Published decisions are selected reports, not all complaints."
+    }
+  },
+  {
+    "id": "ispreportcard",
+    "title": "ISP Report Card",
+    "description": "Compare measured internet capabilities, one indicator at a time. See the dates, samples and routing evidence behind each number.",
+    "category": "liminal-tools",
+    "tags": [
+      "ispreportcard",
+      "liminal-tools",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/ispreportcard/",
+    "source": "https://github.com/jsdyer/ispreportcard",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Separate APNIC IPv6/DNSSEC measurements and RPKI prefix checks for seven Canadian provider ASNs.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/ispreportcard/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "provider ASNs",
+            "measure": "length"
+          },
+          "value": "2026-11-22 14:05 UTC",
+          "count": 7
+        }
+      ]
+    },
+    "readme": {
+      "note": "Compare IPv6 capability, DNSSEC validation and RPKI route authorization separately. Open a provider for dated histories, experiment counts and prefix evidence. There is no composite grade."
+    }
+  },
+  {
+    "id": "donationradar",
+    "title": "Donation Radar",
+    "description": "Explore reported federal contributions and compare return versions. Keep source corrections visible without guessing who a contributor is.",
+    "category": "disclosures",
+    "tags": [
+      "donationradar",
+      "disclosures",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/donationradar/",
+    "source": "https://github.com/jsdyer/donationradar",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Submitted and reviewed 2023 registered-party annual contribution records from Elections Canada.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/donationradar/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "total_records"
+            ],
+            "unit": "contribution records"
+          },
+          "value": "2026-11-22 14:05 UTC",
+          "count": 800929
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose a province and submitted or reviewed 2023 annual returns. Ordinary and directed contributions remain separate. A reported name is not a resolved identity; similar names must not be combined as one person."
+    }
+  },
+  {
+    "id": "anycastcompass",
+    "title": "Anycast Compass",
+    "description": "Which root-server instances do Canadian probes reach? Follow returned instance names and changes in a dated volunteer-probe sample.",
+    "category": "liminal-tools",
+    "tags": [
+      "anycastcompass",
+      "liminal-tools",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/anycastcompass/",
+    "source": "https://github.com/jsdyer/anycastcompass",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Daily one-hour samples from 50 Canadian RIPE Atlas probes across 13 IPv4 root servers.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/anycastcompass/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "observations",
+            "measure": "length"
+          },
+          "value": "2026-11-22 14:00 UTC",
+          "count": 7600
+        }
+      ]
+    },
+    "readme": {
+      "note": "Filter a root server and probe ASN. Instance names are returned TXT answers, not destinations inferred from IP geography. Province is estimated from obfuscated probe coordinates; volunteer probes are not representative of all ISP customers."
+    }
+  },
+  {
+    "id": "sanctionsledger",
+    "title": "Sanctions Ledger",
+    "description": "Keep a dated record of Canada’s consolidated sanctions entries. Inspect listed identities, regulatory references and changes between captures.",
+    "category": "disclosures",
+    "tags": [
+      "sanctionsledger",
+      "disclosures",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/sanctionsledger/",
+    "source": "https://github.com/jsdyer/sanctionsledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Dated snapshots and changes in Global Affairs Canada’s consolidated sanctions XML.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/sanctionsledger/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "list entries",
+            "measure": "length"
+          },
+          "value": "2026-11-22 14:00 UTC",
+          "count": 5781
+        }
+      ]
+    },
+    "readme": {
+      "note": "Open an entry to inspect its identity fields and linked regulation. The diary reports additions, absences and changed source entries between captures. An absence from the consolidated XML is not by itself proof of legal delisting."
+    }
+  },
+  {
+    "id": "borderpulse",
+    "title": "Border Pulse",
+    "description": "Canada-bound waits, kept in context. Compare reported crossing conditions, older hourly patterns and monthly service-standard results.",
+    "category": "places",
+    "tags": [
+      "borderpulse",
+      "places",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/borderpulse/",
+    "source": "https://github.com/jsdyer/borderpulse",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Canada-bound reports for four BC crossings, with 2019 hourly and later monthly historical data.",
+      "cadence": "Every 30 minutes",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/borderpulse/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "crossings",
+            "measure": "length"
+          },
+          "value": "2026-11-22 14:00 UTC",
+          "count": 4
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose a crossing and distinguish current reports, the 2019 Q4 hourly sample and newer monthly service-standard percentages. No delay means up to five minutes; missing and conflicting observations are excluded from wait statistics."
+    }
+  },
+  {
+    "id": "oicdiary",
+    "title": "Order in Council Diary",
+    "description": "Read the cabinet decisions hiding in plain sight. Search orders, appointments, departments and enabling statutes, then follow what changed.",
+    "category": "explorers",
+    "tags": [
+      "oicdiary",
+      "explorers",
+      "public data",
+      "history"
+    ],
+    "icon": "history",
+    "url": "/oicdiary/",
+    "source": "https://github.com/jsdyer/oicdiary",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "A dated index of current-year Orders in Council, with a weekly capture and change feed.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/oicdiary/data/current.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "orders",
+            "measure": "length"
+          },
+          "value": "2026-11-22 14:12 UTC",
+          "count": 1089
+        }
+      ]
+    },
+    "readme": {
+      "note": "Search a department, statute or subject and open the original order. The weekly diary identifies newly observed and changed entries. Approval date is separate from the date the order first appeared in our archive."
+    }
   }
 ]
