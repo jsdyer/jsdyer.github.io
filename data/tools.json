@@ -9283,5 +9283,351 @@
     "readme": {
       "note": "Start with **At least 1 kt**, then select a map point or an event time in the table to inspect its source values. Change the dates or energy threshold freely; the presets are optional. Events without reported coordinates remain in the ledger but are omitted from the map. **Save capture JSON** keeps the entire selected capture and its changes; **Export filtered CSV** saves only the current results. The capture date is when the catalogue was retrieved, not when the fireball occurred. The first capture is a baseline; later weekly captures show revisions to same-time records and records newly appearing or no longer present. A changed event time can appear as both an addition and an absence because the source provides no immutable event identifier."
     }
+  },
+  {
+    "id": "chargegaps",
+    "title": "Charge Gaps",
+    "description": "Explore charging locations and find where recorded coverage thins out.",
+    "category": "places",
+    "tags": [
+      "charging",
+      "electric vehicles",
+      "coverage",
+      "Canada",
+      "Open Charge Map"
+    ],
+    "icon": "map-pin",
+    "url": "/chargegaps/",
+    "source": "https://github.com/jsdyer/chargegaps",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Dated Open Charge Map country exports, searched locally with straight-line distances and provider attribution.",
+      "cadence": "Weekly source check",
+      "probes": [
+        {
+          "label": "Source export edition",
+          "url": "https://coolcode.ca/chargegaps/data/index.json",
+          "path": [
+            "captures",
+            0,
+            "sourceUpdatedAt"
+          ],
+          "value": "2026-04-22"
+        },
+        {
+          "label": "Capture retrieved",
+          "url": "https://coolcode.ca/chargegaps/data/index.json",
+          "path": [
+            "captures",
+            0,
+            "capturedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "captures",
+              0,
+              "count"
+            ],
+            "unit": "locations"
+          },
+          "value": "2026-11-23 11:36 UTC",
+          "count": 18798
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with **Langley**, select a connector and minimum power, then compare the nearest matching record and the number inside your radius. Enter any valid coordinates to investigate another point; the shortcuts are optional. Distances are straight lines, not driving routes, and an empty result means no matching record in this capture—not proof that no charger exists. **Recorded access** and **Recorded status** include private, restricted and planned locations unless filtered. The source export date is prominent because these downloads can be much older than their retrieval date. Save capture JSON to keep a portable record; imports and coordinate calculations stay in this tab."
+    }
+  },
+  {
+    "id": "rfctrail",
+    "title": "RFC Trail",
+    "description": "Follow Internet specifications through their updates, replacements and publication history.",
+    "category": "projects",
+    "tags": [
+      "RFC",
+      "standards",
+      "IETF",
+      "protocols",
+      "history",
+      "networking"
+    ],
+    "icon": "network",
+    "url": "/rfctrail/",
+    "source": "https://github.com/jsdyer/rfctrail",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The full RFC Editor metadata index, retained weekly for local search and relationship comparisons.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/rfctrail/data/status.json",
+          "path": [
+            "capturedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "RFCs"
+          },
+          "value": "2026-11-23 11:33 UTC",
+          "count": 9868
+        },
+        {
+          "label": "Publications through",
+          "url": "https://coolcode.ca/rfctrail/data/status.json",
+          "path": [
+            "through"
+          ],
+          "value": "2026-11"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search **9110** for HTTP Semantics, **DNS** for a topic, or an author's name. Select an RFC, then follow **Obsoletes**, **Obsoleted by**, **Updates** and **Updated by**. The timeline is ordered by publication month, not by the date a status changed. Extend the trail to two or three connections to inspect a wider family. RFC status and replacement are separate facts: an obsolete document is not automatically Historic, and not every RFC is a standard. Save trail JSON or export filtered CSV to retain the evidence. A first capture establishes the baseline; later changed index captures enable comparisons."
+    }
+  },
+  {
+    "id": "commonslens",
+    "title": "Commons Lens",
+    "description": "Find openly licensed images and audio, inspect rights and build a source-linked attribution.",
+    "category": "media",
+    "tags": [
+      "images",
+      "audio",
+      "licences",
+      "Wikimedia",
+      "attribution"
+    ],
+    "icon": "scan-search",
+    "url": "/commonslens/",
+    "source": "https://github.com/jsdyer/commonslens",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Search Wikimedia Commons on demand and retain each work’s creator, original record and reported licence."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search **Halifax waterfront**, then open **Inspect & credit** on a work to find its original record and reported licence. Licence and creator filters narrow the returned page, not the whole catalogue; inspect later pages or loosen a filter if a page has no matches. **Shortlist** keeps selections only in this tab. Save receipt JSON before closing; an imported receipt is processed locally. Always verify the original record before reusing a work."
+    }
+  },
+  {
+    "id": "magneticnorth",
+    "title": "Magnetic North",
+    "description": "Calculate magnetic declination and convert bearings using the World Magnetic Model.",
+    "category": "places",
+    "tags": [
+      "magnetic declination",
+      "compass",
+      "bearings",
+      "WMM",
+      "geodesy",
+      "Canada"
+    ],
+    "icon": "map",
+    "url": "/magneticnorth/",
+    "source": "https://github.com/jsdyer/magneticnorth",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "NOAA/BGS WMM2025 coefficients calculate the magnetic field locally for dates in 2025–2029."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter latitude, longitude, WGS84 ellipsoid height and a date in **2025–2029**, or start with Langley or Halifax. East declination is positive: **true bearing = magnetic bearing + declination**. The compass drawing is a schematic, not a reading from your device. The chart shows one model’s predictions at a fixed place, not observed magnetic history. Save receipt JSON or CSV to retain your result; inputs are not saved automatically. Add places in **web/config.json** and push to publish them."
+    }
+  },
+  {
+    "id": "restroomreach",
+    "title": "Restroom Reach",
+    "description": "Find mapped toilets, inspect accessibility details and keep a dated local record.",
+    "category": "places",
+    "tags": [
+      "washrooms",
+      "accessibility",
+      "OpenStreetMap",
+      "Langley",
+      "Vancouver",
+      "Halifax",
+      "public toilets"
+    ],
+    "icon": "map",
+    "url": "/restroomreach/",
+    "source": "https://github.com/jsdyer/restroomreach",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Dated OpenStreetMap toilet extracts with reported access and accessibility tags; map details can be incomplete or old.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "OSM database edition",
+          "url": "https://coolcode.ca/restroomreach/data/index.json",
+          "path": [
+            "sourceUpdatedAt"
+          ],
+          "allow_unknown": true,
+          "value": "2026-07-15"
+        },
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/restroomreach/data/index.json",
+          "path": [
+            "capturedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "mapped toilets"
+          },
+          "value": "2026-11-23 11:36 UTC",
+          "count": 1285
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a region, then filter wheelchair access, fees or changing tables. **Mapped yes** is a contributor’s report; **Not recorded** is a separate state. Expand **Sort by distance from a point** for coordinates or the Willoughby, Vancouver and Halifax presets. Distances are straight-line, not walking routes. Turn on **Show street map** only when you want background tiles. The capture date and OSM database edition are displayed separately: downloading an old source edition does not make the observations current. Export a receipt to retain the evidence outside this tab."
+    }
+  },
+  {
+    "id": "translationdesk",
+    "title": "Translation Desk",
+    "description": "Translate text on your device or your own server, then review and export paired passages.",
+    "category": "projects",
+    "tags": [
+      "translation",
+      "languages",
+      "text",
+      "LibreTranslate",
+      "privacy"
+    ],
+    "icon": "scroll-text",
+    "url": "/translationdesk/",
+    "source": "https://github.com/jsdyer/translationdesk",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "On-device browser translation or a LibreTranslate server you choose, with local paragraph review and exports."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose source and target language codes, prepare the browser language pair, then select **Translate**. Preparation may download a language pack; it does not upload your source text. The original and editable translation are paired by paragraph order, so review their alignment and wording. If this browser lacks the Translator API, use your LibreTranslate server or paste an existing translation for local review. **Save project** keeps the texts and glossary; nothing is saved automatically and server keys are excluded."
+    }
+  },
+  {
+    "id": "diagrambench",
+    "title": "Diagram Bench",
+    "description": "Turn diagram text into clear, editable SVG and PNG diagrams in your browser.",
+    "category": "projects",
+    "tags": [
+      "diagrams",
+      "Mermaid",
+      "SVG",
+      "flowcharts",
+      "developer"
+    ],
+    "icon": "workflow",
+    "url": "/diagrambench/",
+    "source": "https://github.com/jsdyer/diagrambench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Mermaid renders locally; optional Kroki rendering sends code only to a server you choose."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a starting point or write your own Mermaid source, then select **Render diagram**. The preview and exported image keep the last successful render when a later edit has a syntax error. **Save project** includes that rendered source so it can be reopened and edited. Mermaid runs locally; selecting Kroki requires your own server address and an explicit permission checkbox before code is sent there."
+    }
+  },
+  {
+    "id": "wordweave",
+    "title": "Word Weave",
+    "description": "Explore words by meaning, sound and spelling, compare searches and keep a writing shortlist.",
+    "category": "media",
+    "tags": [
+      "words",
+      "writing",
+      "rhymes",
+      "language",
+      "Datamuse"
+    ],
+    "icon": "scan-text",
+    "url": "/wordweave/",
+    "source": "https://github.com/jsdyer/wordweave",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Datamuse word relationships are fetched on demand; comparisons, filters and shortlists are processed in your browser."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with **ocean** and **Similar meaning**, then pin the search and try **river** to inspect shared words. **Spelling pattern** accepts * for any letters and ? for one letter, such as **t??k**. Syllable and word-class filters are local, so they make no additional API request. Comparisons describe only the returned lists, not the entire vocabulary. Your shortlist stays in this tab; download it before closing."
+    }
+  },
+  {
+    "id": "holidayclock",
+    "title": "Holiday Clock",
+    "description": "Compare holiday calendars and count working days with rules you can inspect.",
+    "category": "places",
+    "tags": [
+      "holidays",
+      "calendar",
+      "working-days",
+      "canada",
+      "comparison"
+    ],
+    "icon": "history",
+    "url": "/holidayclock/",
+    "source": "https://github.com/jsdyer/holidayclock",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Canada Holidays records and local date-holidays rules compare calendars; custom working-day assumptions stay in your browser.",
+      "cadence": "Monthly Canadian cache",
+      "probes": [
+        {
+          "label": "Canadian cache retrieved",
+          "url": "https://coolcode.ca/holidayclock/data/canada.json",
+          "path": [
+            "retrievedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "years"
+            ],
+            "measure": "length",
+            "unit": "cached years"
+          },
+          "value": "2026-11-23 11:34 UTC",
+          "count": 4
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare any supported countries and first-level regions, with British Columbia and Nova Scotia as the starting pair. Canada can use nominal or observed dates; other calendars retain their own substitute rules. Export a comparison CSV, dated JSON receipt or all-day ICS calendar. The working-day planner uses public holidays, your selected weekend weekdays and extra closure dates, counting each date once. Confirm applicable workplace rules: these community calendars are not statutory or ATIP deadline advice."
+    }
   }
 ]
