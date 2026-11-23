@@ -344,6 +344,37 @@
     }
   },
   {
+    "id": "renewalboard",
+    "title": "Renewal Board",
+    "description": "Track when your domains and their certificates expire, spot missing transfer locks and DNSSEC, and export a renewal calendar.",
+    "category": "liminal-tools",
+    "tags": [
+      "domains",
+      "renewals",
+      "expiry",
+      "rdap",
+      "cira",
+      ".ca",
+      "certificates",
+      "dnssec",
+      "transfer lock",
+      "calendar"
+    ],
+    "icon": "calendar-days",
+    "url": "/renewalboard/",
+    "source": "https://github.com/jsdyer/renewalboard",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Your browser asks each domain's registry through RDAP, and optionally crt.sh, for expiry dates when you check your list."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Paste your domains, one per line, and choose \"Check renewals\". Rows are sorted by urgency. \"Act now\" means a registration expires within 30 days (or already has), the domain is in redemption or on hold, or its certificate expires within a week. \"Soon\" means a registration within 90 days or a certificate within three weeks. \"Check\" covers a missing transfer lock or unsigned DNSSEC. Download the .ics file to put every expiry in your calendar with reminders 30 and 7 days before. The list is kept only if you tick \"Remember this list\"."
+    }
+  },
+  {
     "id": "routearchaeologist",
     "title": "Route Archaeologist",
     "description": "Trace observed BGP origins by IP prefix or ASN.",
@@ -6382,6 +6413,56 @@
     }
   },
   {
+    "id": "rangeledger",
+    "title": "Range Ledger",
+    "description": "Follow the IP ranges published by Cloudflare, AWS, Google Cloud, Fastly, Oracle and GitHub, see what changed each day, and check any address.",
+    "category": "liminal-tools",
+    "tags": [
+      "ip ranges",
+      "cidr",
+      "cloudflare",
+      "aws",
+      "google cloud",
+      "fastly",
+      "oracle",
+      "github",
+      "allowlist",
+      "firewall"
+    ],
+    "icon": "list-filter",
+    "url": "/rangeledger/",
+    "source": "https://github.com/jsdyer/rangeledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Daily snapshots of the IP range files Cloudflare, AWS, Google Cloud, Fastly, Oracle Cloud and GitHub publish, with day-by-day changes.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/rangeledger/data/index.json",
+          "path": [
+            "built"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "prefixes"
+            ],
+            "unit": "published prefixes"
+          },
+          "value": "2026-11-23 19:00 UTC",
+          "count": 13992
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Paste an address into \"Check an address\" to see which provider publishes it, in which region or service, and whether that region is Canadian. \"What changed\" lists, by day, every prefix a provider added or removed. A move between regions shows as one removal and one addition. \"Build an allowlist\" turns a provider's current list, filtered by family, region, service or Canadian regions, into plain text, nginx `allow` rules or CSV. Rebuild from the newest snapshot before you rely on one. A provider marked \"stale\" couldn't be refreshed that day and shows its last good list."
+    }
+  },
+  {
     "id": "cancon-atlas",
     "title": "CanCon Atlas",
     "description": "Find a recording in the CRTC music database and inspect its Canadian-content decision, language and release details.",
@@ -7056,6 +7137,37 @@
     "sync_manifest": true,
     "readme": {
       "note": "On November 18, 2026 all eight completed traces from Beauharnois AS16276 to Vancouver AS396993 matched a DE-CIX New York member interface. The eight reverse traces reached Beauharnois with no exchange match. Compare the directions and open their original Atlas results."
+    }
+  },
+  {
+    "id": "colocheck",
+    "title": "Colo Check",
+    "description": "See which Cloudflare data centre your connection reaches over IPv4 and IPv6, how fast it answers, and whether Canadian traffic crosses the border.",
+    "category": "liminal-tools",
+    "tags": [
+      "cloudflare",
+      "colo",
+      "data centre",
+      "latency",
+      "ipv6",
+      "routing",
+      "boomerang",
+      "cdn",
+      "peering",
+      "canada"
+    ],
+    "icon": "radar",
+    "url": "/colocheck/",
+    "source": "https://github.com/jsdyer/colocheck",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Your browser reads Cloudflare's /cdn-cgi/trace page from several addresses; data-centre names come from Cloudflare's published location list."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose \"Check my connection\". The large code is the data centre your browser's normal route reached. Rows highlighted in orange reached a data centre outside Canada although Cloudflare placed you in Canada. That usually means your ISP hands Cloudflare traffic over in the US (for example, Vancouver traffic served from Seattle). Compare the IPv4 and IPv6 rows: they often take different paths. Save each run with a label such as \"Home fibre\" or \"Phone on 5G\", then run it again on another network to compare. Saved runs keep only your network prefix, never your full address."
     }
   },
   {
