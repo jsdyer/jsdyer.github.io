@@ -8976,5 +8976,312 @@
     "readme": {
       "note": "Start with the latest published capture or import a standard axe-core JSON report. The summary counts individual flagged element locations and distinct rule types: one repeated component can produce many locations. The separate review count means human judgement is needed, not that those checks failed. Select an earlier capture and open **Changes** to see newly observed and no-longer-observed rule/element pairs. Comparisons require the same URL, final URL, axe version, browser, viewport, rule tags and settle time. A failed, missing or incomplete-resource page is unassessed. Raw axe imports without the full capture profile can be inspected but cannot establish changes. **Needs review** is separate from confirmed automated findings. There is no accessibility grade or conformance certificate. To expand the collection, edit the `pages` array in `web/config.json`, or run the GitHub workflow with comma-separated public URLs you are authorized to check. Imports stay in this tab; download a receipt to keep it."
     }
+  },
+  {
+    "id": "dockdiary",
+    "title": "Dock Diary",
+    "description": "Find bike-share stations and compare how often bikes or return spaces were unavailable.",
+    "category": "places",
+    "tags": [
+      "bike share",
+      "stations",
+      "Vancouver",
+      "mobility",
+      "availability",
+      "history"
+    ],
+    "icon": "bike",
+    "url": "/dockdiary/",
+    "source": "https://github.com/jsdyer/dockdiary",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "CityBikes station availability with retained hourly captures and optional current network lookups.",
+      "cadence": "Hourly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/dockdiary/data/index.json",
+          "path": [
+            "capturedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "networks"
+            ],
+            "measure": "sum",
+            "field": "stations",
+            "unit": "stations"
+          },
+          "value": "2026-11-23 10:52 UTC",
+          "count": 261
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a network and use **Fetch current availability**, then select a station to inspect bikes, return spaces and a weekday/hour heatmap. Vancouver starts with a real retained capture; the history grows through hourly scheduled checks. An empty heatmap cell means no observations, not uninterrupted availability. A percentage is the share of sampled, distinct observations with zero bikes or spaces, not the share of time unavailable and not a trip count. Download **Save diary JSON** before closing the tab to retain manual lookups; imports and comparisons stay local. Edit **web/config.json** to add tracked networks and their time zones, then run **Dock Diary · Capture, check and publish** to begin retaining them."
+    }
+  },
+  {
+    "id": "buoybench",
+    "title": "Buoy Bench",
+    "description": "Compare Canadian buoy observations and retained marine forecasts across time.",
+    "category": "places",
+    "tags": [
+      "buoys",
+      "waves",
+      "marine",
+      "forecasts",
+      "Canada",
+      "British Columbia",
+      "Nova Scotia"
+    ],
+    "icon": "map",
+    "url": "/buoybench/",
+    "source": "https://github.com/jsdyer/buoybench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "ECCC buoy observations and marine forecast editions, retained with separate observation, issue and capture times.",
+      "cadence": "Every six hours",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/buoybench/data/status.json",
+          "path": [
+            "retrieved_at"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "observations"
+            ],
+            "unit": "observations"
+          },
+          "value": "2026-11-23 11:06 UTC",
+          "count": 140
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a buoy, comparison buoy and dated capture. Wind is shown in knots, significant wave height in metres, and water temperature in °C; each plotted point is a source observation. Select a retained forecast edition to read what ECCC issued and inspect the later observations. Forecasts describe areas while buoys measure points, so this is a manual comparison rather than an accuracy score. First-run forecasts correctly show that later observations are still awaited. Save a receipt JSON to keep the record outside this tab."
+    }
+  },
+  {
+    "id": "orbitalcensus",
+    "title": "Orbital Census",
+    "description": "Explore the satellite catalogue by launch, owner and object type, and compare dated captures.",
+    "category": "field-kit",
+    "tags": [
+      "satellites",
+      "space",
+      "catalogue",
+      "CelesTrak",
+      "history"
+    ],
+    "icon": "telescope",
+    "url": "/orbitalcensus/",
+    "source": "https://github.com/jsdyer/orbitalcensus",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Dated CelesTrak SATCAT records with source edition times, object fields and capture comparisons.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Source checked",
+          "url": "https://coolcode.ca/orbitalcensus/data/index.json",
+          "path": [
+            "checkedAt"
+          ],
+          "precision": "minute",
+          "value": "2026-11-23 10:53 UTC"
+        },
+        {
+          "label": "Catalogue edition",
+          "url": "https://coolcode.ca/orbitalcensus/data/index.json",
+          "path": [
+            "captures",
+            0,
+            "sourceUpdatedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "captures",
+              0,
+              "recordCount"
+            ],
+            "unit": "objects"
+          },
+          "value": "2026-11-22 21:56 UTC",
+          "count": 71423
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search **RADARSAT**, **25544**, or an international designator; filters cover the complete retained catalogue, including payloads, rocket bodies and debris. **Canadian objects** is a starting search, not the only supported owner. Select an object for source fields and its CelesTrak record. A blank decay date does not establish that an object is still in Earth orbit. **Dated captures** compares matching coverage across source editions; the first capture establishes a baseline. Save capture JSON or export the filtered CSV to keep evidence, and import saved JSON or JSON.gz captures locally. Default comparisons cover identity and status; orbital measurements are optional and can vary without proving a manoeuvre."
+    }
+  },
+  {
+    "id": "flightweather",
+    "title": "Flight Weather",
+    "description": "Keep airport forecasts and compare them with later observations.",
+    "category": "field-kit",
+    "tags": [
+      "aviation",
+      "METAR",
+      "TAF",
+      "weather",
+      "forecast",
+      "Vancouver",
+      "Halifax"
+    ],
+    "icon": "plane",
+    "url": "/flightweather/",
+    "source": "https://github.com/jsdyer/flightweather",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Retained NOAA/NWS airport forecasts and observations, with issue, validity and capture times.",
+      "cadence": "Hourly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/flightweather/data/ledger.json",
+          "path": [
+            "retrievedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "observations"
+            ],
+            "measure": "length",
+            "unit": "reports"
+          },
+          "value": "2026-11-23 11:05 UTC",
+          "count": 103
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose an airport and a dated capture, then select a TAF edition. **Saved before observation** shows only outcomes that occurred after this tool had saved that forecast. A new collection can have no such outcomes yet; hourly captures grow the record. **Issued before observation (reconstructed)** can inspect earlier observations but is explicitly labelled retrospective. TEMPO and PROB alternatives stay separate, and BECMG transitions are excluded from deterministic pairing until the next FM period. Save receipt JSON to keep a portable copy."
+    }
+  },
+  {
+    "id": "ephemeraatlas",
+    "title": "Ephemera Atlas",
+    "description": "Search historical menus, postcards and pamphlets by date, place and subject, then inspect original scans.",
+    "category": "media",
+    "tags": [
+      "archives",
+      "menus",
+      "postcards",
+      "pamphlets",
+      "NYPL",
+      "ephemera"
+    ],
+    "icon": "library-big",
+    "url": "/ephemeraatlas/",
+    "source": "https://github.com/jsdyer/ephemeraatlas",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Selected NYPL public-domain metadata from its 30 December 2015 archive; searched locally.",
+      "probes": [
+        {
+          "label": "Source metadata edition",
+          "url": "https://coolcode.ca/ephemeraatlas/data/status.json",
+          "path": [
+            "sourceEdition"
+          ],
+          "count_at": {
+            "path": [
+              "recordCount"
+            ],
+            "unit": "items"
+          },
+          "value": "2015-12-30",
+          "count": 24859
+        },
+        {
+          "label": "Archive downloaded",
+          "url": "https://coolcode.ca/ephemeraatlas/data/status.json",
+          "path": [
+            "capturedAt"
+          ],
+          "precision": "minute",
+          "value": "2026-11-23 10:59 UTC"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search a word such as **railroad** or use **Canadian traces** to find mentions in titles, subjects and notes. The separate place filter searches only recorded geographic subjects and publication places, which many items lack. Open a title for its original dates, source notes, rights and NYPL scan link. **Compare** keeps two records side by side; **Save record JSON** downloads the evidence. Optional scan previews contact NYPL; all searches stay in this tab. This is a selected edition of NYPL’s **30 December 2015** public-domain metadata release, not a live search or a complete inventory of its collections. The download date is separate from the original item date. Year filters overlap recorded ranges; the chart counts each item by its earliest recorded year. Missing dates remain explicitly undated."
+    }
+  },
+  {
+    "id": "fireballledger",
+    "title": "Fireball Ledger",
+    "description": "Explore reported fireballs, compare their energies and retain changes to the published catalogue.",
+    "category": "field-kit",
+    "tags": [
+      "astronomy",
+      "fireballs",
+      "meteors",
+      "history",
+      "space"
+    ],
+    "icon": "history",
+    "url": "/fireballledger/",
+    "source": "https://github.com/jsdyer/fireballledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Weekly captures of the NASA/JPL CNEOS catalogue preserve reported fireball locations, energies and subsequent catalogue changes.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/fireballledger/data/status.json",
+          "path": [
+            "retrieved_at"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "unit": "events"
+          },
+          "value": "2026-11-23 10:53 UTC",
+          "count": 1074
+        },
+        {
+          "label": "Latest reported event",
+          "url": "https://coolcode.ca/fireballledger/data/status.json",
+          "path": [
+            "through"
+          ],
+          "value": "2026-10-04"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with **At least 1 kt**, then select a map point or an event time in the table to inspect its source values. Change the dates or energy threshold freely; the presets are optional. Events without reported coordinates remain in the ledger but are omitted from the map. **Save capture JSON** keeps the entire selected capture and its changes; **Export filtered CSV** saves only the current results. The capture date is when the catalogue was retrieved, not when the fireball occurred. The first capture is a baseline; later weekly captures show revisions to same-time records and records newly appearing or no longer present. A changed event time can appear as both an addition and an absence because the source provides no immutable event identifier."
+    }
   }
 ]
