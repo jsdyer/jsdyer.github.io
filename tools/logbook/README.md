@@ -1,5 +1,9 @@
 # Vhost Logbook
 
+<!-- coolcode:guide -->
+Pass an Apache access log filename, or pipe a decompressed archive to standard input, to compare daily traffic and individual HTTP status codes. Check the skipped-line count before interpreting a report; exit status 1 means some lines could not be read as log records.
+<!-- /coolcode:guide -->
+
 Turn a local Apache access log into a daily traffic report. Each row gives request volume, counts by HTTP status family, and response-body bytes. A second line breaks out the individual status codes, so you can tell a 404 spike from a 403 spike. The report contains aggregate counts and dates only.
 
 ## Read your Apache log

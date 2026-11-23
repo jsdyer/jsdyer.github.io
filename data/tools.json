@@ -32,7 +32,6 @@
       "detail": "Upstream container guides supply the images, ports and data paths. The planner estimates memory for your selections."
     },
     "readme": {
-      "lead": "RAM figures are planning",
       "note": "Plan a media server or monitoring stack from 12 services, change ports and storage, and reopen the exported Compose file later."
     }
   },
@@ -57,8 +56,7 @@
       "detail": "Your local JSON service directory supplies the links."
     },
     "readme": {
-      "lead": "Each entry has a",
-      "note": "Each entry has a group, name, an absolute HTTP or HTTPS url, and an optional note."
+      "note": "Add your NAS and other services to a private JSON file using group, name and URL fields, then reload to see changes. Use hostnames resolvable by your other devices; anyone who can reach the dashboard can see its links."
     }
   },
   {
@@ -83,8 +81,7 @@
       "detail": "Your Apache access log supplies the dates and request counts."
     },
     "readme": {
-      "lead": "Each row gives request",
-      "note": "Each row gives request volume, counts by HTTP status family, and response-body bytes."
+      "note": "Pass an Apache access log filename, or pipe a decompressed archive to standard input, to compare daily traffic and individual HTTP status codes. Check the skipped-line count before interpreting a report; exit status 1 means some lines could not be read as log records."
     }
   },
   {
@@ -109,8 +106,7 @@
       "detail": "Your own host probes are timestamped in a local SQLite database."
     },
     "readme": {
-      "lead": "Probes hosts concurrently, records",
-      "note": "Probes hosts concurrently, records each sample, and logs first observations plus UP/DOWN transitions."
+      "note": "Add a router or NAS by name, run check, then inspect status and history or export recent samples to CSV. A DOWN result means the ICMP probe failed; sleeping devices and hosts that block ping can still have working services."
     }
   },
   {
@@ -168,7 +164,6 @@
       "detail": "Website captures and their timestamps live in your local archive."
     },
     "readme": {
-      "lead": "Replaying an uncaptured destination",
       "note": "Capture a site before and after a change, then compare the two snapshot IDs to see which URLs appeared, disappeared or changed content."
     }
   },
@@ -195,7 +190,6 @@
       "detail": "Your records and timeline spreadsheets populate the archive. An optional collection links seven dated W3C recommendations."
     },
     "readme": {
-      "lead": "Export includes only attachments",
       "note": "Import a timeline CSV with dates and titles. Reopening the same file skips existing records, including capsules you have since edited."
     }
   },
@@ -222,8 +216,7 @@
       "detail": "The index records a SHA-256 checksum for each file you choose so you can verify it later."
     },
     "readme": {
-      "lead": "A moved file appears",
-      "note": "A moved file appears as MISSING under its old name and ADDED under its new one."
+      "note": "Create a manifest outside a stable collection, keep a trusted copy, and verify the collection after copying it to another disk. Renamed files appear as missing and added; changed bytes are detected even when file size and timestamps stay the same."
     }
   },
   {
@@ -281,9 +274,9 @@
       "detail": "Shodan InternetDB returns observations for one public IP without observation dates."
     },
     "readme": {
-      "lead": "Ports, fingerprints and CVEs",
-      "note": "Ports, fingerprints and CVEs describe source observations and associations, with coverage and freshness varying by address."
-    }
+      "note": "Enter a public IP address and export its InternetDB observations as JSON for comparison later. The lookup never probes the target; its retrieval time is not the date Shodan scanned a reported port or vulnerability."
+    },
+    "sync_manifest": true
   },
   {
     "id": "certtrail",
@@ -308,9 +301,9 @@
       "detail": "Certificate records come from a live crt.sh search or a JSON file you import."
     },
     "readme": {
-      "lead": "A validity-start-year timeline, name",
-      "note": "A validity-start-year timeline, name and issuer filters, deduplicated certificate records, name counts and a filtered CSV export help make historical results readable."
-    }
+      "note": "Enter a domain, then filter certificate names and issuers or export matching records as CSV. If the live query fails, import a crt.sh JSON array for the same domain; validity dates and CT history do not establish current deployment or revocation status."
+    },
+    "sync_manifest": true
   },
   {
     "id": "domain-biography",
@@ -397,9 +390,9 @@
       "detail": "RIPEstat supplies historical route observations for your selected dates."
     },
     "readme": {
-      "lead": "The app compares observed",
-      "note": "The app compares observed origins and visibility and exports the selected prefix's intervals as CSV."
-    }
+      "note": "Enter an IP, prefix or ASN with a UTC date range, select a returned prefix and inspect its observed origins or AS paths. The RPKI link checks current authorization even when the routing observation you selected is historical."
+    },
+    "sync_manifest": true
   },
   {
     "id": "rpkiguard",
@@ -426,9 +419,9 @@
       "detail": "RIPEstat checks the submitted prefix and origin ASN on demand."
     },
     "readme": {
-      "lead": "Shared links populate the",
-      "note": "Shared links populate the query without transmitting it until the user selects Validate."
-    }
+      "note": "Submit an ASN and prefix to inspect the validation result and covering authorizations. A shared link only fills the form; select Validate to send it to RIPEstat, and distinguish an unauthorized origin from a prefix that exceeds the allowed length."
+    },
+    "sync_manifest": true
   },
   {
     "id": "outagescope",
@@ -453,9 +446,9 @@
       "detail": "Georgia Tech IODA supplies outage signals for a window of up to 30 days."
     },
     "readme": {
-      "lead": "One disruption can affect",
-      "note": "One disruption can affect several signals, and there can be gaps and uneven coverage."
-    }
+      "note": "Try the July 2022 Rogers AS812 example and compare routing visibility, probing and background traffic over the same UTC window. Missing samples or an empty detection list do not establish network health; follow the linked source evidence."
+    },
+    "sync_manifest": true
   },
   {
     "id": "broadbandatlas",
@@ -511,9 +504,9 @@
       ]
     },
     "readme": {
-      "lead": "Search by community, coordinates",
-      "note": "Search by community, coordinates or hexagon ID, inspect individual cells, combine filters, and export matching records."
-    }
+      "note": "Choose a province, search a community or coordinates, and build a location report to compare coverage, nearby projects, spectrum records and provincial pricing. Grid-centre distances and area coverage estimates do not confirm service or speeds at a particular address."
+    },
+    "sync_manifest": true
   },
   {
     "id": "telecompulse",
@@ -646,9 +639,9 @@
       ]
     },
     "readme": {
-      "lead": "The lookup form opens",
-      "note": "The lookup form opens a source search for any domain and an optional country or UTC date range."
-    }
+      "note": "Open a case and compare its daily measurement outcomes, then follow the evidence into OONI Explorer. Use the lookup form for another domain and country; an anomalous measurement alone does not establish intentional blocking."
+    },
+    "sync_manifest": true
   },
   {
     "id": "packet-detour",
@@ -761,9 +754,9 @@
       "detail": "Inspect pasted headers, a local HAR or a dated HTTP redirect and its final response."
     },
     "readme": {
-      "lead": "It compares cookie flag",
       "note": "Paste headers or open a HAR locally, then inspect its HTTP status context and security-header checklist. Status notes distinguish cache validation, authentication, rate limits and gateway failures, with direct specification links. A code alone does not establish why a request failed. Use Gov Grade for dated MDN provider grades and TLS evidence."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "mailpath",
@@ -791,7 +784,8 @@
     },
     "readme": {
       "note": "Copy the Received and Authentication-Results fields from a message you received, including indented continuation lines. The timeline shows which servers recorded each hop and the delay between their timestamps."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "packetpocket",
@@ -849,9 +843,9 @@
       "detail": "Inspect your lockfile or compare two published project manifests. Optional OSV lookups send only the packages and versions you select."
     },
     "readme": {
-      "lead": "Version ranges, local paths",
       "note": "Compare pip 25.3 and 26.3, then filter for unchanged versions or inspect earlier versions no longer present. The package lists record what pip bundled in each release."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "exploitgraveyard",
@@ -1132,7 +1126,8 @@
           "value": "2026-11-22",
           "count": 6
         }
-      ]
+      ],
+      "cadence": "Twice monthly"
     },
     "readme": {
       "note": "Search a registrar name or IANA ID, then select its row to compare quarters. Rates are per 10,000 managed gTLD domains. Start with eight tracked registrars or load the publisher’s original CSV locally to explore all published registrar rows for that quarter."
@@ -1325,9 +1320,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "The last unquoted word",
       "note": "Search completed federal ATIP summaries by keyword and institution, save useful records, then export the current result page or your saved shortlist as CSV. The export includes both languages, official record links and the snapshot date; it is not the full result set unless you have saved every match."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "governmentmemory",
@@ -1380,9 +1375,9 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "lead": "Each result links to",
-      "note": "Each result links to its source and offers a browser-local outline for a request, plus a topic link into the CoolCode ATIP Records Explorer."
-    }
+      "note": "Save relevant record classes or Personal Information Banks, choose one institution, and edit its request outline before copying or downloading it. Government-wide references are optional and need an applicability check against that institution’s inventory."
+    },
+    "sync_manifest": true
   },
   {
     "id": "briefings",
@@ -1431,9 +1426,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "Select an institution to",
-      "note": "Select an institution to draft a request containing only its saved notes."
-    }
+      "note": "Save briefing references across searches, then select an institution to draft a request containing its saved notes. Follow the ATIP Explorer link to look for an earlier release; the briefing register provides titles and metadata rather than the documents themselves."
+    },
+    "sync_manifest": true
   },
   {
     "id": "evidencelab",
@@ -1520,9 +1515,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "The reporting periods are",
-      "note": "The reporting periods are the months when copies of completed records were requested."
-    }
+      "note": "Choose a reporting period and search a topic, reference or institution to find packages whose copies were requested. Counts describe that informal-request channel and period, not unique readers or the date the original records were released."
+    },
+    "sync_manifest": true
   },
   {
     "id": "atipmetrics",
@@ -1572,9 +1567,9 @@
       "cadence": "Monthly"
     },
     "readme": {
-      "lead": "The table is searchable,",
-      "note": "The table is searchable, sortable, linkable, and exportable as CSV."
-    }
+      "note": "Select an institution and keep Access to Information Act and Privacy Act results separate when comparing years. Use its research workspace to collect public disclosure citations and edit a request draft; a missing publisher match does not prove that no relevant records exist."
+    },
+    "sync_manifest": true
   },
   {
     "id": "ministersays",
@@ -1625,9 +1620,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "The published dates and",
-      "note": "The published dates and ministry codes are source fields, and the interface preserves missing values."
-    }
+      "note": "Select two notes to compare their prepared questions, responses and background, including the source’s redactions. These are briefing preparations, so do not read the comparison as a transcript of what a minister actually said."
+    },
+    "sync_manifest": true
   },
   {
     "id": "wrongdoings",
@@ -1675,9 +1670,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "Dates are file dates",
-      "note": "Dates are file dates from the source."
-    }
+      "note": "Filter by institution, year or finding category, then read the published case description and corrective response together. The index covers published founded cases and cannot measure all complaints or an institution’s overall prevalence of wrongdoing."
+    },
+    "sync_manifest": true
   },
   {
     "id": "algorithmwatch",
@@ -1730,9 +1725,9 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "lead": "The source supplies status",
-      "note": "The source supplies status dates and personal-information fields, with blanks left as unreported."
-    }
+      "note": "Filter the register by institution, status or personal-information use and open the original fields before exporting your selection. An unknown impact level means no verified assessment join is available; blank source fields remain unreported."
+    },
+    "sync_manifest": true
   },
   {
     "id": "datasetexplorer",
@@ -1781,9 +1776,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "Filter by format, organization",
       "note": "Search the downloaded federal catalogue, or use Live catalogue search for a current CKAN query. Preview CSV and JSON resources up to 2 MB when the publisher allows browser access. You can also open a local CSV or JSON extract without uploading it; previews show up to 50 rows and 30 columns."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "opendatagraveyard",
@@ -1831,9 +1826,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "Each entry offers links",
-      "note": "Each entry offers links to check its original URL, archived captures and related current releases."
-    }
+      "note": "Search a removed listing and follow its original URL, archive search and related-current-release links. A catalogue deletion supplies a timestamp and identifier, but does not explain the removal or prove the underlying data was destroyed."
+    },
+    "sync_manifest": true
   },
   {
     "id": "canadaanalytics",
@@ -1896,9 +1891,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "Compare published numeric series",
-      "note": "Compare published numeric series over any portion of the rolling window, inspect the exact source values for each month, or export the comparison as a CSV."
-    }
+      "note": "Choose series and a date range, inspect monthly values, and optionally index each series to its first positive observation. Locally saved annotations can mark a service change; matching timing does not establish why traffic changed."
+    },
+    "sync_manifest": true
   },
   {
     "id": "salmonlines",
@@ -1996,9 +1991,9 @@
       "install_detail": "Your collector stores dated copies of a file or HTTPS feed in SQLite."
     },
     "readme": {
-      "lead": "The report distinguishes missing",
       "note": "Compare the 2020 and 2023 Nova Scotia bridge releases by record_id. Four of the nine Annapolis County bridges changed Level 1 rating. Open ANN002 to see Anderson Brook Bridge move from 3 to 2."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "corporateghosts",
@@ -2051,7 +2046,7 @@
           "count": 369
         }
       ],
-      "cadence": "Daily federal build"
+      "cadence": "Daily"
     },
     "readme": {
       "note": "Open BC historical registrations and look for GLOBAL TELEGRAPH LIMITED (BC0401241). In Nova Scotia, ABC HOUSING CO-OPERATIVE LIMITED is registry ID 3057952. Take an NS ID to RJSC Connect for the official file."
@@ -2122,9 +2117,9 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "lead": "Each report counts once",
-      "note": "Each report counts once even when it names multiple institutions or subjects."
-    }
+      "note": "Select an organization, narrow its communication reports by year, institution or subject, and export the matching reports. Each report counts once even when several subjects are named; consultant registrations are outside this index."
+    },
+    "sync_manifest": true
   },
   {
     "id": "charityflows",
@@ -2183,9 +2178,9 @@
       "cadence": "Monthly"
     },
     "readme": {
-      "lead": "Compare available fiscal periods,",
-      "note": "Compare available fiscal periods, inspect qualified-donee gift values, and follow recipients where their reported charity business number exactly matches the index."
-    }
+      "note": "Find a charity by name or business number, compare its available fiscal periods and follow exact business-number matches in the gifts panel. The table and CSV show the 40 largest gift entries per period, while totals cover all matched gifts in the selected filing."
+    },
+    "sync_manifest": true
   },
   {
     "id": "tariffxray",
@@ -2275,9 +2270,9 @@
       ]
     },
     "readme": {
-      "lead": "Review a device record",
-      "note": "Review a device record or export visible exhibit links as CSV."
-    }
+      "note": "Search a device or FCC ID, narrow the exhibit types and open the original filing or independent reference. Confirm the hardware variant against the filing before using its exhibits; the app links to documents rather than republishing them."
+    },
+    "sync_manifest": true
   },
   {
     "id": "recallradar",
@@ -2326,9 +2321,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "The watchlist runs on",
-      "note": "The watchlist runs on visits and has no background notifications."
-    }
+      "note": "Save a product or brand as a search term, then revisit to check matching notices and read the issuing agency’s instructions. The watchlist runs when you visit and does not send background notifications."
+    },
+    "sync_manifest": true
   },
   {
     "id": "patentattic",
@@ -2607,12 +2602,12 @@
           "value": "2025-12-12"
         }
       ],
-      "cadence": "Daily"
+      "cadence": "Weekly"
     },
     "readme": {
-      "lead": "A record's map-search link",
-      "note": "A record's map-search link uses the address or locality reported by the register."
-    }
+      "note": "Search a locality or choose a theme, then open the original designation and its historical description. Theme matches describe archive wording and do not establish current abandonment, access permission or a site’s physical condition."
+    },
+    "sync_manifest": true
   },
   {
     "id": "namesforget",
@@ -2652,9 +2647,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "Filter by province, territory",
-      "note": "Filter by province, territory or undersea area, and open a record for source coordinates and naming information."
-    }
+      "note": "Choose a province, territory or undersea area and search a name, feature type or reference locality. Map points are published reference coordinates rather than boundaries or entrances; use the official lookup to investigate historical name status."
+    },
+    "sync_manifest": true
   },
   {
     "id": "bcplacenames",
@@ -2679,9 +2674,9 @@
       "detail": "The BC Geographical Names service returns matches for the name or location you choose."
     },
     "readme": {
-      "lead": "Distances are straight-line distances",
-      "note": "Distances are straight-line distances to reference points."
-    }
+      "note": "Search a name or nearby coordinates, inspect a naming decision and export the visible page as CSV or GeoJSON. Nearby official-status filtering applies to the current page only, and a reference point is not a feature boundary or entrance."
+    },
+    "sync_manifest": true
   },
   {
     "id": "hiddenwater",
@@ -3013,9 +3008,9 @@
       "cadence": "Daily"
     },
     "readme": {
-      "lead": "The source category “Weather",
-      "note": "The source category “Weather balloon, meteor, rocket, CIRVIS/UFO” combines several possible observations."
-    }
+      "note": "Search a CADORS number or select a year and event category, then copy the report number into Transport Canada’s original query. The bulk files omit narratives, and the combined balloon, meteor, rocket and CIRVIS/UFO category does not establish an explanation."
+    },
+    "sync_manifest": true
   },
   {
     "id": "lightkeeper",
@@ -3061,9 +3056,9 @@
       ]
     },
     "readme": {
-      "lead": "When source remarks give",
-      "note": "When source remarks give a complete sequence, the app displays the flash and eclipse durations."
-    }
+      "note": "Choose a light station and compare its character with neighbouring signals, or try Identify mode with playback started on request. Schematic flash widths are labelled when source timings are absent; use current official publications for navigation."
+    },
+    "sync_manifest": true
   },
   {
     "id": "stormtracks",
@@ -3212,9 +3207,9 @@
       "cadence": "Every 4 hours"
     },
     "readme": {
-      "lead": "Read the dated orbit",
       "note": "Calculate passes for your location and chosen minimum elevation, filter to likely visible windows, and download the shown passes as CSV or an ICS calendar. The calendar is a dated export, not a live subscription; refresh orbital elements and recalculate before observing."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "skyarchive",
@@ -3260,9 +3255,9 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "lead": "Inspect dates, coordinates, exposure",
-      "note": "Inspect dates, coordinates, exposure and wavelength fields, preview source imagery, and export filtered metadata to CSV."
-    }
+      "note": "Search the selected observation index, inspect a record’s dates and instruments, and request its source preview or export metadata. Use Search all of MAST for arbitrary targets; the local selection is not the full archive and individual products can require additional attribution."
+    },
+    "sync_manifest": true
   },
   {
     "id": "nasa",
@@ -3470,9 +3465,9 @@
       "cadence": "Weekdays"
     },
     "readme": {
-      "lead": "Indexed FX rebases each",
-      "note": "Indexed FX rebases each series to its first available observation within the chosen date range."
-    }
+      "note": "Choose a date range and use the date inspector or data table to compare rates with matching units. Indexed FX starts each series at its first available observation, while CSV exports preserve original exchange rates and blank observations."
+    },
+    "sync_manifest": true
   },
   {
     "id": "priceatlas",
@@ -3531,9 +3526,9 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "lead": "The site labels missing",
-      "note": "The site labels missing observations, retains published package prices in exports and distinguishes the chart’s units from source units."
-    }
+      "note": "Add products and package quantities to a basket, then compare exact endpoint months across your selected areas. Missing prices are listed rather than filled; exports retain the published package observations and Statistics Canada vector identifiers."
+    },
+    "sync_manifest": true
   },
   {
     "id": "insolvencyatlas",
@@ -3596,9 +3591,9 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "lead": "Incomplete years and missing",
-      "note": "Incomplete years and missing observations appear as gaps."
-    }
+      "note": "Compare filings or official annual rates for selected regions, then export the same range as CSV. Incomplete years stay blank, and consumer and business rates use different denominators, so compare like measures."
+    },
+    "sync_manifest": true
   },
   {
     "id": "marketshadows",
@@ -3662,9 +3657,9 @@
       "detail": "Has Things supplies local showtimes across all ten provinces and three territories. Langley links to venue calendars."
     },
     "readme": {
-      "lead": "Choose a city grouped by province",
-      "note": "Choose a city grouped by province or territory, filter its showtimes, then add selections from several cities to one calendar."
-    }
+      "note": "Choose a city, filter its showtimes and add events from several cities to one downloadable calendar. Plans and imported calendars last only for the current tab; download before leaving and check organizer details for unlisted times or changed availability."
+    },
+    "sync_manifest": true
   },
   {
     "id": "atlanticdial",
@@ -3754,7 +3749,8 @@
     },
     "readme": {
       "note": "Search Nain for Labrador broadcasts, or open Field recordings and search William Riley to hear him sing in Cherry Brook. Each recording opens at its original tape cue. On demand includes two programmes about Halifax donairs."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "screenradar",
@@ -3779,9 +3775,9 @@
       "detail": "TV searches use TVmaze, and the selected Canadian films come from Wikidata."
     },
     "readme": {
-      "lead": "Coverage is selective and",
-      "note": "Coverage is selective and year labels refer to initial or festival releases where known."
-    }
+      "note": "Search TVmaze or filter the Canadian film shelf, then save titles to this browser’s watchlist and export it as CSV. Source records provide credits and release information; the app does not establish current streaming availability."
+    },
+    "sync_manifest": true
   },
   {
     "id": "mediaechoes",
@@ -3850,9 +3846,9 @@
       ]
     },
     "readme": {
-      "lead": "Missing captures indicate gaps",
       "note": "Paste up to 50 public URLs into the batch checker to find nearby Wayback captures and download a dated JSON receipt. Current HTTP checks are optional. A browser restriction, timeout or blocked HEAD request is inconclusive, not proof that the page is dead."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "lostcode",
@@ -3876,9 +3872,9 @@
       "detail": "Software Heritage supplies archived origins, crawl visits and branches for each lookup."
     },
     "readme": {
-      "lead": "Try MintChip by name,",
-      "note": "Try MintChip by name, or open the archive history of Linux, PHP or DOOM directly."
-    }
+      "note": "Search a project name or public repository URL, select an archive visit, and inspect its preserved branches or tags. A visit is an archive observation; missing or partial captures do not establish whether the source survives elsewhere."
+    },
+    "sync_manifest": true
   },
   {
     "id": "unreleased",
@@ -3901,9 +3897,9 @@
       "detail": "The tool reads the Canada Media Fund project export you select on your device."
     },
     "readme": {
-      "lead": "Your export, searches, filters,",
-      "note": "Your export, searches, filters, and pinned items remain in the current tab."
-    }
+      "note": "Download an official CMF export, open it locally and correct its column mapping before filtering or adding rows to the research queue. A funded-project row is not proof of release or cancellation, and the imported file and queue stay in the current tab."
+    },
+    "sync_manifest": true
   },
   {
     "id": "clamground",
@@ -4229,7 +4225,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "The Canadian Numbering Administrator supplies telephone assignments. ARIN publishes dated IPv4 and IPv6 delegations by registration economy.",
-      "cadence": "Weekdays",
+      "cadence": "Tuesday–Saturday (UTC)",
       "probes": [
         {
           "label": "Data retrieved",
@@ -5111,7 +5107,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "TransLink publishes average peak passenger loads by route, direction, time band, season, day type and year.",
-      "cadence": "Monthly edition check",
+      "cadence": "Monthly",
       "probes": [
         {
           "label": "Data retrieved",
@@ -5265,7 +5261,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Six-hourly forecast receipts are matched to hourly temperatures from Environment and Climate Change Canada at two airports.",
-      "cadence": "Every six hours",
+      "cadence": "Every 6 hours",
       "probes": [
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -5329,7 +5325,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "NASA DONKI links solar eruptions to two 2024 storms, with Canadian ground measurements from INTERMAGNET.",
-      "cadence": "Monthly archive check",
+      "cadence": "Monthly",
       "probes": [
         {
           "label": "Data retrieved",
@@ -5568,7 +5564,7 @@
     "data_info": {
       "mode": "mixed",
       "detail": "Saved Canadian monitor/model pairs, opt-in worldwide CAMS forecasts and local hourly CSV comparisons. Model estimates remain distinct from observations.",
-      "cadence": "Daily; Nova Scotia releases validated data annually",
+      "cadence": "Daily",
       "probes": [
         {
           "url": "https://coolcode.ca/airpair/data/pairs.json",
@@ -5808,7 +5804,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "CRTC television logs cover two Halifax and two Vancouver stations, starting with all 30 reporting dates in September 2026.",
-      "cadence": "Monthly import",
+      "cadence": "Monthly",
       "probes": [
         {
           "label": "Latest broadcast date",
@@ -5913,7 +5909,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Halifax shop menus supply counter prices, sauce sizes and weekly pickup hours.",
-      "cadence": "Weekly change checks; manual price review",
+      "cadence": "Weekly",
       "probes": [
         {
           "label": "Menus verified",
@@ -6234,7 +6230,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Measurement Lab publishes monthly speed percentiles and test counts by city and network.",
-      "cadence": "Weekly checks for complete monthly files",
+      "cadence": "Weekly",
       "probes": [
         {
           "label": "Data retrieved",
@@ -6290,7 +6286,7 @@
     "data_info": {
       "mode": "mixed",
       "detail": "Backblaze’s quarterly production fleet tables supply model counts, drive-days and failures. Optional smartctl reports stay on your device.",
-      "cadence": "Monthly for quarterly reports",
+      "cadence": "Monthly",
       "probes": [
         {
           "label": "Source period",
@@ -6657,7 +6653,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Statistics Canada’s 2021 Census Profile supplies 16 indicators for communities, metropolitan areas, provinces and territories across Canada.",
-      "cadence": "Quarterly source verification",
+      "cadence": "Quarterly",
       "probes": [
         {
           "url": "https://coolcode.ca/census-lens/data/status.json",
@@ -7079,7 +7075,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Utility bulletins supply dated customer counts. Georgia Tech IODA measurements show how the provincial internet signal compared with its preceding week.",
-      "cadence": "Daily for internet measurements",
+      "cadence": "Daily",
       "probes": [
         {
           "label": "Internet data retrieved",
@@ -7504,7 +7500,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Quarterly Bank of Canada survey medians are matched to dated policy decisions and checked weekly.",
-      "cadence": "Checked weekly",
+      "cadence": "Weekly",
       "probes": [
         {
           "label": "Data retrieved",
@@ -7555,7 +7551,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "cadence": "Weekly checks for monthly releases",
+      "cadence": "Weekly",
       "detail": "Statistics Canada customs records show monthly domestic export value by province of origin, product and destination.",
       "probes": [
         {
@@ -7618,7 +7614,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Statistics Canada’s Labour Force Survey provides monthly, seasonally adjusted three-month averages for seven labour market indicators.",
-      "cadence": "Checked weekly",
+      "cadence": "Weekly",
       "probes": [
         {
           "label": "Snapshot retrieved",
@@ -7678,7 +7674,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Saved Halifax bus arrival estimates are compared with later vehicle sightings; TransLink collection is optional.",
-      "cadence": "Hourly, ten one-minute samples",
+      "cadence": "Hourly",
       "probes": [
         {
           "url": "https://coolcode.ca/transitreceipt/data/index.json",
@@ -7701,7 +7697,8 @@
     },
     "readme": {
       "note": "Start with a Halifax stop, then choose a saved prediction receipt. A positive difference means the first retained vehicle sighting was later than the estimate. A missing sighting stays unmatched; it never becomes an on-time arrival."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "tidereceipt",
@@ -7723,7 +7720,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Canadian Hydrographic Service tide predictions are saved before their target hours and matched to gauge readings.",
-      "cadence": "Every six hours",
+      "cadence": "Every 6 hours",
       "probes": [
         {
           "url": "https://coolcode.ca/tidereceipt/data/index.json",
@@ -7746,7 +7743,8 @@
     },
     "readme": {
       "note": "Choose a gauge and a saved receipt. A prediction of 3.2 m followed by a 3.5 m gauge reading gives a −0.3 m signed difference. That residual includes non-tidal effects and is not a storm-surge forecast score."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "gridreceipt",
@@ -7768,7 +7766,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "IESO hourly average demand forecasts are compared with subsequently reported Ontario electricity demand.",
-      "cadence": "Every three hours",
+      "cadence": "Every 3 hours",
       "probes": [
         {
           "url": "https://coolcode.ca/gridreceipt/data/index.json",
@@ -7791,7 +7789,8 @@
     },
     "readme": {
       "note": "Select a saved forecast issue. Positive error means the forecast exceeded reported demand. Archived source issues are marked separately from forecasts captured live; both use the same hourly average demand series."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "govtrackercensus",
@@ -7835,7 +7834,8 @@
     },
     "readme": {
       "note": "Choose a jurisdiction and open an institution row to inspect its request destinations and cookie names. A third-party request is not proof of tracking. Unavailable scans stay visibly unavailable."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "contractpatterns",
@@ -7880,7 +7880,8 @@
     },
     "readme": {
       "note": "Set a 7-, 30- or 90-day window and an amount band to find repeated awards to the same normalized vendor within a department. Open a row for reported amendments; these patterns are leads, not findings of contract splitting."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "maplehosting",
@@ -7924,7 +7925,8 @@
     },
     "readme": {
       "note": "Compare the first 100 .ca domains in a dated Tranco ranking. Open a domain for A/AAAA answers, origin ASNs and DB-IP Country Lite country estimates. Multiple networks can serve one domain, so shares may overlap."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "atipdecisions",
@@ -7968,7 +7970,8 @@
     },
     "readme": {
       "note": "Filter an institution and Act section, then open a decision for its published finding and original report. Listing/release dates are separate from decision dates. Published decisions are selected reports, not all complaints."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "ispreportcard",
@@ -8012,7 +8015,8 @@
     },
     "readme": {
       "note": "Compare IPv6 capability, DNSSEC validation and RPKI route authorization separately. Open a provider for dated histories, experiment counts and prefix evidence. There is no composite grade."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "donationradar",
@@ -8055,7 +8059,8 @@
     },
     "readme": {
       "note": "Choose a province and submitted or reviewed 2023 annual returns. Ordinary and directed contributions remain separate. A reported name is not a resolved identity; similar names must not be combined as one person."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "anycastcompass",
@@ -8099,7 +8104,8 @@
     },
     "readme": {
       "note": "Filter a root server and probe ASN. Instance names are returned TXT answers, not destinations inferred from IP geography. Province is estimated from obfuscated probe coordinates; volunteer probes are not representative of all ISP customers."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "sanctionsledger",
@@ -8143,7 +8149,8 @@
     },
     "readme": {
       "note": "Open an entry to inspect its identity fields and linked regulation. The diary reports additions, absences and changed source entries between captures. An absence from the consolidated XML is not by itself proof of legal delisting."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "borderpulse",
@@ -8187,7 +8194,8 @@
     },
     "readme": {
       "note": "Choose a crossing and distinguish current reports, the 2019 Q4 hourly sample and newer monthly service-standard percentages. No delay means up to five minutes; missing and conflicting observations are excluded from wait statistics."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "oicdiary",
@@ -8231,7 +8239,8 @@
     },
     "readme": {
       "note": "Search a department, statute or subject and open the original order. The weekly diary identifies newly observed and changed entries. Approval date is separate from the date the order first appeared in our archive."
-    }
+    },
+    "sync_manifest": true
   },
   {
     "id": "maplephish",
@@ -8415,7 +8424,8 @@
           "notice": "Government targets paused",
           "count": 10
         }
-      ]
+      ],
+      "cadence": "Weekly"
     },
     "readme": {
       "note": "Inspect the saved CoolCode header report and individual MDN findings. The owner can run Personal TLS · Check an owned site in GitHub Actions selecting any configured owned hostname and using SSLLABS_EMAIL, then open the provider report from the run Summary. Existing MDN JSON imports stay in this tab for comparison. The HTTP grade explanation lists provider point deductions and keeps it distinct from TLS. Available reports are shown first; uncollected government targets appear only when explicitly viewing coverage notes."
@@ -8458,7 +8468,8 @@
           "value": "2026-11-22 15:03 UTC",
           "count": 25
         }
-      ]
+      ],
+      "cadence": "Weekly"
     },
     "readme": {
       "note": "Add an asset label, software product and installed version. Rack Expiry matches the longest numeric release cycle from a saved endoflife.date catalogue, then sorts support-ended and upcoming deadlines first. Choose an assessment date, inspect the release reference, and export results as CSV. Imports accept simple three-column CSV (asset,product,version) or a JSON array; exported CSV files include evidence columns and can be imported again using their named inventory fields. CSV prefixes formula-leading cells for spreadsheet safety, which can alter labels on reimport; choose **Save inventory JSON** for a lossless backup and exact roundtrip. Inventory stays in memory until **Save on this device**; only that explicit action writes namespaced local storage. No inventory fields are uploaded. The example stack is illustrative. Standard upstream support, active support and extended support differ: purchased entitlements and distribution backports must be checked separately. Unknown versions stay unknown. Numeric prefix matching requires an entirely numeric installed version; nonnumeric release-cycle names match exactly, ignoring case. Prerelease or malformed suffixes are not treated as stable releases. A support deadline is not proof of an exploitable vulnerability. Upstream deadline dates are the last supported day (the status changes the following day). Boolean-only statuses with no known end date are used only on the catalogue check date, so historical or future assessments remain unknown instead of inventing coverage. The API’s `isMaintained` flag can include extended support and is not used to infer standard support. The selected product catalogue refreshes Mondays at 10:43 UTC. Changed catalogues are retained as immutable compressed JSON archives with hashes, dates and a change feed; a first capture is a baseline, not retroactive history. The public app works from the last validated saved snapshot. No API key is needed."
@@ -8502,7 +8513,8 @@
           "value": "2026-11-22 15:12 UTC",
           "count": 14825
         }
-      ]
+      ],
+      "cadence": "Weekly"
     },
     "readme": {
       "note": "Start with research-grade observations, compare the monthly share on each coast, then select a month or taxon to inspect its records. The 2023–2025 calendar describes observation activity, not abundance, edibility or a forecast; obscured records have month-only dates and never appear on the map."
@@ -8544,7 +8556,8 @@
           "value": "2026-11-22 14:56 UTC",
           "count": 207
         }
-      ]
+      ],
+      "cadence": "Weekly"
     },
     "readme": {
       "note": "Search the wider BC legislation title catalogue and full text across the four privacy laws in the selected capture. Historical versions and legislative change tables are labelled separately. Open a section to inspect its recorded text and compare captures. Observation dates are distinct from effective dates; catalogue title matches do not add change history for other laws."
@@ -8587,7 +8600,8 @@
           "value": "2026-11-22 15:05 UTC",
           "count": 345
         }
-      ]
+      ],
+      "cadence": "Weekly"
     },
     "readme": {
       "note": "Choose a species to compare original xeno-canto recordings from British Columbia and Atlantic Canada. Filter by sound, recording month or quality, switch between source recordings, and export attributed metadata. Six focal species and the first 100 records per species/province query form a bounded sample; different individuals, dates, equipment and habitats mean these examples do not establish regional dialects. Cards show recording dates separately from upload dates, plus recordist, source and individual licence. The initial page honestly shows a pending state until its first authenticated collection; a previously saved Dawn Chorus JSON snapshot can also be opened locally."
@@ -8630,7 +8644,8 @@
           "value": "2026-11-22 15:17 UTC",
           "count": 501
         }
-      ]
+      ],
+      "cadence": "Daily"
     },
     "readme": {
       "note": "Inspect seven days of hourly Canadian HTTP traffic and compare its daily rhythm with the United States or United Kingdom. Each country is normalized independently to its own maximum (0–1), so the curves compare shape, not traffic volume or market share. IPv4/IPv6 percentages describe the observed HTTP request mix. Canadian outage annotations cover a separate 30-day source window and are not an exhaustive outage register. Choose a retained capture, inspect gaps and source dates, or open/export a local snapshot without an API key in your browser."
@@ -8682,7 +8697,8 @@
           "notice": "Capped samples; see source totals",
           "count": 3187
         }
-      ]
+      ],
+      "cadence": "Monthly"
     },
     "readme": {
       "note": "Choose Langley or Halifax, then compare historic preserved specimens (1700–1999) with modern records (2000 onward). Up to 300 records per time band are retained; these capped API-order samples are not representative surveys. Filter by taxon, source, licence or coordinate quality, inspect an attributed record card, and export the selection. The coarse map and decade chart show only the selected capture’s retained records, not every GBIF match or a population trend."
@@ -8725,7 +8741,8 @@
           "value": "2026-11-22 15:17 UTC",
           "count": 145
         }
-      ]
+      ],
+      "cadence": "Daily"
     },
     "readme": {
       "note": "Compare the latest accepted report for each species at the two exact hotspots, then filter to shared species, one coast's feed, or eBird notable species. The full 30-day view preserves every report returned by eBird's rolling source window; shorter windows are anchored to that capture date. Species counts are recent-feed counts, not seasonal or historical totals. Missing reports do not establish absence, and observer effort differs. Download the filtered derived CSV or a JSON snapshot; reopening either file happens only in the browser tab."
@@ -8751,7 +8768,8 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Weekly retained APIs.guru definitions, with optional local OpenAPI JSON comparison."
+      "detail": "Weekly retained APIs.guru definitions, with optional local OpenAPI JSON comparison.",
+      "cadence": "Weekly"
     },
     "sync_manifest": true,
     "readme": {
@@ -8777,7 +8795,19 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Weekly observations of eight federal CKAN records retain metadata changes and sampled resource responses; network errors are not treated as deleted data."
+      "detail": "Weekly observations of eight federal CKAN records retain metadata changes and sampled resource responses; network errors are not treated as deleted data.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/govdatagaps/data/manifest.json",
+          "path": [
+            "captured_at"
+          ],
+          "precision": "minute",
+          "value": "2026-11-23 19:12 UTC"
+        }
+      ]
     },
     "sync_manifest": true,
     "readme": {
@@ -8803,7 +8833,8 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Crossref bibliographic metadata from live searches and weekly snapshots of three Canadian topic queries; selected records, not complete research coverage."
+      "detail": "Crossref bibliographic metadata from live searches and weekly snapshots of three Canadian topic queries; selected records, not complete research coverage.",
+      "cadence": "Weekly"
     },
     "sync_manifest": true,
     "readme": {
@@ -8828,7 +8859,21 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Official GitHub and DigitalOcean status APIs supply daily incident, maintenance and component captures, with up to 90 retained collections."
+      "detail": "Official GitHub and DigitalOcean status APIs supply daily incident, maintenance and component captures, with up to 90 retained collections.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/statusledger/data/index.json",
+          "path": [
+            "captures",
+            0,
+            "captured_at"
+          ],
+          "precision": "minute",
+          "value": "2026-11-23 04:23 UTC"
+        }
+      ]
     },
     "sync_manifest": true,
     "readme": {
@@ -8880,7 +8925,21 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Dated SEC EDGAR filings and selected financial facts from a configurable company watchlist; refreshed daily."
+      "detail": "Dated SEC EDGAR filings and selected financial facts from a configurable company watchlist; refreshed daily.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/filingdelta/data/index.json",
+          "path": [
+            "captures",
+            0,
+            "label"
+          ],
+          "precision": "minute",
+          "value": "2026-11-23 04:58 UTC"
+        }
+      ]
     },
     "sync_manifest": true,
     "readme": {
@@ -8932,7 +8991,8 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Live public npm metadata and jsDelivr CDN usage, with dated default captures for immediate exploration."
+      "detail": "Live public npm metadata and jsDelivr CDN usage, with dated default captures for immediate exploration.",
+      "cadence": "Weekly"
     },
     "sync_manifest": true,
     "readme": {
@@ -9216,7 +9276,21 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Selected dated URLhaus and MalwareBazaar metadata; daily authenticated collection, local receipt imports."
+      "detail": "Selected dated URLhaus and MalwareBazaar metadata; daily authenticated collection, local receipt imports.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/malwarelineage/data/index.json",
+          "path": [
+            "captures",
+            0,
+            "captured_at"
+          ],
+          "precision": "minute",
+          "value": "2026-11-23 09:16 UTC"
+        }
+      ]
     },
     "sync_manifest": true,
     "readme": {
@@ -9243,7 +9317,18 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Daily Launch Library 2 captures retain announced launch times, precision and reported status for a configurable date window and watchlist.",
-      "cadence": "Daily"
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/launchledger/data/index.json",
+          "path": [
+            "lastSuccessfulAt"
+          ],
+          "precision": "minute",
+          "value": "2026-11-23 08:22 UTC"
+        }
+      ]
     },
     "sync_manifest": true,
     "readme": {
@@ -9294,7 +9379,21 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Dated DriveBC Open511 events, collected every six hours. Compare event IDs, source schedules and timing notes without treating disappearance as reopening."
+      "detail": "Dated DriveBC Open511 events, collected every six hours. Compare event IDs, source schedules and timing notes without treating disappearance as reopening.",
+      "cadence": "Every 6 hours",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/roadpulse/data/index.json",
+          "path": [
+            "captures",
+            0,
+            "capturedAt"
+          ],
+          "precision": "minute",
+          "value": "2026-11-23 09:06 UTC"
+        }
+      ]
     },
     "sync_manifest": true,
     "readme": {
@@ -9321,7 +9420,8 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Search ECCC's station catalogue, explore retained Canadian gauge observations, or fetch recent readings and historical daily means for any station."
+      "detail": "Search ECCC's station catalogue, explore retained Canadian gauge observations, or fetch recent readings and historical daily means for any station.",
+      "cadence": "Daily"
     },
     "sync_manifest": true,
     "readme": {
@@ -9346,7 +9446,8 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Weekly axe-core checks of configured public pages, with local import of your own axe reports."
+      "detail": "Weekly axe-core checks of configured public pages, with local import of your own axe reports.",
+      "cadence": "Weekly"
     },
     "sync_manifest": true,
     "readme": {
@@ -9423,7 +9524,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "ECCC buoy observations and marine forecast editions, retained with separate observation, issue and capture times.",
-      "cadence": "Every six hours",
+      "cadence": "Every 6 hours",
       "probes": [
         {
           "label": "Data retrieved",
@@ -9680,7 +9781,7 @@
     "data_info": {
       "mode": "snapshot",
       "detail": "Dated Open Charge Map country exports, searched locally with straight-line distances and provider attribution.",
-      "cadence": "Weekly source check",
+      "cadence": "Weekly",
       "probes": [
         {
           "label": "Source export edition",
@@ -9983,7 +10084,7 @@
     "data_info": {
       "mode": "mixed",
       "detail": "Canada Holidays records and local date-holidays rules compare calendars; custom working-day assumptions stay in your browser.",
-      "cadence": "Monthly Canadian cache",
+      "cadence": "Monthly",
       "probes": [
         {
           "label": "Canadian cache retrieved",
@@ -10032,8 +10133,7 @@
       "detail": "Two scenes are drawn locally in code, with per-scene animation speed settings."
     },
     "readme": {
-      "lead": "The artwork is drawn in code",
-      "note": "The artwork is drawn in code, so the two .scr files are all you need to copy."
+      "note": "Try either Windows saver with its /s switch, then use Settings to choose a speed saved separately for that scene. Move the mouse or press a key to exit; both files must be installed for both scenes to appear in the Windows picker."
     }
   },
   {
@@ -10059,8 +10159,7 @@
       "detail": "Your PDFs are signed locally. The example uses a self-signed certificate, which does not establish a trusted identity."
     },
     "readme": {
-      "lead": "The demo signer issued its own certificate",
-      "note": "The demo signer issued its own certificate, so a recipient needs a separate reason to trust the name."
+      "note": "Compare the unsigned and signed samples with pdfsig, then sign your own copy using an encrypted private key. A valid embedded signature can still report an untrusted self-signed issuer; verify the certificate fingerprint separately before trusting a signer’s identity."
     }
   },
   {
@@ -10086,8 +10185,7 @@
       "detail": "The provider sandbox returns trigger-based test responses and mocked balances; it does not move real money."
     },
     "readme": {
-      "lead": "The official workbook says responses are",
-      "note": "The official workbook says responses are trigger-based."
+      "note": "Start with Test authentication and Heartbeat, then inspect the response status and message fields before trying a payment scenario. HTTP 200 alone does not mean acceptance; exported exchanges redact tokens but can still contain request data you entered."
     }
   },
   {
@@ -10113,8 +10211,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "lead": "To compare fully resolved configurations",
-      "note": "To compare fully resolved configurations, generate docker compose config output yourself for each version, review it for secrets, and compare those outputs."
+      "note": "Compare before and after configurations, narrow the results by service or change type, and export a dated report. Values start hidden in results and exports; reveal them only after checking for secrets, and remember that comments and mapping order are not structural changes."
     }
   },
   {

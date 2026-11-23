@@ -1,5 +1,9 @@
 # Tape Index
 
+<!-- coolcode:guide -->
+Create a manifest outside a stable collection, keep a trusted copy, and verify the collection after copying it to another disk. Renamed files appear as missing and added; changed bytes are detected even when file size and timestamps stay the same.
+<!-- /coolcode:guide -->
+
 Give a box of digitized prints, field recordings or WARC captures a checksum catalog you can keep on another disk. Tape Index records each regular file's relative path, exact size in bytes and SHA-256 digest in a readable JSON manifest. You can verify a copy under a different directory name.
 
 ## Try it on Linux

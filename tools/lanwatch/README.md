@@ -1,5 +1,9 @@
 # LANWatch
 
+<!-- coolcode:guide -->
+Add a router or NAS by name, run check, then inspect status and history or export recent samples to CSV. A DOWN result means the ICMP probe failed; sleeping devices and hosts that block ping can still have working services.
+<!-- /coolcode:guide -->
+
 A tiny Linux LAN host monitor that uses **ICMP ping + SQLite**. No Python packages, web account, Docker image, or cloud service needed.
 
 - Monitors only the devices you explicitly add (no network scanning).

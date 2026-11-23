@@ -1,5 +1,9 @@
 # Switchboard
 
+<!-- coolcode:guide -->
+Add your NAS and other services to a private JSON file using group, name and URL fields, then reload to see changes. Use hostnames resolvable by your other devices; anyone who can reach the dashboard can see its links.
+<!-- /coolcode:guide -->
+
 A start page for the services you run. Put your NAS, DNS console, pywb collections and photo scans in a small JSON file. Switchboard renders the groups and links on each request. It works with PHP 8 or later, including on a LAMP virtual host. The browser can display it with JavaScript disabled.
 
 ## Try it on your LAN
