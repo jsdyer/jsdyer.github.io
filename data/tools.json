@@ -8355,5 +8355,160 @@
       "note": "Compare the latest accepted report for each species at the two exact hotspots, then filter to shared species, one coast's feed, or eBird notable species. The full 30-day view preserves every report returned by eBird's rolling source window; shorter windows are anchored to that capture date. Species counts are recent-feed counts, not seasonal or historical totals. Missing reports do not establish absence, and observer effort differs. Download the filtered derived CSV or a JSON snapshot; reopening either file happens only in the browser tab."
     },
     "sync_manifest": true
+  },
+  {
+    "id": "apiarchaeology",
+    "title": "API Archaeology",
+    "description": "Inspect published API definitions, compare operations and schemas, and follow dated specification captures.",
+    "category": "projects",
+    "tags": [
+      "api",
+      "openapi",
+      "schemas",
+      "history",
+      "comparison"
+    ],
+    "icon": "scan-search",
+    "url": "/apiarchaeology/",
+    "source": "https://github.com/jsdyer/apiarchaeology",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Weekly retained APIs.guru definitions, with optional local OpenAPI JSON comparison."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "API Archaeology watches six public API definitions in the APIs.guru directory: Apicurio Registry, Canada Holidays, APIs.guru itself, NASA APOD, NASA Asteroids and Wikimedia. Select an API, then a “from” and “to” definition. Each choice includes the version and actual collection date. The first capture includes two genuine Apicurio versions, so a meaningful comparison is available immediately; other single-version APIs start as inventories until another collection is retained. Search by method, path, summary or change type. Select an operation for authentication, parameters, response codes and field-level evidence. The shared-schema inventory provides a second view of additions, removals and changed definitions. “Changed” means the specification differs; it is not a compatibility judgment or proof that a live service behaves differently. Directory update dates can be old and are not provider release dates. You can also select two local OpenAPI 3.x or Swagger 2.0 JSON files (10 MB each); omit the first file to inspect an inventory. These files stay in the current browser tab and are not uploaded or saved. YAML is not supported. Export JSON for the complete compared evidence and source hashes, or CSV for the operation inventory. Collection runs weekly on Tuesday at 07:13 UTC through GitHub Actions, subject to scheduler delays. The workflow can also be run manually with “Capture fresh public definitions before building” enabled. All definitions must validate and all checks must pass before new data is committed and the site is deployed. Earlier captures remain available. No keys or API registrations are needed: the collector reads specification documents only and never invokes the APIs they describe."
+    }
+  },
+  {
+    "id": "govdatagaps",
+    "title": "Government Data Gap Detector",
+    "description": "Follow changes, publication gaps and download availability in a curated federal dataset watchlist.",
+    "category": "explorers",
+    "tags": [
+      "open-data",
+      "government",
+      "changes",
+      "metadata",
+      "atip"
+    ],
+    "icon": "database",
+    "url": "/govdatagaps/",
+    "source": "https://github.com/jsdyer/govdatagaps",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Weekly observations of eight federal CKAN records retain metadata changes and sampled resource responses; network errors are not treated as deleted data."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a dataset to inspect its declared update frequency, metadata dates and sampled download responses. Set an optional metadata-age threshold for your own review, then save an evidence note with source links and timestamps. The first capture is a baseline: a blocked request does not mean a missing file, and an old metadata date does not prove the underlying data is overdue."
+    }
+  },
+  {
+    "id": "researchledger",
+    "title": "Research Ledger",
+    "description": "Search research metadata, inspect funding and updates, and follow dated Crossref records.",
+    "category": "explorers",
+    "tags": [
+      "research",
+      "Crossref",
+      "citations",
+      "funding",
+      "evidence"
+    ],
+    "icon": "library-big",
+    "url": "/researchledger/",
+    "source": "https://github.com/jsdyer/researchledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Crossref bibliographic metadata from live searches and weekly snapshots of three Canadian topic queries; selected records, not complete research coverage."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with the saved wildfire, water or open-government collection, then inspect a paper's authors, funding and recorded update links. Search Crossref by topic, title, author or DOI for other work; export a CSV or save a timestamped receipt. Missing funding or correction metadata means unknown, and citation counts are incomplete—not a measure of quality."
+    }
+  },
+  {
+    "id": "statusledger",
+    "title": "Status Ledger",
+    "description": "Keep a dated record of official cloud-service incidents, maintenance and changes.",
+    "category": "liminal-tools",
+    "tags": [
+      "status",
+      "incidents",
+      "cloud",
+      "history"
+    ],
+    "icon": "network",
+    "url": "/statusledger/",
+    "source": "https://github.com/jsdyer/statusledger",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Official GitHub and DigitalOcean status APIs supply daily incident, maintenance and component captures, with up to 90 retained collections."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a provider, component, incident or maintenance state, or event date range, then inspect a report’s original update timeline. The two provider cards show the different feed windows; their incident counts are not a reliability ranking. Choose two retained captures to find newly observed records, changed text and records no longer present. The first capture establishes a baseline: earlier dates in an incident timeline are provider-supplied history, not earlier CoolCode captures. Download a filtered CSV or the complete selected capture JSON. Daily collection keeps the latest 90 successful captures; disappearance from a feed never implies resolution."
+    }
+  },
+  {
+    "id": "queryplan",
+    "title": "Query Plan Lab",
+    "description": "Read MySQL and MariaDB execution plans, inspect table access and compare optimizer estimates before and after a change.",
+    "category": "projects",
+    "tags": [
+      "mysql",
+      "mariadb",
+      "database",
+      "query plan",
+      "performance"
+    ],
+    "icon": "scan-search",
+    "url": "/queryplan/",
+    "source": "https://github.com/jsdyer/queryplan",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "MySQL and MariaDB EXPLAIN JSON plans are parsed and compared locally in your browser."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Paste a MySQL or MariaDB JSON execution plan, or open a local JSON file, then choose **Visualize plan**. Add a second plan to compare access types, chosen indexes, row estimates, filtering and reported cost. Select any tree node to inspect the source JSON and any available MariaDB `r_rows` / `r_loops` measurements. The built-in comparison is an explicitly hand-written illustration, not a benchmark. Plans stay in memory in your browser; JSON and CSV downloads are optional. No account, API key or database connection is needed. Supports the traditional `query_block` JSON layout, including EXPLAIN-column exports; text/TREE output and MySQL JSON format version 2 are not supported."
+    }
+  },
+  {
+    "id": "filingdelta",
+    "title": "Filing Delta",
+    "description": "Compare reported financial periods and trace changed values back to SEC filings.",
+    "category": "money",
+    "tags": [
+      "sec",
+      "filings",
+      "xbrl",
+      "financial-statements",
+      "canada"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/filingdelta/",
+    "source": "https://github.com/jsdyer/filingdelta",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Dated SEC EDGAR filings and selected financial facts for six Canadian and US companies; refreshed daily."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose Shopify, Royal Bank of Canada, Canadian Natural Resources, Apple, Microsoft or Amazon, then select a financial concept, currency and period basis. The ledger compares exact reported periods and links each value to its SEC filing; a changed value may reflect a recast or context difference, not necessarily a restatement. Daily captures retain selected standard financial facts from 2018 onward, not a complete company or filing universe."
+    }
   }
 ]
