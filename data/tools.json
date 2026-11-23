@@ -8667,5 +8667,159 @@
     "readme": {
       "note": "Choose a topic or search your own phrase, then open the original page to check the OCR and surrounding columns. Topic matches are historical reports, not verified events; save useful pages and export their source links. If a live request fails, import an official Library JSON response with its exact search URL; clippings stay usable and imports are clearly dated as imports."
     }
+  },
+  {
+    "id": "marinenames",
+    "title": "Marine Names",
+    "description": "Resolve marine scientific names, inspect their taxonomy and follow reported distributions and sources.",
+    "category": "places",
+    "tags": [
+      "marine",
+      "taxonomy",
+      "species",
+      "coastal",
+      "names"
+    ],
+    "icon": "map",
+    "url": "/marinenames/",
+    "source": "https://github.com/jsdyer/marinenames",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Look up WoRMS scientific names live or inspect dated coastal reference records."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search any scientific name or AphiaID; enable prefix matching to explore a genus and load additional pages. Four dated coastal examples open immediately, and are starting points rather than a search restriction. The record distinguishes accepted names from synonyms and alternative representations. It shows the source’s modification date separately from the retrieval date; synonyms are current relationships, not a historical change timeline. Distribution records are incomplete and do not establish present-day occurrence. Download the selected record as JSON or its name fields as CSV; import an earlier JSON export locally. Expand saved coverage in `web/config.json`, run `python3 scripts/refresh.py`, then commit the new capture, manifest and configuration. No registration or API key is required."
+    }
+  },
+  {
+    "id": "civiclookup",
+    "title": "Civic Lookup",
+    "description": "Find Canadian representatives and electoral districts by postal code or coordinates, with source links and downloadable lookup receipts.",
+    "category": "explorers",
+    "tags": [
+      "Canada",
+      "representatives",
+      "postal codes",
+      "districts"
+    ],
+    "icon": "landmark",
+    "url": "/civiclookup/",
+    "source": "https://github.com/jsdyer/civiclookup",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Search Represent by Open North by postal code or coordinates, with a dated public-place example and downloadable lookup receipts."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Civic Lookup accepts **any syntactically valid Canadian postal code**, or latitude/longitude entered explicitly. Search is not restricted to the city presets. It shows source-reported representative names, offices, districts, assemblies, parties and public office contacts, with official profile/source links. Filter by government level or text, inspect boundary records, and save CSV or a complete JSON lookup receipt. JSON receipts can be reopened locally without sending them to a provider. The opening Ottawa city-centre result is a dated, real saved example, not a live lookup. A submitted lookup sends only the chosen coordinates or postal code (plus normal connection information) to Open North. There is no automatic geolocation or local search history. Receipts include the location query: review them before sharing. Postal codes can overlap districts. Both the provider's **centroid** and **concordance** matches are combined, deduplicated and labelled. Coordinates narrow the geographic match, but neither method guarantees current officeholders or complete municipal coverage. A retrieval date is not an election date or source-update date. Other boundary records may include historical district versions, school boards and statistical areas; records linked to a returned representative are labelled separately. Confirm contacts and electoral eligibility through the official institution or election authority. **Expand or customize:** edit `web/config.json`. Change `defaultQuery`, add/remove `presets` (any postal code or coordinates), or tune `pageSize`, `maxPages`, `timeoutMs`, `requestGapMs` and `importMaxBytes`. Presets only fill the form; pressing **Find representatives** submits it. No allowlist of places exists. To replace the saved public example, set `defaultQuery` to a public location and run `python3 scripts/refresh_example.py`, then commit `web/config.json` and `web/data/example.json`. The collector preserves the last-good file on an error and rejects truncated examples. Run the repository's **Browser tool · Check and publish** workflow after committing; main-branch changes build and publish automatically. There is no scheduled collector and no need to rerun it to search a new location."
+    }
+  },
+  {
+    "id": "streamatlas",
+    "title": "Stream Atlas",
+    "description": "Find internet radio across countries, languages and genres, then build your own listening collection.",
+    "category": "media",
+    "tags": [
+      "radio",
+      "music",
+      "canada",
+      "streaming",
+      "discovery"
+    ],
+    "icon": "radio-tower",
+    "url": "/streamatlas/",
+    "source": "https://github.com/jsdyer/streamatlas",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Radio Browser supplies station metadata, with a dated starting collection and live directory searches."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search beyond the starting shelf by station name, country, language or genre; the presets are shortcuts, not a fixed list. Playing connects directly to a station, while saved stations remain in the current tab unless you opt into device storage or export a copy."
+    }
+  },
+  {
+    "id": "pwncheck-kanon",
+    "title": "Password Exposure Check",
+    "description": "Check whether a password appears in known breach data, without sending the password or its full hash.",
+    "category": "security",
+    "tags": [
+      "passwords",
+      "privacy",
+      "breach-data",
+      "k-anonymity"
+    ],
+    "icon": "scan-search",
+    "url": "/pwncheck-kanon/",
+    "source": "https://github.com/jsdyer/pwncheck-kanon",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Pwned Passwords supplies matching hash ranges; the password and full comparison stay in your browser."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter a password and explicitly choose **Check exposure**. Only the first five SHA-1 hash characters go to Pwned Passwords; the browser compares the returned range locally and clears the input after a successful check. A missing match does not prove the password is safe, and a match does not identify an account or a particular breach. Clear everything removes this tab's input and result."
+    }
+  },
+  {
+    "id": "bookgraveyard",
+    "title": "Book Graveyard",
+    "description": "Find old books, compare their editions, and follow the trail to a readable copy.",
+    "category": "media",
+    "tags": [
+      "books",
+      "archives",
+      "editions",
+      "literature",
+      "technology history"
+    ],
+    "icon": "library-big",
+    "url": "/bookgraveyard/",
+    "source": "https://github.com/jsdyer/bookgraveyard",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Searches Open Library book and edition metadata, with a dated opening selection and reading links."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search any title, author, subject or set of words, optionally limiting the work's first-publication years and Open Library's access category. The starting searches are editable suggestions, not a fixed collection. Results are paginated. Open **Compare editions** on a work, then choose two publication records to compare publisher, date, language, pages, format and ISBN. A work groups editions; its first-publication year and reading-access label do not describe every edition. The opening screen uses a small, dated real Open Library capture. **Search books** retrieves live results directly from Open Library; failures preserve the previous results. Add books to a reading shelf, export JSON/CSV, or import a saved search/shelf JSON locally. The shelf stays in the current tab unless **Remember this shelf on this device** is selected. A readable-copy label is not a worldwide public-domain determination, and borrowing can require an Open Library/Internet Archive account. “Graveyard” is a discovery theme, not a claim that titles are forgotten or out of print. **Expand or customize:** edit `web/config.json` to change `defaultSearch`, add any number of `presets`, or change page sizes and timeouts. Each query has `query`, `field` (`all`, `title`, `author`, `subject`), `from`, `to`, `access` (`any`, `public`, `borrowable`, `no_ebook`) and `sort` (`relevance`, `old`, `new`). Visitors can type searches beyond these presets. After changing the opening search, run `python3 scripts/refresh_data.py` once; review `web/data/opening.json`, then run the normal checks and commit to `main`. The Pages workflow builds and publishes the change. This tool needs no API key; Open Library asks the owner to register the application/use case using the form linked in its API documentation."
+    }
+  },
+  {
+    "id": "formatshift",
+    "title": "Format Shift",
+    "description": "Trace an album through vinyl, tape, disc and digital editions with MusicBrainz metadata.",
+    "category": "media",
+    "tags": [
+      "music",
+      "formats",
+      "vinyl",
+      "discography",
+      "archives"
+    ],
+    "icon": "film",
+    "url": "/formatshift/",
+    "source": "https://github.com/jsdyer/formatshift",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "MusicBrainz release metadata, with a retained edition selection and on-demand artist and release searches."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search any artist name, choose the matching MusicBrainz artist, and load additional pages as needed. You can also paste a **release** or **release-group** UUID or MusicBrainz link. A release is one edition; a release group joins editions of the same album. Format filters, date filters, a decade chart and two-edition comparison work on the records loaded into the page. Counts describe recorded editions, not sales, popularity, availability or the entire music industry. The opening view contains eight real selected Rush *Moving Pictures* editions, with capture time and source links. They are selected records rather than a complete discography. Fetch all album editions or search another artist to expand. **Save receipt** exports the current collection; **Import receipt** opens that JSON locally; **Export visible CSV** exports the filtered view. Imported files never leave the browser. Source failures preserve the current collection. The owner can also run the **Music metadata · Collect a receipt** workflow for any artist, release group or release UUID, then import its downloadable JSON. **Expand or customize:** edit `web/config.json`: `presets` changes example artists, `opening.releaseIds` changes retained editions, `opening.title` and `opening.releaseGroupId` describe that selection, and `pageSize` / `maxLoadedReleases` control browsing. Commit an edit to `web/config.json` on `main` and the Pages workflow automatically fetches the configured opening editions, records a successful API receipt in `web/data/opening.json`, and publishes it. A source failure keeps the last good receipt. You can also run `python3 scripts/collect.py` locally, review the JSON and commit it. New entries require no UI source changes. `apiBase` can point to the optional identified server adapter documented below. No MusicBrainz account or API key is needed for public reads; the hosted API's free use is for noncommercial applications."
+    }
   }
 ]
