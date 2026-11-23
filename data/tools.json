@@ -2844,6 +2844,129 @@
     }
   },
   {
+    "id": "langleytrades",
+    "title": "Langley Trades",
+    "description": "Search the Township of Langley business-licence file by trade, name or street, and see which names arrived or left since the previous file.",
+    "category": "places",
+    "tags": [
+      "canada",
+      "local",
+      "public data",
+      "langley",
+      "business"
+    ],
+    "icon": "building-2",
+    "url": "/langleytrades/",
+    "source": "https://github.com/jsdyer/langleytrades",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Monthly",
+      "detail": "The Township of Langley open-data business-licence layer supplies the name, trade, civic address, community and phone already published on the licence directory.",
+      "probes": [
+        {
+          "label": "Licence file",
+          "url": "https://coolcode.ca/langleytrades/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "licences"
+            ],
+            "unit": "licences"
+          }
+        }
+      ]
+    },
+    "readme": {
+      "note": "Type any trade, not only the buttons. A name that is missing from a partial extract is not treated as closed. Phone numbers and streets are only the ones the Township already published."
+    }
+  },
+  {
+    "id": "highwayframe",
+    "title": "Highway Frame",
+    "description": "Look up a B.C. highway camera and see the latest still DriveBC is serving, without the rest of the DriveBC site.",
+    "category": "places",
+    "tags": [
+      "canada",
+      "british columbia",
+      "highways",
+      "cameras",
+      "drivebc"
+    ],
+    "icon": "camera",
+    "url": "/highwayframe/",
+    "source": "https://github.com/jsdyer/highwayframe",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Weekly camera list · Pictures when opened",
+      "detail": "The DriveBC HighwayCams list supplies camera names, highways and picture addresses. The stills themselves are requested from DriveBC when you open a camera.",
+      "probes": [
+        {
+          "label": "Camera list",
+          "url": "https://coolcode.ca/highwayframe/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "cameras"
+            ],
+            "unit": "cameras"
+          }
+        }
+      ]
+    },
+    "readme": {
+      "note": "A highway number matches that highway only, so 1 does not include 10. The buttons are shortcuts. Any place name in the camera list works. The still is requested from DriveBC when the frame opens, and it is the current picture, not one from the day the list was saved."
+    }
+  },
+  {
+    "id": "violationsheet",
+    "title": "Violation Sheet",
+    "description": "Compare police-reported crime rates for a B.C. police service with the previous published year and with the provincial rate.",
+    "category": "places",
+    "tags": [
+      "canada",
+      "british columbia",
+      "crime",
+      "statcan",
+      "public data"
+    ],
+    "icon": "gavel",
+    "url": "/violationsheet/",
+    "source": "https://github.com/jsdyer/violationsheet",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "When StatCan releases the table",
+      "detail": "Statistics Canada table 35-10-0184 supplies annual police-reported incidents and rates per 100,000 for British Columbia police services.",
+      "probes": [
+        {
+          "label": "Extract",
+          "url": "https://coolcode.ca/violationsheet/data/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "count_at": {
+            "path": [
+              "services"
+            ],
+            "unit": "police services"
+          }
+        }
+      ]
+    },
+    "readme": {
+      "note": "Pick any police service in the extract, not only the buttons. A year StatCan left blank is shown as not published and is not counted as zero. The rate is incidents per 100,000 population."
+    }
+  },
+  {
     "id": "strangeskies",
     "title": "Strange Skies Canada",
     "description": "Search aviation occurrence reports by location, year and event.",
