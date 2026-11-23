@@ -1,12 +1,12 @@
 # CoolCode maintenance — 2026-11-23
 
-This maintenance pass covered the 224 tools present at the start of the audit. Three tools added concurrently (Langley Trades, Highway Frame and Violation Sheet) were preserved, bringing the merged hub to 227 tools. Existing titles, ordering, URLs and featured selections were preserved.
+This maintenance pass covered the 224 tools present at the start of the audit. Three tools added concurrently (Langley Trades, Highway Frame and Violation Sheet) were preserved and received the same Pages action upgrades, bringing the merged hub to 227 tools. Existing titles, ordering, URLs and featured selections were preserved.
 
 ## Changes
 
 | Suggestion | Implemented result |
 | --- | --- |
-| Pages actions | Updated `actions/deploy-pages` and `actions/upload-pages-artifact` to v5 wherever used: 213 repositories, including the hub and tool template, across 215 workflow files. API Archaeology was deployed successfully as the canary before rollout. |
+| Pages actions | Updated `actions/deploy-pages` and `actions/upload-pages-artifact` to v5 wherever used: 216 repositories, including the hub and tool template, across 218 workflow files. API Archaeology was deployed successfully as the canary before rollout. |
 | Scheduled checks | Filled 19 genuinely missing schedules and standardized or corrected wording in 22 other entries (41 cadence changes). The other 26 entries identified as missing have no scheduled workflow; no schedule was invented for them. Shield Check already correctly said “Every 6 hours.” Producer manifests carry matching wording. |
 | Data dates | Added verified probes for Gov Data Gaps, Status Ledger, Filing Delta, Malware Lineage, Launch Ledger and Road Pulse. All six published JSON endpoints were fetched and their dates parsed successfully. |
 | Regression tests | Added logic and browser checks for Event Radar, BankRate Lab, Forgotten Places, RPKI Guard, Screen Radar, Sky Archive and Strange Skies Canada. Browser checks load each tool at its project subpath, exercise a control, reject JavaScript/local resource errors and check overflow at 1280, 390 and 320 pixels. Pages publishing depends on the reusable checks; documentation-only pull requests are excluded. |
@@ -18,16 +18,16 @@ This maintenance pass covered the 224 tools present at the start of the audit. T
 ## Issues found during verification
 
 - **Forgotten Places:** the new mobile check found real horizontal overflow. Its mobile CSS hid the line break in “Forgotten Places,” producing an unbreakable word. Preserving the break and allowing the grid column to shrink fixed the layout; the browser checks and deployment passed.
-- **Patent Attic:** CIPO changed its workbook filename to `Weekly_Pre_Grant_Completed_…xlsx`. The importer now recognizes both old and new names on the official HTTPS host. The current workbook also contains incomplete rows; they remain searchable by application number, with missing values shown as unavailable. Added five regression tests. A real-source build parsed 13,963 applications while preserving the workbook's own edition date.
-- **Government Memory:** the rollout run encountered repeated Canada.ca source timeouts before reaching the Pages upload/deploy steps. Failed jobs were retried. Its workflow history below records the current result; the existing deployment is retained when a source download fails.
+- **Patent Attic:** CIPO changed its workbook filename to `Weekly_Pre_Grant_Completed_…xlsx`. The importer now recognizes both old and new names on the official HTTPS host. The current workbook also contains incomplete rows; they remain searchable by application number, with missing values shown as unavailable. Added five regression tests. A real-source build parsed 13,963 applications while preserving the workbook's own edition date. Its production browser checks and deployment passed ([run 45256398006](https://github.com/jsdyer/patentattic/actions/runs/45256398006)).
+- **Government Memory:** the rollout run encountered repeated Canada.ca source timeouts before reaching the Pages upload/deploy steps. The retry failed on the same source-download step ([run 45253796697](https://github.com/jsdyer/governmentmemory/actions/runs/45253796697)). This is the remaining rollout exception; the existing deployment is retained when a source download fails.
 
 ## Verification
 
-- Hub: 56 Python tests and 34 Node tests passed; the static build generated all 227 tools.
-- All 215 non-hub repositories received their relevant local checks. Six initial setup-related failures were resolved by installing the existing dependencies or building before running the tests.
+- Hub: 56 Python tests and 34 Node tests passed; the static build generated all 227 tools. The production browser check and Pages deployment also passed ([run 45256648343](https://github.com/jsdyer/jsdyer.github.io/actions/runs/45256648343)).
+- All 215 originally audited non-hub repositories received their relevant local checks. The three newly added tools run their existing Node, Python, build and browser checks in CI. Six initial setup-related failures were resolved by installing the existing dependencies or building before running the tests.
 - Added 18 logic tests across the seven newly covered tools, eight storage migration tests, and five additional Patent Attic regression tests.
 - All seven newly added browser suites and their Pages deployments passed. Synthetic offline data is built only inside the isolated test job, never in the production artifact.
-- All workflow YAML parsed successfully; six new live-date probes returned valid dates.
+- All workflow YAML parsed successfully; six new live-date probes returned valid dates. All 224 original guide notes and 211 opted-in manifests agree with the published source checkouts. An additional raw-GitHub network check encountered 21 HTTP 503 errors; it reported no content differences for the sources it could fetch.
 - Per-repository commits below are the latest maintenance commits. Actions links show the live status, including any upstream source or subsequent scheduled-run failures.
 
 ### Browser and canary evidence
@@ -45,10 +45,13 @@ This maintenance pass covered the 224 tools present at the start of the audit. T
 
 ## Repository receipts
 
-The hub changes accompany this document. These 215 repository commits contain the tool and template changes.
+The hub changes accompany this document. These 218 repository commits contain the tool and template changes.
 
 | Repository | Maintenance commit | Workflow history |
 | --- | --- | --- |
+| violationsheet | [a7517a5](https://github.com/jsdyer/violationsheet/commit/a7517a56d8bc35d4735ec32a90949a67f47357ca) | [Actions](https://github.com/jsdyer/violationsheet/actions) |
+| highwayframe | [7ad6c87](https://github.com/jsdyer/highwayframe/commit/7ad6c87f5546d4f7e9d5e47fe41ba830ff153c8b) | [Actions](https://github.com/jsdyer/highwayframe/actions) |
+| langleytrades | [2d7a4e8](https://github.com/jsdyer/langleytrades/commit/2d7a4e85903b2fff717b68409f58db83d67badd2) | [Actions](https://github.com/jsdyer/langleytrades/actions) |
 | abusepulse | [a36a29e](https://github.com/jsdyer/abusepulse/commit/a36a29ea7021db143733f78ede8f4b45fcb02a88) | [Actions](https://github.com/jsdyer/abusepulse/actions) |
 | accessreceipt | [4ee1e93](https://github.com/jsdyer/accessreceipt/commit/4ee1e93e2a0803fa0dd77e0e51b07b0c737c7568) | [Actions](https://github.com/jsdyer/accessreceipt/actions) |
 | aircheckdiary | [23448a1](https://github.com/jsdyer/aircheckdiary/commit/23448a1ebec13698e1378914e361889973724986) | [Actions](https://github.com/jsdyer/aircheckdiary/actions) |
