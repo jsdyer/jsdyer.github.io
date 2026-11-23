@@ -8504,11 +8504,11 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Dated SEC EDGAR filings and selected financial facts for six Canadian and US companies; refreshed daily."
+      "detail": "Dated SEC EDGAR filings and selected financial facts from a configurable company watchlist; refreshed daily."
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose Shopify, Royal Bank of Canada, Canadian Natural Resources, Apple, Microsoft or Amazon, then select a financial concept, currency and period basis. The ledger compares exact reported periods and links each value to its SEC filing; a changed value may reflect a recast or context difference, not necessarily a restatement. Daily captures retain selected standard financial facts from 2018 onward, not a complete company or filing universe."
+      "note": "Choose a company from the watchlist, then select a financial concept, currency and period basis. The ledger compares exact reported periods and links each value to its SEC filing; a changed value may reflect a recast or context difference, not necessarily a restatement. Daily captures retain selected standard financial facts from 2018 onward, not a complete company or filing universe."
     }
   }
 ]
