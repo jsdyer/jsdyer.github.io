@@ -8612,7 +8612,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Enter any food barcode to compare nutrition, ingredients and reported allergens. Switch between source-normalized 100 g/mL and each product’s own serving, then save a dated JSON receipt to reopen later; missing fields never become zero or an allergy-free claim."
+      "note": "Enter any food barcode to compare nutrition, including reported vitamins and minerals, ingredients and allergens. Inspect original label photos and additional product details. Switch between source-normalized 100 g/mL and each product’s own serving, then save a dated JSON receipt to reopen later; missing fields never become zero or an allergy-free claim."
     }
   },
   {
@@ -8638,7 +8638,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Search any topic with dates, publication place or a newspaper LCCN; pin useful pages and save a JSON receipt or CSV. Saved starting searches load instantly, while live searches query the Library of Congress; OCR matches and newspaper claims need checking against the original page."
+      "note": "Search any topic with dates, publication place or a newspaper LCCN; pin useful pages and save a JSON receipt or CSV. Saved starting searches load instantly; live searches query the Library of Congress. If a browser cannot read its response, open the exact source JSON and import it locally with its search URL. OCR matches and newspaper claims need checking against the original page."
     }
   },
   {
@@ -8665,7 +8665,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose a topic or search your own phrase, then open the original page to check the OCR and surrounding columns. Topic matches are historical reports, not verified events; save useful pages and export their source links."
+      "note": "Choose a topic or search your own phrase, then open the original page to check the OCR and surrounding columns. Topic matches are historical reports, not verified events; save useful pages and export their source links. If a live request fails, import an official Library JSON response with its exact search URL; clippings stay usable and imports are clearly dated as imports."
     }
   }
 ]
