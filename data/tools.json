@@ -313,6 +313,37 @@
     }
   },
   {
+    "id": "domain-biography",
+    "title": "Domain Biography",
+    "description": "Follow a domain's life from registration through certificates and archived captures, with transfers, changes and quiet years on one timeline.",
+    "category": "liminal-tools",
+    "tags": [
+      "domains",
+      "rdap",
+      "whois",
+      "cira",
+      ".ca",
+      "certificates",
+      "crt.sh",
+      "wayback",
+      "history",
+      "registrar"
+    ],
+    "icon": "history",
+    "url": "/domain-biography/",
+    "source": "https://github.com/jsdyer/domain-biography",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Your browser asks IANA's RDAP registry, crt.sh certificate logs and the Wayback Machine directly when you look up a domain."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter a domain such as cira.ca, or paste a full URL. A subdomain is looked up under its registered name at the registry. The timeline marks each event with its source. A quiet period means two or more years in which no source recorded anything, which often points to a parked, lapsed or re-registered domain. Compare that span with the registration date: a \"Registered\" date after the first archive capture usually means the name expired and someone registered it again. Use \"Copy link\" to share a lookup, or download the report as Markdown or JSON."
+    }
+  },
+  {
     "id": "routearchaeologist",
     "title": "Route Archaeologist",
     "description": "Trace observed BGP origins by IP prefix or ASN.",
@@ -8010,6 +8041,56 @@
       "note": "Choose a brand to inspect derived phishing counts, report-month groups and hosting-ASN groups. Import a PhishStats JSON array or URLhaus response locally to inspect defanged URLs, report dates and supplied registrar data. Brand-token matches are unverified candidates; URLhaus malware is always separate from phishing."
     },
     "sync_manifest": true
+  },
+  {
+    "id": "shieldcheck",
+    "title": "Shield Check",
+    "description": "See which filtering DNS services block fresh phishing and malware domains, including CIRA Canadian Shield, and test your own list.",
+    "category": "security",
+    "tags": [
+      "dns",
+      "cira",
+      "canadian shield",
+      "cloudflare",
+      "quad9",
+      "phishing",
+      "malware",
+      "doh",
+      "protective dns",
+      "filtering"
+    ],
+    "icon": "shield-check",
+    "url": "/shieldcheck/",
+    "source": "https://github.com/jsdyer/shieldcheck",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Six-hourly captures check fresh URLhaus and OpenPhish domains against CIRA, Cloudflare and Quad9; your own list is checked live from your browser.",
+      "cadence": "Every 6 hours",
+      "probes": [
+        {
+          "label": "Data retrieved",
+          "url": "https://coolcode.ca/shieldcheck/data/index.json",
+          "path": [
+            "built"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "tracked_domains"
+            ],
+            "unit": "threat domains tracked"
+          },
+          "value": "2026-11-23 17:59 UTC",
+          "count": 111
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "The scoreboard's block rate counts only domains that still resolved on the operator's unfiltered service, so dead domains don't count against anyone. \"Unique\" means no other security filter blocked that domain in the same capture. A control-list block is a false positive worth reporting to the provider. \"How quickly\" tracks domains that first appear in a feed after tracking began and shows how many hours passed before each filter blocked them. Use \"Check your own list\" to test a suspicious link before you share it. That check runs from your browser, and services that don't accept browser requests show \"!\"."
+    }
   },
   {
     "id": "scanreceipt",
