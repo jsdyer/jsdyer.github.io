@@ -21,9 +21,9 @@ refresh step below when changing retained data as well as interface defaults.
 | [Format Shift](https://coolcode.ca/formatshift/) | Any artist name or MusicBrainz release/release-group ID; import a receipt | [Artist shortcuts, opening edition IDs and page limits](https://github.com/jsdyer/formatshift/blob/main/web/config.json) | Changing config on `main` triggers an identified API collection and publication, preserving the previous receipt on failure. The separate collection workflow can fetch arbitrary IDs into an importable artifact. |
 | [Malware Lineage](https://coolcode.ca/malwarelineage/) | Search retained hashes, families, tags or defanged URLs; import receipts; create watch entries | [Recurring `queries`, recent/detail/recheck counts, request budget and retained captures](https://github.com/jsdyer/malwarelineage/blob/main/web/config.json) | Set repository Actions secret `ABUSECH_AUTH_KEY`. Every main push and daily at 07:23 UTC collect and publish. **Malware Lineage · Collect, check and publish → Run workflow** accepts a one-time `hash`, `urlhaus_id`, `tag` or `family` query without changing the recurring watchlist. |
 | [Launch Ledger](https://coolcode.ca/launchledger/) | Search captured missions, rockets or launch UUIDs; filter by provider, status, pad and date; import receipts to compare | [Date window, `search`, `providerId`, `watchIds`, page/request limits and `historyLimit`](https://github.com/jsdyer/launchledger/blob/main/web/config.json) | Config or collector changes on main refresh automatically; daily collection runs at 05:43 UTC. Use **Launch Ledger · Capture, check and publish → Run workflow** with `refresh` checked. Watched launch UUIDs remain included outside the date window. No key required. |
-| [Plate Solve Lab](https://coolcode.ca/platesolvelab/) | Import solve receipts, compare frames and inspect the real example; the owner workflow accepts a public Astrometry job/submission ID or authorized public image URL | [Example receipt, workflow URL, optional `adapterUrl`, upload and polling limits](https://github.com/jsdyer/platesolvelab/blob/main/web/config.json) | Set repository Actions secret `ASTROMETRY_API_KEY`. Use **Plate Solve · Owner receipt → Run workflow**, download `plate-solve-receipt`, and import `receipt.json`. Main pushes publish interface changes and validate the key without uploading photos. Solving is manual; receipts are not automatically published. |
-| [Road Pulse](https://coolcode.ca/roadpulse/) | Any road, town or event ID in the captured BC feed; local filters, saved views and imported captures | [API `filters`, `quickSearches`, `defaultFilters`, page limits and retention](https://github.com/jsdyer/roadpulse/blob/main/web/config.json) | Config or collector changes on main refresh automatically; collection runs every six hours at minute 17. Use **Road Pulse · Collect, check and publish → Run workflow** with `refresh_data` checked. Other pushes rebuild retained data. No key required. |
-| [River Pulse](https://coolcode.ca/riverpulse/) | Any catalogue station name/ID, 1–30 recent days and two historical years; imports and comparisons | [`stationIds`, `defaultStation`, `realtimeDays`, `historicalYears`, station/page limits and catalogue/history refresh intervals](https://github.com/jsdyer/riverpulse/blob/main/web/config.json) | Config or collector changes on main trigger **River Pulse · Refresh observations**; it also runs daily at 09:43 UTC and manually. Successful refreshes retain captures and trigger Pages publication. Live station lookups need no config change. No key required. |
+| [Plate Solve Lab](https://coolcode.ca/platesolvelab/) | Import solve receipts, compare frames and inspect the real example; use the owner workflow for public job/submission IDs or authorized image URLs, or the optional owner portal for local sky photos | [Example receipt, workflow URL, optional `adapterUrl`, upload and polling limits](https://github.com/jsdyer/platesolvelab/blob/main/web/config.json) | Set repository Actions secret `ASTROMETRY_API_KEY`. Use **Plate Solve · Owner receipt → Run workflow**, download `plate-solve-receipt`, and import `receipt.json`. For local uploads, follow the [dashboard-only owner portal setup](https://github.com/jsdyer/platesolvelab/blob/main/adapter/DASHBOARD.md) below. Solving is manual; receipts are not automatically published. |
+| [Road Pulse](https://coolcode.ca/roadpulse/) | Any road, town or event ID in the captured BC feed; synchronized map/list filters, local saved views and imported captures | [API `filters`, `quickSearches`, `defaultFilters`, page limits, retention and `map` settings](https://github.com/jsdyer/roadpulse/blob/main/web/config.json) | Config or collector changes on main refresh automatically; collection runs every six hours at minute 17. Use **Road Pulse · Collect, check and publish → Run workflow** with `refresh_data` checked. Configure `map.enabled`, `tileUrl`, attribution, zoom limits and fallback view; the same capture and filters drive map and list. Other pushes rebuild retained data. No key required. |
+| [River Pulse](https://coolcode.ca/riverpulse/) | Any catalogue station name/ID, 1–30 recent days and two historical years; **Find archive dates → Use available years** helps choose measured years for closed gauges or empty periods before fetching | [`stationIds`, `defaultStation`, `realtimeDays`, `historicalYears`, station/page limits and catalogue/history refresh intervals](https://github.com/jsdyer/riverpulse/blob/main/web/config.json) | Config or collector changes on main trigger **River Pulse · Refresh observations**; it also runs daily at 09:43 UTC and manually. Successful refreshes retain captures and trigger Pages publication. Live station lookups and archive-date checks need no config change. No key required. |
 | [Access Receipt](https://coolcode.ca/accessreceipt/) | Inspect retained findings or import standard axe-core/Access Receipt JSON; the owner workflow accepts authorized public URLs | [`pages`, `viewport`, `tags`, settle/navigation timeouts, page/request budgets and `historyLimit`](https://github.com/jsdyer/accessreceipt/blob/main/web/config.json) | Every main push and Tuesdays at 07:39 UTC collect and publish. Use **Access Receipt · Check, capture and publish → Run workflow** with comma-separated `urls` for a one-off collection; blank uses saved pages. No API key required. |
 
 Each repository's **Expand or customize** README section gives a working config
@@ -31,6 +31,30 @@ example and the exact command-line alternative. Limits for provider quotas,
 comparison columns or maximum response sizes are explicit; they are separate
 from the length of the starter list. Adding an entirely different upstream API
 may still require an adapter because its response format and terms differ.
+
+## Plate Solve Lab owner uploads
+
+For a local sky photo, follow the [dashboard-only owner portal guide](https://github.com/jsdyer/platesolvelab/blob/main/adapter/DASHBOARD.md).
+It uses a dedicated `platesolvelab-owner` Worker at its own `workers.dev` address,
+protected by Cloudflare Access for your exact owner email. Paste the published
+[single-file Worker](https://github.com/jsdyer/platesolvelab/blob/main/adapter/worker-dashboard.mjs)
+into that Worker's dashboard editor, then add these five bindings:
+
+| Type | Binding | Value |
+| --- | --- | --- |
+| Text | `ALLOWED_ORIGIN` | `https://coolcode.ca` |
+| Text | `CF_ACCESS_TEAM_DOMAIN` | Your `YOUR-TEAM.cloudflareaccess.com` domain, without `https://` |
+| Text | `CF_ACCESS_AUD` | This Worker's Access application Audience (AUD) Tag |
+| Text | `OWNER_EMAIL` | The exact email allowed by its owner-only Access policy |
+| Secret | `ASTROMETRY_API_KEY` | Your Astrometry.net API key, entered into the Secret field |
+
+GitHub Actions secrets do not automatically transfer to a Worker. The direct
+owner portal needs no DNS changes, CNAME, CLI, CORS setup or public `adapterUrl`
+edit. After signing in, first read existing solved job `1493115` to check the
+connection, then upload an authorized sky photo, download its receipt and import
+it into the public viewer. Leave `adapterUrl` empty for this first-test flow.
+Your existing CoolCode router is unchanged; uploads and receipts are not
+automatically published.
 
 ## Know which version you are viewing
 
