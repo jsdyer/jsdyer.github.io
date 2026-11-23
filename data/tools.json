@@ -7954,7 +7954,7 @@
   {
     "id": "scanreceipt",
     "title": "Scan Receipt",
-    "description": "A dated receipt for what a website loaded.",
+    "description": "Inspect dated website screenshots and network requests, and compare saved receipts.",
     "category": "security",
     "tags": [
       "urlscan",
@@ -7969,7 +7969,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Daily owned-domain urlscan search status plus local evidence imports and comparisons; no new scans or public receipt republication.",
+      "detail": "Daily first-party Chromium captures of three CoolCode pages, plus local urlscan imports and an owner-only API scan workflow.",
       "cadence": "Daily",
       "probes": [
         {
@@ -7977,22 +7977,21 @@
           "path": [
             "checked_at"
           ],
-          "label": "Search checked",
+          "label": "Browser captured",
           "precision": "minute",
-          "notice_if": {
+          "count_at": {
             "path": [
-              "status"
+              "records"
             ],
-            "equals": "import ready",
-            "text": "Local evidence workbench"
+            "unit": "scan receipts"
           },
-          "value": "2026-11-22 15:06 UTC",
-          "notice": "Local evidence workbench"
+          "value": "2026-11-23 00:22 UTC",
+          "count": 3
         }
       ]
     },
     "readme": {
-      "note": "Open an existing public urlscan result, copy its full Result API JSON into the local workbench, then save a sanitized receipt. Import two receipts to compare destination hosts, requests and statuses. Scan time is distinct from collection time; a changed request does not prove tracking or removal."
+      "note": "Start with a saved CoolCode receipt, choose Inspect receipt to see its screenshot and network responses, then compare two captures of the same page. Daily first-party captures establish a baseline and build history. The owner-only urlscan workflow uses the saved key to create a public scan and return provider links. Visitors can also import public urlscan Result JSON locally; download receipts to keep local imports."
     },
     "sync_manifest": true
   },
@@ -8014,7 +8013,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "One owned-site MDN reference; government collection is paused and SSL Labs remains permission-gated.",
+      "detail": "Saved CoolCode header evidence, local report comparisons and an owner-only SSL Labs client; government targets are coverage notes.",
       "probes": [
         {
           "url": "https://coolcode.ca/govgrade/data/index.json",
@@ -8043,7 +8042,7 @@
       ]
     },
     "readme": {
-      "note": "Start with the operator-owned CoolCode reference, inspect the provider's individual header findings, and export a dated CSV. The five government sites are explicitly ungraded because their automated collection is paused. Import an existing MDN `/analyze` JSON report for a tab-only, unverified-host comparison. Assessment dates differ from capture dates; provider grades are never combined into a security score."
+      "note": "Inspect the saved CoolCode header report and individual MDN findings. The owner can run Personal TLS · Check CoolCode in GitHub Actions using SSLLABS_EMAIL, then open the provider report from the run Summary. Existing MDN JSON imports stay in this tab for comparison. Available reports are shown first; uncollected government targets appear only when explicitly viewing coverage notes."
     },
     "sync_manifest": true
   },
