@@ -9,6 +9,13 @@
   or releases belong in a separate repository. Keep that work and its tests with the tool.
   Keep existing projects where they are unless a move is requested.
 - New standalone browser tools start from `jsdyer/coolcode-tool-template`.
+- Build tools for expandable personal use. Put watchlists, preset queries, source
+  selections and tunable limits in a documented configuration file. Defaults are
+  starting points; support arbitrary valid visitor input when the source permits it.
+  Derive counts, filters and validation from the configured or captured data, not
+  the initial sample size. Document the exact edit, refresh and publication steps.
+  Test adding an item beyond the starter list. Keep earlier captures valid when
+  the current configuration changes, and show the selected capture's date.
 - Add one catalogue record only after checking the deployed destination. Use `local`
   hosting for an included directory, `project` for another GitHub Pages repository,
   and `external` for an HTTPS destination such as installation instructions.

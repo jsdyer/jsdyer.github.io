@@ -176,6 +176,23 @@ destination, category, probe definitions and cached measurements.
 
 ## Shared conventions
 
+See [Customize your CoolCode tools](customizing-tools.md) for current configuration
+paths and refresh examples.
+
+- Make collections expandable. Keep default entities, queries, sources and request
+  limits in a small documented configuration file rather than scattered UI code.
+  Accept custom visitor inputs wherever the upstream API supports them; presets
+  are conveniences, not the only inputs the tool can process. Separate safety or
+  provider limits from the number of starter examples, and explain those limits.
+- Derive displayed counts, filters and validation from actual data. Validate item
+  structure and unique identifiers without requiring a fixed list length. Test a
+  configuration with one additional item, and preserve valid older captures even
+  when their coverage differs from the current watchlist.
+- Include an **Expand or customize** section in each README: exact config path,
+  example entry, accepted fields, whether a normal push refreshes data, and the
+  workflow/input or command needed to collect and publish the expanded coverage.
+  Make the selected capture date visible; a code deployment and a data refresh
+  are distinct operations when the tool uses retained snapshots.
 - Keep asset URLs relative to the application directory.
 - Link home to `https://coolcode.ca/` and document source/API attribution.
 - Namespace storage as `coolcode:<tool-id>:<key>`; different paths share an origin.

@@ -8510,5 +8510,162 @@
     "readme": {
       "note": "Choose a company from the watchlist, then select a financial concept, currency and period basis. The ledger compares exact reported periods and links each value to its SEC filing; a changed value may reflect a recast or context difference, not necessarily a restatement. Daily captures retain selected standard financial facts from 2018 onward, not a complete company or filing universe."
     }
+  },
+  {
+    "id": "fxreceipt",
+    "title": "FX Receipt",
+    "description": "Compare a foreign-currency purchase with a dated reference rate and save an inspectable conversion receipt.",
+    "category": "money",
+    "tags": [
+      "currency",
+      "exchange rates",
+      "receipts",
+      "CAD",
+      "reference rates"
+    ],
+    "icon": "receipt-text",
+    "url": "/fxreceipt/",
+    "source": "https://github.com/jsdyer/fxreceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Frankfurter historical reference rates with transaction calculations kept in your browser."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter your purchase and final posted charge, then compare with a dated reference. A positive difference is above that benchmark; it does not prove the difference was a separately charged fee. Save JSON to retain the exact rate and reopen the receipt later."
+    }
+  },
+  {
+    "id": "packagepulse",
+    "title": "Package Pulse",
+    "description": "Inspect npm release histories, maintainers and dependencies, then compare packages with dated CDN usage.",
+    "category": "projects",
+    "tags": [
+      "npm",
+      "packages",
+      "releases",
+      "dependencies",
+      "cdn"
+    ],
+    "icon": "package-search",
+    "url": "/packagepulse/",
+    "source": "https://github.com/jsdyer/packagepulse",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Live public npm metadata and jsDelivr CDN usage, with dated default captures for immediate exploration."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter any public npm package, optionally add a second, and choose Look up live. The latest publisher tag can differ from the newest release; CDN requests are not npm downloads or unique users."
+    }
+  },
+  {
+    "id": "arttimeline",
+    "title": "Art Timeline",
+    "description": "Explore two museum collections through time and compare artworks, materials and original records.",
+    "category": "media",
+    "tags": [
+      "art",
+      "museums",
+      "public domain",
+      "timeline",
+      "culture"
+    ],
+    "icon": "library-big",
+    "url": "/arttimeline/",
+    "source": "https://github.com/jsdyer/arttimeline",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Search The Met and Art Institute of Chicago, with a dated opening collection and public-domain images."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search either museum with your own terms, then refine the loaded works and compare two objects with their original date labels and credits. The opening collection and search presets are editable in web/config.json; they do not limit live searches."
+    }
+  },
+  {
+    "id": "labelcompare",
+    "title": "Label Compare",
+    "description": "Compare food labels by barcode: nutrition, ingredients, allergens and missing information side by side.",
+    "category": "money",
+    "tags": [
+      "food",
+      "barcodes",
+      "nutrition",
+      "ingredients",
+      "allergens"
+    ],
+    "icon": "shopping-basket",
+    "url": "/labelcompare/",
+    "source": "https://github.com/jsdyer/labelcompare",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Live Open Food Facts barcode lookups, dated starter labels and local receipt comparisons."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter any food barcode to compare nutrition, ingredients and reported allergens. Switch between source-normalized 100 g/mL and each product’s own serving, then save a dated JSON receipt to reopen later; missing fields never become zero or an allergy-free claim."
+    }
+  },
+  {
+    "id": "headlinevault",
+    "title": "Headline Vault",
+    "description": "Search historic newspaper pages and export a source-linked research trail.",
+    "category": "media",
+    "tags": [
+      "newspapers",
+      "archives",
+      "history",
+      "research",
+      "OCR"
+    ],
+    "icon": "folder-search",
+    "url": "/headlinevault/",
+    "source": "https://github.com/jsdyer/headlinevault",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Live Library of Congress searches plus dated, configurable starting-search captures."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search any topic with dates, publication place or a newspaper LCCN; pin useful pages and save a JSON receipt or CSV. Saved starting searches load instantly, while live searches query the Library of Congress; OCR matches and newspaper claims need checking against the original page."
+    }
+  },
+  {
+    "id": "oldnews-oddities",
+    "title": "Old News Oddities",
+    "description": "Follow curious historical newspaper reports, search your own phrases and save a trail of original pages.",
+    "category": "media",
+    "tags": [
+      "newspapers",
+      "archives",
+      "history",
+      "OCR",
+      "curiosities"
+    ],
+    "icon": "scroll-text",
+    "url": "/oldnews-oddities/",
+    "source": "https://github.com/jsdyer/oldnews-oddities",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Editable discovery shelves and live full-text page searches from Library of Congress Chronicling America.",
+      "cadence": "Weekly"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a topic or search your own phrase, then open the original page to check the OCR and surrounding columns. Topic matches are historical reports, not verified events; save useful pages and export their source links."
+    }
   }
 ]
