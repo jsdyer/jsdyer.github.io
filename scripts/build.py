@@ -276,7 +276,7 @@ def render_data(tool, access, *, show_access=False):
 
 
 def render_entry(tool, access):
-    tags = escape(" ".join(tool["tags"]), quote=True)
+    tags = escape(" ".join([tool["id"], *tool["tags"]]), quote=True)
     icon, title, description, tid = (escape(tool[key], quote=True) for key in ("icon", "title", "description", "id"))
     destination = tool.get("install_url", tool["url"]) if access == "install" else tool["url"]
     url = escape(destination, quote=True)

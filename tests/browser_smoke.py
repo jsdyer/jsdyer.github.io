@@ -65,6 +65,11 @@ def main():
             assert page.locator('[data-tool]:visible').count() == browser_count
             assert not page.locator('#install').is_visible()
             page.get_by_role('button', name='All tools', exact=True).click()
+            for query in ('wordweave', 'Word Weave'):
+                page.locator('#tool-search').fill(query)
+                assert page.locator('[data-tool]:visible').count() == 1
+                assert page.get_by_role('link', name='Word Weave', exact=True).is_visible()
+            page.locator('#clear-tools').click()
             page.locator('#tool-search').fill('Archive Shelf')
             assert page.locator('[data-tool]:visible').count() == 2
             assert page.locator('#tool-count').inner_text() == '1 tool found'

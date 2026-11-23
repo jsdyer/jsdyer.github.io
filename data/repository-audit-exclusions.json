@@ -1,0 +1,86 @@
+[
+  {
+    "repo": "superapp-ca",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "hackme-ca",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "funapps-ca",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "nethush-com",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "jsd-technologies",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "jeffrey-dyer",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "liminal-hacker",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "slash-access",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "jsd-enterprises",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "b0x-ca",
+    "status": "personal-or-business-site",
+    "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "coolcode-tool-template",
+    "status": "template",
+    "reason": "Starter template used to create tools; not a finished utility.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "contaminatedplaces",
+    "status": "starter",
+    "reason": "Still contains the unimplemented CoolCode starter template.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "queryconfessional",
+    "status": "empty",
+    "reason": "Repository has no source files to implement a tool yet.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "backupledger",
+    "status": "empty",
+    "reason": "Repository has no source files to implement a tool yet.",
+    "reviewed_at": "2026-11-23"
+  }
+]

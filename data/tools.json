@@ -648,13 +648,15 @@
   {
     "id": "trackerxray",
     "title": "Tracker X-Ray",
-    "description": "Inspect a browser HAR or the requests recorded while this page loaded.",
+    "description": "Inspect HAR waterfalls, compare individual requests and create a reduced capture for sharing.",
     "category": "security",
     "tags": [
-      "har",
-      "network",
+      "HAR",
       "privacy",
-      "http"
+      "network",
+      "requests",
+      "waterfall",
+      "comparison"
     ],
     "icon": "radar",
     "url": "/trackerxray/",
@@ -663,16 +665,17 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "A local HAR supplies request details. The live page view uses same-origin timing entries observed by your own browser."
+      "detail": "HAR files and measured page timing are processed locally; captured URLs are never replayed."
     },
     "readme": {
-      "note": "Inspect this page’s load to see the requests your browser measured for Tracker X-Ray itself. To compare another site before and after a consent choice, export two sanitized HAR files from the same starting page and open them under Compare two HAR captures."
-    }
+      "note": "Inspect this page’s load, or import your own HAR to see its request waterfall and metadata. Compare two captures by endpoint or exact URL, then inspect individual changes. Make a sanitized copy to remove values, bodies and vendor fields; review what remains before sharing it. All capture processing stays in your browser."
+    },
+    "sync_manifest": true
   },
   {
     "id": "headerautopsy",
     "title": "Header Autopsy",
-    "description": "Read HTTP header values and inspect security policy, cookies and cache signals.",
+    "description": "Inspect HTTP headers, understand status codes and compare dated response captures.",
     "category": "security",
     "tags": [
       "har",
@@ -681,7 +684,10 @@
       "waf",
       "cdn",
       "cookies",
-      "payments"
+      "payments",
+      "status codes",
+      "HTTP",
+      "RFC"
     ],
     "icon": "list-filter",
     "url": "/headerautopsy/",
@@ -694,7 +700,7 @@
     },
     "readme": {
       "lead": "It compares cookie flag",
-      "note": "Paste headers or open a HAR locally, then read the security-header checklist for each captured response. Missing headers mean not observed in that capture; CSP frame-ancestors is recognized as a framing-control alternative. Use Gov Grade for dated MDN provider grades and TLS evidence."
+      "note": "Paste headers or open a HAR locally, then inspect its HTTP status context and security-header checklist. Status notes distinguish cache validation, authentication, rate limits and gateway failures, with direct specification links. A code alone does not establish why a request failed. Use Gov Grade for dated MDN provider grades and TLS evidence."
     }
   },
   {
@@ -3076,7 +3082,7 @@
   {
     "id": "photolab",
     "title": "Photo Lab",
-    "description": "Adjust light and colour, crop and resize photos, compare metadata and export clean copies locally.",
+    "description": "Inspect photo metadata, compare file hashes, edit images and verify sanitized JPEG/PNG copies or a batch ZIP locally.",
     "category": "field-kit",
     "tags": [
       "exif",
@@ -3087,7 +3093,11 @@
       "privacy",
       "photo",
       "image",
-      "histogram"
+      "histogram",
+      "metadata",
+      "sha256",
+      "sanitization",
+      "content-credentials"
     ],
     "icon": "camera",
     "url": "/photolab/",
@@ -3096,10 +3106,10 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Your JPEG and PNG files stay on this device. The included Apollo 8 photograph comes from NASA."
+      "detail": "Files stay in your browser. JPEG/PNG exports are re-inspected for metadata; Content Credentials detection does not validate signatures. The included Earthrise photograph comes from NASA."
     },
     "readme": {
-      "note": "Open a group of photos to compare camera names, capture times and GPS presence. Select a photo to adjust exposure, contrast, saturation and warmth. Compare original tones on the same crop, rotate or flip, and download the edited pixels."
+      "note": "Open JPEG or PNG photos to inspect EXIF, GPS, text and other metadata in the Privacy desk. Edit a selected photo, then export a copy: Photo Lab re-inspects the actual output and compares its SHA-256 and metadata with the original. For a group of photos, prepare a verified ZIP with neutral filenames. HEIC is identified but cannot be edited or sanitized here."
     },
     "sync_manifest": true
   },
@@ -9561,14 +9571,17 @@
   {
     "id": "wordweave",
     "title": "Word Weave",
-    "description": "Explore words by meaning, sound and spelling, compare searches and keep a writing shortlist.",
+    "description": "Find related words and explore local text statistics, Unicode, cleanup and transformations.",
     "category": "media",
     "tags": [
       "words",
       "writing",
       "rhymes",
       "language",
-      "Datamuse"
+      "Datamuse",
+      "Unicode",
+      "text statistics",
+      "slug"
     ],
     "icon": "scan-text",
     "url": "/wordweave/",
@@ -9576,12 +9589,12 @@
     "hosting": "project",
     "access": "browser",
     "data_info": {
-      "mode": "live",
-      "detail": "Datamuse word relationships are fetched on demand; comparisons, filters and shortlists are processed in your browser."
+      "mode": "mixed",
+      "detail": "Datamuse word searches run on demand; text statistics, Unicode inspection and transformations run locally."
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start with **ocean** and **Similar meaning**, then pin the search and try **river** to inspect shared words. **Spelling pattern** accepts * for any letters and ? for one letter, such as **t??k**. Syllable and word-class filters are local, so they make no additional API request. Comparisons describe only the returned lists, not the entire vocabulary. Your shortlist stays in this tab; download it before closing."
+      "note": "Start with **ocean** and **Similar meaning**, then pin the search and try **river** to inspect shared words. **Spelling pattern** accepts * for any letters and ? for one letter, such as **t??k**. Syllable and word-class filters are local, so they make no additional API request. Comparisons describe only the returned lists, not the entire vocabulary. Your shortlist stays in this tab; download it before closing. Switch to **Text utilities** for word counts and frequency, spacing cleanup, case/slug conversion and Unicode inspection. Transformations preview beside the original; choose **Use output as original** only when you want to replace it."
     }
   },
   {
@@ -9628,6 +9641,141 @@
     "sync_manifest": true,
     "readme": {
       "note": "Compare any supported countries and first-level regions, with British Columbia and Nova Scotia as the starting pair. Canada can use nominal or observed dates; other calendars retain their own substitute rules. Export a comparison CSV, dated JSON receipt or all-day ICS calendar. The working-day planner uses public holidays, your selected weekend weekdays and extra closure dates, counting each date once. Confirm applicable workplace rules: these community calendars are not statutory or ATIP deadline advice."
+    }
+  },
+  {
+    "id": "screensaver",
+    "title": "Retro Screensavers",
+    "description": "Install animated aquarium and space scenes as Windows screensavers.",
+    "category": "media",
+    "tags": [
+      "windows",
+      "screensaver",
+      "pixel art",
+      "aquarium",
+      "space"
+    ],
+    "icon": "tv-minimal",
+    "requirements": "64-bit Windows; MinGW-w64 on Linux or WSL to build from source",
+    "url": "https://github.com/jsdyer/screensaver",
+    "source": "https://github.com/jsdyer/screensaver",
+    "hosting": "external",
+    "access": "install",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Two scenes are drawn locally in code, with per-scene animation speed settings."
+    },
+    "readme": {
+      "lead": "The artwork is drawn in code",
+      "note": "The artwork is drawn in code, so the two .scr files are all you need to copy."
+    }
+  },
+  {
+    "id": "pdfsigning",
+    "title": "PDF Signing Lab",
+    "description": "Create a signing identity, sign PDFs and inspect signature integrity and certificate trust.",
+    "category": "security",
+    "tags": [
+      "PDF",
+      "signature",
+      "certificate",
+      "OpenSSL",
+      "pyHanko"
+    ],
+    "icon": "file-badge",
+    "requirements": "Linux, Python 3, OpenSSL, pyHanko and Poppler",
+    "url": "https://github.com/jsdyer/pdfsigning",
+    "source": "https://github.com/jsdyer/pdfsigning",
+    "hosting": "external",
+    "access": "install",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Your PDFs are signed locally. The example uses a self-signed certificate, which does not establish a trusted identity."
+    },
+    "readme": {
+      "lead": "The demo signer issued its own certificate",
+      "note": "The demo signer issued its own certificate, so a recipient needs a separate reason to trust the name."
+    }
+  },
+  {
+    "id": "payments",
+    "title": "RTR Sandbox Explorer",
+    "description": "Try Payments Canada sandbox messages, inspect responses and export redacted exchanges.",
+    "category": "money",
+    "tags": [
+      "payments",
+      "RTR",
+      "sandbox",
+      "PHP",
+      "ISO 20022"
+    ],
+    "icon": "wallet",
+    "requirements": "PHP 8.2+ with curl, XML and ZIP; Payments Canada sandbox credentials",
+    "url": "https://github.com/jsdyer/payments",
+    "source": "https://github.com/jsdyer/payments",
+    "hosting": "external",
+    "access": "install",
+    "data_info": {
+      "mode": "installed",
+      "detail": "The provider sandbox returns trigger-based test responses and mocked balances; it does not move real money."
+    },
+    "readme": {
+      "lead": "The official workbook says responses are",
+      "note": "The official workbook says responses are trigger-based."
+    }
+  },
+  {
+    "id": "composediff",
+    "title": "Compose Diff",
+    "description": "Compare Docker Compose configurations and review exactly what changed.",
+    "category": "projects",
+    "tags": [
+      "Docker",
+      "Compose",
+      "YAML",
+      "comparison",
+      "homelab"
+    ],
+    "icon": "workflow",
+    "url": "/composediff/",
+    "source": "https://github.com/jsdyer/composediff",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Compose YAML or JSON is parsed and compared in your browser; no container, environment or external file is accessed."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "lead": "To compare fully resolved configurations",
+      "note": "To compare fully resolved configurations, generate docker compose config output yourself for each version, review it for secrets, and compare those outputs."
+    }
+  },
+  {
+    "id": "mimecabinet",
+    "title": "MIME Cabinet",
+    "description": "Look up media types, interpret Content-Type headers and compare file signatures with their names.",
+    "category": "projects",
+    "tags": [
+      "MIME",
+      "file types",
+      "extensions",
+      "HTTP",
+      "signatures",
+      "metadata"
+    ],
+    "icon": "file-code-2",
+    "url": "/mimecabinet/",
+    "source": "https://github.com/jsdyer/mimecabinet",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "A bundled mime-db reference and bounded file-header checks run locally; files and pasted headers stay in your browser."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Look up **report.docx**, **image/jpeg** or any extension. Shared extensions can return several media types. Paste a Content-Type value to inspect its parameters. For a local file, **Inspect file header** reads at most 64 KiB and keeps extension, browser type and signature as separate observations. A ZIP header can be compatible with an Office file without proving that subtype. Unknown signatures remain unknown; no file is uploaded or executed. **Save inspection JSON** includes the filename and first 64 bytes, so review it before sharing."
     }
   }
 ]

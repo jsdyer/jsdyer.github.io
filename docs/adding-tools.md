@@ -226,3 +226,15 @@ For a tool with a downloadable original compilation, put the source, units, geog
 Register the download in the tool’s hub entry. For example, Metro Economy uses `"dataset": {"title":"Canadian metropolitan labour market estimates","file":"data/metro-economy.csv","format":"CSV"}`. The build links the tool and its download from [/datasets/](https://coolcode.ca/datasets/). Both the directory and the public tool pages appear in the [sitemap](https://coolcode.ca/sitemap.xml). Use [Google’s Rich Results Test](https://search.google.com/test/rich-results) and your domain’s Search Console URL Inspection to check individual pages. Crawling and inclusion are controlled by Google.
 
 For an immutable, citable edition, follow the [Release Receipt example](https://github.com/jsdyer/releasereceipt). Commit the actual dataset, its licence and source information into the release tag, include a dataset-specific `.zenodo.json`, and check the release package. Link the owner’s GitHub account on [Zenodo](https://zenodo.org/account/settings/github/), enable that individual repo, then publish a versioned GitHub release containing the intended data. Verify the data, metadata and DOI on Zenodo before adding that DOI to the tool. Later editions should be releases of the same dataset so a reader can cite a specific version.
+
+## Check for missing repositories
+
+Run `python3 scripts/audit_repositories.py` to compare the complete public GitHub
+repository inventory against catalogue source links. Review the report before
+adding tools; a repository or a successful HTTP response alone is not proof of
+a working application. See [Repository coverage audit](repository-audit.md) for
+reviewed exclusions, report interpretation and offline inventory input.
+
+The homepage search includes each tool ID as well as its title and tags, so both
+`wordweave` and `Word Weave` find the same listing. Installation projects appear
+under **Install yourself** or **All tools**.

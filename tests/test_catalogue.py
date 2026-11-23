@@ -52,6 +52,13 @@ class CatalogueTests(unittest.TestCase):
                 self.assertIn(category["id"], page.ids)
                 self.assertIn("#" + category["id"], page.hrefs)
 
+    def test_repository_slugs_are_searchable(self):
+        page = Page(render(self.categories, self.tools, self.template))
+        for entry in page.tools:
+            self.assertIn(entry["data-tool-id"], entry["data-keywords"].split())
+        wordweave = next(entry for entry in page.tools if entry["data-tool-id"] == "wordweave")
+        self.assertIn("wordweave", wordweave["data-keywords"])
+
     def test_access_labels_are_explicit_for_every_entry(self):
         html = render(self.categories, self.tools, self.template)
         page = Page(html)
