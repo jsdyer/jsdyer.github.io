@@ -2903,7 +2903,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "cadence": "Weekly camera list · Pictures when opened",
+      "cadence": "Weekly",
       "detail": "The DriveBC HighwayCams list supplies camera names, highways and picture addresses. The stills themselves are requested from DriveBC when you open a camera.",
       "probes": [
         {
@@ -2944,7 +2944,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "cadence": "When StatCan releases the table",
+      "cadence": "Annual",
       "detail": "Statistics Canada table 35-10-0184 supplies annual police-reported incidents and rates per 100,000 for British Columbia police services.",
       "probes": [
         {
