@@ -694,7 +694,7 @@
     },
     "readme": {
       "lead": "It compares cookie flag",
-      "note": "Choose Compare two responses and open the captured redirect and page. The path without a final slash returned 301. The destination returned 200 and a max-age of 600 seconds."
+      "note": "Paste headers or open a HAR locally, then read the security-header checklist for each captured response. Missing headers mean not observed in that capture; CSP frame-ancestors is recognized as a framing-control alternative. Use Gov Grade for dated MDN provider grades and TLS evidence."
     }
   },
   {
@@ -854,7 +854,7 @@
   {
     "id": "patchsignal",
     "title": "Patch Signal",
-    "description": "Look up a CVE from your software inventory, check affected versions and follow patch guidance.",
+    "description": "Check CVE shortlists against known exploitation, inspect affected versions and follow patch guidance.",
     "category": "security",
     "tags": [
       "cisa",
@@ -873,7 +873,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "CVE records, CISA’s exploited-vulnerability catalogue and FIRST’s EPSS scores describe each identifier.",
+      "detail": "CISA KEV shortlist matching runs locally; individual CVE records and FIRST EPSS estimates load on request.",
       "cadence": "Daily",
       "probes": [
         {
@@ -911,7 +911,7 @@
       ]
     },
     "readme": {
-      "note": "Start with a CVE from your inventory. Compare affected versions, CISA’s required action when listed, and changes in FIRST’s EPSS estimate. The Canadian notices link carries that identifier to The Exploit Graveyard to find Cyber Centre alerts and advisories that cite it."
+      "note": "Paste CVE identifiers from your inventory or a bulletin to match up to 250 distinct IDs against the saved CISA known-exploited catalogue. Open an identifier for affected-version records, patch guidance and FIRST EPSS estimates. Not listed in KEV does not mean safe, and an ID match does not establish that your installed version is affected."
     },
     "sync_manifest": true
   },
@@ -1258,7 +1258,7 @@
     },
     "readme": {
       "lead": "The last unquoted word",
-      "note": "The last unquoted word matches prefixes as you type."
+      "note": "Search completed federal ATIP summaries by keyword and institution, save useful records, then export the current result page or your saved shortlist as CSV. The export includes both languages, official record links and the snapshot date; it is not the full result set unless you have saved every match."
     }
   },
   {
@@ -1714,7 +1714,7 @@
     },
     "readme": {
       "lead": "Filter by format, organization",
-      "note": "Filter by format, organization and modified year."
+      "note": "Search the downloaded federal catalogue, or use Live catalogue search for a current CKAN query. Preview CSV and JSON resources up to 2 MB when the publisher allows browser access. You can also open a local CSV or JSON extract without uploading it; previews show up to 50 rows and 30 columns."
     }
   },
   {
@@ -2311,7 +2311,7 @@
   {
     "id": "trailglass",
     "title": "Trailglass",
-    "description": "Follow municipal trails on a street map, download mapped segments as GPX and inspect your own recorded rides.",
+    "description": "Inspect mapped trails or GPX rides, find steep sections and compare recorded elevations with optional terrain estimates.",
     "category": "places",
     "tags": [
       "langley",
@@ -2331,7 +2331,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Municipal trail segments appear over OpenStreetMap streets. Local GPX files supply their own coordinates, times and elevations.",
+      "detail": "Municipal geometry and local GPX tracks, with optional 90 m Copernicus terrain estimates through Open-Meteo. Coordinates are sent only on an explicit terrain request.",
       "probes": [
         {
           "url": "https://coolcode.ca/trailglass/data/status.json",
@@ -2354,7 +2354,7 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "note": "Follow municipal routes against the street map. Select a map segment to download its GPX with the municipality, source record and licence. The inspector also reads local GPX activities with recorded times and elevations."
+      "note": "Select a municipal segment or open a local GPX to inspect distance, recorded elevations and steep sections. You can explicitly send up to 100 sampled coordinates for a separate Open-Meteo terrain profile. The roughly 90 m terrain model does not replace recorded elevations and can miss bridges, tunnels and small climbs."
     },
     "sync_manifest": true
   },
@@ -2951,7 +2951,7 @@
   {
     "id": "nightfinder",
     "title": "Nightfinder",
-    "description": "Find astronomical darkness, target altitude and camera framing for Canadian communities or your own coordinates.",
+    "description": "Plan dark-sky sessions, camera framing and seven days of golden and blue-hour photography windows.",
     "category": "field-kit",
     "tags": [
       "astronomy",
@@ -2970,11 +2970,11 @@
     "hosting": "project",
     "access": "browser",
     "data_info": {
-      "mode": "local",
-      "detail": "GeoNames supplies Canadian community centres and time zones. Sun, Moon and target positions are calculated on your device."
+      "mode": "mixed",
+      "detail": "Sun, Moon and target positions are calculated locally. Optional cloud forecasts come from Open-Meteo only when requested."
     },
     "readme": {
-      "note": "Choose 30, 60, 90 or 120 minutes and optionally require the Moon below the horizon. Nightfinder ranks each target’s continuous dark session by its lowest sampled altitude. Select a target to move the chart to its start, read the compass bearing, and download the sessions with the plan."
+      "note": "Choose a location to calculate seven days of golden light (Sun −4° to +6°) and blue light (−6° to −4°), alongside dark-sky target sessions. Optionally load cloud-cover forecasts for those windows; that click sends coordinates to Open-Meteo. Download the plan to retain the calculated windows."
     },
     "sync_manifest": true
   },
@@ -3022,7 +3022,7 @@
     },
     "readme": {
       "lead": "Read the dated orbit",
-      "note": "Read the dated orbit epoch as well as the snapshot retrieval date, especially after maneuvers."
+      "note": "Calculate passes for your location and chosen minimum elevation, filter to likely visible windows, and download the shown passes as CSV or an ICS calendar. The calendar is a dated export, not a live subscription; refresh orbital elements and recalculate before observing."
     }
   },
   {
@@ -3606,7 +3606,7 @@
     },
     "readme": {
       "lead": "Missing captures indicate gaps",
-      "note": "Missing captures indicate gaps in the evidence."
+      "note": "Paste up to 50 public URLs into the batch checker to find nearby Wayback captures and download a dated JSON receipt. Current HTTP checks are optional. A browser restriction, timeout or blocked HEAD request is inconclusive, not proof that the page is dead."
     }
   },
   {
@@ -5302,7 +5302,7 @@
   {
     "id": "airpair",
     "title": "Air Pair",
-    "description": "Compare hourly fine-particle measurements with air-quality model estimates at Langley Central and Lake Major.",
+    "description": "Compare measured air quality with models, explore worldwide pollutant forecasts and compare local station files.",
     "category": "places",
     "tags": [
       "air quality",
@@ -5321,8 +5321,8 @@
     "hosting": "project",
     "access": "browser",
     "data_info": {
-      "mode": "snapshot",
-      "detail": "Daily checks pair B.C. and Nova Scotia station measurements with Copernicus CAMS Global estimates from Open-Meteo. Each station shows its own source dates.",
+      "mode": "mixed",
+      "detail": "Saved Canadian monitor/model pairs, opt-in worldwide CAMS forecasts and local hourly CSV comparisons. Model estimates remain distinct from observations.",
       "cadence": "Daily; Nova Scotia releases validated data annually",
       "probes": [
         {
@@ -5364,7 +5364,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Open the May 2023 Lake Major peak. Compare the model at the monitor’s highest hour and check how often they crossed 25 µg/m³ together. Change the comparison level or station and inspect daily errors to see which days account for the largest errors."
+      "note": "Compare the saved Langley and Lake Major monitor readings with model estimates, then use the broader comparison to explore six pollutants at any two coordinates. Worldwide values are CAMS Global model forecasts. Alternatively, compare two hourly observation CSV files locally, retaining missing hours and calculating differences only where both values exist."
     }
   },
   {
@@ -8136,7 +8136,7 @@
   {
     "id": "lawdelta",
     "title": "Law Delta",
-    "description": "Track section-level changes across dated captures of selected British Columbia laws.",
+    "description": "Search BC legislation titles and compare section-level changes across captured privacy laws.",
     "category": "explorers",
     "tags": [
       "british-columbia",
@@ -8150,7 +8150,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Dated BC Laws CiviX XML captures of four privacy statutes and regulations, under the King’s Printer Licence.",
+      "detail": "Weekly BC Laws title catalogue plus immutable CiviX XML captures of four privacy laws. Broader title search does not imply full-text history for all laws.",
       "probes": [
         {
           "url": "https://coolcode.ca/lawdelta/data/index.json",
@@ -8171,7 +8171,7 @@
       ]
     },
     "readme": {
-      "note": "Choose one of the two privacy Acts or their regulations, then search a printed section number or a word such as “consent”. The first capture is a baseline with no invented earlier version. Later captures can show added, removed and changed sections side by side. Capture dates are observation dates, while effective-date annotations come separately from the official XML. Read the linked BC Laws source before relying on a change; this is not legal advice."
+      "note": "Search the wider BC legislation title catalogue and full text across the four privacy laws in the selected capture. Historical versions and legislative change tables are labelled separately. Open a section to inspect its recorded text and compare captures. Observation dates are distinct from effective dates; catalogue title matches do not add change history for other laws."
     },
     "sync_manifest": true
   },
