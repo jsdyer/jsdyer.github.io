@@ -80,3 +80,5 @@ pre code { font-size: inherit; overflow-wrap: normal; }
 .guide-nav a { font-size: .92rem; }
 .field-guide { max-width: 77ch; }
 .field-guide h3 { margin: 1.4rem 0 .45rem; line-height: 1.3; }
+
+.article-body { max-width: 77ch; padding-top: 2rem; }

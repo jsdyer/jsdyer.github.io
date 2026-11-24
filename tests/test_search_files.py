@@ -9,6 +9,15 @@ from build import render_datasets, write_search_files
 
 
 class SearchFilesTests(unittest.TestCase):
+    def test_multi_file_dataset_links_to_explanatory_download_section(self):
+        tools = [{"id": "example", "url": "/example/", "title": "Example",
+                  "data_info": {"detail": "A group of source files."},
+                  "dataset": {"title": "Research snapshot", "section": "dataset"}}]
+        page = render_datasets("{{DATASET_ENTRIES}}", tools)
+        self.assertIn('href="/example/#dataset"', page)
+        self.assertIn("Source files and download formats", page)
+        self.assertNotIn("manifest.json", page)
+
     def test_sitemap_uses_public_routes_and_published_articles(self):
         tools = [
             {"access": "browser", "hosting": "project", "url": "/from-another-repo/"},

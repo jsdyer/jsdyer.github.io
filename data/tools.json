@@ -1322,7 +1322,11 @@
     "readme": {
       "note": "Search completed federal ATIP summaries by keyword and institution, save useful records, then export the current result page or your saved shortlist as CSV. The export includes both languages, official record links and the snapshot date; it is not the full result set unless you have saved every match."
     },
-    "sync_manifest": true
+    "sync_manifest": true,
+    "dataset": {
+      "title": "Completed federal ATIP request summaries",
+      "section": "dataset"
+    }
   },
   {
     "id": "governmentmemory",
@@ -1963,7 +1967,11 @@
     "readme": {
       "note": "Read the latest and preceding estimates for one river, population and measure. For Chilliwack River coho, compare the survey years with the Bench Road repair timeline."
     },
-    "data_date_badge": true
+    "data_date_badge": true,
+    "dataset": {
+      "title": "Pacific salmon escapement records from DFO NuSEDS",
+      "section": "dataset"
+    }
   },
   {
     "id": "datasetdiff",

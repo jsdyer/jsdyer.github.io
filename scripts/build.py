@@ -91,10 +91,11 @@ def validate(categories, tools, root=ROOT):
         if "dataset" in tool:
             dataset = tool["dataset"]
             require(tool["access"] == "browser" and tool["hosting"] in {"local", "project"}
-                    and isinstance(dataset, dict) and {"title", "file", "format"} <= set(dataset) <= {"title", "file", "format", "section"}
+                    and isinstance(dataset, dict) and {"title"} <= set(dataset) <= {"title", "file", "format", "section"}
                     and all(nonempty(value) for value in dataset.values()), f"{tid}: invalid dataset entry")
+            require(("file" in dataset) == ("format" in dataset), f"{tid}: dataset file and format must be supplied together")
             require("section" not in dataset or SLUG.fullmatch(dataset["section"]), f"{tid}: invalid dataset section")
-            require(re.fullmatch(r"(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)+", dataset["file"]),
+            require("file" not in dataset or re.fullmatch(r"(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)+", dataset["file"]),
                     f"{tid}: dataset file must be a relative download inside the project")
         guide = tool["readme"]
         require(isinstance(guide, dict) and set(guide) <= {"note", "lead"} and nonempty(guide.get("note"))
@@ -372,12 +373,16 @@ def render_datasets(template, tools):
         data = tool["dataset"]
         landing = escape(tool["url"] + ("#" + data["section"] if "section" in data else ""), quote=True)
         title = escape(data["title"])
-        download = escape(tool["url"] + data["file"], quote=True)
+        if "file" in data:
+            download = escape(tool["url"] + data["file"], quote=True)
+            download_link = f' · <a href="{download}">Download {escape(data["format"])}</a>'
+        else:
+            download_link = f' · <a href="{landing}">Source files and download formats</a>'
         entries.append(
             f'<section><h2><a href="{landing}">{title}</a></h2>'
             f'<p>{escape(tool["data_info"]["detail"])}</p>'
-            f'<p><a href="{landing}">Explore in {escape(tool["title"])}</a> · '
-            f'<a href="{download}">Download {escape(data["format"])}</a></p></section>'
+            f'<p><a href="{landing}">Explore in {escape(tool["title"])}</a>'
+            f'{download_link}</p></section>'
         )
     return template.replace("{{DATASET_ENTRIES}}", "\n".join(entries))
 

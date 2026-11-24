@@ -552,3 +552,5 @@ Public GitHub repositories can have scheduled workflows disabled after 60 days o
 
 This is an interim mitigation, not a scheduling guarantee: GitHub does not document active-workflow renewal as a permanent exemption, and scheduled runs can be delayed or dropped. The GitHub-managed service in `services/refresh-watchdog/` supplies the independent Linux scheduler; it becomes active after installation and refreshes its targets from this repository. The guard does not collect data, create dummy commits, or change source/check timestamps; successful collection and published data freshness still need monitoring.
 <!-- /schedule-reliability -->
+
+Search metadata and Field Note maintenance: [search discovery checklist](docs/search-discovery.md).

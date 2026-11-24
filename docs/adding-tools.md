@@ -240,3 +240,9 @@ reviewed exclusions, report interpretation and offline inventory input.
 The homepage search includes each tool ID as well as its title and tags, so both
 `wordweave` and `Word Weave` find the same listing. Installation projects appear
 under **Install yourself** or **All tools**.
+
+For search titles, app/dataset JSON-LD and worked examples, follow
+[Search discovery](search-discovery.md). A dataset with several files or an upstream
+download may register a `dataset` entry containing `title` and `section` only;
+the dataset directory then links to that page's source/download section. If a
+single local download is provided, include both `file` and `format`.

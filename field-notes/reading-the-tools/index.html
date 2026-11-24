@@ -8,6 +8,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate" type="application/rss+xml" title="CoolCode Field Notes" href="../feed.xml">
   <link rel="stylesheet" href="../notes.css">
+<link rel="canonical" href="https://coolcode.ca/field-notes/reading-the-tools/">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -23,77 +24,77 @@
         <time datetime="2026-11-19">19 November 2026</time>
       </header>
       <nav class="guide-nav" aria-label="In this guide"><ul><li><a href="#two-numbers-worth-investigating">Two numbers worth investigating</a></li><li><a href="#two-files-and-searches-that-looked-broken">Two files and searches that looked broken</a></li><li><a href="#maps-and-local-records">Maps and local records</a></li><li><a href="#research-security-and-homelab-tools">Research, security and homelab tools</a></li><li><a href="#what-the-science-tools-measure">What the science tools measure</a></li></ul></nav>
-      <div class="prose field-guide">
+      <div class="prose field-guide"><p>New step-by-step guides: <a href="../checking-langley-permits/">check Langley permits</a>, <a href="../finding-released-atip-records/">find released federal ATIP records</a>, and <a href="../checking-a-weather-forecast/">verify a saved weather forecast</a>.</p>
         <p>These examples describe the published editions at the time of review. Each tool links its underlying source, and the catalogue displays data dates separately from software changes.</p>
         <h2 id="two-numbers-worth-investigating">Two numbers worth investigating</h2>
         <p><strong>Oxford, Nova Scotia.</strong> For the rural part of census subdivision 1211012, the CRTC’s gigabit row gives an estimated 13.37120304 covered usual-resident dwellings in 2024 and 2025. The matching AllDemographics row supplies the base of 533. Dividing those figures gives 2.51%. The decimals come from the estimate. The source omits the gigabit value in 2022 and 2023 and reports 481.19 out of 528 in 2021. The published notes do not explain that Oxford-specific break. The CRTC identifies 2025 broadband coverage as preliminary. <a href="https://coolcode.ca/telecompulse/?example=oxford">Open the Oxford comparison</a> · <a href="https://crtc.gc.ca/eng/publications/reports/policymonitoring/chg.htm">CRTC change history</a></p>
         <p>For comparison, the same Oxford table lists 533 of 533 dwellings with 50/10 unlimited coverage in both 2024 and 2025. The prices alongside Oxford answer a different question. For rural 50/10 Mbps plans, providers reported offers in Bear River, Mahone Bay and Wedgeport. Each community had one $189 Starlink offer in the 2024 file. The 2025 file lists Bell at $122, City Wide at $57.95 and Xplore at $129.99 in each, averaging $103.31. Open the provider breakdown to see whose offers contributed in either year. Neither year&#x27;s survey establishes what an Oxford subscriber paid. <a href="https://crtc.gc.ca/eng/publications/reports/PolicyMonitoring/cmrd.htm">CRTC open data</a></p>
         <p><strong>Canadian Tor spike.</strong> Tor Metrics&#x27; Canadian direct-client estimate rose from 72,078 on October 27 to 2,070,762 on October 29, then fell to 71,704 on November 6. Tor estimates clients from directory requests. Tor operators documented older clients repeatedly requesting information after a directory change, inflating the estimate across the network. The graph faithfully reproduces the source series. It cannot count the individuals behind those Canadian requests or attribute every request to the same cause. Choose the October 2026 event to compare daily values. <a href="https://coolcode.ca/onionpulse/?metric=relay&amp;country=ca&amp;from=2026-10-20&amp;to=2026-11-10">Onion Pulse</a> · <a href="https://forum.torproject.org/t/snowflake-daily-operations-october-2026-update/22421">Tor operators’ account</a></p>
         <h2 id="two-files-and-searches-that-looked-broken">Two files and searches that looked broken</h2>
-        <h3><a href="https://coolcode.ca/archive-shelf/?q=cat">Archive Shelf · search for cat</a></h3>
+        <h3 id="example-archive-shelf"><a href="https://coolcode.ca/archive-shelf/?q=cat">Archive Shelf · Find early Canadian internet survey results by page or search your own collection</a></h3>
         <p>The fictional bulletin was the former collection. The current one contains nine complete Statistics Canada issues. All 66 pages matching “cat” get that match from the printed “Cat. no.” label. Choose <strong>Hide catalogue labels</strong> and the count becomes zero. Search <strong>dial-up</strong> to open three relevant pages with PDF citations. Imported local text stays in the tab.</p>
-        <h3><a href="https://coolcode.ca/marketshadows/">Market Shadows · CIRO corrections</a></h3>
+        <h3 id="example-marketshadows"><a href="https://coolcode.ca/marketshadows/">Market Shadows · Read CIRO short-sale summaries, signed trading corrections and short positions in your browser</a></h3>
         <p>Download the November 1–15, 2026 corrections CSV from CIRO, then open it in the tool. Its 173 rows include 138 for that period and 35 for older periods reaching back to April 2025. Each row gives the signed change in reported short-sale volume for its original trade period. Three rows report a change of zero. The original import error came from support for only two other report formats. <a href="https://www.ciro.ca/markets/reports-statistics-and-other-information/short-sale-trading-statistics-and-reports">CIRO reports</a></p>
         <h2 id="maps-and-local-records">Maps and local records</h2>
-        <h3><a href="https://coolcode.ca/halifaxtimelens/#story=cogswell">Halifax Time Lens</a></h3>
+        <h3 id="example-halifaxtimelens"><a href="https://coolcode.ca/halifaxtimelens/#story=cogswell">Halifax Time Lens · Compare Halifax aerials from 1947 and 1977 with a 2025 satellite view and find nearby archival photographs</a></h3>
         <p>Choose September 29, 2025 on either side of the divider and compare Cogswell with the earlier aerial mosaic. The modern side is a dated, true-colour Sentinel-2C satellite image with 10 m source pixels. Streets remain a separate choice.</p>
-        <h3><a href="https://coolcode.ca/crossingrecord/">Crossing Record</a></h3>
+        <h3 id="example-crossingrecord"><a href="https://coolcode.ca/crossingrecord/">Crossing Record · Map Langley junctions and compare ICBC crash counts before and after documented road work</a></h3>
         <p>Select an ICBC junction dot and compare recorded crashes before and after a reference year. The map shows 1,247 published locations for 1,245 junction names. Counts depend on incident reporting and traffic exposure. A change in counts alone cannot establish the effect of a road project.</p>
-        <h3><a href="https://coolcode.ca/streetworkdiary/">Streetwork Diary</a></h3>
+        <h3 id="example-streetworkdiary"><a href="https://coolcode.ca/streetworkdiary/">Streetwork Diary · Map Halifax street-service requests by community and compare closures and published resolution fields across two weeks</a></h3>
         <p>Select a Halifax community polygon and a request type. The colour counts the selected records for that community. Requests without a matched community remain in the totals. A closed request can still lack a published repair outcome.</p>
-        <h3><a href="https://coolcode.ca/trailglass/">Trailglass</a> and <a href="https://coolcode.ca/coalbelow/">Coal Below</a></h3>
+        <h3 id="example-trailglass"><a href="https://coolcode.ca/trailglass/">Trailglass · Inspect mapped trails or GPX rides, find steep sections and compare recorded elevations with optional terrain estimates</a></h3>
         <p>Streets and landmarks give the geometry context. In Trailglass, compare municipal routes or inspect a local GPX. In Coal Below, toggle seams and historical workings separately around Springhill or Sydney Mines.</p>
-        <h3><a href="https://coolcode.ca/welllayers/?left=BC-30145&amp;right=NS-000119&amp;units=m&amp;depth=20">Well Layers</a></h3>
+        <h3 id="example-welllayers"><a href="https://coolcode.ca/welllayers/?left=BC-30145&amp;right=NS-000119&amp;units=m&amp;depth=20">Well Layers · Pick a depth to read every sampled Langley and rural Halifax well log, or compare two drillers’ exact intervals side by side</a></h3>
         <p>Read both logs at 20 m. Langley 30145 records coarse sand there, while Hammonds Plains 000119 records shale / unknown. A common depth scale, selectable bands and separate markings for gaps and log ends make the difference visible. The colours illustrate each recorded interval. Similar breaks alone give no basis for connecting aquifers across provinces.</p>
-        <h3><a href="https://coolcode.ca/lakeprofiles/">Lake Profiles</a></h3>
+        <h3 id="example-lakeprofiles"><a href="https://coolcode.ca/lakeprofiles/">Lake Profiles · Compare dissolved oxygen and temperature at measured depths on different Halifax lake visits</a></h3>
         <p>Choose a Halifax-area station and compare temperature or dissolved oxygen at a measured depth on two dates. At Chocolate Lake, the recorded temperature at 6 m was 9.7 °C on May 2, 2022 and 22.4 °C on August 10, 2023. The edition covers 77 repeat-sampled deep-water stations and 9,461 depth records. Five of those records lack a temperature value. Station counts can include more than one basin on a lake.</p>
-        <h3><a href="https://coolcode.ca/parkvisits/">Park Visits</a></h3>
+        <h3 id="example-parkvisits"><a href="https://coolcode.ca/parkvisits/">Park Visits · Compare annual visits at Parks Canada places across the country using trend lines and fiscal-year comparisons</a></h3>
         <p>Compare Fort Langley and Halifax Citadel on trend lines or choose one fiscal year for a bar comparison. The series covers 134 published place names across 25 fiscal years. Visits can include repeat entries.</p>
-        <h3><a href="https://coolcode.ca/snowcourses/">Snow Courses</a></h3>
+        <h3 id="example-snowcourses"><a href="https://coolcode.ca/snowcourses/">Snow Courses · Follow a winter at a B.C. snow station and compare snow depth or water equivalent with earlier seasons</a></h3>
         <p>Follow the October-to-September snow season at one BC station. Compare snow depth or snow water equivalent with earlier observations from the same part of the season and check how many years contribute to the median.</p>
-        <h3><a href="https://coolcode.ca/spectrumatlas/">Spectrum Atlas</a></h3>
+        <h3 id="example-spectrumatlas"><a href="https://coolcode.ca/spectrumatlas/">Spectrum Atlas · Find licensed radio sites and compare frequency assignments across Canada</a></h3>
         <p>Pick any of the ten provinces or three territories and search the two ISED technical extracts by frequency, call sign or distance. The edition has 2,218,198 technical records in 26 regional files. The dots locate published radio assignments.</p>
-        <h3><a href="https://coolcode.ca/shipwrecks/">Shipwreck Explorer</a></h3>
+        <h3 id="example-shipwrecks"><a href="https://coolcode.ca/shipwrecks/">Shipwreck Explorer · Search Nova Scotia shipwreck reports and explore documented wreck sites near Tobermory, Ontario</a></h3>
         <p>Switch from Nova Scotia’s 4,939 historical entries to 18 documented sites around Tobermory, Ontario. The Ontario edition uses Parks Canada’s Fathom Five guides and preserves approximate dates and deliberate sinkings.</p>
-        <h3><a href="https://coolcode.ca/salmonlines/">Salmon Lines</a></h3>
+        <h3 id="example-salmonlines"><a href="https://coolcode.ca/salmonlines/">Salmon Lines · Read annual Pacific salmon returns for a river, compare spawning estimates and inspect survey records</a></h3>
         <p>Pick a river, population and measure. DFO estimated 4,851 naturally spawning adult Adams River sockeye in 2023 and 354 in 2024. Those figures concern that spawning population and adult category. Survey gaps, methods and life stage matter when comparing years.</p>
-        <h3><a href="https://coolcode.ca/clamground/">Clam Grounds</a></h3>
+        <h3 id="example-clamground"><a href="https://coolcode.ca/clamground/">Clam Grounds · Explore Maritime clam habitat, reported and confidential landings, and Nova Scotia’s 1931 returns</a></h3>
         <p>Landed weight is the commercial quantity in kilograms of live-weight equivalent for DFO’s combined clams category, assigned to the province of landing. An <strong>x</strong> means the agency withheld the amount for confidentiality. Both 2007 Nova Scotia amounts carry that mark. Its codebook gives no cell-specific trigger or threshold. An empty field is unreported. A numeric zero and a small published catch each retain their own meaning.</p>
         <h2 id="research-security-and-homelab-tools">Research, security and homelab tools</h2>
-        <h3><a href="https://coolcode.ca/patchsignal/">Patch Signal</a> and <a href="https://coolcode.ca/exploitgraveyard/">The Exploit Graveyard</a></h3>
+        <h3 id="example-patchsignal"><a href="https://coolcode.ca/patchsignal/">Patch Signal · Check CVE shortlists against known exploitation, inspect affected versions and follow patch guidance</a></h3>
         <p>Start in Patch Signal with a CVE from your inventory to check affected versions, patch guidance and FIRST’s EPSS estimate. Start in the Graveyard with a Canadian Cyber Centre notice to see which CVEs it cites and which also appear in CISA’s known-exploited catalogue. Patch Signal carries the selected CVE into a Canadian-notice search.</p>
-        <h3><a href="https://coolcode.ca/tariffxray/">Tariff X-Ray</a></h3>
+        <h3 id="example-tariffxray"><a href="https://coolcode.ca/tariffxray/">Tariff X-Ray · See what internet providers pay Bell and TELUS for Canadian wholesale fibre access, capacity and installation</a></h3>
         <p>This is a Canadian telecom rate schedule. For example, in Ontario and Quebec a competing ISP pays Bell $68.26 for fibre access in the 3–1,500 Mbps tier under the cited order. A separate capacity rate is $44.19 per 100 Mbps. Neither number specifies a household bill or an import duty. <a href="https://web.crtc.gc.ca/eng/archive/2026/2026-77.htm">CRTC order, appendix 1</a></p>
-        <h3><a href="https://coolcode.ca/rack-recipes/">Rack Recipes</a></h3>
+        <h3 id="example-rack-recipes"><a href="https://coolcode.ca/rack-recipes/">Rack Recipes · Plan a homelab from 12 self-hosted services, choose ports and storage, and export or reopen the Compose file</a></h3>
         <p>Choose among 12 services for a home server. For a personal archive, pair FreshRSS and linkding with changedetection.io. For a media server, try Navidrome and Audiobookshelf. Set ports, choose storage, read the startup steps and export or reopen the Compose file.</p>
-        <h3><a href="https://coolcode.ca/libraryworkbench/#tape-planner">Library Workbench</a></h3>
+        <h3 id="example-libraryworkbench"><a href="https://coolcode.ca/libraryworkbench/#tape-planner">Library Workbench · Check whether a 3D print fits Halifax or Richmond library limits, estimate Richmond’s fee, or plan a Vancouver tape transfer</a></h3>
         <p>Bring an actual tape list. Enter three tapes of 60, 90 and 45 minutes to budget 3 h 15 min of transfer time plus setup, with about 13 GB of storage. Check the equipment directory for video standards, audio reels, film and floppy disks. Enter 90 minutes and 30 g in the 3D print planner. Richmond estimates $6.50, and the Halifax view checks its published time limit. The Halifax view puts opening hours, program counts and attendance from the provincial survey alongside the library’s own annual report.</p>
-        <h3><a href="https://coolcode.ca/patentattic/">Patent Attic</a></h3>
+        <h3 id="example-patentattic"><a href="https://coolcode.ca/patentattic/">Patent Attic · Look up Canadian pre-grant applications by title, applicant, IPC class or number, and explore older technology publications</a></h3>
         <p>Use the historical collection for the 22 curated publications and the 14,556-entry CIPO pre-grant queue dated November 17, 2026 to search by applicant, title, number or technology class. A queue entry identifies a pending application at the date of that workbook. Try application <strong>3016489</strong>, Gearing System, or the technology subclass <strong>G01S</strong>.</p>
-        <h3><a href="https://coolcode.ca/corporateghosts/">Corporate Ghosts</a></h3>
+        <h3 id="example-corporateghosts"><a href="https://coolcode.ca/corporateghosts/">Corporate Ghosts · Search federal corporations, current and historical BC registrations, and Nova Scotia co-operatives by name or registry ID</a></h3>
         <p>Choose federal records, a live BC OrgBook search or the 369-entry Nova Scotia register of co-operatives dated June 8, 2026. Other NS entity types lead to the provincial registry. Each source has its own coverage and legal status vocabulary.</p>
-        <h3><a href="https://coolcode.ca/photolab/">Photo Lab</a></h3>
+        <h3 id="example-photolab"><a href="https://coolcode.ca/photolab/">Photo Lab · Inspect photo metadata, compare file hashes, edit images and verify sanitized JPEG/PNG copies or a batch ZIP locally</a></h3>
         <p>Adjust exposure, contrast, saturation and warmth. Rotate or flip, compare the original tones on the same crop and export the edited pixels.</p>
-        <h3><a href="https://coolcode.ca/mediaechoes/">Media Echoes</a></h3>
+        <h3 id="example-mediaechoes"><a href="https://coolcode.ca/mediaechoes/">Media Echoes · Pinpoint old software, Flash projects and media by title, creator, collection, year and exclusions</a></h3>
         <p>Filter by title, creator, collection, year and excluded terms. Start with a specific title and year such as Myst in 1993 or Encarta in 1995. Narrow the Internet Archive results and inspect an individual item&#x27;s available files.</p>
-        <h3><a href="https://coolcode.ca/evidencelab/">Evidence Lab</a></h3>
+        <h3 id="example-evidencelab"><a href="https://coolcode.ca/evidencelab/">Evidence Lab · Find the page that answers a question in a PDF and export its citation, excerpt and your notes</a></h3>
         <p>Start with the 230-page Nova Scotia bridge inspection disclosure or open your own searchable PDF. Try the guided Allain Creek question, inspect physical page 2, pin an excerpt and carry its citation into a research brief.</p>
         <h2 id="what-the-science-tools-measure">What the science tools measure</h2>
-        <h3><a href="https://coolcode.ca/airpair/?station=lake-major&amp;start=2023-05-27">Air Pair · Lake Major</a></h3>
+        <h3 id="example-airpair"><a href="https://coolcode.ca/airpair/?station=lake-major&amp;start=2023-05-27">Air Pair · Compare measured air quality with models, explore worldwide pollutant forecasts and compare local station files</a></h3>
         <p>On May 30, 2023 at 23:00 UTC, the monitor read 71.2 µg/m³ of PM2.5 and the CAMS model estimated 85.4 at the same hour. The model peaked an hour later. Pick a threshold and inspect matched, missed and extra hours over the week.</p>
-        <h3><a href="https://coolcode.ca/auroratrace/?night=2024-10-10">Aurora Trace</a></h3>
+        <h3 id="example-auroratrace"><a href="https://coolcode.ca/auroratrace/?night=2024-10-10">Aurora Trace · See when a 2024 magnetic storm affected Victoria and St. John’s most differently, and inspect the readings on each coast</a></h3>
         <p>Trace a NASA-linked storm to Canadian ground instruments. On October 10, 2024 at 23:25 UTC, Victoria was 552 nT above its reference and St. John’s was 622 nT below. The same storm produced different local magnetic responses. Those readings alone cannot establish who saw an aurora.</p>
-        <h3><a href="https://coolcode.ca/plumediary/">Plume Diary</a></h3>
+        <h3 id="example-plumediary"><a href="https://coolcode.ca/plumediary/">Plume Diary · Compare the Fraser River’s visible plume on two satellite dates and test whether earlier upstream flows change the story</a></h3>
         <p>Compare satellite images at the Fraser mouth on June 21 and 28, 2021 with the Hope flow record. The second date had 680 m³/s more upstream flow at the zero-day comparison. Change the travel-time assumption and inspect the plume alongside clouds and coastal conditions.</p>
-        <h3><a href="https://coolcode.ca/chirproom/">Chirp Room</a></h3>
+        <h3 id="example-chirproom"><a href="https://coolcode.ca/chirproom/">Chirp Room · Can two distant detectors pick out the same black-hole merger? Align the traces and compare their agreement with an earlier recording window</a></h3>
         <p>Test a two-detector measurement. For GW150914, try the published seven-millisecond timing adjustment and polarity reversal. The correlation around the merger rises from 0.018 to 0.589. An equally long earlier stretch stays close to zero.</p>
-        <h3><a href="https://coolcode.ca/nightfinder/">Nightfinder</a></h3>
+        <h3 id="example-nightfinder"><a href="https://coolcode.ca/nightfinder/">Nightfinder · Plan dark-sky sessions, camera framing and seven days of golden and blue-hour photography windows</a></h3>
         <p>Select a 30-, 60-, 90- or 120-minute session in Langley or Halifax. Require a moonless interval, pick a target and read the start time, lowest sampled altitude and compass bearing. The result is a geometry-based observing window.</p>
-        <h3><a href="https://coolcode.ca/otherworldnames/#namesakes">Otherworld Names</a></h3>
+        <h3 id="example-otherworldnames"><a href="https://coolcode.ca/otherworldnames/#namesakes">Otherworld Names · Compare shared Moon and Mars names, explore their origins, and find low-angle sunlight at lunar craters from Langley or Halifax</a></h3>
         <p>Explore 134 names shared by the Moon and Mars in this edition. Balboa&#x27;s lunar crater honours an explorer and its Martian namesake takes its name from a Panamanian town. Read the official origins and locate either feature.</p>
-        <h3><a href="https://coolcode.ca/forecastreceipt/">Forecast Receipt</a></h3>
+        <h3 id="example-forecastreceipt"><a href="https://coolcode.ca/forecastreceipt/">Forecast Receipt · Follow one weather hour at Langley or Halifax from its first saved temperature forecast through later revisions to the airport reading</a></h3>
         <p>Pick a station, provider and an hour from a saved receipt, then follow that provider’s successive predictions for that hour. When ECCC publishes a usable temperature, the tool shows the error for each forecast. The capture pilot began November 19, 2026. An hour awaiting observation has no score yet.</p>
-        <h3><a href="https://coolcode.ca/flybyfiles/">Flyby Files</a></h3>
+        <h3 id="example-flybyfiles"><a href="https://coolcode.ca/flybyfiles/">Flyby Files · See which of six close-passing asteroids astronomers discovered before the flyby, and when old images changed the record</a></h3>
         <p>Follow six asteroid cases and distinguish the time of closest approach, discovery, and earliest observation used later in the orbit. For 2024 MK, scientists could use a 2014 measurement after the fact, although discovery came only 13 days before the 2024 flyby.</p>
       </div>
     </article>

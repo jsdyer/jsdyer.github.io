@@ -46,6 +46,8 @@ Application source imports still belong in the individual tool repositories.
    check metadata; observation dates and retained captures may not mean a new check.
 5. **Generate dependent outputs.** Synchronize guides/manifests and README, regenerate
    operations files and audit, then build the site. Review all diffs together.
+   For search changes, follow `docs/search-discovery.md`: descriptive titles, truthful
+   build-time structured data, crawlable guide links, feed and sitemap consistency.
 6. **Deploy affected services.** Deploy a changed visitor Worker preserving its existing
    bindings and data; verify `/registry` and record the downloaded-code hash. Grant
    the watchdog's existing GitHub App access to a newly added repo if its installation
