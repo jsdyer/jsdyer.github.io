@@ -2,42 +2,17 @@
   "changes": [
     {
       "after": {
-        "counts": [
-          {
-            "label": "Sources checked",
-            "value": 37
-          }
-        ],
-        "due_unobserved": true,
-        "error": null,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "state": "active",
-        "status": "attention"
-      },
-      "before": {
-        "counts": [
-          {
-            "label": "Sources checked",
-            "value": 37
-          }
-        ],
+        "counts": [],
         "due_unobserved": false,
         "error": null,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
+        "latest_result": null,
+        "output": "not_configured",
+        "refresh_result": null,
+        "run_alignment": null,
         "state": "active",
-        "status": "checked"
+        "status": "running"
       },
-      "repo": "jsdyer/gridreceipt",
-      "workflow": "pages.yml"
-    },
-    {
-      "after": {
+      "before": {
         "counts": [],
         "due_unobserved": false,
         "error": null,
@@ -48,24 +23,52 @@
         "state": "active",
         "status": "running"
       },
-      "before": {
-        "counts": [],
-        "due_unobserved": true,
-        "error": null,
-        "latest_result": null,
-        "output": "not_configured",
-        "refresh_result": "success",
-        "run_alignment": null,
-        "state": "active",
-        "status": "attention"
-      },
       "repo": "jsdyer/jsdyer.github.io",
       "workflow": "service-monitor.yml"
     }
   ],
-  "checked_at": "2026-11-24T11:11:37.703613Z",
+  "checked_at": "2026-11-24T11:12:53.411412Z",
   "expected_interval_seconds": 3600,
   "history": [
+    {
+      "changes": [
+        {
+          "after": {
+            "counts": [],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": null,
+            "output": "not_configured",
+            "refresh_result": null,
+            "run_alignment": null,
+            "state": "active",
+            "status": "running"
+          },
+          "before": {
+            "counts": [],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": null,
+            "output": "not_configured",
+            "refresh_result": "success",
+            "run_alignment": null,
+            "state": "active",
+            "status": "running"
+          },
+          "repo": "jsdyer/jsdyer.github.io",
+          "workflow": "service-monitor.yml"
+        }
+      ],
+      "checked_at": "2026-11-24T11:12:53.411412Z",
+      "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45382016651",
+      "summary": {
+        "attention": 3,
+        "checked": 155,
+        "limited": 4,
+        "running": 1,
+        "workflow_only": 5
+      }
+    },
     {
       "changes": [
         {
@@ -440,7 +443,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 5329,
+            "age_seconds": 5411,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -505,7 +508,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2732,
+            "age_seconds": 2814,
             "cached": true,
             "check": 0,
             "label": "Official archive catalogue checked",
@@ -579,7 +582,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 126668,
+            "age_seconds": 126750,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -653,7 +656,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40268,
+            "age_seconds": 40350,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -727,7 +730,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 38843,
+            "age_seconds": 38925,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -792,7 +795,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2726,
+            "age_seconds": 2808,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -865,7 +868,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40268,
+            "age_seconds": 40350,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -939,7 +942,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 6214,
+            "age_seconds": 6295,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1013,7 +1016,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 4989,
+            "age_seconds": 5071,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -1087,7 +1090,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40269,
+            "age_seconds": 40351,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1099,7 +1102,7 @@
             "url": "https://coolcode.ca/atipmetrics/data.json"
           },
           {
-            "age_seconds": 40269,
+            "age_seconds": 40351,
             "cached": true,
             "check": 1,
             "label": "Research sources retrieved",
@@ -1178,7 +1181,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 44732,
+            "age_seconds": 44814,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1252,7 +1255,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40269,
+            "age_seconds": 40351,
             "cached": true,
             "check": 0,
             "label": "Episode feeds retrieved",
@@ -1371,7 +1374,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 19326,
+            "age_seconds": 19408,
             "cached": true,
             "check": 0,
             "label": "Capture started",
@@ -1445,7 +1448,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40270,
+            "age_seconds": 40352,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -1519,7 +1522,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24115,
+            "age_seconds": 24197,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1584,7 +1587,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8198,
+            "age_seconds": 8279,
             "cached": true,
             "check": 0,
             "label": "Rolling cases retrieved",
@@ -1658,7 +1661,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 126671,
+            "age_seconds": 126752,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -1732,7 +1735,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1486,
+            "age_seconds": 1567,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -1806,7 +1809,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40271,
+            "age_seconds": 40353,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -1880,7 +1883,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 35929,
+            "age_seconds": 36010,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1954,7 +1957,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40271,
+            "age_seconds": 40353,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -2028,7 +2031,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 4489,
+            "age_seconds": 4571,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2102,7 +2105,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40272,
+            "age_seconds": 40353,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2176,7 +2179,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 37797,
+            "age_seconds": 37878,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -2250,7 +2253,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472272,
+            "age_seconds": 472353,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -2324,7 +2327,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472272,
+            "age_seconds": 472353,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2398,7 +2401,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40272,
+            "age_seconds": 40354,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -2471,7 +2474,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 10791,
+            "age_seconds": 10872,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -2545,7 +2548,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40273,
+            "age_seconds": 40354,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -2619,7 +2622,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40273,
+            "age_seconds": 40354,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2693,7 +2696,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40273,
+            "age_seconds": 40354,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2767,7 +2770,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472274,
+            "age_seconds": 472355,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2841,7 +2844,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40274,
+            "age_seconds": 40355,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2906,7 +2909,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 162434,
+            "age_seconds": 162515,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -2980,7 +2983,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 38678,
+            "age_seconds": 38759,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -3054,7 +3057,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40274,
+            "age_seconds": 40355,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -3128,7 +3131,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40274,
+            "age_seconds": 40355,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -3202,7 +3205,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 53092,
+            "age_seconds": 53173,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -3276,7 +3279,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40275,
+            "age_seconds": 40355,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -3350,7 +3353,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1164,
+            "age_seconds": 1245,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -3469,7 +3472,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 162336,
+            "age_seconds": 162417,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -3543,7 +3546,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40275,
+            "age_seconds": 40356,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -3617,7 +3620,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24508,
+            "age_seconds": 24589,
             "cached": true,
             "check": 0,
             "label": "Canadian notices checked",
@@ -3691,7 +3694,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40276,
+            "age_seconds": 40356,
             "cached": true,
             "check": 0,
             "label": "Trade data retrieved",
@@ -3765,7 +3768,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472276,
+            "age_seconds": 472356,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -3830,7 +3833,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40276,
+            "age_seconds": 40356,
             "cached": true,
             "check": 0,
             "label": "SeaBus retrieved",
@@ -3904,7 +3907,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40277,
+            "age_seconds": 40357,
             "cached": true,
             "check": 0,
             "label": "Halifax retrieved",
@@ -3978,7 +3981,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40277,
+            "age_seconds": 40357,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4043,7 +4046,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1455,
+            "age_seconds": 1535,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4117,7 +4120,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9889,
+            "age_seconds": 9969,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4191,7 +4194,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1115,
+            "age_seconds": 1195,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4265,7 +4268,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40277,
+            "age_seconds": 40357,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4347,7 +4350,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 4896,
+            "age_seconds": 4976,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -4421,7 +4424,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 6171,
+            "age_seconds": 6251,
             "cached": true,
             "check": 0,
             "label": "Heritage workbook retrieved",
@@ -4495,7 +4498,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40278,
+            "age_seconds": 40358,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4577,7 +4580,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 36721,
+            "age_seconds": 36801,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -4651,7 +4654,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472278,
+            "age_seconds": 472358,
             "cached": true,
             "check": 0,
             "label": "Archive index retrieved",
@@ -4725,7 +4728,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472278,
+            "age_seconds": 472358,
             "cached": true,
             "check": 0,
             "label": "Catalogue retrieved",
@@ -4799,7 +4802,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40278,
+            "age_seconds": 40358,
             "cached": true,
             "check": 0,
             "label": "Government directory retrieved",
@@ -4864,7 +4867,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 57517,
+            "age_seconds": 57596,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4938,7 +4941,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2076,
+            "age_seconds": 2155,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -5012,7 +5015,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 123325,
+            "age_seconds": 123405,
             "cached": true,
             "check": 0,
             "label": "Captured",
@@ -5086,7 +5089,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 163392,
+            "age_seconds": 163472,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -5160,7 +5163,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 126679,
+            "age_seconds": 126759,
             "cached": true,
             "check": 0,
             "label": "Internet data retrieved",
@@ -5234,8 +5237,8 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9562,
-            "cached": false,
+            "age_seconds": 9641,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 21600.0,
@@ -5308,7 +5311,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40280,
+            "age_seconds": 40359,
             "cached": true,
             "check": 0,
             "label": "Photo index retrieved",
@@ -5382,7 +5385,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9554,
+            "age_seconds": 9634,
             "cached": true,
             "check": 0,
             "label": "Waterways retrieved",
@@ -5394,7 +5397,7 @@
             "url": "https://coolcode.ca/hiddenwater/data/status.json"
           },
           {
-            "age_seconds": 40280,
+            "age_seconds": 40359,
             "cached": true,
             "check": 1,
             "label": "Fish passage retrieved",
@@ -5473,7 +5476,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9554,
+            "age_seconds": 9633,
             "cached": true,
             "check": 0,
             "label": "Camera list",
@@ -5547,7 +5550,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 85011,
+            "age_seconds": 85091,
             "cached": true,
             "check": 0,
             "label": "Canadian cache retrieved",
@@ -5621,7 +5624,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472281,
+            "age_seconds": 472360,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -5695,7 +5698,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 47117,
+            "age_seconds": 47196,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -5769,7 +5772,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 385881,
+            "age_seconds": 385960,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -5843,7 +5846,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40281,
+            "age_seconds": 40360,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -5917,7 +5920,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 385881,
+            "age_seconds": 385960,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -5991,7 +5994,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24904,
+            "age_seconds": 24982,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -6065,7 +6068,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9414,
+            "age_seconds": 9492,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -6139,7 +6142,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472282,
+            "age_seconds": 472361,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -6305,22 +6308,22 @@
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T11:10:58Z",
+          "at": "2026-11-24T11:12:20Z",
           "attempt": 1,
           "conclusion": null,
-          "event": "push",
-          "id": 45381802647,
+          "event": "workflow_dispatch",
+          "id": 45382016651,
           "status": "in_progress",
-          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45381802647"
+          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45382016651"
         },
         "latest_refresh": {
-          "at": "2026-11-24T10:12:06Z",
+          "at": "2026-11-24T11:12:20Z",
           "attempt": 1,
-          "conclusion": "success",
+          "conclusion": null,
           "event": "workflow_dispatch",
-          "id": 45372485547,
-          "status": "completed",
-          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45372485547"
+          "id": 45382016651,
+          "status": "in_progress",
+          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45382016651"
         },
         "state": "active"
       },
@@ -6377,7 +6380,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40282,
+            "age_seconds": 40361,
             "cached": true,
             "check": 0,
             "label": "Municipal profiles retrieved",
@@ -6451,7 +6454,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1017,
+            "age_seconds": 1095,
             "cached": true,
             "check": 0,
             "label": "Permit list checked",
@@ -6525,7 +6528,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9249,
+            "age_seconds": 9328,
             "cached": true,
             "check": 0,
             "label": "Licence data retrieved",
@@ -6599,7 +6602,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40283,
+            "age_seconds": 40362,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -6689,7 +6692,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40283,
+            "age_seconds": 40362,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -6754,7 +6757,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9238,
+            "age_seconds": 9317,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -6828,7 +6831,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 53124,
+            "age_seconds": 53202,
             "cached": true,
             "check": 0,
             "label": "Captured",
@@ -6902,7 +6905,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40284,
+            "age_seconds": 40362,
             "cached": true,
             "check": 0,
             "label": "Survey retrieved",
@@ -6976,7 +6979,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 385884,
+            "age_seconds": 385962,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -7053,7 +7056,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2886,
+            "age_seconds": 2965,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7117,7 +7120,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 5970,
+            "age_seconds": 6049,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -7191,7 +7194,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 162596,
+            "age_seconds": 162675,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -7265,7 +7268,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 33937,
+            "age_seconds": 34016,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7339,7 +7342,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40285,
+            "age_seconds": 40363,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -7413,7 +7416,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40285,
+            "age_seconds": 40363,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -7487,7 +7490,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1992,
+            "age_seconds": 2070,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7561,7 +7564,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 44861,
+            "age_seconds": 44939,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7635,7 +7638,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 158294,
+            "age_seconds": 158372,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7709,7 +7712,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 158347,
+            "age_seconds": 158425,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7783,7 +7786,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 37408,
+            "age_seconds": 37486,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7857,7 +7860,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24813,
+            "age_seconds": 24891,
             "cached": true,
             "check": 0,
             "label": "NASA/NOAA capture",
@@ -7931,7 +7934,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 52277,
+            "age_seconds": 52355,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -7996,7 +7999,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 107905,
+            "age_seconds": 107983,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -8070,7 +8073,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40287,
+            "age_seconds": 40365,
             "cached": true,
             "check": 0,
             "label": "Tor Metrics retrieved",
@@ -8144,7 +8147,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40287,
+            "age_seconds": 40365,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -8218,7 +8221,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9201,
+            "age_seconds": 9279,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -8300,7 +8303,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40287,
+            "age_seconds": 40365,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -8312,7 +8315,7 @@
             "url": "https://coolcode.ca/otherworldnames/data-status.json"
           },
           {
-            "age_seconds": 40287,
+            "age_seconds": 40365,
             "cached": true,
             "check": 1,
             "label": "Horizons retrieved",
@@ -8382,7 +8385,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2863,
+            "age_seconds": 2940,
             "cached": true,
             "check": 0,
             "label": "Package registry capture",
@@ -8456,7 +8459,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 126688,
+            "age_seconds": 126765,
             "cached": true,
             "check": 0,
             "label": "Monthly tables retrieved",
@@ -8530,7 +8533,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472288,
+            "age_seconds": 472366,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -8604,7 +8607,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40288,
+            "age_seconds": 40366,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -8678,7 +8681,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24825,
+            "age_seconds": 24903,
             "cached": true,
             "check": 0,
             "label": "KEV source retrieved",
@@ -8752,7 +8755,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8166,
+            "age_seconds": 8244,
             "cached": true,
             "check": 0,
             "label": "Pre-grant workbook retrieved",
@@ -8826,7 +8829,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 385888,
+            "age_seconds": 385966,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -8900,7 +8903,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40288,
+            "age_seconds": 40366,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -8974,7 +8977,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40289,
+            "age_seconds": 40367,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9048,7 +9051,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40289,
+            "age_seconds": 40367,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9122,7 +9125,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 299489,
+            "age_seconds": 299567,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9196,7 +9199,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24883,
+            "age_seconds": 24961,
             "cached": true,
             "check": 0,
             "label": "Price table retrieved",
@@ -9270,7 +9273,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40290,
+            "age_seconds": 40367,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9344,7 +9347,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 46663,
+            "age_seconds": 46740,
             "cached": true,
             "check": 0,
             "label": "Catalogue checked",
@@ -9418,7 +9421,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 48772,
+            "age_seconds": 48849,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -9492,7 +9495,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24841,
+            "age_seconds": 24918,
             "cached": true,
             "check": 0,
             "label": "Provider capture",
@@ -9566,7 +9569,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24678,
+            "age_seconds": 24755,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9640,7 +9643,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 213090,
+            "age_seconds": 213168,
             "cached": true,
             "check": 0,
             "label": "Quarterly sources checked",
@@ -9714,7 +9717,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 213090,
+            "age_seconds": 213168,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -9779,7 +9782,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 67298,
+            "age_seconds": 67376,
             "cached": true,
             "check": 0,
             "label": "Crossref capture",
@@ -9856,7 +9859,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 84922,
+            "age_seconds": 84999,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9929,7 +9932,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8917,
+            "age_seconds": 8994,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -9994,7 +9997,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 48698,
+            "age_seconds": 48775,
             "cached": true,
             "check": 0,
             "label": "River observation capture",
@@ -10059,7 +10062,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 4185,
+            "age_seconds": 4262,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10133,7 +10136,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40292,
+            "age_seconds": 40369,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10207,7 +10210,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 558692,
+            "age_seconds": 558769,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10281,7 +10284,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 47478,
+            "age_seconds": 47555,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -10355,7 +10358,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8912,
+            "age_seconds": 8989,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10429,7 +10432,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 33325,
+            "age_seconds": 33402,
             "cached": true,
             "check": 0,
             "label": "Browser captured",
@@ -10503,7 +10506,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40293,
+            "age_seconds": 40369,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10577,7 +10580,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40293,
+            "age_seconds": 40369,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10651,7 +10654,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40293,
+            "age_seconds": 40370,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10716,7 +10719,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 126693,
+            "age_seconds": 126770,
             "cached": true,
             "check": 0,
             "label": "Timetable retrieved",
@@ -10790,7 +10793,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8615,
+            "age_seconds": 8692,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10864,7 +10867,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 44920,
+            "age_seconds": 44997,
             "cached": true,
             "check": 0,
             "label": "Snapshot generated",
@@ -10938,7 +10941,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40293,
+            "age_seconds": 40370,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11012,7 +11015,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40294,
+            "age_seconds": 40370,
             "cached": true,
             "check": 0,
             "label": "MAST observations retrieved",
@@ -11086,7 +11089,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40294,
+            "age_seconds": 40370,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11168,7 +11171,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472294,
+            "age_seconds": 472370,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -11242,7 +11245,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40294,
+            "age_seconds": 40370,
             "cached": true,
             "check": 0,
             "label": "Spectrum sources retrieved",
@@ -11316,7 +11319,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40294,
+            "age_seconds": 40371,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11381,7 +11384,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 36949,
+            "age_seconds": 37025,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11463,7 +11466,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40295,
+            "age_seconds": 40371,
             "cached": true,
             "check": 0,
             "label": "Tracks retrieved",
@@ -11475,7 +11478,7 @@
             "url": "https://coolcode.ca/stormtracks/data-status.json"
           },
           {
-            "age_seconds": 40295,
+            "age_seconds": 40371,
             "cached": true,
             "check": 1,
             "label": "Harbour data retrieved",
@@ -11554,7 +11557,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 45239,
+            "age_seconds": 45315,
             "cached": true,
             "check": 0,
             "label": "CADORS sources retrieved",
@@ -11628,7 +11631,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40295,
+            "age_seconds": 40371,
             "cached": true,
             "check": 0,
             "label": "Cityworks data retrieved",
@@ -11702,7 +11705,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40295,
+            "age_seconds": 40371,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11776,7 +11779,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472295,
+            "age_seconds": 472371,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -11850,7 +11853,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 985,
+            "age_seconds": 1062,
             "cached": true,
             "check": 0,
             "label": "All targets checked",
@@ -11924,7 +11927,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24013,
+            "age_seconds": 24089,
             "cached": true,
             "check": 0,
             "label": "Telecom sources retrieved",
@@ -11998,7 +12001,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472296,
+            "age_seconds": 472372,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -12072,7 +12075,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 3745,
+            "age_seconds": 3821,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -12146,7 +12149,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472296,
+            "age_seconds": 472372,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -12220,7 +12223,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24413,
+            "age_seconds": 24489,
             "cached": true,
             "check": 0,
             "label": "Oldest regional retrieval",
@@ -12294,7 +12297,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40296,
+            "age_seconds": 40372,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -12368,7 +12371,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 730,
+            "age_seconds": 807,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -12442,7 +12445,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 959,
+            "age_seconds": 1035,
             "cached": true,
             "check": 0,
             "label": "Live fleet capture",
@@ -12516,7 +12519,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40297,
+            "age_seconds": 40373,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -12590,7 +12593,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 39042,
+            "age_seconds": 39118,
             "cached": true,
             "check": 0,
             "label": "Disclosure source retrieved",
@@ -12627,7 +12630,7 @@
       "workflow_url": "https://github.com/jsdyer/wrongdoings/actions/workflows/pages.yml"
     }
   ],
-  "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45381802647",
+  "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45382016651",
   "stale_after_seconds": 10800,
   "summary": {
     "attention": 3,
