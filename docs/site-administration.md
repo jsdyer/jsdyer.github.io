@@ -4,7 +4,7 @@ Open [the owner dashboard](https://coolcode.ca/admin/) and enter the owner’s G
 
 Set four featured tools in display order. Fixed mode always serves lineup A. A/B mode splits new browser tabs approximately evenly between A and B and keeps a tab’s choice for the experiment. Visitors with disabled JavaScript see the server-rendered A lineup. An active-lineup change in the dashboard generates a new experiment identifier.
 
-A read-only token covers statistics and the issue inbox. To publish from the same session, sign in with a fine-grained token limited to this repository with Contents read/write. The collector receives that token for owner verification, and publishing sends it directly to GitHub. The dashboard checks for overlapping changes. You can also copy the configuration into GitHub’s editor. A commit triggers the existing Pages build. If the branch uses required reviews, use the GitHub editor to open a pull request. Manual edits to data/featured.json should give a changed test a fresh experiment ID.
+A read-only token covers statistics and the issue inbox. To publish from the same session, sign in with a fine-grained token limited to this repository with Contents read/write. To use **Check GitHub now**, that same admin token also needs **Actions: read and write** with `jsdyer/jsdyer.github.io` included in its repository access. This is separate from the Linux watchdog’s GitHub App. The collector receives that token for owner verification, and publishing or explicitly requesting a check sends it directly to GitHub. The dashboard checks for overlapping changes. You can also copy the configuration into GitHub’s editor. A commit triggers the existing Pages build. If the branch uses required reviews, use the GitHub editor to open a pull request. Manual edits to data/featured.json should give a changed test a fresh experiment ID.
 
 The statistics panel distinguishes tool page opens, featured-card impressions and clicks, and Google organic clicks. Reloading a tool counts as another open when measurement is active. A card impression is counted when it enters the viewport and a click is counted once per card per page load. Browsers that disable JavaScript, opt out, or block the counter can be absent from these totals. The independently deployed tools send only their catalogue ID. A tool visit can originate anywhere.
 
@@ -114,7 +114,8 @@ and each workflow's observation time explain why later runs may be missing.
 **Check GitHub now** explicitly dispatches `service-monitor.yml` on `main` using
 the current in-memory admin token. It requires **Actions: read and write** for
 `jsdyer/jsdyer.github.io`; reading the saved report needs no extra permission.
-If permission is absent, use **Run workflow** on the linked Observation runs page.
+If GitHub returns 403, open [Fine-grained personal access tokens](https://github.com/settings/personal-access-tokens), edit the token used to unlock this admin, ensure its repository access includes `jsdyer/jsdyer.github.io`, and set repository **Actions → Read and write**. Save the change, lock the admin and sign in again with the token. There is no need to grant Actions write to every tool repository or change the watchdog App. You can alternatively use **Run workflow** on the linked Observation runs page.
+The dispatch request uses GitHub API version `2026-03-10` and accepts its HTTP 200 run receipt as well as the legacy 204 response. Acceptance still means queued, not completed.
 The button starts the observer, not the data collectors. The observer reads fresh
 workflow results and published metadata, then publishes a new saved report.
 The admin checks for it every 20 seconds while the panel remains open, for up to

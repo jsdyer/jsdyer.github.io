@@ -16,7 +16,7 @@
 <label for="owner-token">Owner GitHub token</label>
 <input type="password" id="owner-token" required autocomplete="off" spellcheck="false">
 <button id="unlock" type="submit" disabled>Unlock admin</button>
-<p>This tab sends your token to the CoolCode collector to verify your GitHub identity. Your read-only token opens reports. To publish lineups too, use a fine-grained token limited to jsdyer/jsdyer.github.io with Contents read/write. Opening Cloudflare usage also sends the token to CoolCode’s admin metrics Worker for the same owner check. Publishing and optional repository traffic lookups send the token to GitHub. Repository traffic requires Administration read access to the selected repository.</p>
+<p>This tab sends your token to the CoolCode collector to verify your GitHub identity. Your read-only token opens reports. For optional write actions, use a fine-grained token that includes jsdyer/jsdyer.github.io: Contents read/write publishes lineups; Actions read/write enables Check GitHub now. The Linux watchdog’s GitHub App is a separate credential. Opening Cloudflare usage also sends the token to CoolCode’s admin metrics Worker for the same owner check. Publishing, Check GitHub now and optional repository traffic lookups send the token to GitHub. Repository traffic requires Administration read access to the selected repository.</p>
 <p id="sign-in-status" role="status"></p>
 </form>
 <noscript>Enable JavaScript to sign in.</noscript>

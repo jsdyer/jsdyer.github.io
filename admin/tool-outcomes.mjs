@@ -118,11 +118,15 @@ export async function requestOutcomeCheck(session, fetcher=fetch) {
   if(!session?.token)throw Error('Sign in with a token that has Actions write access to jsdyer.github.io, or use Run workflow on GitHub.');
   const response=await fetcher(dispatchUrl, {method:'POST', credentials:'omit', redirect:'error', referrerPolicy:'no-referrer',
     signal:AbortSignal.any([session.signal,AbortSignal.timeout(20000)]),
-    headers:{Accept:'application/vnd.github+json',Authorization:'Bearer '+session.token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},
+    headers:{Accept:'application/vnd.github+json',Authorization:'Bearer '+session.token,'X-GitHub-Api-Version':'2026-03-10','Content-Type':'application/json'},
     body:JSON.stringify({ref:'main'})});
   if(response.status===401){session.lock?.();throw Error('GitHub sign-in expired. Sign in again to request a check.');}
-  if(response.status===403)throw Error('GitHub did not authorize this request. The admin token needs Actions write access to jsdyer.github.io; you can also use Run workflow on GitHub.');
-  if(response.status!==204)throw Error('GitHub did not accept the check request (HTTP '+response.status+'). Open Observation runs to investigate.');
+  if(response.status===403)throw Error('GitHub denied the request (403). Edit the token used to unlock this admin: include jsdyer/jsdyer.github.io and set repository Actions to Read and write. Save, lock this admin, sign in again and retry. The watchdog App is separate. You can also use Run workflow on GitHub.');
+  if(response.status!==200 && response.status!==204)throw Error('GitHub did not accept the check request (HTTP '+response.status+'). Open Observation runs to investigate.');
+  if(response.status===200){
+    const receipt=await response.json();
+    if(!Number.isSafeInteger(receipt?.workflow_run_id) || receipt.workflow_run_id<1)throw Error('GitHub returned an unexpected dispatch response. Check Observation runs before retrying.');
+  }
   const serverTime=Date.parse(response.headers.get('Date'));
   return Number.isFinite(serverTime)?serverTime:Date.now();
 }
@@ -151,7 +155,9 @@ export function initializeOutcomes(session) {
     const requested=node('p');requested.setAttribute('role','status');requested.className='outcome-request';
     const content=node('div'),history=node('div'),links=node('p');
     links.append(link('Download report JSON',reportUrl),' · ',link('Observation runs',observationRuns));
-    root.replaceChildren(toolbar,status,requested,content,history,links);
+    const permissions=node('p','Check GitHub now needs Actions: Read and write on jsdyer/jsdyer.github.io for the token used to unlock this admin. Viewing the saved report does not. ');
+    permissions.append(link('Edit fine-grained token permissions','https://github.com/settings/personal-access-tokens'),' · ',link('Run the check on GitHub',observationRuns));
+    root.replaceChildren(toolbar,permissions,status,requested,content,history,links);
     let report,request,timer,requestedAt,deadline;
     const ageTimer=setInterval(()=>{if(panel.open && !refresh.disabled)render();},60000);
     sessionSignal.addEventListener('abort',()=>{clearTimeout(timer);clearInterval(ageTimer);request?.abort();},{once:true});

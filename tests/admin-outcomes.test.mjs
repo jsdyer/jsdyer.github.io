@@ -46,9 +46,19 @@ test('explicit check dispatches only the fixed observer workflow with the existi
 });
 test('dispatch denial is actionable, does not pretend success, and 401 locks the session',async()=>{
   let locked=false;const session={token:'test-token',signal:new AbortController().signal,lock:()=>{locked=true;}};
-  await assert.rejects(requestOutcomeCheck(session,async()=>new Response(null,{status:403})),/Actions write/);
+  await assert.rejects(requestOutcomeCheck(session,async()=>new Response(null,{status:403})),/Actions to Read and write/);
   assert.equal(locked,false);
   await assert.rejects(requestOutcomeCheck(session,async()=>new Response(null,{status:401})),/expired/);
   assert.equal(locked,true);
   await assert.rejects(requestOutcomeCheck({signal:session.signal},async()=>{throw Error('must not fetch');}),/Sign in/);
+});
+
+test('current GitHub dispatch receipt is accepted but unexpected success content is not',async()=>{
+  const session={token:'test-token',signal:new AbortController().signal};
+  const request=async(url,options)=>{
+    assert.equal(options.headers['X-GitHub-Api-Version'],'2026-03-10');
+    return Response.json({workflow_run_id:123,html_url:'https://github.com/jsdyer/jsdyer.github.io/actions/runs/123'}, {headers:{Date:'Tue, 24 Nov 2026 17:00:00 GMT'}});
+  };
+  assert.equal(await requestOutcomeCheck(session,request),Date.parse('2026-11-24T17:00:00Z'));
+  await assert.rejects(requestOutcomeCheck(session,async()=>Response.json({message:'unexpected'})),/unexpected dispatch response/);
 });
