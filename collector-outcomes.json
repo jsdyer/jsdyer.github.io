@@ -1,8 +1,202 @@
 {
-  "changes": [],
-  "checked_at": "2026-11-24T17:09:35.549574Z",
+  "changes": [
+    {
+      "after": {
+        "collection_result": null,
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 48
+          }
+        ],
+        "due_unobserved": true,
+        "error": null,
+        "latest_attempt": 1,
+        "latest_id": 45411549034,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_attempt": 1,
+        "refresh_id": 45411549034,
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "source_status_error": null,
+        "sources": [],
+        "state": "active",
+        "status": "attention"
+      },
+      "before": {
+        "collection_result": null,
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 48
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_attempt": 1,
+        "latest_id": 45411549034,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_attempt": 1,
+        "refresh_id": 45411549034,
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "source_status_error": null,
+        "sources": [],
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/gridreceipt",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "collection_result": null,
+        "counts": [],
+        "due_unobserved": false,
+        "error": null,
+        "latest_attempt": 1,
+        "latest_id": 45446168019,
+        "latest_result": null,
+        "output": "not_configured",
+        "refresh_attempt": 1,
+        "refresh_id": 45445172277,
+        "refresh_result": "success",
+        "run_alignment": null,
+        "source_status_error": null,
+        "sources": [],
+        "state": "active",
+        "status": "running"
+      },
+      "before": {
+        "collection_result": null,
+        "counts": [],
+        "due_unobserved": false,
+        "error": null,
+        "latest_attempt": 1,
+        "latest_id": 45445172277,
+        "latest_result": null,
+        "output": "not_configured",
+        "refresh_attempt": 1,
+        "refresh_id": 45445172277,
+        "refresh_result": null,
+        "run_alignment": null,
+        "source_status_error": null,
+        "sources": [],
+        "state": "active",
+        "status": "running"
+      },
+      "repo": "jsdyer/jsdyer.github.io",
+      "workflow": "service-monitor.yml"
+    }
+  ],
+  "checked_at": "2026-11-24T17:14:22.810024Z",
   "expected_interval_seconds": 3600,
   "history": [
+    {
+      "changes": [
+        {
+          "after": {
+            "collection_result": null,
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 48
+              }
+            ],
+            "due_unobserved": true,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45411549034,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45411549034,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "attention"
+          },
+          "before": {
+            "collection_result": null,
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 48
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45411549034,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45411549034,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/gridreceipt",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "collection_result": null,
+            "counts": [],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45446168019,
+            "latest_result": null,
+            "output": "not_configured",
+            "refresh_attempt": 1,
+            "refresh_id": 45445172277,
+            "refresh_result": "success",
+            "run_alignment": null,
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "running"
+          },
+          "before": {
+            "collection_result": null,
+            "counts": [],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45445172277,
+            "latest_result": null,
+            "output": "not_configured",
+            "refresh_attempt": 1,
+            "refresh_id": 45445172277,
+            "refresh_result": null,
+            "run_alignment": null,
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "running"
+          },
+          "repo": "jsdyer/jsdyer.github.io",
+          "workflow": "service-monitor.yml"
+        }
+      ],
+      "checked_at": "2026-11-24T17:14:22.810024Z",
+      "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45446168019",
+      "summary": {
+        "attention": 6,
+        "checked": 156,
+        "limited": 0,
+        "running": 1,
+        "workflow_only": 5
+      }
+    },
     {
       "changes": [],
       "checked_at": "2026-11-24T17:09:35.549574Z",
@@ -3251,7 +3445,7 @@
       }
     }
   ],
-  "read_mode": "fresh",
+  "read_mode": "cached_where_unchanged",
   "rows": [
     {
       "counts": [],
@@ -3279,12 +3473,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:05.630684Z",
+      "observed_at": "2026-11-24T17:13:45.400020Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 26807,
-            "cached": false,
+            "age_seconds": 27087,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 1209600.0,
@@ -3365,12 +3559,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:05.631111Z",
+      "observed_at": "2026-11-24T17:13:45.400579Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 3821,
-            "cached": false,
+            "age_seconds": 4100,
+            "cached": true,
             "check": 0,
             "label": "Official archive catalogue checked",
             "max_age_seconds": 5356800.0,
@@ -3441,12 +3635,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:05.631439Z",
+      "observed_at": "2026-11-24T17:13:45.401087Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61746,
-            "cached": false,
+            "age_seconds": 62025,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -3516,12 +3710,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:05.631854Z",
+      "observed_at": "2026-11-24T17:13:45.403203Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61746,
-            "cached": false,
+            "age_seconds": 62025,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 1296000.0,
@@ -3591,12 +3785,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:06.365733Z",
+      "observed_at": "2026-11-24T17:13:46.204584Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 8241,
-            "cached": false,
+            "age_seconds": 8521,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 172800.0,
@@ -3657,12 +3851,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:06.385305Z",
+      "observed_at": "2026-11-24T17:13:46.300030Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 20893,
-            "cached": false,
+            "age_seconds": 21173,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 1209600.0,
@@ -3732,12 +3926,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:06.528247Z",
+      "observed_at": "2026-11-24T17:13:46.384125Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61747,
-            "cached": false,
+            "age_seconds": 62026,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -3807,12 +4001,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:06.763617Z",
+      "observed_at": "2026-11-24T17:13:46.735388Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 16969,
-            "cached": false,
+            "age_seconds": 17249,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -3882,12 +4076,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:07.104103Z",
+      "observed_at": "2026-11-24T17:13:47.192802Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 26467,
-            "cached": false,
+            "age_seconds": 26747,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -3957,12 +4151,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:07.152753Z",
+      "observed_at": "2026-11-24T17:13:47.199411Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61747,
-            "cached": false,
+            "age_seconds": 62027,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 5443200.0,
@@ -3973,8 +4167,8 @@
             "url": "https://coolcode.ca/atipmetrics/data.json"
           },
           {
-            "age_seconds": 61747,
-            "cached": false,
+            "age_seconds": 62027,
+            "cached": true,
             "check": 1,
             "label": "Research sources retrieved",
             "max_age_seconds": 5443200.0,
@@ -4049,12 +4243,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:07.204937Z",
+      "observed_at": "2026-11-24T17:13:47.265109Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 13077,
-            "cached": false,
+            "age_seconds": 13357,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -4124,12 +4318,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:07.548814Z",
+      "observed_at": "2026-11-24T17:13:47.734728Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61748,
-            "cached": false,
+            "age_seconds": 62028,
+            "cached": true,
             "check": 0,
             "label": "Episode feeds retrieved",
             "max_age_seconds": 259200.0,
@@ -4190,7 +4384,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:07.821941Z",
+      "observed_at": "2026-11-24T17:13:48.069240Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -4245,12 +4439,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:07.937385Z",
+      "observed_at": "2026-11-24T17:13:48.146328Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 19385,
-            "cached": false,
+            "age_seconds": 19665,
+            "cached": true,
             "check": 0,
             "label": "Capture started",
             "max_age_seconds": 172800.0,
@@ -4320,12 +4514,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:08.150057Z",
+      "observed_at": "2026-11-24T17:13:48.162969Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61748,
-            "cached": false,
+            "age_seconds": 62028,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -4395,12 +4589,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:08.188212Z",
+      "observed_at": "2026-11-24T17:13:48.593104Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9591,
-            "cached": false,
+            "age_seconds": 9872,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -4461,12 +4655,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:08.451815Z",
+      "observed_at": "2026-11-24T17:13:48.918661Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 8566,
-            "cached": false,
+            "age_seconds": 8847,
+            "cached": true,
             "check": 0,
             "label": "Rolling cases retrieved",
             "max_age_seconds": 172800.0,
@@ -4536,12 +4730,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:08.626285Z",
+      "observed_at": "2026-11-24T17:13:48.947456Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61749,
-            "cached": false,
+            "age_seconds": 62029,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -4581,7 +4775,7 @@
         {
           "definition": "[\"https://coolcode.ca/borderpulse/data/current.json\", {\"measure\": \"length\", \"path\": [\"records\"], \"unit\": \"crossings\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-24T17:09:08.747068Z",
+          "read_at": "2026-11-24T17:13:49.106155Z",
           "unit": "crossings",
           "url": "https://coolcode.ca/borderpulse/data/current.json",
           "value": 3
@@ -4611,17 +4805,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:08.747068Z",
+      "observed_at": "2026-11-24T17:13:49.106155Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 6087,
+            "age_seconds": 6367,
             "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 3600,
             "precision": "timestamp",
-            "read_at": "2026-11-24T17:09:08.747068Z",
+            "read_at": "2026-11-24T17:13:49.106155Z",
             "status": "stale",
             "timestamp": "2026-11-24T15:27:42Z",
             "url": "https://coolcode.ca/borderpulse/data/current.json"
@@ -4633,7 +4827,7 @@
       "probe_cache": {
         "0": {
           "key": "3994d1fb6e9a06a8b14c485ab3912cc63327028ef200bc0ac08f0a740ee741a5",
-          "read_at": "2026-11-24T17:09:08.747068Z",
+          "read_at": "2026-11-24T17:13:49.106155Z",
           "timestamp": "2026-11-24T15:27:42Z"
         }
       },
@@ -4687,12 +4881,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:09.052494Z",
+      "observed_at": "2026-11-24T17:13:49.753051Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61749,
-            "cached": false,
+            "age_seconds": 62030,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -4762,12 +4956,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:09.417043Z",
+      "observed_at": "2026-11-24T17:13:49.868312Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 5231,
-            "cached": false,
+            "age_seconds": 5511,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -4837,12 +5031,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:09.560063Z",
+      "observed_at": "2026-11-24T17:13:49.929602Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61750,
-            "cached": false,
+            "age_seconds": 62030,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 5443200.0,
@@ -4912,12 +5106,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:09.646466Z",
+      "observed_at": "2026-11-24T17:13:50.401565Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9934,
-            "cached": false,
+            "age_seconds": 10214,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 43200.0,
@@ -4987,12 +5181,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:09.670463Z",
+      "observed_at": "2026-11-24T17:13:50.458322Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61750,
-            "cached": false,
+            "age_seconds": 62030,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -5062,12 +5256,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:10.160417Z",
+      "observed_at": "2026-11-24T17:13:50.741054Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 7259,
-            "cached": false,
+            "age_seconds": 7540,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -5137,12 +5331,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:10.211486Z",
+      "observed_at": "2026-11-24T17:13:50.925168Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493750,
-            "cached": false,
+            "age_seconds": 494031,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -5212,12 +5406,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:10.223568Z",
+      "observed_at": "2026-11-24T17:13:51.264863Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493750,
-            "cached": false,
+            "age_seconds": 494031,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -5257,7 +5451,7 @@
         {
           "definition": "[\"https://coolcode.ca/census-lens/data/status.json\", {\"path\": [\"count\"], \"unit\": \"places\"}]",
           "label": "Source retrieved",
-          "read_at": "2026-11-24T17:09:10.338091Z",
+          "read_at": "2026-11-24T17:13:51.381625Z",
           "unit": "places",
           "url": "https://coolcode.ca/census-lens/data/status.json",
           "value": 5335
@@ -5310,17 +5504,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:10.338091Z",
+      "observed_at": "2026-11-24T17:13:51.381625Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61750,
+            "age_seconds": 62031,
             "cached": false,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 15984000.0,
             "precision": "date",
-            "read_at": "2026-11-24T17:09:10.338091Z",
+            "read_at": "2026-11-24T17:13:51.381625Z",
             "status": "fresh",
             "timestamp": "2026-11-24T00:00:00Z",
             "url": "https://coolcode.ca/census-lens/data/status.json"
@@ -5331,7 +5525,7 @@
       "probe_cache": {
         "0": {
           "key": "bc70eb216ddeb34bdeb7856d2a4016eef4a91eec06d4bc14e435acc3b14118a8",
-          "read_at": "2026-11-24T17:09:10.338091Z",
+          "read_at": "2026-11-24T17:13:51.381625Z",
           "timestamp": "2026-11-24T00:00:00Z"
         }
       },
@@ -5384,12 +5578,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:10.801489Z",
+      "observed_at": "2026-11-24T17:13:51.706099Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 32269,
-            "cached": false,
+            "age_seconds": 32550,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -5459,12 +5653,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:10.855099Z",
+      "observed_at": "2026-11-24T17:13:51.769574Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61751,
-            "cached": false,
+            "age_seconds": 62032,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 5443200.0,
@@ -5534,12 +5728,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:10.996684Z",
+      "observed_at": "2026-11-24T17:13:52.219816Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61751,
-            "cached": false,
+            "age_seconds": 62032,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -5609,12 +5803,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:11.476616Z",
+      "observed_at": "2026-11-24T17:13:52.476725Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61751,
-            "cached": false,
+            "age_seconds": 62032,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -5684,12 +5878,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:11.518546Z",
+      "observed_at": "2026-11-24T17:13:52.569603Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61752,
-            "cached": false,
+            "age_seconds": 62033,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -5759,12 +5953,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:11.659183Z",
+      "observed_at": "2026-11-24T17:13:52.927783Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61752,
-            "cached": false,
+            "age_seconds": 62033,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -5825,12 +6019,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:11.880759Z",
+      "observed_at": "2026-11-24T17:13:53.205683Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 183912,
-            "cached": false,
+            "age_seconds": 184193,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -5900,12 +6094,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:12.052509Z",
+      "observed_at": "2026-11-24T17:13:53.395024Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 8159,
-            "cached": false,
+            "age_seconds": 8440,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -5975,12 +6169,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:12.273254Z",
+      "observed_at": "2026-11-24T17:13:53.397757Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61752,
-            "cached": false,
+            "age_seconds": 62033,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -6050,12 +6244,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:12.365097Z",
+      "observed_at": "2026-11-24T17:13:53.740198Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61752,
-            "cached": false,
+            "age_seconds": 62034,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 259200.0,
@@ -6125,12 +6319,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:12.687763Z",
+      "observed_at": "2026-11-24T17:13:54.024987Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 74571,
-            "cached": false,
+            "age_seconds": 74852,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -6200,12 +6394,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:13.079282Z",
+      "observed_at": "2026-11-24T17:13:54.194894Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61753,
-            "cached": false,
+            "age_seconds": 62034,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -6275,12 +6469,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:13.300057Z",
+      "observed_at": "2026-11-24T17:13:54.347965Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 990,
-            "cached": false,
+            "age_seconds": 1271,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 7200.0,
@@ -6341,7 +6535,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:13.320414Z",
+      "observed_at": "2026-11-24T17:13:54.683471Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -6396,12 +6590,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:13.377510Z",
+      "observed_at": "2026-11-24T17:13:54.803302Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 183814,
-            "cached": false,
+            "age_seconds": 184096,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -6471,12 +6665,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:13.623595Z",
+      "observed_at": "2026-11-24T17:13:54.905905Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61754,
-            "cached": false,
+            "age_seconds": 62035,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -6546,12 +6740,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:13.893638Z",
+      "observed_at": "2026-11-24T17:13:55.406575Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9232,
-            "cached": false,
+            "age_seconds": 9513,
+            "cached": true,
             "check": 0,
             "label": "Canadian notices checked",
             "max_age_seconds": 172800.0,
@@ -6641,12 +6835,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:14.071779Z",
+      "observed_at": "2026-11-24T17:13:55.481782Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61754,
-            "cached": false,
+            "age_seconds": 62035,
+            "cached": true,
             "check": 0,
             "label": "Trade data retrieved",
             "max_age_seconds": 1296000.0,
@@ -6716,12 +6910,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:14.180343Z",
+      "observed_at": "2026-11-24T17:13:55.540994Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61754,
-            "cached": false,
+            "age_seconds": 62036,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 1296000.0,
@@ -6782,12 +6976,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:14.223105Z",
+      "observed_at": "2026-11-24T17:13:55.610523Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61754,
-            "cached": false,
+            "age_seconds": 62036,
+            "cached": true,
             "check": 0,
             "label": "SeaBus retrieved",
             "max_age_seconds": 5443200.0,
@@ -6857,12 +7051,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:14.777647Z",
+      "observed_at": "2026-11-24T17:13:56.296302Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61755,
-            "cached": false,
+            "age_seconds": 62036,
+            "cached": true,
             "check": 0,
             "label": "Halifax retrieved",
             "max_age_seconds": 1296000.0,
@@ -6932,12 +7126,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:14.930727Z",
+      "observed_at": "2026-11-24T17:13:56.457679Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61755,
-            "cached": false,
+            "age_seconds": 62036,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -6998,12 +7192,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:15.069928Z",
+      "observed_at": "2026-11-24T17:13:56.514083Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 22933,
-            "cached": false,
+            "age_seconds": 23215,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -7073,12 +7267,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:15.146894Z",
+      "observed_at": "2026-11-24T17:13:56.773730Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 31367,
-            "cached": false,
+            "age_seconds": 31649,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1209600.0,
@@ -7148,12 +7342,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:15.328838Z",
+      "observed_at": "2026-11-24T17:13:56.932619Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 942,
-            "cached": false,
+            "age_seconds": 1224,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 7200.0,
@@ -7223,12 +7417,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:15.529426Z",
+      "observed_at": "2026-11-24T17:13:57.199307Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61756,
-            "cached": false,
+            "age_seconds": 62037,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -7306,12 +7500,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:15.776878Z",
+      "observed_at": "2026-11-24T17:13:57.449232Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9885,
-            "cached": false,
+            "age_seconds": 10166,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 43200.0,
@@ -7381,12 +7575,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:15.819562Z",
+      "observed_at": "2026-11-24T17:13:57.629930Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 27650,
-            "cached": false,
+            "age_seconds": 27932,
+            "cached": true,
             "check": 0,
             "label": "Heritage workbook retrieved",
             "max_age_seconds": 1209600.0,
@@ -7456,12 +7650,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:16.138808Z",
+      "observed_at": "2026-11-24T17:13:57.899840Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61756,
-            "cached": false,
+            "age_seconds": 62038,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -7539,12 +7733,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:16.139925Z",
+      "observed_at": "2026-11-24T17:13:57.912768Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 58199,
-            "cached": false,
+            "age_seconds": 58481,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -7614,12 +7808,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:16.622451Z",
+      "observed_at": "2026-11-24T17:13:58.491427Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493757,
-            "cached": false,
+            "age_seconds": 494038,
+            "cached": true,
             "check": 0,
             "label": "Archive index retrieved",
             "max_age_seconds": 5443200.0,
@@ -7689,12 +7883,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:16.652891Z",
+      "observed_at": "2026-11-24T17:13:58.518826Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493757,
-            "cached": false,
+            "age_seconds": 494039,
+            "cached": true,
             "check": 0,
             "label": "Catalogue retrieved",
             "max_age_seconds": 5443200.0,
@@ -7764,12 +7958,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:16.655615Z",
+      "observed_at": "2026-11-24T17:13:58.530776Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61757,
-            "cached": false,
+            "age_seconds": 62039,
+            "cached": true,
             "check": 0,
             "label": "Government directory retrieved",
             "max_age_seconds": 259200.0,
@@ -7830,12 +8024,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:16.876952Z",
+      "observed_at": "2026-11-24T17:13:58.547004Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 78995,
-            "cached": false,
+            "age_seconds": 79277,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1209600.0,
@@ -7905,12 +8099,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:17.328594Z",
+      "observed_at": "2026-11-24T17:13:59.141729Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 23554,
-            "cached": false,
+            "age_seconds": 23836,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1209600.0,
@@ -7980,12 +8174,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:17.357690Z",
+      "observed_at": "2026-11-24T17:13:59.234354Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 144803,
-            "cached": false,
+            "age_seconds": 145085,
+            "cached": true,
             "check": 0,
             "label": "Captured",
             "max_age_seconds": 1209600.0,
@@ -8075,12 +8269,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:17.377346Z",
+      "observed_at": "2026-11-24T17:13:59.321113Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 2704,
-            "cached": false,
+            "age_seconds": 2986,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -8150,12 +8344,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:17.459010Z",
+      "observed_at": "2026-11-24T17:13:59.540163Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61757,
-            "cached": false,
+            "age_seconds": 62040,
+            "cached": true,
             "check": 0,
             "label": "Internet data retrieved",
             "max_age_seconds": 259200.0,
@@ -8195,15 +8389,15 @@
         {
           "definition": "[\"https://coolcode.ca/gridreceipt/data/index.json\", {\"path\": [\"archive_count\"], \"unit\": \"saved receipts\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-24T17:09:18.069962Z",
+          "read_at": "2026-11-24T17:13:59.971145Z",
           "unit": "saved receipts",
           "url": "https://coolcode.ca/gridreceipt/data/index.json",
           "value": 48
         }
       ],
       "execution": {
-        "due_at": "2026-11-24T12:41:00Z",
-        "due_unobserved": false,
+        "due_at": "2026-11-24T15:41:00Z",
+        "due_unobserved": true,
         "history_limit": 20,
         "latest": {
           "at": "2026-11-24T14:12:41Z",
@@ -8225,17 +8419,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:18.069962Z",
+      "observed_at": "2026-11-24T17:13:59.971145Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 10586,
+            "age_seconds": 10868,
             "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 21600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T17:09:18.069962Z",
+            "read_at": "2026-11-24T17:13:59.971145Z",
             "status": "fresh",
             "timestamp": "2026-11-24T14:12:52Z",
             "url": "https://coolcode.ca/gridreceipt/data/index.json"
@@ -8246,16 +8440,16 @@
       },
       "probe_cache": {
         "0": {
-          "key": "4c55b53e78e5ed62b5a4c6d96d52bda7f01a364c8ea8544db0a4baf91321fb17",
-          "read_at": "2026-11-24T17:09:18.069962Z",
+          "key": "51439a5049ad6f44b47882df2ab8a632896aec25537a54fa98231c799af7c1ca",
+          "read_at": "2026-11-24T17:13:59.971145Z",
           "timestamp": "2026-11-24T14:12:52Z"
         }
       },
       "reasons": [
-        "Workflow and configured published checks are available"
+        "No scheduled/manual run observed for the latest due time"
       ],
       "repo": "jsdyer/gridreceipt",
-      "status": "checked",
+      "status": "attention",
       "titles": [
         "Grid Receipt"
       ],
@@ -8300,12 +8494,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:18.175864Z",
+      "observed_at": "2026-11-24T17:14:00.164277Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61758,
-            "cached": false,
+            "age_seconds": 62040,
+            "cached": true,
             "check": 0,
             "label": "Photo index retrieved",
             "max_age_seconds": 1296000.0,
@@ -8375,12 +8569,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:18.234592Z",
+      "observed_at": "2026-11-24T17:14:00.444182Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 31033,
-            "cached": false,
+            "age_seconds": 31315,
+            "cached": true,
             "check": 0,
             "label": "Waterways retrieved",
             "max_age_seconds": 1209600.0,
@@ -8391,8 +8585,8 @@
             "url": "https://coolcode.ca/hiddenwater/data/status.json"
           },
           {
-            "age_seconds": 61758,
-            "cached": false,
+            "age_seconds": 62040,
+            "cached": true,
             "check": 1,
             "label": "Fish passage retrieved",
             "max_age_seconds": 1296000.0,
@@ -8467,12 +8661,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:18.398116Z",
+      "observed_at": "2026-11-24T17:14:00.579354Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 31032,
-            "cached": false,
+            "age_seconds": 31315,
+            "cached": true,
             "check": 0,
             "label": "Camera list",
             "max_age_seconds": 1209600.0,
@@ -8542,12 +8736,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:18.671283Z",
+      "observed_at": "2026-11-24T17:14:00.795279Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 106490,
-            "cached": false,
+            "age_seconds": 106772,
+            "cached": true,
             "check": 0,
             "label": "Canadian cache retrieved",
             "max_age_seconds": 5356800.0,
@@ -8617,12 +8811,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:18.742832Z",
+      "observed_at": "2026-11-24T17:14:00.893686Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493759,
-            "cached": false,
+            "age_seconds": 494041,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -8692,12 +8886,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:18.816756Z",
+      "observed_at": "2026-11-24T17:14:01.107359Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 16830,
-            "cached": false,
+            "age_seconds": 17112,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -8767,12 +8961,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:18.953621Z",
+      "observed_at": "2026-11-24T17:14:01.230220Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 407359,
-            "cached": false,
+            "age_seconds": 407641,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -8842,12 +9036,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:19.276430Z",
+      "observed_at": "2026-11-24T17:14:01.658356Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61759,
-            "cached": false,
+            "age_seconds": 62042,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -8917,12 +9111,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:19.349705Z",
+      "observed_at": "2026-11-24T17:14:01.793701Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 407359,
-            "cached": false,
+            "age_seconds": 407642,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -8992,12 +9186,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:19.575848Z",
+      "observed_at": "2026-11-24T17:14:02.069150Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 46382,
-            "cached": false,
+            "age_seconds": 46664,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -9067,12 +9261,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:19.686365Z",
+      "observed_at": "2026-11-24T17:14:02.219810Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 30892,
-            "cached": false,
+            "age_seconds": 31174,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -9142,12 +9336,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:19.847368Z",
+      "observed_at": "2026-11-24T17:14:02.373264Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493760,
-            "cached": false,
+            "age_seconds": 494042,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -9208,7 +9402,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:20.021433Z",
+      "observed_at": "2026-11-24T17:14:02.552146Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -9250,7 +9444,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:20.199700Z",
+      "observed_at": "2026-11-24T17:14:02.858946Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -9292,7 +9486,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:20.421401Z",
+      "observed_at": "2026-11-24T17:14:03.050490Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -9315,26 +9509,26 @@
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T17:08:20Z",
+          "at": "2026-11-24T17:13:34Z",
           "attempt": 1,
           "conclusion": null,
-          "event": "workflow_dispatch",
-          "id": 45445172277,
+          "event": "push",
+          "id": 45446168019,
           "status": "in_progress",
-          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45445172277"
+          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45446168019"
         },
         "latest_refresh": {
           "at": "2026-11-24T17:08:20Z",
           "attempt": 1,
-          "conclusion": null,
+          "conclusion": "success",
           "event": "workflow_dispatch",
           "id": 45445172277,
-          "status": "in_progress",
+          "status": "completed",
           "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45445172277"
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:20.473572Z",
+      "observed_at": "2026-11-24T17:14:03.052394Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -9385,12 +9579,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:20.618941Z",
+      "observed_at": "2026-11-24T17:14:03.230611Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61761,
-            "cached": false,
+            "age_seconds": 62043,
+            "cached": true,
             "check": 0,
             "label": "Municipal profiles retrieved",
             "max_age_seconds": 1296000.0,
@@ -9460,12 +9654,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:20.658423Z",
+      "observed_at": "2026-11-24T17:14:03.558278Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 22495,
-            "cached": false,
+            "age_seconds": 22778,
+            "cached": true,
             "check": 0,
             "label": "Permit list checked",
             "max_age_seconds": 172800.0,
@@ -9535,12 +9729,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:21.183391Z",
+      "observed_at": "2026-11-24T17:14:04.027245Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 30727,
-            "cached": false,
+            "age_seconds": 31010,
+            "cached": true,
             "check": 0,
             "label": "Licence data retrieved",
             "max_age_seconds": 5356800.0,
@@ -9610,12 +9804,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:21.249019Z",
+      "observed_at": "2026-11-24T17:14:04.167842Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61761,
-            "cached": false,
+            "age_seconds": 62044,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -9701,12 +9895,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:21.257296Z",
+      "observed_at": "2026-11-24T17:14:04.326511Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61761,
-            "cached": false,
+            "age_seconds": 62044,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -9767,12 +9961,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:21.324033Z",
+      "observed_at": "2026-11-24T17:14:04.907018Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 2913,
-            "cached": false,
+            "age_seconds": 3197,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -9842,12 +10036,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:21.633796Z",
+      "observed_at": "2026-11-24T17:14:04.976846Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 74602,
-            "cached": false,
+            "age_seconds": 74885,
+            "cached": true,
             "check": 0,
             "label": "Captured",
             "max_age_seconds": 1209600.0,
@@ -9917,12 +10111,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:21.733879Z",
+      "observed_at": "2026-11-24T17:14:04.984871Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61762,
-            "cached": false,
+            "age_seconds": 62045,
+            "cached": true,
             "check": 0,
             "label": "Survey retrieved",
             "max_age_seconds": 5443200.0,
@@ -9992,12 +10186,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:21.851957Z",
+      "observed_at": "2026-11-24T17:14:05.114661Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 407362,
-            "cached": false,
+            "age_seconds": 407645,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 2678400.0,
@@ -10037,7 +10231,7 @@
         {
           "definition": "[\"https://coolcode.ca/lobbytrail/index.json\", {\"path\": [\"reports\"], \"unit\": \"communication reports\"}]",
           "label": "Source export",
-          "read_at": "2026-11-24T17:09:21.987545Z",
+          "read_at": "2026-11-24T17:14:05.716891Z",
           "unit": "communication reports",
           "url": "https://coolcode.ca/lobbytrail/index.json",
           "value": 270514
@@ -10090,17 +10284,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:21.987545Z",
+      "observed_at": "2026-11-24T17:14:05.716891Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 24364,
+            "age_seconds": 24648,
             "cached": false,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T17:09:21.987545Z",
+            "read_at": "2026-11-24T17:14:05.716891Z",
             "status": "fresh",
             "timestamp": "2026-11-24T10:23:18Z",
             "url": "https://coolcode.ca/lobbytrail/index.json"
@@ -10111,7 +10305,7 @@
       "probe_cache": {
         "0": {
           "key": "5c5f7853e522e94c899015bfac2a913755a00cff51da592097829d4a52e542ca",
-          "read_at": "2026-11-24T17:09:21.987545Z",
+          "read_at": "2026-11-24T17:14:05.716891Z",
           "timestamp": "2026-11-24T10:23:18Z"
         }
       },
@@ -10155,12 +10349,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:22.378545Z",
+      "observed_at": "2026-11-24T17:14:05.769417Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 27448,
-            "cached": false,
+            "age_seconds": 27732,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -10230,12 +10424,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:22.421926Z",
+      "observed_at": "2026-11-24T17:14:05.793095Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 184074,
-            "cached": false,
+            "age_seconds": 184358,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 5356800.0,
@@ -10305,12 +10499,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:22.430986Z",
+      "observed_at": "2026-11-24T17:14:06.055896Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 2419,
-            "cached": false,
+            "age_seconds": 2703,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -10380,12 +10574,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:22.959002Z",
+      "observed_at": "2026-11-24T17:14:06.476955Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61763,
-            "cached": false,
+            "age_seconds": 62046,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -10455,12 +10649,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:23.025873Z",
+      "observed_at": "2026-11-24T17:14:06.610742Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61763,
-            "cached": false,
+            "age_seconds": 62047,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -10530,12 +10724,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:23.034640Z",
+      "observed_at": "2026-11-24T17:14:06.898913Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 23470,
-            "cached": false,
+            "age_seconds": 23754,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -10605,12 +10799,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:23.268396Z",
+      "observed_at": "2026-11-24T17:14:07.224949Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 13565,
-            "cached": false,
+            "age_seconds": 13849,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -10680,12 +10874,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:23.514238Z",
+      "observed_at": "2026-11-24T17:14:07.364708Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 179772,
-            "cached": false,
+            "age_seconds": 180055,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 5356800.0,
@@ -10755,12 +10949,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:23.570303Z",
+      "observed_at": "2026-11-24T17:14:07.689577Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 179825,
-            "cached": false,
+            "age_seconds": 180109,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -10830,12 +11024,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:23.592764Z",
+      "observed_at": "2026-11-24T17:14:07.854784Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 6472,
-            "cached": false,
+            "age_seconds": 6756,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -10875,7 +11069,7 @@
         {
           "definition": "[\"https://coolcode.ca/nasa/data/index.json\", {\"measure\": \"length\", \"path\": [\"captures\"], \"unit\": \"daily captures\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-24T17:09:24.107880Z",
+          "read_at": "2026-11-24T17:14:08.077259Z",
           "unit": "daily captures",
           "url": "https://coolcode.ca/nasa/data/index.json",
           "value": 2
@@ -10925,17 +11119,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:24.107880Z",
+      "observed_at": "2026-11-24T17:14:08.077259Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 2343,
+            "age_seconds": 2627,
             "cached": false,
             "check": 0,
             "label": "NASA/NOAA capture",
             "max_age_seconds": 172800.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T17:09:24.107880Z",
+            "read_at": "2026-11-24T17:14:08.077259Z",
             "status": "fresh",
             "timestamp": "2026-11-24T16:30:20.651000Z",
             "url": "https://coolcode.ca/nasa/data/index.json"
@@ -10984,7 +11178,7 @@
       "probe_cache": {
         "0": {
           "key": "daa2ec1ad1c2cdef9ea340dd3c8d5cc1d811d2947fa98177ab81ad62a6341bf7",
-          "read_at": "2026-11-24T17:09:24.107880Z",
+          "read_at": "2026-11-24T17:14:08.077259Z",
           "timestamp": "2026-11-24T16:30:20.651000Z"
         }
       },
@@ -11037,12 +11231,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:24.138866Z",
+      "observed_at": "2026-11-24T17:14:08.162219Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 73755,
-            "cached": false,
+            "age_seconds": 74039,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -11103,12 +11297,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:24.196555Z",
+      "observed_at": "2026-11-24T17:14:08.728393Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 129383,
-            "cached": false,
+            "age_seconds": 129668,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -11178,12 +11372,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:24.231113Z",
+      "observed_at": "2026-11-24T17:14:08.900318Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61764,
-            "cached": false,
+            "age_seconds": 62049,
+            "cached": true,
             "check": 0,
             "label": "Tor Metrics retrieved",
             "max_age_seconds": 259200.0,
@@ -11253,12 +11447,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:24.766101Z",
+      "observed_at": "2026-11-24T17:14:08.928993Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61765,
-            "cached": false,
+            "age_seconds": 62049,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 259200.0,
@@ -11328,12 +11522,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:24.873548Z",
+      "observed_at": "2026-11-24T17:14:09.537208Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 17157,
-            "cached": false,
+            "age_seconds": 17442,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -11411,12 +11605,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:24.938948Z",
+      "observed_at": "2026-11-24T17:14:09.556471Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61765,
-            "cached": false,
+            "age_seconds": 62050,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -11427,8 +11621,8 @@
             "url": "https://coolcode.ca/otherworldnames/data-status.json"
           },
           {
-            "age_seconds": 61765,
-            "cached": false,
+            "age_seconds": 62050,
+            "cached": true,
             "check": 1,
             "label": "Horizons retrieved",
             "max_age_seconds": 5443200.0,
@@ -11494,12 +11688,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:25.268017Z",
+      "observed_at": "2026-11-24T17:14:10.030483Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 24341,
-            "cached": false,
+            "age_seconds": 24625,
+            "cached": true,
             "check": 0,
             "label": "Package registry capture",
             "max_age_seconds": 1209600.0,
@@ -11569,12 +11763,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:25.400894Z",
+      "observed_at": "2026-11-24T17:14:10.177500Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 148165,
-            "cached": false,
+            "age_seconds": 148450,
+            "cached": true,
             "check": 0,
             "label": "Monthly tables retrieved",
             "max_age_seconds": 3715200.0,
@@ -11644,12 +11838,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:25.528476Z",
+      "observed_at": "2026-11-24T17:14:10.195342Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493766,
-            "cached": false,
+            "age_seconds": 494050,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -11719,12 +11913,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:25.535459Z",
+      "observed_at": "2026-11-24T17:14:10.268742Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61766,
-            "cached": false,
+            "age_seconds": 62050,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -11794,12 +11988,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:25.985554Z",
+      "observed_at": "2026-11-24T17:14:10.883436Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9105,
-            "cached": false,
+            "age_seconds": 9389,
+            "cached": true,
             "check": 0,
             "label": "KEV source retrieved",
             "max_age_seconds": 172800.0,
@@ -11869,12 +12063,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:25.990341Z",
+      "observed_at": "2026-11-24T17:14:10.908030Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 29644,
-            "cached": false,
+            "age_seconds": 29929,
+            "cached": true,
             "check": 0,
             "label": "Pre-grant workbook retrieved",
             "max_age_seconds": 1209600.0,
@@ -11944,12 +12138,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:26.066626Z",
+      "observed_at": "2026-11-24T17:14:10.953230Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 407366,
-            "cached": false,
+            "age_seconds": 407651,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -12019,12 +12213,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:26.115521Z",
+      "observed_at": "2026-11-24T17:14:11.031341Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61766,
-            "cached": false,
+            "age_seconds": 62051,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -12094,12 +12288,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:26.560043Z",
+      "observed_at": "2026-11-24T17:14:11.681194Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61767,
-            "cached": false,
+            "age_seconds": 62052,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -12169,12 +12363,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:26.678669Z",
+      "observed_at": "2026-11-24T17:14:11.772455Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61767,
-            "cached": false,
+            "age_seconds": 62052,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -12244,12 +12438,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:26.713687Z",
+      "observed_at": "2026-11-24T17:14:11.828502Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61767,
-            "cached": false,
+            "age_seconds": 62052,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 345600,
@@ -12319,12 +12513,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:26.774274Z",
+      "observed_at": "2026-11-24T17:14:11.896134Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 46361,
-            "cached": false,
+            "age_seconds": 46646,
+            "cached": true,
             "check": 0,
             "label": "Price table retrieved",
             "max_age_seconds": 1209600.0,
@@ -12394,12 +12588,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:27.171615Z",
+      "observed_at": "2026-11-24T17:14:12.412805Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61767,
-            "cached": false,
+            "age_seconds": 62052,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -12469,12 +12663,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:27.197874Z",
+      "observed_at": "2026-11-24T17:14:12.461620Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 68140,
-            "cached": false,
+            "age_seconds": 68425,
+            "cached": true,
             "check": 0,
             "label": "Catalogue checked",
             "max_age_seconds": 1209600.0,
@@ -12544,12 +12738,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:27.394545Z",
+      "observed_at": "2026-11-24T17:14:12.592275Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 19514,
-            "cached": false,
+            "age_seconds": 19800,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -12619,12 +12813,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:27.497850Z",
+      "observed_at": "2026-11-24T17:14:12.606217Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 1446,
-            "cached": false,
+            "age_seconds": 1731,
+            "cached": true,
             "check": 0,
             "label": "Provider capture",
             "max_age_seconds": 172800.0,
@@ -12694,12 +12888,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:27.761098Z",
+      "observed_at": "2026-11-24T17:14:13.254460Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 8710,
-            "cached": false,
+            "age_seconds": 8995,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -12789,12 +12983,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:27.987847Z",
+      "observed_at": "2026-11-24T17:14:13.358824Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 2081,
-            "cached": false,
+            "age_seconds": 2366,
+            "cached": true,
             "check": 0,
             "label": "Quarterly sources checked",
             "max_age_seconds": 2419200.0,
@@ -12864,12 +13058,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:28.022252Z",
+      "observed_at": "2026-11-24T17:14:13.434735Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 234568,
-            "cached": false,
+            "age_seconds": 234853,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 604800.0,
@@ -12930,12 +13124,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:28.054371Z",
+      "observed_at": "2026-11-24T17:14:13.530166Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 88776,
-            "cached": false,
+            "age_seconds": 89062,
+            "cached": true,
             "check": 0,
             "label": "Crossref capture",
             "max_age_seconds": 1209600.0,
@@ -12975,7 +13169,7 @@
         {
           "definition": "[\"https://coolcode.ca/restroomreach/data/index.json\", {\"path\": [\"count\"], \"unit\": \"mapped toilets\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-24T17:09:28.487905Z",
+          "read_at": "2026-11-24T17:14:14.198316Z",
           "unit": "mapped toilets",
           "url": "https://coolcode.ca/restroomreach/data/index.json",
           "value": 1285
@@ -13025,17 +13219,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:28.487905Z",
+      "observed_at": "2026-11-24T17:14:14.198316Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 106399,
+            "age_seconds": 106685,
             "cached": false,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1209600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T17:09:28.487905Z",
+            "read_at": "2026-11-24T17:14:14.198316Z",
             "status": "fresh",
             "timestamp": "2026-11-23T11:36:09Z",
             "url": "https://coolcode.ca/restroomreach/data/index.json"
@@ -13046,7 +13240,7 @@
       "probe_cache": {
         "0": {
           "key": "36f844afa20703c1723efaadb910e46d07816d62275d2bfe1a3338a1b1c57045",
-          "read_at": "2026-11-24T17:09:28.487905Z",
+          "read_at": "2026-11-24T17:14:14.198316Z",
           "timestamp": "2026-11-23T11:36:09Z"
         }
       },
@@ -13099,12 +13293,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:28.653022Z",
+      "observed_at": "2026-11-24T17:14:14.235071Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 30395,
-            "cached": false,
+            "age_seconds": 30680,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -13165,12 +13359,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:28.780590Z",
+      "observed_at": "2026-11-24T17:14:14.268689Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 19230,
-            "cached": false,
+            "age_seconds": 19515,
+            "cached": true,
             "check": 0,
             "label": "River observation capture",
             "max_age_seconds": 172800.0,
@@ -13231,12 +13425,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:28.803643Z",
+      "observed_at": "2026-11-24T17:14:14.327603Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9773,
-            "cached": false,
+            "age_seconds": 10058,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 43200.0,
@@ -13306,12 +13500,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:29.351237Z",
+      "observed_at": "2026-11-24T17:14:15.103592Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61769,
-            "cached": false,
+            "age_seconds": 62055,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -13381,12 +13575,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:29.391395Z",
+      "observed_at": "2026-11-24T17:14:15.180583Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 580169,
-            "cached": false,
+            "age_seconds": 580455,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -13456,12 +13650,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:29.635650Z",
+      "observed_at": "2026-11-24T17:14:15.392312Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 17440,
-            "cached": false,
+            "age_seconds": 17725,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 172800.0,
@@ -13531,13 +13725,13 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:29.724881Z",
+      "observed_at": "2026-11-24T17:14:15.736104Z",
       "output": {
         "cache_max_age_seconds": 7200,
         "checks": [
           {
-            "age_seconds": 9758,
-            "cached": false,
+            "age_seconds": 10044,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 28800.0,
@@ -13607,12 +13801,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:29.922932Z",
+      "observed_at": "2026-11-24T17:14:15.931698Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 797,
-            "cached": false,
+            "age_seconds": 1083,
+            "cached": true,
             "check": 0,
             "label": "Browser captured",
             "max_age_seconds": 172800.0,
@@ -13682,12 +13876,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:30.067493Z",
+      "observed_at": "2026-11-24T17:14:16.022432Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61770,
-            "cached": false,
+            "age_seconds": 62056,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -13757,12 +13951,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:30.528381Z",
+      "observed_at": "2026-11-24T17:14:16.349381Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61771,
-            "cached": false,
+            "age_seconds": 62056,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -13832,12 +14026,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:30.568849Z",
+      "observed_at": "2026-11-24T17:14:16.678769Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61771,
-            "cached": false,
+            "age_seconds": 62057,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -13898,12 +14092,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:30.576775Z",
+      "observed_at": "2026-11-24T17:14:16.800748Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61771,
-            "cached": false,
+            "age_seconds": 62057,
+            "cached": true,
             "check": 0,
             "label": "Timetable retrieved",
             "max_age_seconds": 259200.0,
@@ -13973,12 +14167,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:30.835701Z",
+      "observed_at": "2026-11-24T17:14:16.872266Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9414,
-            "cached": false,
+            "age_seconds": 9700,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 43200.0,
@@ -14048,12 +14242,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:31.053914Z",
+      "observed_at": "2026-11-24T17:14:17.043654Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 13521,
-            "cached": false,
+            "age_seconds": 13807,
+            "cached": true,
             "check": 0,
             "label": "Snapshot generated",
             "max_age_seconds": 172800.0,
@@ -14123,12 +14317,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:31.057335Z",
+      "observed_at": "2026-11-24T17:14:17.347312Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61771,
-            "cached": false,
+            "age_seconds": 62057,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -14198,12 +14392,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:31.084284Z",
+      "observed_at": "2026-11-24T17:14:17.543397Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61771,
-            "cached": false,
+            "age_seconds": 62058,
+            "cached": true,
             "check": 0,
             "label": "MAST observations retrieved",
             "max_age_seconds": 1296000.0,
@@ -14273,12 +14467,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:31.481800Z",
+      "observed_at": "2026-11-24T17:14:17.722570Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61771,
-            "cached": false,
+            "age_seconds": 62058,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -14356,12 +14550,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:31.664803Z",
+      "observed_at": "2026-11-24T17:14:17.949146Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493772,
-            "cached": false,
+            "age_seconds": 494058,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -14431,12 +14625,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:31.729705Z",
+      "observed_at": "2026-11-24T17:14:18.175995Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61772,
-            "cached": false,
+            "age_seconds": 62058,
+            "cached": true,
             "check": 0,
             "label": "Spectrum sources retrieved",
             "max_age_seconds": 5443200.0,
@@ -14506,12 +14700,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:32.228710Z",
+      "observed_at": "2026-11-24T17:14:18.319235Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61772,
-            "cached": false,
+            "age_seconds": 62058,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -14572,12 +14766,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:32.329046Z",
+      "observed_at": "2026-11-24T17:14:18.645710Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 6249,
-            "cached": false,
+            "age_seconds": 6536,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -14655,12 +14849,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:32.345469Z",
+      "observed_at": "2026-11-24T17:14:18.862246Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61772,
-            "cached": false,
+            "age_seconds": 62059,
+            "cached": true,
             "check": 0,
             "label": "Tracks retrieved",
             "max_age_seconds": 5443200.0,
@@ -14671,8 +14865,8 @@
             "url": "https://coolcode.ca/stormtracks/data-status.json"
           },
           {
-            "age_seconds": 61772,
-            "cached": false,
+            "age_seconds": 62059,
+            "cached": true,
             "check": 1,
             "label": "Harbour data retrieved",
             "max_age_seconds": 5443200.0,
@@ -14747,12 +14941,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:32.368024Z",
+      "observed_at": "2026-11-24T17:14:19.026468Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 13747,
-            "cached": false,
+            "age_seconds": 14034,
+            "cached": true,
             "check": 0,
             "label": "CADORS sources retrieved",
             "max_age_seconds": 172800.0,
@@ -14822,12 +15016,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:32.773467Z",
+      "observed_at": "2026-11-24T17:14:19.058960Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61773,
-            "cached": false,
+            "age_seconds": 62059,
+            "cached": true,
             "check": 0,
             "label": "Cityworks data retrieved",
             "max_age_seconds": 1296000.0,
@@ -14897,12 +15091,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:32.865227Z",
+      "observed_at": "2026-11-24T17:14:19.423239Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61773,
-            "cached": false,
+            "age_seconds": 62059,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -14972,12 +15166,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:33.040350Z",
+      "observed_at": "2026-11-24T17:14:19.527233Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61773,
-            "cached": false,
+            "age_seconds": 62060,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 1296000.0,
@@ -15047,12 +15241,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:33.169389Z",
+      "observed_at": "2026-11-24T17:14:19.670909Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9399,
-            "cached": false,
+            "age_seconds": 9686,
+            "cached": true,
             "check": 0,
             "label": "All targets checked",
             "max_age_seconds": 43200.0,
@@ -15122,12 +15316,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:33.219094Z",
+      "observed_at": "2026-11-24T17:14:19.922891Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 12574,
-            "cached": false,
+            "age_seconds": 12861,
+            "cached": true,
             "check": 0,
             "label": "Telecom sources retrieved",
             "max_age_seconds": 1209600.0,
@@ -15197,12 +15391,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:33.301016Z",
+      "observed_at": "2026-11-24T17:14:20.060164Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 493773,
-            "cached": false,
+            "age_seconds": 494060,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -15272,12 +15466,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:33.753366Z",
+      "observed_at": "2026-11-24T17:14:20.389634Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 9004,
-            "cached": false,
+            "age_seconds": 9290,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 43200.0,
@@ -15347,12 +15541,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:33.820527Z",
+      "observed_at": "2026-11-24T17:14:20.481139Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61774,
-            "cached": false,
+            "age_seconds": 62060,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 1296000.0,
@@ -15422,12 +15616,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:33.942307Z",
+      "observed_at": "2026-11-24T17:14:20.734240Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 5038,
-            "cached": false,
+            "age_seconds": 5325,
+            "cached": true,
             "check": 0,
             "label": "Oldest regional retrieval",
             "max_age_seconds": 1209600.0,
@@ -15497,12 +15691,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:33.951082Z",
+      "observed_at": "2026-11-24T17:14:20.860708Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61774,
-            "cached": false,
+            "age_seconds": 62061,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -15572,12 +15766,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:34.418004Z",
+      "observed_at": "2026-11-24T17:14:21.197400Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 541,
-            "cached": false,
+            "age_seconds": 828,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 7200.0,
@@ -15647,12 +15841,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:34.465473Z",
+      "observed_at": "2026-11-24T17:14:21.381781Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 787,
-            "cached": false,
+            "age_seconds": 1074,
+            "cached": true,
             "check": 0,
             "label": "Live fleet capture",
             "max_age_seconds": 7200.0,
@@ -15722,12 +15916,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:34.615559Z",
+      "observed_at": "2026-11-24T17:14:21.602652Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 61775,
-            "cached": false,
+            "age_seconds": 62062,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -15797,12 +15991,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-24T17:09:34.830504Z",
+      "observed_at": "2026-11-24T17:14:21.604010Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 8317,
-            "cached": false,
+            "age_seconds": 8604,
+            "cached": true,
             "check": 0,
             "label": "Disclosure source retrieved",
             "max_age_seconds": 172800.0,
@@ -15838,11 +16032,11 @@
       "workflow_url": "https://github.com/jsdyer/wrongdoings/actions/workflows/pages.yml"
     }
   ],
-  "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45445172277",
+  "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45446168019",
   "stale_after_seconds": 10800,
   "summary": {
-    "attention": 5,
-    "checked": 157,
+    "attention": 6,
+    "checked": 156,
     "limited": 0,
     "running": 1,
     "workflow_only": 5
