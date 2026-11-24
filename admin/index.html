@@ -58,9 +58,12 @@
 <p><a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages">Workers dashboard</a> · <a href="https://dash.cloudflare.com/?to=/:account/workers/d1">D1 dashboard</a> · <a href="https://github.com/jsdyer/jsdyer.github.io/blob/main/docs/site-administration.md#cloudflare-usage">Connect live usage</a></p>
 </details></section>
 <section id="outcomes"><h2>Tool outcomes</h2><details id="outcomes-panel"><summary>Compare workflow results with published data</summary>
+<p>Hourly observations of scheduled workflows and the data they publish. Open a run or evidence link to investigate a result.</p>
+<div id="outcomes-body"></div>
+<details><summary>What these checks verify</summary>
 <p>The existing hourly service-check workflow saves this report for every registered scheduled workflow. Workflow execution and published output are separate checks. The report uses the watchdog’s reviewed check timestamps and age limits, plus available record counts.</p>
 <p>An unchanged count or an old observation year can be normal. A recent published check does not prove every record is correct or that a particular run downloaded it. Source validation and browser-test details remain in the linked workflow logs. Tools without scheduled workflows are outside this report.</p>
-<div id="outcomes-body"></div></details></section>
+</details></details></section>
 <section id="activity"><h2>Update log</h2><p><a href="#outcomes">Tool outcomes</a> records problems, recoveries and count changes alongside each tool’s workflow result.</p><details id="activity-panel"><summary>Browse update history</summary><div id="activity-body"></div></details></section>
 <div id="statistics"><h2>Statistics and issue reports</h2><p>Loading the reporting dashboard…</p></div>
 

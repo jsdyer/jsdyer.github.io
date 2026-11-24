@@ -56,8 +56,6 @@ def classify(row):
     refresh = execution.get('latest_refresh')
     if latest and latest.get('conclusion') in FAILED:
         issues.append('Latest workflow run ' + latest['conclusion'].replace('_', ' '))
-    if refresh and refresh.get('conclusion') in FAILED and (not latest or latest['id'] != refresh['id']):
-        issues.append('Latest scheduled/manual run ' + refresh['conclusion'].replace('_', ' '))
     if output['status'] in ('stale', 'unavailable', 'invalid'):
         issues.append('Published check ' + output['status'])
     if any(x.get('error') for x in row.get('counts', [])):
@@ -66,9 +64,16 @@ def classify(row):
         return 'attention', issues
     if latest and latest['status'] in ACTIVE:
         return 'running', ['Workflow is queued or running; output result is independent']
-    if (output['status'] == 'not_configured' or output.get('run_alignment') == 'predates_success'
-            or not latest or not refresh or latest.get('conclusion') != 'success'):
-        return 'limited', ['Published checks or scheduled/manual run evidence is incomplete']
+    if not latest or latest.get('conclusion') != 'success':
+        return 'limited', ['A successful latest execution was not observed']
+    if output['status'] == 'not_configured':
+        return 'workflow_only', ['This registered check does not publish a dataset; inspect its run for check details']
+    if refresh and refresh.get('conclusion') in FAILED:
+        return 'limited', ['Latest run succeeded; the earlier scheduled/manual run failed. A subsequent scheduled/manual refresh is not yet confirmed']
+    if output.get('run_alignment') == 'predates_success':
+        return 'limited', ['Published evidence predates the successful scheduled/manual run']
+    if not refresh:
+        return 'limited', ['No scheduled/manual execution found in the latest 20 runs']
     return 'checked', ['Workflow and configured published checks are available']
 
 
@@ -97,6 +102,14 @@ def observe(target, tools, now, http, previous=None):
         row['execution']['latest_refresh'] = run_record(refreshes[0], repo) if refreshes else None
         row['execution']['history_limit'] = 20
         row['execution']['due_unobserved'] = not any(wd.timestamp(r['created_at']) >= due for r in refreshes)
+        latest = row['execution']['latest']
+        if latest and latest.get('conclusion') in FAILED:
+            try:
+                jobs = http.request('GET', f"/repos/{repo}/actions/runs/{latest['id']}/jobs?filter=latest&per_page=100")
+                row['execution']['failed_steps'] = [str(step['name'])[:200] for job in jobs.get('jobs', [])
+                    for step in (job.get('steps') or []) if step.get('conclusion')=='failure'][:10]
+            except (wd.SafeError, KeyError, TypeError, ValueError):
+                row['execution']['step_details_unavailable'] = True
     except wd.SafeError as error:
         row['execution']['error'] = error.kind
     except (ValueError, KeyError, TypeError):
@@ -176,7 +189,7 @@ def assemble(rows, now, previous=None, run_id=None):
               'stale_after_seconds': 10800, 'rows': rows, 'changes': []}
     if run_id and re.fullmatch(r'[1-9][0-9]*', run_id):
         report['run_url'] = f'https://github.com/jsdyer/jsdyer.github.io/actions/runs/{run_id}'
-    report['summary'] = {s: sum(r['status'] == s for r in rows) for s in ('attention', 'running', 'limited', 'checked')}
+    report['summary'] = {s: sum(r['status'] == s for r in rows) for s in ('attention', 'running', 'limited', 'workflow_only', 'checked')}
     old = {(r['repo'], r['workflow']): r for r in (previous or {}).get('rows', [])}
     for row in rows:
         before = old.get((row['repo'], row['workflow']))

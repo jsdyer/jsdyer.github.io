@@ -40,7 +40,7 @@ class OutcomeTests(unittest.TestCase):
         row=observe(TARGET,TOOLS,NOW,PushAfterFailure())
         self.assertEqual(row['execution']['latest']['conclusion'],'success')
         self.assertEqual(row['execution']['latest_refresh']['conclusion'],'failure')
-        self.assertEqual(row['status'],'attention')
+        self.assertEqual(row['status'],'limited')
 
     def test_missing_due_run_is_visible_even_if_a_push_has_succeeded(self):
         class PushOnly(HTTP):
@@ -96,11 +96,11 @@ class OutcomeTests(unittest.TestCase):
         self.assertEqual(change['after']['status'],'checked')
         self.assertEqual(change['after']['counts'][0]['value'],6)
 
-    def test_no_published_probe_is_explicitly_limited(self):
+    def test_reviewed_non_data_workflow_is_explicitly_workflow_only(self):
         target={k:v for k,v in TARGET.items() if k!='freshness'}
         row=observe(target,TOOLS,NOW,HTTP())
         self.assertEqual(row['output']['status'],'not_configured')
-        self.assertEqual(row['status'],'limited')
+        self.assertEqual(row['status'],'workflow_only')
 
     def test_cached_counts_keep_their_read_time_and_new_runs_force_recheck(self):
         target=copy.deepcopy(TARGET);target['crons']=['0 0 * * *']

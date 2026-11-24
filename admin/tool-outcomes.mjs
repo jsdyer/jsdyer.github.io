@@ -124,7 +124,7 @@ export function initializeOutcomes(sessionSignal) {
       const rows=matchingOutcomes(report.rows,filter.value,search.value);
       content.replaceChildren();
       if(!rows.length){content.append(node('p','No workflows match this filter.'));return;}
-      const table=node('table');table.append(node('caption',rows.length+' workflows · Results observed at the report time'));
+      const table=node('table');table.tabIndex=0;table.setAttribute('aria-label','Workflow and published-output comparison');table.append(node('caption',rows.length+(rows.length===1?' workflow':' workflows')+' · Results observed at the report time'));
       const head=node('thead'),headers=node('tr');for(const text of ['Tool','Workflow execution','Published output evidence','Result']){const th=node('th',text);th.scope='col';headers.append(th);}head.append(headers);table.append(head);
       const body=node('tbody');for(const row of rows)body.append(renderOutcome(row));table.append(body);content.append(table);
     }

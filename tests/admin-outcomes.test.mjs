@@ -13,6 +13,13 @@ test('report age cannot be confused with current tool health',()=>{
   assert.equal(reportAge(report,Date.parse('2026-11-24T16:00:00Z')),'stale');
   assert.equal(reportAge(report,Date.parse('2026-11-24T11:00:00Z')),'future');
 });
+test('review filter includes uncertain data verification and excludes expected workflow-only checks',()=>{
+  const limited={...row,status:'limited'};
+  const check={...row,status:'workflow_only',output:{status:'not_configured',checks:[]}};
+  assert.deepEqual(matchingOutcomes([row,limited,check],'review',''),[row,limited]);
+  assert.deepEqual(matchingOutcomes([row,limited,check],'workflow_only',''),[check]);
+  assert.equal(validateReport({...report,rows:[check]}).rows[0].status,'workflow_only');
+});
 test('malformed reports and duplicate workflows do not render as healthy',()=>{
   assert.throws(()=>validateReport({...report,rows:[row,row]}),/repeats/);
   assert.throws(()=>validateReport({...report,rows:[{...row,repo:'https://bad.example'}]}),/invalid/);
