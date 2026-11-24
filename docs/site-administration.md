@@ -54,7 +54,9 @@ called verified.
 
 A failed collection remains **Needs attention** after a successful build that
 skipped collection. For reviewed workflows, exact GitHub step results distinguish
-collection from publishing retained data. A successful collection step on a push
+collection from publishing retained data. The observer searches the latest 20
+runs so a build-only push cannot obscure a failed collector push between builds.
+A successful collection step on a push
 can confirm recovery; a green push by itself cannot. Missing step evidence stays
 unconfirmed. Both run results remain visible.
 

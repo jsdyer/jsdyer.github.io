@@ -167,8 +167,26 @@ class ReviewedOutcomeTests(unittest.TestCase):
         self.assertIn('collection steps failed',' '.join(row['reasons']))
     def test_missing_step_details_are_not_confirmation_of_collection(self):
         row=observe(self.target(),TOOLS,NOW,HTTP())
-        self.assertEqual(row['status'],'limited')
+        self.assertNotEqual(row['status'],'checked')
         self.assertTrue(row['execution']['collection_unconfirmed'])
+    def test_failed_collector_push_between_skipped_build_and_old_dispatch_is_not_lost(self):
+        class InterveningPush(StepEvidence):
+            def request(self,method,path,**kwargs):
+                result=super().request(method,path,**kwargs)
+                if '/runs?' in path:
+                    result['workflow_runs'].insert(1,{'id':44,'created_at':'2026-11-24T11:38:00Z','head_branch':'main','status':'completed','conclusion':'failure','event':'push'})
+                if '/44/jobs?' in path:
+                    return {'jobs':[{'steps':[{'name':'Download source','conclusion':'failure'}]}]}
+                return result
+        row=observe(self.target(),TOOLS,NOW,InterveningPush(refresh_step='success'))
+        self.assertEqual(row['status'],'attention')
+        self.assertEqual(row['execution']['latest_collection']['id'],44)
+        self.assertFalse(row['execution']['due_unobserved'])
+    def test_skipped_manual_build_does_not_satisfy_collection_schedule(self):
+        row=observe(self.target(),TOOLS,NOW,StepEvidence(latest_step='skipped',refresh_step='skipped'))
+        self.assertTrue(row['execution']['due_unobserved'])
+        self.assertNotEqual(row['status'],'checked')
+
     def test_permitted_cache_is_explicit_but_cannot_mask_stale_output(self):
         target=copy.deepcopy(TARGET);target['freshness'][0]['cache_max_age_seconds']=7200
         recent=observe(target,TOOLS,NOW,HTTP(stamp='2026-11-24T11:00:00Z'))

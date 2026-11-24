@@ -98,7 +98,7 @@ def classify(row):
         return 'limited', ['A successful latest execution was not observed']
     if output['status'] == 'not_configured':
         return 'workflow_only', ['This registered check does not publish a dataset; inspect its run for check details']
-    if execution.get('collection_unconfirmed'):
+    if execution.get('collection_unconfirmed') or execution.get('latest_step_check', {}).get('status') == 'unavailable':
         return 'limited', ['Source collection was skipped or its steps could not be verified; build success alone does not confirm a refresh']
     if output.get('run_alignment') == 'predates_success':
         return 'limited', ['Published evidence predates the successful scheduled/manual run']
@@ -139,26 +139,26 @@ def observe(target, tools, now, http, previous=None, fresh=False):
         latest = row['execution']['latest']
         names = target.get('collection_steps', [])
         if names:
-            evidence = collection_check(http, repo, latest, names)
-            row['execution']['latest_step_check'] = evidence
-            refresh = row['execution']['latest_refresh']
-            candidates = []
-            results = {}
-            if latest and evidence['status'] in ('success', 'failure'):
-                candidates.append(latest)
-                results[latest['id']] = evidence['status']
-            if refresh and refresh != latest:
-                earlier = collection_check(http, repo, refresh, names)
-                if earlier['status'] in ('success', 'failure'):
-                    candidates.append(refresh)
-                    results[refresh['id']] = earlier['status']
-            collection = max(candidates, key=lambda r: wd.timestamp(r['at'])) if candidates else None
+            collection, collection_result = None, None
+            latest_evidence = {'status': 'unavailable'}
+            # A README/build push can follow a failed collector push. Inspect the
+            # bounded run history, not just the latest run and latest dispatch.
+            for index, source_run in enumerate(runs):
+                candidate = run_record(source_run, repo)
+                evidence = collection_check(http, repo, candidate, names)
+                if index == 0:
+                    latest_evidence = evidence
+                if evidence['status'] in ('success', 'failure'):
+                    collection, collection_result = candidate, evidence['status']
+                    break
+            row['execution']['latest_step_check'] = latest_evidence
             row['execution']['latest_collection'] = collection
-            row['execution']['collection_result'] = results.get(collection['id']) if collection else None
+            row['execution']['collection_result'] = collection_result
             row['execution']['collection_unconfirmed'] = collection is None
-            if (latest and latest['conclusion'] == 'success' and evidence['status'] == 'success'
-                    and wd.timestamp(latest['at']) >= due):
-                row['execution']['due_unobserved'] = False
+            observed_attempt = collection and wd.timestamp(collection['at']) >= due
+            pending_refresh = any(r.get('event') in wd.REFRESH_EVENTS and r.get('status') in ACTIVE
+                                  and wd.timestamp(r['created_at']) >= due for r in runs)
+            row['execution']['due_unobserved'] = not (observed_attempt or pending_refresh)
         if latest and latest.get('conclusion') in FAILED:
             try:
                 jobs = http.request('GET', f"/repos/{repo}/actions/runs/{latest['id']}/jobs?filter=latest&per_page=100")
