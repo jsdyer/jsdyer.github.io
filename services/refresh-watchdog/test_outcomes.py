@@ -100,6 +100,22 @@ class OutcomeTests(unittest.TestCase):
         self.assertEqual(change['after']['status'],'checked')
         self.assertEqual(change['after']['counts'][0]['value'],6)
 
+    def test_another_failed_run_is_recorded_even_when_status_and_counts_match(self):
+        before=observe(TARGET,TOOLS,NOW,HTTP(result='failure',count=4))
+        after=copy.deepcopy(before)
+        for key in ('latest','latest_refresh'):
+            after['execution'][key].update(id=43,attempt=1)
+        report=assemble([after],NOW,assemble([before],NOW-dt.timedelta(hours=1)))
+        self.assertEqual(len(report['changes']),1)
+        change=report['changes'][0]
+        self.assertEqual(change['before']['status'],change['after']['status'])
+        self.assertEqual(change['after']['latest_id'],43)
+        self.assertEqual(change['after']['latest_result'],'failure')
+        retry=copy.deepcopy(after)
+        for key in ('latest','latest_refresh'):
+            retry['execution'][key]['attempt']=2
+        self.assertEqual(len(assemble([retry],NOW,report)['changes']),1)
+
     def test_reviewed_non_data_workflow_is_explicitly_workflow_only(self):
         target={k:v for k,v in TARGET.items() if k!='freshness'}
         row=observe(target,TOOLS,NOW,HTTP())

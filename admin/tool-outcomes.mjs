@@ -1,4 +1,5 @@
 const reportUrl = 'https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/collector-outcomes-log/collector-outcomes.json';
+const reportApi = 'https://api.github.com/repos/jsdyer/jsdyer.github.io/contents/collector-outcomes.json?ref=collector-outcomes-log';
 const statuses = {attention:'Needs attention', running:'Running', limited:'Limited verification', workflow_only:'Workflow-only check', checked:'Checks passed'};
 const outputs = {recent:'Published check is recent', stale:'Published check is overdue', unavailable:'Published check unavailable', invalid:'Invalid published timestamp', not_configured:'Workflow-only target; no dataset output expected'};
 const time = value => value ? value.replace('T', ' ').replace(/\.\d+(?=Z)/, '').replace('Z', ' UTC') : 'Not observed';
@@ -93,6 +94,7 @@ export function renderOutcomeHistory(report) {
       const text=change.repo + ' · ' + change.workflow + ' · ' + readable(before?.status) + ' → ' + readable(after?.status);
       const details=[];
       for(const [key,label] of [['output','Published checks'],['latest_result','Latest run'],['refresh_result','Scheduled/manual run']])if(before?.[key]!==after?.[key])details.push(label+': '+readable(before?.[key])+' → '+readable(after?.[key]));
+      if(after?.latest_id && (before?.latest_id!==after.latest_id || before?.latest_attempt!==after.latest_attempt))details.push('New workflow attempt: run '+after.latest_id+' · attempt '+(after.latest_attempt || 1)+' · '+readable(after.latest_result));
       const oldCounts=new Map((before?.counts||[]).map(c=>[c.label,c]));
       for(const count of after?.counts||[]){const old=oldCounts.get(count.label);if(old?.value!==count.value||old?.error!==count.error)details.push(count.label+': '+(old?.value??'unavailable')+' → '+(count.value??'unavailable'));}
       changes.append(node('li',text + (details.length ? ' · '+details.join(' · ') : before?.status===after?.status ? ' · verification details changed' : '')));
@@ -135,8 +137,19 @@ export function includesFreshCheck(report, requestedAt) {
   return report?.read_mode==='fresh' && report.rows.length>0 && report.rows.every(row=>Number.isFinite(Date.parse(row.observed_at)) && Date.parse(row.observed_at)>=requestedAt);
 }
 
+export async function loadOutcomeReport(session, signal, fetcher=fetch) {
+  // The raw branch URL can lag behind a completed report by several minutes.
+  // Read the branch through GitHub's API; never send this credential to raw/CDN URLs.
+  const headers={Accept:'application/vnd.github.raw+json','X-GitHub-Api-Version':'2026-03-10'};
+  if(session?.token)headers.Authorization='Bearer '+session.token;
+  const response=await fetcher(reportApi+'&check='+Date.now(),{signal,headers,credentials:'omit',redirect:'error',referrerPolicy:'no-referrer',cache:'no-store'});
+  if(response.status===401){session.lock?.();throw Error('GitHub sign-in expired. Sign in again to load the report.');}
+  if(!response.ok)throw Error(response.status===404?'The outcome report is unavailable. Open Observation runs to check publication.':'The current report could not be read from GitHub (HTTP '+response.status+'). Retry Load saved report; a cached copy has not been substituted.');
+  return validateReport(await response.json());
+}
+
 export function initializeOutcomes(session) {
-  // The public report is readable without a token; only an explicit check request uses it.
+  // Use the session only for fixed GitHub API URLs, including public-report reads.
   const sessionSignal=session.signal;
   const panel=document.getElementById('outcomes-panel'), root=document.getElementById('outcomes-body');
   document.querySelectorAll('a[href="#outcomes"]').forEach(a=>a.addEventListener('click',()=>{panel.open=true;}));
@@ -158,9 +171,9 @@ export function initializeOutcomes(session) {
     const permissions=node('p','Check GitHub now needs Actions: Read and write on jsdyer/jsdyer.github.io for the token used to unlock this admin. Viewing the saved report does not. ');
     permissions.append(link('Edit fine-grained token permissions','https://github.com/settings/personal-access-tokens'),' · ',link('Run the check on GitHub',observationRuns));
     root.replaceChildren(toolbar,permissions,status,requested,content,history,links);
-    let report,request,timer,requestedAt,deadline;
+    let report,request,timer,requestedAt,deadline,downloadUrl;
     const ageTimer=setInterval(()=>{if(panel.open && !refresh.disabled)render();},60000);
-    sessionSignal.addEventListener('abort',()=>{clearTimeout(timer);clearInterval(ageTimer);request?.abort();},{once:true});
+    sessionSignal.addEventListener('abort',()=>{clearTimeout(timer);clearInterval(ageTimer);request?.abort();if(downloadUrl)URL.revokeObjectURL(downloadUrl);},{once:true});
     function render() {
       if(!report)return;
       const summary=Object.entries(statuses).map(([key,label])=>report.rows.filter(r=>r.status===key).length+' '+label.toLowerCase()).join(' · ');
@@ -177,11 +190,10 @@ export function initializeOutcomes(session) {
       const signal=AbortSignal.any([request.signal,sessionSignal,AbortSignal.timeout(20000)]);
       refresh.disabled=true;status.textContent='Loading the latest saved outcome report…';
       try {
-        const url=reportUrl+'?check='+Date.now();
-        const response=await fetch(url,{signal,credentials:'omit',referrerPolicy:'no-referrer',cache:'no-cache'});
-        if(!response.ok)throw Error(response.status===404?'The first outcome report has not been published yet.':'The outcome report could not be loaded (HTTP '+response.status+').');
-        const next=validateReport(await response.json());if(signal.aborted)return;report=next;
-        links.querySelector('a').href=url;
+        const next=await loadOutcomeReport(session,signal);if(signal.aborted)return;report=next;
+        if(downloadUrl)URL.revokeObjectURL(downloadUrl);
+        downloadUrl=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));
+        const download=links.querySelector('a');download.href=downloadUrl;download.download='coolcode-collector-outcomes.json';
         history.replaceChildren(renderOutcomeHistory(report));render();
         if(requestedAt!==undefined && includesFreshCheck(report,requestedAt)) {
           requested.textContent='A fresh check has finished. The table now shows the new saved report.';

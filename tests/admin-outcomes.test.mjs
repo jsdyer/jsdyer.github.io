@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {validateReport,matchingOutcomes,reportAge,snapshotDescription,requestOutcomeCheck,includesFreshCheck} from '../admin/tool-outcomes.mjs';
+import {validateReport,matchingOutcomes,reportAge,snapshotDescription,requestOutcomeCheck,includesFreshCheck,loadOutcomeReport} from '../admin/tool-outcomes.mjs';
 const row={repo:'jsdyer/example',workflow:'refresh.yml',titles:['Example'],status:'attention',execution:{latest:{id:42,at:'2026-11-24T11:00:00Z',conclusion:'failure'}},output:{status:'recent',checks:[]},counts:[],reasons:[]};
 const report={version:1,checked_at:'2026-11-24T12:00:00Z',rows:[row]};
 test('workflow failure with current publication remains in attention filter',()=>{
@@ -61,4 +61,32 @@ test('current GitHub dispatch receipt is accepted but unexpected success content
   };
   assert.equal(await requestOutcomeCheck(session,request),Date.parse('2026-11-24T17:00:00Z'));
   await assert.rejects(requestOutcomeCheck(session,async()=>Response.json({message:'unexpected'})),/unexpected dispatch response/);
+});
+
+test('report reads use the fixed GitHub API and show a newer failed Census run',async()=>{
+  const census={...row,repo:'jsdyer/census-lens',titles:['Census Lens'],workflow:'pages.yml',execution:{latest:{id:45441466838,at:'2026-11-24T16:48:52Z',conclusion:'failure'}}};
+  const current={...report,checked_at:'2026-11-24T17:06:24Z',rows:[census]};
+  const signal=new AbortController().signal;
+  const got=await loadOutcomeReport({token:'test-token'},signal,async(url,options)=>{
+    const u=new URL(url);
+    assert.equal(u.origin,'https://api.github.com');
+    assert.equal(u.pathname,'/repos/jsdyer/jsdyer.github.io/contents/collector-outcomes.json');
+    assert.equal(u.searchParams.get('ref'),'collector-outcomes-log');
+    assert.ok(u.searchParams.get('check'));
+    assert.equal(options.headers.Authorization,'Bearer test-token');
+    assert.equal(options.headers.Accept,'application/vnd.github.raw+json');
+    assert.equal(options.cache,'no-store');assert.equal(options.redirect,'error');assert.equal(options.credentials,'omit');
+    assert.equal(options.signal,signal);
+    return Response.json(current);
+  });
+  assert.deepEqual(matchingOutcomes(got.rows,'review','census'),[census]);
+});
+
+test('report read errors do not fall back to an old CDN report',async()=>{
+  let calls=0,locked=false;
+  const session={token:'test-token',lock:()=>{locked=true;}};
+  await assert.rejects(loadOutcomeReport(session,new AbortController().signal,async()=>{calls++;return new Response(null,{status:403});}),/cached copy has not been substituted/);
+  assert.equal(calls,1);assert.equal(locked,false);
+  await assert.rejects(loadOutcomeReport(session,new AbortController().signal,async()=>new Response(null,{status:401})),/expired/);
+  assert.equal(locked,true);
 });

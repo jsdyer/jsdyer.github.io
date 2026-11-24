@@ -105,10 +105,14 @@ update; changing the target list alone does not install it. See the watchdog's
 
 The job saves `collector-outcomes.json` on the `collector-outcomes-log` branch,
 including the latest results and 24 recent observations. **Recent outcome
-observations** shows problems, recoveries and changed counts. The branch's Git
+observations** shows problems, recoveries, changed counts and new workflow attempts.
+A second failed attempt is recorded even when the tool remains in Needs attention. The branch's Git
 history retains earlier reports. A report older than three hours is visibly
 stale. The normal schedule is **hourly at :37 UTC**, subject to GitHub delays.
-**Load saved report** only downloads that snapshot. Its timestamp, age in minutes,
+**Load saved report** reads that snapshot directly from GitHub’s Contents API with
+cache disabled and a distinct request URL. It does not use the raw branch URL, which
+can keep serving an older file after an observer finishes. The download link saves
+the exact report currently displayed. Its timestamp, age in minutes,
 and each workflow's observation time explain why later runs may be missing.
 
 **Check GitHub now** explicitly dispatches `service-monitor.yml` on `main` using
@@ -127,7 +131,10 @@ A successful observation job means it produced a report, even when that report
 contains individual tool failures.
 
 Only public repository identities, run links and summarized public metadata are
-saved. The admin downloads this file without sending its owner credential. No
+saved. The admin sends the existing in-memory owner token only to the fixed GitHub
+API endpoint when loading the report, avoiding the anonymous API rate limit during
+polling. It never forwards the token to the raw-content host or another origin.
+A failed API read is shown explicitly, without silently using an older copy. No
 new account, secret, server timer, Cloudflare deployment or duplicate tool list
 is required. The existing registry automatically includes newly registered
 scheduled workflows. Maintain that registry and reviewed evidence definitions

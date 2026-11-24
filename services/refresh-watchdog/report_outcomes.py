@@ -255,7 +255,11 @@ def observe(target, tools, now, http, previous=None, fresh=False):
 
 def observation_signature(row):
     return {'status': row['status'], 'output': row['output']['status'],
+            'latest_id': (row['execution'].get('latest') or {}).get('id'),
+            'latest_attempt': (row['execution'].get('latest') or {}).get('attempt'),
             'latest_result': (row['execution'].get('latest') or {}).get('conclusion'),
+            'refresh_id': (row['execution'].get('latest_refresh') or {}).get('id'),
+            'refresh_attempt': (row['execution'].get('latest_refresh') or {}).get('attempt'),
             'refresh_result': (row['execution'].get('latest_refresh') or {}).get('conclusion'),
             'state': row['execution'].get('state'), 'error': row['execution'].get('error'),
             'due_unobserved': row['execution'].get('due_unobserved'),

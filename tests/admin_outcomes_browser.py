@@ -6,6 +6,7 @@ from playwright.sync_api import expect
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = 'https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/collector-outcomes-log/collector-outcomes.json'
+REPORT_API = 'https://api.github.com/repos/jsdyer/jsdyer.github.io/contents/collector-outcomes.json?ref=collector-outcomes-log'
 
 
 def check_outcomes(browser, base, screenshots):
@@ -32,7 +33,15 @@ def check_outcomes(browser, base, screenshots):
           root.hidden=false;
           initializeOutcomes({signal:new AbortController().signal,token:'browser-fixture-token'});
         '''))
-        context.route(REPORT+'*',lambda route:route.fulfill(content_type='application/json',body=json.dumps(report)))
+        cached=json.dumps(report);raw_reads=[]
+        def raw_report(route):
+            raw_reads.append(route.request.url)
+            route.fulfill(content_type='application/json',body=cached)
+        context.route(REPORT+'*',raw_report)
+        def current_report(route):
+            assert route.request.headers.get('authorization')=='Bearer browser-fixture-token'
+            route.fulfill(content_type='application/json',body=json.dumps(report))
+        context.route(REPORT_API+'*',current_report)
         dispatches=[]
         def dispatch(route):
             dispatches.append(route.request.post_data)
@@ -60,10 +69,23 @@ def check_outcomes(browser, base, screenshots):
         page.get_by_role('button',name='Load saved report').click()
         expect(page.locator('.outcome-request')).to_contain_text('table still shows the saved snapshot')
         report['read_mode']='fresh'
+        census=json.loads(json.dumps(row))
+        census.update(repo='jsdyer/census-lens',titles=['Census Lens'],workflow='pages.yml')
+        for key in ('latest','latest_refresh'):
+            census['execution'][key].update(id=45441466838,at='2026-11-24T16:48:52Z')
+        census['execution']['failed_steps']=['Retrieve and check source files']
+        report['rows'].append(census)
         for item in report['rows']:item['observed_at']=(now+timedelta(seconds=1)).isoformat().replace('+00:00','Z')
         page.get_by_role('button',name='Load saved report').click()
         expect(page.locator('.outcome-request')).to_contain_text('fresh check has finished')
         expect(page.get_by_role('button',name='Check GitHub now')).to_be_enabled()
+        page.get_by_label('Outcome results').select_option('review')
+        page.get_by_label('Find tool outcome').fill('Census')
+        expect(page.locator('#outcomes-body tbody tr')).to_have_count(1)
+        expect(page.locator('#outcomes-body tbody tr')).to_contain_text('Needs attention')
+        expect(page.locator('#outcomes-body tbody tr')).to_contain_text('Retrieve and check source files')
+        expect(page.locator('#outcomes-body tbody tr a[href="https://github.com/jsdyer/census-lens/actions/runs/45441466838"]')).to_have_count(2)
+        assert raw_reads==[], 'The cached branch download must not hide the failed Census run'
         report['checked_at']=(now-timedelta(hours=5)).isoformat().replace('+00:00','Z')
         page.get_by_role('button',name='Load saved report').click()
         expect(page.locator('#outcomes-body [role=status]').first).to_contain_text('current tool health is unknown')
