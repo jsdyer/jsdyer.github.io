@@ -151,12 +151,99 @@ class Decisions(unittest.TestCase):
     def test_future_timestamp_never_claims_fresh(self):
         c=config(freshness=[{'url':'https://tool.example/a.json','json_path':'t'}]);f=Fake(runs=[completed()],public={'t':'2027-01-01T00:00:00Z'})
         self.assertEqual(w.run(c,{},f,NOW)['targets'][0]['freshness'][0]['status'],'future_timestamp')
-    def test_dispatch_budget_and_retry_cap(self):
+    def test_dispatch_budget_still_limits_each_pass(self):
         c=config();c['targets'] += [dict(c['targets'][0],repo='owner/second')];c['max_dispatches_per_pass']=1
         f=Fake();r=w.run(c,{},f,NOW,True);self.assertEqual(r['dispatches'],1)
         self.assertEqual(r['targets'][1]['status'],'dispatch_budget')
-        c=config();due=w.stamp(w.due_at(c['targets'][0],NOW,120));key=w.target_key(c['targets'][0]);state={'targets':{key:{'attempts':3,'attempt_due':due}}}
-        f=Fake();r=w.run(c,state,f,NOW,True);self.assertEqual(r['targets'][0]['status'],'retry_exhausted');self.assertFalse(f.writes)
+    def test_failed_refresh_keeps_retrying_every_six_hours_across_due_dates(self):
+        for cron in ('0 8 * * *','37 15 * * 2','18 9 20 2,5,8,11 *'):
+            with self.subTest(cron=cron):
+                c=config(crons=[cron]);state={};dispatch_hours=[]
+                for hour in range(73):
+                    now=NOW+dt.timedelta(hours=hour)
+                    failure=dict(completed(created=w.stamp(now-dt.timedelta(minutes=1))),conclusion='failure')
+                    f=Fake(runs=[failure])
+                    r=w.run(c,state,f,now,True)
+                    if f.writes:dispatch_hours.append(hour)
+                    self.assertEqual(r['targets'][0]['status'],'dispatch_requested' if hour%6==0 else 'cooldown')
+                    self.assertFalse(r['targets'][0]['verified_refresh'])
+                    # Simulate restarting the service between every pass.
+                    state=json.loads(json.dumps(state))
+                self.assertEqual(dispatch_hours,list(range(0,73,6)))
+                self.assertEqual(r['targets'][0]['recovery_attempts'],13)
+
+    def test_old_exhausted_state_resumes_without_resetting_history(self):
+        c=config(crons=['18 9 20 2,5,8,11 *']);key=w.target_key(c['targets'][0])
+        due=w.stamp(w.due_at(c['targets'][0],NOW,120))
+        state={'targets':{key:{'attempts':3,'attempt_due':due,
+            'last_dispatch_attempt':w.stamp(NOW-dt.timedelta(hours=7)),
+            'retry_after':w.stamp(NOW+dt.timedelta(hours=1))}}}
+        f=Fake();r=w.run(c,state,f,NOW,True)
+        self.assertEqual(r['targets'][0]['status'],'dispatch_requested')
+        self.assertEqual(r['targets'][0]['recovery_attempts'],4)
+        self.assertEqual(r['targets'][0]['retry_after'],w.stamp(NOW+dt.timedelta(hours=6)))
+        self.assertEqual(len(f.writes),1)
+
+    def test_old_short_cooldown_does_not_burst_after_upgrade(self):
+        c=config();key=w.target_key(c['targets'][0])
+        state={'targets':{key:{'attempts':1,
+            'last_dispatch_attempt':w.stamp(NOW-dt.timedelta(hours=3)),
+            'retry_after':w.stamp(NOW-dt.timedelta(hours=1))}}}
+        f=Fake();r=w.run(c,state,f,NOW,True)
+        self.assertEqual(r['targets'][0]['status'],'cooldown')
+        self.assertEqual(r['targets'][0]['retry_after'],w.stamp(NOW+dt.timedelta(hours=3)))
+        self.assertFalse(f.writes)
+
+    def test_success_resets_retry_window_before_next_missed_occurrence(self):
+        c=config(crons=['*/30 * * * *']);state={};key=w.target_key(c['targets'][0])
+        w.run(c,state,Fake(),NOW,True)
+        success=completed(event='workflow_dispatch',created=w.stamp(NOW+dt.timedelta(minutes=5)))
+        f=Fake(runs=[success]);r=w.run(c,state,f,NOW+dt.timedelta(minutes=10),True)
+        self.assertEqual(r['targets'][0]['status'],'current')
+        self.assertFalse(f.writes)
+        for field in ('attempts','attempt_due','retry_after'):
+            self.assertNotIn(field,state['targets'][key])
+        # A later missed refresh gets its first recovery promptly, not six hours later.
+        f=Fake(runs=[success]);r=w.run(c,state,f,NOW+dt.timedelta(hours=1),True)
+        self.assertEqual(r['targets'][0]['status'],'dispatch_requested')
+        self.assertEqual(r['targets'][0]['recovery_attempts'],1)
+
+    def test_retries_continue_but_cannot_hide_stale_published_output(self):
+        c=config(freshness=[{'url':'https://tool.example/data.json','json_path':'checked','max_age_seconds':3600}])
+        state={};public={'checked':w.stamp(NOW-dt.timedelta(days=1))}
+        for hour,expected in ((0,'dispatch_requested'),(1,'cooldown'),(6,'dispatch_requested')):
+            f=Fake(public=public);r=w.run(c,state,f,NOW+dt.timedelta(hours=hour),True)
+            self.assertEqual(r['targets'][0]['status'],expected)
+            self.assertEqual(r['health'],'unhealthy')
+            self.assertTrue(r['targets'][0]['published_data_stale'])
+            self.assertEqual(len(f.writes),0 if expected=='cooldown' else 1)
+
+    def test_fresh_retained_output_warns_during_failed_refresh_retries(self):
+        c=config(freshness=[{'url':'https://tool.example/data.json','json_path':'checked','max_age_seconds':86400}])
+        state={};public={'checked':w.stamp(NOW-dt.timedelta(hours=1))}
+        for minute in (0,5):
+            f=Fake(runs=[dict(completed(),conclusion='failure')],public=public)
+            r=w.run(c,state,f,NOW+dt.timedelta(minutes=minute),True)
+            self.assertEqual(r['health'],'attention')
+            self.assertEqual(r['errors'],0)
+            self.assertFalse(r['targets'][0]['verified_refresh'])
+
+    def test_retry_interval_global_setting_and_target_override(self):
+        for target_minutes,expected in ((None,720),(180,180)):
+            c=config();c['cooldown_minutes']=720
+            if target_minutes is not None:c['targets'][0]['cooldown_minutes']=target_minutes
+            w.validate_config(c)
+            r=w.run(c,{},Fake(),NOW,True)
+            self.assertEqual(r['targets'][0]['retry_after'],w.stamp(NOW+dt.timedelta(minutes=expected)))
+
+    def test_dry_run_does_not_migrate_saved_retry_state(self):
+        c=config();key=w.target_key(c['targets'][0])
+        retry=w.stamp(NOW+dt.timedelta(hours=1))
+        state={'targets':{key:{'attempts':1,'retry_after':retry,'last_dispatch_attempt':w.stamp(NOW)}}}
+        f=Fake();r=w.run(c,state,f,NOW,False)
+        self.assertEqual(r['targets'][0]['status'],'cooldown')
+        self.assertEqual(state['targets'][key]['retry_after'],retry)
+        self.assertFalse(f.writes)
     def test_auth_failure_stops_remaining_targets(self):
         c=config();c['targets'] += [dict(c['targets'][0],repo='owner/second')];f=Fake(fail=w.SafeError('authentication_failed',401))
         r=w.run(c,{},f,NOW);self.assertEqual(len(f.calls),1);self.assertEqual(r['errors'],2)

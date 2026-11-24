@@ -388,7 +388,7 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
         record=records.setdefault(key,{})
         cadence=cadence_minutes(target,now)
         grace=target.get('grace_minutes',config.get('grace_minutes',min(cadence/2,120)))
-        cooldown=target.get('cooldown_minutes',config.get('cooldown_minutes',max(15,min(cadence/2,120))))
+        cooldown=target.get('cooldown_minutes',config.get('cooldown_minutes',360))
         due=due_at(target,now,grace)
         row['due_at']=stamp(due)
         prefix='/repos/'+target['repo']+'/actions/workflows/'+urllib.parse.quote(row['workflow'],safe='')
@@ -441,7 +441,8 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
                         elif fresh_workflow.get('state')!='active':
                             record.pop('workflow_cache',None);row.update(status='disabled_manually',severity='warning');continue
                     else: row.update(status='would_enable',severity='warning')
-                record.pop('attempts',None)
+                for field in ('attempts','attempt_due','retry_after'):
+                    record.pop(field,None)
                 continue
             if active:
                 row.update(status='pending',severity='warning',reason='A workflow run is already queued or active; no duplicate dispatch')
@@ -464,9 +465,15 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
                 row.update(status='history_incomplete',severity='error',reason='History cap reached; refusing uncertain duplicate dispatch')
                 continue
             retry=record.get('retry_after')
+            if record.get('attempts') and record.get('last_dispatch_attempt'):
+                # Also migrate the old exponential cooldown without deleting state.
+                # A new cron occurrence does not shorten an unresolved retry window.
+                retry=stamp(timestamp(record['last_dispatch_attempt'])+dt.timedelta(minutes=cooldown))
+                if apply:record['retry_after']=retry
             if retry and timestamp(retry)>now:
                 row.update(status='cooldown',severity='warning',retry_after=retry,
-                           reason='Previous dispatch attempt awaits its retry window; acceptance is not refresh success')
+                           recovery_attempts=record.get('attempts',0),
+                           reason='Previous recovery attempt awaits its retry window; no successful refresh confirmed')
                 continue
             if report['dispatch_attempts']>=config.get('max_dispatches_per_pass',10):
                 row.update(status='dispatch_budget',severity='warning',reason='Overdue target deferred to a later pass')
@@ -485,12 +492,9 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
             elif latest_state!='active':
                 row.update(status='disabled_manually' if latest_state=='disabled_manually' else 'disabled_other',severity='warning' if latest_state=='disabled_manually' else 'error',reason='Fresh workflow state prevents dispatch')
                 continue
-            attempts=record.get('attempts',0)+1 if record.get('attempt_due')==stamp(due) else 1
-            if attempts>3:
-                row.update(status='retry_exhausted',severity='error',reason='Three recovery attempts for this due occurrence failed; await next due occurrence or owner review')
-                continue
+            attempts=record.get('attempts',0)+1
             record.update(attempt_due=stamp(due),attempts=attempts,last_dispatch_attempt=stamp(now),
-                          retry_after=stamp(now+dt.timedelta(minutes=min(1440,cooldown*2**min(attempts-1,7)))))
+                          retry_after=stamp(now+dt.timedelta(minutes=cooldown)))
             # Persist before dispatch: even a killed process must retain the attempt cooldown.
             report['dispatch_attempts']+=1
             if persist:persist(state)
@@ -501,7 +505,7 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
                 raise
             record['dispatch_outcome']='accepted';report['dispatches']+=1
             if persist:persist(state)
-            row.update(status='dispatch_requested',severity='warning',retry_after=record['retry_after'],
+            row.update(status='dispatch_requested',severity='warning',retry_after=record['retry_after'],recovery_attempts=attempts,
                        reason='GitHub accepted dispatch; a later pass must verify completion and published timestamps')
         except SafeError as error:
             row.update(status=error.kind,severity='error')
@@ -512,6 +516,10 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
         except (ValueError,KeyError,TypeError,OverflowError):
             row.update(status='invalid_api_or_state_data',severity='error')
         finally:
+            if (row['status'] in ('cooldown','dispatch_budget','dispatch_requested')
+                    and any(check['status']!='fresh' for check in row.get('freshness',[]))):
+                row.update(severity='error',published_data_stale=True)
+                row['reason']+='; published freshness checks also fail'
             record['last_checked']=stamp(now)
             # Preserve completed checks even if a later request stalls and
             # systemd ends the pass. The next pass resumes with older targets.

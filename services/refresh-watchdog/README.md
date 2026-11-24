@@ -18,7 +18,7 @@ A newly added repository must also be accessible to the existing GitHub App inst
 
 - GitHub's existing schedules continue running. The Linux server checks for a successful refresh covering the most recent due occurrence, allowing a grace period for normal queueing.
 - It recovers workflows disabled specifically for inactivity. Manually disabled workflows stay disabled.
-- It dispatches missed refreshes, avoiding jobs already queued or running. It attempts at most ten dispatches per pass, uses persisted cooldowns, and limits recovery attempts for each due occurrence.
+- It dispatches missed or failed refreshes, avoiding jobs already queued or running. It attempts at most ten dispatches per pass. Unresolved refreshes keep receiving recovery attempts at least six hours apart by default (up to four per day), without a lifetime attempt limit.
 - A successful dispatch request is **not** reported as a successful refresh. Later passes check the completed run and, where configured, the actual published data timestamp.
 - Published freshness checks use reviewed collection/check timestamps from `data/operations/freshness.json` in the hub. Old upstream observations and intentionally retained captures are not silently treated as fresh. The 162 data-publishing workflows have 166 reviewed probes; the six workflow-only exceptions are listed below.
 - An optional Healthchecks-compatible heartbeat can notify you if a pass fails or the server stops checking. Without that URL, reporting is local through the JSON report and systemd journal.
@@ -57,6 +57,45 @@ sends a failure ping, including a failed published-data freshness check, even wh
 the Linux process itself ran normally. Ordinary `attention` warnings do not send
 a failure ping. Read the report's target status/reason to identify what failed;
 the Healthchecks “Down” label alone does not establish that the server is offline.
+Recovery continues when published data is overdue or unreadable; those conditions
+remain errors during both dispatch and cooldown. A failed refresh with a still-recent
+retained snapshot is a warning while another attempt is pending.
+
+## Continuing recovery attempts
+
+A collector that exits unsuccessfully, including an HTTP 403 or timeout, does not
+satisfy its due refresh. After the first recovery dispatch, the watchdog waits six
+hours before dispatching again, and continues at that interval until it observes a
+successful scheduled/manual refresh covering the latest due occurrence. This replaces
+the old three-attempt cutoff and exponential cooldown. The first overdue recovery
+still happens on an eligible pass after the normal schedule grace period.
+
+The retry window survives service restarts and new cron occurrences; it is not reset
+just because another scheduled time passed. A successful refresh clears the retry
+counter and cooldown so that a later missed refresh can be recovered promptly.
+Existing GitHub schedules continue independently. Queued/running jobs, intentional
+manual disables, API rate limits, and the ten-dispatch pass budget still take priority.
+Successful runs with failed published checks continue to require review rather than
+causing redundant dispatches. No snapshot or source timestamp is advanced by retrying.
+
+The report includes `recovery_attempts` and `retry_after` for recovery dispatches and
+cooldowns. Previously exhausted targets resume under the six-hour policy using their
+saved last-dispatch time; do not delete `state.json` to upgrade.
+
+This is a **runtime update**: the automatically downloaded target list alone does not
+install it. From your existing `services/refresh-watchdog` checkout on the server, run:
+
+```bash
+git pull --ff-only
+sudo systemctl stop coolcode-watchdog.timer coolcode-watchdog.service
+sudo bash ./install.sh
+```
+
+The installer preserves your GitHub App credentials, heartbeat URL and retry history,
+then re-enables the timer and starts a pass. Inspect the next report or journal for
+`dispatch_requested` or `cooldown` with its next eligible retry time. If installation
+fails, correct that error and rerun it; the stopped timer must be re-enabled before
+monitoring resumes.
 
 Seven apps needed small published metadata additions: Blocked or Gone, Contract
 Patterns, Langley Trades, Lobby Trail, Metro Economy, Patent Attic and RegistrarWatch.
@@ -147,7 +186,7 @@ sudo journalctl -u coolcode-watchdog.service -n 60 --no-pager
 sudo python3 -m json.tool /var/lib/coolcode-watchdog/report.json
 ```
 
-The report distinguishes `current`, `pending`, `dispatch_requested`, `cooldown`, `disabled_manually`, `published_stale`, authentication errors and exhausted retries. `verified_refresh: false` with `assurance: workflow_only` means the workflow succeeded but that target has no independent published-timestamp check. An accepted dispatch remains pending verification.
+The report distinguishes `current`, `pending`, `dispatch_requested`, `cooldown`, `disabled_manually`, `published_stale` and authentication errors. Recovery no longer stops with `retry_exhausted`; retries continue at the configured interval. `verified_refresh: false` with `assurance: workflow_only` means the workflow succeeded but that target has no independent published-timestamp check. An accepted dispatch remains pending verification.
 
 The journal immediately shows registry refresh, authentication, each target's
 start and result, elapsed seconds, and final heartbeat/report stages. Watch with
@@ -185,7 +224,7 @@ Published metadata reads are cached for up to half the schedule interval, capped
 
 The GitHub `targets.json` is generated from the catalogue and `data/operations/repositories.json`. Follow [the lifecycle checklist](../../docs/tool-lifecycle.md): refresh the workflow inventory, update reviewed freshness fields, generate files and commit them. The server adopts the committed targets automatically. New workflows also belong in their repository schedule guard, and new repositories may need App installation access.
 
-`grace_minutes`, `cooldown_minutes` and `max_run_minutes` can be set globally or per target. The default stalled-run threshold is 180 minutes; pending runs with already stale published data report an error immediately. Defaults allow half the schedule interval, capped at two hours, with a minimum fifteen-minute dispatch cooldown. `freshness[].max_age_seconds` can override the published-age threshold. The default threshold is twice the workflow interval, with an extra day for explicitly date-only timestamps. Upstream publication cadence may justify a different limit.
+`grace_minutes`, `cooldown_minutes` and `max_run_minutes` can be set globally or per target. The default stalled-run threshold is 180 minutes; pending runs with already stale published data report an error immediately. The default schedule grace is half the schedule interval, capped at two hours. The default recovery cooldown is a fixed 360 minutes (six hours), independent of the schedule interval and number of attempts. A configured `cooldown_minutes` overrides that interval. `freshness[].max_age_seconds` can override the published-age threshold. The default threshold is twice the workflow interval, with an extra day for explicitly date-only timestamps. Upstream publication cadence may justify a different limit.
 
 After changing configuration in GitHub, inspect the next server pass. To validate the installed cache manually:
 
