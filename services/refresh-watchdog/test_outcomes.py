@@ -51,6 +51,10 @@ class OutcomeTests(unittest.TestCase):
         row=observe(TARGET,TOOLS,NOW,PushOnly())
         self.assertTrue(row['execution']['due_unobserved'])
         self.assertEqual(row['status'],'attention')
+        check_only={k:v for k,v in TARGET.items() if k!='freshness'}
+        row=observe(check_only,TOOLS,NOW,PushOnly())
+        self.assertFalse(row['execution']['due_unobserved'])
+        self.assertEqual(row['status'],'workflow_only')
 
     def test_successful_workflow_does_not_hide_overdue_output(self):
         row=observe(TARGET,TOOLS,NOW,HTTP(stamp='2026-11-20T11:35:00Z'))

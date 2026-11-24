@@ -53,7 +53,7 @@ export function renderOutcome(row) {
   for (const step of row.execution.failed_steps || []) execution.append(node('p','Failed step: '+step));
   addRun(execution,'Latest run',row.execution.latest,row.repo);
   addRun(execution,'Scheduled/manual run',row.execution.latest_refresh,row.repo);
-  if (row.execution.due_unobserved) execution.append(node('p','No scheduled/manual run observed after due time ' + time(row.execution.due_at)));
+  if (row.execution.due_unobserved) execution.append(node('p','No '+(row.output.status==='not_configured'?'':'scheduled/manual ')+'run observed after due time ' + time(row.execution.due_at)));
   const output=node('td'); output.append(node('strong',outputs[row.output.status]));
   if (row.output.note) output.append(node('p',row.output.note));
   for (const check of row.output.checks) {

@@ -51,7 +51,7 @@ def classify(row):
     if execution.get('error'):
         issues.append('Workflow results could not be read')
     if execution.get('due_unobserved'):
-        issues.append('No scheduled/manual run observed for the latest due time')
+        issues.append('No ' + ('scheduled/manual ' if row['output']['status'] != 'not_configured' else '') + 'run observed for the latest due time')
     latest = execution.get('latest')
     refresh = execution.get('latest_refresh')
     if latest and latest.get('conclusion') in FAILED:
@@ -101,7 +101,11 @@ def observe(target, tools, now, http, previous=None):
         refreshes = [r for r in runs if r.get('event') in wd.REFRESH_EVENTS]
         row['execution']['latest_refresh'] = run_record(refreshes[0], repo) if refreshes else None
         row['execution']['history_limit'] = 20
-        row['execution']['due_unobserved'] = not any(wd.timestamp(r['created_at']) >= due for r in refreshes)
+        # A data publisher may only build retained data on push. The six reviewed
+        # workflow-only targets perform their checks on push too, so a recent
+        # push execution is valid evidence that those checks actually ran.
+        due_runs = refreshes if target.get('freshness') else runs
+        row['execution']['due_unobserved'] = not any(wd.timestamp(r['created_at']) >= due for r in due_runs)
         latest = row['execution']['latest']
         if latest and latest.get('conclusion') in FAILED:
             try:
