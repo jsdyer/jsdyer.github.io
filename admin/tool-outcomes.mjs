@@ -133,9 +133,11 @@ export function initializeOutcomes(sessionSignal) {
       const signal=AbortSignal.any([request.signal,sessionSignal,AbortSignal.timeout(20000)]);
       refresh.disabled=true;status.textContent='Loading the latest saved outcome report…';
       try {
-        const response=await fetch(reportUrl,{signal,credentials:'omit',referrerPolicy:'no-referrer',cache:'no-cache'});
+        const url=reportUrl+'?check='+Date.now();
+        const response=await fetch(url,{signal,credentials:'omit',referrerPolicy:'no-referrer',cache:'no-cache'});
         if(!response.ok)throw Error(response.status===404?'The first outcome report has not been published yet.':'The outcome report could not be loaded (HTTP '+response.status+').');
         const next=validateReport(await response.json());if(signal.aborted)return;report=next;
+        links.querySelector('a').href=url;
         history.replaceChildren(renderOutcomeHistory(report));render();
       } catch(error) {if(!sessionSignal.aborted){content.replaceChildren();history.replaceChildren();report=null;status.textContent=error.name==='TimeoutError'?'Outcome report request timed out; retry or open the observation runs.':error.message;}}
       finally {if(!sessionSignal.aborted)refresh.disabled=false;}

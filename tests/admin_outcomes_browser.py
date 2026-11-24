@@ -32,7 +32,7 @@ def check_outcomes(browser, base, screenshots):
           root.hidden=false;
           initializeOutcomes(new AbortController().signal);
         '''))
-        context.route(REPORT,lambda route:route.fulfill(content_type='application/json',body=json.dumps(report)))
+        context.route(REPORT+'*',lambda route:route.fulfill(content_type='application/json',body=json.dumps(report)))
         page.goto(base+'/admin/#outcomes')
         expect(page.locator('#outcomes-body tbody tr')).to_have_count(1)
         expect(page.locator('#outcomes-body')).to_contain_text('Published check is recent')
