@@ -5,7 +5,10 @@ import fcntl
 import io
 import json
 import os
+import stat
+import struct
 import tempfile
+from types import SimpleNamespace
 import unittest
 import urllib.error
 from pathlib import Path
@@ -275,6 +278,50 @@ class FilesAndCLI(unittest.TestCase):
             p.chmod(0o600);self.assertEqual(w.secure_read(p),'SECRET')
             link=Path(d)/'link';link.symlink_to(p)
             with self.assertRaises(w.SafeError):w.secure_read(link)
+    def test_systemd_acl_credential_and_rejected_lookalikes(self):
+        undefined=0xffffffff;uid=61234
+        entries=[(1,4,undefined),(2,4,uid),(4,0,undefined),(16,4,undefined),(32,0,undefined)]
+        def acl(rows):
+            return struct.pack('<I',2)+b''.join(struct.pack('<HHI',*row) for row in rows)
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)/'heartbeat';p.write_text('https://monitor.example/test');p.chmod(0o440)
+            info=SimpleNamespace(st_mode=stat.S_IFREG|0o440,st_uid=0,st_nlink=1,st_dev=1)
+            parent=SimpleNamespace(st_mode=stat.S_IFDIR|0o550,st_uid=0,st_dev=1)
+            with patch.dict(os.environ,{'CREDENTIALS_DIRECTORY':d}), \
+                    patch('watchdog.os.fstat',return_value=info), \
+                    patch('watchdog.Path.stat',return_value=parent), \
+                    patch('watchdog.os.geteuid',return_value=uid), \
+                    patch('watchdog.os.fstatvfs',return_value=SimpleNamespace(f_flag=os.ST_RDONLY)) as fs, \
+                    patch('watchdog.os.getxattr',return_value=acl(entries)) as xattr:
+                self.assertEqual(w.heartbeat_url(p),'https://monitor.example/test')
+                for bad_acl in (b'',acl(entries).replace(struct.pack('<I',2),struct.pack('<I',3),1),
+                        acl(entries[:2]+[(4,4,undefined)]+entries[3:]),
+                        acl(entries[:1]+[(2,4,uid+1)]+entries[2:]),
+                        acl(entries+[(8,4,1234)])):
+                    with self.subTest(acl=bad_acl):
+                        xattr.return_value=bad_acl
+                        with self.assertRaises(w.SafeError):w.secure_read(p)
+                xattr.return_value=acl(entries)
+                xattr.side_effect=OSError('ACL unavailable')
+                with self.assertRaises(w.SafeError):w.secure_read(p)
+                xattr.side_effect=None
+                fs.return_value=SimpleNamespace(f_flag=0)
+                with self.assertRaises(w.SafeError):w.secure_read(p)
+                fs.return_value=SimpleNamespace(f_flag=os.ST_RDONLY)
+                for attr,bad in (('st_uid',uid),('st_nlink',2),('st_mode',stat.S_IFREG|0o644)):
+                    good=getattr(info,attr);setattr(info,attr,bad)
+                    with self.assertRaises(w.SafeError):w.secure_read(p)
+                    setattr(info,attr,good)
+                for attr,bad in (('st_uid',uid),('st_mode',stat.S_IFDIR|0o570),('st_dev',2)):
+                    good=getattr(parent,attr);setattr(parent,attr,bad)
+                    with self.assertRaises(w.SafeError):w.secure_read(p)
+                    setattr(parent,attr,good)
+                for location in ('',str(Path(d)/'elsewhere'),'.'):
+                    with patch.dict(os.environ,{'CREDENTIALS_DIRECTORY':location}):
+                        with self.assertRaises(w.SafeError):w.secure_read(p)
+            # A plain group-readable file remains rejected outside systemd.
+            with patch.dict(os.environ,{},clear=True):
+                with self.assertRaises(w.SafeError):w.secure_read(p)
     def test_heartbeat_file_validation_and_disabled_empty_file(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'heartbeat';p.write_text('');p.chmod(0o600);self.assertIsNone(w.heartbeat_url(p))

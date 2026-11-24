@@ -9,6 +9,7 @@ import json
 import os
 import re
 import stat
+import struct
 import sys
 import tempfile
 import time
@@ -206,13 +207,47 @@ class HTTP:
                 raise SafeError('invalid_json') from None
 
 
+def private_systemd_credential(filename, fd, info):
+    """Recognize systemd's root-owned, read-only credential with a service-user ACL.
+
+    Since systemd 254 the ACL mask can make this appear group-readable (0440).
+    Accept only the exact ACL granting read access to this service user and root,
+    inside CREDENTIALS_DIRECTORY on a read-only filesystem. Ordinary files still
+    require owner-only permissions; the environment variable alone grants nothing.
+    """
+    directory = os.environ.get('CREDENTIALS_DIRECTORY')
+    if not directory or not os.path.isabs(directory):
+        return False
+    directory = Path(os.path.abspath(directory))
+    if Path(os.path.abspath(filename)).parent != directory:
+        return False
+    if stat.S_IMODE(info.st_mode) != 0o440 or info.st_uid != 0 or info.st_nlink != 1:
+        return False
+    try:
+        parent = directory.stat(follow_symlinks=False)
+        if (not stat.S_ISDIR(parent.st_mode) or parent.st_uid != 0 or
+                parent.st_mode & 0o027 or parent.st_dev != info.st_dev):
+            return False
+        if not os.fstatvfs(fd).f_flag & os.ST_RDONLY:
+            return False
+        # Linux POSIX ACL xattr version 2, followed by (tag, permissions, ID).
+        undefined = 0xffffffff
+        entries = ((0x01, 4, undefined), (0x02, 4, os.geteuid()),
+                   (0x04, 0, undefined), (0x10, 4, undefined), (0x20, 0, undefined))
+        expected = struct.pack('<I', 2) + b''.join(struct.pack('<HHI', *e) for e in entries)
+        return os.getxattr(fd, 'system.posix_acl_access') == expected
+    except (OSError, AttributeError):
+        return False
+
+
 def secure_read(filename):
     flags = os.O_RDONLY | getattr(os,'O_NOFOLLOW',0)
     try:
         fd = os.open(filename, flags)
         with os.fdopen(fd, 'r') as source:
             info = os.fstat(source.fileno())
-            if not stat.S_ISREG(info.st_mode) or info.st_mode & 0o077:
+            if not stat.S_ISREG(info.st_mode) or (info.st_mode & 0o077 and
+                    not private_systemd_credential(filename, source.fileno(), info)):
                 raise SafeError('credential_file_must_be_private_0600_or_0400')
             value = source.read(65537)
             if len(value)>65536:

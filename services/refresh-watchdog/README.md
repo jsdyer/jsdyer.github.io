@@ -87,6 +87,15 @@ sudo python3 -m json.tool /var/lib/coolcode-watchdog/report.json
 
 The report distinguishes `current`, `pending`, `dispatch_requested`, `cooldown`, `disabled_manually`, `published_stale`, authentication errors and exhausted retries. `verified_refresh: false` with `assurance: workflow_only` means the workflow succeeded but that target has no independent published-timestamp check. An accepted dispatch remains pending verification.
 
+If an older installation reports `credential_file_must_be_private_0600_or_0400`
+under systemd, update this checkout and rerun `sudo bash ./install.sh`. Newer
+systemd releases can expose `LoadCredential` files as root-owned `0440` with an
+ACL granting read access only to the service user. The watchdog now validates
+that exact ACL and the read-only credential location. Ordinary credential files
+still require owner-only permissions. Keep the original `/etc/coolcode-watchdog/`
+files at `0600`; do not try to chmod systemd's temporary credential mounts.
+The installer preserves the existing App configuration, private key and ping URL.
+
 An overdue source after a successful run is reported for investigation, rather than repeatedly redispatching the same apparently successful workflow. A source outage, changed data format or publication failure may still need an actual collector fix.
 
 ## Configuration and maintenance

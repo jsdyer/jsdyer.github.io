@@ -76,6 +76,19 @@ jobs:
       - run: python3 -m pip install -r services/refresh-watchdog/requirements.txt
       - run: python3 -m unittest discover -s services/refresh-watchdog -p 'test_*.py' -v
       - run: python3 services/refresh-watchdog/watchdog.py --config services/refresh-watchdog/targets.json --check-config
+      - name: Read a real systemd DynamicUser credential
+        run: |
+          sudo systemd-run --unit=coolcode-credential-check --wait --pipe --collect \
+            -p DynamicUser=yes -p LoadCredential=probe:/etc/hostname \
+            "$(command -v python3)" -c '
+          import os, sys
+          from pathlib import Path
+          sys.path.insert(0, sys.argv[1])
+          from watchdog import secure_read
+          credential = Path(os.environ["CREDENTIALS_DIRECTORY"]) / "probe"
+          assert secure_read(credential), "Test credential must not be empty"
+          print("Read systemd credential successfully; mode=" + oct(credential.stat().st_mode & 0o777))
+          ' "$PWD/services/refresh-watchdog"
 
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
