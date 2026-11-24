@@ -1,6 +1,6 @@
 const reportUrl = 'https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/collector-outcomes-log/collector-outcomes.json';
-const statuses = {attention:'Needs attention', running:'Running', limited:'Limited verification', checked:'Checks passed'};
-const outputs = {recent:'Published check is recent', stale:'Published check is overdue', unavailable:'Published check unavailable', invalid:'Invalid published timestamp', not_configured:'No published-data check configured'};
+const statuses = {attention:'Needs attention', running:'Running', limited:'Limited verification', workflow_only:'Workflow-only check', checked:'Checks passed'};
+const outputs = {recent:'Published check is recent', stale:'Published check is overdue', unavailable:'Published check unavailable', invalid:'Invalid published timestamp', not_configured:'Workflow-only target; no dataset output expected'};
 const time = value => value ? value.replace('T', ' ').replace(/\.\d+(?=Z)/, '').replace('Z', ' UTC') : 'Not observed';
 const readable = value => String(value || 'unknown').replaceAll('_', ' ');
 
@@ -26,7 +26,7 @@ export function reportAge(report, now=Date.now()) {
 
 export function matchingOutcomes(rows, filter, query) {
   const q = query.trim().toLocaleLowerCase('en-CA');
-  return rows.filter(row => (!filter || row.status === filter) &&
+  return rows.filter(row => (!filter || (filter==='review' ? ['attention','limited'].includes(row.status) : row.status === filter)) &&
     [row.repo, row.workflow, ...row.titles].join(' ').toLocaleLowerCase('en-CA').includes(q))
     .sort((a,b) => a.repo.localeCompare(b.repo) || a.workflow.localeCompare(b.workflow));
 }
@@ -50,6 +50,7 @@ export function renderOutcome(row) {
   execution.append(link(row.workflow,workflowURL(row)));
   if (row.execution.state && row.execution.state !== 'active') execution.append(node('p', 'Workflow ' + readable(row.execution.state)));
   if (row.execution.error) execution.append(node('p','Could not inspect workflow: ' + readable(row.execution.error)));
+  for (const step of row.execution.failed_steps || []) execution.append(node('p','Failed step: '+step));
   addRun(execution,'Latest run',row.execution.latest,row.repo);
   addRun(execution,'Scheduled/manual run',row.execution.latest_refresh,row.repo);
   if (row.execution.due_unobserved) execution.append(node('p','No scheduled/manual run observed after due time ' + time(row.execution.due_at)));
@@ -106,7 +107,7 @@ export function initializeOutcomes(sessionSignal) {
   function setup() {
     const toolbar=node('div');toolbar.className='stats-toolbar';
     const label=node('label','Results '), filter=node('select');filter.setAttribute('aria-label','Outcome results');
-    for(const [value,text] of [['attention','Needs attention'],['','All workflows'],['limited','Limited verification'],['running','Running'],['checked','Checks passed']])filter.add(new Option(text,value));
+    for(const [value,text] of [['review','Needs review'],['attention','Failed, overdue or unreadable'],['','All workflows'],['limited','Limited verification'],['running','Running'],['workflow_only','Workflow-only checks'],['checked','Checks passed']])filter.add(new Option(text,value));
     label.append(filter);
     const searchLabel=node('label','Find tool '),search=node('input');search.type='search';search.setAttribute('aria-label','Find tool outcome');searchLabel.append(search);
     const refresh=node('button','Reload latest report');refresh.type='button';toolbar.append(label,searchLabel,refresh);

@@ -32,7 +32,7 @@ The six-hour catalogue workflow checks metadata published by the tools. Each ind
 
 Open **Tool outcomes → Compare workflow results with published data** for two
 separate results per scheduled workflow: GitHub execution and the evidence the
-tool has actually published. The report defaults to **Needs attention** and can
+tool has actually published. The report defaults to **Needs review** and can
 be filtered by tool, all workflows, running jobs, limited verification or passed
 checks. Each row links to the latest run, the latest scheduled/manual run and the
 published metadata that was read.
@@ -50,6 +50,11 @@ If a precise timestamp predates a successful refresh run, that run's output is
 marked unconfirmed. Date-only evidence is explicitly identified as unable to
 prove which individual run produced it. Missing or unreadable evidence is never
 called verified.
+
+An older failed scheduled/manual run followed by a successful newer run is a
+verification warning, rather than a new current failure. Both run results stay
+visible. The six reviewed jobs that do not publish datasets are explicitly
+labelled workflow-only checks. They are not missing dataset-monitoring coverage.
 
 These checks do not certify the accuracy of every record or exercise every tool's
 interactive features. Source validation and browser checks remain in each tool's
