@@ -4,10 +4,14 @@ import json
 import os
 from pathlib import Path
 from sync_targets import update
+from watchdog import log_progress
 
+log_progress('service_started')
 credential_dir = Path(os.environ["CREDENTIALS_DIRECTORY"])
 auth = json.loads((credential_dir / "auth.json").read_text())
+log_progress('registry_refresh_started')
 current_targets = update('/var/lib/coolcode-watchdog/targets.json', credential_dir / 'targets.json')
+log_progress('registry_ready')
 args = ["/opt/coolcode-watchdog/venv/bin/python", "/opt/coolcode-watchdog/watchdog.py",
         "--config", str(current_targets),
         "--state", "/var/lib/coolcode-watchdog/state.json",

@@ -39,6 +39,33 @@ class Fake:
     def writes(self):return [c for c in self.calls if c[0]!='GET']
 
 class Decisions(unittest.TestCase):
+    def test_progress_precedes_request_and_checkpoint_survives_later_interruption(self):
+        c=config();c['targets'].append(dict(c['targets'][0],repo='owner/second'))
+        events=[];checkpoints=[]
+        class Interrupted(Fake):
+            def request(self,method,path,payload=None,public=False):
+                self_outer.assertEqual(events[-1]['event'],'target_started')
+                if '/owner/second/' in path:raise KeyboardInterrupt()
+                return super().request(method,path,payload,public)
+        self_outer=self
+        def progress(event,**fields):events.append({'event':event,**fields})
+        with self.assertRaises(KeyboardInterrupt):
+            w.run(c,{},Interrupted(runs=[completed()]),NOW,True,
+                  persist=lambda state:checkpoints.append(copy.deepcopy(state)),progress=progress)
+        self.assertEqual(events[0]['index'],1)
+        self.assertEqual(events[1]['status'],'current')
+        self.assertEqual(events[2]['repo'],'owner/second')
+        key=w.target_key(c['targets'][0])
+        self.assertEqual(checkpoints[0]['targets'][key]['last_checked'],w.stamp(NOW))
+    def test_progress_reports_skipped_targets_without_disclosing_inputs(self):
+        c=config(inputs={'private':'DO_NOT_LOG'});c['targets'].append(dict(c['targets'][0],repo='owner/second'))
+        events=[]
+        w.run(c,{},Fake(fail=w.SafeError('authentication_failed',401)),NOW,
+              progress=lambda event,**fields:events.append({'event':event,**fields}))
+        self.assertEqual([e['event'] for e in events],['target_started','target_finished','target_finished'])
+        self.assertEqual(events[1]['http_status'],401)
+        self.assertEqual(events[2]['status'],'not_checked')
+        self.assertNotIn('DO_NOT_LOG',json.dumps(events))
     def test_monthly_not_dispatched_early(self):
         c=config(crons=['0 0 1 * *']);f=Fake(runs=[completed(created='2026-11-01T00:05:00Z')])
         r=w.run(c,{},f,NOW,True)
@@ -266,6 +293,10 @@ class Transport(unittest.TestCase):
         self.assertNotIn('GH_SUPER_SECRET',json.dumps(r))
 
 class FilesAndCLI(unittest.TestCase):
+    def test_progress_is_flushed_immediately(self):
+        with patch('builtins.print') as output:w.log_progress('checking_targets',targets=168)
+        self.assertTrue(output.call_args.kwargs['flush'])
+        self.assertEqual(json.loads(output.call_args.args[0])['event'],'checking_targets')
     def test_atomic_state_is_private_and_valid(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'state.json';w.atomic_json(p,{'ok':True});self.assertEqual(p.stat().st_mode&0o777,0o600)

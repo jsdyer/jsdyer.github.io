@@ -87,6 +87,14 @@ sudo python3 -m json.tool /var/lib/coolcode-watchdog/report.json
 
 The report distinguishes `current`, `pending`, `dispatch_requested`, `cooldown`, `disabled_manually`, `published_stale`, authentication errors and exhausted retries. `verified_refresh: false` with `assurance: workflow_only` means the workflow succeeded but that target has no independent published-timestamp check. An accepted dispatch remains pending verification.
 
+The journal immediately shows registry refresh, authentication, each target's
+start and result, elapsed seconds, and final heartbeat/report stages. Watch with
+`sudo journalctl -u coolcode-watchdog.service -f`. Progress lines are flushed
+immediately and contain no credentials, request URLs or workflow inputs. During
+a oneshot pass systemd displays `activating (start)`; use these progress lines to
+see what it is doing. Completed targets are checkpointed so an interrupted pass
+does not forget which repositories it already checked.
+
 If an older installation reports `credential_file_must_be_private_0600_or_0400`
 under systemd, update this checkout and rerun `sudo bash ./install.sh`. Newer
 systemd releases can expose `LoadCredential` files as root-owned `0440` with an

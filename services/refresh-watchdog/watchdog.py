@@ -29,6 +29,12 @@ def stamp(value):
     return value.astimezone(UTC).isoformat().replace('+00:00', 'Z')
 
 
+def log_progress(event, **fields):
+    # Callers supply only stage names, public target IDs and status codes, never
+    # credentials, request URLs, workflow inputs or response bodies.
+    print(json.dumps({'at':stamp(dt.datetime.now(UTC)), 'event':event, **fields}), flush=True)
+
+
 def timestamp(value):
     if not isinstance(value, str):
         raise ValueError('Timestamp must be an ISO 8601 string')
@@ -349,7 +355,7 @@ def get_runs(http, prefix, branch, due):
     return collected,True
 
 
-def run(config, state, http, now, apply=False, persist=None):
+def run(config, state, http, now, apply=False, persist=None, progress=None):
     report={'version':1,'checked_at':stamp(now),'mode':'apply' if apply else 'dry-run',
             'health':'unknown','dispatches':0,'dispatch_attempts':0,'targets':[]}
     state.setdefault('version',1)
@@ -361,14 +367,24 @@ def run(config, state, http, now, apply=False, persist=None):
             if timestamp(blocked)>now: stop_reason='rate_limit_backoff'
         except ValueError: pass
     ordered=sorted(config['targets'],key=lambda t: records.get(target_key(t),{}).get('last_checked',''))
-    for target in ordered:
+    for index, target in enumerate(ordered, 1):
+        started = time.monotonic()
         key=target_key(target)
         row={'repo':target['repo'],'branch':target['branch'],'workflow':str(target['workflow']).split('/')[-1],
              'status':'unknown','severity':'info','verified_refresh':False}
         report['targets'].append(row)
+        def notify(event):
+            if progress:
+                fields={'index':index,'total':len(ordered),'repo':row['repo'],'workflow':row['workflow']}
+                if event=='target_finished':
+                    fields.update(status=row['status'],elapsed_seconds=round(time.monotonic()-started,1))
+                    if 'http_status' in row:fields['http_status']=row['http_status']
+                progress(event,**fields)
         if stop_reason:
             row.update(status='not_checked',severity='error',reason=stop_reason)
+            notify('target_finished')
             continue
+        notify('target_started')
         record=records.setdefault(key,{})
         cadence=cadence_minutes(target,now)
         grace=target.get('grace_minutes',config.get('grace_minutes',min(cadence/2,120)))
@@ -497,6 +513,10 @@ def run(config, state, http, now, apply=False, persist=None):
             row.update(status='invalid_api_or_state_data',severity='error')
         finally:
             record['last_checked']=stamp(now)
+            # Preserve completed checks even if a later request stalls and
+            # systemd ends the pass. The next pass resumes with older targets.
+            if persist:persist(state)
+            notify('target_finished')
     report['errors']=sum(r['severity']=='error' for r in report['targets'])
     if config.get('_registry'):
         report['registry']=config['_registry']
@@ -556,6 +576,7 @@ def main(argv=None):
     parser.add_argument('--heartbeat-url-file')
     args=parser.parse_args(argv)
     now=dt.datetime.now(UTC)
+    if not args.check_config:log_progress('watchdog_started',mode='apply' if args.apply else 'dry-run')
     try:
         heartbeat=None if args.check_config or not args.apply else heartbeat_url(args.heartbeat_url_file)
     except SafeError as error:
@@ -580,15 +601,19 @@ def main(argv=None):
         app=(args.app_id,args.installation_id,args.private_key_file)
         if any(app):
             if not all(app):raise SafeError('app_auth_requires_all_three_options')
+            log_progress('authenticating',method='app')
             token=installation_token(*app,now)
         else:
+            log_progress('authenticating',method='token')
             token=os.environ.get('GH_TOKEN','').strip()
             filename=args.token_file or os.environ.get('GH_TOKEN_FILE')
             if not token and filename:token=secure_read(filename)
             if not token:raise SafeError('github_credentials_missing')
-        report=run(config,state,HTTP(token),now,args.apply,persist=lambda value:atomic_json(args.state,value))
+        log_progress('checking_targets',targets=len(config['targets']))
+        report=run(config,state,HTTP(token),now,args.apply,persist=lambda value:atomic_json(args.state,value),progress=log_progress)
         # Dry runs may cache reads but never write dispatch attempt or enable state.
         atomic_json(args.state,state)
+        log_progress('sending_heartbeat' if heartbeat else 'saving_report',errors=report['errors'],dispatches=report['dispatches'])
         delivered=ping_heartbeat(heartbeat,report['errors']==0)
         if delivered is not None:
             report['heartbeat']='delivered' if delivered else 'delivery_failed'
