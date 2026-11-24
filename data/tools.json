@@ -3319,7 +3319,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Each day's build saves a dated capture. Use the Capture menu to compare earlier days. The asteroid chart plots each close approach by date and by distance in lunar distances (LD, about 384,400 km) on a log scale. Anything below the dashed line passes inside the Moon's orbit. \"Potentially hazardous\" is NASA's orbital class, not a risk for this week. For the aurora, a city with a geomagnetic latitude of about 54° (Vancouver, Halifax) typically needs Kp 6 or higher to see a glow on the northern horizon. Add your own place as \"Name, latitude, longitude\", for example \"Whitehorse, 60.72, -135.06\"."
+      "note": "Each day's build saves a dated capture. Use the Capture menu to compare earlier days. The asteroid chart plots each close approach by date and by distance in lunar distances (LD, about 384,400 km) on a log scale. Anything below the dashed line passes inside the Moon's orbit. \"Potentially hazardous\" is NASA's orbital class, not a risk for this week. For the aurora, a city with a geomagnetic latitude of about 54° (Vancouver, Halifax) typically needs Kp 6 or higher to see a glow on the northern horizon. Add your own place as \"Name, latitude, longitude\", for example \"Whitehorse, 60.72, -135.06\". APOD uses NASA’s APOD Basic feed: each entry links to its dated article, with an image, video, or article-only fallback. A successful daily capture can contain a source error; its public source results show which feeds were unavailable."
     }
   },
   {
@@ -9993,7 +9993,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose a region, then filter wheelchair access, fees or changing tables. **Mapped yes** is a contributor’s report; **Not recorded** is a separate state. Expand **Sort by distance from a point** for coordinates or the Willoughby, Vancouver and Halifax presets. Distances are straight-line, not walking routes. Turn on **Show street map** only when you want background tiles. The capture date and OSM database edition are displayed separately: downloading an old source edition does not make the observations current. Export a receipt to retain the evidence outside this tab."
+      "note": "Choose a region, then filter wheelchair access, fees or changing tables. **Mapped yes** is a contributor’s report; **Not recorded** is a separate state. Expand **Sort by distance from a point** for coordinates or the Willoughby, Vancouver and Halifax presets. Distances are straight-line, not walking routes. Turn on **Show street map** only when you want background tiles. The capture date and OSM database edition are displayed separately: downloading an old source edition does not make the observations current. Export a receipt to retain the evidence outside this tab. A refresh collects all configured regions before publishing; a failed or incomplete region keeps the last good capture available."
     }
   },
   {

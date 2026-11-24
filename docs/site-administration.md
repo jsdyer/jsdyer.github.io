@@ -40,6 +40,7 @@ published metadata that was read.
 Validated metadata readings reuse the watchdog's bounded cache (at most six hours
 for slower sources), with a fresh read after a changed run or due occurrence.
 Cached evidence and record counts retain their actual read time in the report.
+An explicit **Check GitHub now** run reads metadata afresh.
 
 The report uses the same 168-target registry, reviewed timestamps and age limits
 as the independent watchdog. It also reads record counts where the catalogue has
@@ -51,9 +52,17 @@ marked unconfirmed. Date-only evidence is explicitly identified as unable to
 prove which individual run produced it. Missing or unreadable evidence is never
 called verified.
 
-An older failed scheduled/manual run followed by a successful newer run is a
-verification warning, rather than a new current failure. Both run results stay
-visible. The six reviewed jobs that do not publish datasets are explicitly
+A failed collection remains **Needs attention** after a successful build that
+skipped collection. For reviewed workflows, exact GitHub step results distinguish
+collection from publishing retained data. A successful collection step on a push
+can confirm recovery; a green push by itself cannot. Missing step evidence stays
+unconfirmed. Both run results remain visible.
+
+Satellite Pass deliberately permits a snapshot cached for up to two hours during
+a build. That reviewed allowance is labelled as cache reuse, not a fresh download;
+its ordinary published-age limit still applies. NASA Overhead exposes individual
+source failures (including Sun subfeeds) even when enough feeds succeeded to
+publish a useful capture. The six reviewed jobs that do not publish datasets are explicitly
 labelled workflow-only checks. They are not missing dataset-monitoring coverage.
 
 These checks do not certify the accuracy of every record or exercise every tool's
@@ -94,9 +103,23 @@ The job saves `collector-outcomes.json` on the `collector-outcomes-log` branch,
 including the latest results and 24 recent observations. **Recent outcome
 observations** shows problems, recoveries and changed counts. The branch's Git
 history retains earlier reports. A report older than three hours is visibly
-stale; **Reload latest report** reloads the saved observation without starting
-collectors. A successful observation job means it produced a report, even when
-the report contains individual tool failures.
+stale. The normal schedule is **hourly at :37 UTC**, subject to GitHub delays.
+**Load saved report** only downloads that snapshot. Its timestamp, age in minutes,
+and each workflow's observation time explain why later runs may be missing.
+
+**Check GitHub now** explicitly dispatches `service-monitor.yml` on `main` using
+the current in-memory admin token. It requires **Actions: read and write** for
+`jsdyer/jsdyer.github.io`; reading the saved report needs no extra permission.
+If permission is absent, use **Run workflow** on the linked Observation runs page.
+The button starts the observer, not the data collectors. The observer reads fresh
+workflow results and published metadata, then publishes a new saved report.
+The admin checks for it every 20 seconds while the panel remains open, for up to
+15 minutes. An accepted dispatch is shown as waiting, never as a completed check.
+A delayed/failed observer leaves the old report clearly labelled and links to its
+GitHub runs. Closing the page does not cancel GitHub's work.
+
+A successful observation job means it produced a report, even when that report
+contains individual tool failures.
 
 Only public repository identities, run links and summarized public metadata are
 saved. The admin downloads this file without sending its owner credential. No

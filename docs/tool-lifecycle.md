@@ -16,7 +16,7 @@ This applies to installable tools as well as browser tools.
 | Published freshness fields and tolerances | Reviewed `data/operations/freshness.json` | Generated watchdog probes; never infer check dates from source editions |
 | Visitor counts and issue acceptance | `services/cloudflare-visitor/worker.template.js` plus catalogue IDs | Generated `worker.js`, deployed Worker and verified deployment receipt |
 | Independent scheduling | `services/refresh-watchdog/` in this repository | Server timer downloads validated `targets.json` from GitHub every pass |
-| Admin outcome reporting | The same generated watchdog registry and reviewed catalogue count definitions | Hourly service observer saves workflow/output results on `collector-outcomes-log`; no separate app list |
+| Admin outcome reporting | The same generated watchdog registry and reviewed catalogue count definitions | Hourly or explicitly requested service observer saves workflow/output results on `collector-outcomes-log`; reviewed collection step names and cache allowances live in the same freshness registry |
 | Search indexing | Catalogue routes and `scripts/build.py` | Generated `dist/sitemap.xml` and `robots.txt`; do not hand-edit them |
 | GitHub inactivity protection | Each scheduled repo's separate schedule guard | Explicit allowlist includes all scheduled workflows and itself |
 

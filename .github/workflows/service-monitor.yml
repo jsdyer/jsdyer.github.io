@@ -61,10 +61,13 @@ jobs:
       - name: Observe workflows and published output without dispatching
         env:
           GH_TOKEN: ${{ github.token }}
+          FORCE_FRESH: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
+          extra=()
+          if [ "$FORCE_FRESH" = true ]; then extra+=(--fresh); fi
           python3 services/refresh-watchdog/report_outcomes.py \
             --previous "$RUNNER_TEMP/collector-outcomes/collector-outcomes.json" \
-            --output "$RUNNER_TEMP/collector-outcomes/collector-outcomes.json"
+            --output "$RUNNER_TEMP/collector-outcomes/collector-outcomes.json" "${extra[@]}"
       - name: Publish the report and recent observation history
         run: |
           folder="$RUNNER_TEMP/collector-outcomes"

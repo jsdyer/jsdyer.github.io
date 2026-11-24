@@ -23,6 +23,9 @@
         "label": "Official archive catalogue checked",
         "precision": "timestamp"
       }
+    ],
+    "collection_steps": [
+      "Import complete archive"
     ]
   },
   "jsdyer/airpair/pages.yml": {
@@ -334,6 +337,9 @@
         "label": "Source retrieved",
         "precision": "date"
       }
+    ],
+    "collection_steps": [
+      "Retrieve and check source files"
     ]
   },
   "jsdyer/chargegaps/pages.yml": {
@@ -538,6 +544,9 @@
         "label": "Trade data retrieved",
         "precision": "date"
       }
+    ],
+    "collection_steps": [
+      "Refresh the published trade edition"
     ]
   },
   "jsdyer/federal-property-atlas/pages.yml": {
@@ -768,6 +777,9 @@
         "label": "Sources checked",
         "precision": "timestamp"
       }
+    ],
+    "collection_steps": [
+      "Collect public source evidence"
     ]
   },
   "jsdyer/grid-dark/pages.yml": {
@@ -1065,6 +1077,9 @@
         "precision": "timestamp",
         "label": "Source checked"
       }
+    ],
+    "collection_steps": [
+      "Retrieve and validate the official export"
     ]
   },
   "jsdyer/malwarelineage/pages.yml": {
@@ -1199,8 +1214,16 @@
           "captured"
         ],
         "precision": "timestamp",
-        "label": "NASA/NOAA capture"
+        "label": "NASA/NOAA capture",
+        "source_status_path": [
+          "captures",
+          0,
+          "status"
+        ]
       }
+    ],
+    "collection_steps": [
+      "Fetch today's capture from NASA"
     ]
   },
   "jsdyer/oicdiary/pages.yml": {
@@ -1500,6 +1523,9 @@
         "precision": "timestamp",
         "label": "Quarterly sources checked"
       }
+    ],
+    "collection_steps": [
+      "Retrieve and validate quarterly snapshots"
     ]
   },
   "jsdyer/releasereceipt/pages.yml": {
@@ -1538,6 +1564,9 @@
         "label": "Data retrieved",
         "precision": "timestamp"
       }
+    ],
+    "collection_steps": [
+      "Collect regional toilet extracts"
     ]
   },
   "jsdyer/rfctrail/pages.yml": {
@@ -1624,7 +1653,8 @@
           "retrieved"
         ],
         "label": "Data retrieved",
-        "precision": "timestamp"
+        "precision": "timestamp",
+        "cache_max_age_seconds": 7200
       }
     ]
   },

@@ -148,8 +148,11 @@ def outputs(root, tools, registry, overrides):
             workflow_keys.add(key)
             target = {'repo': repo['repo'], 'branch': repo['branch'], **workflow}
             if key in overrides:
-                if set(overrides[key]) - {'freshness', 'grace_minutes', 'cooldown_minutes', 'max_run_minutes'}:
+                if set(overrides[key]) - {'freshness', 'grace_minutes', 'cooldown_minutes', 'max_run_minutes', 'collection_steps'}:
                     raise ValueError('Unsupported operations override: ' + key)
+                steps = overrides[key].get('collection_steps', [])
+                if not isinstance(steps, list) or len(steps) > 10 or not all(isinstance(n, str) and 0 < len(n) <= 200 for n in steps) or len(set(steps)) != len(steps):
+                    raise ValueError('Invalid reviewed collection step names: ' + key)
                 target.update(overrides[key])
             targets.append(target)
     stale = set(overrides) - workflow_keys

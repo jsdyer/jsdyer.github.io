@@ -40,7 +40,7 @@ class OutcomeTests(unittest.TestCase):
         row=observe(TARGET,TOOLS,NOW,PushAfterFailure())
         self.assertEqual(row['execution']['latest']['conclusion'],'success')
         self.assertEqual(row['execution']['latest_refresh']['conclusion'],'failure')
-        self.assertEqual(row['status'],'limited')
+        self.assertEqual(row['status'],'attention')
 
     def test_missing_due_run_is_visible_even_if_a_push_has_succeeded(self):
         class PushOnly(HTTP):
@@ -133,5 +133,66 @@ class OutcomeTests(unittest.TestCase):
         self.assertEqual(row['execution']['error'],'permission_denied')
         self.assertEqual(row['output']['status'],'recent')
         self.assertEqual(row['status'],'attention')
+
+class StepEvidence(HTTP):
+    def __init__(self, latest_step='skipped', refresh_step='failure', latest_result='success', **kwargs):
+        super().__init__(**kwargs)
+        self.latest_step,self.refresh_step,self.latest_result=latest_step,refresh_step,latest_result
+    def request(self,method,path,**kwargs):
+        result=super().request(method,path,**kwargs)
+        if '/runs?' in path:
+            result['workflow_runs'][0]['conclusion']='failure' if self.refresh_step=='failure' else 'success'
+            result['workflow_runs'].insert(0,{'id':43,'created_at':'2026-11-24T11:40:00Z','head_branch':'main','status':'completed','conclusion':self.latest_result,'event':'push'})
+        if '/jobs?' in path:
+            step=self.latest_step if '/43/' in path else self.refresh_step
+            return {'jobs':[{'steps':[{'name':'Download source','conclusion':step}]}]}
+        return result
+
+class ReviewedOutcomeTests(unittest.TestCase):
+    def target(self):
+        target=copy.deepcopy(TARGET);target['collection_steps']=['Download source'];return target
+    def test_skipped_build_does_not_clear_failed_collection(self):
+        row=observe(self.target(),TOOLS,NOW,StepEvidence())
+        self.assertEqual(row['status'],'attention')
+        self.assertEqual(row['execution']['latest_collection']['id'],42)
+        self.assertIn('collection was skipped',' '.join(row['reasons']))
+    def test_verified_collection_on_push_can_recover_and_satisfy_due_time(self):
+        row=observe(self.target(),TOOLS,NOW,StepEvidence(latest_step='success',stamp='2026-11-24T11:41:00Z'))
+        self.assertEqual(row['status'],'checked')
+        self.assertEqual(row['execution']['latest_collection']['id'],43)
+        self.assertFalse(row['execution']['due_unobserved'])
+    def test_continue_on_error_does_not_hide_failed_source_step(self):
+        row=observe(self.target(),TOOLS,NOW,StepEvidence(latest_step='failure'))
+        self.assertEqual(row['status'],'attention')
+        self.assertIn('collection steps failed',' '.join(row['reasons']))
+    def test_missing_step_details_are_not_confirmation_of_collection(self):
+        row=observe(self.target(),TOOLS,NOW,HTTP())
+        self.assertEqual(row['status'],'limited')
+        self.assertTrue(row['execution']['collection_unconfirmed'])
+    def test_permitted_cache_is_explicit_but_cannot_mask_stale_output(self):
+        target=copy.deepcopy(TARGET);target['freshness'][0]['cache_max_age_seconds']=7200
+        recent=observe(target,TOOLS,NOW,HTTP(stamp='2026-11-24T11:00:00Z'))
+        self.assertEqual(recent['output']['run_alignment'],'permitted_cache')
+        self.assertEqual(recent['status'],'checked')
+        old=observe(target,TOOLS,NOW,HTTP(stamp='2026-11-20T11:00:00Z'))
+        self.assertEqual(old['status'],'attention')
+    def test_partial_source_failure_is_visible_with_successful_workflow(self):
+        class Partial(HTTP):
+            def request(self,method,path,**kwargs):
+                result=super().request(method,path,**kwargs)
+                if kwargs.get('public'):result['sources']={'apod':'no usable dated entries','earth':'ok'}
+                return result
+        target=copy.deepcopy(TARGET);target['freshness'][0]['source_status_path']=['sources']
+        row=observe(target,TOOLS,NOW,Partial())
+        self.assertEqual(row['status'],'attention')
+        self.assertIn('apod',' '.join(row['reasons']))
+        self.assertEqual(row['output']['status'],'recent')
+    def test_explicit_fresh_check_rereads_unchanged_metadata(self):
+        target=copy.deepcopy(TARGET);target['crons']=['0 0 * * *']
+        first=observe(target,TOOLS,NOW,HTTP(count=5))
+        http=HTTP(count=9)
+        next_row=observe(target,TOOLS,NOW+dt.timedelta(hours=1),http,first,fresh=True)
+        self.assertFalse(next_row['output']['checks'][0]['cached'])
+        self.assertEqual(next_row['counts'][0]['value'],9)
 
 if __name__=='__main__':unittest.main()

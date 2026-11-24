@@ -72,7 +72,7 @@ export async function openDashboard(session, initialMetrics) {
   bind();
   initializeStats(catalog, session, initialMetrics);
   initializeActivity(session.signal);
-  initializeOutcomes(session.signal);
+  initializeOutcomes(session);
   initializeServiceStatus(session.signal);
   initializeCanadaChecks(session.signal);
   initializeCloudflareUsage(session);

@@ -11,7 +11,8 @@ export function validateReport(data) {
     if (!/^jsdyer\/[A-Za-z0-9][A-Za-z0-9_.-]*$/.test(row.repo) || !/^[\w.-]+\.ya?ml$/.test(row.workflow) || !Object.hasOwn(statuses, row.status) || !Object.hasOwn(outputs, row.output?.status) || !Array.isArray(row.output.checks) || !row.execution || !Array.isArray(row.counts) || !Array.isArray(row.titles) || !row.titles.every(x=>typeof x==='string') || !Array.isArray(row.reasons)) throw Error('The outcome report contains an invalid tool result.');
     for(const check of row.output.checks)if(typeof check.label!=='string'||typeof check.url!=='string'||(check.timestamp&&!Number.isFinite(Date.parse(check.timestamp))))throw Error('The outcome report contains invalid published evidence.');
     for(const count of row.counts)if(typeof count.label!=='string'||(!count.error&&(!Number.isSafeInteger(count.value)||count.value<0||typeof count.unit!=='string')))throw Error('The outcome report contains an invalid record count.');
-    for(const run of [row.execution.latest,row.execution.latest_refresh])if(run&&(!Number.isSafeInteger(run.id)||run.id<1||!Number.isFinite(Date.parse(run.at))))throw Error('The outcome report contains an invalid workflow run.');
+    for(const run of [row.execution.latest,row.execution.latest_refresh,row.execution.latest_collection])if(run&&(!Number.isSafeInteger(run.id)||run.id<1||!Number.isFinite(Date.parse(run.at))))throw Error('The outcome report contains an invalid workflow run.');
+    if (row.output.sources && (!Array.isArray(row.output.sources) || row.output.sources.length > 50 || !row.output.sources.every(x => typeof x.name === 'string' && ['ok','failed'].includes(x.status) && typeof x.detail === 'string'))) throw Error('The outcome report contains invalid source results.');
     const key = row.repo + '/' + row.workflow;
     if (keys.has(key)) throw Error('The outcome report repeats a workflow.');
     keys.add(key);
@@ -53,6 +54,9 @@ export function renderOutcome(row) {
   for (const step of row.execution.failed_steps || []) execution.append(node('p','Failed step: '+step));
   addRun(execution,'Latest run',row.execution.latest,row.repo);
   addRun(execution,'Scheduled/manual run',row.execution.latest_refresh,row.repo);
+  if(row.execution.latest_step_check)execution.append(node('p','Source collection in latest run: '+readable(row.execution.latest_step_check.status)));
+  if(row.execution.latest_collection && row.execution.latest_collection.id !== row.execution.latest_refresh?.id)addRun(execution,'Verified collection steps',row.execution.latest_collection,row.repo);
+  if(row.observed_at)execution.append(node('p','Workflow checked '+time(row.observed_at)));
   if (row.execution.due_unobserved) execution.append(node('p','No '+(row.output.status==='not_configured'?'':'scheduled/manual ')+'run observed after due time ' + time(row.execution.due_at)));
   const output=node('td'); output.append(node('strong',outputs[row.output.status]));
   if (row.output.note) output.append(node('p',row.output.note));
@@ -62,10 +66,12 @@ export function renderOutcome(row) {
     p.append(' · ' + (check.timestamp ? time(check.precision==='date' ? check.timestamp.slice(0,10) : check.timestamp) : readable(check.error || check.status)));
     if (check.precision==='date') p.append(' (date only)');
     if (check.cached && check.read_at) p.append(' · metadata last read ' + time(check.read_at));
-    if (Number.isFinite(check.max_age_seconds)) p.append(' · allowed age ' + Math.round(check.max_age_seconds/3600*10)/10 + ' h');
+    if (Number.isFinite(check.max_age_seconds)) p.append(' · allowed age ' + (check.max_age_seconds >= 86400 ? Math.round(check.max_age_seconds/86400*10)/10 + ' days' : Math.round(check.max_age_seconds/3600*10)/10 + ' hours'));
     output.append(p);
   }
-  if (row.output.run_alignment==='predates_success') output.append(node('p','Published timestamp predates the successful scheduled/manual run. Its output is not confirmed.'));
+  for(const source of row.output.sources || [])if(source.status!=='ok')output.append(node('p','Source '+source.name+': '+source.detail));
+  if (row.output.run_alignment==='permitted_cache') output.append(node('p','The saved snapshot was within the permitted '+Math.round(row.output.cache_max_age_seconds/3600*10)/10+'-hour cache window when the run started. This does not claim a new download.'));
+  else if (row.output.run_alignment==='predates_success') output.append(node('p','Published timestamp predates the successful scheduled/manual run. Its output is not confirmed.'));
   else if (row.output.run_alignment==='date_only') output.append(node('p','Date-only evidence cannot identify the individual run that produced it.'));
   else if (row.output.run_alignment==='at_or_after_start') output.append(node('p','Published check is at or after the successful run’s start; this is timestamp evidence, not a download receipt.'));
   for (const count of row.counts) output.append(node('p',count.error ? count.label + ': count unavailable' : count.label + ': ' + count.value.toLocaleString('en-CA') + ' ' + count.unit + (count.read_at ? ' · read ' + time(count.read_at) : '')));
@@ -98,7 +104,36 @@ export function renderOutcomeHistory(report) {
   details.append(list); return details;
 }
 
-export function initializeOutcomes(sessionSignal) {
+const observationRuns = 'https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml';
+const dispatchUrl = 'https://api.github.com/repos/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml/dispatches';
+
+export function snapshotDescription(report, now=Date.now()) {
+  const age = reportAge(report,now);
+  const minutes = Math.max(0,Math.floor((now-Date.parse(report.checked_at))/60000));
+  return 'Saved report: '+time(report.checked_at)+' · '+minutes+' minutes old. Later runs are not included. '+
+    (age==='stale'?'Report is over 3 hours old; current tool health is unknown.':age==='future'?'Report time is ahead of this browser; check the clock.':'Scheduled hourly at :37; GitHub may delay it.');
+}
+
+export async function requestOutcomeCheck(session, fetcher=fetch) {
+  if(!session?.token)throw Error('Sign in with a token that has Actions write access to jsdyer.github.io, or use Run workflow on GitHub.');
+  const response=await fetcher(dispatchUrl, {method:'POST', credentials:'omit', redirect:'error', referrerPolicy:'no-referrer',
+    signal:AbortSignal.any([session.signal,AbortSignal.timeout(20000)]),
+    headers:{Accept:'application/vnd.github+json',Authorization:'Bearer '+session.token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},
+    body:JSON.stringify({ref:'main'})});
+  if(response.status===401){session.lock?.();throw Error('GitHub sign-in expired. Sign in again to request a check.');}
+  if(response.status===403)throw Error('GitHub did not authorize this request. The admin token needs Actions write access to jsdyer.github.io; you can also use Run workflow on GitHub.');
+  if(response.status!==204)throw Error('GitHub did not accept the check request (HTTP '+response.status+'). Open Observation runs to investigate.');
+  const serverTime=Date.parse(response.headers.get('Date'));
+  return Number.isFinite(serverTime)?serverTime:Date.now();
+}
+
+export function includesFreshCheck(report, requestedAt) {
+  return report?.read_mode==='fresh' && report.rows.length>0 && report.rows.every(row=>Number.isFinite(Date.parse(row.observed_at)) && Date.parse(row.observed_at)>=requestedAt);
+}
+
+export function initializeOutcomes(session) {
+  // The public report is readable without a token; only an explicit check request uses it.
+  const sessionSignal=session.signal;
   const panel=document.getElementById('outcomes-panel'), root=document.getElementById('outcomes-body');
   document.querySelectorAll('a[href="#outcomes"]').forEach(a=>a.addEventListener('click',()=>{panel.open=true;}));
   let initialized=false;
@@ -110,17 +145,20 @@ export function initializeOutcomes(sessionSignal) {
     for(const [value,text] of [['review','Needs review'],['attention','Failed, overdue or unreadable'],['','All workflows'],['limited','Limited verification'],['running','Running'],['workflow_only','Workflow-only checks'],['checked','Checks passed']])filter.add(new Option(text,value));
     label.append(filter);
     const searchLabel=node('label','Find tool '),search=node('input');search.type='search';search.setAttribute('aria-label','Find tool outcome');searchLabel.append(search);
-    const refresh=node('button','Reload latest report');refresh.type='button';toolbar.append(label,searchLabel,refresh);
+    const refresh=node('button','Load saved report');refresh.type='button';
+    const check=node('button','Check GitHub now');check.type='button';toolbar.append(label,searchLabel,refresh,check);
     const status=node('p');status.setAttribute('role','status');
+    const requested=node('p');requested.setAttribute('role','status');requested.className='outcome-request';
     const content=node('div'),history=node('div'),links=node('p');
-    links.append(link('Download report JSON',reportUrl),' · ',link('Observation runs','https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml'));
-    root.replaceChildren(toolbar,status,content,history,links);
-    let report,request;
+    links.append(link('Download report JSON',reportUrl),' · ',link('Observation runs',observationRuns));
+    root.replaceChildren(toolbar,status,requested,content,history,links);
+    let report,request,timer,requestedAt,deadline;
+    const ageTimer=setInterval(()=>{if(panel.open && !refresh.disabled)render();},60000);
+    sessionSignal.addEventListener('abort',()=>{clearTimeout(timer);clearInterval(ageTimer);request?.abort();},{once:true});
     function render() {
       if(!report)return;
-      const age=reportAge(report);
       const summary=Object.entries(statuses).map(([key,label])=>report.rows.filter(r=>r.status===key).length+' '+label.toLowerCase()).join(' · ');
-      status.textContent=time(report.checked_at)+' · '+summary+(age==='stale'?' · Report is over 3 hours old; current tool health is unknown.':age==='future'?' · Report time is ahead of this browser; check the clock.':'');
+      status.textContent=snapshotDescription(report)+' '+summary;
       const rows=matchingOutcomes(report.rows,filter.value,search.value);
       content.replaceChildren();
       if(!rows.length){content.append(node('p','No workflows match this filter.'));return;}
@@ -139,9 +177,27 @@ export function initializeOutcomes(sessionSignal) {
         const next=validateReport(await response.json());if(signal.aborted)return;report=next;
         links.querySelector('a').href=url;
         history.replaceChildren(renderOutcomeHistory(report));render();
-      } catch(error) {if(!sessionSignal.aborted){content.replaceChildren();history.replaceChildren();report=null;status.textContent=error.name==='TimeoutError'?'Outcome report request timed out; retry or open the observation runs.':error.message;}}
+        if(requestedAt!==undefined && includesFreshCheck(report,requestedAt)) {
+          requested.textContent='A fresh check has finished. The table now shows the new saved report.';
+          requestedAt=undefined;clearTimeout(timer);check.disabled=false;
+        }
+      } catch(error) {if(!signal.aborted || error.name==='TimeoutError'){content.replaceChildren();history.replaceChildren();report=null;status.textContent=error.name==='TimeoutError'?'Outcome report request timed out; retry or open the observation runs.':error.message;}}
       finally {if(!sessionSignal.aborted)refresh.disabled=false;}
     }
+    async function poll() {
+      if(sessionSignal.aborted || requestedAt===undefined)return;
+      if(Date.now()>=deadline){requested.textContent='A fresh report has not arrived yet. GitHub may still have it queued or running; open Observation runs for progress, then load the saved report.';requestedAt=undefined;check.disabled=false;return;}
+      if(panel.open)await load();
+      if(requestedAt!==undefined)timer=setTimeout(poll,20000);
+    }
+    check.addEventListener('click',async()=>{
+      check.disabled=true;requested.textContent='Requesting a new report from GitHub…';
+      try {
+        requestedAt=await requestOutcomeCheck(session);deadline=Date.now()+15*60000;
+        requested.textContent='GitHub accepted the request. Waiting for the new report; the table still shows the saved snapshot. This checks results and published metadata; it does not retry collectors.';
+        timer=setTimeout(poll,20000);
+      } catch(error) {if(!sessionSignal.aborted){requested.textContent=error.message;check.disabled=false;}}
+    });
     filter.addEventListener('change',render);search.addEventListener('input',render);refresh.addEventListener('click',load);load();
   }
 }

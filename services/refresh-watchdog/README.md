@@ -156,7 +156,10 @@ uses this same registry and timestamp-checking code in a read-only hourly GitHub
 job. It displays workflow execution separately from published evidence and retains
 recent result/count changes on the `collector-outcomes-log` branch. It is an
 independent observation, not a copy of the Linux server's private report, and does
-not dispatch jobs or send another heartbeat. No installed-service update is needed
+not dispatch collectors or send another heartbeat. The admin can explicitly request
+a fresh observer run with its existing GitHub session (Actions write access required).
+The page labels its saved snapshot age and waits for a newly completed report.
+No installed-service update is needed
 to use the admin report. Keep the observer's schema tests with this service.
 
 ## 1. Prerequisites

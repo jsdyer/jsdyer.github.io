@@ -58,7 +58,7 @@
 <p><a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages">Workers dashboard</a> · <a href="https://dash.cloudflare.com/?to=/:account/workers/d1">D1 dashboard</a> · <a href="https://github.com/jsdyer/jsdyer.github.io/blob/main/docs/site-administration.md#cloudflare-usage">Connect live usage</a></p>
 </details></section>
 <section id="outcomes"><h2>Tool outcomes</h2><details id="outcomes-panel"><summary>Compare workflow results with published data</summary>
-<p>Hourly observations of scheduled workflows and the data they publish. Open a run or evidence link to investigate a result.</p>
+<p>A saved report, scheduled hourly at 37 minutes past the hour. GitHub can delay it. Load saved report reads the last completed report; Check GitHub now requests a new one, which can take several minutes. Neither button retries data collectors.</p>
 <div id="outcomes-body"></div>
 <details><summary>What these checks verify</summary>
 <p>The existing hourly service-check workflow saves this report for every registered scheduled workflow. Workflow execution and published output are separate checks. The report uses the watchdog’s reviewed check timestamps and age limits, plus available record counts.</p>

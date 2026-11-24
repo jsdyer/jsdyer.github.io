@@ -41,6 +41,9 @@
           "label": "Official archive catalogue checked",
           "precision": "timestamp"
         }
+      ],
+      "collection_steps": [
+        "Import complete archive"
       ]
     },
     {
@@ -540,6 +543,9 @@
           "label": "Source retrieved",
           "precision": "date"
         }
+      ],
+      "collection_steps": [
+        "Retrieve and check source files"
       ]
     },
     {
@@ -874,6 +880,9 @@
           "label": "Trade data retrieved",
           "precision": "date"
         }
+      ],
+      "collection_steps": [
+        "Refresh the published trade edition"
       ]
     },
     {
@@ -1243,6 +1252,9 @@
           "label": "Sources checked",
           "precision": "timestamp"
         }
+      ],
+      "collection_steps": [
+        "Collect public source evidence"
       ]
     },
     {
@@ -1750,6 +1762,9 @@
           "precision": "timestamp",
           "label": "Source checked"
         }
+      ],
+      "collection_steps": [
+        "Retrieve and validate the official export"
       ]
     },
     {
@@ -1966,8 +1981,16 @@
             "captured"
           ],
           "precision": "timestamp",
-          "label": "NASA/NOAA capture"
+          "label": "NASA/NOAA capture",
+          "source_status_path": [
+            "captures",
+            0,
+            "status"
+          ]
         }
+      ],
+      "collection_steps": [
+        "Fetch today's capture from NASA"
       ]
     },
     {
@@ -2439,6 +2462,9 @@
           "precision": "timestamp",
           "label": "Quarterly sources checked"
         }
+      ],
+      "collection_steps": [
+        "Retrieve and validate quarterly snapshots"
       ]
     },
     {
@@ -2502,6 +2528,9 @@
           "label": "Data retrieved",
           "precision": "timestamp"
         }
+      ],
+      "collection_steps": [
+        "Collect regional toilet extracts"
       ]
     },
     {
@@ -2643,7 +2672,8 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "precision": "timestamp"
+          "precision": "timestamp",
+          "cache_max_age_seconds": 7200
         }
       ]
     },

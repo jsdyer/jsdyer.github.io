@@ -59,3 +59,39 @@ source refusals. No server collector or new timer was installed in this pass.
 Old failed Actions runs remain in the history. Fresh published metadata is useful
 evidence of recovery, but a green aggregate heartbeat is not proof that every
 upstream source can be downloaded successfully.
+
+## Follow-up: saved admin reports and collector repairs
+
+The Census Lens report dated 15:21 UTC could not include run 45430866729, which
+started at 15:54 UTC. Loading the saved report did not perform a new check.
+The admin now labels this distinction and offers an explicit fresh observer run.
+Failed collection remains visible after a successful build that skips downloading.
+Reviewed collection-step evidence, permitted short caches and NASA per-source
+results prevent green build status from being mistaken for a successful download.
+
+| Tool | Follow-up change | Verification |
+| --- | --- | --- |
+| Gov Tracker Census | Fixed the Python fingerprint syntax error; isolated normalization for tests and added compilation before collection. Collector changes on push perform real source checks. | [Collection, tests and deployment](https://github.com/jsdyer/govtrackercensus/actions/runs/45436104059) |
+| Export Neighbours | Validate ZIP structure and CRC before replacing an archive; stream to a temporary file, retry one temporary/invalid response, preserve existing data and report HTTP/content-type diagnostics. | [Collection, tests and deployment](https://github.com/jsdyer/exportneighbours/actions/runs/45436117302) |
+| NASA Overhead | Moved APOD to the official APOD Basic JSON endpoint. Article and optional image are separate; direct MP4 and iframe video are extracted safely. Live JPEG, MP4 and YouTube entries were checked. Per-source failures remain visible in the public index. | [Collection, browser tests and deployment](https://github.com/jsdyer/nasa/actions/runs/45437809361) |
+| Restroom Reach | Split Overpass collection into sequential regional POSTs with one bounded retry for temporary network/5xx errors. Every region must validate before publication. | [Live collection](https://github.com/jsdyer/restroomreach/actions/runs/45438033472) still timed out twice at the configured provider on Metro Vancouver. The prior capture was preserved; recovery is not yet confirmed. |
+| RegistrarWatch | Ran the corrected collector against all six official quarters and validated 48 registrar observations. Measurements were unchanged; the actual check timestamp advanced. This was a local source collection published by commit, not a new scheduled/manual GitHub collection. | [Validated metadata publication](https://github.com/jsdyer/registrarwatch/commit/7985b8611327154bf6be8f31ed3787df9e8de54d) |
+
+NASA's [retirement notice](https://api.nasa.gov/assets/html/header.html) specifies
+1 December 2026. The [replacement documentation](https://api.nasa.gov/assets/files/apod/APOD-APIs-and-RSS-info.pdf)
+identifies `url` as the article and `hdurl` as an optional full-size image. The
+live validation used 24 November's image, 28 October's MP4 and 18 October's YouTube
+entry; missing media falls back to the article without treating HTML as an image.
+
+No tool identities, routes, schedules, dispatch inputs or accepted Worker IDs
+changed. Guide notes, generated README, operations targets and the site build
+were reconciled; sitemap generation and Worker registrations remain covered by
+integration checks. This observer/UI update requires no server runtime reinstall.
+Census Lens and Lobby Trail's hosted HTTP 403s remain external download failures;
+the six-hour recovery policy is unchanged.
+
+The migrated NASA capture at 16:30 UTC confirms APOD, asteroids, geomagnetic Kp,
+Earth imagery and events. Its solar-flare subfeed remained unavailable: the API
+mirror returned 404 and the direct CCMC endpoint timed out; a separate direct
+check returned HTTP 503. Other Sun feeds remained available. This is now visible
+as a partial source failure instead of being hidden behind overall workflow success.

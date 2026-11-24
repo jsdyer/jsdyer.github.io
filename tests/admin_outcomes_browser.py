@@ -30,9 +30,15 @@ def check_outcomes(browser, base, screenshots):
           const root=document.getElementById('dashboard');
           root.replaceChildren(document.getElementById('dashboard-layout').content.cloneNode(true));
           root.hidden=false;
-          initializeOutcomes(new AbortController().signal);
+          initializeOutcomes({signal:new AbortController().signal,token:'browser-fixture-token'});
         '''))
         context.route(REPORT+'*',lambda route:route.fulfill(content_type='application/json',body=json.dumps(report)))
+        dispatches=[]
+        def dispatch(route):
+            dispatches.append(route.request.post_data)
+            assert route.request.headers.get('authorization')=='Bearer browser-fixture-token'
+            route.fulfill(status=204,headers={'Date':now.strftime('%a, %d %b %Y %H:%M:%S GMT')})
+        context.route('https://api.github.com/repos/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml/dispatches',dispatch)
         page.goto(base+'/admin/#outcomes')
         expect(page.locator('#outcomes-body tbody tr')).to_have_count(1)
         expect(page.locator('#outcomes-body')).to_contain_text('Published check is recent')
@@ -47,12 +53,23 @@ def check_outcomes(browser, base, screenshots):
             page.locator('#outcomes').scroll_into_view_if_needed()
             assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
             page.locator('#outcomes').screenshot(path=str(screenshots/f'admin-outcomes-{width}.png'))
+        page.get_by_role('button',name='Check GitHub now').click()
+        expect(page.locator('.outcome-request')).to_contain_text('GitHub accepted')
+        assert dispatches==['{"ref":"main"}']
+        expect(page.get_by_role('button',name='Check GitHub now')).to_be_disabled()
+        page.get_by_role('button',name='Load saved report').click()
+        expect(page.locator('.outcome-request')).to_contain_text('table still shows the saved snapshot')
+        report['read_mode']='fresh'
+        for item in report['rows']:item['observed_at']=(now+timedelta(seconds=1)).isoformat().replace('+00:00','Z')
+        page.get_by_role('button',name='Load saved report').click()
+        expect(page.locator('.outcome-request')).to_contain_text('fresh check has finished')
+        expect(page.get_by_role('button',name='Check GitHub now')).to_be_enabled()
         report['checked_at']=(now-timedelta(hours=5)).isoformat().replace('+00:00','Z')
-        page.get_by_role('button',name='Reload latest report').click()
-        expect(page.locator('#outcomes-body [role=status]')).to_contain_text('current tool health is unknown')
+        page.get_by_role('button',name='Load saved report').click()
+        expect(page.locator('#outcomes-body [role=status]').first).to_contain_text('current tool health is unknown')
         report['rows']=[{'bad':'result'}]
-        page.get_by_role('button',name='Reload latest report').click()
-        expect(page.locator('#outcomes-body [role=status]')).to_contain_text('invalid tool result')
+        page.get_by_role('button',name='Load saved report').click()
+        expect(page.locator('#outcomes-body [role=status]').first).to_contain_text('invalid tool result')
         expect(page.locator('#outcomes-body tbody tr')).to_have_count(0)
         assert not errors,errors
     finally:

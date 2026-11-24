@@ -43,6 +43,24 @@ class PublicDocuments:
         return self.documents[url]
 
 
+def collection_check(http, repo, run, names):
+    """Only reviewed source steps can prove that a push performed collection."""
+    if not run or run['status'] != 'completed':
+        return {'status': 'pending'}
+    try:
+        jobs = http.request('GET', f"/repos/{repo}/actions/runs/{run['id']}/jobs?filter=latest&per_page=100")
+        steps = [step for job in jobs.get('jobs', []) for step in (job.get('steps') or [])
+                 if step.get('name') in names]
+        if len(steps) != len(names) or {step['name'] for step in steps} != set(names):
+            return {'status': 'unavailable'}
+        results = {step.get('conclusion') for step in steps}
+        status = ('success' if results == {'success'} else 'failure' if results & FAILED
+                  else 'skipped' if results == {'skipped'} else 'unavailable')
+        return {'status': status, 'steps': [{'name': s['name'], 'conclusion': s.get('conclusion')} for s in steps]}
+    except (wd.SafeError, KeyError, TypeError, ValueError):
+        return {'status': 'unavailable'}
+
+
 def classify(row):
     execution, output = row['execution'], row['output']
     issues = []
@@ -53,13 +71,25 @@ def classify(row):
     if execution.get('due_unobserved'):
         issues.append('No ' + ('scheduled/manual ' if row['output']['status'] != 'not_configured' else '') + 'run observed for the latest due time')
     latest = execution.get('latest')
-    refresh = execution.get('latest_refresh')
+    refresh = execution.get('latest_collection', execution.get('latest_refresh'))
     if latest and latest.get('conclusion') in FAILED:
         issues.append('Latest workflow run ' + latest['conclusion'].replace('_', ' '))
     if output['status'] in ('stale', 'unavailable', 'invalid'):
         issues.append('Published check ' + output['status'])
     if any(x.get('error') for x in row.get('counts', [])):
         issues.append('A published record count could not be verified')
+    failed_sources = [s['name'] for s in output.get('sources', []) if s['status'] != 'ok']
+    if failed_sources:
+        issues.append('Published capture reports source problems: ' + ', '.join(failed_sources))
+    if output.get('source_status_error'):
+        issues.append('Published source results could not be verified')
+    if execution.get('collection_result') == 'failure' and (not latest or latest.get('conclusion') not in FAILED):
+        issues.append('Reviewed source collection steps failed, despite the workflow result')
+    if refresh and refresh.get('conclusion') in FAILED and refresh != latest:
+        if execution.get('latest_step_check', {}).get('status') == 'skipped':
+            issues.append('Latest download attempt failed. Website successfully published using previously saved data; collection was skipped in that build')
+        else:
+            issues.append('Latest source refresh attempt failed; the later successful build does not confirm recovery')
     if issues:
         return 'attention', issues
     if latest and latest['status'] in ACTIVE:
@@ -68,8 +98,8 @@ def classify(row):
         return 'limited', ['A successful latest execution was not observed']
     if output['status'] == 'not_configured':
         return 'workflow_only', ['This registered check does not publish a dataset; inspect its run for check details']
-    if refresh and refresh.get('conclusion') in FAILED:
-        return 'limited', ['Latest run succeeded; the earlier scheduled/manual run failed. A subsequent scheduled/manual refresh is not yet confirmed']
+    if execution.get('collection_unconfirmed'):
+        return 'limited', ['Source collection was skipped or its steps could not be verified; build success alone does not confirm a refresh']
     if output.get('run_alignment') == 'predates_success':
         return 'limited', ['Published evidence predates the successful scheduled/manual run']
     if not refresh:
@@ -77,10 +107,10 @@ def classify(row):
     return 'checked', ['Workflow and configured published checks are available']
 
 
-def observe(target, tools, now, http, previous=None):
+def observe(target, tools, now, http, previous=None, fresh=False):
     repo, workflow = target['repo'], str(target['workflow'])
     row = {'repo': repo, 'workflow': workflow, 'titles': [t['title'] for t in tools],
-           'tool_ids': [t['id'] for t in tools], 'execution': {}, 'counts': [],
+           'tool_ids': [t['id'] for t in tools], 'observed_at': wd.stamp(now), 'execution': {}, 'counts': [],
            'workflow_url': f'https://github.com/{repo}/actions/workflows/{workflow}'}
     cadence = wd.cadence_minutes(target, now)
     due = wd.due_at(target, now, target.get('grace_minutes', min(cadence / 2, 120)))
@@ -107,6 +137,28 @@ def observe(target, tools, now, http, previous=None):
         due_runs = refreshes if target.get('freshness') else runs
         row['execution']['due_unobserved'] = not any(wd.timestamp(r['created_at']) >= due for r in due_runs)
         latest = row['execution']['latest']
+        names = target.get('collection_steps', [])
+        if names:
+            evidence = collection_check(http, repo, latest, names)
+            row['execution']['latest_step_check'] = evidence
+            refresh = row['execution']['latest_refresh']
+            candidates = []
+            results = {}
+            if latest and evidence['status'] in ('success', 'failure'):
+                candidates.append(latest)
+                results[latest['id']] = evidence['status']
+            if refresh and refresh != latest:
+                earlier = collection_check(http, repo, refresh, names)
+                if earlier['status'] in ('success', 'failure'):
+                    candidates.append(refresh)
+                    results[refresh['id']] = earlier['status']
+            collection = max(candidates, key=lambda r: wd.timestamp(r['at'])) if candidates else None
+            row['execution']['latest_collection'] = collection
+            row['execution']['collection_result'] = results.get(collection['id']) if collection else None
+            row['execution']['collection_unconfirmed'] = collection is None
+            if (latest and latest['conclusion'] == 'success' and evidence['status'] == 'success'
+                    and wd.timestamp(latest['at']) >= due):
+                row['execution']['due_unobserved'] = False
         if latest and latest.get('conclusion') in FAILED:
             try:
                 jobs = http.request('GET', f"/repos/{repo}/actions/runs/{latest['id']}/jobs?filter=latest&per_page=100")
@@ -124,7 +176,7 @@ def observe(target, tools, now, http, previous=None):
     count_specs = [p for t in tools for p in t.get('data_info', {}).get('probes', []) if p.get('count_at')]
     marker = hashlib.sha256(json.dumps({'run': row['execution'].get('latest'),
         'counts': [{k: p.get(k) for k in ('url', 'label', 'count_at')} for p in count_specs]}, sort_keys=True).encode()).hexdigest()
-    row['probe_cache'] = copy.deepcopy((previous or {}).get('probe_cache', {}))
+    row['probe_cache'] = {} if fresh else copy.deepcopy((previous or {}).get('probe_cache', {}))
     checks = wd.freshness_checks(target, documents, now, cadence, cache=row['probe_cache'], refresh_marker=marker, due=wd.stamp(due))
     for result, probe in zip(checks, probes):
         result.update(label=probe['label'], url=probe['url'], precision=probe.get('precision', 'timestamp'))
@@ -132,15 +184,35 @@ def observe(target, tools, now, http, previous=None):
     status = ('not_configured' if not checks else 'invalid' if 'future_timestamp' in states
               else 'unavailable' if 'error' in states else 'stale' if 'stale' in states else 'recent')
     row['output'] = {'status': status, 'checks': checks}
-    refresh = row['execution'].get('latest_refresh')
+    refresh = row['execution'].get('latest_collection', row['execution'].get('latest_refresh'))
     if refresh and refresh.get('conclusion') == 'success' and checks:
         precise = [c for c in checks if c['precision'] != 'date' and c.get('timestamp')]
-        if any(wd.timestamp(c['timestamp']) < wd.timestamp(refresh['at']) - dt.timedelta(minutes=5) for c in precise):
-            row['output']['run_alignment'] = 'predates_success'
+        early = [(c, p) for c, p in zip(checks, probes) if c in precise and
+                 wd.timestamp(c['timestamp']) < wd.timestamp(refresh['at']) - dt.timedelta(minutes=5)]
+        if early:
+            permitted = all(isinstance(p.get('cache_max_age_seconds'), (int, float)) and
+                            0 <= (wd.timestamp(refresh['at']) - wd.timestamp(c['timestamp'])).total_seconds()
+                            <= p['cache_max_age_seconds'] for c, p in early)
+            row['output']['run_alignment'] = 'permitted_cache' if permitted else 'predates_success'
+            if permitted:
+                row['output']['cache_max_age_seconds'] = min(p['cache_max_age_seconds'] for c, p in early)
         elif any(c['precision'] == 'date' for c in checks):
             row['output']['run_alignment'] = 'date_only'
         else:
             row['output']['run_alignment'] = 'at_or_after_start'
+    for probe in probes:
+        if 'source_status_path' not in probe:
+            continue
+        try:
+            document = documents.request('GET', probe['url'], public=True)
+            statuses = wd.json_value(document, probe['source_status_path'])
+            if not isinstance(statuses, dict) or not statuses or not all(isinstance(k, str) and isinstance(v, str) for k, v in statuses.items()):
+                raise ValueError('Invalid source status map')
+            row['output'].setdefault('sources', []).extend(
+                {'name': name[:100], 'status': 'ok' if result == 'ok' else 'failed',
+                 'detail': result[:300]} for name, result in sorted(statuses.items()))
+        except (wd.SafeError, KeyError, IndexError, TypeError, ValueError):
+            row['output']['source_status_error'] = True
     # Use only reviewed catalogue count definitions on the documents already read.
     # Do not download every dataset again, guess a minimum count, or infer freshness
     # from an observation year or a changed count.
@@ -185,6 +257,9 @@ def observation_signature(row):
             'state': row['execution'].get('state'), 'error': row['execution'].get('error'),
             'due_unobserved': row['execution'].get('due_unobserved'),
             'run_alignment': row['output'].get('run_alignment'),
+            'sources': row['output'].get('sources', []),
+            'source_status_error': row['output'].get('source_status_error'),
+            'collection_result': row['execution'].get('collection_result'),
             'counts': [{k: c[k] for k in ('label', 'value', 'error') if k in c} for c in row.get('counts', [])]}
 
 
@@ -211,6 +286,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--previous', type=Path)
+    parser.add_argument('--fresh', action='store_true', help='Read published metadata again instead of using the saved probe cache')
     args = parser.parse_args()
     config = json.loads((ROOT / 'services/refresh-watchdog/targets.json').read_text())
     wd.validate_config(config)
@@ -219,12 +295,13 @@ def main():
     old = {(r['repo'], r['workflow']): r for r in (previous or {}).get('rows', [])}
     def check(target):
         matched = [t for t in tools if t['source'].rstrip('/') == 'https://github.com/' + target['repo']]
-        result = observe(target, matched, dt.datetime.now(wd.UTC), wd.HTTP(os.environ.get('GH_TOKEN'), timeout=15), old.get((target['repo'], str(target['workflow']))))
+        result = observe(target, matched, dt.datetime.now(wd.UTC), wd.HTTP(os.environ.get('GH_TOKEN'), timeout=15), old.get((target['repo'], str(target['workflow']))), fresh=args.fresh)
         print(target['repo'], target['workflow'], result['status'], flush=True)
         return result
     with ThreadPoolExecutor(max_workers=4) as pool:
         rows = list(pool.map(check, config['targets']))
     report = assemble(rows, dt.datetime.now(wd.UTC), previous, os.environ.get('GITHUB_RUN_ID'))
+    report['read_mode'] = 'fresh' if args.fresh else 'cached_where_unchanged'
     wd.atomic_json(args.output, report)
     print(json.dumps(report['summary']))
     # Observed failures belong in the report; failure to produce/save the report
