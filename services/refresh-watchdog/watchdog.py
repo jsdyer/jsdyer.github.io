@@ -1,0 +1,580 @@
+#!/usr/bin/env python3
+"""GitHub schedule recovery; read-only unless --apply. Never logs response bodies."""
+from __future__ import annotations
+import argparse
+import datetime as dt
+import fcntl
+import hashlib
+import json
+import os
+import re
+import stat
+import sys
+import tempfile
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+from croniter import croniter
+
+UTC = dt.timezone.utc
+API = 'https://api.github.com'
+ACTIVE = {'queued', 'in_progress', 'requested', 'waiting', 'pending'}
+REFRESH_EVENTS = {'schedule', 'workflow_dispatch'}
+
+
+def stamp(value):
+    return value.astimezone(UTC).isoformat().replace('+00:00', 'Z')
+
+
+def timestamp(value):
+    if not isinstance(value, str):
+        raise ValueError('Timestamp must be an ISO 8601 string')
+    parsed = dt.datetime.fromisoformat(value.replace('Z', '+00:00'))
+    if parsed.tzinfo is None:
+        raise ValueError('Timestamp must include its UTC offset')
+    return parsed.astimezone(UTC)
+
+
+def due_at(target, now, grace):
+    eligible = now - dt.timedelta(minutes=grace)
+    # croniter's previous is exclusive; a microsecond includes an exact boundary.
+    return max(croniter(c, eligible + dt.timedelta(microseconds=1)).get_prev(dt.datetime)
+               for c in target['crons']).astimezone(UTC)
+
+
+def cadence_minutes(target, now):
+    gaps = []
+    for expression in target['crons']:
+        it = croniter(expression, now)
+        a, b = it.get_prev(dt.datetime), it.get_prev(dt.datetime)
+        gaps.append((a-b).total_seconds()/60)
+    return max(1, min(gaps))
+
+
+def validate_config(config):
+    if not isinstance(config, dict) or config.get('version', 1) != 1:
+        raise ValueError('Config must be a version 1 object')
+    targets = config.get('targets')
+    if not isinstance(targets, list) or not targets:
+        raise ValueError('Config requires a nonempty targets list')
+    limit = config.get('max_dispatches_per_pass', 10)
+    if not isinstance(limit, int) or isinstance(limit, bool) or not 1 <= limit <= 100:
+        raise ValueError('max_dispatches_per_pass must be 1..100')
+    if 'github_api_url' in config:
+        raise ValueError('github_api_url is not configurable; credentials only go to api.github.com')
+    seen = set()
+    for t in targets:
+        if not isinstance(t, dict):
+            raise ValueError('Every target must be an object')
+        if not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', str(t.get('repo', ''))):
+            raise ValueError('Invalid target repository')
+        if not isinstance(t.get('branch'), str) or not t['branch'].strip():
+            raise ValueError('Every target needs an explicit branch')
+        if not isinstance(t.get('workflow'), (str, int)) or not str(t['workflow']).strip():
+            raise ValueError('Every target needs a workflow filename or numeric ID')
+        workflow = str(t['workflow'])
+        if not (workflow.isdigit() or re.fullmatch(r'(?:\.github/workflows/)?[\w.-]+\.ya?ml', workflow)):
+            raise ValueError('Workflow must be a YAML filename or numeric ID')
+        key = target_key(t)
+        if key in seen:
+            raise ValueError('Duplicate repository/branch/workflow target')
+        seen.add(key)
+        if not isinstance(t.get('crons'), list) or not t['crons']:
+            raise ValueError('Every target needs explicit UTC cron expressions')
+        for c in t['crons']:
+            if not isinstance(c, str) or len(c.split()) != 5 or not croniter.is_valid(c):
+                raise ValueError('Cron expressions must contain five valid UTC fields')
+        for owner in (config, t):
+            for key in ('grace_minutes', 'cooldown_minutes'):
+                if key in owner and (not isinstance(owner[key], (int, float)) or isinstance(owner[key], bool)
+                                     or not 0 <= owner[key] <= 10080):
+                    raise ValueError(key + ' must be between 0 and 10080')
+        for owner in (config,t):
+            if 'max_run_minutes' in owner and (not isinstance(owner['max_run_minutes'],(int,float)) or isinstance(owner['max_run_minutes'],bool) or not 1 <= owner['max_run_minutes'] <= 10080):
+                raise ValueError('max_run_minutes must be between 1 and 10080')
+        inputs = t.get('inputs', {})
+        if not isinstance(inputs, dict) or any(not isinstance(k, str) or not isinstance(v, (str, bool, int, float)) for k,v in inputs.items()):
+            raise ValueError('Workflow inputs must be a primitive JSON object')
+        freshness = t.get('freshness', [])
+        if not isinstance(freshness, list):
+            raise ValueError('freshness must be a list')
+        for check in freshness:
+            if not isinstance(check, dict):
+                raise ValueError('Freshness checks must be objects')
+            url = urllib.parse.urlsplit(str(check.get('url', '')))
+            if url.scheme != 'https' or not url.hostname or url.username or url.password or url.fragment:
+                raise ValueError('Freshness URLs must be HTTPS without credentials or fragments')
+            path = check.get('json_path')
+            if not ((isinstance(path, str) and path) or
+                    (isinstance(path, list) and path and all(isinstance(x, (str,int)) for x in path))):
+                raise ValueError('Freshness json_path must be a dotted string or path list')
+            age = check.get('max_age_seconds')
+            if age is not None and (not isinstance(age, (int,float)) or isinstance(age,bool) or age <= 0):
+                raise ValueError('max_age_seconds must be positive')
+    return config
+
+
+def target_key(t):
+    return '|'.join((t['repo'], t['branch'], str(t['workflow']).split('/')[-1]))
+
+
+class SafeError(Exception):
+    def __init__(self, kind, status=None, retry_at=None):
+        self.kind, self.status, self.retry_at = kind, status, retry_at
+        super().__init__(kind + (f' (HTTP {status})' if status else ''))
+
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        # Never forward credentials across a redirect, even to a guessed API URL.
+        return None
+
+
+class HTTP:
+    def __init__(self, token=None, timeout=20, opener=None, sleep=time.sleep, now=None):
+        self.token, self.timeout = token, timeout
+        self.opener = opener or urllib.request.build_opener(NoRedirect())
+        self.sleep, self.now = sleep, now or (lambda: dt.datetime.now(UTC))
+
+    def request(self, method, path, payload=None, *, public=False):
+        if public:
+            url = path
+            if urllib.parse.urlsplit(url).scheme != 'https':
+                raise SafeError('invalid_public_url')
+        else:
+            if not path.startswith('/') or path.startswith('//') or '\n' in path:
+                raise SafeError('invalid_api_path')
+            url = API + path
+        headers = {'Accept':'application/json', 'User-Agent':'coolcode-watchdog/1.0'}
+        if not public:
+            headers.update({'Accept':'application/vnd.github+json', 'X-GitHub-Api-Version':'2026-03-10'})
+            if self.token:
+                headers['Authorization'] = 'Bearer ' + self.token
+        data = None if payload is None else json.dumps(payload).encode()
+        if data is not None:
+            headers['Content-Type'] = 'application/json'
+        # Dispatch POST is never retried: a timeout can occur after GitHub accepted it.
+        tries = 3 if method == 'GET' else 1
+        for attempt in range(tries):
+            request = urllib.request.Request(url, data=data, headers=headers, method=method)
+            try:
+                with self.opener.open(request, timeout=self.timeout) as response:
+                    limit = (24 if public else 4)*1024*1024
+                    body = response.read(limit+1)
+                    if len(body)>limit:
+                        raise SafeError('response_too_large')
+                    return json.loads(body) if body else None
+            except urllib.error.HTTPError as error:
+                status = error.code
+                if status == 401:
+                    raise SafeError('authentication_failed', status) from None
+                secondary=False
+                if status==403:
+                    try:
+                        message=error.read(4096).decode('utf-8','replace').lower()
+                        secondary=any(word in message for word in ('secondary rate limit','api rate limit exceeded','abuse detection'))
+                    except OSError:pass
+                if status == 429 or (status == 403 and
+                    (secondary or error.headers.get('X-RateLimit-Remaining') == '0' or error.headers.get('Retry-After'))):
+                    until = self.now() + dt.timedelta(minutes=5)
+                    try:
+                        retry = error.headers.get('Retry-After')
+                        if retry:
+                            try: until=self.now()+dt.timedelta(seconds=max(1,int(retry)))
+                            except ValueError:
+                                from email.utils import parsedate_to_datetime
+                                until=parsedate_to_datetime(retry).astimezone(UTC)
+                        elif error.headers.get('X-RateLimit-Reset'):
+                            until=dt.datetime.fromtimestamp(int(error.headers['X-RateLimit-Reset']),UTC)
+                    except (ValueError,TypeError,OverflowError):
+                        pass
+                    raise SafeError('rate_limited', status, max(until,self.now()+dt.timedelta(seconds=60))) from None
+                if status == 403:
+                    raise SafeError('permission_denied', status) from None
+                if status >= 500 and attempt+1 < tries:
+                    self.sleep(2**attempt)
+                    continue
+                raise SafeError('http_error', status) from None
+            except (urllib.error.URLError, TimeoutError, OSError):
+                if attempt+1 < tries:
+                    self.sleep(2**attempt)
+                    continue
+                raise SafeError('network_error') from None
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                raise SafeError('invalid_json') from None
+
+
+def secure_read(filename):
+    flags = os.O_RDONLY | getattr(os,'O_NOFOLLOW',0)
+    try:
+        fd = os.open(filename, flags)
+        with os.fdopen(fd, 'r') as source:
+            info = os.fstat(source.fileno())
+            if not stat.S_ISREG(info.st_mode) or info.st_mode & 0o077:
+                raise SafeError('credential_file_must_be_private_0600_or_0400')
+            value = source.read(65537)
+            if len(value)>65536:
+                raise SafeError('credential_file_too_large')
+            return value.strip()
+    except SafeError:
+        raise
+    except OSError:
+        raise SafeError('credential_file_unreadable') from None
+
+
+def installation_token(app_id, installation_id, keyfile, now, http_factory=HTTP):
+    if not str(installation_id).isdigit():
+        raise SafeError('invalid_installation_id')
+    import jwt
+    try:
+        signed=jwt.encode({'iat':int(now.timestamp())-60,'exp':int(now.timestamp())+540,'iss':str(app_id)},
+                          secure_read(keyfile),algorithm='RS256')
+    except SafeError:
+        raise
+    except Exception:
+        raise SafeError('app_private_key_invalid') from None
+    response=http_factory(signed).request('POST',f'/app/installations/{installation_id}/access_tokens',
+                                         {'permissions':{'actions':'write','metadata':'read'}})
+    if not isinstance(response,dict) or not isinstance(response.get('token'),str):
+        raise SafeError('installation_token_missing')
+    return response['token']
+
+
+def json_value(document, path):
+    parts=path if isinstance(path,list) else path.split('.')
+    node=document
+    for part in parts:
+        node=node[int(part)] if isinstance(node,list) else node[part]
+    return node
+
+
+def freshness_checks(target, http, now, cadence, cache=None, refresh_marker=None, due=None):
+    results=[]
+    ttl_seconds=max(60,min(cadence/2,360)*60)
+    for index, check in enumerate(target.get('freshness',[])):
+        # Cache only validated timestamps, never response bodies, URLs, credentials or errors.
+        cache_slot=str(index)
+        cache_key=hashlib.sha256(json.dumps({'probe':check,'refresh':refresh_marker,'due':due},sort_keys=True).encode()).hexdigest()
+        result={'check':index,'status':'error'}
+        try:
+            entry=cache.get(cache_slot,{}) if cache is not None else {}
+            cached=False
+            if entry.get('key')==cache_key:
+                try:
+                    read_at=timestamp(entry['read_at'])
+                    checked=timestamp(entry['timestamp'])
+                    cached=0<=(now-read_at).total_seconds()<ttl_seconds
+                except (ValueError,TypeError,KeyError):
+                    cached=False
+            if not cached:
+                document=http.request('GET',check['url'],public=True)
+                value=json_value(document,check['json_path'])
+                if check.get('precision')=='date' and isinstance(value,str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}',value):
+                    value += 'T00:00:00Z'
+                checked=timestamp(value)
+                read_at=now
+            age=(now-checked).total_seconds()
+            max_age=check.get('max_age_seconds',max(3600,cadence*120)+(86400 if check.get('precision')=='date' else 0))
+            status='future_timestamp' if age < -300 else 'fresh' if age <= max_age else 'stale'
+            result.update(timestamp=stamp(checked),age_seconds=round(age),max_age_seconds=max_age,
+                          status=status,cached=cached,read_at=stamp(read_at))
+            if cache is not None:
+                if status=='future_timestamp':cache.pop(cache_slot,None)
+                else:cache[cache_slot]={'key':cache_key,'read_at':stamp(read_at),'timestamp':stamp(checked)}
+        except SafeError as exc:
+            result['error']=exc.kind
+            if cache is not None:cache.pop(cache_slot,None)
+        except (KeyError,IndexError,TypeError,ValueError,OverflowError):
+            result['error']='timestamp_missing_or_invalid'
+            if cache is not None:cache.pop(cache_slot,None)
+        results.append(result)
+    if cache is not None:
+        for key in list(cache):
+            if key not in {str(i) for i in range(len(target.get('freshness',[])))}:cache.pop(key,None)
+    return results
+
+
+def get_runs(http, prefix, branch, due):
+    collected=[]
+    for page in range(1,6):
+        query=urllib.parse.urlencode({'branch':branch,'per_page':100,'page':page})
+        body=http.request('GET',prefix+'/runs?'+query)
+        runs=body.get('workflow_runs') if isinstance(body,dict) else None
+        if not isinstance(runs,list):
+            raise SafeError('invalid_workflow_runs_response')
+        collected.extend(r for r in runs if r.get('head_branch')==branch)
+        dates=[]
+        for r in runs:
+            try: dates.append(timestamp(r['created_at']))
+            except (ValueError,KeyError,TypeError): pass
+        if len(runs)<100 or (dates and min(dates)<due):
+            return collected,False
+    return collected,True
+
+
+def run(config, state, http, now, apply=False, persist=None):
+    report={'version':1,'checked_at':stamp(now),'mode':'apply' if apply else 'dry-run',
+            'health':'unknown','dispatches':0,'dispatch_attempts':0,'targets':[]}
+    state.setdefault('version',1)
+    records=state.setdefault('targets',{})
+    blocked=state.get('blocked_until')
+    stop_reason=None
+    if blocked:
+        try:
+            if timestamp(blocked)>now: stop_reason='rate_limit_backoff'
+        except ValueError: pass
+    ordered=sorted(config['targets'],key=lambda t: records.get(target_key(t),{}).get('last_checked',''))
+    for target in ordered:
+        key=target_key(target)
+        row={'repo':target['repo'],'branch':target['branch'],'workflow':str(target['workflow']).split('/')[-1],
+             'status':'unknown','severity':'info','verified_refresh':False}
+        report['targets'].append(row)
+        if stop_reason:
+            row.update(status='not_checked',severity='error',reason=stop_reason)
+            continue
+        record=records.setdefault(key,{})
+        cadence=cadence_minutes(target,now)
+        grace=target.get('grace_minutes',config.get('grace_minutes',min(cadence/2,120)))
+        cooldown=target.get('cooldown_minutes',config.get('cooldown_minutes',max(15,min(cadence/2,120))))
+        due=due_at(target,now,grace)
+        row['due_at']=stamp(due)
+        prefix='/repos/'+target['repo']+'/actions/workflows/'+urllib.parse.quote(row['workflow'],safe='')
+        try:
+            cached=record.get('workflow_cache',{})
+            if cached and timestamp(cached['at'])>now-dt.timedelta(hours=1):
+                workflow={'state':cached['state']}
+            else:
+                workflow=http.request('GET',prefix)
+                if not isinstance(workflow,dict) or not isinstance(workflow.get('state'),str):
+                    raise SafeError('invalid_workflow_response')
+                record['workflow_cache']={'at':stamp(now),'state':workflow['state']}
+            workflow_state=workflow['state'];row['workflow_state']=workflow_state
+            if workflow_state=='disabled_manually':
+                row.update(status='disabled_manually',severity='warning',reason='Preserved intentional disable; no enable or dispatch')
+                continue
+            if workflow_state not in ('active','disabled_inactivity'):
+                row.update(status='disabled_other',severity='error',reason='Workflow is not active; requires owner review')
+                continue
+            runs,truncated=get_runs(http,prefix,target['branch'],due)
+            if truncated:
+                row['history_limited']=True
+            active=[r for r in runs if r.get('status') in ACTIVE]
+            successful=[]
+            for r in runs:
+                if r.get('event') in REFRESH_EVENTS and r.get('status')=='completed' and r.get('conclusion')=='success':
+                    try:
+                        created=timestamp(r['created_at'])
+                        if created>=due: successful.append((created,r))
+                    except (KeyError,TypeError,ValueError): pass
+            latest_refresh=max(successful,key=lambda item:item[0])[1] if successful else None
+            refresh_marker=None if latest_refresh is None else [latest_refresh.get('id',latest_refresh.get('created_at')),latest_refresh.get('run_attempt',1),latest_refresh.get('updated_at')]
+            fresh=freshness_checks(target,http,now,cadence,cache=record.setdefault('probe_cache',{}),refresh_marker=refresh_marker,due=stamp(due))
+            if fresh: row['freshness']=fresh
+            stale=any(c['status']!='fresh' for c in fresh)
+            if successful:
+                created,latest=max(successful,key=lambda item:item[0])
+                row.update(status='published_stale' if stale else 'current',
+                           severity='error' if stale else 'info',last_successful_refresh_run=stamp(created),
+                           verified_refresh=bool(fresh) and not stale,
+                           assurance='published_timestamp' if fresh else 'workflow_only')
+                # A completed refresh with stale source data needs review, not an infinite redispatch loop.
+                if stale: row['reason']='Refresh run succeeded, but published timestamp did not pass; no redundant dispatch'
+                if workflow_state=='disabled_inactivity':
+                    if apply:
+                        fresh_workflow=http.request('GET',prefix)
+                        if fresh_workflow.get('state')=='disabled_inactivity':
+                            http.request('PUT',prefix+'/enable');record.pop('workflow_cache',None);row['re_enabled']=True
+                            if persist:persist(state)
+                        elif fresh_workflow.get('state')!='active':
+                            record.pop('workflow_cache',None);row.update(status='disabled_manually',severity='warning');continue
+                    else: row.update(status='would_enable',severity='warning')
+                record.pop('attempts',None)
+                continue
+            if active:
+                row.update(status='pending',severity='warning',reason='A workflow run is already queued or active; no duplicate dispatch')
+                row['active_runs']=len(active)
+                max_run=target.get('max_run_minutes',config.get('max_run_minutes',180))
+                for active_run in active:
+                    try:
+                        if timestamp(active_run['created_at']) < now-dt.timedelta(minutes=max_run):
+                            row.update(status='stalled_run',severity='error',max_run_minutes=max_run,reason='An active run exceeds the configured duration; investigate rather than dispatch a duplicate')
+                    except (ValueError,TypeError,KeyError):pass
+                if stale:
+                    row['published_data_stale']=True
+                    row['severity']='error'
+                    if row['status']=='pending':
+                        row['reason']='A run is active, but published freshness checks still fail; no duplicate dispatch'
+                continue
+            if workflow_state=='disabled_inactivity' and not apply:
+                row['would_enable']=True
+            if truncated:
+                row.update(status='history_incomplete',severity='error',reason='History cap reached; refusing uncertain duplicate dispatch')
+                continue
+            retry=record.get('retry_after')
+            if retry and timestamp(retry)>now:
+                row.update(status='cooldown',severity='warning',retry_after=retry,
+                           reason='Previous dispatch attempt awaits its retry window; acceptance is not refresh success')
+                continue
+            if report['dispatch_attempts']>=config.get('max_dispatches_per_pass',10):
+                row.update(status='dispatch_budget',severity='warning',reason='Overdue target deferred to a later pass')
+                continue
+            if not apply:
+                row.update(status='would_dispatch',severity='error',reason='No successful scheduled/dispatched run covers the due occurrence')
+                continue
+            # Fresh owner intent wins over a cached active state, immediately before dispatch.
+            latest_workflow=http.request('GET',prefix)
+            latest_state=latest_workflow.get('state') if isinstance(latest_workflow,dict) else None
+            row['workflow_state']=latest_state
+            record['workflow_cache']={'at':stamp(now),'state':latest_state}
+            if latest_state=='disabled_inactivity':
+                http.request('PUT',prefix+'/enable');record.pop('workflow_cache',None);row['re_enabled']=True
+                if persist:persist(state)
+            elif latest_state!='active':
+                row.update(status='disabled_manually' if latest_state=='disabled_manually' else 'disabled_other',severity='warning' if latest_state=='disabled_manually' else 'error',reason='Fresh workflow state prevents dispatch')
+                continue
+            attempts=record.get('attempts',0)+1 if record.get('attempt_due')==stamp(due) else 1
+            if attempts>3:
+                row.update(status='retry_exhausted',severity='error',reason='Three recovery attempts for this due occurrence failed; await next due occurrence or owner review')
+                continue
+            record.update(attempt_due=stamp(due),attempts=attempts,last_dispatch_attempt=stamp(now),
+                          retry_after=stamp(now+dt.timedelta(minutes=min(1440,cooldown*2**min(attempts-1,7)))))
+            # Persist before dispatch: even a killed process must retain the attempt cooldown.
+            report['dispatch_attempts']+=1
+            if persist:persist(state)
+            try:
+                http.request('POST',prefix+'/dispatches',{'ref':target['branch'],'inputs':target.get('inputs',{})})
+            except SafeError:
+                record['dispatch_outcome']='unknown_or_failed'
+                raise
+            record['dispatch_outcome']='accepted';report['dispatches']+=1
+            if persist:persist(state)
+            row.update(status='dispatch_requested',severity='warning',retry_after=record['retry_after'],
+                       reason='GitHub accepted dispatch; a later pass must verify completion and published timestamps')
+        except SafeError as error:
+            row.update(status=error.kind,severity='error')
+            if error.status: row['http_status']=error.status
+            if error.retry_at:
+                state['blocked_until']=stamp(error.retry_at);row['retry_after']=state['blocked_until'];stop_reason='rate_limited'
+            elif error.kind=='authentication_failed':stop_reason='authentication_failed'
+        except (ValueError,KeyError,TypeError,OverflowError):
+            row.update(status='invalid_api_or_state_data',severity='error')
+        finally:
+            record['last_checked']=stamp(now)
+    report['errors']=sum(r['severity']=='error' for r in report['targets'])
+    if config.get('_registry'):
+        report['registry']=config['_registry']
+    if config.get('_registry_warning'):
+        report['registry_warning']=config['_registry_warning']
+        report['errors']+=1
+    report['attention']=sum(r['severity']=='warning' for r in report['targets'])
+    report['health']='unhealthy' if report['errors'] else 'attention' if report['attention'] else 'healthy'
+    report['assurance']='Published timestamp checks are reported separately; workflow success alone does not prove new source data'
+    return report
+
+
+def heartbeat_url(filename):
+    if not filename:return None
+    value=secure_read(filename)
+    if not value:return None
+    parsed=urllib.parse.urlsplit(value)
+    if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.fragment:
+        raise SafeError('heartbeat_url_must_be_https_without_credentials')
+    return value
+
+
+def ping_heartbeat(url, healthy, opener=None):
+    if not url:return None
+    parsed=urllib.parse.urlsplit(url)
+    destination=url if healthy else urllib.parse.urlunsplit(parsed._replace(path=parsed.path.rstrip('/')+'/fail'))
+    request=urllib.request.Request(destination,headers={'User-Agent':'coolcode-watchdog/1.0','Accept':'text/plain'},method='GET')
+    try:
+        with (opener or urllib.request.build_opener(NoRedirect())).open(request,timeout=10) as response:
+            response.read(1024)
+        return True
+    except (OSError,urllib.error.URLError,ValueError):
+        return False
+
+
+def atomic_json(path, document):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    fd,name=tempfile.mkstemp(prefix='.'+path.name+'.',dir=path.parent)
+    try:
+        os.fchmod(fd,0o600)
+        with os.fdopen(fd,'w') as output:
+            json.dump(document,output,indent=2,sort_keys=True);output.write('\n');output.flush();os.fsync(output.fileno())
+        os.replace(name,path)
+        directory=os.open(path.parent,os.O_RDONLY)
+        try:os.fsync(directory)
+        finally:os.close(directory)
+    finally:
+        if os.path.exists(name):os.unlink(name)
+
+
+def main(argv=None):
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--config',required=True);parser.add_argument('--state',default='state.json')
+    parser.add_argument('--report',default='health.json');parser.add_argument('--apply',action='store_true')
+    parser.add_argument('--check-config',action='store_true');parser.add_argument('--token-file')
+    parser.add_argument('--app-id');parser.add_argument('--installation-id');parser.add_argument('--private-key-file')
+    parser.add_argument('--heartbeat-url-file')
+    args=parser.parse_args(argv)
+    now=dt.datetime.now(UTC)
+    try:
+        heartbeat=None if args.check_config or not args.apply else heartbeat_url(args.heartbeat_url_file)
+    except SafeError as error:
+        print(json.dumps({'health':'unhealthy','status':error.kind}),file=sys.stderr);return 2
+    try:
+        with open(args.config) as source:config=validate_config(json.load(source))
+        if args.check_config:
+            print(json.dumps({'status':'config_valid','targets':len(config['targets'])}));return 0
+    except (OSError,ValueError,TypeError,KeyError):
+        ping_heartbeat(heartbeat,False)
+        print('Configuration validation failed; check config structure, cron expressions and file permissions.',file=sys.stderr);return 2
+    lockpath=Path(args.state+'.lock');lockpath.parent.mkdir(parents=True,exist_ok=True)
+    lock=open(lockpath,'a+');os.chmod(lockpath,0o600)
+    try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    except BlockingIOError:
+        lock.close()
+        print(json.dumps({'status':'already_running','health':'not_checked'}));return 0
+    report=None
+    try:
+        state=json.loads(Path(args.state).read_text()) if Path(args.state).exists() else {'version':1,'targets':{}}
+        if not isinstance(state,dict) or not isinstance(state.get('targets',{}),dict):raise SafeError('invalid_state_file')
+        app=(args.app_id,args.installation_id,args.private_key_file)
+        if any(app):
+            if not all(app):raise SafeError('app_auth_requires_all_three_options')
+            token=installation_token(*app,now)
+        else:
+            token=os.environ.get('GH_TOKEN','').strip()
+            filename=args.token_file or os.environ.get('GH_TOKEN_FILE')
+            if not token and filename:token=secure_read(filename)
+            if not token:raise SafeError('github_credentials_missing')
+        report=run(config,state,HTTP(token),now,args.apply,persist=lambda value:atomic_json(args.state,value))
+        # Dry runs may cache reads but never write dispatch attempt or enable state.
+        atomic_json(args.state,state)
+        delivered=ping_heartbeat(heartbeat,report['errors']==0)
+        if delivered is not None:
+            report['heartbeat']='delivered' if delivered else 'delivery_failed'
+            if not delivered:report['errors']+=1;report['health']='unhealthy'
+        atomic_json(args.report,report)
+        print(json.dumps({'health':report['health'],'mode':report['mode'],'targets':len(report['targets']),
+                          'errors':report['errors'],'attention':report['attention'],'dispatches':report['dispatches']}))
+        return 1 if report['errors'] else 0
+    except SafeError as error:
+        report={'version':1,'checked_at':stamp(now),'health':'unhealthy','status':error.kind,
+                'http_status':error.status,'mode':'apply' if args.apply else 'dry-run'}
+        delivered=ping_heartbeat(heartbeat,False)
+        if delivered is not None:report['heartbeat']='delivered' if delivered else 'delivery_failed'
+        atomic_json(args.report,report)
+        print(json.dumps({'health':'unhealthy','status':error.kind}),file=sys.stderr);return 2
+    except (OSError,ValueError,TypeError):
+        ping_heartbeat(heartbeat,False)
+        print('Watchdog state/report I/O failed; no credentials or response bodies were logged.',file=sys.stderr);return 2
+    finally:
+        fcntl.flock(lock,fcntl.LOCK_UN);lock.close()
+
+
+if __name__=='__main__':
+    sys.exit(main())

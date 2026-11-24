@@ -58,19 +58,4 @@ An initial capture does not invent a previous version. Later captures show what 
 
 ## Shared CoolCode counter and private issue reports
 
-The tools' data collection uses GitHub Actions. The existing `coolcode-visitor-api` Cloudflare Worker separately needs these IDs in its existing `const toolList` for the shared counter and private issue form:
-
-```js
-"maplephish",
-"scanreceipt",
-"govgrade",
-"rackexpiry",
-"mushroomcalendar",
-"lawdelta",
-"dawnchorus",
-"radarscope",
-"museumdrawer",
-"hotspotledger"
-```
-
-In **Workers & Pages → coolcode-visitor-api → Edit code**, add missing IDs to the existing array, preserve existing entries/bindings, and deploy. That Worker was not changed or inspected in this task. Do not replace the complete array with this short addition list. See [Adding tools](adding-tools.md#enable-usage-counts-and-private-issue-reports).
+Data collection uses GitHub Actions. Shared counter and issue registration is now generated from the catalogue and maintained in [the visitor Worker service](../services/cloudflare-visitor/README.md). Follow the [complete lifecycle](tool-lifecycle.md), including deployment and read-only registry verification. The previous manual addition list is superseded.

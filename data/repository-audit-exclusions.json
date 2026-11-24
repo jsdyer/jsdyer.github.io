@@ -82,5 +82,35 @@
     "status": "empty",
     "reason": "Repository has no source files to implement a tool yet.",
     "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "abuse-kit",
+    "status": "starter",
+    "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "atlas-canada",
+    "status": "starter",
+    "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "edge-map",
+    "status": "starter",
+    "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "takedown-watcher",
+    "status": "starter",
+    "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
+    "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "public-apis",
+    "status": "reference-fork",
+    "reason": "Contribution/reference fork of public-apis/public-apis, not an independent CoolCode application.",
+    "reviewed_at": "2026-11-23"
   }
 ]

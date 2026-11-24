@@ -10245,5 +10245,59 @@
     "readme": {
       "note": "Look up **report.docx**, **image/jpeg** or any extension. Shared extensions can return several media types. Paste a Content-Type value to inspect its parameters. For a local file, **Inspect file header** reads at most 64 KiB and keeps extension, browser type and signature as separate observations. A ZIP header can be compatible with an Office file without proving that subtype. Unknown signatures remain unknown; no file is uploaded or executed. **Save inspection JSON** includes the filename and first 64 bytes, so review it before sharing."
     }
+  },
+  {
+    "id": "translink",
+    "title": "Fleet Sheet",
+    "description": "See which TransLink vehicles are out, where a route is bunched, and what changed since the previous capture.",
+    "category": "places",
+    "tags": [
+      "TransLink",
+      "Vancouver",
+      "bus",
+      "SkyTrain",
+      "realtime",
+      "bunching"
+    ],
+    "icon": "route",
+    "url": "/translink/",
+    "source": "https://github.com/jsdyer/translink",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "TransLink’s GTFS-Realtime feeds supply vehicle positions, trip delays and service alerts for each saved capture.",
+      "cadence": "Hourly",
+      "probes": [
+        {
+          "label": "Fleet captured",
+          "url": "https://coolcode.ca/translink/data/status.json",
+          "path": [
+            "captured"
+          ],
+          "count_at": {
+            "path": [
+              "buses"
+            ],
+            "unit": "buses out"
+          },
+          "precision": "minute",
+          "value": "2026-11-24 03:21 UTC",
+          "count": 687
+        },
+        {
+          "label": "Network",
+          "url": "https://coolcode.ca/translink/data/network-status.json",
+          "path": [
+            "retrieved"
+          ],
+          "value": "2026-11-24"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Pick a capture, then a route. The closest pair is measured along the saved line when this network file has one, and as the crow flies when it does not. A route missing from a partial capture is not counted as zero."
+    }
   }
 ]

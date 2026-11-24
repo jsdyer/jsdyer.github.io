@@ -9,6 +9,31 @@ permissions:
   contents: read
 
 jobs:
+  repository-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install -r scripts/requirements-maintenance.txt
+      - name: Check complete public repository coverage
+        run: python3 scripts/audit_repositories.py --check
+      - name: Detect changed schedules, inputs and missing guards
+        if: '!cancelled()'
+        run: python3 scripts/sync_operations.py --refresh --check
+      - name: Check verified Worker deployment receipt
+        if: '!cancelled()'
+        run: python3 scripts/check_integration.py --deployment
+      - name: Check deployed Cloudflare tool registration
+        if: '!cancelled()'
+        run: python3 scripts/check_live_registry.py
+
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 15

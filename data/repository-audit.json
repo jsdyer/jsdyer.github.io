@@ -1,13 +1,14 @@
 {
   "schema": "coolcode.repository-audit.v1",
-  "checked_at": "2026-11-23T13:23:11+00:00",
+  "checked_at": "2026-11-24T05:01:25+00:00",
   "owner": "jsdyer",
   "scope": "Public repositories; private repository identities are omitted. Functional readiness is reviewed before listing.",
-  "catalogue_tools": 218,
-  "public_repositories": 223,
+  "catalogue_tools": 228,
+  "public_repositories": 238,
   "private_repositories_omitted": 1,
-  "listed_source_repositories": 209,
+  "listed_source_repositories": 219,
   "public_repository_names": [
+    "abuse-kit",
     "abusepulse",
     "accessreceipt",
     "aircheckdiary",
@@ -22,6 +23,7 @@
     "atipmetrics",
     "atippopularity",
     "atlanticdial",
+    "atlas-canada",
     "auroratrace",
     "b0x-ca",
     "backupledger",
@@ -48,6 +50,7 @@
     "clamground",
     "cloud-ledger",
     "coalbelow",
+    "colocheck",
     "committeereceipt",
     "commonslens",
     "composediff",
@@ -64,9 +67,11 @@
     "dispatchledger",
     "dnslens",
     "dockdiary",
+    "domain-biography",
     "donairafterdark",
     "donationradar",
     "drivecohort",
+    "edge-map",
     "ephemeraatlas",
     "eventradar",
     "evidencelab",
@@ -102,6 +107,7 @@
     "headerautopsy",
     "headlinevault",
     "hiddenwater",
+    "highwayframe",
     "holidayclock",
     "hosted-where",
     "hotspotledger",
@@ -119,6 +125,7 @@
     "labelcompare",
     "lakeprofiles",
     "langleychanges",
+    "langleytrades",
     "lastmilepercentile",
     "lastrefill",
     "launchledger",
@@ -144,6 +151,7 @@
     "museumdrawer",
     "mushroomcalendar",
     "namesforget",
+    "nasa",
     "nethush-com",
     "nightfinder",
     "oicdiary",
@@ -171,15 +179,18 @@
     "postmarkplaces",
     "prefixdiary",
     "priceatlas",
+    "public-apis",
     "pwncheck-kanon",
     "quakeecho",
     "queryconfessional",
     "queryplan",
     "rackexpiry",
     "radarscope",
+    "rangeledger",
     "recallradar",
     "registrarwatch",
     "releasereceipt",
+    "renewalboard",
     "researchledger",
     "restroomreach",
     "rfctrail",
@@ -199,6 +210,7 @@
     "screenradar",
     "screensaver",
     "seabusclock",
+    "shieldcheck",
     "shipwrecks",
     "shopfrontdiary",
     "signalwalk",
@@ -216,6 +228,7 @@
     "sunledger",
     "superapp-ca",
     "surplus-crown",
+    "takedown-watcher",
     "tariffxray",
     "telecompulse",
     "tide-and-dark",
@@ -226,7 +239,9 @@
     "transferwindow",
     "transitreceipt",
     "translationdesk",
+    "translink",
     "unreleased",
+    "violationsheet",
     "weatherarchive",
     "welllayers",
     "wordweave",
@@ -234,6 +249,18 @@
   ],
   "needs_review": [],
   "excluded": [
+    {
+      "repo": "abuse-kit",
+      "status": "starter",
+      "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
+      "reviewed_at": "2026-11-23"
+    },
+    {
+      "repo": "atlas-canada",
+      "status": "starter",
+      "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
+      "reviewed_at": "2026-11-23"
+    },
     {
       "repo": "b0x-ca",
       "status": "personal-or-business-site",
@@ -256,6 +283,12 @@
       "repo": "coolcode-tool-template",
       "status": "template",
       "reason": "Starter template used to create tools; not a finished utility.",
+      "reviewed_at": "2026-11-23"
+    },
+    {
+      "repo": "edge-map",
+      "status": "starter",
+      "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
       "reviewed_at": "2026-11-23"
     },
     {
@@ -301,6 +334,12 @@
       "reviewed_at": "2026-11-23"
     },
     {
+      "repo": "public-apis",
+      "status": "reference-fork",
+      "reason": "Contribution/reference fork of public-apis/public-apis, not an independent CoolCode application.",
+      "reviewed_at": "2026-11-23"
+    },
+    {
       "repo": "queryconfessional",
       "status": "empty",
       "reason": "Repository has no source files to implement a tool yet.",
@@ -316,6 +355,12 @@
       "repo": "superapp-ca",
       "status": "personal-or-business-site",
       "reason": "Separate personal or business website, not a standalone CoolCode utility.",
+      "reviewed_at": "2026-11-23"
+    },
+    {
+      "repo": "takedown-watcher",
+      "status": "starter",
+      "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
       "reviewed_at": "2026-11-23"
     }
   ],

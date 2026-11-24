@@ -27,12 +27,16 @@ jobs:
           python-version: '3.12'
       - name: Check README tool directory is in sync
         run: python3 scripts/sync_readme.py --check
+      - name: Check catalogue integration and generated operations
+        run: python3 scripts/check_integration.py
       - name: Check catalogue excerpts against the tool guides in this checkout
         run: python3 scripts/sync_guides.py --local --check
       - name: Test catalogue validation and rendering
         run: python3 -m unittest discover -s tests -v
       - name: Build static site
         run: python3 scripts/build.py
+      - name: Check built catalogue and sitemap coverage
+        run: python3 scripts/check_integration.py --built
       - name: Test admin reporting and service checks
         run: node --test tests/*.test.mjs
       - name: Install browser test dependencies
@@ -61,9 +65,21 @@ jobs:
         with:
           path: dist
 
+  watchdog:
+    name: Validate independent watchdog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install -r services/refresh-watchdog/requirements.txt
+      - run: python3 -m unittest discover -s services/refresh-watchdog -p 'test_*.py' -v
+      - run: python3 services/refresh-watchdog/watchdog.py --config services/refresh-watchdog/targets.json --check-config
+
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: build
+    needs: [build, watchdog]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     concurrency:

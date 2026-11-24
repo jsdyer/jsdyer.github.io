@@ -1,5 +1,12 @@
 # Working on CoolCode
 
+- Every tool addition, update, rename or removal must follow `docs/tool-lifecycle.md`.
+  A repo alone is not a completed release. Reconcile documentation, catalogue,
+  repository coverage, Cloudflare registration, watchdog schedules/probes/permissions,
+  inactivity guards and generated sitemap; verify each affected deployment.
+  Run `scripts/check_integration.py` before and after the build (`--built`).
+  Do not hand-maintain duplicate tool lists or leave the watchdog only in a ZIP.
+
 - The homepage catalogue is maintained in `data/tools.json` and `data/categories.json`.
   Edit layout in `templates/index.html`. `dist/` is generated and must not be committed.
 - Keep existing titles, descriptions, order, category anchors, icons and URLs unless

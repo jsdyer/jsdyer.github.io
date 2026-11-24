@@ -58,7 +58,7 @@ The repaired Worker returns **401** for that placeholder. Use your existing sign
 
 ### Register a new tool with the visitor API
 
-In the **coolcode-visitor-api** Worker, add each new catalogue slug once to `const toolList` and click **Deploy**. For the four economics tools, the entries are `"releasereceipt"`, `"scorecard"`, `"exportneighbours"` and `"metroeconomy"`. This list lets the collector accept visits and private reports for those tools. This is the entire Worker registration step for these four published tools. To verify one, open its public page and look for a successful collector request in your browser's Network tab, or check its next tool-traffic report. [Catalogue guide](adding-tools.md)
+The accepted IDs are generated from `data/tools.json`. Follow [the visitor Worker deployment](../services/cloudflare-visitor/README.md), preserving its existing settings and D1 binding. Verify with `python3 scripts/check_live_registry.py` and commit the verified deployment receipt. The [tool lifecycle](tool-lifecycle.md) also covers the watchdog, catalogue, README, sitemap and repository audit.
 
 ### Activate the metrics Worker on Linux
 

@@ -29,24 +29,7 @@ Donation Radar preserves each province/version shard by content hash. Its diary'
 
 ## Shared Cloudflare counter and private reports
 
-The explorers, archives and scheduled collectors work without a Cloudflare deployment. The existing shared counter and private issue form require catalogue IDs in the `coolcode-visitor-api` Worker's `const toolList`, as described in [Adding tools](adding-tools.md#enable-usage-counts-and-private-issue-reports).
-
-In **Workers & Pages → coolcode-visitor-api → Edit code**, add any missing entries below to the existing array, preserve the other entries and bindings, then click **Deploy**:
-
-```js
-"govtrackercensus",
-"contractpatterns",
-"maplehosting",
-"atipdecisions",
-"ispreportcard",
-"donationradar",
-"anycastcompass",
-"sanctionsledger",
-"borderpulse",
-"oicdiary"
-```
-
-Worker registration was not changed or verified during this build. After registering, open a tool with counting enabled and check for a successful collector request or its entry in the owner dashboard. Do not submit a fake private report just to test the form.
+The shared counter and private report form are registered from `data/tools.json`. Their Worker source and deployment instructions are now [in GitHub](../services/cloudflare-visitor/README.md). Follow the [complete lifecycle](tool-lifecycle.md); do not maintain the original launch-time addition list separately. Verification uses the read-only `/registry` endpoint and does not insert fake reports.
 
 ## Optional missed-run email alerts
 

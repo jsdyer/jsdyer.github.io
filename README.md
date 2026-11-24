@@ -34,7 +34,7 @@ A tool that asks you to select a local file is still a browser tool.
 
 <!-- BEGIN BROWSER_TOOLS -->
 
-218 browser tools, grouped as on the homepage.
+219 browser tools, grouped as on the homepage.
 
 #### Homelab &amp; archiving
 
@@ -232,6 +232,7 @@ A tool that asks you to select a local file is still a browser tool.
 | [Magnetic North](<https://coolcode.ca/magneticnorth/>) | Calculate magnetic declination and convert bearings using the World Magnetic Model. <br> Local inputs · NOAA/BGS WMM2025 coefficients calculate the magnetic field locally for dates in 2025–2029. Enter latitude, longitude, WGS84 ellipsoid height and a date in \*\*2025–2029\*\*, or start with Langley or Halifax. East declination is positive: \*\*true bearing = magnetic bearing + declination\*\*. The compass drawing is a schematic, not a reading from your device. The chart shows one model’s predictions at a fixed place, not observed magnetic history. Save receipt JSON or CSV to retain your result; inputs are not saved automatically. Add places in \*\*web/config.json\*\* and push to publish them. | [Source &amp; docs](<https://github.com/jsdyer/magneticnorth>) |
 | [Restroom Reach](<https://coolcode.ca/restroomreach/>) | Find mapped toilets, inspect accessibility details and keep a dated local record. <br> Saved dataset · Dated OpenStreetMap toilet extracts with reported access and accessibility tags; map details can be incomplete or old. Choose a region, then filter wheelchair access, fees or changing tables. \*\*Mapped yes\*\* is a contributor’s report; \*\*Not recorded\*\* is a separate state. Expand \*\*Sort by distance from a point\*\* for coordinates or the Willoughby, Vancouver and Halifax presets. Distances are straight-line, not walking routes. Turn on \*\*Show street map\*\* only when you want background tiles. The capture date and OSM database edition are displayed separately: downloading an old source edition does not make the observations current. Export a receipt to retain the evidence outside this tab. <br> Scheduled checks: weekly · OSM database edition: 2026-07-15 · Data retrieved: 2026-11-23 11:36 UTC · 1,285 mapped toilets | [Source &amp; docs](<https://github.com/jsdyer/restroomreach>) |
 | [Holiday Clock](<https://coolcode.ca/holidayclock/>) | Compare holiday calendars and count working days with rules you can inspect. <br> Multiple data sources · Canada Holidays records and local date-holidays rules compare calendars; custom working-day assumptions stay in your browser. Compare any supported countries and first-level regions, with British Columbia and Nova Scotia as the starting pair. Canada can use nominal or observed dates; other calendars retain their own substitute rules. Export a comparison CSV, dated JSON receipt or all-day ICS calendar. The working-day planner uses public holidays, your selected weekend weekdays and extra closure dates, counting each date once. Confirm applicable workplace rules: these community calendars are not statutory or ATIP deadline advice. <br> Scheduled checks: monthly · Canadian cache retrieved: 2026-11-23 11:34 UTC · 4 cached years | [Source &amp; docs](<https://github.com/jsdyer/holidayclock>) |
+| [Fleet Sheet](<https://coolcode.ca/translink/>) | See which TransLink vehicles are out, where a route is bunched, and what changed since the previous capture. <br> Saved dataset · TransLink’s GTFS-Realtime feeds supply vehicle positions, trip delays and service alerts for each saved capture. Pick a capture, then a route. The closest pair is measured along the saved line when this network file has one, and as the crow flies when it does not. A route missing from a partial capture is not counted as zero. <br> Scheduled checks: hourly · Fleet captured: 2026-11-24 03:21 UTC · Network: 2026-11-24 · 687 buses out | [Source &amp; docs](<https://github.com/jsdyer/translink>) |
 
 #### Sky &amp; photography
 
@@ -538,12 +539,12 @@ app in its source repository; change the homepage record only when its listing c
 Do not edit generated HTML or commit `dist/`, and do not copy another project's
 published files into this repository just to link to it.
 
-[Repository coverage audit](docs/repository-audit.md) · [November 2026 tool audit](docs/november-tool-audit.md) · [Planned investigations for existing tools](docs/next-investigations.md)
+[Mandatory tool lifecycle](docs/tool-lifecycle.md) · [GitHub-managed watchdog](services/refresh-watchdog/README.md) · [Visitor Worker](services/cloudflare-visitor/README.md) · [Repository coverage audit](docs/repository-audit.md) · [November 2026 tool audit](docs/november-tool-audit.md) · [Planned investigations for existing tools](docs/next-investigations.md)
 
 <!-- schedule-reliability -->
 ## Schedule reliability
 
 Public GitHub repositories can have scheduled workflows disabled after 60 days of inactivity. A separate weekly [schedule guard](.github/workflows/schedule-guard.yml) calls GitHub's enable-workflow API for an explicit list of refresh workflows and itself. It can restore workflows disabled for inactivity, preserves manually disabled workflows, and runs independently of collection failures.
 
-This is an interim mitigation, not a scheduling guarantee: GitHub does not document active-workflow renewal as a permanent exemption, and scheduled runs can be delayed or dropped. A scheduler on our own Linux server is the planned independent trigger. The guard does not collect data, create dummy commits, or change source/check timestamps; successful collection and published data freshness still need monitoring.
+This is an interim mitigation, not a scheduling guarantee: GitHub does not document active-workflow renewal as a permanent exemption, and scheduled runs can be delayed or dropped. The GitHub-managed service in `services/refresh-watchdog/` supplies the independent Linux scheduler; it becomes active after installation and refreshes its targets from this repository. The guard does not collect data, create dummy commits, or change source/check timestamps; successful collection and published data freshness still need monitoring.
 <!-- /schedule-reliability -->

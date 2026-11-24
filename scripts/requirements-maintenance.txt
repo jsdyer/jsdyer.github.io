@@ -1,0 +1,2 @@
+# Only the separate online workflow inventory uses YAML. The catalogue build is stdlib-only.
+PyYAML==6.0.3

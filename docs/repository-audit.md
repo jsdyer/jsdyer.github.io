@@ -1,7 +1,6 @@
 # Repository coverage audit
 
-Reviewed 23 November 2026. The repository inventory was read through all three
-nonempty GitHub pages and an empty final page. The machine-readable result is
+The current inventory is regenerated from every public repository page. The latest review includes the missing Fleet Sheet tool, four newly created starter repositories, and the public-apis contribution/reference fork. The machine-readable result is
 [`data/repository-audit.json`](../data/repository-audit.json). It includes public
 repository names only; private repository identities are omitted.
 
@@ -26,10 +25,8 @@ inspected but not executed in the audit environment because PHP was unavailable.
 
 Compose Diff and MIME Cabinet were starter templates at the start of this review.
 Both are now implemented, deployed and checked, and are listed as browser tools.
-The final inventory contains **218 catalogue tools across 209 source repositories**,
-with **223 public repositories reviewed, 14 documented exclusions and no unreviewed
-public repositories**. One private repository was omitted. The report is regenerated
-after each catalogue addition.
+Current counts and classifications are generated in [data/repository-audit.json](../data/repository-audit.json), not maintained separately in this narrative. Refresh that report after every catalogue change. The offline integration check rejects stale counts, unresolved repositories and stale exclusions.
+
 
 ## Reviewed exclusions
 
@@ -38,7 +35,7 @@ records each public exclusion with a reason and review date:
 
 - Ten separate personal/business websites are not CoolCode utilities.
 - `coolcode-tool-template` is the reusable starter, not a finished tool.
-- `contaminatedplaces` still contains the starter template.
+- Starter repositories are explicitly classified until their actual tools are implemented and verified.
 - `queryconfessional` and `backupledger` contain no source files yet.
 
 An exclusion is a review decision, not a permanent block. Remove it when a tool is

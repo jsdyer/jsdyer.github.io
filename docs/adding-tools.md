@@ -1,5 +1,7 @@
 # Adding a tool
 
+Follow the mandatory [tool lifecycle checklist](tool-lifecycle.md) for additions, updates, renames and removals. Repository creation alone is not completion.
+
 The catalogue is curated in `data/tools.json`. Category IDs, titles, icons and order
 are in `data/categories.json`. Array order controls listing order within each category.
 The four featured cards use the same catalogue records. Edit `data/featured.json` to choose their order.
@@ -211,7 +213,7 @@ that an application or its data is correct.
 
 Use the catalogue ID as the first path segment for a browser tool (for example, `/nightfinder/`). The standalone template build adds the shared `/assets/tool-metrics.js` script and the `/report/?tool=ID` link. For a custom build, include the script once with `defer` and add the issue link to the published HTML. The counter reads the ID from the URL. Check the deployed page as well as its catalogue entry.
 
-The production Cloudflare Worker `coolcode-visitor-api` keeps an explicit `toolList` of accepted catalogue IDs. For each new ID, add its quoted slug to that array and deploy the Worker. The same list validates visit counts and private issue submissions. An existing ID continues to work when only its data, features or title changes. Install-only listings can receive issue reports, while browsing their external installation guides produces no CoolCode tool pageviews.
+The production `coolcode-visitor-api` Worker accepts the generated catalogue ID list. Run `scripts/sync_operations.py`, deploy `services/cloudflare-visitor/worker.js` using its documented content-only deployment, and verify `scripts/check_live_registry.py`. Do not edit a second array in the dashboard. The same IDs validate visits and private issues. Install-only listings can receive issues; external installation guides do not produce CoolCode pageviews.
 
 To verify, open the new browser tool with counting enabled and inspect the `POST /event` request for a successful response. Sign in to the owner dashboard and search Tool traffic for the tool. A catalogue listing alone does not confirm that the collector accepts its events.
 

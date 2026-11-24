@@ -1,0 +1,32 @@
+[Unit]
+Description=CoolCode independent refresh scheduler and freshness watchdog
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+DynamicUser=yes
+StateDirectory=coolcode-watchdog
+StateDirectoryMode=0700
+WorkingDirectory=/var/lib/coolcode-watchdog
+LoadCredential=github-credential:/etc/coolcode-watchdog/credential
+LoadCredential=auth.json:/etc/coolcode-watchdog/auth.json
+LoadCredential=targets.json:/etc/coolcode-watchdog/targets.json
+LoadCredential=heartbeat-url:/etc/coolcode-watchdog/heartbeat-url
+ExecStart=/opt/coolcode-watchdog/venv/bin/python /opt/coolcode-watchdog/run-service.py
+TimeoutStartSec=15min
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+
+[Install]
+WantedBy=multi-user.target
