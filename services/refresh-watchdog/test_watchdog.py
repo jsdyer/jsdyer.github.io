@@ -39,6 +39,32 @@ class Fake:
     def writes(self):return [c for c in self.calls if c[0]!='GET']
 
 class Decisions(unittest.TestCase):
+    def test_prefixdiary_date_only_snapshot_survives_its_scheduled_weekend_gap(self):
+        registry=json.loads(Path(__file__).with_name('targets.json').read_text())
+        target=next(t for t in registry['targets'] if t['repo']=='jsdyer/prefixdiary' and t['workflow']=='refresh.yml')
+        c={'version':1,'targets':[target]}
+        saturday=completed(created='2026-11-21T17:36:36Z')
+        old=copy.deepcopy(c)
+        old['targets'][0]['freshness'][0].pop('max_age_seconds')
+        state={}
+        before=w.run(old,state,Fake(runs=[saturday],public={'retrieved':'2026-11-21'}),w.timestamp('2026-11-24T09:33:08Z'),True)
+        self.assertEqual(before['targets'][0]['status'],'published_stale')
+        f=Fake(runs=[saturday],public={'retrieved':'2026-11-21'})
+        r=w.run(c,state,f,w.timestamp('2026-11-24T09:38:08Z'),True)
+        self.assertEqual(r['targets'][0]['status'],'current')
+        self.assertEqual(r['errors'],0)
+        self.assertFalse(r['targets'][0]['freshness'][0]['cached'])
+        self.assertFalse(f.writes)
+        # The longer date tolerance must not postpone a missed Tuesday workflow.
+        late=Fake(runs=[saturday],public={'retrieved':'2026-11-21'})
+        r=w.run(c,{},late,w.timestamp('2026-11-24T12:23:00Z'),True)
+        self.assertEqual(r['targets'][0]['status'],'dispatch_requested')
+        # Nor may an old snapshot pass indefinitely after successful workflows.
+        fresh_run=Fake(runs=[completed(created='2026-11-24T13:00:00Z')],public={'retrieved':'2026-11-21'})
+        r=w.run(c,{},fresh_run,w.timestamp('2026-11-25T00:00:01Z'),True)
+        self.assertEqual(r['targets'][0]['status'],'published_stale')
+        self.assertEqual(r['errors'],1)
+
     def test_progress_precedes_request_and_checkpoint_survives_later_interruption(self):
         c=config();c['targets'].append(dict(c['targets'][0],repo='owner/second'))
         events=[];checkpoints=[]

@@ -45,6 +45,19 @@ unchanged response. Source edition dates, historical observations and manual
 review dates are not refresh dates. Existing date-only fields retain their
 one-day precision allowance. A retained fallback keeps its original date.
 
+Prefix Diary publishes a date-only successful-retrieval field and refreshes
+Tuesday–Saturday at 10:22 UTC. Its reviewed maximum age is four days (345600
+seconds): the three-day Saturday-to-Tuesday gap plus one day for date precision.
+The generic daily limit incorrectly flagged Saturday's snapshot on Tuesday morning,
+before another run was due. This tolerance does not delay recovery of a missed
+scheduled workflow; the due-run check remains separate and unchanged.
+
+The Healthchecks signal represents the result of the whole pass. `errors > 0`
+sends a failure ping, including a failed published-data freshness check, even when
+the Linux process itself ran normally. Ordinary `attention` warnings do not send
+a failure ping. Read the report's target status/reason to identify what failed;
+the Healthchecks “Down” label alone does not establish that the server is offline.
+
 Seven apps needed small published metadata additions: Blocked or Gone, Contract
 Patterns, Langley Trades, Lobby Trail, Metro Economy, Patent Attic and RegistrarWatch.
 The other additions reuse existing fields after reviewing their collectors.

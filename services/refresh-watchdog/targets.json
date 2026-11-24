@@ -2301,7 +2301,8 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "precision": "date"
+          "precision": "date",
+          "max_age_seconds": 345600
         }
       ]
     },
