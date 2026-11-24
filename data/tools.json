@@ -483,7 +483,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-19",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "regions"
@@ -545,7 +545,7 @@
             ],
             "unit": "coverage areas"
           },
-          "value": "2026-11-19",
+          "value": "2026-11-23",
           "count": 6634
         }
       ]
@@ -588,8 +588,8 @@
             ],
             "unit": "calendar days"
           },
-          "value": "2026-11-22",
-          "count": 2149
+          "value": "2026-11-23",
+          "count": 2150
         }
       ]
     },
@@ -628,7 +628,7 @@
             "capturedAt"
           ],
           "label": "Canadian sample retrieved",
-          "value": "2026-11-22",
+          "value": "2026-11-24",
           "count_at": {
             "path": [],
             "unit": "case studies",
@@ -887,8 +887,8 @@
             "measure": "length",
             "unit": "Canadian notices"
           },
-          "value": "2026-11-23",
-          "count": 6547
+          "value": "2026-11-24",
+          "count": 6556
         },
         {
           "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
@@ -903,8 +903,8 @@
             "measure": "length",
             "unit": "KEV entries"
           },
-          "value": "2026-11-20",
-          "count": 1790
+          "value": "2026-11-23",
+          "count": 1792
         }
       ]
     },
@@ -951,8 +951,8 @@
             "unit": "KEV entries",
             "measure": "length"
           },
-          "value": "2026-11-23",
-          "count": 1790
+          "value": "2026-11-24",
+          "count": 1792
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -960,7 +960,7 @@
             "kevDate"
           ],
           "label": "Source published",
-          "value": "2026-11-20"
+          "value": "2026-11-23"
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -968,7 +968,7 @@
             "epssDate"
           ],
           "label": "EPSS score date",
-          "value": "2026-11-22"
+          "value": "2026-11-23"
         }
       ]
     },
@@ -1013,7 +1013,7 @@
             "measure": "length",
             "unit": "official feeds"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-24",
           "count": 13
         },
         {
@@ -1411,7 +1411,7 @@
             ],
             "unit": "briefing notes"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 161791
         },
         {
@@ -1420,7 +1420,7 @@
             "sourceUpdated"
           ],
           "label": "Source updated",
-          "value": "2026-11-22"
+          "value": "2026-11-23"
         }
       ],
       "cadence": "Daily"
@@ -1487,7 +1487,7 @@
             ],
             "unit": "release and month combinations"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 58806
         },
         {
@@ -1553,7 +1553,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-19",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "years"
@@ -1605,7 +1605,7 @@
             ],
             "unit": "notes"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 7676
         },
         {
@@ -1614,7 +1614,7 @@
             "modified"
           ],
           "label": "Source updated",
-          "value": "2026-11-22"
+          "value": "2026-11-23"
         }
       ],
       "cadence": "Daily"
@@ -1655,7 +1655,7 @@
             ],
             "unit": "disclosures"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-24",
           "count": 73
         },
         {
@@ -1664,7 +1664,7 @@
             "modified"
           ],
           "label": "Source updated",
-          "value": "2026-11-22"
+          "value": "2026-11-23"
         }
       ],
       "cadence": "Daily"
@@ -1703,7 +1703,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-19",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "records"
@@ -1762,7 +1762,7 @@
             "unit": "catalogue entries"
           },
           "value": "2026-11-23",
-          "count": 48350
+          "count": 48359
         },
         {
           "url": "https://coolcode.ca/datasetexplorer/data/manifest.json",
@@ -1770,7 +1770,7 @@
             "publisherDate"
           ],
           "label": "Source updated",
-          "value": "2026-11-22"
+          "value": "2026-11-23"
         }
       ],
       "cadence": "Daily"
@@ -1811,7 +1811,7 @@
             ],
             "unit": "removed entries"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-24",
           "count": 3934
         },
         {
@@ -1856,7 +1856,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-22",
+          "value": "2026-11-24",
           "count_at": {
             "path": [
               "series"
@@ -2027,8 +2027,8 @@
             ],
             "unit": "federal records"
           },
-          "value": "2026-11-22",
-          "count": 1581309
+          "value": "2026-11-24",
+          "count": 1581591
         },
         {
           "label": "Nova Scotia register",
@@ -2156,7 +2156,7 @@
             ],
             "unit": "charities"
           },
-          "value": "2026-11-19",
+          "value": "2026-11-23",
           "count": 87802
         },
         {
@@ -2314,7 +2314,7 @@
             ],
             "unit": "notices"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-24",
           "count": 34417
         }
       ],
@@ -2360,8 +2360,8 @@
             ],
             "unit": "pre-grant applications"
           },
-          "value": "2026-11-17",
-          "count": 14556
+          "value": "2026-11-24",
+          "count": 13963
         }
       ],
       "cadence": "Weekly"
@@ -2491,7 +2491,7 @@
             "measure": "sum",
             "field": "count"
           },
-          "value": "2026-11-19",
+          "value": "2026-11-23",
           "count": 2218198
         }
       ],
@@ -2536,7 +2536,7 @@
             ],
             "unit": "shipwreck records"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 4957
         },
         {
@@ -2584,7 +2584,7 @@
             "builtAt"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "count"
@@ -2634,7 +2634,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-22",
+          "value": "2026-11-24",
           "count_at": {
             "path": [
               "count"
@@ -2813,7 +2813,7 @@
             "unit": "planning records",
             "measure": "length"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 644
         },
         {
@@ -2828,8 +2828,8 @@
             ],
             "unit": "listed permit folders"
           },
-          "value": "2026-11-22",
-          "count": 2082
+          "value": "2026-11-23",
+          "count": 2073
         }
       ]
     },
@@ -2871,7 +2871,8 @@
               "licences"
             ],
             "unit": "licences"
-          }
+          },
+          "unavailable": true
         }
       ]
     },
@@ -2912,7 +2913,9 @@
               "cameras"
             ],
             "unit": "cameras"
-          }
+          },
+          "value": "2026-11-23",
+          "count": 1041
         }
       ]
     },
@@ -2953,7 +2956,9 @@
               "services"
             ],
             "unit": "police services"
-          }
+          },
+          "value": "2026-11-23",
+          "count": 239
         }
       ]
     },
@@ -2987,7 +2992,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "total"
@@ -3192,7 +3197,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-23 00:53 UTC",
+          "value": "2026-11-23 20:01 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -3241,7 +3246,7 @@
             "updated"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-20",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "records"
@@ -3299,7 +3304,7 @@
             "unit": "daily captures",
             "measure": "length"
           },
-          "value": "2026-11-23 16:59 UTC",
+          "value": "2026-11-23 19:59 UTC",
           "count": 1
         }
       ]
@@ -3438,7 +3443,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-22",
+          "value": "2026-11-24",
           "count_at": {
             "path": [
               "tracks"
@@ -3455,7 +3460,7 @@
             0
           ],
           "label": "Observation dates",
-          "value": "2017-01-02–2026-11-20",
+          "value": "2017-01-02–2026-11-23",
           "end_path": [
             "dates",
             -1
@@ -3499,7 +3504,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-19",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "products"
@@ -3561,7 +3566,7 @@
             "oldest_retrieval"
           ],
           "label": "Oldest source retrieved",
-          "value": "2026-11-19",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "sources"
@@ -4582,7 +4587,7 @@
             ],
             "unit": "published prices"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 19733
         },
         {
@@ -4800,7 +4805,7 @@
             ],
             "unit": "transit routes"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 8
         },
         {
@@ -4876,7 +4881,7 @@
           "path": [
             "retrieved"
           ],
-          "value": "2026-11-22"
+          "value": "2026-11-23"
         }
       ]
     },
@@ -5277,8 +5282,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-23 07:31 UTC",
-          "count": 20
+          "value": "2026-11-23 23:50 UTC",
+          "count": 22
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -5293,7 +5298,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 800
+          "count": 880
         }
       ]
     },
@@ -5580,7 +5585,7 @@
             ],
             "unit": "paired station-hours"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 503
         },
         {
@@ -5590,7 +5595,7 @@
             "catalog",
             "langleyLatest"
           ],
-          "value": "2026-11-22"
+          "value": "2026-11-23"
         },
         {
           "url": "https://coolcode.ca/airpair/data/pairs.json",
@@ -6244,8 +6249,8 @@
             ],
             "unit": "monthly comparison groups"
           },
-          "value": "2026-11-19",
-          "count": 9773
+          "value": "2026-11-23",
+          "count": 9645
         },
         {
           "label": "Test months",
@@ -6256,7 +6261,7 @@
           "end_path": [
             "end"
           ],
-          "value": "2026-07–2026-09"
+          "value": "2026-08–2026-10"
         }
       ]
     },
@@ -6571,8 +6576,8 @@
             ],
             "unit": "published prefixes"
           },
-          "value": "2026-11-23 19:00 UTC",
-          "count": 13992
+          "value": "2026-11-23 19:59 UTC",
+          "count": 13990
         }
       ]
     },
@@ -7089,7 +7094,7 @@
             ],
             "unit": "utility bulletins"
           },
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count": 10
         }
       ]
@@ -7240,8 +7245,8 @@
             ],
             "unit": "trace observations"
           },
-          "value": "2026-11-20",
-          "count": 12520
+          "value": "2026-11-21",
+          "count": 15043
         },
         {
           "url": "https://coolcode.ca/boomerang-meter/data/status.json",
@@ -7249,7 +7254,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-22"
+          "value": "2026-11-23"
         }
       ]
     },
@@ -7560,7 +7565,7 @@
           "path": [
             "retrieved"
           ],
-          "value": "2026-11-22",
+          "value": "2026-11-23",
           "count_at": {
             "path": [
               "count"
@@ -7690,8 +7695,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-23 01:45 UTC",
-          "count": 379
+          "value": "2026-11-23 22:45 UTC",
+          "count": 566
         }
       ]
     },
@@ -7782,8 +7787,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-23 01:56 UTC",
-          "count": 22
+          "value": "2026-11-23 13:35 UTC",
+          "count": 26
         }
       ]
     },
@@ -8097,8 +8102,8 @@
             "unit": "observations",
             "measure": "length"
           },
-          "value": "2026-11-22 14:00 UTC",
-          "count": 7600
+          "value": "2026-11-24 00:23 UTC",
+          "count": 7747
         }
       ]
     },
@@ -8142,7 +8147,7 @@
             "unit": "list entries",
             "measure": "length"
           },
-          "value": "2026-11-22 14:00 UTC",
+          "value": "2026-11-23 22:00 UTC",
           "count": 5781
         }
       ]
@@ -8187,7 +8192,7 @@
             "unit": "crossings",
             "measure": "length"
           },
-          "value": "2026-11-23 01:34 UTC",
+          "value": "2026-11-23 21:59 UTC",
           "count": 4
         }
       ]
@@ -8232,7 +8237,7 @@
             "unit": "orders",
             "measure": "length"
           },
-          "value": "2026-11-22 14:12 UTC",
+          "value": "2026-11-23 20:40 UTC",
           "count": 1089
         }
       ]
@@ -8326,8 +8331,8 @@
             ],
             "unit": "threat domains tracked"
           },
-          "value": "2026-11-23 17:59 UTC",
-          "count": 111
+          "value": "2026-11-23 20:01 UTC",
+          "count": 231
         }
       ]
     },
@@ -8465,7 +8470,7 @@
             ],
             "unit": "products"
           },
-          "value": "2026-11-22 15:03 UTC",
+          "value": "2026-11-23 22:13 UTC",
           "count": 25
         }
       ],
@@ -8553,7 +8558,7 @@
             ],
             "unit": "sections and schedules"
           },
-          "value": "2026-11-22 14:56 UTC",
+          "value": "2026-11-23 20:26 UTC",
           "count": 207
         }
       ],
@@ -8597,7 +8602,7 @@
             ],
             "unit": "recordings"
           },
-          "value": "2026-11-22 15:05 UTC",
+          "value": "2026-11-23 20:26 UTC",
           "count": 345
         }
       ],
@@ -8641,7 +8646,7 @@
             ],
             "unit": "hourly traffic points"
           },
-          "value": "2026-11-22 15:17 UTC",
+          "value": "2026-11-23 21:38 UTC",
           "count": 501
         }
       ],
@@ -8738,8 +8743,8 @@
             ],
             "unit": "reported species"
           },
-          "value": "2026-11-22 15:17 UTC",
-          "count": 145
+          "value": "2026-11-23 22:06 UTC",
+          "count": 142
         }
       ],
       "cadence": "Daily"
@@ -8871,7 +8876,7 @@
             "captured_at"
           ],
           "precision": "minute",
-          "value": "2026-11-23 04:23 UTC"
+          "value": "2026-11-24 00:55 UTC"
         }
       ]
     },
@@ -8937,7 +8942,7 @@
             "label"
           ],
           "precision": "minute",
-          "value": "2026-11-23 04:58 UTC"
+          "value": "2026-11-23 20:34 UTC"
         }
       ]
     },
@@ -9288,7 +9293,7 @@
             "captured_at"
           ],
           "precision": "minute",
-          "value": "2026-11-23 09:16 UTC"
+          "value": "2026-11-23 19:59 UTC"
         }
       ]
     },
@@ -9391,7 +9396,7 @@
             "capturedAt"
           ],
           "precision": "minute",
-          "value": "2026-11-23 09:06 UTC"
+          "value": "2026-11-23 23:59 UTC"
         }
       ]
     },
@@ -9492,7 +9497,7 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-23 10:52 UTC",
+          "value": "2026-11-23 22:42 UTC",
           "count": 261
         }
       ]
@@ -9539,8 +9544,8 @@
             ],
             "unit": "observations"
           },
-          "value": "2026-11-23 11:06 UTC",
-          "count": 140
+          "value": "2026-11-23 23:55 UTC",
+          "count": 192
         }
       ]
     },
@@ -9645,8 +9650,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-23 11:05 UTC",
-          "count": 103
+          "value": "2026-11-23 22:42 UTC",
+          "count": 179
         }
       ]
     },
