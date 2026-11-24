@@ -20,10 +20,44 @@ A newly added repository must also be accessible to the existing GitHub App inst
 - It recovers workflows disabled specifically for inactivity. Manually disabled workflows stay disabled.
 - It dispatches missed refreshes, avoiding jobs already queued or running. It attempts at most ten dispatches per pass, uses persisted cooldowns, and limits recovery attempts for each due occurrence.
 - A successful dispatch request is **not** reported as a successful refresh. Later passes check the completed run and, where configured, the actual published data timestamp.
-- Published freshness checks use reviewed collection/check timestamps from `data/operations/freshness.json` in the hub. Old upstream observations and intentionally retained captures are not silently treated as fresh. Only reviewed probes are enabled; the generated targets show their current coverage.
+- Published freshness checks use reviewed collection/check timestamps from `data/operations/freshness.json` in the hub. Old upstream observations and intentionally retained captures are not silently treated as fresh. The 162 data-publishing workflows have 166 reviewed probes; the six workflow-only exceptions are listed below.
 - An optional Healthchecks-compatible heartbeat can notify you if a pass fails or the server stops checking. Without that URL, reporting is local through the JSON report and systemd journal.
 
 The separate weekly GitHub schedule guards are an immediate mitigation, not a documented exemption from GitHub's inactivity policy. This server provides the independent scheduling backstop. **Execution and publication still depend on GitHub Actions**; migrating the collectors themselves to your server would be a separate step.
+
+## Published timestamp coverage
+
+All 162 scheduled data-publishing workflows have a published timestamp check.
+The remaining six jobs monitor or audit existing material and do not publish a
+source-data snapshot:
+
+| Repository | Workflow | Purpose |
+| --- | --- | --- |
+| `atlanticdial` | `station-schedules.yml` | Check station schedule pages for changes |
+| `donairafterdark` | `watch.yml` | Check menu sources for editorial review |
+| `jsdyer.github.io` | `canada-probes.yml` | Check Canadian source access |
+| `jsdyer.github.io` | `catalogue-audit.yml` | Audit repository and deployment integration |
+| `jsdyer.github.io` | `catalogue-freshness.yml` | Check the catalogue's published metadata |
+| `jsdyer.github.io` | `service-monitor.yml` | Monitor services |
+
+Checks use the date of a successful source retrieval or validation, including an
+unchanged response. Source edition dates, historical observations and manual
+review dates are not refresh dates. Existing date-only fields retain their
+one-day precision allowance. A retained fallback keeps its original date.
+
+Seven apps needed small published metadata additions: Blocked or Gone, Contract
+Patterns, Langley Trades, Lobby Trail, Metro Economy, Patent Attic and RegistrarWatch.
+The other additions reuse existing fields after reviewing their collectors.
+Contract Patterns exposes a small status file instead of requiring a 47 MB data
+download. The probe label names the checked feed: for example, Patch Signal checks
+KEV retrieval, while optional EPSS enrichment is reported by the app separately.
+A fresh capture timestamp does not certify every optional feed or the accuracy of
+the upstream data.
+
+Keep the probe mapping in `data/operations/freshness.json` current when adding or
+changing a workflow. The operations test requires a probe for every scheduled job
+except these six documented non-data jobs. This update changes probe configuration;
+the installed service loads it automatically without a runtime reinstall.
 
 ## 1. Prerequisites
 

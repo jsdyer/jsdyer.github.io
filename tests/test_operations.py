@@ -20,6 +20,22 @@ class OperationsTests(unittest.TestCase):
     def test_committed_outputs_are_current(self):
         sync(ROOT, check=True)
 
+    def test_scheduled_data_workflows_have_published_timestamp_checks(self):
+        # The six non-data jobs are explained in services/refresh-watchdog/README.md.
+        workflow_only = {
+            'jsdyer/atlanticdial/station-schedules.yml',
+            'jsdyer/donairafterdark/watch.yml',
+            'jsdyer/jsdyer.github.io/canada-probes.yml',
+            'jsdyer/jsdyer.github.io/catalogue-audit.yml',
+            'jsdyer/jsdyer.github.io/catalogue-freshness.yml',
+            'jsdyer/jsdyer.github.io/service-monitor.yml',
+        }
+        generated = outputs(ROOT, self.tools, self.registry, self.overrides)
+        targets = json.loads(generated['services/refresh-watchdog/targets.json'])['targets']
+        missing = {f"{t['repo']}/{t['workflow']}" for t in targets if not t.get('freshness')}
+        self.assertEqual(missing, workflow_only,
+                         'Add reviewed published timestamp probes for new data workflows.')
+
     def test_new_repository_cannot_be_forgotten(self):
         self.tools.append({'id': 'another-real-tool', 'source': 'https://github.com/jsdyer/another-real-tool'})
         with self.assertRaisesRegex(ValueError, 'Repository coverage'):

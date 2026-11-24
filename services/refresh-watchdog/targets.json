@@ -10,7 +10,19 @@
       "crons": [
         "39 7 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/accessreceipt/data/index.json",
+          "json_path": [
+            "captures",
+            0,
+            "capturedAt"
+          ],
+          "precision": "timestamp",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/aircheckdiary",
@@ -19,7 +31,17 @@
       "crons": [
         "23 8 19 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/aircheckdiary/data/archive.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/airpair",
@@ -28,7 +50,18 @@
       "crons": [
         "32 11 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/airpair/data/pairs.json",
+          "json_path": [
+            "catalog",
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/algorithmwatch",
@@ -37,7 +70,17 @@
       "crons": [
         "26 14 * * 1"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/algorithmwatch/register.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "date",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/anycastcompass",
@@ -67,7 +110,19 @@
       ],
       "inputs": {
         "refresh": "true"
-      }
+      },
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/apiarchaeology/data/manifest.json",
+          "json_path": [
+            "captures",
+            0,
+            "capturedAt"
+          ],
+          "precision": "timestamp",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/asn-canada",
@@ -76,7 +131,17 @@
       "crons": [
         "14 7 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/asn-canada/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/atip",
@@ -85,7 +150,17 @@
       "crons": [
         "23 10 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/atip/data/manifest.json",
+          "json_path": [
+            "generatedAtUtc"
+          ],
+          "precision": "timestamp",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/atipdecisions",
@@ -113,7 +188,25 @@
       "crons": [
         "23 12 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/atipmetrics/data.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "date",
+          "label": "Source snapshot generated"
+        },
+        {
+          "url": "https://coolcode.ca/atipmetrics/research-data/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "date",
+          "label": "Research sources retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/atippopularity",
@@ -122,7 +215,17 @@
       "crons": [
         "27 11 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/atippopularity/data/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/atlanticdial",
@@ -131,7 +234,17 @@
       "crons": [
         "41 21 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/atlanticdial/episodes.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Episode feeds retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/atlanticdial",
@@ -168,7 +281,17 @@
       "crons": [
         "17 7 11 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/auroratrace/data/archive.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/bankrates",
@@ -177,7 +300,17 @@
       "crons": [
         "23 12 * * 1-5"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/bankrates/snapshot.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/blockedorgone",
@@ -186,7 +319,17 @@
       "crons": [
         "43 12 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/blockedorgone/data-status.json",
+          "json_path": [
+            "oldest_retrieval"
+          ],
+          "precision": "timestamp",
+          "label": "Rolling cases retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/boomerang-meter",
@@ -195,7 +338,17 @@
       "crons": [
         "47 9 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/boomerang-meter/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/borderpulse",
@@ -223,7 +376,17 @@
       "crons": [
         "24 14 6 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/bridgeledger/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/briefings",
@@ -232,7 +395,17 @@
       "crons": [
         "37 13 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/briefings/data/manifest.json",
+          "json_path": [
+            "snapshotBuilt"
+          ],
+          "precision": "timestamp",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/broadbandatlas",
@@ -241,7 +414,17 @@
       "crons": [
         "37 10 12 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/broadbandatlas/data/index.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "date",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/buoybench",
@@ -271,7 +454,17 @@
       "crons": [
         "33 10 4 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/campcalendar/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/canadaanalytics",
@@ -280,7 +473,17 @@
       "crons": [
         "02 13 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/canadaanalytics/data/pulse.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/cancon-atlas",
@@ -289,7 +492,17 @@
       "crons": [
         "41 10 9 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/cancon-atlas/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/ccts-ledger",
@@ -298,7 +511,17 @@
       "crons": [
         "41 10 17 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/ccts-ledger/data/index.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/census-lens",
@@ -307,7 +530,17 @@
       "crons": [
         "18 9 20 2,5,8,11 *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/census-lens/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/chargegaps",
@@ -337,7 +570,17 @@
       "crons": [
         "43 14 13 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/charityflows/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "date",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/chirproom",
@@ -346,7 +589,17 @@
       "crons": [
         "31 8 8 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/chirproom/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/clamground",
@@ -355,7 +608,17 @@
       "crons": [
         "31 9 5 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/clamground/data/records.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/cloud-ledger",
@@ -364,7 +627,17 @@
       "crons": [
         "17 10 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/cloud-ledger/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/coalbelow",
@@ -373,7 +646,17 @@
       "crons": [
         "41 9 6 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/coalbelow/data/index.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/contractpatterns",
@@ -382,7 +665,17 @@
       "crons": [
         "31 8 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/contractpatterns/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Source checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/corporateghosts",
@@ -391,7 +684,17 @@
       "crons": [
         "48 12 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/corporateghosts/data/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/crossingrecord",
@@ -400,7 +703,17 @@
       "crons": [
         "24 14 6 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/crossingrecord/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/datasetexplorer",
@@ -409,7 +722,17 @@
       "crons": [
         "55 13 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/datasetexplorer/data/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "date",
+          "label": "Source snapshot generated"
+        }
+      ]
     },
     {
       "repo": "jsdyer/dawnchorus",
@@ -437,7 +760,17 @@
       "crons": [
         "24 14 6 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/dispatchledger/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/dockdiary",
@@ -493,7 +826,17 @@
       "crons": [
         "32 9 6 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/drivecohort/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/exploitgraveyard",
@@ -521,7 +864,17 @@
       "crons": [
         "36 12 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/exportneighbours/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Trade data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/federal-property-atlas",
@@ -530,7 +883,17 @@
       "crons": [
         "43 10 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/federal-property-atlas/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/ferrycountss",
@@ -539,7 +902,17 @@
       "crons": [
         "53 10 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/ferrycountss/data/seabus-status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "SeaBus retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/ferrycountss",
@@ -548,7 +921,17 @@
       "crons": [
         "43 11 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/ferrycountss/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Halifax retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/ferryrecord",
@@ -557,7 +940,17 @@
       "crons": [
         "49 10 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/ferryrecord/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/filingdelta",
@@ -629,7 +1022,17 @@
       "crons": [
         "15 8 8 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/flybyfiles/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/forecastreceipt",
@@ -657,7 +1060,17 @@
       "crons": [
         "27 12 * * 1"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/forgottenplaces/data/manifest.json",
+          "json_path": [
+            "builtAt"
+          ],
+          "precision": "timestamp",
+          "label": "Heritage workbook retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/fossilneighbours",
@@ -666,7 +1079,17 @@
       "crons": [
         "27 7 5 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/fossilneighbours/data/index.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/fraudpulse",
@@ -694,7 +1117,17 @@
       "crons": [
         "41 10 9 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/freenet-echo/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Archive index retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/gc-domain-graveyard",
@@ -703,7 +1136,17 @@
       "crons": [
         "19 11 7 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/gc-domain-graveyard/data.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Catalogue retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/gc-subdomain-watch",
@@ -712,7 +1155,17 @@
       "crons": [
         "43 8 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/gc-subdomain-watch/data.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Government directory retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/govdatagaps",
@@ -799,7 +1252,17 @@
       "crons": [
         "47 9 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/grid-dark/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Internet data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/gridreceipt",
@@ -828,7 +1291,17 @@
       "crons": [
         "38 9 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/halifaxtimelens/data/photos.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Photo index retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/hiddenwater",
@@ -904,7 +1377,17 @@
       "crons": [
         "47 10 12 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/hosted-where/data.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/hotspotledger",
@@ -932,7 +1415,17 @@
       "crons": [
         "27 8 20 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/housing-pulse/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/iceweeks",
@@ -941,7 +1434,17 @@
       "crons": [
         "41 10 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/iceweeks/data/index.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/inflation-basket",
@@ -950,7 +1453,17 @@
       "crons": [
         "27 8 20 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/inflation-basket/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/insolvencyatlas",
@@ -959,7 +1472,17 @@
       "crons": [
         "23 13 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/insolvencyatlas/data-status.json",
+          "json_path": [
+            "oldest_retrieval"
+          ],
+          "precision": "timestamp",
+          "label": "Source checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/ispreportcard",
@@ -987,7 +1510,17 @@
       "crons": [
         "28 8 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/ix-ledger/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/jsdyer.github.io",
@@ -1032,7 +1565,17 @@
       "crons": [
         "38 9 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/lakeprofiles/data/profiles.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Municipal profiles retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/langleychanges",
@@ -1060,7 +1603,17 @@
       "crons": [
         "17 15 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/langleytrades/data/status.json",
+          "json_path": [
+            "retrieved_at"
+          ],
+          "precision": "timestamp",
+          "label": "Licence data retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/lastmilepercentile",
@@ -1069,7 +1622,17 @@
       "crons": [
         "23 7 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/lastmilepercentile/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/lastrefill",
@@ -1078,7 +1641,17 @@
       "crons": [
         "33 19 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/lastrefill/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/launchledger",
@@ -1129,7 +1702,17 @@
       "crons": [
         "23 10 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/libraryworkbench/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Survey retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/lightkeeper",
@@ -1138,7 +1721,17 @@
       "crons": [
         "31 9 5,20 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/lightkeeper/data-status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/lobbytrail",
@@ -1147,7 +1740,17 @@
       "crons": [
         "37 15 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/lobbytrail/index.json",
+          "json_path": [
+            "checkedAt"
+          ],
+          "precision": "timestamp",
+          "label": "Source checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/malwarelineage",
@@ -1218,7 +1821,17 @@
       "crons": [
         "7 8 8 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/masspeaks/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/metermath",
@@ -1227,7 +1840,17 @@
       "crons": [
         "33 19 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/metermath/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/metroeconomy",
@@ -1236,7 +1859,17 @@
       "crons": [
         "17 15 * * 5"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/metroeconomy/data/summary.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Source checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/ministersays",
@@ -1245,7 +1878,17 @@
       "crons": [
         "20 11 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/ministersays/data/manifest.json",
+          "json_path": [
+            "generated"
+          ],
+          "precision": "timestamp",
+          "label": "Source checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/museumdrawer",
@@ -1294,7 +1937,17 @@
       "crons": [
         "09 13 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/namesforget/data/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "Source checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/nasa",
@@ -1303,7 +1956,19 @@
       "crons": [
         "17 13 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/nasa/data/index.json",
+          "json_path": [
+            "captures",
+            0,
+            "captured"
+          ],
+          "precision": "timestamp",
+          "label": "NASA/NOAA capture"
+        }
+      ]
     },
     {
       "repo": "jsdyer/oicdiary",
@@ -1333,7 +1998,17 @@
       ],
       "inputs": {
         "refresh_data": "true"
-      }
+      },
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/oldnews-oddities/data/shelf.json",
+          "json_path": [
+            "capturedAt"
+          ],
+          "precision": "timestamp",
+          "label": "Source checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/onionpulse",
@@ -1342,7 +2017,17 @@
       "crons": [
         "14 12 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/onionpulse/data/snapshot.json",
+          "json_path": [
+            "refreshed"
+          ],
+          "precision": "date",
+          "label": "Tor Metrics retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/opendatagraveyard",
@@ -1351,7 +2036,17 @@
       "crons": [
         "34 12 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/opendatagraveyard/data/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "date",
+          "label": "Source checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/orbitalcensus",
@@ -1379,7 +2074,25 @@
       "crons": [
         "38 7 2 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/otherworldnames/data-status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        },
+        {
+          "url": "https://coolcode.ca/otherworldnames/crater-light-status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Horizons retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/packagepulse",
@@ -1390,7 +2103,17 @@
       ],
       "inputs": {
         "refresh_data": "true"
-      }
+      },
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/packagepulse/data/defaults.json",
+          "json_path": [
+            "capturedAt"
+          ],
+          "precision": "timestamp",
+          "label": "Package registry capture"
+        }
+      ]
     },
     {
       "repo": "jsdyer/pantryprices",
@@ -1399,7 +2122,17 @@
       "crons": [
         "13 9 2,23 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/pantryprices/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Monthly tables retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/paperchequetrail",
@@ -1408,7 +2141,17 @@
       "crons": [
         "37 9 18 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/paperchequetrail/data/index.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/parkvisits",
@@ -1417,7 +2160,17 @@
       "crons": [
         "24 14 6 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/parkvisits/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/patchsignal",
@@ -1426,7 +2179,17 @@
       "crons": [
         "31 12 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/patchsignal/kev.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "KEV source retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/patentattic",
@@ -1435,7 +2198,17 @@
       "crons": [
         "20 11 * * 6"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/patentattic/manifest.json",
+          "json_path": [
+            "retrieved_at"
+          ],
+          "precision": "timestamp",
+          "label": "Pre-grant workbook retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/pipeda-findings",
@@ -1444,7 +2217,17 @@
       "crons": [
         "39 8 * * 5"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/pipeda-findings/data/index.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/planetpapers",
@@ -1453,7 +2236,17 @@
       "crons": [
         "37 8 5 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/planetpapers/data/index.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/plumediary",
@@ -1462,7 +2255,17 @@
       "crons": [
         "23 8 8 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/plumediary/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/postmarkplaces",
@@ -1471,7 +2274,17 @@
       "crons": [
         "23 10 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/postmarkplaces/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/prefixdiary",
@@ -1480,7 +2293,17 @@
       "crons": [
         "22 10 * * 2-6"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/prefixdiary/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/priceatlas",
@@ -1489,7 +2312,17 @@
       "crons": [
         "44 11 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/priceatlas/snapshot.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "Price table retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/quakeecho",
@@ -1498,7 +2331,17 @@
       "crons": [
         "39 8 8 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/quakeecho/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/rackexpiry",
@@ -1545,7 +2388,19 @@
       "crons": [
         "41 14 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/rangeledger/data/index.json",
+          "json_path": [
+            "snapshots",
+            0,
+            "retrieved"
+          ],
+          "precision": "timestamp",
+          "label": "Provider capture"
+        }
+      ]
     },
     {
       "repo": "jsdyer/recallradar",
@@ -1573,7 +2428,17 @@
       "crons": [
         "17 14 7,21 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/registrarwatch/data/index.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Quarterly sources checked"
+        }
+      ]
     },
     {
       "repo": "jsdyer/releasereceipt",
@@ -1603,7 +2468,19 @@
       ],
       "inputs": {
         "refresh": "true"
-      }
+      },
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/researchledger/data/ledger.json",
+          "json_path": [
+            "captures",
+            0,
+            "capturedAt"
+          ],
+          "precision": "timestamp",
+          "label": "Crossref capture"
+        }
+      ]
     },
     {
       "repo": "jsdyer/restroomreach",
@@ -1654,7 +2531,19 @@
       "crons": [
         "43 9 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/riverpulse/data/index.json",
+          "json_path": [
+            "captures",
+            0,
+            "capturedAt"
+          ],
+          "precision": "timestamp",
+          "label": "River observation capture"
+        }
+      ]
     },
     {
       "repo": "jsdyer/roadpulse",
@@ -1686,7 +2575,17 @@
       "crons": [
         "23 10 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/routemirror/data/loads-status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/salmonlines",
@@ -1697,7 +2596,17 @@
       ],
       "inputs": {
         "refresh": "true"
-      }
+      },
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/salmonlines/data/source.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/sanctionsledger",
@@ -1765,7 +2674,17 @@
       "crons": [
         "23 10 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/schoolhouseledger/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/scorecard",
@@ -1774,7 +2693,17 @@
       "crons": [
         "37 14 * * 4"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/scorecard/data/scorecard.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/seabusclock",
@@ -1783,7 +2712,17 @@
       "crons": [
         "37 10 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/seabusclock/data/seabus-status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/seabusclock",
@@ -1792,7 +2731,17 @@
       "crons": [
         "53 8 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/seabusclock/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Timetable retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/shieldcheck",
@@ -1840,7 +2789,17 @@
       "crons": [
         "23 10 3 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/shopfrontdiary/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/skyarchive",
@@ -1849,7 +2808,17 @@
       "crons": [
         "56 14 * * 5"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/skyarchive/catalog.json",
+          "json_path": [
+            "updated"
+          ],
+          "precision": "date",
+          "label": "MAST observations retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/snowcourses",
@@ -1858,7 +2827,17 @@
       "crons": [
         "33 19 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/snowcourses/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/spectrum-explorer",
@@ -1867,7 +2846,17 @@
       "crons": [
         "41 10 9 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/spectrum-explorer/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/spectrumatlas",
@@ -1876,7 +2865,17 @@
       "crons": [
         "22 13 8 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/spectrumatlas/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "date",
+          "label": "Spectrum sources retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/spillledger",
@@ -1885,7 +2884,17 @@
       "crons": [
         "41 10 4 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/spillledger/data/edition.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/statusledger",
@@ -1917,7 +2926,25 @@
       "crons": [
         "37 9 5 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/stormtracks/data-status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Tracks retrieved",
+          "precision": "date"
+        },
+        {
+          "url": "https://coolcode.ca/stormtracks/data-status.json",
+          "json_path": [
+            "harboursRetrieved"
+          ],
+          "label": "Harbour data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/strangeskies",
@@ -1926,7 +2953,17 @@
       "crons": [
         "13 11 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/strangeskies/data/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "CADORS sources retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/streetworkdiary",
@@ -1935,7 +2972,17 @@
       "crons": [
         "38 9 * * 3"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/streetworkdiary/data/requests.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Cityworks data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/sunledger",
@@ -1944,7 +2991,17 @@
       "crons": [
         "36 14 7 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/sunledger/data/solar.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/surplus-crown",
@@ -1953,7 +3010,17 @@
       "crons": [
         "45 10 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/surplus-crown/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/takedown-watcher",
@@ -1981,7 +3048,17 @@
       "crons": [
         "31 11 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/telecompulse/data/manifest.json",
+          "json_path": [
+            "built"
+          ],
+          "precision": "timestamp",
+          "label": "Telecom sources retrieved"
+        }
+      ]
     },
     {
       "repo": "jsdyer/tide-and-dark",
@@ -1990,7 +3067,17 @@
       "crons": [
         "13 10 2 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/tide-and-dark/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/tidereceipt",
@@ -2019,7 +3106,17 @@
       "crons": [
         "44 10 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/toxic-ground/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Source retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/trailglass",
@@ -2028,7 +3125,17 @@
       "crons": [
         "37 13 * * 2"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/trailglass/data/status.json",
+          "json_path": [
+            "oldest_retrieval"
+          ],
+          "precision": "timestamp",
+          "label": "Oldest regional retrieval"
+        }
+      ]
     },
     {
       "repo": "jsdyer/transferwindow",
@@ -2037,7 +3144,17 @@
       "crons": [
         "39 8 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/transferwindow/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/transitreceipt",
@@ -2085,7 +3202,17 @@
       "crons": [
         "33 10 4 * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/welllayers/data/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "label": "Data retrieved",
+          "precision": "date"
+        }
+      ]
     },
     {
       "repo": "jsdyer/wrongdoings",
@@ -2094,7 +3221,17 @@
       "crons": [
         "41 12 * * *"
       ],
-      "inputs": {}
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/wrongdoings/data/manifest.json",
+          "json_path": [
+            "generated"
+          ],
+          "precision": "timestamp",
+          "label": "Disclosure source retrieved"
+        }
+      ]
     }
   ]
 }
