@@ -67,6 +67,13 @@ KEV retrieval, while optional EPSS enrichment is reported by the app separately.
 A fresh capture timestamp does not certify every optional feed or the accuracy of
 the upstream data.
 
+Air Check Diary uses `data/check.json.checked_at`, the time its collector successfully
+checked the official CRTC archive catalogue. `awaiting_publication` means the next
+monthly archive is not listed yet; it does not advance the retained archive's
+retrieval date. A listed archive that fails to download still fails the collector.
+See the [24 November collector repairs](../../docs/collector-repairs-2026-11-24.md)
+for verified recoveries and the two remaining hosted-download restrictions.
+
 Keep the probe mapping in `data/operations/freshness.json` current when adding or
 changing a workflow. The operations test requires a probe for every scheduled job
 except these six documented non-data jobs. This update changes probe configuration;

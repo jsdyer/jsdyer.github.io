@@ -3761,7 +3761,7 @@
       ]
     },
     "readme": {
-      "note": "Search Nain for Labrador broadcasts, or open Field recordings and search William Riley to hear him sing in Cherry Brook. Each recording opens at its original tape cue. On demand includes two programmes about Halifax donairs."
+      "note": "Search Nain for Labrador broadcasts, or open Field recordings and search William Riley to hear him sing in Cherry Brook. Each recording opens at its original tape cue. On demand includes two programmes about Halifax donairs. Only currently verified station listings produce upcoming airings; unconfirmed listings are retained separately for review."
     },
     "sync_manifest": true
   },
@@ -5853,7 +5853,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare September 1, 2026 at 8 p.m. Halifax’s CJCH logged Password while Vancouver’s CIVT logged Jeopardy! Masters. At 10 p.m. the titles trade places. Open a program’s source rows to see the commercial spots and segments filed inside its slot."
+      "note": "Compare September 1, 2026 at 8 p.m. Halifax’s CJCH logged Password while Vancouver’s CIVT logged Jeopardy! Masters. At 10 p.m. the titles trade places. Open a program’s source rows to see the commercial spots and segments filed inside its slot. The official catalogue is checked separately from the retained archive date; an unpublished next month is reported as awaiting publication."
     }
   },
   {
@@ -8210,7 +8210,7 @@
       ]
     },
     "readme": {
-      "note": "Choose a crossing and distinguish current reports, the 2019 Q4 hourly sample and newer monthly service-standard percentages. No delay means up to five minutes; missing and conflicting observations are excluded from wait statistics."
+      "note": "Choose a crossing and distinguish current reports, the 2019 Q4 hourly sample and newer monthly service-standard percentages. No delay means up to five minutes; missing and conflicting observations are excluded from wait statistics. If a crossing is absent from the current CBSA feed, its historical records remain available and its current report is explicitly unavailable."
     },
     "sync_manifest": true
   },

@@ -34,12 +34,12 @@
       "inputs": {},
       "freshness": [
         {
-          "url": "https://coolcode.ca/aircheckdiary/data/archive.json",
+          "url": "https://coolcode.ca/aircheckdiary/data/check.json",
           "json_path": [
-            "retrieved"
+            "checked_at"
           ],
-          "label": "Source retrieved",
-          "precision": "date"
+          "label": "Official archive catalogue checked",
+          "precision": "timestamp"
         }
       ]
     },
