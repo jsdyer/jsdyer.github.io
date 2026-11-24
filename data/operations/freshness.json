@@ -23,6 +23,18 @@
       }
     ]
   },
+  "jsdyer/atlas-canada/collect.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/atlas-canada/data/status.json",
+        "json_path": [
+          "last_success"
+        ],
+        "label": "Capture started",
+        "precision": "timestamp"
+      }
+    ]
+  },
   "jsdyer/borderpulse/pages.yml": {
     "freshness": [
       {
@@ -577,6 +589,18 @@
           "captured_at"
         ],
         "label": "Data retrieved",
+        "precision": "timestamp"
+      }
+    ]
+  },
+  "jsdyer/takedown-watcher/collect.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/takedown-watcher/data/status.json",
+        "json_path": [
+          "last_success"
+        ],
+        "label": "All targets checked",
         "precision": "timestamp"
       }
     ]

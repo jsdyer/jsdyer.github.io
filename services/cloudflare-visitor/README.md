@@ -32,10 +32,15 @@ See [the complete tool lifecycle](../../docs/tool-lifecycle.md).
 
 ## Pending deployment
 
-The initial GitHub import found missing catalogue IDs. The generated replacement is
-tested, but the connected Cloudflare account rejected its content-only upload with
+The generated replacement includes all 232 catalogue IDs, including Atlas Canada,
+Takedown Watcher, Abuse Kit and Edge Map. It is tested, but the connected Cloudflare account rejected its content-only upload with
 HTTP 403 (missing Workers Scripts Write scope). The recorded receipt is the
 **previous live code**, so `scripts/check_integration.py --deployment` intentionally
 reports the difference until the prepared replacement is deployed and verified.
 Run the deploy command above with a permitted connection/token, then commit the
 new receipt and remove this pending note. No binding or database migration is needed.
+
+Copy the current generated source from
+[worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js).
+A content-only deployment is sufficient. After a manual deployment, verify the
+live module and update the receipt; do not merely mark the pending note complete.

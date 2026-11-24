@@ -10,6 +10,7 @@ jsdyer/atipdecisions
 jsdyer/atipmetrics
 jsdyer/atippopularity
 jsdyer/atlanticdial
+jsdyer/atlas-canada
 jsdyer/auroratrace
 jsdyer/bankrates
 jsdyer/blockedorgone
@@ -148,6 +149,7 @@ jsdyer/strangeskies
 jsdyer/streetworkdiary
 jsdyer/sunledger
 jsdyer/surplus-crown
+jsdyer/takedown-watcher
 jsdyer/telecompulse
 jsdyer/tide-and-dark
 jsdyer/tidereceipt

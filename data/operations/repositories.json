@@ -1,5 +1,11 @@
 [
   {
+    "repo": "jsdyer/abuse-kit",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
     "repo": "jsdyer/abusepulse",
     "branch": "main",
     "workflows": [],
@@ -223,6 +229,23 @@
       ".github/workflows/episodes.yml",
       ".github/workflows/schedule-guard.yml",
       ".github/workflows/station-schedules.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/atlas-canada",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "collect.yml",
+        "crons": [
+          "41 9 * * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/collect.yml",
+      ".github/workflows/schedule-guard.yml"
     ]
   },
   {
@@ -816,6 +839,12 @@
       ".github/workflows/refresh.yml",
       ".github/workflows/schedule-guard.yml"
     ]
+  },
+  {
+    "repo": "jsdyer/edge-map",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
   },
   {
     "repo": "jsdyer/ephemeraatlas",
@@ -2947,6 +2976,23 @@
     ],
     "guarded_paths": [
       ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/takedown-watcher",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "collect.yml",
+        "crons": [
+          "23 */6 * * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/collect.yml",
       ".github/workflows/schedule-guard.yml"
     ]
   },

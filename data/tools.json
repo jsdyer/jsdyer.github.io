@@ -10299,5 +10299,160 @@
     "readme": {
       "note": "Pick a capture, then a route. The closest pair is measured along the saved line when this network file has one, and as the crow flies when it does not. A route missing from a partial capture is not counted as zero."
     }
+  },
+  {
+    "id": "atlas-canada",
+    "title": "Atlas Canada",
+    "description": "Inspect Canadian RIPE Atlas traceroutes and possible cross-border routes, with hop locations, network breakdowns and original measurements.",
+    "category": "liminal-tools",
+    "tags": [
+      "ripe atlas",
+      "traceroute",
+      "boomerang routing",
+      "canada",
+      "bgp",
+      "sovereignty"
+    ],
+    "icon": "route",
+    "url": "/atlas-canada/",
+    "source": "https://github.com/jsdyer/atlas-canada",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Daily RIPE Atlas traceroutes from Canadian probes, with hop locations from IPinfo Lite and exchange points from PeeringDB.",
+      "cadence": "Daily at 09:41 UTC",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/atlas-canada/data/status.json",
+          "path": [
+            "last_success"
+          ],
+          "label": "Capture started",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "traces"
+            ],
+            "unit": "traces"
+          },
+          "value": "2026-11-24 05:49 UTC",
+          "count": 90
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose a capture to inspect possible cross-border routes by probe network or destination. The percentage includes only completed traces with known Canadian endpoints; unanswered hops, unlocated addresses and excluded traces are shown separately. IPinfo geolocation and PeeringDB exchange prefixes can place a router in the wrong country, so the result can overcount or undercount real border crossings. Expand a route and follow its RIPE Atlas measurement link to inspect the evidence."
+    },
+    "sync_manifest": true,
+    "dataset": {
+      "title": "Capture index",
+      "file": "data/index.json",
+      "format": "JSON"
+    }
+  },
+  {
+    "id": "takedown-watcher",
+    "title": "Takedown Watcher",
+    "description": "Track DNS, registration and HTTP changes for watched domains, with dated evidence and cautious takedown indicators.",
+    "category": "security",
+    "tags": [
+      "phishing",
+      "abuse reports",
+      "takedown",
+      "dns",
+      "rdap"
+    ],
+    "icon": "shield-alert",
+    "url": "/takedown-watcher/",
+    "source": "https://github.com/jsdyer/takedown-watcher",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Checks of each watched domain run every six hours on GitHub; the instant check asks Cloudflare DNS and RDAP from your browser.",
+      "cadence": "Every six hours at :23 UTC",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/takedown-watcher/data/status.json",
+          "path": [
+            "last_success"
+          ],
+          "label": "All targets checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "watched"
+            ],
+            "unit": "watched targets"
+          },
+          "value": "2026-11-24 05:49 UTC",
+          "count": 4
+        }
+      ]
+    },
+    "readme": {
+      "note": "Inspect each target's DNS, registration and HTTP evidence and timeline. Ordinary HTTP errors, missing DNS answers, TLS failures and a missing RDAP record do not prove a takedown or identify who acted. Registry hold statuses identify a registrar/registry role but not its reason. “First indicator after report” appears only after an observed live state and a later hold, suspension message or CDN warning; it is an approximate observation interval, not a confirmed response time. Failed DNS checks retain the previous observation and show the error."
+    },
+    "sync_manifest": true,
+    "dataset": {
+      "title": "Observation history",
+      "file": "data/history.json",
+      "format": "JSON"
+    }
+  },
+  {
+    "id": "abuse-kit",
+    "title": "Abuse Kit",
+    "description": "Find who to report a phishing site, scam domain or abusive IP address to, and draft the report.",
+    "category": "security",
+    "tags": [
+      "phishing",
+      "abuse reports",
+      "rdap",
+      "asn",
+      "whois",
+      "registrar"
+    ],
+    "icon": "mail",
+    "url": "/abuse-kit/",
+    "source": "https://github.com/jsdyer/abuse-kit",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Looks up DNS, RDAP registration records and RIPEstat network data from your browser when you search."
+    },
+    "readme": {
+      "note": "Enter a domain, URL or public IP to find CDN, registrar and network abuse contacts and build an editable report. Contact order is a useful starting point, not a guarantee of responsibility or response speed; a CDN may conceal the origin host. “Someone else” clears the suggested recipient. Bulk mode extracts IPv4 and IPv6 from logs, skips private/reserved addresses, and exports network/contact results plus lookup failures as CSV. Nothing is sent as a report automatically, and the suspect site is never contacted."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "edge-map",
+    "title": "Edge Map",
+    "description": "See which Cloudflare data centre serves your connection over IPv4 and IPv6, whether it is in Canada, and how it changes over time.",
+    "category": "liminal-tools",
+    "tags": [
+      "cloudflare",
+      "cdn",
+      "ipv6",
+      "routing",
+      "edge",
+      "canada"
+    ],
+    "icon": "radar",
+    "url": "/edge-map/",
+    "source": "https://github.com/jsdyer/edge-map",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Your browser asks Cloudflare's public /cdn-cgi/trace endpoints which data centre answered."
+    },
+    "readme": {
+      "note": "The page asks several Cloudflare endpoints for their /cdn-cgi/trace and shows which data centre (an airport code such as YVR or SEA) answered each one, over IPv4 and IPv6. If Cloudflare locates your IP in Canada but an edge outside Canada answered, it is flagged. Turn on \"Remember my results in this browser\" and come back over days to see whether your ISP's route to Cloudflare moves; the history stores data centre codes only, never your IP, and can be downloaded as CSV."
+    },
+    "sync_manifest": true
   }
 ]

@@ -1,12 +1,12 @@
 {
   "schema": "coolcode.repository-audit.v1",
-  "checked_at": "2026-11-24T05:01:25+00:00",
+  "checked_at": "2026-11-24T06:32:07+00:00",
   "owner": "jsdyer",
   "scope": "Public repositories; private repository identities are omitted. Functional readiness is reviewed before listing.",
-  "catalogue_tools": 228,
+  "catalogue_tools": 232,
   "public_repositories": 238,
   "private_repositories_omitted": 1,
-  "listed_source_repositories": 219,
+  "listed_source_repositories": 223,
   "public_repository_names": [
     "abuse-kit",
     "abusepulse",
@@ -250,18 +250,6 @@
   "needs_review": [],
   "excluded": [
     {
-      "repo": "abuse-kit",
-      "status": "starter",
-      "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
-      "reviewed_at": "2026-11-23"
-    },
-    {
-      "repo": "atlas-canada",
-      "status": "starter",
-      "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
-      "reviewed_at": "2026-11-23"
-    },
-    {
       "repo": "b0x-ca",
       "status": "personal-or-business-site",
       "reason": "Separate personal or business website, not a standalone CoolCode utility.",
@@ -283,12 +271,6 @@
       "repo": "coolcode-tool-template",
       "status": "template",
       "reason": "Starter template used to create tools; not a finished utility.",
-      "reviewed_at": "2026-11-23"
-    },
-    {
-      "repo": "edge-map",
-      "status": "starter",
-      "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
       "reviewed_at": "2026-11-23"
     },
     {
@@ -355,12 +337,6 @@
       "repo": "superapp-ca",
       "status": "personal-or-business-site",
       "reason": "Separate personal or business website, not a standalone CoolCode utility.",
-      "reviewed_at": "2026-11-23"
-    },
-    {
-      "repo": "takedown-watcher",
-      "status": "starter",
-      "reason": "Contains the unimplemented CoolCode browser template; review and register when the actual tool is complete.",
       "reviewed_at": "2026-11-23"
     }
   ],

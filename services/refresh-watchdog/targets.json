@@ -143,6 +143,25 @@
       "inputs": {}
     },
     {
+      "repo": "jsdyer/atlas-canada",
+      "branch": "main",
+      "workflow": "collect.yml",
+      "crons": [
+        "41 9 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/atlas-canada/data/status.json",
+          "json_path": [
+            "last_success"
+          ],
+          "label": "Capture started",
+          "precision": "timestamp"
+        }
+      ]
+    },
+    {
       "repo": "jsdyer/auroratrace",
       "branch": "main",
       "workflow": "refresh.yml",
@@ -1935,6 +1954,25 @@
         "45 10 * * 2"
       ],
       "inputs": {}
+    },
+    {
+      "repo": "jsdyer/takedown-watcher",
+      "branch": "main",
+      "workflow": "collect.yml",
+      "crons": [
+        "23 */6 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/takedown-watcher/data/status.json",
+          "json_path": [
+            "last_success"
+          ],
+          "label": "All targets checked",
+          "precision": "timestamp"
+        }
+      ]
     },
     {
       "repo": "jsdyer/telecompulse",
