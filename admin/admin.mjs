@@ -4,6 +4,7 @@ import {initializeServiceStatus} from './service-status.mjs';
 import {initializeActivity} from './activity.mjs';
 import {initializeCanadaChecks} from './canada-panel.mjs';
 import {initializeCloudflareUsage} from './cloudflare-usage.mjs';
+import {initializeOutcomes} from './tool-outcomes.mjs';
 const $ = id => document.getElementById(id);
 const api = 'https://api.github.com/repos/jsdyer/jsdyer.github.io/contents/data/featured.json';
 export async function openDashboard(session, initialMetrics) {
@@ -71,6 +72,7 @@ export async function openDashboard(session, initialMetrics) {
   bind();
   initializeStats(catalog, session, initialMetrics);
   initializeActivity(session.signal);
+  initializeOutcomes(session.signal);
   initializeServiceStatus(session.signal);
   initializeCanadaChecks(session.signal);
   initializeCloudflareUsage(session);

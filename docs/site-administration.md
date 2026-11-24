@@ -28,6 +28,56 @@ Switch **History** to **Workflow runs** to read a project's public GitHub Action
 
 The six-hour catalogue workflow checks metadata published by the tools. Each independent tool has its own update process. The catalogue can retain an earlier reading when a probe fails. Expand **Unavailable catalogue checks** for the flags in the latest published snapshot. Catalogue refreshes running the updated script also write changed, unchanged and unavailable probe totals to the GitHub run summary. A source commit records a repository change. The Pages deployment result records whether a release succeeded. Private inbox actions and manual Cloudflare edits are outside this GitHub history.
 
+## Tool outcomes
+
+Open **Tool outcomes → Compare workflow results with published data** for two
+separate results per scheduled workflow: GitHub execution and the evidence the
+tool has actually published. The report defaults to **Needs attention** and can
+be filtered by tool, all workflows, running jobs, limited verification or passed
+checks. Each row links to the latest run, the latest scheduled/manual run and the
+published metadata that was read.
+
+Validated metadata readings reuse the watchdog's bounded cache (at most six hours
+for slower sources), with a fresh read after a changed run or due occurrence.
+Cached evidence and record counts retain their actual read time in the report.
+
+The report uses the same 168-target registry, reviewed timestamps and age limits
+as the independent watchdog. It also reads record counts where the catalogue has
+a reviewed count definition on the checked document. Zero or unchanged counts
+are allowed; an old observation year is not substituted for a retrieval/check
+date. A failed workflow and a recent retained snapshot remain visible together.
+If a precise timestamp predates a successful refresh run, that run's output is
+marked unconfirmed. Date-only evidence is explicitly identified as unable to
+prove which individual run produced it. Missing or unreadable evidence is never
+called verified.
+
+These checks do not certify the accuracy of every record or exercise every tool's
+interactive features. Source validation and browser checks remain in each tool's
+workflow. Tools without scheduled workflows are outside this report. An expected
+unpublished archive, such as Air Check Diary's next month, can be a successful
+source check with unchanged retained data.
+
+The existing hourly `service-monitor.yml` workflow has a separate read-only
+observation job. It reads workflow state and the latest 20 runs per registered
+workflow, then reads public output metadata. It never dispatches, enables or
+retries collectors, and it does not send additional alerts. The Linux watchdog
+continues to own recovery and Healthchecks signalling.
+
+The job saves `collector-outcomes.json` on the `collector-outcomes-log` branch,
+including the latest results and 24 recent observations. **Recent outcome
+observations** shows problems, recoveries and changed counts. The branch's Git
+history retains earlier reports. A report older than three hours is visibly
+stale; **Reload latest report** reloads the saved observation without starting
+collectors. A successful observation job means it produced a report, even when
+the report contains individual tool failures.
+
+Only public repository identities, run links and summarized public metadata are
+saved. The admin downloads this file without sending its owner credential. No
+new account, secret, server timer, Cloudflare deployment or duplicate tool list
+is required. The existing registry automatically includes newly registered
+scheduled workflows. Maintain that registry and reviewed evidence definitions
+through the [tool lifecycle](tool-lifecycle.md).
+
 ## Service status
 
 Open **Service status** to check the production homepage, tool catalogue, search sitemap and visitor API from your browser. Each GET validates expected response content. The visitor API health endpoint also executes a read-only schema query against D1. These checks make no pageview submissions, private report requests or database writes. Response times include network travel and reading the response. A timeout can originate between the observer and the service.

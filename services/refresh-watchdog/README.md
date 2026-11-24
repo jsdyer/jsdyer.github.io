@@ -79,6 +79,14 @@ changing a workflow. The operations test requires a probe for every scheduled jo
 except these six documented non-data jobs. This update changes probe configuration;
 the installed service loads it automatically without a runtime reinstall.
 
+The admin's [Tool outcomes report](../../docs/site-administration.md#tool-outcomes)
+uses this same registry and timestamp-checking code in a read-only hourly GitHub
+job. It displays workflow execution separately from published evidence and retains
+recent result/count changes on the `collector-outcomes-log` branch. It is an
+independent observation, not a copy of the Linux server's private report, and does
+not dispatch jobs or send another heartbeat. No installed-service update is needed
+to use the admin report. Keep the observer's schema tests with this service.
+
 ## 1. Prerequisites
 
 Use a Linux server with Python 3.10+, systemd 247+ and outbound HTTPS. Ubuntu 22.04+ and AlmaLinux 10 meet those version requirements with Python installed.

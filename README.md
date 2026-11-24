@@ -19,6 +19,8 @@ The [November field guide](https://coolcode.ca/field-notes/reading-the-tools/) f
 
 The [API tools setup guide](docs/api-tools.md) covers the ten API-powered explorers, repository secrets, retained history, provider limits and shared Worker registration.
 
+[Admin Tool outcomes](https://coolcode.ca/admin/#outcomes) separates scheduled workflow execution from published-data checks, with problems, recoveries and count changes. See the [reporting guide](docs/site-administration.md#tool-outcomes) for coverage and evidence limits.
+
 ## Find a tool
 
 The [homepage](https://coolcode.ca/) shows what each tool does, where its data comes

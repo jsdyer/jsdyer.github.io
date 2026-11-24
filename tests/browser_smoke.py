@@ -10,6 +10,7 @@ from featured_browser import check_featured
 from report_browser import check_report
 from protocol_captures_browser import check_protocols
 from rack_recipes_browser import check_rack_recipes
+from admin_outcomes_browser import check_outcomes
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -116,6 +117,7 @@ def main():
             assert nojs.locator(".issue-list li a").count() == 18
             context.close()
             check_featured(browser, url)
+            check_outcomes(browser, url, screenshots)
             check_report(browser, url)
             check_protocols(browser,url)
             check_archive_shelf(browser,url,screenshots)

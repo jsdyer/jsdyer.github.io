@@ -23,7 +23,7 @@
 </section>
 <div id="dashboard" hidden></div>
 <template id="dashboard-layout">
-<nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a><a href="#activity">Update log</a><a href="#services">Service status</a><a href="#cloudflare">Cloudflare usage</a><button type="button" id="sign-out">Lock admin</button></nav>
+<nav aria-label="Admin navigation"><a href="#featured">Featured tools</a><a href="#statistics">Stats &amp; reports</a><a href="#outcomes">Tool outcomes</a><a href="#activity">Update log</a><a href="#services">Service status</a><a href="#cloudflare">Cloudflare usage</a><button type="button" id="sign-out">Lock admin</button></nav>
 <p id="health" aria-live="polite">Loading the published catalogue…</p>
 <section id="featured"><h2>Featured tools</h2>
 <form id="lineup"><fieldset disabled id="controls">
@@ -40,6 +40,7 @@
 <p>Elapsed time includes the network request and reading the response. The visitor API checks that D1 can query the expected tables.</p>
 <button type="button" id="run-service-checks">Check again</button><p id="service-message" role="status"></p><div id="service-results"></div>
 <h3>External checks</h3><p>GitHub Actions checks the same endpoints hourly, including while the admin is closed. Open a run for individual results.</p>
+<p>These checks cover the site infrastructure. <a href="#outcomes">Tool outcomes</a> separately reports workflow execution and published-data evidence. A successful observer run can report problems with individual tools.</p>
 <div id="service-history"></div>
 <p><a href="https://github.com/jsdyer/jsdyer.github.io/actions/workflows/service-monitor.yml">External check history</a></p>
 <h3>How does CoolCode look from across Canada?</h3>
@@ -56,7 +57,11 @@
 <p role="status" id="cloudflare-message"></p><div id="cloudflare-results"></div>
 <p><a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages">Workers dashboard</a> · <a href="https://dash.cloudflare.com/?to=/:account/workers/d1">D1 dashboard</a> · <a href="https://github.com/jsdyer/jsdyer.github.io/blob/main/docs/site-administration.md#cloudflare-usage">Connect live usage</a></p>
 </details></section>
-<section id="activity"><h2>Update log</h2><details id="activity-panel"><summary>Browse update history</summary><div id="activity-body"></div></details></section>
+<section id="outcomes"><h2>Tool outcomes</h2><details id="outcomes-panel"><summary>Compare workflow results with published data</summary>
+<p>The existing hourly service-check workflow saves this report for every registered scheduled workflow. Workflow execution and published output are separate checks. The report uses the watchdog’s reviewed check timestamps and age limits, plus available record counts.</p>
+<p>An unchanged count or an old observation year can be normal. A recent published check does not prove every record is correct or that a particular run downloaded it. Source validation and browser-test details remain in the linked workflow logs. Tools without scheduled workflows are outside this report.</p>
+<div id="outcomes-body"></div></details></section>
+<section id="activity"><h2>Update log</h2><p><a href="#outcomes">Tool outcomes</a> records problems, recoveries and count changes alongside each tool’s workflow result.</p><details id="activity-panel"><summary>Browse update history</summary><div id="activity-body"></div></details></section>
 <div id="statistics"><h2>Statistics and issue reports</h2><p>Loading the reporting dashboard…</p></div>
 
 <footer><a href="/sitemap.xml">Sitemap</a><a href="https://search.google.com/search-console?resource_id=sc-domain%3Acoolcode.ca">Google Search Console</a><a href="/report/">Report an issue</a></footer>

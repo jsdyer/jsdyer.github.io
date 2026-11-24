@@ -11,6 +11,8 @@ on:
       - 'admin/service-checks.mjs'
       - 'assets/service.mjs'
       - 'scripts/check_services.mjs'
+      - 'services/refresh-watchdog/report_outcomes.py'
+      - 'services/refresh-watchdog/targets.json'
 
 permissions:
   contents: read
@@ -24,3 +26,49 @@ jobs:
         with:
           persist-credentials: false
       - run: node scripts/check_services.mjs
+
+  outcomes:
+    name: Record workflow and published-data outcomes
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: collector-outcome-report
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install -r services/refresh-watchdog/requirements.txt
+      - name: Read the previous public report
+        run: |
+          folder="$RUNNER_TEMP/collector-outcomes"
+          base=HEAD
+          if git ls-remote --exit-code --heads origin refs/heads/collector-outcomes-log > /dev/null; then
+            git fetch --no-tags --depth=1 origin refs/heads/collector-outcomes-log
+            base=FETCH_HEAD
+          else
+            status=$?
+            if [ "$status" -ne 2 ]; then exit "$status"; fi
+          fi
+          git worktree add --detach "$folder" "$base"
+      - name: Observe workflows and published output without dispatching
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 services/refresh-watchdog/report_outcomes.py \
+            --previous "$RUNNER_TEMP/collector-outcomes/collector-outcomes.json" \
+            --output "$RUNNER_TEMP/collector-outcomes/collector-outcomes.json"
+      - name: Publish the report and recent observation history
+        run: |
+          folder="$RUNNER_TEMP/collector-outcomes"
+          git -C "$folder" add -- collector-outcomes.json
+          git -C "$folder" -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m "Record collector outcomes $GITHUB_RUN_ID"
+          git push origin "$(git -C "$folder" rev-parse HEAD):refs/heads/collector-outcomes-log"
