@@ -5,31 +5,790 @@
         "counts": [],
         "due_unobserved": false,
         "error": null,
-        "latest_result": null,
-        "output": "not_configured",
-        "refresh_result": null,
-        "run_alignment": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
         "state": "active",
-        "status": "running"
+        "status": "checked"
       },
       "before": {
         "counts": [],
         "due_unobserved": false,
         "error": null,
-        "latest_result": null,
-        "output": "not_configured",
-        "refresh_result": "success",
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "failure",
         "run_alignment": null,
         "state": "active",
-        "status": "running"
+        "status": "limited"
       },
-      "repo": "jsdyer/jsdyer.github.io",
-      "workflow": "service-monitor.yml"
+      "repo": "jsdyer/apiarchaeology",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Latest sample",
+            "value": 17550
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "date_only",
+        "state": "active",
+        "status": "checked"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Latest sample",
+            "value": 15043
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "date_only",
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/boomerang-meter",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 3
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "failure",
+        "output": "recent",
+        "refresh_result": "failure",
+        "run_alignment": null,
+        "state": "active",
+        "status": "attention"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 3
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/borderpulse",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Source retrieved",
+            "value": 5335
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "failure",
+        "output": "recent",
+        "refresh_result": "failure",
+        "run_alignment": null,
+        "state": "active",
+        "status": "attention"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Source retrieved",
+            "value": 5335
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "failure",
+        "run_alignment": null,
+        "state": "active",
+        "status": "limited"
+      },
+      "repo": "jsdyer/census-lens",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Data retrieved",
+            "value": 239
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Data retrieved",
+            "value": 235
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/flightweather",
+      "workflow": "refresh.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 15
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "failure",
+        "output": "recent",
+        "refresh_result": "failure",
+        "run_alignment": null,
+        "state": "active",
+        "status": "attention"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 15
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/govtrackercensus",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 40
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 37
+          }
+        ],
+        "due_unobserved": true,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "attention"
+      },
+      "repo": "jsdyer/gridreceipt",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Source checked",
+            "value": 504
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Source checked",
+            "value": 501
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/radarscope",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 5781
+          }
+        ],
+        "due_unobserved": true,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "attention"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 5781
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/sanctionsledger",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 799
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Sources checked",
+            "value": 713
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/transitreceipt",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "counts": [
+          {
+            "label": "Fleet captured",
+            "value": 156
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "before": {
+        "counts": [
+          {
+            "label": "Fleet captured",
+            "value": 26
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/translink",
+      "workflow": "refresh.yml"
     }
   ],
-  "checked_at": "2026-11-24T11:12:53.411412Z",
+  "checked_at": "2026-11-24T12:13:06.136704Z",
   "expected_interval_seconds": 3600,
   "history": [
+    {
+      "changes": [
+        {
+          "after": {
+            "counts": [],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "counts": [],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "failure",
+            "run_alignment": null,
+            "state": "active",
+            "status": "limited"
+          },
+          "repo": "jsdyer/apiarchaeology",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Latest sample",
+                "value": 17550
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "date_only",
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Latest sample",
+                "value": 15043
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "date_only",
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/boomerang-meter",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 3
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "failure",
+            "output": "recent",
+            "refresh_result": "failure",
+            "run_alignment": null,
+            "state": "active",
+            "status": "attention"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 3
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/borderpulse",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Source retrieved",
+                "value": 5335
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "failure",
+            "output": "recent",
+            "refresh_result": "failure",
+            "run_alignment": null,
+            "state": "active",
+            "status": "attention"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Source retrieved",
+                "value": 5335
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "failure",
+            "run_alignment": null,
+            "state": "active",
+            "status": "limited"
+          },
+          "repo": "jsdyer/census-lens",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Data retrieved",
+                "value": 239
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Data retrieved",
+                "value": 235
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/flightweather",
+          "workflow": "refresh.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 15
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "failure",
+            "output": "recent",
+            "refresh_result": "failure",
+            "run_alignment": null,
+            "state": "active",
+            "status": "attention"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 15
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/govtrackercensus",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 40
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 37
+              }
+            ],
+            "due_unobserved": true,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "attention"
+          },
+          "repo": "jsdyer/gridreceipt",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Source checked",
+                "value": 504
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Source checked",
+                "value": 501
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/radarscope",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 5781
+              }
+            ],
+            "due_unobserved": true,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "attention"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 5781
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/sanctionsledger",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 799
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 713
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/transitreceipt",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "counts": [
+              {
+                "label": "Fleet captured",
+                "value": 156
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "counts": [
+              {
+                "label": "Fleet captured",
+                "value": 26
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/translink",
+          "workflow": "refresh.yml"
+        }
+      ],
+      "checked_at": "2026-11-24T12:13:06.136704Z",
+      "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45391263020",
+      "summary": {
+        "attention": 6,
+        "checked": 154,
+        "limited": 2,
+        "running": 1,
+        "workflow_only": 5
+      }
+    },
     {
       "changes": [
         {
@@ -443,7 +1202,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 5411,
+            "age_seconds": 9013,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -508,7 +1267,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2814,
+            "age_seconds": 6416,
             "cached": true,
             "check": 0,
             "label": "Official archive catalogue checked",
@@ -582,7 +1341,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 126750,
+            "age_seconds": 130352,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -656,7 +1415,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40350,
+            "age_seconds": 43952,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -730,7 +1489,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 38925,
+            "age_seconds": 42528,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -773,54 +1532,55 @@
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T10:29:25Z",
+          "at": "2026-11-24T11:20:44Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "push",
-          "id": 45375262665,
+          "event": "workflow_dispatch",
+          "id": 45383313522,
           "status": "completed",
-          "url": "https://github.com/jsdyer/apiarchaeology/actions/runs/45375262665"
+          "url": "https://github.com/jsdyer/apiarchaeology/actions/runs/45383313522"
         },
         "latest_refresh": {
-          "at": "2026-11-24T09:24:25Z",
+          "at": "2026-11-24T11:20:44Z",
           "attempt": 1,
-          "conclusion": "failure",
+          "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45364886286,
+          "id": 45383313522,
           "status": "completed",
-          "url": "https://github.com/jsdyer/apiarchaeology/actions/runs/45364886286"
+          "url": "https://github.com/jsdyer/apiarchaeology/actions/runs/45383313522"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 2808,
-            "cached": true,
+            "age_seconds": 3100,
+            "cached": false,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 1209600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T10:59:47.034835Z",
+            "read_at": "2026-11-24T12:12:32.843362Z",
             "status": "fresh",
-            "timestamp": "2026-11-24T10:25:42Z",
+            "timestamp": "2026-11-24T11:20:53Z",
             "url": "https://coolcode.ca/apiarchaeology/data/manifest.json"
           }
         ],
+        "run_alignment": "at_or_after_start",
         "status": "recent"
       },
       "probe_cache": {
         "0": {
-          "key": "6f8d7569a6ef6d4203dd42433b9c77337314c9411ba766c8d76a7e8574e5e8dc",
-          "read_at": "2026-11-24T10:59:47.034835Z",
-          "timestamp": "2026-11-24T10:25:42Z"
+          "key": "680f68c217c4b5554062287d4e45a85278526502ad6f6609294fccbc88048025",
+          "read_at": "2026-11-24T12:12:32.843362Z",
+          "timestamp": "2026-11-24T11:20:53Z"
         }
       },
       "reasons": [
-        "Latest run succeeded; the earlier scheduled/manual run failed. A subsequent scheduled/manual refresh is not yet confirmed"
+        "Workflow and configured published checks are available"
       ],
       "repo": "jsdyer/apiarchaeology",
-      "status": "limited",
+      "status": "checked",
       "titles": [
         "API Archaeology"
       ],
@@ -868,7 +1628,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40350,
+            "age_seconds": 43953,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -942,7 +1702,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 6295,
+            "age_seconds": 9898,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1016,7 +1776,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 5071,
+            "age_seconds": 8673,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -1090,7 +1850,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40351,
+            "age_seconds": 43954,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1102,7 +1862,7 @@
             "url": "https://coolcode.ca/atipmetrics/data.json"
           },
           {
-            "age_seconds": 40351,
+            "age_seconds": 43954,
             "cached": true,
             "check": 1,
             "label": "Research sources retrieved",
@@ -1181,7 +1941,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 44814,
+            "age_seconds": 48417,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1255,7 +2015,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40351,
+            "age_seconds": 43954,
             "cached": true,
             "check": 0,
             "label": "Episode feeds retrieved",
@@ -1341,48 +2101,48 @@
         {
           "definition": "[\"https://coolcode.ca/atlas-canada/data/status.json\", {\"path\": [\"traces\"], \"unit\": \"traces\"}]",
           "label": "Capture started",
-          "read_at": "2026-11-24T10:59:48.903572Z",
+          "read_at": "2026-11-24T12:12:34.642479Z",
           "unit": "traces",
           "url": "https://coolcode.ca/atlas-canada/data/status.json",
           "value": 90
         }
       ],
       "execution": {
-        "due_at": "2026-11-23T09:41:00Z",
+        "due_at": "2026-11-24T09:41:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T06:30:48Z",
-          "attempt": 1,
-          "conclusion": "success",
-          "event": "push",
-          "id": 45341004832,
-          "status": "completed",
-          "url": "https://github.com/jsdyer/atlas-canada/actions/runs/45341004832"
-        },
-        "latest_refresh": {
-          "at": "2026-11-24T05:48:58Z",
+          "at": "2026-11-24T11:45:56Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45335942617,
+          "id": 45387169134,
           "status": "completed",
-          "url": "https://github.com/jsdyer/atlas-canada/actions/runs/45335942617"
+          "url": "https://github.com/jsdyer/atlas-canada/actions/runs/45387169134"
+        },
+        "latest_refresh": {
+          "at": "2026-11-24T11:45:56Z",
+          "attempt": 1,
+          "conclusion": "success",
+          "event": "workflow_dispatch",
+          "id": 45387169134,
+          "status": "completed",
+          "url": "https://github.com/jsdyer/atlas-canada/actions/runs/45387169134"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 19408,
-            "cached": true,
+            "age_seconds": 1592,
+            "cached": false,
             "check": 0,
             "label": "Capture started",
             "max_age_seconds": 172800.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T10:59:48.903572Z",
+            "read_at": "2026-11-24T12:12:34.642479Z",
             "status": "fresh",
-            "timestamp": "2026-11-24T05:49:04Z",
+            "timestamp": "2026-11-24T11:46:03Z",
             "url": "https://coolcode.ca/atlas-canada/data/status.json"
           }
         ],
@@ -1391,9 +2151,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "210cd277daa7c87a3e463a63ecbd1a9b0a4c503e8011ff8f47fecec259cb5ef9",
-          "read_at": "2026-11-24T10:59:48.903572Z",
-          "timestamp": "2026-11-24T05:49:04Z"
+          "key": "7f54cdb3d6a859a787480d7b47f6a5b06db446f2c295acd0b7ce9b15dfe7a640",
+          "read_at": "2026-11-24T12:12:34.642479Z",
+          "timestamp": "2026-11-24T11:46:03Z"
         }
       },
       "reasons": [
@@ -1448,7 +2208,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40352,
+            "age_seconds": 43955,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -1522,7 +2282,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24197,
+            "age_seconds": 27800,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1587,7 +2347,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8279,
+            "age_seconds": 11882,
             "cached": true,
             "check": 0,
             "label": "Rolling cases retrieved",
@@ -1628,48 +2388,48 @@
         {
           "definition": "[\"https://coolcode.ca/boomerang-meter/data/status.json\", {\"path\": [\"count\"], \"unit\": \"trace observations\"}]",
           "label": "Latest sample",
-          "read_at": "2026-11-24T10:59:49.674287Z",
+          "read_at": "2026-11-24T12:12:35.841110Z",
           "unit": "trace observations",
           "url": "https://coolcode.ca/boomerang-meter/data/status.json",
-          "value": 15043
+          "value": 17550
         }
       ],
       "execution": {
-        "due_at": "2026-11-23T09:47:00Z",
+        "due_at": "2026-11-24T09:47:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T04:17:44Z",
+          "at": "2026-11-24T11:50:57Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "push",
-          "id": 45325387051,
+          "event": "workflow_dispatch",
+          "id": 45387932255,
           "status": "completed",
-          "url": "https://github.com/jsdyer/boomerang-meter/actions/runs/45325387051"
+          "url": "https://github.com/jsdyer/boomerang-meter/actions/runs/45387932255"
         },
         "latest_refresh": {
-          "at": "2026-11-23T21:41:56Z",
+          "at": "2026-11-24T11:50:57Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "schedule",
-          "id": 45272298253,
+          "event": "workflow_dispatch",
+          "id": 45387932255,
           "status": "completed",
-          "url": "https://github.com/jsdyer/boomerang-meter/actions/runs/45272298253"
+          "url": "https://github.com/jsdyer/boomerang-meter/actions/runs/45387932255"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 126752,
-            "cached": true,
+            "age_seconds": 43956,
+            "cached": false,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
             "precision": "date",
-            "read_at": "2026-11-24T10:59:49.674287Z",
+            "read_at": "2026-11-24T12:12:35.841110Z",
             "status": "fresh",
-            "timestamp": "2026-11-23T00:00:00Z",
+            "timestamp": "2026-11-24T00:00:00Z",
             "url": "https://coolcode.ca/boomerang-meter/data/status.json"
           }
         ],
@@ -1678,9 +2438,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "2dd194389d052513f235db9df2194a1ec304f923dc73e26a6533896ffe1ad6ce",
-          "read_at": "2026-11-24T10:59:49.674287Z",
-          "timestamp": "2026-11-23T00:00:00Z"
+          "key": "9c45cb1d9651150024a73f3a2218465d92cf8efcaf31f494735a6db976d7dffe",
+          "read_at": "2026-11-24T12:12:35.841110Z",
+          "timestamp": "2026-11-24T00:00:00Z"
         }
       },
       "reasons": [
@@ -1702,66 +2462,68 @@
         {
           "definition": "[\"https://coolcode.ca/borderpulse/data/current.json\", {\"measure\": \"length\", \"path\": [\"records\"], \"unit\": \"crossings\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-24T10:59:50.079716Z",
+          "read_at": "2026-11-24T12:12:35.980391Z",
           "unit": "crossings",
           "url": "https://coolcode.ca/borderpulse/data/current.json",
           "value": 3
         }
       ],
       "execution": {
-        "due_at": "2026-11-24T10:37:00Z",
+        "due_at": "2026-11-24T11:37:00Z",
         "due_unobserved": false,
+        "failed_steps": [
+          "Collect public source evidence"
+        ],
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T10:45:56Z",
+          "at": "2026-11-24T11:56:23Z",
           "attempt": 1,
-          "conclusion": "success",
+          "conclusion": "failure",
           "event": "workflow_dispatch",
-          "id": 45377863139,
+          "id": 45388766073,
           "status": "completed",
-          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45377863139"
+          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45388766073"
         },
         "latest_refresh": {
-          "at": "2026-11-24T10:45:56Z",
+          "at": "2026-11-24T11:56:23Z",
           "attempt": 1,
-          "conclusion": "success",
+          "conclusion": "failure",
           "event": "workflow_dispatch",
-          "id": 45377863139,
+          "id": 45388766073,
           "status": "completed",
-          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45377863139"
+          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45388766073"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 1567,
-            "cached": true,
+            "age_seconds": 2730,
+            "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 3600,
             "precision": "timestamp",
-            "read_at": "2026-11-24T10:59:50.079716Z",
+            "read_at": "2026-11-24T12:12:35.980391Z",
             "status": "fresh",
-            "timestamp": "2026-11-24T10:46:25Z",
+            "timestamp": "2026-11-24T11:27:06Z",
             "url": "https://coolcode.ca/borderpulse/data/current.json"
           }
         ],
-        "run_alignment": "at_or_after_start",
         "status": "recent"
       },
       "probe_cache": {
         "0": {
-          "key": "e18b4ebadce6cafb5ea294a262bc0f3e8a58acb9cc9703194171d2744dc8366a",
-          "read_at": "2026-11-24T10:59:50.079716Z",
-          "timestamp": "2026-11-24T10:46:25Z"
+          "key": "4bc6a8677661171e3ce0b064c020500283e48d19d7193d16b51974a1264f5414",
+          "read_at": "2026-11-24T12:12:35.980391Z",
+          "timestamp": "2026-11-24T11:27:06Z"
         }
       },
       "reasons": [
-        "Workflow and configured published checks are available"
+        "Latest workflow run failure"
       ],
       "repo": "jsdyer/borderpulse",
-      "status": "checked",
+      "status": "attention",
       "titles": [
         "Border Pulse"
       ],
@@ -1809,7 +2571,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40353,
+            "age_seconds": 43956,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -1883,7 +2645,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 36010,
+            "age_seconds": 39614,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -1957,7 +2719,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40353,
+            "age_seconds": 43957,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -2031,7 +2793,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 4571,
+            "age_seconds": 8175,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2105,7 +2867,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40353,
+            "age_seconds": 43957,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2179,7 +2941,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 37878,
+            "age_seconds": 41482,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -2253,7 +3015,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472353,
+            "age_seconds": 475958,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -2327,7 +3089,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472353,
+            "age_seconds": 475958,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2368,7 +3130,7 @@
         {
           "definition": "[\"https://coolcode.ca/census-lens/data/status.json\", {\"path\": [\"count\"], \"unit\": \"places\"}]",
           "label": "Source retrieved",
-          "read_at": "2026-11-24T10:59:51.897984Z",
+          "read_at": "2026-11-24T12:12:38.111435Z",
           "unit": "places",
           "url": "https://coolcode.ca/census-lens/data/status.json",
           "value": 5335
@@ -2377,37 +3139,40 @@
       "execution": {
         "due_at": "2026-11-20T09:18:00Z",
         "due_unobserved": false,
+        "failed_steps": [
+          "Retrieve and check source files"
+        ],
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T10:37:39Z",
-          "attempt": 1,
-          "conclusion": "success",
-          "event": "push",
-          "id": 45376571895,
-          "status": "completed",
-          "url": "https://github.com/jsdyer/census-lens/actions/runs/45376571895"
-        },
-        "latest_refresh": {
-          "at": "2026-11-24T10:01:54Z",
+          "at": "2026-11-24T11:54:22Z",
           "attempt": 1,
           "conclusion": "failure",
           "event": "workflow_dispatch",
-          "id": 45370807496,
+          "id": 45388456794,
           "status": "completed",
-          "url": "https://github.com/jsdyer/census-lens/actions/runs/45370807496"
+          "url": "https://github.com/jsdyer/census-lens/actions/runs/45388456794"
+        },
+        "latest_refresh": {
+          "at": "2026-11-24T11:54:22Z",
+          "attempt": 1,
+          "conclusion": "failure",
+          "event": "workflow_dispatch",
+          "id": 45388456794,
+          "status": "completed",
+          "url": "https://github.com/jsdyer/census-lens/actions/runs/45388456794"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 40354,
-            "cached": true,
+            "age_seconds": 43958,
+            "cached": false,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 15984000.0,
             "precision": "date",
-            "read_at": "2026-11-24T10:59:51.897984Z",
+            "read_at": "2026-11-24T12:12:38.111435Z",
             "status": "fresh",
             "timestamp": "2026-11-24T00:00:00Z",
             "url": "https://coolcode.ca/census-lens/data/status.json"
@@ -2417,16 +3182,16 @@
       },
       "probe_cache": {
         "0": {
-          "key": "04e46b6abb28646dd62e8088f456f70629ca830dff405745c88ac61b60634f25",
-          "read_at": "2026-11-24T10:59:51.897984Z",
+          "key": "1a49db85d96f3eb7ae7d2f1c75ebfcdd40de1282b5eaffe8233cd06c23c8f730",
+          "read_at": "2026-11-24T12:12:38.111435Z",
           "timestamp": "2026-11-24T00:00:00Z"
         }
       },
       "reasons": [
-        "Latest run succeeded; the earlier scheduled/manual run failed. A subsequent scheduled/manual refresh is not yet confirmed"
+        "Latest workflow run failure"
       ],
       "repo": "jsdyer/census-lens",
-      "status": "limited",
+      "status": "attention",
       "titles": [
         "Census Lens"
       ],
@@ -2474,7 +3239,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 10872,
+            "age_seconds": 14476,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -2548,7 +3313,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40354,
+            "age_seconds": 43959,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -2622,7 +3387,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40354,
+            "age_seconds": 43959,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2696,7 +3461,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40354,
+            "age_seconds": 43959,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2770,7 +3535,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472355,
+            "age_seconds": 475959,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2844,7 +3609,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40355,
+            "age_seconds": 43959,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -2909,7 +3674,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 162515,
+            "age_seconds": 166120,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -2983,7 +3748,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 38759,
+            "age_seconds": 42364,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -3057,7 +3822,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40355,
+            "age_seconds": 43960,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -3131,7 +3896,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40355,
+            "age_seconds": 43961,
             "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
@@ -3205,7 +3970,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 53173,
+            "age_seconds": 56779,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -3279,7 +4044,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40355,
+            "age_seconds": 43961,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -3320,33 +4085,33 @@
         {
           "definition": "[\"https://coolcode.ca/dockdiary/data/index.json\", {\"field\": \"stations\", \"measure\": \"sum\", \"path\": [\"networks\"], \"unit\": \"stations\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-24T10:59:54.565165Z",
+          "read_at": "2026-11-24T12:12:40.903448Z",
           "unit": "stations",
           "url": "https://coolcode.ca/dockdiary/data/index.json",
           "value": 261
         }
       ],
       "execution": {
-        "due_at": "2026-11-24T10:17:00Z",
+        "due_at": "2026-11-24T11:17:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T10:51:41Z",
+          "at": "2026-11-24T11:51:48Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45378760792,
+          "id": 45388062543,
           "status": "completed",
-          "url": "https://github.com/jsdyer/dockdiary/actions/runs/45378760792"
+          "url": "https://github.com/jsdyer/dockdiary/actions/runs/45388062543"
         },
         "latest_refresh": {
-          "at": "2026-11-24T10:51:41Z",
+          "at": "2026-11-24T11:51:48Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45378760792,
+          "id": 45388062543,
           "status": "completed",
-          "url": "https://github.com/jsdyer/dockdiary/actions/runs/45378760792"
+          "url": "https://github.com/jsdyer/dockdiary/actions/runs/45388062543"
         },
         "state": "active"
       },
@@ -3354,14 +4119,14 @@
         "checks": [
           {
             "age_seconds": 1245,
-            "cached": true,
+            "cached": false,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 7200.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T10:59:54.565165Z",
+            "read_at": "2026-11-24T12:12:40.903448Z",
             "status": "fresh",
-            "timestamp": "2026-11-24T10:51:51Z",
+            "timestamp": "2026-11-24T11:51:56Z",
             "url": "https://coolcode.ca/dockdiary/data/index.json"
           }
         ],
@@ -3370,9 +4135,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "a85a0ff02abfbc70574df2380f4f17547428b96477386220e9cbc24eab07d3b0",
-          "read_at": "2026-11-24T10:59:54.565165Z",
-          "timestamp": "2026-11-24T10:51:51Z"
+          "key": "52e645c60d978c824faf54060ede866e3c7f48f4647661e0471d1b8214961c42",
+          "read_at": "2026-11-24T12:12:40.903448Z",
+          "timestamp": "2026-11-24T11:51:56Z"
         }
       },
       "reasons": [
@@ -3472,7 +4237,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 162417,
+            "age_seconds": 166022,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -3546,7 +4311,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40356,
+            "age_seconds": 43961,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -3620,7 +4385,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24589,
+            "age_seconds": 28194,
             "cached": true,
             "check": 0,
             "label": "Canadian notices checked",
@@ -3694,7 +4459,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40356,
+            "age_seconds": 43962,
             "cached": true,
             "check": 0,
             "label": "Trade data retrieved",
@@ -3768,7 +4533,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472356,
+            "age_seconds": 475962,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -3833,7 +4598,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40356,
+            "age_seconds": 43962,
             "cached": true,
             "check": 0,
             "label": "SeaBus retrieved",
@@ -3907,7 +4672,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40357,
+            "age_seconds": 43963,
             "cached": true,
             "check": 0,
             "label": "Halifax retrieved",
@@ -3981,7 +4746,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40357,
+            "age_seconds": 43963,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4046,7 +4811,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1535,
+            "age_seconds": 5141,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4120,7 +4885,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9969,
+            "age_seconds": 13575,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4161,48 +4926,48 @@
         {
           "definition": "[\"https://coolcode.ca/flightweather/data/ledger.json\", {\"measure\": \"length\", \"path\": [\"observations\"], \"unit\": \"reports\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-24T10:59:57.018575Z",
+          "read_at": "2026-11-24T12:12:43.135179Z",
           "unit": "reports",
           "url": "https://coolcode.ca/flightweather/data/ledger.json",
-          "value": 235
+          "value": 239
         }
       ],
       "execution": {
-        "due_at": "2026-11-24T10:17:00Z",
+        "due_at": "2026-11-24T11:17:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T10:52:17Z",
+          "at": "2026-11-24T11:52:12Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45378853504,
+          "id": 45388124920,
           "status": "completed",
-          "url": "https://github.com/jsdyer/flightweather/actions/runs/45378853504"
+          "url": "https://github.com/jsdyer/flightweather/actions/runs/45388124920"
         },
         "latest_refresh": {
-          "at": "2026-11-24T10:52:17Z",
+          "at": "2026-11-24T11:52:12Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45378853504,
+          "id": 45388124920,
           "status": "completed",
-          "url": "https://github.com/jsdyer/flightweather/actions/runs/45378853504"
+          "url": "https://github.com/jsdyer/flightweather/actions/runs/45388124920"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 1195,
-            "cached": true,
+            "age_seconds": 1210,
+            "cached": false,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 7200.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T10:59:57.018575Z",
+            "read_at": "2026-11-24T12:12:43.135179Z",
             "status": "fresh",
-            "timestamp": "2026-11-24T10:52:42Z",
+            "timestamp": "2026-11-24T11:52:33Z",
             "url": "https://coolcode.ca/flightweather/data/ledger.json"
           }
         ],
@@ -4211,9 +4976,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "6f5946a4287aeccdb1450541a73b35dfd6164f3bd08034f871b46ca9ceb9e95c",
-          "read_at": "2026-11-24T10:59:57.018575Z",
-          "timestamp": "2026-11-24T10:52:42Z"
+          "key": "4a48db8dfdf9490164b3e7bd65faddefc008bed9fc40e12dd3f6fe6c4af839d3",
+          "read_at": "2026-11-24T12:12:43.135179Z",
+          "timestamp": "2026-11-24T11:52:33Z"
         }
       },
       "reasons": [
@@ -4268,7 +5033,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40357,
+            "age_seconds": 43963,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4350,7 +5115,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 4976,
+            "age_seconds": 8582,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -4424,7 +5189,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 6251,
+            "age_seconds": 9858,
             "cached": true,
             "check": 0,
             "label": "Heritage workbook retrieved",
@@ -4498,7 +5263,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40358,
+            "age_seconds": 43964,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4580,7 +5345,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 36801,
+            "age_seconds": 40407,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -4654,7 +5419,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472358,
+            "age_seconds": 475964,
             "cached": true,
             "check": 0,
             "label": "Archive index retrieved",
@@ -4728,7 +5493,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472358,
+            "age_seconds": 475965,
             "cached": true,
             "check": 0,
             "label": "Catalogue retrieved",
@@ -4802,7 +5567,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40358,
+            "age_seconds": 43965,
             "cached": true,
             "check": 0,
             "label": "Government directory retrieved",
@@ -4867,7 +5632,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 57596,
+            "age_seconds": 61203,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -4941,7 +5706,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2155,
+            "age_seconds": 5763,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -5015,7 +5780,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 123405,
+            "age_seconds": 127012,
             "cached": true,
             "check": 0,
             "label": "Captured",
@@ -5056,66 +5821,68 @@
         {
           "definition": "[\"https://coolcode.ca/govtrackercensus/data/current.json\", {\"measure\": \"length\", \"path\": [\"records\"], \"unit\": \"homepages\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-24T10:59:59.394985Z",
+          "read_at": "2026-11-24T12:12:45.787512Z",
           "unit": "homepages",
           "url": "https://coolcode.ca/govtrackercensus/data/current.json",
           "value": 15
         }
       ],
       "execution": {
-        "due_at": "2026-11-17T09:17:00Z",
+        "due_at": "2026-11-24T09:17:00Z",
         "due_unobserved": false,
+        "failed_steps": [
+          "Collect public source evidence"
+        ],
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T04:15:28Z",
+          "at": "2026-11-24T11:22:40Z",
           "attempt": 1,
-          "conclusion": "success",
-          "event": "push",
-          "id": 45325114113,
+          "conclusion": "failure",
+          "event": "workflow_dispatch",
+          "id": 45383609218,
           "status": "completed",
-          "url": "https://github.com/jsdyer/govtrackercensus/actions/runs/45325114113"
+          "url": "https://github.com/jsdyer/govtrackercensus/actions/runs/45383609218"
         },
         "latest_refresh": {
-          "at": "2026-11-22T12:28:29Z",
+          "at": "2026-11-24T11:22:40Z",
           "attempt": 1,
-          "conclusion": "success",
+          "conclusion": "failure",
           "event": "workflow_dispatch",
-          "id": 45022448249,
+          "id": 45383609218,
           "status": "completed",
-          "url": "https://github.com/jsdyer/govtrackercensus/actions/runs/45022448249"
+          "url": "https://github.com/jsdyer/govtrackercensus/actions/runs/45383609218"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 163472,
-            "cached": true,
+            "age_seconds": 167079,
+            "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T10:59:59.394985Z",
+            "read_at": "2026-11-24T12:12:45.787512Z",
             "status": "fresh",
             "timestamp": "2026-11-22T13:48:07Z",
             "url": "https://coolcode.ca/govtrackercensus/data/current.json"
           }
         ],
-        "run_alignment": "at_or_after_start",
         "status": "recent"
       },
       "probe_cache": {
         "0": {
-          "key": "c837f6ef7547c285affcf0c75c9bb7f9a1bbfd72dfc94c84876e6f3fb4beaf41",
-          "read_at": "2026-11-24T10:59:59.394985Z",
+          "key": "ff68d652f6261d57ce095ec1102364edab251659c40390af48cf7a4ee1690474",
+          "read_at": "2026-11-24T12:12:45.787512Z",
           "timestamp": "2026-11-22T13:48:07Z"
         }
       },
       "reasons": [
-        "Workflow and configured published checks are available"
+        "Latest workflow run failure"
       ],
       "repo": "jsdyer/govtrackercensus",
-      "status": "checked",
+      "status": "attention",
       "titles": [
         "Gov Tracker Census"
       ],
@@ -5130,48 +5897,48 @@
         {
           "definition": "[\"https://coolcode.ca/grid-dark/status.json\", {\"path\": [\"bulletins\"], \"unit\": \"utility bulletins\"}]",
           "label": "Internet data retrieved",
-          "read_at": "2026-11-24T10:59:59.582679Z",
+          "read_at": "2026-11-24T12:12:45.945512Z",
           "unit": "utility bulletins",
           "url": "https://coolcode.ca/grid-dark/status.json",
           "value": 10
         }
       ],
       "execution": {
-        "due_at": "2026-11-23T09:47:00Z",
+        "due_at": "2026-11-24T09:47:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T04:15:47Z",
+          "at": "2026-11-24T11:52:40Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "push",
-          "id": 45325154053,
+          "event": "workflow_dispatch",
+          "id": 45388194841,
           "status": "completed",
-          "url": "https://github.com/jsdyer/grid-dark/actions/runs/45325154053"
+          "url": "https://github.com/jsdyer/grid-dark/actions/runs/45388194841"
         },
         "latest_refresh": {
-          "at": "2026-11-23T21:42:48Z",
+          "at": "2026-11-24T11:52:40Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "schedule",
-          "id": 45272444322,
+          "event": "workflow_dispatch",
+          "id": 45388194841,
           "status": "completed",
-          "url": "https://github.com/jsdyer/grid-dark/actions/runs/45272444322"
+          "url": "https://github.com/jsdyer/grid-dark/actions/runs/45388194841"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 126759,
-            "cached": true,
+            "age_seconds": 43966,
+            "cached": false,
             "check": 0,
             "label": "Internet data retrieved",
             "max_age_seconds": 259200.0,
             "precision": "date",
-            "read_at": "2026-11-24T10:59:59.582679Z",
+            "read_at": "2026-11-24T12:12:45.945512Z",
             "status": "fresh",
-            "timestamp": "2026-11-23T00:00:00Z",
+            "timestamp": "2026-11-24T00:00:00Z",
             "url": "https://coolcode.ca/grid-dark/status.json"
           }
         ],
@@ -5180,9 +5947,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "894c7c8384ba007e91d687a4a23e0bfb6e501500f0e54d9ca3311974c149451c",
-          "read_at": "2026-11-24T10:59:59.582679Z",
-          "timestamp": "2026-11-23T00:00:00Z"
+          "key": "6de8cd85e2206e2ad132528e6b5619886355fd902288bb5bd6b337bffbff9c11",
+          "read_at": "2026-11-24T12:12:45.945512Z",
+          "timestamp": "2026-11-24T00:00:00Z"
         }
       },
       "reasons": [
@@ -5204,48 +5971,48 @@
         {
           "definition": "[\"https://coolcode.ca/gridreceipt/data/index.json\", {\"path\": [\"archive_count\"], \"unit\": \"saved receipts\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-24T11:11:19.858779Z",
+          "read_at": "2026-11-24T12:12:46.527207Z",
           "unit": "saved receipts",
           "url": "https://coolcode.ca/gridreceipt/data/index.json",
-          "value": 37
+          "value": 40
         }
       ],
       "execution": {
         "due_at": "2026-11-24T09:41:00Z",
-        "due_unobserved": true,
+        "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T08:31:44Z",
+          "at": "2026-11-24T11:17:21Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45356900623,
+          "id": 45382799108,
           "status": "completed",
-          "url": "https://github.com/jsdyer/gridreceipt/actions/runs/45356900623"
+          "url": "https://github.com/jsdyer/gridreceipt/actions/runs/45382799108"
         },
         "latest_refresh": {
-          "at": "2026-11-24T08:31:44Z",
+          "at": "2026-11-24T11:17:21Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45356900623,
+          "id": 45382799108,
           "status": "completed",
-          "url": "https://github.com/jsdyer/gridreceipt/actions/runs/45356900623"
+          "url": "https://github.com/jsdyer/gridreceipt/actions/runs/45382799108"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 9641,
-            "cached": true,
+            "age_seconds": 3310,
+            "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 21600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T11:11:19.858779Z",
+            "read_at": "2026-11-24T12:12:46.527207Z",
             "status": "fresh",
-            "timestamp": "2026-11-24T08:31:58Z",
+            "timestamp": "2026-11-24T11:17:37Z",
             "url": "https://coolcode.ca/gridreceipt/data/index.json"
           }
         ],
@@ -5254,16 +6021,16 @@
       },
       "probe_cache": {
         "0": {
-          "key": "d22b1299e604702a59f2e363b545eb9a011b349eb06bd0b4e4766196e428a901",
-          "read_at": "2026-11-24T11:11:19.858779Z",
-          "timestamp": "2026-11-24T08:31:58Z"
+          "key": "2fe1e1bfc229318a3d096e7c157f0d31a8d2492a6f91fa28330ea9ea8428e9da",
+          "read_at": "2026-11-24T12:12:46.527207Z",
+          "timestamp": "2026-11-24T11:17:37Z"
         }
       },
       "reasons": [
-        "No scheduled/manual run observed for the latest due time"
+        "Workflow and configured published checks are available"
       ],
       "repo": "jsdyer/gridreceipt",
-      "status": "attention",
+      "status": "checked",
       "titles": [
         "Grid Receipt"
       ],
@@ -5311,7 +6078,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40359,
+            "age_seconds": 43967,
             "cached": true,
             "check": 0,
             "label": "Photo index retrieved",
@@ -5385,7 +6152,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9634,
+            "age_seconds": 13241,
             "cached": true,
             "check": 0,
             "label": "Waterways retrieved",
@@ -5397,7 +6164,7 @@
             "url": "https://coolcode.ca/hiddenwater/data/status.json"
           },
           {
-            "age_seconds": 40359,
+            "age_seconds": 43967,
             "cached": true,
             "check": 1,
             "label": "Fish passage retrieved",
@@ -5476,7 +6243,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9633,
+            "age_seconds": 13241,
             "cached": true,
             "check": 0,
             "label": "Camera list",
@@ -5550,7 +6317,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 85091,
+            "age_seconds": 88698,
             "cached": true,
             "check": 0,
             "label": "Canadian cache retrieved",
@@ -5624,7 +6391,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472360,
+            "age_seconds": 475967,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -5698,7 +6465,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 47196,
+            "age_seconds": 50804,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -5772,7 +6539,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 385960,
+            "age_seconds": 389568,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -5846,7 +6613,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40360,
+            "age_seconds": 43968,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -5920,7 +6687,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 385960,
+            "age_seconds": 389568,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -5994,7 +6761,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24982,
+            "age_seconds": 28591,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -6068,7 +6835,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9492,
+            "age_seconds": 13101,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -6142,7 +6909,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472361,
+            "age_seconds": 475969,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -6304,26 +7071,26 @@
     {
       "counts": [],
       "execution": {
-        "due_at": "2026-11-24T10:37:00Z",
+        "due_at": "2026-11-24T11:37:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T11:12:20Z",
+          "at": "2026-11-24T12:12:24Z",
           "attempt": 1,
           "conclusion": null,
           "event": "workflow_dispatch",
-          "id": 45382016651,
+          "id": 45391263020,
           "status": "in_progress",
-          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45382016651"
+          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45391263020"
         },
         "latest_refresh": {
-          "at": "2026-11-24T11:12:20Z",
+          "at": "2026-11-24T12:12:24Z",
           "attempt": 1,
           "conclusion": null,
           "event": "workflow_dispatch",
-          "id": 45382016651,
+          "id": 45391263020,
           "status": "in_progress",
-          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45382016651"
+          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45391263020"
         },
         "state": "active"
       },
@@ -6380,7 +7147,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40361,
+            "age_seconds": 43970,
             "cached": true,
             "check": 0,
             "label": "Municipal profiles retrieved",
@@ -6454,7 +7221,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1095,
+            "age_seconds": 4704,
             "cached": true,
             "check": 0,
             "label": "Permit list checked",
@@ -6528,7 +7295,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9328,
+            "age_seconds": 12936,
             "cached": true,
             "check": 0,
             "label": "Licence data retrieved",
@@ -6602,7 +7369,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40362,
+            "age_seconds": 43970,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -6692,7 +7459,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40362,
+            "age_seconds": 43971,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -6757,7 +7524,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9317,
+            "age_seconds": 12926,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -6831,7 +7598,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 53202,
+            "age_seconds": 56811,
             "cached": true,
             "check": 0,
             "label": "Captured",
@@ -6905,7 +7672,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40362,
+            "age_seconds": 43971,
             "cached": true,
             "check": 0,
             "label": "Survey retrieved",
@@ -6979,7 +7746,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 385962,
+            "age_seconds": 389571,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -7056,7 +7823,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2965,
+            "age_seconds": 6573,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7120,7 +7887,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 6049,
+            "age_seconds": 9658,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -7194,7 +7961,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 162675,
+            "age_seconds": 166284,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -7268,7 +8035,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 34016,
+            "age_seconds": 37625,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7342,7 +8109,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40363,
+            "age_seconds": 43972,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -7416,7 +8183,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40363,
+            "age_seconds": 43972,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -7490,7 +8257,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2070,
+            "age_seconds": 5679,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7564,7 +8331,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 44939,
+            "age_seconds": 48548,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7638,7 +8405,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 158372,
+            "age_seconds": 161981,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7712,7 +8479,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 158425,
+            "age_seconds": 162034,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7786,7 +8553,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 37486,
+            "age_seconds": 41095,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -7860,7 +8627,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24891,
+            "age_seconds": 28500,
             "cached": true,
             "check": 0,
             "label": "NASA/NOAA capture",
@@ -7934,7 +8701,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 52355,
+            "age_seconds": 55965,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -7999,7 +8766,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 107983,
+            "age_seconds": 111593,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -8073,7 +8840,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40365,
+            "age_seconds": 43974,
             "cached": true,
             "check": 0,
             "label": "Tor Metrics retrieved",
@@ -8147,7 +8914,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40365,
+            "age_seconds": 43974,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -8221,7 +8988,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 9279,
+            "age_seconds": 12888,
             "cached": true,
             "check": 0,
             "label": "Source checked",
@@ -8303,7 +9070,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40365,
+            "age_seconds": 43974,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -8315,7 +9082,7 @@
             "url": "https://coolcode.ca/otherworldnames/data-status.json"
           },
           {
-            "age_seconds": 40365,
+            "age_seconds": 43974,
             "cached": true,
             "check": 1,
             "label": "Horizons retrieved",
@@ -8385,7 +9152,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 2940,
+            "age_seconds": 6550,
             "cached": true,
             "check": 0,
             "label": "Package registry capture",
@@ -8459,7 +9226,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 126765,
+            "age_seconds": 130375,
             "cached": true,
             "check": 0,
             "label": "Monthly tables retrieved",
@@ -8533,7 +9300,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472366,
+            "age_seconds": 475975,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -8607,7 +9374,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40366,
+            "age_seconds": 43975,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -8681,7 +9448,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24903,
+            "age_seconds": 28512,
             "cached": true,
             "check": 0,
             "label": "KEV source retrieved",
@@ -8755,7 +9522,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8244,
+            "age_seconds": 11854,
             "cached": true,
             "check": 0,
             "label": "Pre-grant workbook retrieved",
@@ -8829,7 +9596,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 385966,
+            "age_seconds": 389576,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -8903,7 +9670,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40366,
+            "age_seconds": 43976,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -8977,7 +9744,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40367,
+            "age_seconds": 43976,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9051,7 +9818,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40367,
+            "age_seconds": 43976,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9125,7 +9892,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 299567,
+            "age_seconds": 303177,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9199,7 +9966,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24961,
+            "age_seconds": 28571,
             "cached": true,
             "check": 0,
             "label": "Price table retrieved",
@@ -9273,7 +10040,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40367,
+            "age_seconds": 43977,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9347,7 +10114,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 46740,
+            "age_seconds": 50350,
             "cached": true,
             "check": 0,
             "label": "Catalogue checked",
@@ -9388,48 +10155,48 @@
         {
           "definition": "[\"https://coolcode.ca/radarscope/data/index.json\", {\"path\": [\"record_count\"], \"unit\": \"hourly traffic points\"}]",
           "label": "Source checked",
-          "read_at": "2026-11-24T11:00:13.443731Z",
+          "read_at": "2026-11-24T12:12:57.249773Z",
           "unit": "hourly traffic points",
           "url": "https://coolcode.ca/radarscope/data/index.json",
-          "value": 501
+          "value": 504
         }
       ],
       "execution": {
-        "due_at": "2026-11-23T09:37:00Z",
+        "due_at": "2026-11-24T09:37:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T04:16:42Z",
+          "at": "2026-11-24T11:43:36Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "push",
-          "id": 45325262480,
+          "event": "workflow_dispatch",
+          "id": 45386808875,
           "status": "completed",
-          "url": "https://github.com/jsdyer/radarscope/actions/runs/45325262480"
+          "url": "https://github.com/jsdyer/radarscope/actions/runs/45386808875"
         },
         "latest_refresh": {
-          "at": "2026-11-23T21:38:16Z",
+          "at": "2026-11-24T11:43:36Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "schedule",
-          "id": 45271696807,
+          "event": "workflow_dispatch",
+          "id": 45386808875,
           "status": "completed",
-          "url": "https://github.com/jsdyer/radarscope/actions/runs/45271696807"
+          "url": "https://github.com/jsdyer/radarscope/actions/runs/45386808875"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 48849,
-            "cached": true,
+            "age_seconds": 1724,
+            "cached": false,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T11:00:13.443731Z",
+            "read_at": "2026-11-24T12:12:57.249773Z",
             "status": "fresh",
-            "timestamp": "2026-11-23T21:38:38Z",
+            "timestamp": "2026-11-24T11:44:13Z",
             "url": "https://coolcode.ca/radarscope/data/index.json"
           }
         ],
@@ -9438,9 +10205,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "e503a8ccec5bddd64f5abdfb1327d077a87289b26e01403afbb45c70fa11c48e",
-          "read_at": "2026-11-24T11:00:13.443731Z",
-          "timestamp": "2026-11-23T21:38:38Z"
+          "key": "310ac3b53425ac9cc0464b6a407b596aedbc0602c7751e3dd62a7b34b53f6bdb",
+          "read_at": "2026-11-24T12:12:57.249773Z",
+          "timestamp": "2026-11-24T11:44:13Z"
         }
       },
       "reasons": [
@@ -9495,7 +10262,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24918,
+            "age_seconds": 28528,
             "cached": true,
             "check": 0,
             "label": "Provider capture",
@@ -9569,7 +10336,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24755,
+            "age_seconds": 28365,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9643,7 +10410,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 213168,
+            "age_seconds": 216778,
             "cached": true,
             "check": 0,
             "label": "Quarterly sources checked",
@@ -9717,7 +10484,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 213168,
+            "age_seconds": 216778,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -9782,7 +10549,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 67376,
+            "age_seconds": 70986,
             "cached": true,
             "check": 0,
             "label": "Crossref capture",
@@ -9859,7 +10626,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 84999,
+            "age_seconds": 88609,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -9932,7 +10699,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8994,
+            "age_seconds": 12604,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -9971,41 +10738,41 @@
     {
       "counts": [],
       "execution": {
-        "due_at": "2026-11-23T09:43:00Z",
+        "due_at": "2026-11-24T09:43:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-23T21:39:46Z",
+          "at": "2026-11-24T11:48:52Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "schedule",
-          "id": 45271943001,
+          "event": "workflow_dispatch",
+          "id": 45387615509,
           "status": "completed",
-          "url": "https://github.com/jsdyer/riverpulse/actions/runs/45271943001"
+          "url": "https://github.com/jsdyer/riverpulse/actions/runs/45387615509"
         },
         "latest_refresh": {
-          "at": "2026-11-23T21:39:46Z",
+          "at": "2026-11-24T11:48:52Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "schedule",
-          "id": 45271943001,
+          "event": "workflow_dispatch",
+          "id": 45387615509,
           "status": "completed",
-          "url": "https://github.com/jsdyer/riverpulse/actions/runs/45271943001"
+          "url": "https://github.com/jsdyer/riverpulse/actions/runs/45387615509"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 48775,
-            "cached": true,
+            "age_seconds": 1440,
+            "cached": false,
             "check": 0,
             "label": "River observation capture",
             "max_age_seconds": 172800.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T11:00:15.164622Z",
+            "read_at": "2026-11-24T12:12:58.627731Z",
             "status": "fresh",
-            "timestamp": "2026-11-23T21:39:53Z",
+            "timestamp": "2026-11-24T11:48:59Z",
             "url": "https://coolcode.ca/riverpulse/data/index.json"
           }
         ],
@@ -10014,9 +10781,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "1d8b2929d677fca0c7093d97473b7fddbd8d14ed7a3efa2e649690d04d4cc72f",
-          "read_at": "2026-11-24T11:00:15.164622Z",
-          "timestamp": "2026-11-23T21:39:53Z"
+          "key": "79edf05461ea5615d07f9e3ae4cef25eaa0f3d99497a5627dbaff984f45efbc1",
+          "read_at": "2026-11-24T12:12:58.627731Z",
+          "timestamp": "2026-11-24T11:48:59Z"
         }
       },
       "reasons": [
@@ -10062,7 +10829,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 4262,
+            "age_seconds": 7873,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10136,7 +10903,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40369,
+            "age_seconds": 43979,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10210,7 +10977,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 558769,
+            "age_seconds": 562379,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10251,15 +11018,15 @@
         {
           "definition": "[\"https://coolcode.ca/sanctionsledger/data/current.json\", {\"measure\": \"length\", \"path\": [\"records\"], \"unit\": \"list entries\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-24T11:00:15.978530Z",
+          "read_at": "2026-11-24T12:12:59.269677Z",
           "unit": "list entries",
           "url": "https://coolcode.ca/sanctionsledger/data/current.json",
           "value": 5781
         }
       ],
       "execution": {
-        "due_at": "2026-11-23T10:11:00Z",
-        "due_unobserved": false,
+        "due_at": "2026-11-24T10:11:00Z",
+        "due_unobserved": true,
         "history_limit": 20,
         "latest": {
           "at": "2026-11-24T04:17:57Z",
@@ -10284,13 +11051,13 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 47555,
-            "cached": true,
+            "age_seconds": 51165,
+            "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 172800.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T11:00:15.978530Z",
+            "read_at": "2026-11-24T12:12:59.269677Z",
             "status": "fresh",
             "timestamp": "2026-11-23T22:00:14Z",
             "url": "https://coolcode.ca/sanctionsledger/data/current.json"
@@ -10301,16 +11068,16 @@
       },
       "probe_cache": {
         "0": {
-          "key": "ef6902d1f739b93191e6625309457c708dfe3fe2599278d76edd2ae56b3b8ff7",
-          "read_at": "2026-11-24T11:00:15.978530Z",
+          "key": "393f943f1eb2cf34a6ce6bd41747627c0d251dd3e4c532617867513eb62aac3d",
+          "read_at": "2026-11-24T12:12:59.269677Z",
           "timestamp": "2026-11-23T22:00:14Z"
         }
       },
       "reasons": [
-        "Workflow and configured published checks are available"
+        "No scheduled/manual run observed for the latest due time"
       ],
       "repo": "jsdyer/sanctionsledger",
-      "status": "checked",
+      "status": "attention",
       "titles": [
         "Sanctions Ledger"
       ],
@@ -10358,7 +11125,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8989,
+            "age_seconds": 12599,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10432,7 +11199,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 33402,
+            "age_seconds": 37012,
             "cached": true,
             "check": 0,
             "label": "Browser captured",
@@ -10506,7 +11273,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40369,
+            "age_seconds": 43980,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10580,7 +11347,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40369,
+            "age_seconds": 43980,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10654,7 +11421,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40370,
+            "age_seconds": 43980,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10719,7 +11486,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 126770,
+            "age_seconds": 130380,
             "cached": true,
             "check": 0,
             "label": "Timetable retrieved",
@@ -10793,7 +11560,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 8692,
+            "age_seconds": 12303,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -10867,7 +11634,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 44997,
+            "age_seconds": 48608,
             "cached": true,
             "check": 0,
             "label": "Snapshot generated",
@@ -10941,7 +11708,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40370,
+            "age_seconds": 43981,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11015,7 +11782,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40370,
+            "age_seconds": 43981,
             "cached": true,
             "check": 0,
             "label": "MAST observations retrieved",
@@ -11089,7 +11856,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40370,
+            "age_seconds": 43981,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11171,7 +11938,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472370,
+            "age_seconds": 475981,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -11245,7 +12012,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40370,
+            "age_seconds": 43982,
             "cached": true,
             "check": 0,
             "label": "Spectrum sources retrieved",
@@ -11319,7 +12086,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40371,
+            "age_seconds": 43982,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11384,7 +12151,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 37025,
+            "age_seconds": 40636,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11466,7 +12233,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40371,
+            "age_seconds": 43982,
             "cached": true,
             "check": 0,
             "label": "Tracks retrieved",
@@ -11478,7 +12245,7 @@
             "url": "https://coolcode.ca/stormtracks/data-status.json"
           },
           {
-            "age_seconds": 40371,
+            "age_seconds": 43982,
             "cached": true,
             "check": 1,
             "label": "Harbour data retrieved",
@@ -11557,7 +12324,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 45315,
+            "age_seconds": 48927,
             "cached": true,
             "check": 0,
             "label": "CADORS sources retrieved",
@@ -11631,7 +12398,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40371,
+            "age_seconds": 43983,
             "cached": true,
             "check": 0,
             "label": "Cityworks data retrieved",
@@ -11705,7 +12472,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40371,
+            "age_seconds": 43983,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -11779,7 +12546,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472371,
+            "age_seconds": 475983,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -11853,7 +12620,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 1062,
+            "age_seconds": 4673,
             "cached": true,
             "check": 0,
             "label": "All targets checked",
@@ -11927,7 +12694,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24089,
+            "age_seconds": 27701,
             "cached": true,
             "check": 0,
             "label": "Telecom sources retrieved",
@@ -12001,7 +12768,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472372,
+            "age_seconds": 475983,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -12075,7 +12842,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 3821,
+            "age_seconds": 7433,
             "cached": true,
             "check": 0,
             "label": "Sources checked",
@@ -12149,7 +12916,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 472372,
+            "age_seconds": 475984,
             "cached": true,
             "check": 0,
             "label": "Source retrieved",
@@ -12223,7 +12990,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 24489,
+            "age_seconds": 28101,
             "cached": true,
             "check": 0,
             "label": "Oldest regional retrieval",
@@ -12297,7 +13064,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40372,
+            "age_seconds": 43985,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -12338,48 +13105,48 @@
         {
           "definition": "[\"https://coolcode.ca/transitreceipt/data/index.json\", {\"path\": [\"archive_count\"], \"unit\": \"saved receipts\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-24T11:00:22.393248Z",
+          "read_at": "2026-11-24T12:13:04.605132Z",
           "unit": "saved receipts",
           "url": "https://coolcode.ca/transitreceipt/data/index.json",
-          "value": 713
+          "value": 799
         }
       ],
       "execution": {
-        "due_at": "2026-11-24T10:13:00Z",
+        "due_at": "2026-11-24T11:13:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T10:49:59Z",
+          "at": "2026-11-24T11:49:51Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45378492602,
+          "id": 45387764020,
           "status": "completed",
-          "url": "https://github.com/jsdyer/transitreceipt/actions/runs/45378492602"
+          "url": "https://github.com/jsdyer/transitreceipt/actions/runs/45387764020"
         },
         "latest_refresh": {
-          "at": "2026-11-24T10:49:59Z",
+          "at": "2026-11-24T11:49:51Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45378492602,
+          "id": 45387764020,
           "status": "completed",
-          "url": "https://github.com/jsdyer/transitreceipt/actions/runs/45378492602"
+          "url": "https://github.com/jsdyer/transitreceipt/actions/runs/45387764020"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 807,
-            "cached": true,
+            "age_seconds": 804,
+            "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 7200.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T11:00:22.393248Z",
+            "read_at": "2026-11-24T12:13:04.605132Z",
             "status": "fresh",
-            "timestamp": "2026-11-24T10:59:26Z",
+            "timestamp": "2026-11-24T11:59:41Z",
             "url": "https://coolcode.ca/transitreceipt/data/index.json"
           }
         ],
@@ -12388,9 +13155,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "2e2d148422ee44bdbc0de2022a69197ec0d59bb15da445be90d5070c1edf5c90",
-          "read_at": "2026-11-24T11:00:22.393248Z",
-          "timestamp": "2026-11-24T10:59:26Z"
+          "key": "a4e0c5a89c8aea49e63105d40a63b2c6446a2f4d352f1a139a4fb095e5e4e60e",
+          "read_at": "2026-11-24T12:13:04.605132Z",
+          "timestamp": "2026-11-24T11:59:41Z"
         }
       },
       "reasons": [
@@ -12412,48 +13179,48 @@
         {
           "definition": "[\"https://coolcode.ca/translink/data/status.json\", {\"path\": [\"buses\"], \"unit\": \"buses out\"}]",
           "label": "Fleet captured",
-          "read_at": "2026-11-24T11:00:22.778203Z",
+          "read_at": "2026-11-24T12:13:04.673421Z",
           "unit": "buses out",
           "url": "https://coolcode.ca/translink/data/status.json",
-          "value": 26
+          "value": 156
         }
       ],
       "execution": {
-        "due_at": "2026-11-24T10:17:00Z",
+        "due_at": "2026-11-24T11:17:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-24T10:55:23Z",
+          "at": "2026-11-24T11:55:18Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45379330785,
+          "id": 45388602472,
           "status": "completed",
-          "url": "https://github.com/jsdyer/translink/actions/runs/45379330785"
+          "url": "https://github.com/jsdyer/translink/actions/runs/45388602472"
         },
         "latest_refresh": {
-          "at": "2026-11-24T10:55:23Z",
+          "at": "2026-11-24T11:55:18Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45379330785,
+          "id": 45388602472,
           "status": "completed",
-          "url": "https://github.com/jsdyer/translink/actions/runs/45379330785"
+          "url": "https://github.com/jsdyer/translink/actions/runs/45388602472"
         },
         "state": "active"
       },
       "output": {
         "checks": [
           {
-            "age_seconds": 1035,
-            "cached": true,
+            "age_seconds": 1057,
+            "cached": false,
             "check": 0,
             "label": "Live fleet capture",
             "max_age_seconds": 7200.0,
             "precision": "timestamp",
-            "read_at": "2026-11-24T11:00:22.778203Z",
+            "read_at": "2026-11-24T12:13:04.673421Z",
             "status": "fresh",
-            "timestamp": "2026-11-24T10:55:38Z",
+            "timestamp": "2026-11-24T11:55:28Z",
             "url": "https://coolcode.ca/translink/data/status.json"
           }
         ],
@@ -12462,9 +13229,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "145246d568d3412526919c6352e192a78b033e6221750a363b49be744170cc29",
-          "read_at": "2026-11-24T11:00:22.778203Z",
-          "timestamp": "2026-11-24T10:55:38Z"
+          "key": "8785c326520353e82b33ba8c784087d353272577927c5d2b5c6c9dadb611974e",
+          "read_at": "2026-11-24T12:13:04.673421Z",
+          "timestamp": "2026-11-24T11:55:28Z"
         }
       },
       "reasons": [
@@ -12519,7 +13286,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 40373,
+            "age_seconds": 43985,
             "cached": true,
             "check": 0,
             "label": "Data retrieved",
@@ -12593,7 +13360,7 @@
       "output": {
         "checks": [
           {
-            "age_seconds": 39118,
+            "age_seconds": 42730,
             "cached": true,
             "check": 0,
             "label": "Disclosure source retrieved",
@@ -12630,12 +13397,12 @@
       "workflow_url": "https://github.com/jsdyer/wrongdoings/actions/workflows/pages.yml"
     }
   ],
-  "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45382016651",
+  "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45391263020",
   "stale_after_seconds": 10800,
   "summary": {
-    "attention": 3,
-    "checked": 155,
-    "limited": 4,
+    "attention": 6,
+    "checked": 154,
+    "limited": 2,
     "running": 1,
     "workflow_only": 5
   },
