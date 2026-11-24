@@ -21,7 +21,7 @@ A newly added repository must also be accessible to the existing GitHub App inst
 - It dispatches missed or failed refreshes, avoiding jobs already queued or running. It attempts at most ten dispatches per pass. Unresolved refreshes keep receiving recovery attempts at least six hours apart by default (up to four per day), without a lifetime attempt limit.
 - A successful dispatch request is **not** reported as a successful refresh. Later passes check the completed run and, where configured, the actual published data timestamp.
 - Published freshness checks use reviewed collection/check timestamps from `data/operations/freshness.json` in the hub. Old upstream observations and intentionally retained captures are not silently treated as fresh. The 162 data-publishing workflows have 166 reviewed probes; the six workflow-only exceptions are listed below.
-- An optional Healthchecks-compatible heartbeat can notify you if a pass fails or the server stops checking. Without that URL, reporting is local through the JSON report and systemd journal.
+- An optional Healthchecks-compatible heartbeat monitors watchdog execution: completing checks, requesting eligible recovery and saving the report. Collector failures and stale data stay in reports without failing this heartbeat. Without that URL, reporting is local through the JSON report and systemd journal.
 
 The separate weekly GitHub schedule guards are an immediate mitigation, not a documented exemption from GitHub's inactivity policy. This server provides the independent scheduling backstop. **Execution and publication still depend on GitHub Actions**; migrating the collectors themselves to your server would be a separate step.
 
@@ -52,14 +52,46 @@ The generic daily limit incorrectly flagged Saturday's snapshot on Tuesday morni
 before another run was due. This tolerance does not delay recovery of a missed
 scheduled workflow; the due-run check remains separate and unchanged.
 
-The Healthchecks signal represents the result of the whole pass. `errors > 0`
-sends a failure ping, including a failed published-data freshness check, even when
-the Linux process itself ran normally. Ordinary `attention` warnings do not send
-a failure ping. Read the report's target status/reason to identify what failed;
-the Healthchecks “Down” label alone does not establish that the server is offline.
-Recovery continues when published data is overdue or unreadable; those conditions
-remain errors during both dispatch and cooldown. A failed refresh with a still-recent
-retained snapshot is a warning while another attempt is pending.
+## What Healthchecks monitors
+
+The heartbeat answers **“Did the watchdog complete its own checks and recovery work?”**
+It does not require every collector to download successfully or every dataset to be
+recent. A source HTTP 403, failed collector, stalled GitHub run, stale timestamp or
+unreadable published status remains visible in the per-tool report and journal. A
+completed watchdog pass can send a success ping with those findings still present.
+Waiting for an active job, the six-hour retry window or the dispatch budget is normal.
+Recovery continues according to the same rules; timestamps and validation results are
+never changed just to make the heartbeat green.
+
+The heartbeat fails when the watchdog cannot complete its own work: invalid credentials
+or configuration, failure to inspect GitHub workflows or request recovery, an incomplete
+history that prevents a safe recovery decision, or inability to save its state/report.
+A crash or stopped timer also leaves missing pings for Healthchecks to detect. GitHub
+API authentication/permission errors are operational failures; an upstream source 403
+inside a collector, or a 403 reading public data metadata, is a reported collector issue.
+A registry fetch warning does not fail a pass that successfully uses validated cached
+targets; the warning stays in the report.
+
+| Report field | Meaning |
+| --- | --- |
+| `watchdog_health`, `watchdog_errors` | Execution health. Controls Healthchecks and the exit status in `--apply` mode. |
+| `collector_errors` | Targets with error-level collector/output findings. Ordinary warnings remain in `attention`. |
+| `health`, `errors` | Existing overall findings, including collector data problems and registry warnings. Kept for compatibility; **not the heartbeat decision**. |
+| `targets[].error_scope` | `watchdog` or `collector` for each error-level target; also included in the journal. |
+| `heartbeat_scope` | `watchdog_execution`, identifying the new policy. |
+
+For example, Lobby Trail may repeatedly receive 403s and exceed its data-age limit.
+Its report still shows the stale data and recovery attempts, while Healthchecks stays
+green if the watchdog keeps completing its work. The final journal summary prints
+`watchdog_health`, `watchdog_errors` and `collector_errors` separately. The admin's
+Tool outcomes report independently continues to show failed runs and overdue data.
+The overall JSON `health` can therefore remain `unhealthy` while `watchdog_health`
+and Healthchecks are healthy. A dry run never sends the production heartbeat and
+retains its existing nonzero exit for findings; `watchdog_health` is `dry_run` when
+its read-only checks complete.
+
+This replaces the older combined heartbeat policy. Install the runtime update below;
+keep the existing Healthchecks URL, five-minute period and twenty-minute grace.
 
 ## Continuing recovery attempts
 
@@ -92,8 +124,9 @@ sudo bash ./install.sh
 ```
 
 The installer preserves your GitHub App credentials, heartbeat URL and retry history,
-then re-enables the timer and starts a pass. Inspect the next report or journal for
-`dispatch_requested` or `cooldown` with its next eligible retry time. If installation
+then re-enables the timer and starts a pass. Inspect the next report for
+`heartbeat_scope: watchdog_execution` and `watchdog_health`, and recovery rows for
+`dispatch_requested` or `cooldown` with their next eligible retry time. If installation
 fails, correct that error and rerun it; the stopped timer must be re-enabled before
 monitoring resumes.
 
@@ -186,7 +219,7 @@ sudo journalctl -u coolcode-watchdog.service -n 60 --no-pager
 sudo python3 -m json.tool /var/lib/coolcode-watchdog/report.json
 ```
 
-The report distinguishes `current`, `pending`, `dispatch_requested`, `cooldown`, `disabled_manually`, `published_stale` and authentication errors. Recovery no longer stops with `retry_exhausted`; retries continue at the configured interval. `verified_refresh: false` with `assurance: workflow_only` means the workflow succeeded but that target has no independent published-timestamp check. An accepted dispatch remains pending verification.
+The report distinguishes `current`, `pending`, `dispatch_requested`, `cooldown`, `disabled_manually`, `published_stale` and authentication errors. Read `watchdog_health` for execution health and each target's status, severity and `error_scope` for findings; the overall `health` is not the Healthchecks result. Recovery no longer stops with `retry_exhausted`; retries continue at the configured interval. `verified_refresh: false` with `assurance: workflow_only` means the workflow succeeded but that target has no independent published-timestamp check. An accepted dispatch remains pending verification.
 
 The journal immediately shows registry refresh, authentication, each target's
 start and result, elapsed seconds, and final heartbeat/report stages. Watch with

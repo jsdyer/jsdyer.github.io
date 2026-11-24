@@ -377,11 +377,12 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
             if progress:
                 fields={'index':index,'total':len(ordered),'repo':row['repo'],'workflow':row['workflow']}
                 if event=='target_finished':
-                    fields.update(status=row['status'],elapsed_seconds=round(time.monotonic()-started,1))
+                    fields.update(status=row['status'],severity=row['severity'],elapsed_seconds=round(time.monotonic()-started,1))
+                    if row.get('error_scope'):fields['error_scope']=row['error_scope']
                     if 'http_status' in row:fields['http_status']=row['http_status']
                 progress(event,**fields)
         if stop_reason:
-            row.update(status='not_checked',severity='error',reason=stop_reason)
+            row.update(status='not_checked',severity='error',error_scope='watchdog',reason=stop_reason)
             notify('target_finished')
             continue
         notify('target_started')
@@ -462,7 +463,7 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
             if workflow_state=='disabled_inactivity' and not apply:
                 row['would_enable']=True
             if truncated:
-                row.update(status='history_incomplete',severity='error',reason='History cap reached; refusing uncertain duplicate dispatch')
+                row.update(status='history_incomplete',severity='error',error_scope='watchdog',reason='History cap reached; refusing uncertain duplicate dispatch')
                 continue
             retry=record.get('retry_after')
             if record.get('attempts') and record.get('last_dispatch_attempt'):
@@ -508,18 +509,19 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
             row.update(status='dispatch_requested',severity='warning',retry_after=record['retry_after'],recovery_attempts=attempts,
                        reason='GitHub accepted dispatch; a later pass must verify completion and published timestamps')
         except SafeError as error:
-            row.update(status=error.kind,severity='error')
+            row.update(status=error.kind,severity='error',error_scope='watchdog')
             if error.status: row['http_status']=error.status
             if error.retry_at:
                 state['blocked_until']=stamp(error.retry_at);row['retry_after']=state['blocked_until'];stop_reason='rate_limited'
             elif error.kind=='authentication_failed':stop_reason='authentication_failed'
         except (ValueError,KeyError,TypeError,OverflowError):
-            row.update(status='invalid_api_or_state_data',severity='error')
+            row.update(status='invalid_api_or_state_data',severity='error',error_scope='watchdog')
         finally:
             if (row['status'] in ('cooldown','dispatch_budget','dispatch_requested')
                     and any(check['status']!='fresh' for check in row.get('freshness',[]))):
                 row.update(severity='error',published_data_stale=True)
                 row['reason']+='; published freshness checks also fail'
+            if row['severity']=='error':row.setdefault('error_scope','collector')
             record['last_checked']=stamp(now)
             # Preserve completed checks even if a later request stalls and
             # systemd ends the pass. The next pass resumes with older targets.
@@ -533,6 +535,13 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
         report['errors']+=1
     report['attention']=sum(r['severity']=='warning' for r in report['targets'])
     report['health']='unhealthy' if report['errors'] else 'attention' if report['attention'] else 'healthy'
+    # Keep the overall findings intact; the execution heartbeat has a narrower scope.
+    # Public probe failures are caught inside freshness_checks, while GitHub API or
+    # state failures above prevent the watchdog from completing its own work.
+    report['watchdog_errors']=sum(r.get('error_scope')=='watchdog' for r in report['targets'])
+    report['collector_errors']=sum(r.get('error_scope')=='collector' for r in report['targets'])
+    report['watchdog_health']='unhealthy' if report['watchdog_errors'] else 'healthy' if apply else 'dry_run'
+    report['heartbeat_scope']='watchdog_execution'
     report['assurance']='Published timestamp checks are reported separately; workflow success alone does not prove new source data'
     return report
 
@@ -621,17 +630,25 @@ def main(argv=None):
         report=run(config,state,HTTP(token),now,args.apply,persist=lambda value:atomic_json(args.state,value),progress=log_progress)
         # Dry runs may cache reads but never write dispatch attempt or enable state.
         atomic_json(args.state,state)
-        log_progress('sending_heartbeat' if heartbeat else 'saving_report',errors=report['errors'],dispatches=report['dispatches'])
-        delivered=ping_heartbeat(heartbeat,report['errors']==0)
+        log_progress('saving_report',watchdog_errors=report['watchdog_errors'],collector_errors=report['collector_errors'],dispatches=report['dispatches'])
+        # A successful heartbeat also means the completed findings reached disk.
+        if heartbeat:report['heartbeat']='pending'
+        atomic_json(args.report,report)
+        if heartbeat:log_progress('sending_heartbeat',watchdog_health=report['watchdog_health'])
+        delivered=ping_heartbeat(heartbeat,report['watchdog_errors']==0)
         if delivered is not None:
             report['heartbeat']='delivered' if delivered else 'delivery_failed'
-            if not delivered:report['errors']+=1;report['health']='unhealthy'
-        atomic_json(args.report,report)
-        print(json.dumps({'health':report['health'],'mode':report['mode'],'targets':len(report['targets']),
-                          'errors':report['errors'],'attention':report['attention'],'dispatches':report['dispatches']}))
-        return 1 if report['errors'] else 0
+            if not delivered:
+                report['errors']+=1;report['health']='unhealthy'
+                report['watchdog_errors']+=1;report['watchdog_health']='unhealthy'
+            atomic_json(args.report,report)
+        print(json.dumps({'watchdog_health':report['watchdog_health'],'mode':report['mode'],'targets':len(report['targets']),
+                          'watchdog_errors':report['watchdog_errors'],'collector_errors':report['collector_errors'],
+                          'attention':report['attention'],'dispatches':report['dispatches']}))
+        return 1 if (report['watchdog_errors'] if args.apply else report['errors']) else 0
     except SafeError as error:
         report={'version':1,'checked_at':stamp(now),'health':'unhealthy','status':error.kind,
+                'watchdog_health':'unhealthy','watchdog_errors':1,'collector_errors':0,'heartbeat_scope':'watchdog_execution',
                 'http_status':error.status,'mode':'apply' if args.apply else 'dry-run'}
         delivered=ping_heartbeat(heartbeat,False)
         if delivered is not None:report['heartbeat']='delivered' if delivered else 'delivery_failed'
