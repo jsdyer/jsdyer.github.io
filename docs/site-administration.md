@@ -67,6 +67,10 @@ observation job. It reads workflow state and the latest 20 runs per registered
 workflow, then reads public output metadata. It never dispatches, enables or
 retries collectors, and it does not send additional alerts. The Linux watchdog
 continues to own recovery and Healthchecks signalling.
+If a source can be downloaded in your browser but rejects the collector, follow
+[Manual data import](manual-data-import.md). It documents the verified Census Lens
+and Lobby Trail inputs, local validation, committed files and publication steps,
+plus the limits of applying the same procedure to other tools.
 With the updated watchdog runtime, unresolved refreshes are retried six hours apart
 by default, without a three-attempt cutoff. A new cron occurrence does not shorten
 that retry window, and an observed successful refresh resets it. A recent retained
