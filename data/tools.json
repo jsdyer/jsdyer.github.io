@@ -888,7 +888,7 @@
             "unit": "Canadian notices"
           },
           "value": "2026-11-24",
-          "count": 6559
+          "count": 6563
         },
         {
           "url": "https://coolcode.ca/exploitgraveyard/data/kev.json",
@@ -903,8 +903,8 @@
             "measure": "length",
             "unit": "KEV entries"
           },
-          "value": "2026-11-23",
-          "count": 1792
+          "value": "2026-11-24",
+          "count": 1795
         }
       ]
     },
@@ -952,7 +952,7 @@
             "measure": "length"
           },
           "value": "2026-11-24",
-          "count": 1792
+          "count": 1795
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -960,7 +960,7 @@
             "kevDate"
           ],
           "label": "Source published",
-          "value": "2026-11-23"
+          "value": "2026-11-24"
         },
         {
           "url": "https://coolcode.ca/patchsignal/kev.json",
@@ -3312,7 +3312,7 @@
             "unit": "daily captures",
             "measure": "length"
           },
-          "value": "2026-11-24 16:30 UTC",
+          "value": "2026-11-24 23:00 UTC",
           "count": 2
         }
       ]
@@ -3468,7 +3468,7 @@
             0
           ],
           "label": "Observation dates",
-          "value": "2017-01-02–2026-11-23",
+          "value": "2017-01-02–2026-11-24",
           "end_path": [
             "dates",
             -1
@@ -4203,7 +4203,7 @@
           "path": [
             "latest"
           ],
-          "value": "2026-11-23"
+          "value": "2026-11-24"
         }
       ]
     },
@@ -7703,8 +7703,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-24 20:57 UTC",
-          "count": 1863
+          "value": "2026-11-24 22:59 UTC",
+          "count": 2109
         }
       ]
     },
@@ -7749,8 +7749,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-24 20:38 UTC",
-          "count": 24
+          "value": "2026-11-24 22:38 UTC",
+          "count": 27
         }
       ]
     },
@@ -8110,8 +8110,8 @@
             "unit": "observations",
             "measure": "length"
           },
-          "value": "2026-11-24 14:51 UTC",
-          "count": 5871
+          "value": "2026-11-24 22:47 UTC",
+          "count": 7699
         }
       ]
     },
@@ -8200,7 +8200,7 @@
             "unit": "crossings",
             "measure": "length"
           },
-          "value": "2026-11-24 21:23 UTC",
+          "value": "2026-11-24 22:57 UTC",
           "count": 4
         }
       ]
@@ -9404,7 +9404,7 @@
             "capturedAt"
           ],
           "precision": "minute",
-          "value": "2026-11-24 20:26 UTC"
+          "value": "2026-11-24 22:33 UTC"
         }
       ]
     },
@@ -9505,7 +9505,7 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-24 20:50 UTC",
+          "value": "2026-11-24 22:52 UTC",
           "count": 261
         }
       ]
@@ -9552,8 +9552,8 @@
             ],
             "unit": "observations"
           },
-          "value": "2026-11-24 20:21 UTC",
-          "count": 276
+          "value": "2026-11-24 22:28 UTC",
+          "count": 284
         }
       ]
     },
@@ -9658,8 +9658,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-24 20:51 UTC",
-          "count": 287
+          "value": "2026-11-24 22:53 UTC",
+          "count": 300
         }
       ]
     },
@@ -10290,8 +10290,8 @@
             "unit": "buses out"
           },
           "precision": "minute",
-          "value": "2026-11-24 20:54 UTC",
-          "count": 870
+          "value": "2026-11-24 22:56 UTC",
+          "count": 1287
         },
         {
           "label": "Network",
