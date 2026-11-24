@@ -1,4 +1,5 @@
 import json
+import hashlib
 from pathlib import Path
 import sys
 import tempfile
@@ -7,7 +8,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from sync_operations import outputs, sync
-from check_integration import check_built
+from check_integration import check_built, verify_source_receipt
 
 
 class OperationsTests(unittest.TestCase):
@@ -79,3 +80,18 @@ class BuiltIntegrationTests(unittest.TestCase):
             sitemap.write_text('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"/>')
             with self.assertRaisesRegex(ValueError, 'missing public tool routes'):
                 check_built(root, [tool])
+
+
+class DeploymentReceiptTests(unittest.TestCase):
+    def test_dashboard_final_newline_variation_is_explicit_and_narrow(self):
+        code = b'export default {};\n'
+        receipt = {'source_sha256': hashlib.sha256(code[:-1]).hexdigest(), 'source_transform': 'remove-final-newline'}
+        verify_source_receipt(code, receipt)
+        with self.assertRaises(ValueError):
+            verify_source_receipt(b'export default {changed:true};\n', receipt)
+        with self.assertRaises(ValueError):
+            verify_source_receipt(code + b'\n', receipt)
+        with self.assertRaises(ValueError):
+            verify_source_receipt(code, {**receipt, 'source_transform': 'ignore-whitespace'})
+        with self.assertRaises(ValueError):
+            verify_source_receipt(code, {'source_sha256': receipt['source_sha256']})

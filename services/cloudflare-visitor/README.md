@@ -30,17 +30,15 @@ not mark the Worker integration complete.
 
 See [the complete tool lifecycle](../../docs/tool-lifecycle.md).
 
-## Pending deployment
+## Verified deployment
 
-The generated replacement includes all 232 catalogue IDs, including Atlas Canada,
-Takedown Watcher, Abuse Kit and Edge Map. It is tested, but the connected Cloudflare account rejected its content-only upload with
-HTTP 403 (missing Workers Scripts Write scope). The recorded receipt is the
-**previous live code**, so `scripts/check_integration.py --deployment` intentionally
-reports the difference until the prepared replacement is deployed and verified.
-Run the deploy command above with a permitted connection/token, then commit the
-new receipt and remove this pending note. No binding or database migration is needed.
+The manually deployed Worker was downloaded and verified on 2026-11-24. Its
+public `/registry` matches all 232 catalogue IDs. The dashboard editor omitted
+one final newline; the receipt records that precise byte transformation and the
+actual downloaded hash. Any other source change still fails verification.
+Future deployments through `deploy.py` use an exact byte match by default.
 
-Copy the current generated source from
+Copy the generated source from
 [worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js).
-A content-only deployment is sufficient. After a manual deployment, verify the
-live module and update the receipt; do not merely mark the pending note complete.
+The connector still requires Workers Scripts Write for future API deployments;
+the current deployment is verified and no longer pending.

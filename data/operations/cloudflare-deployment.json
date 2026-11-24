@@ -1,6 +1,7 @@
 {
   "worker": "coolcode-visitor-api",
-  "source_sha256": "faab6c1aa409fdee926269d5de845400d523cdbc1b67e2e9369fdca41896b450",
-  "verified_at": "2026-11-24T05:17:11.481044+00:00",
-  "method": "Downloaded existing live module; generated replacement pending Workers Scripts Write permission"
+  "source_sha256": "28e12e51ca581cc926730efed135f3d8e782e22f382707bbace8abaa75faf4cc",
+  "source_transform": "remove-final-newline",
+  "verified_at": "2026-11-24T07:05:28.047477+00:00",
+  "method": "Downloaded manually deployed module; identical to generated source except omitted final LF; live /registry verified for all 232 tool IDs"
 }

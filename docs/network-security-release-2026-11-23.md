@@ -36,12 +36,11 @@ have unanswered hops. The original capture timestamp remains unchanged.
 
 ## External completion requirements
 
-The generated visitor Worker has 232 tool IDs. Cloudflare's content-only PUT
-still returns HTTP 403 because this connection lacks Workers Scripts Write.
-The browser is signed out. The deployment receipt deliberately remains the
-previous live hash, so the deployment and weekly live-registry audits continue
-to flag this discrepancy. Deploy `services/cloudflare-visitor/worker.js`,
-verify the live module and `/registry`, then update the receipt.
+The visitor Worker was manually updated and verified on 2026-11-24: the downloaded
+module matches the generated source apart from an omitted final newline, and
+`/registry` includes all 232 IDs. The receipt now records that verification. The
+Cloudflare connector still lacks write permission for future API deployments,
+but this release's Worker deployment is complete.
 
 The independent scheduler's installer and current targets are in GitHub at
 `services/refresh-watchdog/`. Server installation cannot be verified from this

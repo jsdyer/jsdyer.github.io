@@ -25,6 +25,18 @@ def check_built(root, tools):
         raise ValueError('Built search/report catalogue differs from data/tools.json')
 
 
+def verify_source_receipt(source, receipt):
+    # The dashboard editor can omit the final LF when code is pasted manually.
+    # Permit only this explicitly verified byte transformation, never other drift.
+    transform = receipt.get('source_transform')
+    if transform == 'remove-final-newline':
+        source = source.removesuffix(b'\n')
+    elif transform is not None:
+        raise ValueError('Unknown Worker receipt source transformation')
+    if receipt.get('source_sha256') != hashlib.sha256(source).hexdigest():
+        raise ValueError('Visitor Worker changed without a matching verified deployment receipt')
+
+
 def check(root=ROOT, built=False, deployment=False):
     tools = json.loads((root / 'data/tools.json').read_text())
     snapshot = json.loads((root / 'data/repository-audit.json').read_text())
@@ -40,9 +52,7 @@ def check(root=ROOT, built=False, deployment=False):
     sync(root, check=True)
     if deployment:
         receipt = json.loads((root / 'data/operations/cloudflare-deployment.json').read_text())
-        actual_hash = hashlib.sha256((root / 'services/cloudflare-visitor/worker.js').read_bytes()).hexdigest()
-        if receipt.get('source_sha256') != actual_hash:
-            raise ValueError('Visitor Worker changed without a matching verified deployment receipt')
+        verify_source_receipt((root / 'services/cloudflare-visitor/worker.js').read_bytes(), receipt)
     if built:
         check_built(root, tools)
     return len(tools)
