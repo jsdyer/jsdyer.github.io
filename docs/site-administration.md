@@ -40,7 +40,9 @@ published metadata that was read.
 Validated metadata readings reuse the watchdog's bounded cache (at most six hours
 for slower sources), with a fresh read after a changed run or due occurrence.
 Cached evidence and record counts retain their actual read time in the report.
-An explicit **Check GitHub now** run reads metadata afresh.
+Unresolved failures or limited evidence are re-read on each observation, so an
+independent publication cannot stay hidden behind the metadata cache.
+An explicit **Check GitHub now** run reads all metadata afresh.
 
 The report uses the same 168-target registry, reviewed timestamps and age limits
 as the independent watchdog. It also reads record counts where the catalogue has

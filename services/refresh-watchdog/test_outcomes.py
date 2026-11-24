@@ -205,6 +205,15 @@ class ReviewedOutcomeTests(unittest.TestCase):
         self.assertEqual(row['status'],'attention')
         self.assertIn('apod',' '.join(row['reasons']))
         self.assertEqual(row['output']['status'],'recent')
+    def test_unconfirmed_output_is_reread_after_independent_publication(self):
+        target=copy.deepcopy(TARGET);target['crons']=['0 0 * * *']
+        first=observe(target,TOOLS,NOW,HTTP(stamp='2026-11-24T10:00:00Z',count=5))
+        self.assertEqual(first['status'],'limited')
+        row=observe(target,TOOLS,NOW+dt.timedelta(hours=1),HTTP(stamp='2026-11-24T12:30:00Z',count=6),first)
+        self.assertFalse(row['output']['checks'][0]['cached'])
+        self.assertEqual(row['status'],'checked')
+        self.assertEqual(row['counts'][0]['value'],6)
+
     def test_explicit_fresh_check_rereads_unchanged_metadata(self):
         target=copy.deepcopy(TARGET);target['crons']=['0 0 * * *']
         first=observe(target,TOOLS,NOW,HTTP(count=5))

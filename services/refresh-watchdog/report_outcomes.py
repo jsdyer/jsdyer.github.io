@@ -83,7 +83,7 @@ def classify(row):
         issues.append('Published capture reports source problems: ' + ', '.join(failed_sources))
     if output.get('source_status_error'):
         issues.append('Published source results could not be verified')
-    if execution.get('collection_result') == 'failure' and (not latest or latest.get('conclusion') not in FAILED):
+    if execution.get('collection_result') == 'failure' and refresh == latest and latest and latest.get('conclusion') not in FAILED:
         issues.append('Reviewed source collection steps failed, despite the workflow result')
     if refresh and refresh.get('conclusion') in FAILED and refresh != latest:
         if execution.get('latest_step_check', {}).get('status') == 'skipped':
@@ -176,7 +176,10 @@ def observe(target, tools, now, http, previous=None, fresh=False):
     count_specs = [p for t in tools for p in t.get('data_info', {}).get('probes', []) if p.get('count_at')]
     marker = hashlib.sha256(json.dumps({'run': row['execution'].get('latest'),
         'counts': [{k: p.get(k) for k in ('url', 'label', 'count_at')} for p in count_specs]}, sort_keys=True).encode()).hexdigest()
-    row['probe_cache'] = {} if fresh else copy.deepcopy((previous or {}).get('probe_cache', {}))
+    # Unresolved evidence must be re-read: a separate publication workflow or
+    # a verified local import can repair it without changing this workflow's ID.
+    reread = fresh or (previous or {}).get('status') in ('attention', 'limited')
+    row['probe_cache'] = {} if reread else copy.deepcopy((previous or {}).get('probe_cache', {}))
     checks = wd.freshness_checks(target, documents, now, cadence, cache=row['probe_cache'], refresh_marker=marker, due=wd.stamp(due))
     for result, probe in zip(checks, probes):
         result.update(label=probe['label'], url=probe['url'], precision=probe.get('precision', 'timestamp'))
