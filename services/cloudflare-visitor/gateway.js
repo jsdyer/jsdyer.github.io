@@ -156,9 +156,12 @@ async function apiHandle(request,env,ctx) {
     const url=new URL(request.url), origin=request.headers.get('Origin');
     if(origin && origin!==ORIGIN) return apiFailure(403,'origin_denied','Origin is not allowed.');
     if(request.method==='OPTIONS') return {status:204};
+    if(['/api/measurebench/','/api/screenradar/','/api/domain-biography/'].some(prefix=>url.pathname.startsWith(prefix))) return await secondBatchApiHandle(request,env,ctx);
     if(request.method!=='GET') return apiFailure(405,'method_denied','Use GET for public data requests.');
-    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY)}}};
+    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY),screenplaces:Boolean(env.TMDB_READ_ACCESS_TOKEN),planehere:true,planehere_key:Boolean(env.ADSBLOL_API_KEY),screenradar:Boolean(env.TMDB_READ_ACCESS_TOKEN),measurebench:Boolean(env.WOLFRAM_APP_ID),domain_biography:true}}};
     if(url.pathname.startsWith('/api/halifaxnext/')) return await halifaxApiHandle(request,env,ctx);
+    if(url.pathname.startsWith('/api/screenplaces/')) return await screenplacesApiHandle(request,env,ctx);
+    if(url.pathname.startsWith('/api/planehere/')) return await planehereApiHandle(request,env,ctx);
     const plan=pcRoute(url,env)||inspectionRoute(url)||apiRoute(url,env), db=env.DB, now=Date.now();
     if(!db) return apiFailure(503,'storage_unavailable','The shared request limiter is unavailable.');
     if(!await allowed(db,request,new Date(now),'tool-api')) return apiFailure(429,'client_wait','Too many requests. Please wait before trying again.',300);

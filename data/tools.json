@@ -11432,5 +11432,373 @@
     "readme": {
       "note": "Care Compass collects the complete published BC Child Care Map layer and Nova Scotia Child Care Directory, rather than limiting the search to a preset city list. Search a name, city, street or postal code; filter by province, age, program, operating pattern and reported vacancy. Specific filters match explicit positive source flags, so unknown fields remain visible under “Any / unknown”. The map uses supplied coordinates and loads OpenStreetMap tiles only when opened. BC covers ministry-funded licensed child care, not every BC provider. Its reported vacancy flags include their original update dates and are never promises of an available space. Nova Scotia updates its directory biannually; its source coverage date and publication date are displayed separately from our collection check. NS does not publish live vacancies in this dataset. Licence capacity is not spare capacity, and source inspection dates are not inspection findings or endorsements. Choose “Add to shortlist” to save a provider on this device. Contact status and notes survive ordinary refreshes in the same browser, with CSV export and a delete button; they do not sync or submit an application. Directory JSON export/reopen preserves earlier source coverage and dates separately from the private shortlist. Confirm age eligibility, fees, availability and hours with the provider before making plans."
     }
+  },
+  {
+    "id": "harbournow",
+    "title": "Harbour Now",
+    "description": "Identify observed ships around Halifax and Vancouver, explore recorded harbour movements, and compare time observed at anchor.",
+    "category": "places",
+    "tags": [
+      "ships",
+      "AIS",
+      "Halifax",
+      "Vancouver",
+      "English Bay",
+      "harbours",
+      "anchorage"
+    ],
+    "icon": "map",
+    "url": "/harbournow/",
+    "source": "https://github.com/jsdyer/harbournow",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "A separately installed VPS collector records AISStream observations continuously. Position dates, observation gaps and approximate boundaries are explicit. Requires a connected collector."
+    },
+    "readme": {
+      "note": "Choose Halifax or Vancouver, search a vessel name or MMSI, and select a ship for details and its recorded track. Older positions are hidden initially; enable “Show older positions” to inspect them with their original timestamps. Entries/exits require consecutive observations across a configurable boundary, and a first sighting is not an arrival. “Time observed at anchor” begins after compatible observations in an approximate anchorage zone and resets after a long gap. Connect the HTTPS address of an installed Harbour Now collector under “Connect a collector”; never enter the AISStream key in the browser."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "screenplaces",
+    "title": "Screen Places",
+    "description": "Explore documented film and television locations across Canadian regions, compare location precision and save an outing.",
+    "category": "media",
+    "tags": [
+      "film",
+      "television",
+      "filming locations",
+      "Canada",
+      "Vancouver",
+      "Halifax",
+      "Wikidata"
+    ],
+    "icon": "film",
+    "url": "/screenplaces/",
+    "source": "https://github.com/jsdyer/screenplaces",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Weekly regional Wikidata filming-location captures across Canada, with optional live TMDb details."
+    },
+    "readme": {
+      "note": "Search for a production such as The X-Files, then inspect the precision label before planning a visit. A city-level record only establishes that Wikidata associates the production with that city; choose recorded venues/sites for more specific leads and inspect each filming statement's references. Use **Pictures of this place** on a result to open Commons Lens with that record’s coordinates prefilled. Commons Lens waits for you to submit before requesting media."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "wikitrails",
+    "title": "Wiki Trails",
+    "description": "Discover nearby history, buildings and landmarks from Wikipedia, then save a personal walking list.",
+    "category": "places",
+    "tags": [
+      "Wikipedia",
+      "walking",
+      "places",
+      "Halifax",
+      "Vancouver",
+      "local history"
+    ],
+    "icon": "map",
+    "url": "/wikitrails/",
+    "source": "https://github.com/jsdyer/wikitrails",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Wikipedia geotagged articles and excerpts near a chosen place, with OpenStreetMap tiles."
+    },
+    "readme": {
+      "note": "Choose Halifax waterfront or search for another starting point, then increase the radius if few articles appear. Distances are straight-line measurements to article coordinates, not walking directions; save interesting places and check access before visiting. Use **Pictures of this place** on a result to open Commons Lens with that record’s coordinates prefilled. Commons Lens waits for you to submit before requesting media."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "addresschronicle",
+    "title": "Address Chronicle",
+    "description": "Search historical Vancouver and Halifax directories by address, street, person or business, with original scanned-page citations.",
+    "category": "places",
+    "tags": [
+      "history",
+      "directories",
+      "Vancouver",
+      "Halifax",
+      "addresses",
+      "archives"
+    ],
+    "icon": "map",
+    "url": "/addresschronicle/",
+    "source": "https://github.com/jsdyer/addresschronicle",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Page-indexed Internet Archive OCR from selected historical Vancouver and Halifax directories;monthly source checks."
+    },
+    "readme": {
+      "note": "Start with a street such as Granville or Barrington, then add a number or surname. OCR errors, changed street numbering and selective directory coverage can hide a match. Open the original scan and confirm the printed city heading before treating an excerpt as evidence."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "torrentlens",
+    "title": "Torrent Lens",
+    "description": "Inspect torrent files and magnet links locally: see files, sizes, hashes, trackers and filename warnings without downloading the content.",
+    "category": "security",
+    "tags": [
+      "torrent",
+      "magnet",
+      "privacy",
+      "files",
+      "hash",
+      "BitTorrent"
+    ],
+    "icon": "scan-search",
+    "url": "/torrentlens/",
+    "source": "https://github.com/jsdyer/torrentlens",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Reads torrent metadata or magnet links locally. Does not contact trackers, join peers or download the described files."
+    },
+    "readme": {
+      "note": "Drop a .torrent file to see its declared files, sizes, tracker addresses and exact infohashes. A magnet normally supplies only identifiers and hints; Torrent Lens does not fetch its missing file list. Filename warnings help you review metadata but are not a malware or authenticity verdict."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "skygeometry",
+    "title": "Sky Geometry",
+    "description": "Convert RA and declination to altitude and azimuth, plan target visibility and compare sky coordinates in your browser.",
+    "category": "field-kit",
+    "tags": [
+      "astronomy",
+      "coordinates",
+      "RA Dec",
+      "altitude",
+      "azimuth",
+      "observing"
+    ],
+    "icon": "moon-star",
+    "url": "/skygeometry/",
+    "source": "https://github.com/jsdyer/skygeometry",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Astronomy Engine calculates fixed sky-coordinate transformations locally from your location, date and selected coordinate system."
+    },
+    "readme": {
+      "note": "Choose your location, observation time and coordinate system before converting RA/Dec to altitude/azimuth. Catalogue coordinates usually use J2000; select equator of date only when your input already uses that frame. A positive altitude clears a level horizon, not nearby trees, buildings or cloud."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "budgetmirror",
+    "title": "Budget Mirror",
+    "description": "Compare your household spending with published Canadian averages, privately in your browser.",
+    "category": "money",
+    "tags": [
+      "Canada",
+      "household",
+      "budget"
+    ],
+    "icon": "wallet",
+    "url": "/budgetmirror/",
+    "source": "https://github.com/jsdyer/budgetmirror",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Statistics Canada household spending averages, with private comparisons calculated in your browser."
+    },
+    "readme": {
+      "note": "Choose a published geography, income group, household type or tenure, then enter only the spending categories you know. Blank amounts are unknown, while zero means no spending; the comparison subtotal matches only entered categories with a published estimate. Survey-year averages are historical context, not recommended budgets or current prices."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "movebench",
+    "title": "Move Bench",
+    "description": "Compare two places using your rent, job offers and moving costs to see the monthly difference.",
+    "category": "money",
+    "tags": [
+      "moving",
+      "rent",
+      "salary",
+      "comparison"
+    ],
+    "icon": "wallet",
+    "url": "/movebench/",
+    "source": "https://github.com/jsdyer/movebench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Your private pay and cost scenarios, with separately labelled Statistics Canada provincial household-spending context."
+    },
+    "readme": {
+      "note": "Enter actual pay and expenses for your current and proposed places. Move Bench separates the gross-pay change from the expense change, calculates an equivalent gross salary and shows moving-cost recovery. All salary comparisons are before income tax and payroll deductions; provincial household averages appear only as dated context and never fill your budget automatically."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "canadapulse",
+    "title": "Canada Pulse",
+    "description": "Explore Wikipedia reading trends in Canada and worldwide interest in Canadian topics.",
+    "category": "media",
+    "tags": [
+      "Wikipedia",
+      "pageviews",
+      "Canada",
+      "reading",
+      "trends"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/canadapulse/",
+    "source": "https://github.com/jsdyer/canadapulse",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Wikimedia daily Canadian readership rankings and worldwide user pageviews for configurable Canadian topics, with a growing dated archive and daily scheduled checks."
+    },
+    "readme": {
+      "note": "“Read from Canada” counts article views originating in Canada; “Canadian topics worldwide” follows a curated list globally. Country figures are privacy-protected upper bounds, not exact reader counts. Browse saved report dates by month, share a date link or export its results. Historical observations and the topic selection for each day are retained in the repository. Missing days remain gaps. A spike compares a complete earlier baseline; it does not explain why people are reading."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "planehere",
+    "title": "Plane Here",
+    "description": "Identify aircraft near you by callsign, direction, distance and altitude, with dated ADS-B observations.",
+    "category": "field-kit",
+    "tags": [
+      "aircraft",
+      "ADS-B",
+      "Halifax",
+      "Vancouver",
+      "aviation"
+    ],
+    "icon": "plane",
+    "url": "/planehere/",
+    "source": "https://github.com/jsdyer/planehere",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Community ADS-B observations from adsb.lol, shared in five-minute area snapshots with individual position times."
+    },
+    "readme": {
+      "note": "Choose a viewpoint and select Find aircraft. The list shows aircraft nearest first; bearing points from you toward the reported position, while track describes the aircraft's movement. Area observations may be cached for five minutes, and positions older than 15 minutes are hidden. Barometric altitude is not height above your building. Coverage is incomplete; this is a discovery tool, not aviation navigation."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "civicrevision",
+    "title": "Civic Revision",
+    "description": "Follow Wikipedia changes to Canadian institutions and public policy, with readable revision comparisons, citation changes and topic RSS feeds.",
+    "category": "explorers",
+    "tags": [
+      "Wikipedia",
+      "Canada",
+      "revisions",
+      "RSS"
+    ],
+    "icon": "landmark",
+    "url": "/civicrevision/",
+    "source": "https://github.com/jsdyer/civicrevision",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Scheduled Wikimedia revision captures with original revision links, citation changes and topic feeds."
+    },
+    "readme": {
+      "note": "Choose a topic, revision month or citation/reversion filter, then expand a revision to compare removed and added text. Original Wikipedia diff links retain the full context. Subscribe to all edits or one topic using the RSS links, including in Feed Harbour. The starter watchlist includes Canadian institutions, privacy/copyright/access-to-information policy, economic services, BC, Nova Scotia and Halifax. Revision date means when Wikipedia changed; first captured and source checked mean when this collector observed it. A changed citation can appear as one removal and one addition. Reversion signals are not judgments about intent, accuracy or vandalism."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "openseed",
+    "title": "Open Seed",
+    "description": "Find official Linux torrents, openly licensed archive media and research datasets with dated download checks.",
+    "category": "projects",
+    "tags": [
+      "Linux",
+      "torrent",
+      "open data",
+      "archive",
+      "downloads"
+    ],
+    "icon": "package-open",
+    "url": "/openseed/",
+    "source": "https://github.com/jsdyer/openseed",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Official Ubuntu, Debian and Arch torrents, openly licensed Internet Archive media and Zenodo datasets with bounded download checks.",
+      "cadence": "Daily"
+    },
+    "readme": {
+      "note": "Search Debian and choose Linux to find official installer torrents, or browse Archive media and Research data. “Available” means the small torrent was parsed or the first byte of the selected data file responded at the shown time. It does not mean the whole payload was downloaded or that seeders are currently online. Check the licence and publisher’s checksum before use."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "noticeguide",
+    "title": "Notice Guide",
+    "description": "Decode a Canadian ISP copyright notice privately, identify its key fields and review possible settlement or payment demands.",
+    "category": "security",
+    "tags": [
+      "privacy",
+      "copyright",
+      "Canada",
+      "ISP"
+    ],
+    "icon": "shield-check",
+    "url": "/noticeguide/",
+    "source": "https://github.com/jsdyer/noticeguide",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Pasted notices are processed only in your browser; dated explanations link to Justice Canada and ISED."
+    },
+    "readme": {
+      "note": "Paste a forwarded notice or open a plain-text `.txt`/`.eml` file to extract labelled claimant, work, allegation, event date and network fields. Payment, settlement, personal-information and court-document phrases are highlighted for human review. Try the fictional example before using your own notice. A missing extraction is not proof a legally required field is absent, and a flag is not a legal determination. Notice text never leaves the tab; the app uses no analytics or browser storage. A downloaded review contains the extracted private information. Clear or reload to remove the working text."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "measurebench",
+    "title": "Measure Bench",
+    "description": "Calculate transfer times, storage, energy use and everyday unit conversions locally.",
+    "category": "projects",
+    "tags": [
+      "calculator",
+      "units",
+      "storage",
+      "transfer",
+      "energy"
+    ],
+    "icon": "percent",
+    "url": "/measurebench/",
+    "source": "https://github.com/jsdyer/measurebench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Local unit definitions and calculations; optional Wolfram Alpha short answers through a quota-limited proxy."
+    },
+    "readme": {
+      "note": "Try `100 GB at 100 Mbps`: the ideal transfer takes 2 hours, 13 minutes and 20 seconds. Lower the useful-throughput percentage to model overhead. GB and GiB differ; B means bytes and b means bits. Energy estimates include only the energy charge, not fixed fees or taxes."
+    },
+    "sync_manifest": true
   }
 ]
