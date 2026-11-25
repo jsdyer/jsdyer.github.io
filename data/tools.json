@@ -2325,7 +2325,7 @@
             ],
             "unit": "notices"
           },
-          "value": "2026-11-24",
+          "value": "2026-11-25",
           "count": 34422
         }
       ],
@@ -3208,7 +3208,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-25 00:44 UTC",
+          "value": "2026-11-25 06:23 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -3315,8 +3315,8 @@
             "unit": "daily captures",
             "measure": "length"
           },
-          "value": "2026-11-24 23:00 UTC",
-          "count": 2
+          "value": "2026-11-25 03:49 UTC",
+          "count": 3
         }
       ]
     },
@@ -3743,7 +3743,7 @@
             "measure": "length",
             "unit": "episodes"
           },
-          "value": "2026-11-24",
+          "value": "2026-11-25",
           "count": 45
         },
         {
@@ -5294,8 +5294,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-25 02:22 UTC",
-          "count": 30
+          "value": "2026-11-25 08:23 UTC",
+          "count": 32
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -5310,7 +5310,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 1200
+          "count": 1280
         }
       ]
     },
@@ -7430,7 +7430,7 @@
             "unit": "predicted tide events"
           },
           "precision": "minute",
-          "value": "2026-11-25 08:15 UTC",
+          "value": "2026-11-25 08:58 UTC",
           "count": 411
         },
         {
@@ -7781,8 +7781,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-25 02:38 UTC",
-          "count": 30
+          "value": "2026-11-25 08:54 UTC",
+          "count": 33
         }
       ]
     },
@@ -7827,8 +7827,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-25 02:17 UTC",
-          "count": 65
+          "value": "2026-11-25 09:03 UTC",
+          "count": 72
         }
       ]
     },
@@ -8233,7 +8233,7 @@
             "unit": "crossings",
             "measure": "length"
           },
-          "value": "2026-11-25 08:22 UTC",
+          "value": "2026-11-25 09:27 UTC",
           "count": 28
         }
       ]
@@ -8372,8 +8372,8 @@
             ],
             "unit": "threat domains tracked"
           },
-          "value": "2026-11-25 02:37 UTC",
-          "count": 405
+          "value": "2026-11-25 08:33 UTC",
+          "count": 419
         }
       ]
     },
@@ -9372,7 +9372,7 @@
             "lastSuccessfulAt"
           ],
           "precision": "minute",
-          "value": "2026-11-24 16:20 UTC"
+          "value": "2026-11-25 07:48 UTC"
         }
       ]
     },
@@ -9437,7 +9437,7 @@
             "capturedAt"
           ],
           "precision": "minute",
-          "value": "2026-11-25 02:27 UTC"
+          "value": "2026-11-25 08:45 UTC"
         }
       ]
     },
@@ -9538,7 +9538,7 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-25 03:04 UTC",
+          "value": "2026-11-25 08:53 UTC",
           "count": 261
         }
       ]
@@ -9585,8 +9585,8 @@
             ],
             "unit": "observations"
           },
-          "value": "2026-11-25 02:21 UTC",
-          "count": 300
+          "value": "2026-11-25 08:37 UTC",
+          "count": 324
         }
       ]
     },
@@ -9691,8 +9691,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-25 03:04 UTC",
-          "count": 320
+          "value": "2026-11-25 08:53 UTC",
+          "count": 353
         }
       ]
     },
@@ -10323,8 +10323,8 @@
             "unit": "buses out"
           },
           "precision": "minute",
-          "value": "2026-11-25 02:53 UTC",
-          "count": 748
+          "value": "2026-11-25 08:44 UTC",
+          "count": 141
         },
         {
           "label": "Network",
@@ -10427,7 +10427,7 @@
             ],
             "unit": "watched targets"
           },
-          "value": "2026-11-25 02:38 UTC",
+          "value": "2026-11-25 08:34 UTC",
           "count": 4
         }
       ]
@@ -10588,7 +10588,7 @@
             "unit": "federal sites"
           },
           "precision": "minute",
-          "value": "2026-11-25 03:59 UTC",
+          "value": "2026-11-25 04:06 UTC",
           "count": 24433
         }
       ]
@@ -10636,7 +10636,7 @@
             ],
             "unit": "protected areas"
           },
-          "value": "2026-11-25 04:30 UTC",
+          "value": "2026-11-25 08:55 UTC",
           "count": 1037
         }
       ]
@@ -10938,7 +10938,7 @@
             ],
             "unit": "projects"
           },
-          "value": "2026-11-25 06:46 UTC",
+          "value": "2026-11-25 06:52 UTC",
           "count": 64
         }
       ]
@@ -11129,7 +11129,7 @@
             ],
             "unit": "destinations"
           },
-          "value": "2026-11-25 05:37 UTC",
+          "value": "2026-11-25 09:08 UTC",
           "count": 230
         }
       ]
