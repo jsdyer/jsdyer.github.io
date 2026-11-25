@@ -1,6 +1,6 @@
 # Repository coverage audit
 
-The current inventory is regenerated from every public repository page. The latest review completes Contaminated Places, Query Confessional and Backup Ledger and retains the public-apis contribution/reference fork as a documented non-tool repository. The machine-readable result is
+The current inventory is regenerated from every public repository page. The latest review includes Park Ready, Tariff Bench, Clam Counter and Basket Math, following Contaminated Places, Query Confessional and Backup Ledger. The public-apis contribution/reference fork remains a documented non-tool repository. The machine-readable result is
 [`data/repository-audit.json`](../data/repository-audit.json). It includes public
 repository names only; private repository identities are omitted.
 
@@ -63,7 +63,10 @@ catalogue's **source** links, and reports unlisted repositories. The default
 command updates the JSON report; `--check` writes nothing and exits nonzero for
 unreviewed repositories, stale exclusions or missing catalogue source repos.
 Rate limits, failed pages and repeated pages fail the audit instead of producing
-a falsely complete report. No API key is needed for a small public inventory.
+a falsely complete report. No API key is needed for a small public inventory. In
+GitHub Actions, the audit uses the existing GH_TOKEN supplied by the workflow to
+avoid the smaller anonymous API allowance. Authorization is restricted to the HTTPS
+GitHub API and is never forwarded through redirects.
 
 A complete paginated GitHub connector export can be used without another request:
 

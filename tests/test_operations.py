@@ -8,7 +8,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from sync_operations import outputs, sync
-from check_integration import check_built, verify_source_receipt
+from check_integration import check_built, manual_source_receipt, receipt_source, verify_source_receipt
 
 
 class OperationsTests(unittest.TestCase):
@@ -111,3 +111,56 @@ class DeploymentReceiptTests(unittest.TestCase):
             verify_source_receipt(code, {**receipt, 'source_transform': 'ignore-whitespace'})
         with self.assertRaises(ValueError):
             verify_source_receipt(code, {'source_sha256': receipt['source_sha256']})
+
+    def test_audited_list_order_comments_and_final_newline_preserve_exact_live_hash(self):
+        generated = b'// generated\nconst toolList = [\n  "alpha",\n  "beta"\n];\nexport default {};\n'
+        literal = '[\n  "beta", // manually added\n  "alpha",\n]'
+        for ending in (b'\n', b''):
+            downloaded = b'// generated\nconst toolList = ' + literal.encode() + b';\nexport default {};' + ending
+            with self.subTest(final_lf=bool(ending)):
+                receipt = manual_source_receipt(generated, downloaded)
+                self.assertEqual(receipt['source_sha256'], hashlib.sha256(downloaded).hexdigest())
+                self.assertEqual(receipt['tool_list_literal'], literal)
+                self.assertEqual(receipt['remove_final_newline'], not bool(ending))
+                self.assertEqual(receipt_source(generated, receipt), downloaded)
+                verify_source_receipt(generated, receipt)
+
+    def test_recorded_list_cannot_change_membership_or_contain_executable_tokens(self):
+        generated = b'const toolList = ["alpha", "beta"];\nexport default {};\n'
+        bad_literals = [
+            '["alpha", "alpha", "beta"]', '["alpha"]', '["alpha", "beta", "extra"]',
+            '["alpha", ...otherIds]', '["alpha", getId()]', '["alpha" + "beta"]',
+            '["alpha",, "beta"]', '["alpha" "beta"]', '["alpha", "beta"]; alert(1)',
+            '["alpha", /* unsupported block */ "beta"]', '["alpha", // comment\u2028 "beta"]',
+            '["alpha", "beta"] // trailing code', '["alpha", "\\u0062eta"]',
+        ]
+        for literal in bad_literals:
+            with self.subTest(literal=literal), self.assertRaises(ValueError):
+                manual_source_receipt(generated, b'const toolList = ' + literal.encode() + b';\nexport default {};\n')
+        with self.assertRaises(ValueError):
+            manual_source_receipt(generated.replace(b'"alpha", "beta"', b'"alpha", "alpha"'), generated)
+
+    def test_recorded_list_does_not_ignore_outside_code_or_newline_changes(self):
+        generated = b'const toolList = ["alpha", "beta"];\nexport default {};\n'
+        downloaded = b'const toolList = ["beta", "alpha",];\nexport default {};'
+        receipt = manual_source_receipt(generated, downloaded)
+        for changed in (generated.replace(b'export default {};', b'export default {changed:true};'),
+                        generated.replace(b';\nexport', b'; \nexport'), generated + b'\n'):
+            with self.subTest(changed=changed), self.assertRaises(ValueError):
+                verify_source_receipt(changed, receipt)
+        with self.assertRaises(ValueError):
+            manual_source_receipt(generated, downloaded.replace(b'export default {};', b'export default {changed:true};'))
+        with self.assertRaises(ValueError):
+            manual_source_receipt(generated, downloaded.replace(b';\nexport', b';\r\nexport'))
+
+    def test_recorded_list_receipt_rejects_ambiguous_declarations_and_flags(self):
+        generated = b'const toolList = ["alpha", "beta"];\nexport default {};\n'
+        downloaded = b'const toolList = ["beta", "alpha"];\nexport default {};'
+        receipt = manual_source_receipt(generated, downloaded)
+        for flag in (None, 'false', 0):
+            with self.subTest(flag=flag), self.assertRaises(ValueError):
+                verify_source_receipt(generated, {**receipt, 'remove_final_newline': flag})
+        with self.assertRaises(ValueError):
+            verify_source_receipt(generated + b'const toolList = ["alpha", "beta"];\n', receipt)
+        with self.assertRaises(ValueError):
+            verify_source_receipt(generated, {**receipt, 'source_sha256': '0' * 64})

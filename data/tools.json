@@ -10564,5 +10564,152 @@
       "note": "Search Halifax or choose British Columbia, then narrow the results by contaminant, inventory status, management strategy or completed cleanup step. Select a site for its custodian, record date and reported contaminant/media pairs. Download every matching result as CSV, or copy a link to the current search and selected site. Nearby search accepts coordinates or optional browser location permission. Closed records remain searchable; a listing alone is not evidence of present-day danger."
     },
     "sync_manifest": true
+  },
+  {
+    "id": "parkready",
+    "title": "Park Ready",
+    "description": "Check BC park advisories, gate dates and facilities before you go. Search the full BC Parks catalogue and save a local visit plan.",
+    "category": "places",
+    "tags": [
+      "BC",
+      "parks",
+      "advisories",
+      "closures",
+      "camping",
+      "hiking",
+      "day trips",
+      "gate dates"
+    ],
+    "icon": "map",
+    "url": "/parkready/",
+    "source": "https://github.com/jsdyer/parkready",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The official BC Parks public catalogue supplies protected areas, published advisories, facility descriptions and year-specific gate dates. It does not determine that a park is open or safe.",
+      "cadence": "Hourly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/parkready/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Source checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "protected areas"
+          },
+          "value": "2026-11-25 04:30 UTC",
+          "count": 1037
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search for a BC park, choose your visit date and open its details. Read the published notices and check the recorded gate dates before following the official park link. A facility listing is a description, not a guarantee that it is available. No notice does not mean open or safe. Save parks locally for next time, copy a shareable plan link, or download a dated planning snapshot. Check the source timestamp and the official page again before travelling."
+    }
+  },
+  {
+    "id": "tariffbench",
+    "title": "Tariff Bench",
+    "description": "Estimate device electricity costs and compare BC Hydro plans or Nova Scotia Power standard rates.",
+    "category": "money",
+    "tags": [
+      "electricity",
+      "energy",
+      "British Columbia",
+      "Nova Scotia",
+      "calculator"
+    ],
+    "icon": "wallet",
+    "url": "/tariffbench/",
+    "source": "https://github.com/jsdyer/tariffbench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "reference",
+      "detail": "Private device and household inputs with manually reviewed BC Hydro and Nova Scotia Power residential tariffs, effective April/May 2026; reviewed November 24, 2026."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter actual billing days and the household kWh **excluding** the devices in your scenario. Add arbitrary devices with average watts, hours per day and quantity. Tariff Bench calculates total bills and the extra cost of all devices together, sharing the household's BC tier threshold rather than giving each device a new lower tier. BC time-of-day estimates use separate energy shares for household and added-device loads; check eligibility with BC Hydro before switching. NS standard service uses its published combined energy rate and your actual number of billed months. Rates were manually reviewed November 24, 2026, with effective dates shown on the page; this reference edition ends December 31, 2026. Tax defaults to zero; an optional simple percentage does not reproduce all tax/rebate rules. Save on your device only when requested, download/open scenario JSON or export CSV results. No inputs leave the browser. NS time-of-day equipment tariffs and enrollment-limited pilots are outside this calculator's coverage."
+    }
+  },
+  {
+    "id": "basketmath",
+    "title": "Basket Math",
+    "description": "Compare package sizes, unit prices and multi-buy offers for the amount you need.",
+    "category": "money",
+    "tags": [
+      "unit price",
+      "groceries",
+      "shopping",
+      "coupons",
+      "multipacks",
+      "calculator"
+    ],
+    "icon": "shopping-basket",
+    "url": "/basketmath/",
+    "source": "https://github.com/jsdyer/basketmath",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Your entered prices, pack sizes, promotion rules and tax assumptions are calculated privately in the browser."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare two sizes of the same product using your own shelf prices. Basket Math calculates whole packs, checkout cost, unit price and extra quantity, including complete-bundle offers, qualifying per-pack prices and buy-X-get-Y-free deals. Lowest unit price can require a larger purchase. Enter coupon and tax assumptions explicitly; save or export only when you choose. The starting prices are invented examples, not live store prices."
+    }
+  },
+  {
+    "id": "clamcounter",
+    "title": "Clam Counter",
+    "description": "Compare Halifax-area clam dishes, published portions and estimated order totals.",
+    "category": "places",
+    "tags": [
+      "clams",
+      "seafood",
+      "Halifax",
+      "Dartmouth",
+      "menus",
+      "food prices"
+    ],
+    "icon": "shopping-basket",
+    "url": "/clamcounter/",
+    "source": "https://github.com/jsdyer/clamcounter",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Dated restaurant-menu observations with weekly source-change checks; personal quotes and saved comparisons stay in your browser.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Menu sources checked",
+          "url": "https://coolcode.ca/clamcounter/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "source_count"
+            ],
+            "unit": "restaurants"
+          },
+          "value": "2026-11-25 04:28 UTC",
+          "precision": "minute",
+          "count": 9
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare dated restaurant-menu observations by area, explicitly stated clam type, dish and listed price. Keep portion descriptions and included sides visible; an unweighed dish is never converted into a cost per gram. Market prices stay unknown. Enter the number of dishes, optionally estimate Nova Scotia HST, and compare up to eight alternatives, including a current phone or counter quote of your own. Favourites and deliberately saved comparisons stay on your device; JSON import/export preserves the prices and review dates originally saved. The weekly source-change watch checks pages, not current stock or prices. Open each restaurant source before travelling or ordering, especially when it is seasonal, old or flagged as changed."
+    }
   }
 ]

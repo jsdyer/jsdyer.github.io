@@ -1,13 +1,29 @@
 import sys
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 from urllib.parse import parse_qs, urlsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from audit_repositories import audit, fetch_repositories
+from audit_repositories import NoRedirect, audit, fetch_repositories, read_json
 
 
 class RepositoryAuditTests(unittest.TestCase):
+    def test_ci_token_is_used_only_for_https_github_api(self):
+        with patch.dict('os.environ', {'GH_TOKEN': 'test-only-token'}), patch('audit_repositories.build_opener') as factory:
+            opener = factory.return_value
+            opener.open.return_value.__enter__.return_value.read.return_value = b'[]'
+            for url, expected in [
+                    ('https://api.github.com/users/jsdyer/repos', 'Bearer test-only-token'),
+                    ('http://api.github.com/users/jsdyer/repos', None),
+                    ('https://api.github.com.example/users/jsdyer/repos', None)]:
+                self.assertEqual(read_json(url), [])
+                self.assertEqual(opener.open.call_args.args[0].get_header('Authorization'), expected)
+            self.assertIsInstance(factory.call_args.args[0], NoRedirect)
+
+    def test_authorized_inventory_requests_do_not_follow_redirects(self):
+        self.assertIsNone(NoRedirect().redirect_request(None, None, 302, '', {}, 'https://example.com/'))
+
     def test_all_pages_are_read(self):
         calls = []
         def fetch(url):

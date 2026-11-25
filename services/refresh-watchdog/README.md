@@ -14,6 +14,23 @@ The installer prompts locally for GitHub authentication, installs a restricted s
 
 A newly added repository must also be accessible to the existing GitHub App installation. If the App uses selected repositories, add that repository to its installation; the watchdog cannot grant itself access. Missing access is reported, not silently ignored.
 
+## Do tool updates require a server update?
+
+| Change | What the server owner needs to do |
+| --- | --- |
+| A tool's interface, parser, tests or README changes | Nothing to the watchdog. That tool's GitHub workflow runs the updated code. |
+| A tool's schedule, dispatch inputs or freshness probe changes | Nothing after the reviewed registry is published here. The next watchdog pass downloads the new targets automatically. |
+| A new scheduled repository is added | If the GitHub App covers all repositories, nothing. If it uses selected repositories, grant the new repository access. A target entry alone cannot grant that access. |
+| A browser-only calculator or private installable tool is added | No target or server change; there is no public collector to dispatch. |
+| The watchdog program, dependencies or systemd service changes | Pull the reviewed update and rerun the installer using the runtime-upgrade instructions below. Automatic target updates do not install new program code. |
+
+Park Ready and Clam Counter add scheduled work: park/advisory collection and menu
+source-change checks respectively. Tariff Bench uses reviewed rate editions and
+Basket Math is a local calculator; neither needs a public watchdog target. This
+release changes the registry, not the installed watchdog program. Confirm the next
+server report sees any newly granted repositories; a public GitHub deployment
+cannot confirm the private server's credentials or running version.
+
 ## What changes
 
 - GitHub's existing schedules continue running. The Linux server checks for a successful refresh covering the most recent due occurrence, allowing a grace period for normal queueing.

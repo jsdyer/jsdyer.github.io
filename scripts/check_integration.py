@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 from xml.etree import ElementTree
 from audit_repositories import audit
 from sync_operations import sync
@@ -25,16 +26,98 @@ def check_built(root, tools):
         raise ValueError('Built search/report catalogue differs from data/tools.json')
 
 
-def verify_source_receipt(source, receipt):
-    # The dashboard editor can omit the final LF when code is pasted manually.
-    # Permit only this explicitly verified byte transformation, never other drift.
+def tool_list_ids(literal):
+    """Parse only quoted catalogue IDs, ASCII whitespace and // comments; never JS."""
+    if not isinstance(literal, str) or len(literal) > 65_536 or not literal.isascii():
+        raise ValueError('Worker tool list must be a bounded ASCII array literal')
+    position, ids = 0, []
+
+    def skip():
+        nonlocal position
+        while position < len(literal):
+            if literal[position] in ' \t\r\n':
+                position += 1
+            elif literal.startswith('//', position):
+                end = re.search(r'[\r\n]', literal[position:])
+                position = position + end.start() if end else len(literal)
+            else:
+                break
+
+    if not literal.startswith('['):
+        raise ValueError('Worker tool list must be an array literal')
+    position = 1
+    skip()
+    while position < len(literal) and literal[position] != ']':
+        match = re.match(r'"([a-z0-9][a-z0-9_-]*)"', literal[position:])
+        if not match:
+            raise ValueError('Worker tool list contains unsupported tokens')
+        ids.append(match.group(1))
+        position += match.end()
+        skip()
+        if position < len(literal) and literal[position] == ',':
+            position += 1
+            skip()
+        elif position >= len(literal) or literal[position] != ']':
+            raise ValueError('Worker tool list needs comma-separated IDs')
+    if position != len(literal) - 1 or literal[position:] != ']':
+        raise ValueError('Worker tool list contains trailing or incomplete tokens')
+    if not ids or len(ids) != len(set(ids)):
+        raise ValueError('Worker tool list must contain unique, nonempty IDs')
+    return set(ids)
+
+
+def tool_list_span(source):
+    matches = list(re.finditer(rb'(?m)^const toolList = (\[[\s\S]*?\]);', source))
+    if len(matches) != 1:
+        raise ValueError('Expected exactly one Worker toolList declaration')
+    match = matches[0]
+    literal = match.group(1).decode('ascii')
+    tool_list_ids(literal)
+    return match.span(1), literal
+
+
+def receipt_source(source, receipt):
+    """Reconstruct audited deployed bytes without relaxing checks outside toolList."""
     transform = receipt.get('source_transform')
     if transform == 'remove-final-newline':
         source = source.removesuffix(b'\n')
+    elif transform == 'recorded-tool-list':
+        (start, end), canonical = tool_list_span(source)
+        deployed = receipt.get('tool_list_literal')
+        if tool_list_ids(canonical) != tool_list_ids(deployed):
+            raise ValueError('Recorded Worker tool IDs differ from the catalogue')
+        remove_lf = receipt.get('remove_final_newline')
+        if not isinstance(remove_lf, bool):
+            raise ValueError('Recorded Worker final-newline handling must be explicit')
+        source = source[:start] + deployed.encode('ascii') + source[end:]
+        if remove_lf:
+            if not source.endswith(b'\n'):
+                raise ValueError('Generated Worker has no final newline to remove')
+            source = source[:-1]
     elif transform is not None:
         raise ValueError('Unknown Worker receipt source transformation')
+    return source
+
+
+def verify_source_receipt(source, receipt):
+    source = receipt_source(source, receipt)
     if receipt.get('source_sha256') != hashlib.sha256(source).hexdigest():
         raise ValueError('Visitor Worker changed without a matching verified deployment receipt')
+
+
+def manual_source_receipt(source, downloaded):
+    """Create receipt fields only after checking the actual downloaded module."""
+    receipt = {'source_sha256': hashlib.sha256(downloaded).hexdigest()}
+    if source == downloaded:
+        return receipt
+    if source.endswith(b'\n') and source[:-1] == downloaded:
+        receipt['source_transform'] = 'remove-final-newline'
+        return receipt
+    _, literal = tool_list_span(downloaded)
+    receipt.update(source_transform='recorded-tool-list', tool_list_literal=literal,
+                   remove_final_newline=source.endswith(b'\n') and not downloaded.endswith(b'\n'))
+    verify_source_receipt(source, receipt)
+    return receipt
 
 
 def check(root=ROOT, built=False, deployment=False):

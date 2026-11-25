@@ -3,17 +3,29 @@
 import argparse
 from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
 from urllib.parse import urlencode, urlsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
 def read_json(url):
-    request = Request(url, headers={"Accept": "application/vnd.github+json",
-                                   "User-Agent": "CoolCode repository catalogue audit"})
-    with urlopen(request, timeout=30) as response:
+    headers = {"Accept": "application/vnd.github+json",
+               "User-Agent": "CoolCode repository catalogue audit"}
+    # CI already supplies this token. Use its larger API allowance only at GitHub,
+    # and never forward authorization through a redirect to another destination.
+    origin = urlsplit(url)
+    if origin.scheme == 'https' and origin.netloc == 'api.github.com' and os.environ.get('GH_TOKEN'):
+        headers['Authorization'] = 'Bearer ' + os.environ['GH_TOKEN']
+    request = Request(url, headers=headers)
+    with build_opener(NoRedirect()).open(request, timeout=30) as response:
         body = response.read(5_000_001)
     if len(body) > 5_000_000:
         raise ValueError("Repository inventory response exceeds 5 MB")

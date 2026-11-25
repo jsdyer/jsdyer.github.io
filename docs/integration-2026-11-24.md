@@ -37,15 +37,16 @@ restores from recent snapshots or integrity-check results.
 - The watchdog App must have access to `contaminatedplaces`. If it already covers
   all repositories, no selection change is needed. The private server report and
   App installation permissions were not accessible here, so adoption is not claimed.
-- The generated Cloudflare Worker includes all 235 IDs. Deployment is blocked by
-  the connector's missing **Workers Scripts Write** scope (HTTP 403). The owner
-  chose to paste the supplied generated `worker.js` manually; the existing
-  verified receipt intentionally remains unchanged. The live Worker still has 232 IDs.
-  See [deployment state](../services/cloudflare-visitor/README.md).
+- Cloudflare deployment was initially blocked by the connector's missing write
+  scope. The owner subsequently updated it manually. The downloaded production
+  source and live registry now verify all 239 IDs, including these three releases
+  and the four follow-up tools. The actual deployed source hash is recorded.
+  See [current deployment state](../services/cloudflare-visitor/README.md).
 
 Hub verification: 67 Python tests, 47 Node tests, 99 watchdog tests, generated-registry
-validation, static build and pre/post-build integration checks passed. Deployment
-receipt checks remain intentionally failing until the new Worker is actually deployed.
+validation, static build and pre/post-build integration checks passed. The subsequent
+manual Worker deployment has now been verified; deployment receipt checks pass with
+the expanded catalogue. See the [four-tool follow-up](four-tool-release-2026-11-24.md).
 
 ## Existing-tool repairs and review
 

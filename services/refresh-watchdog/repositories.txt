@@ -28,6 +28,7 @@ jsdyer/census-lens
 jsdyer/chargegaps
 jsdyer/charityflows
 jsdyer/chirproom
+jsdyer/clamcounter
 jsdyer/clamground
 jsdyer/cloud-ledger
 jsdyer/coalbelow
@@ -107,6 +108,7 @@ jsdyer/otherworldnames
 jsdyer/packagepulse
 jsdyer/pantryprices
 jsdyer/paperchequetrail
+jsdyer/parkready
 jsdyer/parkvisits
 jsdyer/patchsignal
 jsdyer/patentattic

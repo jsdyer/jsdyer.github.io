@@ -32,21 +32,21 @@ See [the complete tool lifecycle](../../docs/tool-lifecycle.md).
 
 ## Current deployment state
 
-The last verified production Worker accepts 232 catalogue IDs. The generated
-`worker.js` now includes Contaminated Places, Query Confessional and Backup Ledger
-(235 IDs), but that update is **pending deployment**. Cloudflare rejected the
-content-only upload with HTTP 403 because the connection lacks Workers Scripts
-Write. The owner requested a manual dashboard update instead. Replace the Worker's
-code with the complete generated `worker.js`, preserving all bindings and settings;
-after deployment, download it to verify the hash and update the receipt. Do not replace the receipt with an
-unverified local hash. Until then, the live registry audit correctly reports the
-three missing IDs; existing bindings and production code remain intact.
+The owner-deployed production Worker has been downloaded and verified with all
+239 catalogue IDs, including Contaminated Places, Query Confessional, Backup Ledger,
+Park Ready, Tariff Bench, Clam Counter and Basket Math. The live `/registry` agrees.
+No additional dashboard update is needed for this release.
 
-The existing receipt records the manually deployed source's omitted final newline.
-Future deployments through `deploy.py` require an exact byte match by default.
+The owner preserved the application code but appended IDs in a different order,
+with a comment and without a final newline. The receipt records that exact list
+literal and the actual downloaded-code hash. Verification accepts only the same
+unique catalogue IDs and reconstructs the downloaded bytes; changes anywhere else
+in the Worker still fail the receipt check. This is verification of an actual
+manual deployment, not a replacement of the receipt with an unverified local hash.
 
-Copy the generated source from
-[worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js).
-The only application changes are the added `backupledger`, `contaminatedplaces`
-and `queryconfessional` strings in `toolList`. An API deployment would require
-Workers Scripts Write; the owner can instead paste the generated code in the dashboard.
+For a later manual update, copy the complete generated source from
+[worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js),
+preserving all existing bindings and settings. Download the deployed module,
+verify its source and `/registry`, and record the resulting receipt. Deployments
+through `deploy.py` continue to require exact uploaded/downloaded bytes and refuse
+to overwrite unexpected live changes.

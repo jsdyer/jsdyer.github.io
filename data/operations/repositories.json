@@ -289,6 +289,12 @@
     ]
   },
   {
+    "repo": "jsdyer/basketmath",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
     "repo": "jsdyer/bcplacenames",
     "branch": "main",
     "workflows": [],
@@ -570,6 +576,23 @@
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/clamcounter",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "47 11 * * 2"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
   },
   {
     "repo": "jsdyer/clamground",
@@ -2154,6 +2177,23 @@
     ]
   },
   {
+    "repo": "jsdyer/parkready",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "17 * * * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/parkvisits",
     "branch": "main",
     "workflows": [
@@ -3024,6 +3064,12 @@
       ".github/workflows/collect.yml",
       ".github/workflows/schedule-guard.yml"
     ]
+  },
+  {
+    "repo": "jsdyer/tariffbench",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
   },
   {
     "repo": "jsdyer/tariffxray",

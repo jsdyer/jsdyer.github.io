@@ -381,6 +381,22 @@
       }
     ]
   },
+  "jsdyer/clamcounter/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/clamcounter/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "All menu sources successfully checked",
+        "precision": "timestamp",
+        "max_age_seconds": 1296000
+      }
+    ],
+    "collection_steps": [
+      "Check published menu sources"
+    ]
+  },
   "jsdyer/clamground/refresh.yml": {
     "freshness": [
       {
@@ -414,6 +430,21 @@
         ],
         "label": "Data retrieved",
         "precision": "date"
+      }
+    ]
+  },
+  "jsdyer/contaminatedplaces/pages.yml": {
+    "collection_steps": [
+      "Refresh public record files"
+    ],
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/contaminatedplaces/data/status.json",
+        "label": "FCSI source checked",
+        "max_age_seconds": 1209600,
+        "json_path": [
+          "checked_at"
+        ]
       }
     ]
   },
@@ -1345,6 +1376,22 @@
       }
     ]
   },
+  "jsdyer/parkready/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/parkready/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "BC Parks sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 21600
+      }
+    ],
+    "collection_steps": [
+      "Refresh BC Parks sources"
+    ]
+  },
   "jsdyer/parkvisits/refresh.yml": {
     "freshness": [
       {
@@ -2034,21 +2081,6 @@
         ],
         "precision": "timestamp",
         "label": "Disclosure source retrieved"
-      }
-    ]
-  },
-  "jsdyer/contaminatedplaces/pages.yml": {
-    "collection_steps": [
-      "Refresh public record files"
-    ],
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/contaminatedplaces/data/status.json",
-        "label": "FCSI source checked",
-        "max_age_seconds": 1209600,
-        "json_path": [
-          "checked_at"
-        ]
       }
     ]
   }

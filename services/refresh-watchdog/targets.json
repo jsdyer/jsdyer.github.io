@@ -611,6 +611,29 @@
       ]
     },
     {
+      "repo": "jsdyer/clamcounter",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "47 11 * * 2"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/clamcounter/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "All menu sources successfully checked",
+          "precision": "timestamp",
+          "max_age_seconds": 1296000
+        }
+      ],
+      "collection_steps": [
+        "Check published menu sources"
+      ]
+    },
+    {
       "repo": "jsdyer/clamground",
       "branch": "main",
       "workflow": "refresh.yml",
@@ -2199,6 +2222,29 @@
           "label": "Source retrieved",
           "precision": "date"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/parkready",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "17 * * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/parkready/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "BC Parks sources checked",
+          "precision": "timestamp",
+          "max_age_seconds": 21600
+        }
+      ],
+      "collection_steps": [
+        "Refresh BC Parks sources"
       ]
     },
     {
