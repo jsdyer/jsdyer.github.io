@@ -1,6 +1,7 @@
 # CoolCode visitor Worker
 
-`worker.template.js` and its inlined `gateway.js` are the reviewed application source.
+`worker.template.js`, `gateway.js`, `halifax-gateway.js`,
+`inspection-gateway.js` and `parcel-corporate-gateway.js` are the reviewed source.
 `worker.js` is generated from them and every ID in `data/tools.json` by
 `python3 scripts/sync_operations.py`. Never hand-maintain a second tool array.
 
@@ -32,14 +33,13 @@ See [the complete tool lifecycle](../../docs/tool-lifecycle.md).
 
 ## Current deployment state
 
-The owner-deployed production Worker has been downloaded and verified with all
-250 catalogue IDs and the eleven-app API integration. The live `/registry` agrees.
-No additional dashboard update is needed for this release.
-
-The dashboard removed the final newline. The receipt records that transformation
-and the actual downloaded-code hash; all other deployed bytes match the generated
-source. The earlier list-formatting transformation remains supported for actual
-manual deployments, but is not used by this release's receipt.
+The seven-tool release stages 257 catalogue IDs and new Halifax Transit, Nova
+Scotia inspection, Canada Post and federal-corporation handlers. Its complete
+manual deployment instructions are in [seven-tools-setup.md](seven-tools-setup.md).
+The owner will paste the tested generated Worker. The earlier deployment receipt
+remains the record of the last verified source until the new module has actually
+been downloaded and checked. Do not treat the configuration flags as a successful
+provider request or replace the receipt before verification.
 
 For a later manual update, copy the complete generated source from
 [worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js),
@@ -52,7 +52,9 @@ to overwrite unexpected live changes.
 
 Use the existing Worker **Settings → Variables and Secrets → Secret**. These are
 runtime bindings, never public frontend variables or files in tool repositories.
-All four are configured and have passed real provider requests in this release.
+The existing four provider keys remain configured. The new Canada Post and ISED
+bindings have been added; real provider requests are verified after the owner
+deploys the new handlers.
 
 | Tool | Secret bindings | GET routes below `/api/` |
 | --- | --- | --- |
@@ -61,6 +63,11 @@ All four are configured and have passed real provider requests in this release.
 | Recipe Math (USDA only) | `FDC_API_KEY` | `recipemath/search?q=&page=`, `food?id=` |
 | Distro Pilot | None | `distropilot/project?name=` |
 | Feed Harbour | None | `feedharbour/feed?url=` |
+| Halifax Next | None | `halifaxnext/realtime?feed=vehicles`, `feed=alerts`, `feed=trips&stop=` |
+| Inspection Trail | None | `inspectiontrail/search?q=&town=&address=&mode=`, `report?id=&q=&town=&address=&mode=` |
+| Parcel Bench | `CANADAPOST_CLIENT_ID`, `CANADAPOST_CLIENT_SECRET` | `parcelbench/rates?origin=&destination=&weight=&length=&width=&height=&mailingDate=`, `offices?postal=`, `office?id=` |
+| Corporate Ghosts | `ISED_CORPORATIONS_API_KEY` | `corporateghosts/corporation?id=` |
+
 
 `/api/status` returns configuration booleans only. Successful lookups return
 `{fetched_at,data}`; failures return `{error:{code,message}}` with non-2xx status.
@@ -71,15 +78,20 @@ are not sent to this API.
 
 The existing `DB` binding holds two additive tables, `gateway_cache` and
 `gateway_budget`. Existing visit/report tables and administration are retained.
-The cache has at most 256 entries, at most 500 KB each (1 MB for package evidence),
-with expiry from 15 minutes to 24 hours. Errors are not cached. SQL upserts enforce
+Ordinary cached responses have a 256-entry cap and a 500 KB response limit
+(1 MB for package evidence). Halifax has three fixed compressed feed keys capped
+at 1.9 MB each with 30-second expiry; filtering happens after source caching.
+Inspection and corporation details expire after five minutes. Parcel quotes and
+outlet lookups are never persisted in the shared cache and return no-store.
+Errors are not cached. SQL upserts enforce
 shared budgets across Worker instances: 50 YouTube searches/day, 5,000 ordinary
 YouTube calls/day, 500 USDA calls/hour, 1,500 Podcast Index calls/day, 3,000 feed
 fetches/day and 600 Repology calls/day. Repology also has an atomic 1.1-second
 spacing lease. Requests rejected by that lease do not consume its daily allowance.
 Cached reads remain available after source budgets are exhausted.
 
-Repology's source deadline is 35 seconds; other providers use 12 seconds. Distro
+Repology's source deadline is 35 seconds; inspection sessions use 30 seconds,
+Canada Post/ISED requests 15 seconds, and the other providers 12 seconds. Distro
 Pilot waits 45 seconds. Production Repology succeeded after 25 seconds during
 verification, and a subsequent request reused the same capture. Source timeouts
 return `504 source_timeout`; network failures and invalid source data remain
@@ -99,3 +111,27 @@ Backbone Compare's optional `PEERINGDB_API_KEY` belongs in that repository's
 **Settings → Secrets and variables → Actions**. Its browser uses public APIs and
 does not receive the secret. The other new tools need no keys; Recipe Math's
 complete Canadian food dataset also works without USDA access.
+
+## Additional provider limits and validation
+
+The new adapters use fixed official upstream hosts and reject unsupported paths,
+repeated parameters, redirects and oversized responses. Inspection queries are
+limited to 1,500 shared requests/day. Halifax allows 4,000 source requests/day/feed;
+short caching normally serves many visitors from each download. ISED is limited
+to 50 uncached requests/minute with a shared 1.1-second spacing lease. Canada Post
+uses an 80-request/minute application budget and a shared 300ms spacing lease,
+including token calls. Canada Post tokens are kept only in bounded isolate memory
+and expire or are replaced when the configured credentials change.
+
+Canada Post API Key maps to `CANADAPOST_CLIENT_ID`; its matching API Secret maps
+to `CANADAPOST_CLIENT_SECRET`. Use Secret bindings for both. A customer number is
+not needed for the consumer counter quotes. No account pricing or label purchase
+is requested. Federal details include public names and lifecycle records, with
+explicit truncation flags; personal street addresses and birth dates are omitted.
+
+Run `npm ci --prefix services/cloudflare-visitor --ignore-scripts` and
+`npm run check --prefix services/cloudflare-visitor` for the dashboard JavaScript
+check against pinned Cloudflare types. The JavaScript check is intentionally
+non-strict to match this existing plain-JavaScript Worker; no diagnostic is
+suppressed. Runtime suites exercise malformed UTF-8, source contracts, credential
+redaction, cache separation and source budgets against SQLite.

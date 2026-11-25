@@ -22,6 +22,49 @@ test('status exposes configuration booleans without database access or key value
   assert.equal(r.status,200);assert.equal(JSON.parse(body).configured.recipemath,true);assert.equal(body.includes('never-show-this'),false);
 });
 
+test('new credential status reports presence only and keyless adapters remain enabled',async()=>{
+  const env={CANADAPOST_CLIENT_ID:'private-id',CANADAPOST_CLIENT_SECRET:'private-secret',ISED_CORPORATIONS_API_KEY:'private-ised'};
+  const r=await run('/api/status',env), raw=await r.text(), status=JSON.parse(raw).configured;
+  for(const name of ['parcelbench','corporateghosts','halifaxnext','inspectiontrail'])assert.equal(status[name],true,name);
+  for(const secret of Object.values(env))assert.equal(raw.includes(secret),false);
+  assert.equal((await(await run('/api/status',{CANADAPOST_CLIENT_ID:'only-one'})).json()).configured.parcelbench,false);
+});
+
+test('federal detail dispatch is authenticated server-side and caches each corporation separately',async t=>{
+  const env={...environment(),ISED_CORPORATIONS_API_KEY:'private-federal-key'};let calls=0;
+  stub(t,async(target,options)=>{calls++;const u=new URL(target),id=u.pathname.split('/').at(-1);
+    assert.equal(u.hostname,'apigateway-passerelledapi.ised-isde.canada.ca');assert.equal(options.headers.user_key,env.ISED_CORPORATIONS_API_KEY);
+    return Response.json({corporationNumber:Number(id),corporateName:{legalName:'Corporation '+id},status:'active'});});
+  assert.equal((await(await run('/api/corporateghosts/corporation?id=123',env)).json()).data.id,'123');
+  assert.equal((await run('/api/corporateghosts/corporation?id=123',env)).status,200);assert.equal(calls,1);
+  env.sql.prepare("DELETE FROM gateway_budget WHERE id='ised-corporations-lease'").run();
+  assert.equal((await(await run('/api/corporateghosts/corporation?id=456',env)).json()).data.id,'456');assert.equal(calls,2);
+  assert.equal(JSON.stringify(env.sql.prepare('SELECT * FROM gateway_cache').all()).includes(env.ISED_CORPORATIONS_API_KEY),false);
+});
+
+test('parcel rates pass through the complete handler without persisting quotes or postal inputs',async t=>{
+  const env={...environment(),CANADAPOST_CLIENT_ID:'parcel-key',CANADAPOST_CLIENT_SECRET:'parcel-secret'};let quotes=0;
+  stub(t,async(target,options)=>{
+    if(String(target).endsWith('/token'))return Response.json({token_type:'Bearer',access_token:'test-bearer',expires_in:3600});
+    quotes++;assert.equal(options.headers.Authorization,'Bearer test-bearer');assert.equal(JSON.parse(options.body).quoteType,'counter');
+    return Response.json([{serviceCode:'DOM.RP',serviceName:'Regular Parcel',priceDetails:{due:12+quotes,base:12}}]);});
+  const path='/api/parcelbench/rates?origin=B3J1S9&destination=K1A0B1&weight=1&length=30&width=20&height=10&mailingDate='+new Date().toISOString().slice(0,10);
+  const first=await run(path,env);assert.equal(first.status,200);assert.match(first.headers.get('Cache-Control'),/no-store/);assert.equal((await first.json()).data.quotes[0].total,13);
+  env.sql.prepare("DELETE FROM gateway_budget WHERE id='canadapost-lease'").run();
+  assert.equal((await(await run(path,env)).json()).data.quotes[0].total,14);assert.equal(quotes,2);
+  assert.equal(env.sql.prepare('SELECT COUNT(*) AS n FROM gateway_cache').get().n,0);
+  const stored=JSON.stringify(env.sql.prepare('SELECT * FROM gateway_budget').all());
+  for(const value of ['B3J1S9','K1A0B1','parcel-secret','test-bearer'])assert.equal(stored.includes(value),false);
+});
+
+test('invalid upstream UTF-8 is rejected and a leading BOM is decoded consistently',async t=>{
+  const env=environment();let calls=0;
+  stub(t,async()=>new Response(calls++===0?new Uint8Array([0xff]):'\ufeff{"foods":[]}'));
+  const bad=await run('/api/recipemath/search?q=invalid',env);
+  assert.equal(bad.status,502);assert.equal((await bad.json()).error.code,'source_encoding');
+  const good=await run('/api/recipemath/search?q=valid',env);assert.deepEqual((await good.json()).data,{foods:[]});
+});
+
 test('missing runtime secrets, foreign origins and unsupported methods fail before upstream access',async t=>{
   stub(t,()=>{throw new Error('must not fetch');});
   assert.equal((await run('/api/podcastroute/search?q=space',{})).status,503);

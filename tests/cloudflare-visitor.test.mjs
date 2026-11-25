@@ -34,3 +34,15 @@ test('unknown IDs and foreign origins remain rejected without writes', async () 
     assert.equal(response.status,status);
   }
 });
+
+test('invalid UTF-8 is a bad request on Workers as well as Node, while BOM JSON stays accepted', async () => {
+  const statement={bind(){return this;},async first(field){return field==='secret'?'test-salt':{hits:1};},async run(){}};
+  const DB={prepare(){return statement;}};
+  const send=bytes=>worker.fetch(new Request('https://worker.example/event',{
+    method:'POST',headers:{Origin:'https://coolcode.ca','Content-Type':'application/json'},body:bytes}),{DB});
+  const malformed=await send(new Uint8Array([0x7b,0xff,0x7d]));
+  assert.equal(malformed.status,400);
+  assert.equal((await malformed.json()).error,'Invalid JSON request.');
+  const valid=new TextEncoder().encode('\ufeff'+JSON.stringify({tool:tools[0].id,type:'pageview'}));
+  assert.equal((await send(valid)).status,204);
+});

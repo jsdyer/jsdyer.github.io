@@ -35,6 +35,7 @@ const toolList = [
   "campcalendar",
   "canadaanalytics",
   "cancon-atlas",
+  "carecompass",
   "ccts-ledger",
   "census-lens",
   "certtrail",
@@ -88,6 +89,7 @@ const toolList = [
   "fossilneighbours",
   "fraudpulse",
   "freenet-echo",
+  "fuelwindow",
   "fxreceipt",
   "gc-domain-graveyard",
   "gc-subdomain-watch",
@@ -99,6 +101,7 @@ const toolList = [
   "govtrackercensus",
   "grid-dark",
   "gridreceipt",
+  "halifaxnext",
   "halifaxtimelens",
   "headerautopsy",
   "headlinevault",
@@ -111,6 +114,7 @@ const toolList = [
   "iceweeks",
   "inflation-basket",
   "insolvencyatlas",
+  "inspectiontrail",
   "ipsnapshot",
   "ispreportcard",
   "ix-ledger",
@@ -160,6 +164,7 @@ const toolList = [
   "packetpocket",
   "pantryprices",
   "paperchequetrail",
+  "parcelbench",
   "parkready",
   "parkvisits",
   "patchsignal",
@@ -246,8 +251,10 @@ const toolList = [
   "tripbrief",
   "unreleased",
   "violationsheet",
+  "wagewindow",
   "waystation",
   "weatherarchive",
+  "weatherwindow",
   "welllayers",
   "wordweave",
   "wrongdoings"
@@ -359,7 +366,7 @@ async function apiRead(response, limit) {
       if(length>limit) apiThrow(502,'source_too_large','The source response exceeds this tool’s size limit.'); chunks.push(value);}
   } catch(e) {await reader.cancel().catch(()=>{}); throw e;}
   const bytes=new Uint8Array(length); let at=0; for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length;}
-  try{return new TextDecoder('utf-8',{fatal:true}).decode(bytes);}catch{apiThrow(502,'source_encoding','This source is not valid UTF-8.');}
+  try{return new TextDecoder('utf-8',{fatal:true,ignoreBOM:false}).decode(bytes);}catch{apiThrow(502,'source_encoding','This source is not valid UTF-8.');}
 }
 
 async function apiSchema(db) {
@@ -423,14 +430,15 @@ async function apiHandle(request,env) {
     if(origin && origin!==ORIGIN) return apiFailure(403,'origin_denied','Origin is not allowed.');
     if(request.method==='OPTIONS') return {status:204};
     if(request.method!=='GET') return apiFailure(405,'method_denied','Use GET for public data requests.');
-    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true}}};
-    const plan=apiRoute(url,env), db=env.DB, now=Date.now();
+    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY)}}};
+    if(url.pathname.startsWith('/api/halifaxnext/')) return await halifaxApiHandle(request,env);
+    const plan=pcRoute(url,env)||inspectionRoute(url)||apiRoute(url,env), db=env.DB, now=Date.now();
     if(!db) return apiFailure(503,'storage_unavailable','The shared request limiter is unavailable.');
     if(!await allowed(db,request,new Date(now),'tool-api')) return apiFailure(429,'client_wait','Too many requests. Please wait before trying again.',300);
     await apiSchema(db);
-    const digest=await crypto.subtle.digest('SHA-256',encoder.encode(apiVersion+'|'+plan.group+'|'+plan.target.href));
+    const digest=await crypto.subtle.digest('SHA-256',encoder.encode(apiVersion+'|'+plan.group+'|'+(plan.cacheKey??plan.target.href)));
     const id=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
-    const cached=await db.prepare('SELECT payload FROM gateway_cache WHERE id=? AND expiry>?').bind(id,now).first('payload');
+    const cached=plan.ttl>0 ? await db.prepare('SELECT payload FROM gateway_cache WHERE id=? AND expiry>?').bind(id,now).first('payload') : null;
     if(cached) return {body:JSON.parse(cached)};
     if(plan.group==='repology'){
       // Atomic sliding lease across ALL Worker instances; Cache API alone is only per-PoP.
@@ -438,10 +446,11 @@ async function apiHandle(request,env) {
       if(!lease) return apiFailure(429,'source_pacing','The package source permits one request per second. Please retry shortly.',2);
     }
     await apiBudget(db,plan.group,now,plan.window,plan.maximum);
-    const data=await apiUpstream(plan,env), captured=Date.now(), result={fetched_at:new Date(captured).toISOString(),data}, payload=JSON.stringify(result);
+    const data=await (plan.pc?pcUpstream(plan,env):plan.inspection?inspectionUpstream(plan):apiUpstream(plan,env)), captured=Date.now(), result={fetched_at:new Date(captured).toISOString(),data}, payload=JSON.stringify(result);
+    await db.prepare('DELETE FROM gateway_budget WHERE expiry<=?').bind(captured).run();
     // <=256 records; ordinary responses <=500 KB, package evidence <=1 MB.
     // Popular projects such as PHP exceed 500 KB after lossless field selection.
-    if(encoder.encode(payload).byteLength<=(plan.group==='repology'?1000000:500000)) await db.batch([
+    if(plan.ttl>0 && encoder.encode(payload).byteLength<=(plan.group==='repology'?1000000:500000)) await db.batch([
       db.prepare('DELETE FROM gateway_cache WHERE expiry<=?').bind(captured),
       db.prepare('DELETE FROM gateway_budget WHERE expiry<=?').bind(captured),
       db.prepare('INSERT INTO gateway_cache(id,payload,expiry,touched) VALUES(?,?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,expiry=excluded.expiry,touched=excluded.touched').bind(id,payload,captured+plan.ttl*1000,captured),
@@ -452,6 +461,273 @@ async function apiHandle(request,env) {
     if(e.api) return apiFailure(e.status,e.code,e.message,e.retry);
     return apiFailure(503,'temporarily_unavailable','The source or shared request service is temporarily unavailable. Your saved workspace is unchanged.');
   }
+}
+
+
+// Halifax Transit public GTFS-realtime adapter. Inlined after gateway.js.
+// Wire fields follow https://github.com/google/transit/blob/master/gtfs-realtime/proto/gtfs-realtime.proto.
+// No arbitrary URLs, client credentials, cookies, or raw protobuf escape this adapter.
+const halifaxFeeds = Object.freeze({vehicles:'Vehicle/VehiclePositions.pb',trips:'TripUpdate/TripUpdates.pb',alerts:'Alert/Alerts.pb'});
+function halifaxDecode(bytes, feed) {
+  if (!(bytes instanceof Uint8Array) || bytes.length > 5000000 || !halifaxFeeds[feed]) throw new Error('Invalid GTFS-realtime input');
+  let fieldsRead=0;
+  function parse(buf,depth=0) {
+    if(depth>10)throw new Error('GTFS nesting exceeds bound');
+    const fields=new Map();let at=0;
+    function vint(){let n=0n,shift=0n;for(let i=0;i<10;i++){if(at>=buf.length)throw new Error('Truncated GTFS varint');const b=buf[at++];n|=BigInt(b&127)<<shift;if(!(b&128)){if(i===9&&b>1)throw new Error('Oversized GTFS integer');return n}shift+=7n}throw new Error('Oversized GTFS varint')}
+    while(at<buf.length){if(++fieldsRead>1000000)throw new Error('Too many GTFS fields');const key=Number(vint()),field=key>>>3,wire=key&7;let value;if(!field)throw new Error('Invalid GTFS field');
+      if(wire===0)value=vint();
+      else if(wire===2){const length=Number(vint());if(!Number.isSafeInteger(length)||length<0||at+length>buf.length)throw new Error('Truncated GTFS message');value=buf.subarray(at,at+length);at+=length}
+      else if(wire===5||wire===1){const length=wire===5?4:8;if(at+length>buf.length)throw new Error('Truncated GTFS fixed field');value=new DataView(buf.buffer,buf.byteOffset+at,length);at+=length}
+      else throw new Error('Unsupported GTFS wire type');
+      if(!fields.has(field))fields.set(field,[]);fields.get(field).push(value);
+    }
+    return fields;
+  }
+  const num=(f,k,signed=false)=>{const v=f.get(k)?.[0];if(typeof v!=='bigint')return null;const n=Number(signed?BigInt.asIntN(32,v):v);if(!Number.isSafeInteger(n))throw new Error('GTFS integer outside safe range');return n};
+  const str=(f,k,max=512)=>{const v=f.get(k)?.[0];if(v===undefined)return '';if(!(v instanceof Uint8Array)||v.length>max*4)throw new Error('Invalid GTFS text');const s=new TextDecoder('utf-8',{fatal:true,ignoreBOM:false}).decode(v);if(s.length>max)throw new Error('GTFS text too long');return s};
+  const sub=(f,k)=>{const v=f.get(k)?.[0];return v instanceof Uint8Array?parse(v,1):new Map()};
+  const many=(f,k)=>{const a=f.get(k)||[];return a.map(v=>{if(!(v instanceof Uint8Array))throw new Error('Invalid GTFS child');return parse(v,1)})};
+  const trip=f=>({id:str(f,1),date:str(f,3),route:str(f,5),relationship:num(f,4)??0});
+  const event=f=>({time:num(f,2),delay:num(f,1,true),uncertainty:num(f,3,true)});
+  const translated=f=>{const a=many(f,1);return str(a.find(t=>str(t,2).startsWith('en'))||a[0]||new Map(),1,16000)};
+  const root=parse(bytes),header=sub(root,1),timestamp=num(header,3);
+  if(!str(header,1)||num(header,2)===1||!timestamp||timestamp<946684800)throw new Error('Missing full-feed header or source timestamp');
+  const entities=many(root,2);if(entities.length>12000)throw new Error('Too many GTFS entities');
+  const rows=[];
+  for(const entity of entities){if(num(entity,2))continue;const id=str(entity,1);if(!id)throw new Error('Missing GTFS entity ID');
+    if(feed==='vehicles'&&entity.has(4)){const v=sub(entity,4),p=sub(v,2),d=sub(v,8),x=p.get(1)?.[0],y=p.get(2)?.[0];const lat=x instanceof DataView?x.getFloat32(0,true):null,lon=y instanceof DataView?y.getFloat32(0,true):null;
+      if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)continue;
+      rows.push({id,trip:trip(sub(v,1)),vehicle:str(d,2)||str(d,1),lat,lon,timestamp:num(v,5),stop:str(v,7)});
+    } else if(feed==='trips'&&entity.has(3)){const v=sub(entity,3),t=trip(sub(v,1));if(!t.id)continue;
+      rows.push({id,trip:t,timestamp:num(v,4),delay:num(v,5,true),stops:many(v,2).map(s=>({id:str(s,4),sequence:num(s,1),relationship:num(s,5)??0,arrival:event(sub(s,2)),departure:event(sub(s,3))}))});
+    } else if(feed==='alerts'&&entity.has(5)){const a=sub(entity,5);rows.push({id,header:translated(sub(a,10)),description:translated(sub(a,11)),url:translated(sub(a,8)),periods:many(a,1).map(p=>({start:num(p,1),end:num(p,2)})),targets:many(a,5).map(t=>({route:str(t,2),stop:str(t,5),trip:trip(sub(t,4)).id})),cause:num(a,6),effect:num(a,7)})}
+  }
+  return {schema:1,feed,timestamp,version:str(header,4),entities:rows};
+}
+async function halifaxRead(response,limit=5000000) {
+  if(!response.body)throw new Error('Empty GTFS response');const reader=response.body.getReader(),parts=[];let size=0;
+  try{for(;;){const part=await reader.read();if(part.done)break;size+=part.value.length;if(size>limit)throw new Error('Oversized GTFS response');parts.push(part.value)}}catch(e){await reader.cancel();throw e}
+  const bytes=new Uint8Array(size);let at=0;for(const part of parts){bytes.set(part,at);at+=part.length}return bytes;
+}
+async function halifaxPack(result){const json=JSON.stringify(result);if(json.length>12000000)throw new Error('Normalized GTFS response too large');const zipped=await halifaxRead(new Response(new Blob([json]).stream().pipeThrough(new CompressionStream('gzip'))),1400000);let binary='';for(let i=0;i<zipped.length;i+=8192)binary+=String.fromCharCode(...zipped.subarray(i,i+8192));return btoa(binary)}
+async function halifaxUnpack(payload){if(typeof payload!=='string'||payload.length>1900000)throw new Error('Invalid transit cache');const bytes=Uint8Array.from(atob(payload),c=>c.charCodeAt(0));const raw=await halifaxRead(new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))),12000000);return JSON.parse(new TextDecoder('utf-8',{fatal:true,ignoreBOM:false}).decode(raw))}
+async function halifaxApiHandle(request,env) {
+  const origin=request.headers.get('Origin');if(origin&&origin!==ORIGIN)return apiFailure(403,'origin','This origin is not allowed.');
+  if(request.method==='OPTIONS')return {status:204};if(request.method!=='GET')return apiFailure(405,'method','Use GET.');
+  try {
+    const url=new URL(request.url);if(url.pathname!=='/api/halifaxnext/realtime')return apiFailure(404,'route','Unknown Halifax API route.');
+    const p=apiParams(url,['feed','stop']),feed=p('feed',/^(vehicles|trips|alerts)$/,'trips'),stop=p('stop',/^[A-Za-z0-9_.-]{0,64}$/,'');
+    if(feed==='trips'&&!stop)return apiFailure(400,'parameter','Select a stop for departure updates.');
+    const db=env.DB;if(!db)return apiFailure(503,'configuration','The transit cache is not configured.');
+    const now=Date.now();if(!await allowed(db,request,new Date(now),'tool-api'))return apiFailure(429,'rate_limit','Please try again shortly.',300);
+    await apiSchema(db);const key='halifax:gtfs:gzip:v1:'+feed;
+    let result;const cached=await db.prepare('SELECT payload FROM gateway_cache WHERE id=? AND expiry>?').bind(key,now).first();
+    if(cached){result=await halifaxUnpack(cached.payload)}else{
+      await apiBudget(db,'halifax:'+feed,now,86400000,4000);
+      const response=await fetch('https://gtfs.halifax.ca/realtime/'+halifaxFeeds[feed],{headers:{'User-Agent':apiUA,Accept:'application/x-protobuf,application/octet-stream'},redirect:'error',signal:AbortSignal.timeout(12000)});
+      if(!response.ok)return apiFailure(502,'source','Halifax Transit is temporarily unavailable. Scheduled times remain available.');
+      const data=halifaxDecode(await halifaxRead(response),feed);result={fetched_at:new Date(now).toISOString(),data};const payload=await halifaxPack(result);
+      await db.prepare('INSERT INTO gateway_cache(id,payload,expiry,touched) VALUES(?,?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,expiry=excluded.expiry,touched=excluded.touched').bind(key,payload,now+30000,now).run();
+    }
+    if(stop&&feed==='trips')result={...result,data:{...result.data,entities:result.data.entities.filter(e=>e.stops.some(s=>s.id===stop||!s.id)||(e.trip.relationship===3||e.trip.relationship===7)||e.delay!==null).map(e=>({...e,stops:e.stops.filter(s=>s.id===stop||!s.id)}))}};
+    return {status:200,body:result,headers:{'Cache-Control':'public, max-age=15'}};
+  } catch(e){return e&&e.api?apiFailure(e.status,e.code,e.message,e.retry):apiFailure(503,'source','Live transit information is temporarily unavailable. Use the labelled scheduled times.');}
+}
+
+
+// Bounded, read-only adapter for Nova Scotia’s public ASP.NET inspection search.
+// Source HTML is never inserted into the page. Only bounded text fields are exposed.
+function inspectionText(value='') {
+  return String(value).replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,'').replace(/<[^>]*>/g,' ').replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi,(_,e)=>{const known={amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' '};if(known[e.toLowerCase()]!==undefined)return known[e.toLowerCase()];const n=e[1].toLowerCase()==='x'?parseInt(e.slice(2),16):parseInt(e.slice(1),10);return n>0&&n<=0x10ffff?String.fromCodePoint(n):'';}).replace(/\s+/g,' ').trim();
+}
+function inspectionSpan(html,id){return inspectionText(html.match(new RegExp('<span\\b[^>]*\\bid="'+id+'"[^>]*>([\\s\\S]*?)<\\/span>','i'))?.[1]||'');}
+function inspectionParseSearch(html){
+  const date=inspectionSpan(html,'lblLastUploadDateTime'),countText=inspectionSpan(html,'LblResultsCount');
+  if(!date || !/^\d+$/.test(countText))throw new Error('Unrecognized inspection search response');
+  const rows=[...html.matchAll(/<tr\b[^>]*class="ResultsTableRow[^"]*"[^>]*>([\s\S]*?)<\/tr>/gi)].map(m=>{const link=m[1].match(/href="Details\.aspx\?Id1=(\d+)"[^>]*>([\s\S]*?)<\/a>/i);const address=m[1].match(/<td\b[^>]*class="ResultsTableAddress"[^>]*>([\s\S]*?)<\/td>/i);if(!link||!address)throw new Error('Unrecognized establishment row');return {id:link[1],name:inspectionText(link[2]),address:inspectionText(address[1])};});
+  if(rows.length!==Number(countText)||new Set(rows.map(x=>x.id)).size!==rows.length)throw new Error('Incomplete inspection results');
+  return {source_updated:date,total:rows.length,truncated:rows.length>200,establishments:rows.slice(0,200)};
+}
+function inspectionParseReport(html,id){
+  const name=inspectionSpan(html,'LblEstablishmentName'),address=inspectionSpan(html,'LblAddress');
+  if(!name||!address||!html.includes('InspectionTable'))throw new Error('Unrecognized inspection report');
+  const advisoryHTML=html.match(/<table\b[^>]*id="BoilWaterAdvisoryTable"[^>]*>([\s\S]*?)<\/table>/i)?.[1]||'';
+  const advisories=[...advisoryHTML.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)].flatMap(m=>{const cells=[...m[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map(c=>inspectionText(c[1]));return cells.length===2?[{issued:cells[0]||null,removed:cells[1]||null}]:[];});
+  const positions=[...html.matchAll(/<span\b[^>]*class="LabelInspectionDateStatus"[^>]*>Date Inspected:\s*([^<]*)<\/span>/gi)];
+  const inspections=positions.map((m,i)=>{const block=html.slice(m.index,positions[i+1]?.index||html.indexOf('Disclaimer Footer'));const findings=[...block.matchAll(/<span\b[^>]*class="LabelInspectionText"[^>]*>([\s\S]*?)<\/span>\s*<\/td>\s*<td[^>]*>\s*<a\b[^>]*class="LinkInspectionText"[^>]*>([\s\S]*?)<\/a>[\s\S]*?<span\b[^>]*class="LabelInspectionHeader"[^>]*>Remedy<\/span>[\s\S]*?<span\b[^>]*class="LabelInspectionText"[^>]*>([\s\S]*?)<\/span>/gi)].map(f=>({finding:inspectionText(f[1]),status:inspectionText(f[2]),remedy:inspectionText(f[3])}));
+    const summary=inspectionText(block.match(/class="DetailsCellOuter"[^>]*>\s*<span[^>]*>([\s\S]*?)<\/span>/i)?.[1]||'');
+    // Preserve closure/warning annotations beside the inspection date as published.
+    const annotation=inspectionText(block.match(/<\/span><\/td><td[^>]*>([\s\S]*?)<\/td>/i)?.[1]||'');
+    if((block.match(/class="LinkInspectionText"/g)||[]).length!==findings.length)throw new Error('Unrecognized findings layout');
+    return {date:inspectionText(m[1]),annotation,summary,findings};});
+  if(!inspections.length)throw new Error('Report has no recognized inspection dates');
+  return {id,name,address,advisories,inspections};
+}
+
+function inspectionRoute(url) {
+  if(!url.pathname.startsWith('/api/inspectiontrail/'))return null;
+  if(!['/api/inspectiontrail/search','/api/inspectiontrail/report'].includes(url.pathname))apiThrow(404,'unknown_endpoint','Unknown inspection endpoint.');
+  const p=apiParams(url,['q','town','address','mode','id']);
+  const query={q:p('q',/^[^\x00-\x1f]{0,120}$/u,''),town:p('town',/^[^\x00-\x1f]{0,100}$/u,''),address:p('address',/^[^\x00-\x1f]{0,120}$/u,''),mode:p('mode',/^(search|current-closures|closures-year|current-warnings|warnings-year)$/,'search')};
+  if(query.mode==='search' && Math.max(query.q.length,query.town.length,query.address.length)<2)apiThrow(400,'invalid_parameter','Enter at least two characters of a name, community or street.');
+  const report=url.pathname.endsWith('/report');
+  if(report)query.id=p('id',/^\d{1,12}$/);else if(url.searchParams.has('id'))apiThrow(400,'invalid_parameter','Search does not accept an ID.');
+  return {target:new URL('https://novascotia.ca/nse/food-protection/reports/Request.aspx'),cacheKey:'inspection-v1|'+JSON.stringify(query),group:'inspection',window:86400000,maximum:1500,ttl:300,limit:2000000,timeout:30000,inspection:true,inspectionQuery:query};
+}
+async function inspectionUpstream(plan) {
+  const signal=AbortSignal.timeout(plan.timeout),jar=new Map();
+  async function read(url,body){
+    const headers={'Accept':'text/html','User-Agent':apiUA};if(jar.size)headers.Cookie=[...jar].map(([k,v])=>k+'='+v).join('; ');
+    if(body)headers['Content-Type']='application/x-www-form-urlencoded';
+    const response=await fetch(url,{method:body?'POST':'GET',body:body?.toString(),headers,redirect:'manual',signal});
+    if(!response.ok){await response.body?.cancel();apiThrow(502,'inspection_source_unavailable','The provincial inspection search is unavailable. Open the official source or try again later.');}
+    // Anonymous ASP.NET session cookies never leave this one source request chain.
+    const cookie=response.headers.get('Set-Cookie')||'';
+    for(const m of cookie.matchAll(/(?:^|,\s*)([A-Za-z0-9_.-]{1,80})=([^;,\s]{1,2048})/gi))jar.set(m[1],m[2]);
+    return apiRead(response,plan.limit);
+  }
+  try {
+    const initial=await read(plan.target.href);const fields=new URLSearchParams();
+    for(const m of initial.matchAll(/<input\b[^>]*>/gi)){
+      const attrs=Object.fromEntries([...m[0].matchAll(/([\w]+)="([^"]*)"/g)].map(a=>[a[1],a[2]]));
+      if(attrs.type==='hidden' && ['__VIEWSTATE','__VIEWSTATEGENERATOR','__EVENTVALIDATION'].includes(attrs.name))fields.set(attrs.name,inspectionText(attrs.value));
+    }
+    if(!fields.has('__VIEWSTATE')||!fields.has('__EVENTVALIDATION'))apiThrow(502,'inspection_source_changed','The provincial search format has changed. Use the official search while this adapter is updated.');
+    const q=plan.inspectionQuery;
+    fields.set('TxtEstablishmentName',q.q);fields.set('TxtCity',q.town);fields.set('TxtEstablishmentStreet',q.address);fields.set('TxtEstablishmentStreetNo','');
+    for(const from of ['From','To'])for(const part of ['Month','Day','Year'])fields.set('Drop'+from+part,'');
+    const buttons={search:['BttnSubmit','Submit'],'current-closures':['BttnClosuresCurrent','Current Closures'],'closures-year':['BttnClosuresPastYear','Closures in Past 12 Months'],'current-warnings':['BttnWarningsCurrent','Current Warnings'],'warnings-year':['BttnWarningsPastYear','Warnings in Past 12 Months']};
+    const [button,value]=buttons[q.mode];fields.set(button,value);const result=inspectionParseSearch(await read(plan.target.href,fields));
+    if(q.id){
+      if(!result.establishments.some(row=>row.id===q.id))apiThrow(404,'inspection_not_found','That establishment is not in this search. Refine the name or community and try again.');
+      return {source_updated:result.source_updated,report:inspectionParseReport(await read(new URL('Details.aspx?Id1='+q.id,plan.target).href),q.id)};
+    }
+    return result;
+  }catch(e){if(e.api)throw e;if(signal.aborted)apiThrow(504,'source_timeout','The provincial inspection search took too long. Try again later.');apiThrow(502,'inspection_source_changed','The provincial search could not be read. Use the official search while this adapter is checked.');}
+}
+
+
+// Inlined after gateway.js. Fixed-host, read-only Canada Post and federal registry adapters.
+// OAuth credentials and bearer tokens never enter the shared response cache or logs.
+// Contracts reviewed 2026-11-25: Canada Post portal downloads /4632/document (Rating),
+// /4631/document (Post Office); https://api.ised-isde.canada.ca/swagger/spec/corporation-en.json
+const pcBase = 'https://api.canadapost-postescanada.ca/prod/devportal-portaildesdeveloppeurs/';
+const pcPostal = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z]\d[ABCEGHJ-NPRSTV-Z]\d$/;
+let pcToken = null; // Bounded, isolate-local token; expiry and credential fingerprint checked on every use.
+const pcText = (v,n=300) => typeof v==='string'?v.slice(0,n):'';
+const pcNumber = v => typeof v==='number' && Number.isFinite(v)?v:null;
+const pcDate = v => typeof v==='string' && /^\d{4}-\d\d-\d\d(?:T.*)?$/.test(v) && Number.isFinite(Date.parse(v))?v.slice(0,10):null;
+
+function pcRoute(url,env) {
+  const path=url.pathname;
+  if(!path.startsWith('/api/parcelbench/') && !path.startsWith('/api/corporateghosts/')) return null;
+  const plan={pc:true,ttl:0,limit:1_000_000,group:'canadapost',window:60000,maximum:80,headers:{Accept:'application/json','Accept-Language':'en-CA','User-Agent':apiUA}};
+  let p;
+  if(path==='/api/corporateghosts/corporation') {
+    p=apiParams(url,['id']); const id=p('id',/^\d{1,12}$/);
+    plan.target=new URL('https://apigateway-passerelledapi.ised-isde.canada.ca/cc/api/v1/corporations/'+id);
+    for(const include of ['directors','filings','isc']) plan.target.searchParams.append('include',include);
+    if(!env.ISED_CORPORATIONS_API_KEY) apiThrow(503,'not_configured','Current federal records are awaiting the site API configuration. Snapshot search remains available.');
+    Object.assign(plan,{group:'ised-corporations',maximum:50,ttl:300,kind:'corporation',id});
+  } else if(path==='/api/parcelbench/rates') {
+    p=apiParams(url,['origin','destination','weight','length','width','height','mailingDate']);
+    const postal=key=>p(key,pcPostal), number=(key,min,max,precision)=>{
+      const raw=p(key,new RegExp('^\\d{1,3}(?:\\.\\d{1,'+precision+'})?$')), value=Number(raw);
+      if(value<min||value>max)apiThrow(400,'invalid_parameter','Check the '+key+' value.');return value;
+    };
+    const dimensions=[number('length',0.1,200,1),number('width',0.1,200,1),number('height',0.1,200,1)].sort((a,b)=>b-a);
+    const mailingDate=p('mailingDate',/^\d{4}-\d\d-\d\d$/), day=Date.parse(mailingDate+'T00:00:00Z'), now=Date.now();
+    if(!Number.isFinite(day)||new Date(day).toISOString().slice(0,10)!==mailingDate||day<now-2*86400000||day>now+366*86400000)apiThrow(400,'invalid_parameter','Choose a real mailing date from today through the coming year.');
+    plan.body=JSON.stringify({quoteType:'counter',expectedMailingDate:mailingDate,originPostalCode:postal('origin'),destination:{domestic:{postalCode:postal('destination')}},parcelCharacteristics:{weight:number('weight',0.001,30,3),dimensions:{length:dimensions[0],width:dimensions[1],height:dimensions[2]}}});
+    plan.method='POST';plan.kind='rates';plan.target=new URL(pcBase+'rating/v1/prices');plan.cacheKey=plan.body;
+  } else if(path==='/api/parcelbench/offices') {
+    p=apiParams(url,['postal']);plan.kind='offices';plan.target=new URL(pcBase+'postoffice/v1/post-offices');
+    plan.target.searchParams.set('postal-code',p('postal',pcPostal));plan.target.searchParams.set('maximum','10');plan.target.searchParams.set('d2po','false');
+  } else if(path==='/api/parcelbench/office') {
+    p=apiParams(url,['id']);plan.kind='office';plan.target=new URL(pcBase+'postoffice/v1/post-offices/'+p('id',/^\d{1,12}$/)+'/details');
+  } else apiThrow(404,'unknown_endpoint','Unknown parcel or corporation endpoint.');
+  if(plan.group==='canadapost'&&(!env.CANADAPOST_CLIENT_ID||!env.CANADAPOST_CLIENT_SECRET))apiThrow(503,'not_configured','Canada Post lookup is awaiting the site API configuration.');
+  return plan;
+}
+
+async function pcPace(db,group) {
+  // Shared lease prevents bursts across Worker instances, not merely in one isolate.
+  for(let attempt=0;attempt<2;attempt++) {
+    const now=Date.now(), spacing=group==='canadapost'?300:1100;
+    const row=await db.prepare('INSERT INTO gateway_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET expiry=excluded.expiry WHERE expiry<=? RETURNING hits').bind(group+'-lease',now+spacing,now).first();
+    if(row)return;
+    if(!attempt)await new Promise(resolve=>setTimeout(resolve,spacing));
+  }
+  apiThrow(429,'source_pacing','This source is busy. Please retry in a moment.',2);
+}
+
+async function pcFetch(target,options,plan,env) {
+  await pcPace(env.DB,plan.group);
+  const signal=AbortSignal.timeout(15000);
+  try {
+    const response=await fetch(target,{...options,redirect:'manual',signal});
+    if(!response.ok){
+      await response.body?.cancel();
+      if(response.status===404)apiThrow(404,'record_not_found','The source did not find this record. Check the number in the official register.');
+      if(response.status===429)apiThrow(429,'source_busy','The source has asked us to pause. Please retry later.',60);
+      if(response.status===401||response.status===403)apiThrow(503,'source_authentication','The source did not accept this service’s API credentials or subscription. The site operator needs to check its production API configuration.');
+      if(response.status===400||response.status===422)apiThrow(400,'source_input','The source could not quote these inputs. Check the postal codes, mailing date, weight and dimensions; some services have package limits.');
+      apiThrow(502,'source_unavailable','The source could not complete this request. Please retry later.');
+    }
+    const raw=await apiRead(response,plan.limit);
+    try{return JSON.parse(raw);}catch{apiThrow(502,'invalid_source','The source returned an unexpected response.');}
+  } catch(error) {
+    if(error.api)throw error;
+    apiThrow(signal.aborted?504:502,signal.aborted?'source_timeout':'source_network','The source could not be reached in time. Please retry later.');
+  }
+}
+
+async function pcBearer(plan,env) {
+  const fingerprint=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',encoder.encode(env.CANADAPOST_CLIENT_ID+'\0'+env.CANADAPOST_CLIENT_SECRET))),b=>b.toString(16).padStart(2,'0')).join('');
+  if(pcToken?.fingerprint===fingerprint&&pcToken.expires>Date.now()+60000)return pcToken.value;
+  const body=new URLSearchParams({grant_type:'client_credentials',scope:'merchant',client_id:env.CANADAPOST_CLIENT_ID,client_secret:env.CANADAPOST_CLIENT_SECRET});
+  const token=await pcFetch(pcBase+'cpc-api-native-oauth-provider/oauth2/token',{method:'POST',headers:{Accept:'application/json','Content-Type':'application/x-www-form-urlencoded'},body}, {...plan,limit:20000},env);
+  if(typeof token.access_token!=='string'||token.access_token.length>16000||!/^\S+$/.test(token.access_token)||!/^Bearer$/i.test(token.token_type||'')||!Number.isFinite(Number(token.expires_in))||Number(token.expires_in)<=0)apiThrow(502,'source_authentication','The source returned an invalid authorization response.');
+  pcToken={fingerprint,value:token.access_token,expires:Date.now()+Math.min(Number(token.expires_in),28800)*1000};
+  return pcToken.value;
+}
+
+function pcRates(data) {
+  if(!Array.isArray(data)||data.length>50)apiThrow(502,'invalid_source','The quote source returned an unexpected result.');
+  return {quoteType:'counter',currency:'CAD',quotes:data.map(x=>{
+    if(!x||typeof x.serviceCode!=='string'||typeof x.serviceName!=='string'||pcNumber(x.priceDetails?.due)===null)apiThrow(502,'invalid_source','The quote source returned an incomplete price.');
+    const p=x.priceDetails,s=x.serviceStandard||{};
+    return {code:pcText(x.serviceCode,40),name:pcText(x.serviceName),total:pcNumber(p.due),base:pcNumber(p.base),taxes:Object.fromEntries(['gst','pst','hst'].filter(k=>p.taxes?.[k]).map(k=>[k,pcNumber(p.taxes[k].amt)])),adjustments:(p.adjustments||[]).slice(0,20).map(a=>({name:pcText(a.adjustmentName),cost:pcNumber(a.adjustmentCost)})),options:(p.options||[]).slice(0,20).map(a=>({name:pcText(a.optionName),cost:pcNumber(a.optionPrice)})),cubedWeight:pcNumber(x.weightDetails?.cubedWeight),expectedDeliveryDate:pcDate(s.expectedDeliveryDate),expectedTransitTime:pcNumber(s.expectedTransitTime),guaranteedDelivery:typeof s.guaranteedDelivery==='boolean'?s.guaranteedDelivery:null};
+  })};
+}
+function pcOffice(x) {
+  if(!x||!/^\d{1,12}$/.test(String(x.officeId))||!x.address)apiThrow(502,'invalid_source','The post office source returned an incomplete record.');
+  const a=x.address,latitude=Number(a.latitude),longitude=Number(a.longitude);
+  const coordinates=Number.isFinite(latitude)&&latitude>=40&&latitude<=90&&Number.isFinite(longitude)&&longitude>=-150&&longitude<=-50?{latitude,longitude}:null;
+  // Use a validated fixed-host detail link ID when supplied, preserving leading zeros.
+  let id=String(x.officeId);try{const link=new URL(x.link?.href);if(link.origin===new URL(pcBase).origin){const match=link.pathname.match(/\/post-offices\/(\d{1,12})\/details$/);if(match)id=match[1];}}catch{}
+  return {id,name:pcText(x.name),location:pcText(x.location),address:[a.officeAddress,a.city,a.province,a.postalCode].filter(v=>typeof v==='string').map(v=>v.slice(0,150)).join(', '),coordinates,distance:pcNumber(x.distance),hours:Array.isArray(x.hoursList)?x.hoursList.slice(0,7).filter(h=>Number.isInteger(h.day)&&h.day>=1&&h.day<=7&&Array.isArray(h.time)).map(h=>({day:h.day,times:h.time.slice(0,4).filter(t=>typeof t==='string'&&/^(?:[01]?\d|2[0-3]):[0-5]\d$/.test(t))})):null};
+}
+function pcCorporation(x) {
+  if(!x||!/^\d{1,12}$/.test(String(x.corporationNumber))||!x.corporateName||typeof x.corporateName.legalName!=='string')apiThrow(502,'invalid_source','The federal source returned an incomplete record.');
+  const filings=Array.isArray(x.filingHistory)?x.filingHistory.slice(0,500).map(f=>({type:pcText(f.recordType,100),receivedDate:pcDate(f.receivedDate),effectiveDate:pcDate(f.effectiveDate),year:pcNumber(f.year),legalName:pcText(f.corporateName?.legalName)})):null;
+  const statements=Array.isArray(x.controlStatements)?x.controlStatements.slice(0,500):null;
+  return {id:String(x.corporationNumber),legalName:pcText(x.corporateName.legalName,500),alternateLegalName:pcText(x.corporateName.alternateLegalName,500),status:pcText(x.status,100),statusDetail:pcText(x.statusDetail,200),legislation:pcText(x.legislation,100),corporationType:pcText(x.declaredCorporationType,150),anniversaryDate:pcDate(x.anniversaryDate),locality:[x.registeredOffice?.city,x.registeredOffice?.subdivision,x.registeredOffice?.country].filter(v=>typeof v==='string').map(v=>v.slice(0,150)).join(', '),annualReturns:Array.isArray(x.annualReturnCompliance)?x.annualReturnCompliance.slice(0,100).map(a=>({year:pcNumber(a.year),status:pcText(a.status,80)})):null,directors:Array.isArray(x.board?.directors)?x.board.directors.slice(0,200).map(d=>({name:[pcText(d.givenName),pcText(d.familyName)].filter(Boolean).join(' '),changeType:pcText(d.changeType,80)})):null,directorsTruncated:Array.isArray(x.board?.directors)&&x.board.directors.length>200,filings,filingsTruncated:Array.isArray(x.filingHistory)&&x.filingHistory.length>500,controlStatements:statements===null?null:statements.filter(s=>s.recordType==='person').map(s=>({date:pcDate(s.statementDate),status:pcText(s.recordStatus,50),personType:pcText(s.recordDetails?.personType,80),names:Array.isArray(s.recordDetails?.names)?s.recordDetails.names.slice(0,10).map(n=>pcText(n.fullName,300)||[pcText(n.givenName),pcText(n.familyName)].filter(Boolean).join(' ')).filter(Boolean):[]})),controlStatementsTruncated:Array.isArray(x.controlStatements)&&x.controlStatements.length>500};
+}
+async function pcUpstream(plan,env) {
+  const headers={...plan.headers};
+  if(plan.group==='canadapost')headers.Authorization='Bearer '+await pcBearer(plan,env);
+  else headers.user_key=env.ISED_CORPORATIONS_API_KEY;
+  if(plan.body)headers['Content-Type']='application/json';
+  let data;
+  try{data=await pcFetch(plan.target.href,{method:plan.method||'GET',headers,...(plan.body?{body:plan.body}:{})},plan,env);}catch(error){if(plan.group==='canadapost'&&error.code==='source_authentication')pcToken=null;throw error;}
+  if(plan.kind==='rates')return pcRates(data);
+  if(plan.kind==='office')return pcOffice(data);
+  if(plan.kind==='offices'){if(!Array.isArray(data)||data.length>50)apiThrow(502,'invalid_source','The post office source returned an unexpected result.');return {offices:data.slice(0,10).map(pcOffice)};}
+  const corporation=pcCorporation(data);
+  if(Number(corporation.id)!==Number(plan.id))apiThrow(502,'invalid_source','The federal source returned a different corporation number.');
+  return corporation;
 }
 
 
@@ -471,7 +747,10 @@ async function body(request, limit) {
   const bytes = new Uint8Array(length);
   let offset = 0;
   for (const chunk of chunks) { bytes.set(chunk,offset); offset += chunk.length; }
-  const value = JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+  let text;
+  try { text = new TextDecoder('utf-8',{fatal:true,ignoreBOM:false}).decode(bytes); }
+  catch { throw new SyntaxError('Invalid UTF-8 request.'); }
+  const value = JSON.parse(text);
   if (!value || Array.isArray(value) || typeof value !== 'object') throw new SyntaxError();
   return value;
 }
@@ -616,7 +895,7 @@ export default {
     try { result=await handle(request,env); }
     catch (e) {
       if (e instanceof RangeError) result=errorResponse(413,'Request is too large.');
-      else if (e instanceof SyntaxError || e instanceof TypeError && e.code==='ERR_ENCODING_INVALID_ENCODED_DATA') result=errorResponse(400,'Invalid JSON request.');
+      else if (e instanceof SyntaxError) result=errorResponse(400,'Invalid JSON request.');
       else result=errorResponse(503,'Service temporarily unavailable.');
     }
     if (result.body) headers['Content-Type']='application/json; charset=utf-8';

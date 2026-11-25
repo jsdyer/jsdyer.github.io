@@ -1,0 +1,11 @@
+{
+  "name": "coolcode-worker-validation",
+  "private": true,
+  "scripts": {
+    "check": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261125.1",
+    "typescript": "7.0.2"
+  }
+}

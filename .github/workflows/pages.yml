@@ -43,6 +43,10 @@ jobs:
       - name: Test admin reporting and service checks
         # The gateway tests exercise its SQL against Node's real SQLite engine.
         run: node --test tests/*.test.mjs
+      - name: Check dashboard Worker against Cloudflare types
+        run: |
+          npm ci --prefix services/cloudflare-visitor --ignore-scripts --no-audit --no-fund
+          npm run check --prefix services/cloudflare-visitor
       - name: Install browser test dependencies
         run: |
           python3 -m pip install -r tests/browser-requirements.txt

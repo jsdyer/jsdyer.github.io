@@ -183,6 +183,22 @@
       }
     ]
   },
+  "jsdyer/backbonecompare/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/backbonecompare/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Network evidence sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 259200
+      }
+    ],
+    "collection_steps": [
+      "Refresh validated source capture"
+    ]
+  },
   "jsdyer/bankrates/pages.yml": {
     "freshness": [
       {
@@ -316,6 +332,22 @@
         "label": "Source retrieved",
         "precision": "date"
       }
+    ]
+  },
+  "jsdyer/carecompass/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/carecompass/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Complete child-care directories checked",
+        "max_age_seconds": 129600
+      }
+    ],
+    "collection_steps": [
+      "Refresh complete child-care directories"
     ]
   },
   "jsdyer/ccts-ledger/pages.yml": {
@@ -518,6 +550,22 @@
         "label": "Data retrieved",
         "precision": "date"
       }
+    ]
+  },
+  "jsdyer/distropilot/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/distropilot/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Package sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 259200
+      }
+    ],
+    "collection_steps": [
+      "Refresh validated source capture"
     ]
   },
   "jsdyer/dockdiary/pages.yml": {
@@ -741,6 +789,35 @@
       }
     ]
   },
+  "jsdyer/fuelwindow/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/fuelwindow/data/prices.json",
+        "json_path": [
+          "sources",
+          0,
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Nova Scotia fuel prices checked",
+        "max_age_seconds": 172800
+      },
+      {
+        "url": "https://coolcode.ca/fuelwindow/data/prices.json",
+        "json_path": [
+          "sources",
+          1,
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "PEI fuel prices checked",
+        "max_age_seconds": 172800
+      }
+    ],
+    "collection_steps": [
+      "Refresh official public data"
+    ]
+  },
   "jsdyer/gc-domain-graveyard/pages.yml": {
     "freshness": [
       {
@@ -839,6 +916,22 @@
         "label": "Sources checked",
         "precision": "timestamp"
       }
+    ]
+  },
+  "jsdyer/halifaxnext/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/halifaxnext/status.json",
+        "json_path": [
+          "retrieved"
+        ],
+        "precision": "timestamp",
+        "label": "Halifax schedule downloaded",
+        "max_age_seconds": 129600
+      }
+    ],
+    "collection_steps": [
+      "Refresh and validate Halifax schedule"
     ]
   },
   "jsdyer/halifaxtimelens/refresh.yml": {
@@ -967,6 +1060,22 @@
         "precision": "timestamp",
         "label": "Source checked"
       }
+    ]
+  },
+  "jsdyer/inspectiontrail/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/inspectiontrail/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Official starter reports checked",
+        "max_age_seconds": 129600
+      }
+    ],
+    "collection_steps": [
+      "Refresh official inspection starter captures"
     ]
   },
   "jsdyer/ispreportcard/pages.yml": {
@@ -1464,6 +1573,22 @@
       }
     ]
   },
+  "jsdyer/portwindow/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/portwindow/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Oldest available schedule checked",
+        "precision": "timestamp",
+        "max_age_seconds": 259200
+      }
+    ],
+    "collection_steps": [
+      "Refresh official port schedules"
+    ]
+  },
   "jsdyer/postmarkplaces/refresh.yml": {
     "freshness": [
       {
@@ -1561,6 +1686,22 @@
         "label": "Data retrieved",
         "precision": "timestamp"
       }
+    ]
+  },
+  "jsdyer/recipemath/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/recipemath/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Official CNF release checked",
+        "precision": "timestamp",
+        "max_age_seconds": 3888000
+      }
+    ],
+    "collection_steps": [
+      "Refresh the official CNF release"
     ]
   },
   "jsdyer/registrarwatch/refresh.yml": {
@@ -2060,6 +2201,54 @@
       }
     ]
   },
+  "jsdyer/tripbrief/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/tripbrief/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Official advisory index checked",
+        "precision": "timestamp",
+        "max_age_seconds": 21600
+      }
+    ],
+    "collection_steps": [
+      "Refresh official travel advisory index"
+    ]
+  },
+  "jsdyer/wagewindow/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/wagewindow/data/index.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Official wage edition checked",
+        "max_age_seconds": 1382400
+      }
+    ],
+    "collection_steps": [
+      "Refresh official public data"
+    ]
+  },
+  "jsdyer/weatherwindow/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/weatherwindow/data/source-health.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "ECCC APIs and place directory checked",
+        "max_age_seconds": 129600
+      }
+    ],
+    "collection_steps": [
+      "Check ECCC sources and refresh place directory"
+    ]
+  },
   "jsdyer/welllayers/refresh.yml": {
     "freshness": [
       {
@@ -2082,86 +2271,6 @@
         "precision": "timestamp",
         "label": "Disclosure source retrieved"
       }
-    ]
-  },
-  "jsdyer/portwindow/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/portwindow/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "label": "Oldest available schedule checked",
-        "precision": "timestamp",
-        "max_age_seconds": 259200
-      }
-    ],
-    "collection_steps": [
-      "Refresh official port schedules"
-    ]
-  },
-  "jsdyer/distropilot/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/distropilot/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "label": "Package sources checked",
-        "precision": "timestamp",
-        "max_age_seconds": 259200
-      }
-    ],
-    "collection_steps": [
-      "Refresh validated source capture"
-    ]
-  },
-  "jsdyer/recipemath/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/recipemath/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "label": "Official CNF release checked",
-        "precision": "timestamp",
-        "max_age_seconds": 3888000
-      }
-    ],
-    "collection_steps": [
-      "Refresh the official CNF release"
-    ]
-  },
-  "jsdyer/backbonecompare/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/backbonecompare/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "label": "Network evidence sources checked",
-        "precision": "timestamp",
-        "max_age_seconds": 259200
-      }
-    ],
-    "collection_steps": [
-      "Refresh validated source capture"
-    ]
-  },
-  "jsdyer/tripbrief/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/tripbrief/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "label": "Official advisory index checked",
-        "precision": "timestamp",
-        "max_age_seconds": 21600
-      }
-    ],
-    "collection_steps": [
-      "Refresh official travel advisory index"
     ]
   }
 }

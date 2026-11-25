@@ -24,6 +24,7 @@ jsdyer/buoybench
 jsdyer/campcalendar
 jsdyer/canadaanalytics
 jsdyer/cancon-atlas
+jsdyer/carecompass
 jsdyer/ccts-ledger
 jsdyer/census-lens
 jsdyer/chargegaps
@@ -59,6 +60,7 @@ jsdyer/forgottenplaces
 jsdyer/fossilneighbours
 jsdyer/fraudpulse
 jsdyer/freenet-echo
+jsdyer/fuelwindow
 jsdyer/gc-domain-graveyard
 jsdyer/gc-subdomain-watch
 jsdyer/govdatagaps
@@ -67,6 +69,7 @@ jsdyer/govgrade
 jsdyer/govtrackercensus
 jsdyer/grid-dark
 jsdyer/gridreceipt
+jsdyer/halifaxnext
 jsdyer/halifaxtimelens
 jsdyer/hiddenwater
 jsdyer/highwayframe
@@ -77,6 +80,7 @@ jsdyer/housing-pulse
 jsdyer/iceweeks
 jsdyer/inflation-basket
 jsdyer/insolvencyatlas
+jsdyer/inspectiontrail
 jsdyer/ispreportcard
 jsdyer/ix-ledger
 jsdyer/jsdyer.github.io
@@ -166,5 +170,7 @@ jsdyer/transferwindow
 jsdyer/transitreceipt
 jsdyer/translink
 jsdyer/tripbrief
+jsdyer/wagewindow
+jsdyer/weatherwindow
 jsdyer/welllayers
 jsdyer/wrongdoings

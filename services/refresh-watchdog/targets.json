@@ -534,6 +534,29 @@
       ]
     },
     {
+      "repo": "jsdyer/carecompass",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "17 9 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/carecompass/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Complete child-care directories checked",
+          "max_age_seconds": 129600
+        }
+      ],
+      "collection_steps": [
+        "Refresh complete child-care directories"
+      ]
+    },
+    {
       "repo": "jsdyer/ccts-ledger",
       "branch": "main",
       "workflow": "pages.yml",
@@ -1233,6 +1256,42 @@
       ]
     },
     {
+      "repo": "jsdyer/fuelwindow",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "19 7,19 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/fuelwindow/data/prices.json",
+          "json_path": [
+            "sources",
+            0,
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Nova Scotia fuel prices checked",
+          "max_age_seconds": 172800
+        },
+        {
+          "url": "https://coolcode.ca/fuelwindow/data/prices.json",
+          "json_path": [
+            "sources",
+            1,
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "PEI fuel prices checked",
+          "max_age_seconds": 172800
+        }
+      ],
+      "collection_steps": [
+        "Refresh official public data"
+      ]
+    },
+    {
       "repo": "jsdyer/gc-domain-graveyard",
       "branch": "main",
       "workflow": "pages.yml",
@@ -1388,6 +1447,29 @@
           "label": "Sources checked",
           "precision": "timestamp"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/halifaxnext",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "17 8 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/halifaxnext/status.json",
+          "json_path": [
+            "retrieved"
+          ],
+          "precision": "timestamp",
+          "label": "Halifax schedule downloaded",
+          "max_age_seconds": 129600
+        }
+      ],
+      "collection_steps": [
+        "Refresh and validate Halifax schedule"
       ]
     },
     {
@@ -1588,6 +1670,29 @@
           "precision": "timestamp",
           "label": "Source checked"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/inspectiontrail",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "31 9 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/inspectiontrail/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Official starter reports checked",
+          "max_age_seconds": 129600
+        }
+      ],
+      "collection_steps": [
+        "Refresh official inspection starter captures"
       ]
     },
     {
@@ -3413,6 +3518,52 @@
       ],
       "collection_steps": [
         "Refresh official travel advisory index"
+      ]
+    },
+    {
+      "repo": "jsdyer/wagewindow",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "43 8 * * 3"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/wagewindow/data/index.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Official wage edition checked",
+          "max_age_seconds": 1382400
+        }
+      ],
+      "collection_steps": [
+        "Refresh official public data"
+      ]
+    },
+    {
+      "repo": "jsdyer/weatherwindow",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "23 9 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/weatherwindow/data/source-health.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "ECCC APIs and place directory checked",
+          "max_age_seconds": 129600
+        }
+      ],
+      "collection_steps": [
+        "Check ECCC sources and refresh place directory"
       ]
     },
     {

@@ -4,3 +4,4 @@ __pycache__/
 .venv/
 /link-audit.json
 /browser-checks/
+node_modules/

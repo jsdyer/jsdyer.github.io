@@ -93,7 +93,7 @@ async function apiRead(response, limit) {
       if(length>limit) apiThrow(502,'source_too_large','The source response exceeds this tool’s size limit.'); chunks.push(value);}
   } catch(e) {await reader.cancel().catch(()=>{}); throw e;}
   const bytes=new Uint8Array(length); let at=0; for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length;}
-  try{return new TextDecoder('utf-8',{fatal:true}).decode(bytes);}catch{apiThrow(502,'source_encoding','This source is not valid UTF-8.');}
+  try{return new TextDecoder('utf-8',{fatal:true,ignoreBOM:false}).decode(bytes);}catch{apiThrow(502,'source_encoding','This source is not valid UTF-8.');}
 }
 
 async function apiSchema(db) {
@@ -157,14 +157,15 @@ async function apiHandle(request,env) {
     if(origin && origin!==ORIGIN) return apiFailure(403,'origin_denied','Origin is not allowed.');
     if(request.method==='OPTIONS') return {status:204};
     if(request.method!=='GET') return apiFailure(405,'method_denied','Use GET for public data requests.');
-    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true}}};
-    const plan=apiRoute(url,env), db=env.DB, now=Date.now();
+    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY)}}};
+    if(url.pathname.startsWith('/api/halifaxnext/')) return await halifaxApiHandle(request,env);
+    const plan=pcRoute(url,env)||inspectionRoute(url)||apiRoute(url,env), db=env.DB, now=Date.now();
     if(!db) return apiFailure(503,'storage_unavailable','The shared request limiter is unavailable.');
     if(!await allowed(db,request,new Date(now),'tool-api')) return apiFailure(429,'client_wait','Too many requests. Please wait before trying again.',300);
     await apiSchema(db);
-    const digest=await crypto.subtle.digest('SHA-256',encoder.encode(apiVersion+'|'+plan.group+'|'+plan.target.href));
+    const digest=await crypto.subtle.digest('SHA-256',encoder.encode(apiVersion+'|'+plan.group+'|'+(plan.cacheKey??plan.target.href)));
     const id=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
-    const cached=await db.prepare('SELECT payload FROM gateway_cache WHERE id=? AND expiry>?').bind(id,now).first('payload');
+    const cached=plan.ttl>0 ? await db.prepare('SELECT payload FROM gateway_cache WHERE id=? AND expiry>?').bind(id,now).first('payload') : null;
     if(cached) return {body:JSON.parse(cached)};
     if(plan.group==='repology'){
       // Atomic sliding lease across ALL Worker instances; Cache API alone is only per-PoP.
@@ -172,10 +173,11 @@ async function apiHandle(request,env) {
       if(!lease) return apiFailure(429,'source_pacing','The package source permits one request per second. Please retry shortly.',2);
     }
     await apiBudget(db,plan.group,now,plan.window,plan.maximum);
-    const data=await apiUpstream(plan,env), captured=Date.now(), result={fetched_at:new Date(captured).toISOString(),data}, payload=JSON.stringify(result);
+    const data=await (plan.pc?pcUpstream(plan,env):plan.inspection?inspectionUpstream(plan):apiUpstream(plan,env)), captured=Date.now(), result={fetched_at:new Date(captured).toISOString(),data}, payload=JSON.stringify(result);
+    await db.prepare('DELETE FROM gateway_budget WHERE expiry<=?').bind(captured).run();
     // <=256 records; ordinary responses <=500 KB, package evidence <=1 MB.
     // Popular projects such as PHP exceed 500 KB after lossless field selection.
-    if(encoder.encode(payload).byteLength<=(plan.group==='repology'?1000000:500000)) await db.batch([
+    if(plan.ttl>0 && encoder.encode(payload).byteLength<=(plan.group==='repology'?1000000:500000)) await db.batch([
       db.prepare('DELETE FROM gateway_cache WHERE expiry<=?').bind(captured),
       db.prepare('DELETE FROM gateway_budget WHERE expiry<=?').bind(captured),
       db.prepare('INSERT INTO gateway_cache(id,payload,expiry,touched) VALUES(?,?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,expiry=excluded.expiry,touched=excluded.touched').bind(id,payload,captured+plan.ttl*1000,captured),

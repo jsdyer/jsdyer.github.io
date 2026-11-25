@@ -3485,12 +3485,13 @@
   {
     "id": "priceatlas",
     "title": "Canadian Price Atlas",
-    "description": "Compare historical grocery prices across Canadian regions.",
+    "description": "Compare grocery price histories across Canada, all provinces and available northern cities.",
     "category": "money",
     "tags": [
       "statcan",
-      "bc",
-      "ns",
+      "canada",
+      "provinces",
+      "territories",
       "food",
       "grocery",
       "inflation",
@@ -3504,7 +3505,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Statistics Canada publishes monthly retail prices for Canada, BC and Nova Scotia.",
+      "detail": "Statistics Canada monthly retail prices for Canada, all 10 provinces, Whitehorse and Yellowknife. City-only northern coverage; Nunavut is explicitly unavailable with its separate survey linked.",
       "probes": [
         {
           "url": "https://coolcode.ca/priceatlas/snapshot.json",
@@ -3539,7 +3540,7 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "note": "Add products and package quantities to a basket, then compare exact endpoint months across your selected areas. Missing prices are listed rather than filled; exports retain the published package observations and Statistics Canada vector identifiers."
+      "note": "Compare all ten provinces and Canada, plus Whitehorse and Yellowknife where monthly prices are published. The northern series cover those cities only; Nunavut is explicitly marked unavailable with a link to its separate survey. Add package quantities to a basket and compare exact endpoint months. Missing prices remain missing, and CSV exports retain Statistics Canada vector identifiers."
     },
     "sync_manifest": true
   },
@@ -11105,5 +11106,287 @@
       "note": "Search any of the 230 destinations in Global Affairs Canada's current index, including territories. Filter by advice level or regional advisories, then open a destination to read its latest published change and the full official advice. Add destinations to your trip, set arrival/departure dates and write notes. The tab keeps these in memory until you explicitly save on this device or export a file. Loading a previously saved trip highlights changes from its saved advisory evidence. Export JSON for later editing, or a self-contained HTML brief to open offline and print to PDF. Delete the device copy separately from clearing the current tab. Advice is checked hourly and every destination links to its official page. The checked time, source edition and individual official update dates mean different things. The summary does not include all regional boundaries, entry rules or health advice. Dates organize your itinerary; they do not predict future conditions or determine visa eligibility. Review full official advice before departure and while travelling. Exported briefs can become outdated."
     },
     "sync_manifest": true
+  },
+  {
+    "id": "halifaxnext",
+    "title": "Halifax Next",
+    "description": "Find your next Halifax bus or ferry, with live departure updates, service alerts and the last scheduled trip.",
+    "category": "places",
+    "tags": [
+      "Halifax",
+      "transit",
+      "bus",
+      "ferry",
+      "departures"
+    ],
+    "icon": "map",
+    "url": "/halifaxnext/",
+    "source": "https://github.com/jsdyer/halifaxnext",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Halifax Transit static GTFS schedules refresh daily; public vehicle, trip and alert feeds are checked while the page is open. Live and scheduled times are labelled separately.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/halifaxnext/status.json",
+          "path": [
+            "retrieved"
+          ],
+          "label": "Halifax schedule downloaded",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "stops"
+            ],
+            "unit": "stops"
+          }
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search 8330 for Spring Garden Road before Dresden Row, or open a ferry-terminal shortcut. Live labels require a fresh source prediction; scheduled times are timetable entries, and a missing position does not mean a trip is cancelled. Last service uses the selected service date, including trips after midnight."
+    }
+  },
+  {
+    "id": "parcelbench",
+    "title": "Parcel Bench",
+    "description": "Compare Canada Post parcel prices and expected delivery dates, test two box sizes and find nearby post offices.",
+    "category": "money",
+    "tags": [
+      "Canada Post",
+      "shipping",
+      "parcel",
+      "post office",
+      "delivery",
+      "postal code"
+    ],
+    "icon": "package-search",
+    "url": "/parcelbench/",
+    "source": "https://github.com/jsdyer/parcelbench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Canada Post provides eligible consumer counter quotes, delivery estimates and post office details on request."
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Enter the two postal codes, packed weight, dimensions and mailing date. Add an arrive-by date to flag returned estimates that fit it. Compare the same contents in a smaller box to see the price difference for services available to both. Quotes use consumer counter rates; a future mailing date changes the delivery estimate, not the quote’s price date. Save a plan only if you want it retained on this device. Post office hours are not parcel acceptance cutoffs."
+    }
+  },
+  {
+    "id": "inspectiontrail",
+    "title": "Inspection Trail",
+    "description": "Search Nova Scotia food inspection histories, dated findings, remedies and boil-water advisory timelines.",
+    "category": "places",
+    "tags": [
+      "food",
+      "inspections",
+      "Nova Scotia"
+    ],
+    "icon": "file-check-2",
+    "url": "/inspectiontrail/",
+    "source": "https://github.com/jsdyer/inspectiontrail",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Nova Scotia official inspection searches and selected dated starter captures.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/inspectiontrail/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Official starter reports checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "starter histories"
+          }
+        }
+      ],
+      "cadence": "Daily"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search any establishment name, community or street, or use the province’s current/past-year closure and warning searches. A live lookup opens the official anonymous ASP.NET search session and reads its public results. Report lookups replay that search and retrieve only a returned establishment ID. Broad searches show up to 200 results; refine the query for more precise coverage. Initial examples are explicitly labelled starter captures, with their original source upload and retrieval dates. Each report retains the province’s inspection dates, status wording, findings and required remedies. Boil-water advisory issue and removal dates are displayed separately. A historical “Deficient” entry does not mean that finding remains unresolved today; no hygiene score, safety rating or present-day health conclusion is inferred. Read the original source and its definitions when interpreting a report. “Watch establishment” saves its name, address and reproducible search on this device. It survives ordinary browser refreshes, but does not automatically check for changes, send alerts or sync. A saved search can be rerun at any time; a dated report can be downloaded as text. Search inputs leave the browser for CoolCode’s public API and the provincial source; watchlists stay in this browser. Provincial detail URLs require a source session, so the tool links to the official search and explains how to reproduce the result."
+    }
+  },
+  {
+    "id": "weatherwindow",
+    "title": "Weather Window",
+    "description": "Find your next outdoor window with Canadian weather, hourly forecasts, air quality and official alert areas.",
+    "category": "places",
+    "tags": [
+      "weather",
+      "air quality",
+      "Canada",
+      "alerts",
+      "outdoors"
+    ],
+    "icon": "map",
+    "url": "/weatherwindow/",
+    "source": "https://github.com/jsdyer/weatherwindow",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Official ECCC current weather, hourly and text forecasts, AQHI and alert polygons for Canadian places.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/weatherwindow/data/source-health.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "ECCC APIs and place directory checked",
+          "precision": "minute"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search any listed Canadian forecast place, an ECCC place ID, or latitude, longitude; save places on this browser and set your temperature, wind and precipitation-probability limits. Matching hours are weather preferences, not an all-clear: read the separately dated official alerts and AQHI observations/forecast periods, and check the named station's distance. Missing inputs never count as a matching window."
+    }
+  },
+  {
+    "id": "fuelwindow",
+    "title": "Fuel Window",
+    "description": "Compare regulated fuel prices in Nova Scotia and PEI, estimate a fill or trip, and keep private vehicle budgets.",
+    "category": "money",
+    "tags": [
+      "fuel",
+      "Nova Scotia",
+      "PEI",
+      "trip cost",
+      "heating oil"
+    ],
+    "icon": "wallet",
+    "url": "/fuelwindow/",
+    "source": "https://github.com/jsdyer/fuelwindow",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Official Nova Scotia Energy Board and PEI IRAC regulated prices, checked twice daily; calculations stay in your browser.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/fuelwindow/data/prices.json",
+          "path": [
+            "sources",
+            0,
+            "checked_at"
+          ],
+          "label": "Nova Scotia fuel prices checked",
+          "precision": "minute"
+        },
+        {
+          "url": "https://coolcode.ca/fuelwindow/data/prices.json",
+          "path": [
+            "sources",
+            1,
+            "checked_at"
+          ],
+          "label": "PEI fuel prices checked",
+          "precision": "minute"
+        }
+      ],
+      "cadence": "Twice daily"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Fuel Window includes all six Nova Scotia pricing zones for self-serve regular gasoline and diesel; PEI adds self/full-serve regular, mid-grade, premium and diesel plus the after-tax furnace-oil maximum. Prices are official regulated limits, not live station quotes or forecasts. Editions and successful check dates are separate. Enter litres, distance and consumption to estimate a budget; optional saved plans retain their original source edition and can be exported/imported as JSON. Calculations and saved plans stay in your browser. Public sources are checked twice daily and an unavailable source retains its prior good prices with a visible warning."
+    }
+  },
+  {
+    "id": "wagewindow",
+    "title": "Wage Window",
+    "description": "Compare official Canadian job wages by occupation and region, check an offer, and save private comparisons.",
+    "category": "money",
+    "tags": [
+      "wages",
+      "jobs",
+      "NOC",
+      "salary",
+      "Canada"
+    ],
+    "icon": "wallet",
+    "url": "/wagewindow/",
+    "source": "https://github.com/jsdyer/wagewindow",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "ESDC Job Bank wage estimates for all published occupations and regions, checked weekly; source periods and annual/hourly units are preserved.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/wagewindow/data/index.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Official wage edition checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "occupation_count"
+            ],
+            "unit": "occupations"
+          }
+        }
+      ],
+      "cadence": "Weekly"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Wage Window includes every occupation-region row in the ESDC Job Bank wage download, including unavailable estimates. Search by English/French occupation title or NOC code, compare any two regions, inspect low/median/high wages and their own reference periods, or compare a gross offer using your paid hours and weeks. Annual source wages remain annual; missing values stay missing. Optional private comparisons preserve the selected edition and assumptions, survive refreshes and export/import as JSON; current comparisons also export CSV. The official release is checked weekly; failed downloads retain the previous good edition with its original successful check date."
+    }
+  },
+  {
+    "id": "carecompass",
+    "title": "Care Compass",
+    "description": "Find licensed child care in British Columbia and Nova Scotia, compare published services and keep a private contact shortlist.",
+    "category": "places",
+    "tags": [
+      "child care",
+      "BC",
+      "Nova Scotia",
+      "family"
+    ],
+    "icon": "hand-heart",
+    "url": "/carecompass/",
+    "source": "https://github.com/jsdyer/carecompass",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Official BC and NS child-care directory snapshots, with source coverage and vacancy dates.",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/carecompass/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Complete child-care directories checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "facilities"
+          }
+        }
+      ],
+      "cadence": "Daily"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Care Compass collects the complete published BC Child Care Map layer and Nova Scotia Child Care Directory, rather than limiting the search to a preset city list. Search a name, city, street or postal code; filter by province, age, program, operating pattern and reported vacancy. Specific filters match explicit positive source flags, so unknown fields remain visible under “Any / unknown”. The map uses supplied coordinates and loads OpenStreetMap tiles only when opened. BC covers ministry-funded licensed child care, not every BC provider. Its reported vacancy flags include their original update dates and are never promises of an available space. Nova Scotia updates its directory biannually; its source coverage date and publication date are displayed separately from our collection check. NS does not publish live vacancies in this dataset. Licence capacity is not spare capacity, and source inspection dates are not inspection findings or endorsements. Choose “Add to shortlist” to save a provider on this device. Contact status and notes survive ordinary refreshes in the same browser, with CSV export and a delete button; they do not sync or submit an application. Directory JSON export/reopen preserves earlier source coverage and dates separately from the private shortlist. Confirm age eligibility, fees, availability and hours with the provider before making plans."
+    }
   }
 ]

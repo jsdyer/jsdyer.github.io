@@ -30,7 +30,10 @@ async function body(request, limit) {
   const bytes = new Uint8Array(length);
   let offset = 0;
   for (const chunk of chunks) { bytes.set(chunk,offset); offset += chunk.length; }
-  const value = JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+  let text;
+  try { text = new TextDecoder('utf-8',{fatal:true,ignoreBOM:false}).decode(bytes); }
+  catch { throw new SyntaxError('Invalid UTF-8 request.'); }
+  const value = JSON.parse(text);
   if (!value || Array.isArray(value) || typeof value !== 'object') throw new SyntaxError();
   return value;
 }
@@ -175,7 +178,7 @@ export default {
     try { result=await handle(request,env); }
     catch (e) {
       if (e instanceof RangeError) result=errorResponse(413,'Request is too large.');
-      else if (e instanceof SyntaxError || e instanceof TypeError && e.code==='ERR_ENCODING_INVALID_ENCODED_DATA') result=errorResponse(400,'Invalid JSON request.');
+      else if (e instanceof SyntaxError) result=errorResponse(400,'Invalid JSON request.');
       else result=errorResponse(503,'Service temporarily unavailable.');
     }
     if (result.body) headers['Content-Type']='application/json; charset=utf-8';
