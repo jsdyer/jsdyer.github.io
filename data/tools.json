@@ -9334,7 +9334,7 @@
             "captured_at"
           ],
           "precision": "minute",
-          "value": "2026-11-24 18:59 UTC"
+          "value": "2026-11-25 09:30 UTC"
         }
       ]
     },
@@ -9538,7 +9538,7 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-25 08:53 UTC",
+          "value": "2026-11-25 09:53 UTC",
           "count": 261
         }
       ]
@@ -9691,8 +9691,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-25 08:53 UTC",
-          "count": 353
+          "value": "2026-11-25 09:53 UTC",
+          "count": 358
         }
       ]
     },
@@ -10636,7 +10636,7 @@
             ],
             "unit": "protected areas"
           },
-          "value": "2026-11-25 08:55 UTC",
+          "value": "2026-11-25 09:55 UTC",
           "count": 1037
         }
       ]
@@ -11175,7 +11175,8 @@
             "unit": "stops"
           },
           "value": "2026-11-25 08:00 UTC",
-          "count": 2347
+          "count": 2347,
+          "unavailable": true
         }
       ]
     },
