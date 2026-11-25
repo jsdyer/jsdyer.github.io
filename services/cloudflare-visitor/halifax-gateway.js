@@ -13,11 +13,12 @@ async function halifaxApiHandle(request,env,ctx) {
     const now=Date.now();if(!await allowed(db,request,new Date(now),'tool-api'))return apiFailure(429,'rate_limit','Please try again shortly.',300);
     await apiSchema(db);
     const cache=typeof caches!=='undefined'?caches.default:null;
-    const cacheRequest=new Request(new URL('/api/halifaxnext/cache/raw-v1/'+feed,url.origin));
+    const cacheRequest=new Request(new URL('/api/halifaxnext/cache/raw-v1/'+feed,url.origin).href);
     const cached=cache?await cache.match(cacheRequest):null;
     if(cached)return {rawResponse:cached};
     await apiBudget(db,'halifax:'+feed,now,86400000,4000);
-    const response=await fetch('https://gtfs.halifax.ca/realtime/'+halifaxFeeds[feed],{headers:{'User-Agent':apiUA,Accept:'application/x-protobuf,application/octet-stream','Accept-Encoding':'identity'},redirect:'error',signal:AbortSignal.timeout(12000)});
+    // IIS requires its actual protocol-buffer MIME; Workers supports manual, not error, redirects.
+    const response=await fetch('https://gtfs.halifax.ca/realtime/'+halifaxFeeds[feed],{headers:{'User-Agent':apiUA,Accept:'application/protocol-buffer,application/x-protobuf,application/octet-stream','Accept-Encoding':'identity'},redirect:'manual',signal:AbortSignal.timeout(12000)});
     if(!response.ok){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit is temporarily unavailable. Scheduled times remain available.');}
     const size=response.headers.get('Content-Length'),encoding=response.headers.get('Content-Encoding');
     if(encoding&&encoding.toLowerCase()!=='identity'){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit returned an unsupported transport encoding.');}

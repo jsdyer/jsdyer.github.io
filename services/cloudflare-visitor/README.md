@@ -85,6 +85,10 @@ Ordinary cached responses have a 256-entry cap and a 500 KB response limit
 (1 MB for package evidence). Halifax uses three fixed public feed keys in the edge Cache API with 30-second
 expiry. Feed responses are bounded at 5 MB and decoded/filtered in the browser;
 no protobuf decode, JSON expansion or gzip work runs in the Worker.
+Halifax's IIS source requires `application/protocol-buffer` in the upstream Accept
+header. The relay requests identity encoding and uses `redirect: 'manual'`, rejecting
+non-success responses without following them. Workers does not support the Fetch
+standard's `redirect: 'error'` mode; the regression fixture enforces this difference.
 Inspection and corporation details expire after five minutes. Parcel quotes and
 outlet lookups are never persisted in the shared cache and return no-store.
 Errors are not cached. SQL upserts enforce
