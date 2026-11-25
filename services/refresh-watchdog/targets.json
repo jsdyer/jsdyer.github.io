@@ -297,6 +297,29 @@
       ]
     },
     {
+      "repo": "jsdyer/backbonecompare",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "53 8 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/backbonecompare/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "Network evidence sources checked",
+          "precision": "timestamp",
+          "max_age_seconds": 259200
+        }
+      ],
+      "collection_steps": [
+        "Refresh validated source capture"
+      ]
+    },
+    {
       "repo": "jsdyer/bankrates",
       "branch": "main",
       "workflow": "pages.yml",
@@ -824,6 +847,29 @@
           "label": "Data retrieved",
           "precision": "date"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/distropilot",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "31 8 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/distropilot/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "Package sources checked",
+          "precision": "timestamp",
+          "max_age_seconds": 259200
+        }
+      ],
+      "collection_steps": [
+        "Refresh validated source capture"
       ]
     },
     {
@@ -2362,6 +2408,29 @@
       ]
     },
     {
+      "repo": "jsdyer/portwindow",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "43 10 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/portwindow/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "Official port schedules checked",
+          "precision": "timestamp",
+          "max_age_seconds": 259200
+        }
+      ],
+      "collection_steps": [
+        "Refresh official CLAA port schedules"
+      ]
+    },
+    {
       "repo": "jsdyer/postmarkplaces",
       "branch": "main",
       "workflow": "refresh.yml",
@@ -2514,6 +2583,29 @@
           "label": "Data retrieved",
           "precision": "timestamp"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/recipemath",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "23 12 1 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/recipemath/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "Official CNF release checked",
+          "precision": "timestamp",
+          "max_age_seconds": 3888000
+        }
+      ],
+      "collection_steps": [
+        "Refresh the official CNF release"
       ]
     },
     {
@@ -3298,6 +3390,29 @@
           "label": "Live fleet capture",
           "precision": "timestamp"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/tripbrief",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "29 * * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/tripbrief/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "Official advisory index checked",
+          "precision": "timestamp",
+          "max_age_seconds": 21600
+        }
+      ],
+      "collection_steps": [
+        "Refresh official travel advisory index"
       ]
     },
     {

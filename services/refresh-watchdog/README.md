@@ -31,6 +31,16 @@ release changes the registry, not the installed watchdog program. Confirm the ne
 server report sees any newly granted repositories; a public GitHub deployment
 cannot confirm the private server's credentials or running version.
 
+The eleven-app release adds five more collector targets: `tripbrief` (hourly),
+`portwindow`, `distropilot` and `backbonecompare` (daily), and `recipemath`
+(monthly). The generated registry now contains 176 scheduled workflows. Their
+published `data/status.json` files supply actual `checked_at` timestamps; alert
+ages are six hours, 72 hours for the daily jobs, and 45 days for Recipe Math.
+The other six new apps fetch data on demand or calculate locally and need no
+collector target. This release requires no watchdog runtime reinstall. If its
+GitHub App uses selected repositories, grant those five repositories access and
+confirm the next private server report sees them.
+
 ## What changes
 
 - GitHub's existing schedules continue running. The Linux server checks for a successful refresh covering the most recent due occurrence, allowing a grace period for normal queueing.

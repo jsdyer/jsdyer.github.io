@@ -266,6 +266,23 @@
     ]
   },
   {
+    "repo": "jsdyer/backbonecompare",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "53 8 * * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/backupledger",
     "branch": "main",
     "workflows": [],
@@ -514,6 +531,12 @@
   },
   {
     "repo": "jsdyer/certtrail",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/channelqueue",
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
@@ -807,6 +830,23 @@
     ]
   },
   {
+    "repo": "jsdyer/distropilot",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "31 8 * * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/dnslens",
     "branch": "main",
     "workflows": [],
@@ -960,6 +1000,12 @@
       ".github/workflows/pages.yml",
       ".github/workflows/schedule-guard.yml"
     ]
+  },
+  {
+    "repo": "jsdyer/feedharbour",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
   },
   {
     "repo": "jsdyer/ferrycountss",
@@ -1806,6 +1852,12 @@
     ]
   },
   {
+    "repo": "jsdyer/manualshelf",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
     "repo": "jsdyer/maplehosting",
     "branch": "main",
     "workflows": [
@@ -1930,6 +1982,12 @@
       ".github/workflows/pages.yml",
       ".github/workflows/schedule-guard.yml"
     ]
+  },
+  {
+    "repo": "jsdyer/missionmedia",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
   },
   {
     "repo": "jsdyer/museumdrawer",
@@ -2326,6 +2384,29 @@
     ]
   },
   {
+    "repo": "jsdyer/podcastroute",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/portwindow",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "43 10 * * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/postmarkplaces",
     "branch": "main",
     "workflows": [
@@ -2480,6 +2561,23 @@
     ]
   },
   {
+    "repo": "jsdyer/recipemath",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "23 12 1 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/registrarwatch",
     "branch": "main",
     "workflows": [
@@ -2512,6 +2610,12 @@
       ".github/workflows/pages.yml",
       ".github/workflows/schedule-guard.yml"
     ]
+  },
+  {
+    "repo": "jsdyer/renewalbench",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
   },
   {
     "repo": "jsdyer/renewalboard",
@@ -3222,6 +3326,23 @@
     ],
     "guarded_paths": [
       ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/tripbrief",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "29 * * * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
       ".github/workflows/schedule-guard.yml"
     ]
   },

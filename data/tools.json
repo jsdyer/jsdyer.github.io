@@ -10711,5 +10711,385 @@
     "readme": {
       "note": "Compare dated restaurant-menu observations by area, explicitly stated clam type, dish and listed price. Keep portion descriptions and included sides visible; an unweighed dish is never converted into a cost per gram. Market prices stay unknown. Enter the number of dishes, optionally estimate Nova Scotia HST, and compare up to eight alternatives, including a current phone or counter quote of your own. Favourites and deliberately saved comparisons stay on your device; JSON import/export preserves the prices and review dates originally saved. The weekly source-change watch checks pages, not current stock or prices. Open each restaurant source before travelling or ordering, especially when it is seasonal, old or flagged as changed."
     }
+  },
+  {
+    "id": "manualshelf",
+    "title": "Manual Shelf",
+    "description": "Find archived equipment manuals, inspect available editions and build a private equipment cabinet.",
+    "category": "projects",
+    "tags": [
+      "manuals",
+      "equipment",
+      "repair",
+      "Internet Archive",
+      "cameras",
+      "computers"
+    ],
+    "icon": "library-big",
+    "url": "/manualshelf/",
+    "source": "https://github.com/jsdyer/manualshelf",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Searches Internet Archive public metadata on demand. Deliberately saved equipment labels, notes and cabinet exports stay on your device."
+    },
+    "readme": {
+      "note": "Search your manufacturer and model, then inspect the source record before choosing a PDF or other document format. Archive dates and title-based manual types do not establish compatibility; verify the exact model, region and revision in the document. Save an equipment label and notes only when you choose, compare up to three records, and export a cabinet backup. Search terms and selected item IDs go to Internet Archive; your private labels, notes and imported cabinet stay on your device. Restricted files remain subject to Internet Archive access controls."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "podcastroute",
+    "title": "Podcast Route",
+    "description": "Find podcasts and episodes that fit your interests and listening time, then build a private queue.",
+    "category": "media",
+    "tags": [
+      "podcasts",
+      "audio",
+      "RSS",
+      "science",
+      "history",
+      "listening"
+    ],
+    "icon": "radio-tower",
+    "url": "/podcastroute/",
+    "source": "https://github.com/jsdyer/podcastroute",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Podcast Index supplies directory and episode metadata on request; audio plays from publishers. Queues, subscriptions, notes and listening progress stay on your device."
+    },
+    "readme": {
+      "note": "Search a subject or open an indexed RSS feed, then explore a show and filter its latest 100 indexed episodes by keywords, language at show level, and duration. Unknown durations are explicitly included or excluded. Follow shows, import/export subscriptions as OPML, and save a queue with notes and listening positions on your device; publisher audio and available chapter/transcript links remain on their original hosts."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "feedharbour",
+    "title": "Feed Harbour",
+    "description": "Read public RSS and Atom feeds together, filter headlines, and keep a private reading list.",
+    "category": "media",
+    "tags": [
+      "RSS",
+      "Atom",
+      "OPML",
+      "news",
+      "reader",
+      "feeds"
+    ],
+    "icon": "film",
+    "url": "/feedharbour/",
+    "source": "https://github.com/jsdyer/feedharbour",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Your public RSS/Atom feeds are fetched on demand through the CoolCode gateway. Local XML, subscriptions and reading state stay in the browser unless you deliberately save or export them."
+    },
+    "readme": {
+      "note": "Add a public HTTPS feed, or import an OPML subscription list, then choose Refresh public feeds. For example, put NASA in a Space folder and Canada news in a Canada folder, search a topic, and save useful items for later. Duplicate article links can be grouped without losing their original feed entries. Local RSS/Atom XML can be imported without contacting a publisher. Save explicitly on your device or export JSON to keep content and reading state; OPML exports subscriptions and folders only. A failed refresh keeps the last good items visible."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "renewalbench",
+    "title": "Renewal Bench",
+    "description": "Compare Canadian mortgage renewal quotes, payment schedules and prepayments over the same period.",
+    "category": "money",
+    "tags": [
+      "mortgage",
+      "renewal",
+      "Canada",
+      "amortization",
+      "prepayment",
+      "calculator"
+    ],
+    "icon": "wallet",
+    "url": "/renewalbench/",
+    "source": "https://github.com/jsdyer/renewalbench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Your entered fixed-rate mortgage quotes, fees and prepayment plans are calculated privately in the browser. No live lender offers or API keys are used."
+    },
+    "readme": {
+      "note": "Compare written fixed-rate offers over a period no longer than the shortest term. The editable example compares a $400,000 mortgage over 36 months, with different rates and upfront fees; those offers are invented. Include your own fees and lender-quoted penalties, then inspect both borrowing cost and the amount owing. Dated lump sums apply to every offer; recurring extras and contract limits are set per offer. Save deliberately on your device or export a private JSON workspace, schedule CSV and text report."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "portwindow",
+    "title": "Port Window",
+    "description": "Explore official cruise schedules, compare port days and plan your own time buffer.",
+    "category": "places",
+    "tags": [
+      "travel",
+      "cruises",
+      "Vancouver",
+      "Victoria",
+      "Alaska",
+      "schedule"
+    ],
+    "icon": "map",
+    "url": "/portwindow/",
+    "source": "https://github.com/jsdyer/portwindow",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "CLAA published cruise schedules for selected ports, checked daily. These are planned calls, not live ship positions or crowd estimates.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/portwindow/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Official port schedules checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "schedule entries"
+          }
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose Vancouver, Victoria or Juneau, search any vessel in the source schedule and filter a date range. The daily calendar counts scheduled entries and shows peak overlap among entries with both times. It does not estimate crowds, passengers or live ship positions. Set your own minutes after arrival and before departure to see a personal planning window. Your cruise operator decides disembarkation and all-aboard times; verify these directly. Missing times remain unknown. A 24:00 departure is midnight at the end of that date. Separate overnight entries are not silently joined. Mark favourites, explicitly save them on this device and export the filtered complete intervals as a calendar file. The export includes published times and source links; it does not turn your personal buffers into official deadlines. A capture selector preserves earlier source coverage when a schedule changes, and the changes view records observed additions, removals and time changes. Schedules are checked daily against Cruise Line Agencies of Alaska's public PDFs. The checked date, PDF edition and sailing dates have different meanings. Open the original PDF linked from each entry and reconfirm with your operator before travel."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "distropilot",
+    "title": "Distro Pilot",
+    "description": "Compare Linux package versions and support windows, then save a migration plan.",
+    "category": "projects",
+    "tags": [
+      "linux",
+      "distributions",
+      "packages",
+      "migration",
+      "support"
+    ],
+    "icon": "server-cog",
+    "url": "/distropilot/",
+    "source": "https://github.com/jsdyer/distropilot",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Repology package captures and official distro lifecycle dates; live project lookups use a cached gateway.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/distropilot/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Package sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "projects"
+          }
+        }
+      ]
+    },
+    "readme": {
+      "note": "Choose Linux releases, build a software wishlist and compare captured upstream versions, packaging revisions and repository sections. Add any valid Repology project identifier; new lookups use CoolCode’s cached gateway. Support dates are separately sourced from distro-info-data and AlmaLinux’s release notes, with Fedora dates explicitly uncaptured. Save notes and dated evidence locally or export/import a complete plan. Missing index records do not prove package absence, and older versions may have security backports."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "recipemath",
+    "title": "RecipeMath",
+    "description": "Estimate recipe nutrition, compare ingredient swaps and save recipes privately using the complete Canadian Nutrient File.",
+    "category": "money",
+    "tags": [
+      "recipes",
+      "nutrition",
+      "food",
+      "calories",
+      "Canadian Nutrient File",
+      "USDA"
+    ],
+    "icon": "shopping-basket",
+    "url": "/recipemath/",
+    "source": "https://github.com/jsdyer/recipemath",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "CNF 2026 contains 5,993 foods. Recipes stay in your browser; optional USDA searches use a protected service.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/recipemath/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Official CNF release checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "foods"
+          }
+        }
+      ]
+    },
+    "readme": {
+      "note": "Search for an ingredient in English or French and choose the description matching how you use it: raw, cooked, drained or another preparation. Enter grams, a weight unit or one of that food's supported portions. Add as many ingredients as you need, then set servings. For example, a 400 g dish divided into four servings has 100 g per serving; if cooking reduces it to 320 g, enter that finished weight to calculate nutrition per 100 g of the finished dish. This changes concentration, not the total nutrient estimate or cooking losses. Capture a comparison baseline before changing an ingredient, then return to Compare a swap to see the difference. Missing nutrient values remain unknown: a partial subtotal lists the ingredients without data. Save explicitly on your device, export JSON for a backup, and import it in another browser. Source values are saved with the recipe, so future data updates do not silently change it. Multiple tabs merge their saved lists; conflicting edits to the same saved recipe require reopening it first. For a branded food, use optional USDA search or enter a label's verified values per 100 g. This is an estimate for meal planning, not medical advice or a regulatory nutrition label."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "missionmedia",
+    "title": "Mission Media",
+    "description": "Search NASA images, video and audio, inspect original assets and collect private research boards with credits.",
+    "category": "media",
+    "tags": [
+      "NASA",
+      "space",
+      "photos",
+      "video",
+      "audio",
+      "research",
+      "credits"
+    ],
+    "icon": "telescope",
+    "url": "/missionmedia/",
+    "source": "https://github.com/jsdyer/missionmedia",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Searches NASA’s public media library on demand. Saved board names and notes stay on your device; source dates and credits come from NASA metadata."
+    },
+    "readme": {
+      "note": "Search any subject in NASA’s media library, filter by type and year, then inspect original assets and captions. Save records into private local boards with notes; export a backup or credits for the selected board. Dates reflect source records, and credits do not grant reuse rights. No API key is needed."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "backbonecompare",
+    "title": "Backbone Compare",
+    "description": "Compare observed BGP neighbours and listed network exchanges and facilities for any two ASNs.",
+    "category": "liminal-tools",
+    "tags": [
+      "networks",
+      "asn",
+      "bgp",
+      "peering",
+      "internet"
+    ],
+    "icon": "network",
+    "url": "/backbonecompare/",
+    "source": "https://github.com/jsdyer/backbonecompare",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "RIPE RIS path observations and PeeringDB exchange/facility listings, with dated captures and public ASN lookups.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/backbonecompare/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Network evidence sources checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "ASNs"
+          }
+        }
+      ]
+    },
+    "readme": {
+      "note": "Enter any two ASNs to compare RIPE RIS neighbours and PeeringDB exchange/facility listings. Filter IPv4 or IPv6 evidence, inspect shared and one-sided records, and see observation dates separately from fetch dates. Save named private pairs with notes, export JSON/CSV, or import earlier evidence. Uncertain RIS observations are excluded by default. Shared directory listings and AS-path adjacency do not prove physical route diversity, direct peering or a contractual transit relationship."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "channelqueue",
+    "title": "Channel Queue",
+    "description": "Turn public YouTube videos, channels and playlists into a private learning queue with topics and timestamp notes.",
+    "category": "media",
+    "tags": [
+      "YouTube",
+      "video",
+      "learning",
+      "notes",
+      "playlists"
+    ],
+    "icon": "film",
+    "url": "/channelqueue/",
+    "source": "https://github.com/jsdyer/channelqueue",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "YouTube Data API supplies public metadata on request. Bookmarks, topics and timestamp notes stay on your device; playback uses YouTube’s official player."
+    },
+    "readme": {
+      "note": "Paste a public video, playlist or channel URL, a channel @handle, or a video ID. Explore loaded videos, filter by keywords or length, then add bookmarks to your own learning queue with topics, manual resume positions and timestamp notes. Saved workspace files contain your annotations and links; refresh YouTube details when reopening them. Playback uses the official YouTube player and restricted or child-directed videos open on YouTube instead."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "tripbrief",
+    "title": "Trip Brief",
+    "description": "Build a private itinerary with current Canadian travel advisories and export a dated travel brief.",
+    "category": "places",
+    "tags": [
+      "travel",
+      "Canada",
+      "advisories",
+      "itinerary",
+      "international",
+      "offline"
+    ],
+    "icon": "map",
+    "url": "/tripbrief/",
+    "source": "https://github.com/jsdyer/tripbrief",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Global Affairs Canada advisory summaries are checked hourly. Your itinerary, notes and saved comparison stay on your device.",
+      "cadence": "Hourly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/tripbrief/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Official advisory index checked",
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "destinations"
+          }
+        }
+      ]
+    },
+    "readme": {
+      "note": "Search any of the 230 destinations in Global Affairs Canada's current index, including territories. Filter by advice level or regional advisories, then open a destination to read its latest published change and the full official advice. Add destinations to your trip, set arrival/departure dates and write notes. The tab keeps these in memory until you explicitly save on this device or export a file. Loading a previously saved trip highlights changes from its saved advisory evidence. Export JSON for later editing, or a self-contained HTML brief to open offline and print to PDF. Delete the device copy separately from clearing the current tab. Advice is checked hourly and every destination links to its official page. The checked time, source edition and individual official update dates mean different things. The summary does not include all regional boundaries, entry rules or health advice. Dates organize your itinerary; they do not predict future conditions or determine visa eligibility. Review full official advice before departure and while travelling. Exported briefs can become outdated."
+    },
+    "sync_manifest": true
   }
 ]

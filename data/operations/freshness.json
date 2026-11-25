@@ -2083,5 +2083,85 @@
         "label": "Disclosure source retrieved"
       }
     ]
+  },
+  "jsdyer/portwindow/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/portwindow/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Official port schedules checked",
+        "precision": "timestamp",
+        "max_age_seconds": 259200
+      }
+    ],
+    "collection_steps": [
+      "Refresh official CLAA port schedules"
+    ]
+  },
+  "jsdyer/distropilot/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/distropilot/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Package sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 259200
+      }
+    ],
+    "collection_steps": [
+      "Refresh validated source capture"
+    ]
+  },
+  "jsdyer/recipemath/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/recipemath/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Official CNF release checked",
+        "precision": "timestamp",
+        "max_age_seconds": 3888000
+      }
+    ],
+    "collection_steps": [
+      "Refresh the official CNF release"
+    ]
+  },
+  "jsdyer/backbonecompare/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/backbonecompare/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Network evidence sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 259200
+      }
+    ],
+    "collection_steps": [
+      "Refresh validated source capture"
+    ]
+  },
+  "jsdyer/tripbrief/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/tripbrief/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Official advisory index checked",
+        "precision": "timestamp",
+        "max_age_seconds": 21600
+      }
+    ],
+    "collection_steps": [
+      "Refresh official travel advisory index"
+    ]
   }
 }
