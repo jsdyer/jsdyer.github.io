@@ -22,6 +22,13 @@ test('registry preserves all previous tools and adds the four accepted IDs',asyn
   for(const id of ['civicrevision','openseed','noticeguide','measurebench','screenplaces','planehere','halifaxnext','canadapulse'])assert.ok(body.tool_ids.includes(id));
 });
 
+test('shared public RSS paths are allowed without opening recursive or arbitrary CoolCode requests',async t=>{
+  const env=environment();let calls=0;stub(t,async target=>{calls++;assert.match(String(target),/^https:\/\/coolcode.ca\/(civicrevision|releasereceipt)\//);return new Response('<rss version="2.0"><channel><title>Public feed</title></channel></rss>');});
+  for(const path of ['/civicrevision/data/feeds/all.xml','/civicrevision/data/feeds/rights-policy.xml','/releasereceipt/feed.xml','/releasereceipt/feeds/v41690973.xml'])assert.equal((await get('/api/feedharbour/feed?url='+encodeURIComponent('https://coolcode.ca'+path),env)).status,200);
+  for(const path of ['/api/feedharbour/feed','/admin/','/civicrevision/data/feeds/other.xml','/releasereceipt/feed.xml?secret=x','/releasereceipt/feeds/v0.xml'])assert.equal((await get('/api/feedharbour/feed?url='+encodeURIComponent('https://coolcode.ca'+path),env)).status,400);
+  assert.equal(calls,4);
+});
+
 test('status never exposes credentials and retains earlier adapters',async()=>{
   const env=environment(),raw=await(await get('/api/status',env)).text(),body=JSON.parse(raw);
   for(const key of ['screenradar','measurebench','domain_biography','screenplaces','planehere'])assert.equal(body.configured[key],true);

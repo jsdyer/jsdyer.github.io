@@ -297,10 +297,11 @@ function apiPublicURL(value) {
   let u;
   try { u = new URL(value); } catch { apiThrow(400,'invalid_url','Enter a public HTTPS feed URL.'); }
   const host = u.hostname.toLowerCase();
+  const coolcodeFeed=host==='coolcode.ca' && !u.search && /^\/(?:civicrevision\/data\/feeds\/(?:all|institutions|rights-policy|economy|regional)|releasereceipt\/(?:feed|feeds\/v[1-9]\d{0,14}))\.xml$/.test(u.pathname);
   if (value.length>2048 || u.protocol!=='https:' || u.username || u.password || u.port || u.hash ||
       /[\\\s]/.test(value) || !/^[a-z0-9.-]+\.[a-z]{2,63}$/.test(host) || host.endsWith('.') ||
       /(^|\.)(localhost|local|internal|lan|home|test|invalid|example|onion)$/.test(host) ||
-      host==='coolcode.ca' || host.endsWith('.workers.dev') ||
+      (host==='coolcode.ca' && !coolcodeFeed) || host.endsWith('.workers.dev') ||
       [...u.searchParams.keys()].some(k=>/^(token|key|api[_-]?key|auth|password|secret|access_token)$/i.test(k))) {
     apiThrow(400,'invalid_url','Use a public HTTPS feed without credentials, tokens, custom ports or local addresses.');
   }
