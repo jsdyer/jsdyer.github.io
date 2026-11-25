@@ -59,6 +59,8 @@ absence of a collector for Parcel Bench. New successful-check probes, collection
 step names and schedule guards are registered. The watchdog runtime is unchanged;
 its existing timer downloads the updated targets automatically. A restricted
 GitHub App installation must include the six new scheduled repositories. The
+owner confirmed the watchdog App has access to all repositories, including these
+six, on November 25; no access change or runtime reinstall is required. The
 private server report has not been inspected from this workspace. The first
 public outcome report finds current published data for all affected tools, but
 Halifax, Fuel, Wage and Weather are still awaiting a successful collection run of
