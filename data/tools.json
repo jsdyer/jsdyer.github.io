@@ -2006,7 +2006,7 @@
   {
     "id": "corporateghosts",
     "title": "Corporate Ghosts",
-    "description": "Search Canadian corporation names and numbers, check current federal status, directors and filings, and compare saved records.",
+    "description": "Search Canadian corporation names and CRA business numbers, check current federal records, and compare saved captures.",
     "category": "disclosures",
     "tags": [
       "company",
@@ -2024,7 +2024,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Daily federal name snapshots, on-demand federal API details, live BC OrgBook search and the published NS co-operative register have distinct coverage.",
+      "detail": "Daily federal name/BN snapshots, on-demand federal API details, live current/historical BC OrgBook search and NS co-operative records have distinct coverage.",
       "probes": [
         {
           "label": "Federal snapshot",
@@ -2060,7 +2060,7 @@
       "cadence": "Daily"
     },
     "readme": {
-      "note": "Search the dated name index, open a result and choose Get current federal API record. Compare status details, annual returns, directors and dated filings; save a capture on this device to compare it with a later lookup. Legal registration does not verify a website’s ownership or honesty. BC historical search includes GLOBAL TELEGRAPH LIMITED (BC0401241); the Nova Scotia co-operative list includes ABC HOUSING CO-OPERATIVE LIMITED, registry ID 3057952."
+      "note": "Search the dated name/number index, open a result and choose Get current federal API record. A nine-digit CRA business number (BN) is different from a corporation number: the current lookup first matches it against the federal snapshot, then requests that corporation’s API record. A missing federal match can be a provincial business; the BC link carries the BN into a current-registration search. Compare status details, annual returns, directors and dated filings; save a capture on this device to compare it with a later lookup. Legal registration does not verify a website’s ownership or honesty. BC historical search includes GLOBAL TELEGRAPH LIMITED (BC0401241); the Nova Scotia co-operative list includes ABC HOUSING CO-OPERATIVE LIMITED, registry ID 3057952."
     },
     "sync_manifest": true
   },
