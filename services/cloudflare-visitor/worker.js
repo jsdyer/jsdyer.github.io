@@ -1342,7 +1342,10 @@ async function sbMeasureHandle(request,env,url,db,now) {
   // Reserve both limits in one atomic write, including failed provider calls.
   // Rejected daily requests cannot consume the rest of the month's allowance.
   const usage=await db.prepare('INSERT INTO measure_budget(month,hits,day,day_hits,expiry) VALUES(?,1,?,1,?) ON CONFLICT(month) DO UPDATE SET hits=hits+1,day=excluded.day,day_hits=CASE WHEN day=excluded.day THEN day_hits+1 ELSE 1 END WHERE hits<1000 AND CAST(day AS INTEGER)<=CAST(excluded.day AS INTEGER) AND (day<>excluded.day OR day_hits<50) RETURNING hits').bind(month,String(day),monthEnd).first();
-  if(!usage) apiThrow(429,'quota_wait','The shared Wolfram allowance is reached (50 requests per UTC day, 1,000 per calendar month). Cached answers and local calculations remain available.',Math.ceil(((day+1)*sbDay-now)/1000));
+  if(!usage) {
+    const spent=await db.prepare('SELECT hits FROM measure_budget WHERE month=?').bind(month).first('hits');
+    apiThrow(429,'quota_wait','The shared Wolfram allowance is reached (50 requests per UTC day, 1,000 per calendar month). Cached answers and local calculations remain available.',Math.ceil(((spent>=1000?monthEnd:(day+1)*sbDay)-now)/1000));
+  }
   const target=new URL('https://api.wolframalpha.com/v1/result');
   target.searchParams.set('i',query);target.searchParams.set('appid',env.WOLFRAM_APP_ID);target.searchParams.set('units','metric');target.searchParams.set('timeout','5');
   const answer=(await sbRead(target.href,{Accept:'text/plain','User-Agent':apiUA},16384,8000)).trim();

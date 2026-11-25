@@ -57,7 +57,8 @@ test('both quotas are atomic and daily rejection cannot consume monthly slots',a
   await post('2+2',env);env.sql.prepare('UPDATE measure_budget SET day_hits=50,hits=73').run();
   assert.equal((await post('3+3',env)).status,429);assert.equal(env.sql.prepare('SELECT hits FROM measure_budget').get().hits,73);assert.equal(calls,1);
   assert.equal((await post('2+2',env)).status,200,'cached answers continue at quota');
-  env.sql.prepare('UPDATE measure_budget SET day_hits=0,hits=1000').run();assert.equal((await post('4+4',env)).status,429);assert.equal(calls,1);
+  env.sql.prepare('UPDATE measure_budget SET day_hits=0,hits=1000').run();const monthly=await post('4+4',env);assert.equal(monthly.status,429);assert.equal(calls,1);
+  const now=new Date(),expected=(Date.UTC(now.getUTCFullYear(),now.getUTCMonth()+1,1)-Date.now())/1000;assert.ok(Math.abs(Number(monthly.headers.get('Retry-After'))-expected)<3);
 });
 
 test('new UTC day resets daily allowance but retains month total',async t=>{
