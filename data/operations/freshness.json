@@ -229,6 +229,9 @@
         "label": "Sources checked",
         "precision": "timestamp"
       }
+    ],
+    "collection_steps": [
+      "Collect public source evidence"
     ]
   },
   "jsdyer/bridgeledger/refresh.yml": {
@@ -1827,6 +1830,9 @@
         "label": "Data retrieved",
         "precision": "timestamp"
       }
+    ],
+    "collection_steps": [
+      "Capture official provider reports"
     ]
   },
   "jsdyer/stormtracks/refresh.yml": {

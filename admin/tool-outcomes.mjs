@@ -74,7 +74,7 @@ export function renderOutcome(row) {
   if (row.output.run_alignment==='permitted_cache') output.append(node('p','The saved snapshot was within the permitted '+Math.round(row.output.cache_max_age_seconds/3600*10)/10+'-hour cache window when the run started. This does not claim a new download.'));
   else if (row.output.run_alignment==='predates_success') output.append(node('p','Published timestamp predates the successful scheduled/manual run. Its output is not confirmed.'));
   else if (row.output.run_alignment==='date_only') output.append(node('p','Date-only evidence cannot identify the individual run that produced it.'));
-  else if (row.output.run_alignment==='at_or_after_start') output.append(node('p','Published check is at or after the successful run’s start; this is timestamp evidence, not a download receipt.'));
+  else if (row.output.run_alignment==='at_or_after_start') output.append(node('p','Published check is at or after the '+(row.execution.collection_started_at?'verified collection step’s':'successful run’s')+' start; this is timestamp evidence, not a download receipt.'));
   for (const count of row.counts) output.append(node('p',count.error ? count.label + ': count unavailable' : count.label + ': ' + count.value.toLocaleString('en-CA') + ' ' + count.unit + (count.read_at ? ' · read ' + time(count.read_at) : '')));
   const result=node('td'); result.append(node('strong',statuses[row.status]));
   for (const reason of row.reasons) result.append(node('p',reason));

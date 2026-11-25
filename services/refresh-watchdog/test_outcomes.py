@@ -177,6 +177,40 @@ class ReviewedOutcomeTests(unittest.TestCase):
         self.assertEqual(row['status'],'checked')
         self.assertEqual(row['execution']['latest_collection']['id'],43)
         self.assertFalse(row['execution']['due_unobserved'])
+    def test_deployment_retry_compares_output_with_the_reused_collection_step(self):
+        class DeployRetry(HTTP):
+            def request(self,method,path,**kwargs):
+                result=super().request(method,path,**kwargs)
+                if '/runs?' in path:
+                    result['workflow_runs'][0].update(run_started_at='2026-11-24T11:55:00Z',run_attempt=2)
+                if '/jobs?' in path:
+                    return {'jobs':[{'steps':[{'name':'Download source','conclusion':'success','started_at':'2026-11-24T11:30:00Z'}]}]}
+                return result
+        row=observe(self.target(),TOOLS,NOW,DeployRetry())
+        self.assertEqual(row['execution']['latest']['at'],'2026-11-24T11:55:00Z')
+        self.assertEqual(row['execution']['collection_started_at'],'2026-11-24T11:30:00Z')
+        self.assertEqual(row['output']['run_alignment'],'at_or_after_start')
+        self.assertEqual(row['status'],'checked')
+        older=observe(self.target(),TOOLS,NOW,DeployRetry(stamp='2026-11-24T11:00:00Z'))
+        self.assertEqual(older['status'],'limited')
+        later=observe(self.target(),TOOLS,NOW+dt.timedelta(hours=1),DeployRetry())
+        self.assertTrue(later['execution']['due_unobserved'])
+    def test_repeated_collection_can_satisfy_due_time_but_deployment_retry_cannot(self):
+        class Retry(HTTP):
+            def __init__(self,source_start):
+                super().__init__(stamp=source_start);self.source_start=source_start
+            def request(self,method,path,**kwargs):
+                result=super().request(method,path,**kwargs)
+                if '/runs?' in path:
+                    result['workflow_runs'][0].update(created_at='2026-11-24T10:30:00Z',run_started_at='2026-11-24T11:55:00Z',run_attempt=2)
+                if '/jobs?' in path:
+                    return {'jobs':[{'steps':[{'name':'Download source','conclusion':'success','started_at':self.source_start}]}]}
+                return result
+        old=observe(self.target(),TOOLS,NOW,Retry('2026-11-24T10:30:00Z'))
+        self.assertTrue(old['execution']['due_unobserved'])
+        new=observe(self.target(),TOOLS,NOW,Retry('2026-11-24T11:55:05Z'))
+        self.assertFalse(new['execution']['due_unobserved'])
+        self.assertEqual(new['status'],'checked')
     def test_continue_on_error_does_not_hide_failed_source_step(self):
         row=observe(self.target(),TOOLS,NOW,StepEvidence(latest_step='failure'))
         self.assertEqual(row['status'],'attention')

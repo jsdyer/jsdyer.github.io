@@ -56,7 +56,10 @@ def collection_check(http, repo, run, names):
         results = {step.get('conclusion') for step in steps}
         status = ('success' if results == {'success'} else 'failure' if results & FAILED
                   else 'skipped' if results == {'skipped'} else 'unavailable')
-        return {'status': status, 'steps': [{'name': s['name'], 'conclusion': s.get('conclusion')} for s in steps]}
+        result = {'status': status, 'steps': [{'name': s['name'], 'conclusion': s.get('conclusion')} for s in steps]}
+        if status in ('success', 'failure') and all(s.get('started_at') for s in steps):
+            result['started_at'] = wd.stamp(min(wd.timestamp(s['started_at']) for s in steps))
+        return result
     except (wd.SafeError, KeyError, TypeError, ValueError):
         return {'status': 'unavailable'}
 
@@ -150,12 +153,16 @@ def observe(target, tools, now, http, previous=None, fresh=False):
                     latest_evidence = evidence
                 if evidence['status'] in ('success', 'failure'):
                     collection, collection_result = candidate, evidence['status']
+                    if evidence.get('started_at'):
+                        row['execution']['collection_started_at'] = evidence['started_at']
                     break
             row['execution']['latest_step_check'] = latest_evidence
             row['execution']['latest_collection'] = collection
             row['execution']['collection_result'] = collection_result
             row['execution']['collection_unconfirmed'] = collection is None
-            observed_attempt = collection and wd.timestamp(collection['at']) >= due
+            # A deployment-only retry reuses the earlier successful build. Its
+            # new run start is neither a new collection nor a new due occurrence.
+            observed_attempt = collection and wd.timestamp(row['execution'].get('collection_started_at') or collection['at']) >= due
             pending_refresh = any(r.get('event') in wd.REFRESH_EVENTS and r.get('status') in ACTIVE
                                   and wd.timestamp(r['created_at']) >= due for r in runs)
             row['execution']['due_unobserved'] = not (observed_attempt or pending_refresh)
@@ -189,12 +196,13 @@ def observe(target, tools, now, http, previous=None, fresh=False):
     row['output'] = {'status': status, 'checks': checks}
     refresh = row['execution'].get('latest_collection', row['execution'].get('latest_refresh'))
     if refresh and refresh.get('conclusion') == 'success' and checks:
+        collection_start = wd.timestamp(row['execution'].get('collection_started_at') or refresh['at'])
         precise = [c for c in checks if c['precision'] != 'date' and c.get('timestamp')]
         early = [(c, p) for c, p in zip(checks, probes) if c in precise and
-                 wd.timestamp(c['timestamp']) < wd.timestamp(refresh['at']) - dt.timedelta(minutes=5)]
+                 wd.timestamp(c['timestamp']) < collection_start - dt.timedelta(minutes=5)]
         if early:
             permitted = all(isinstance(p.get('cache_max_age_seconds'), (int, float)) and
-                            0 <= (wd.timestamp(refresh['at']) - wd.timestamp(c['timestamp'])).total_seconds()
+                            0 <= (collection_start - wd.timestamp(c['timestamp'])).total_seconds()
                             <= p['cache_max_age_seconds'] for c, p in early)
             row['output']['run_alignment'] = 'permitted_cache' if permitted else 'predates_success'
             if permitted:

@@ -62,6 +62,11 @@ A successful collection step on a push
 can confirm recovery; a green push by itself cannot. Missing step evidence stays
 unconfirmed. Both run results remain visible.
 
+Border Pulse and Status Ledger have reviewed collection steps too. When only a
+failed deployment is retried, the observer compares published evidence with the
+original collection step's start, not the later deployment retry. Reusing that
+build does not count as another scheduled collection.
+
 Satellite Pass deliberately permits a snapshot cached for up to two hours during
 a build. That reviewed allowance is labelled as cache reuse, not a fresh download;
 its ordinary published-age limit still applies. NASA Overhead exposes individual

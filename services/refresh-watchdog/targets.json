@@ -370,6 +370,9 @@
           "label": "Sources checked",
           "precision": "timestamp"
         }
+      ],
+      "collection_steps": [
+        "Collect public source evidence"
       ]
     },
     {
@@ -2948,6 +2951,9 @@
           "label": "Data retrieved",
           "precision": "timestamp"
         }
+      ],
+      "collection_steps": [
+        "Capture official provider reports"
       ]
     },
     {
