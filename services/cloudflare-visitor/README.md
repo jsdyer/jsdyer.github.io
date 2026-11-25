@@ -1,7 +1,11 @@
 # CoolCode visitor Worker
 
 `worker.template.js`, `gateway.js`, `halifax-gateway.js`,
-`inspection-gateway.js` and `parcel-corporate-gateway.js` are the reviewed source.
+`inspection-gateway.js`, `parcel-corporate-gateway.js`, `screenplaces-gateway.js`,
+`planehere-gateway.js` and `second-batch-gateway.js` are the reviewed source.
+The two app-owned adapters record their upstream commit and SHA-256 in
+`app-owned-modules.json`; regeneration includes them rather than overwriting
+previously deployed routes.
 `worker.js` is generated from them and every ID in `data/tools.json` by
 `python3 scripts/sync_operations.py`. Never hand-maintain a second tool array.
 
@@ -31,7 +35,7 @@ not mark the Worker integration complete.
 
 See [the complete tool lifecycle](../../docs/tool-lifecycle.md).
 
-## Current deployment state
+## Deployment history and pending update
 
 The owner deployed the seven-tool release with 257 catalogue IDs and new Halifax
 Transit, Nova Scotia inspection, Canada Post and federal-corporation handlers.
@@ -42,8 +46,16 @@ alerts and vehicle positions also passed after correcting upstream MIME
 negotiation and the Workers redirect mode, then using native bounded streaming.
 The final cold trip-feed request used 8 ms CPU; all three feeds returned 200.
 Canada Post opening hours also passed after accepting canonical numeric-string
-day values. The receipt matches this final source.
+day values. The receipt records that seven-tool source. Later releases must replace it only
+after downloading and verifying the actual deployed module.
 Instructions for future updates are in [seven-tools-setup.md](seven-tools-setup.md).
+
+The November 25 discovery update generates 271 catalogue IDs and adds actor credits,
+Wayback capture queries and optional Wolfram answers. The owner has received the
+complete source for manual deployment; publication of this source does not imply
+that those new routes are live. See [second-batch-setup.md](second-batch-setup.md)
+for limits, existing Secret bindings and the exact verification requirements.
+The existing Screen Places and Plane Here handlers are preserved.
 
 For a later manual update, copy the complete generated source from
 [worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js),
@@ -60,7 +72,7 @@ The existing four provider keys remain configured. The new Canada Post and ISED
 bindings have been added as Secrets; real Canada Post and ISED requests passed
 production verification on November 25, 2026.
 
-| Tool | Secret bindings | GET routes below `/api/` |
+| Tool | Secret bindings | Routes below `/api/` (GET unless noted) |
 | --- | --- | --- |
 | Podcast Route | `PODCASTINDEX_API_KEY`, `PODCASTINDEX_API_SECRET` | `podcastroute/search?q=`, `episodes?id=`, `feed?url=` |
 | Channel Queue | `YOUTUBE_API_KEY` | `channelqueue/channel?id=` or `handle=`, `playlist?id=&pageToken=`, `videos?ids=`, `search?q=` |
@@ -71,6 +83,11 @@ production verification on November 25, 2026.
 | Inspection Trail | None | `inspectiontrail/search?q=&town=&address=&mode=`, `report?id=&q=&town=&address=&mode=` |
 | Parcel Bench | `CANADAPOST_CLIENT_ID`, `CANADAPOST_CLIENT_SECRET` | `parcelbench/rates?origin=&destination=&weight=&length=&width=&height=&mailingDate=`, `offices?postal=`, `office?id=` |
 | Corporate Ghosts | `ISED_CORPORATIONS_API_KEY` | `corporateghosts/corporation?id=` |
+| Screen Places | `TMDB_READ_ACCESS_TOKEN` | `screenplaces/title?wikidata=` |
+| Plane Here | Optional `ADSBLOL_API_KEY` | `planehere/nearby?lat=&lon=&radius=` |
+| Screen Radar | `TMDB_READ_ACCESS_TOKEN` | `screenradar/person?wikidata=` |
+| Domain Biography | None | `domain-biography/archive?domain=&mode=&from=&to=` |
+| Measure Bench | `WOLFRAM_APP_ID` | POST `measurebench/answer` with JSON `query` |
 
 
 `/api/status` returns configuration booleans only. Successful lookups return

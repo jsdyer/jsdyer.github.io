@@ -1023,7 +1023,19 @@
         ],
         "label": "Source retrieved",
         "precision": "date"
+      },
+      {
+        "url": "https://coolcode.ca/housing-pulse/data/context.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Compatible rent, earnings and completions sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 5616000
       }
+    ],
+    "collection_steps": [
+      "Retrieve and check source files"
     ]
   },
   "jsdyer/iceweeks/refresh.yml": {
@@ -1728,7 +1740,19 @@
         ],
         "label": "Sources checked",
         "precision": "date"
+      },
+      {
+        "url": "https://coolcode.ca/releasereceipt/watchlist.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Configured Statistics Canada vectors checked",
+        "max_age_seconds": 604800
       }
+    ],
+    "collection_steps": [
+      "Retrieve the latest published tables"
     ]
   },
   "jsdyer/researchledger/pages.yml": {
@@ -2243,6 +2267,15 @@
         "precision": "timestamp",
         "label": "Official wage edition checked",
         "max_age_seconds": 1382400
+      },
+      {
+        "url": "https://coolcode.ca/wagewindow/data/cpi.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Provincial CPI checked",
+        "precision": "timestamp",
+        "max_age_seconds": 1382400
       }
     ],
     "collection_steps": [
@@ -2287,6 +2320,118 @@
         "precision": "timestamp",
         "label": "Disclosure source retrieved"
       }
+    ]
+  },
+  "jsdyer/screenplaces/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/screenplaces/data/catalogue.json",
+        "json_path": [
+          "fetched_at"
+        ],
+        "precision": "timestamp",
+        "label": "Wikidata filming locations fetched",
+        "max_age_seconds": 864000
+      }
+    ],
+    "collection_steps": [
+      "Refresh documented filming locations"
+    ]
+  },
+  "jsdyer/budgetmirror/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/budgetmirror/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Statistics Canada spending sources checked",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Refresh validated Statistics Canada spending data"
+    ]
+  },
+  "jsdyer/movebench/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/movebench/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Statistics Canada spending sources checked",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Refresh validated Statistics Canada spending data"
+    ]
+  },
+  "jsdyer/canadapulse/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/canadapulse/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Wikimedia pageview sources checked",
+        "max_age_seconds": 172800
+      }
+    ],
+    "collection_steps": [
+      "Collect complete Wikimedia daily rankings and article histories"
+    ]
+  },
+  "jsdyer/addresschronicle/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/addresschronicle/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Archive directory sources checked and indexes validated",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Check archive sources and rebuild page indexes"
+    ]
+  },
+  "jsdyer/civicrevision/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/civicrevision/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Wikimedia revisions checked",
+        "precision": "timestamp",
+        "max_age_seconds": 64800
+      }
+    ],
+    "collection_steps": [
+      "Collect complete configured Wikipedia revision windows"
+    ]
+  },
+  "jsdyer/openseed/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/openseed/data/catalogue.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Official download availability checked",
+        "precision": "timestamp",
+        "max_age_seconds": 259200
+      }
+    ],
+    "collection_steps": [
+      "Refresh public catalogues and check download availability"
     ]
   }
 }

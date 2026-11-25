@@ -4,6 +4,7 @@ const toolList = [
   "abuse-kit",
   "abusepulse",
   "accessreceipt",
+  "addresschronicle",
   "aircheckdiary",
   "airpair",
   "algorithmwatch",
@@ -31,9 +32,11 @@ const toolList = [
   "bridgeledger",
   "briefings",
   "broadbandatlas",
+  "budgetmirror",
   "buoybench",
   "campcalendar",
   "canadaanalytics",
+  "canadapulse",
   "cancon-atlas",
   "carecompass",
   "ccts-ledger",
@@ -44,6 +47,7 @@ const toolList = [
   "charityflows",
   "chirproom",
   "civiclookup",
+  "civicrevision",
   "clamcounter",
   "clamground",
   "cloud-ledger",
@@ -103,6 +107,7 @@ const toolList = [
   "gridreceipt",
   "halifaxnext",
   "halifaxtimelens",
+  "harbournow",
   "headerautopsy",
   "headlinevault",
   "hiddenwater",
@@ -141,21 +146,25 @@ const toolList = [
   "marinenames",
   "marketshadows",
   "masspeaks",
+  "measurebench",
   "mediaechoes",
   "metermath",
   "metroeconomy",
   "mimecabinet",
   "ministersays",
   "missionmedia",
+  "movebench",
   "museumdrawer",
   "mushroomcalendar",
   "namesforget",
   "nasa",
   "nightfinder",
+  "noticeguide",
   "oicdiary",
   "oldnews-oddities",
   "onionpulse",
   "opendatagraveyard",
+  "openseed",
   "orbitalcensus",
   "otherworldnames",
   "outagescope",
@@ -174,6 +183,7 @@ const toolList = [
   "phishintel",
   "photolab",
   "pipeda-findings",
+  "planehere",
   "planetpapers",
   "platesolvelab",
   "plumediary",
@@ -213,6 +223,7 @@ const toolList = [
   "scanreceipt",
   "schoolhouseledger",
   "scorecard",
+  "screenplaces",
   "screenradar",
   "screensaver",
   "seabusclock",
@@ -221,6 +232,7 @@ const toolList = [
   "shopfrontdiary",
   "signalwalk",
   "skyarchive",
+  "skygeometry",
   "snowcourses",
   "spectrum-explorer",
   "spectrumatlas",
@@ -241,6 +253,7 @@ const toolList = [
   "tide-and-dark",
   "tidereceipt",
   "timefold",
+  "torrentlens",
   "toxic-ground",
   "trackerxray",
   "trailglass",
@@ -256,6 +269,7 @@ const toolList = [
   "weatherarchive",
   "weatherwindow",
   "welllayers",
+  "wikitrails",
   "wordweave",
   "wrongdoings"
 ];
@@ -283,10 +297,11 @@ function apiPublicURL(value) {
   let u;
   try { u = new URL(value); } catch { apiThrow(400,'invalid_url','Enter a public HTTPS feed URL.'); }
   const host = u.hostname.toLowerCase();
+  const coolcodeFeed=host==='coolcode.ca' && !u.search && /^\/(?:civicrevision\/data\/feeds\/(?:all|institutions|rights-policy|economy|regional)|releasereceipt\/(?:feed|feeds\/v[1-9]\d{0,14}))\.xml$/.test(u.pathname);
   if (value.length>2048 || u.protocol!=='https:' || u.username || u.password || u.port || u.hash ||
       /[\\\s]/.test(value) || !/^[a-z0-9.-]+\.[a-z]{2,63}$/.test(host) || host.endsWith('.') ||
       /(^|\.)(localhost|local|internal|lan|home|test|invalid|example|onion)$/.test(host) ||
-      host==='coolcode.ca' || host.endsWith('.workers.dev') ||
+      (host==='coolcode.ca' && !coolcodeFeed) || host.endsWith('.workers.dev') ||
       [...u.searchParams.keys()].some(k=>/^(token|key|api[_-]?key|auth|password|secret|access_token)$/i.test(k))) {
     apiThrow(400,'invalid_url','Use a public HTTPS feed without credentials, tokens, custom ports or local addresses.');
   }
@@ -429,9 +444,12 @@ async function apiHandle(request,env,ctx) {
     const url=new URL(request.url), origin=request.headers.get('Origin');
     if(origin && origin!==ORIGIN) return apiFailure(403,'origin_denied','Origin is not allowed.');
     if(request.method==='OPTIONS') return {status:204};
+    if(['/api/measurebench/','/api/screenradar/','/api/domain-biography/'].some(prefix=>url.pathname.startsWith(prefix))) return await secondBatchApiHandle(request,env,ctx);
     if(request.method!=='GET') return apiFailure(405,'method_denied','Use GET for public data requests.');
-    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY)}}};
+    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY),screenplaces:Boolean(env.TMDB_READ_ACCESS_TOKEN),planehere:true,planehere_key:Boolean(env.ADSBLOL_API_KEY),screenradar:Boolean(env.TMDB_READ_ACCESS_TOKEN),measurebench:Boolean(env.WOLFRAM_APP_ID),domain_biography:true}}};
     if(url.pathname.startsWith('/api/halifaxnext/')) return await halifaxApiHandle(request,env,ctx);
+    if(url.pathname.startsWith('/api/screenplaces/')) return await screenplacesApiHandle(request,env,ctx);
+    if(url.pathname.startsWith('/api/planehere/')) return await planehereApiHandle(request,env,ctx);
     const plan=pcRoute(url,env)||inspectionRoute(url)||apiRoute(url,env), db=env.DB, now=Date.now();
     if(!db) return apiFailure(503,'storage_unavailable','The shared request limiter is unavailable.');
     if(!await allowed(db,request,new Date(now),'tool-api')) return apiFailure(429,'client_wait','Too many requests. Please wait before trying again.',300);
@@ -698,6 +716,661 @@ async function pcUpstream(plan,env) {
   const corporation=pcCorporation(data);
   if(Number(corporation.id)!==Number(plan.id))apiThrow(502,'invalid_source','The federal source returned a different corporation number.');
   return corporation;
+}
+
+
+/* Screen Places TMDb lookup. Root can inline this module after removing export keywords.
+   Dispatch /api/screenplaces/* before the ordinary shared apiRoute plan.
+   Returns the shared gateway's {status, body, headers} response descriptor. */
+const spApiError = (status, code, message, retry) => ({
+  status,
+  body: { error: { code, message } },
+  headers: retry ? { "Retry-After": String(retry) } : {},
+});
+function screenplacesRoute(url) {
+  if (url.pathname !== "/api/screenplaces/title") return null;
+  const id = url.searchParams.get("wikidata");
+  if (
+    !id ||
+    !/^Q[1-9]\d{0,11}$/.test(id) ||
+    [...url.searchParams.keys()].some((k) => k !== "wikidata") ||
+    url.searchParams.getAll("wikidata").length !== 1
+  )
+    throw new Error("invalid_query");
+  return {
+    id,
+    target: `https://api.themoviedb.org/3/find/${id}?external_source=wikidata_id&language=en-US`,
+  };
+}
+function screenplacesNormalize(payload) {
+  let type = "movie",
+    item = payload?.movie_results?.[0];
+  if (!item) {
+    type = "tv";
+    item = payload?.tv_results?.[0];
+  }
+  if (!item) return null;
+  if (!Number.isInteger(item.id) || item.id <= 0)
+    throw new Error("invalid_source");
+  const image =
+    typeof item.poster_path === "string" &&
+    /^\/[A-Za-z0-9_-]+\.(jpg|png|webp)$/.test(item.poster_path)
+      ? `https://image.tmdb.org/t/p/w342${item.poster_path}`
+      : null;
+  const rating = Number(item.vote_average),
+    votes = Number(item.vote_count);
+  return {
+    id: item.id,
+    type,
+    title: String(item.title || item.name || "").slice(0, 300),
+    overview: String(item.overview || "").slice(0, 5000),
+    poster_url: image,
+    rating:
+      Number.isFinite(rating) && rating >= 0 && rating <= 10 ? rating : null,
+    rating_count: Number.isSafeInteger(votes) && votes >= 0 ? votes : 0,
+    release_date: String(item.release_date || item.first_air_date || "").slice(
+      0,
+      10,
+    ),
+    tmdb_url: `https://www.themoviedb.org/${type}/${item.id}`,
+  };
+}
+async function spApiJson(response) {
+  if (Number(response.headers.get("Content-Length") || 0) > 524288)
+    throw new Error("oversize");
+  if (!/application\/json/i.test(response.headers.get("Content-Type") || ""))
+    throw new Error("invalid_source");
+  const reader = response.body.getReader(),
+    parts = [];
+  let size = 0;
+  try {
+    while (true) {
+      const r = await reader.read();
+      if (r.done) break;
+      size += r.value.byteLength;
+      if (size > 524288) {
+        await reader.cancel();
+        throw new Error("oversize");
+      }
+      parts.push(r.value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const p of parts) {
+    bytes.set(p, offset);
+    offset += p.byteLength;
+  }
+  return JSON.parse(
+    new TextDecoder("utf-8", { fatal: true, ignoreBOM: false }).decode(bytes),
+  );
+}
+async function spApiBudget(db, key, now, width, max) {
+  const start = Math.floor(now / width) * width,
+    expiry = start + width;
+  const row = await db
+    .prepare(
+      "INSERT INTO screenplaces_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET hits=CASE WHEN expiry<=? THEN 1 ELSE hits+1 END, expiry=excluded.expiry RETURNING hits",
+    )
+    .bind(key, expiry, now)
+    .first();
+  return row?.hits <= max;
+}
+async function screenplacesApiHandle(request, env, ctx) {
+  const origin = request.headers.get("Origin");
+  if (origin && origin !== "https://coolcode.ca")
+    return spApiError(403, "origin_denied", "Origin is not allowed.");
+  if (request.method === "OPTIONS") return { status: 204 };
+  if (request.method !== "GET")
+    return spApiError(405, "method_denied", "Use GET for title lookups.");
+  let plan;
+  try {
+    plan = screenplacesRoute(new URL(request.url));
+  } catch {
+    return spApiError(
+      400,
+      "invalid_query",
+      "Provide one Wikidata item ID, such as Q2744.",
+    );
+  }
+  if (!plan)
+    return spApiError(
+      404,
+      "unknown_route",
+      "This Screen Places endpoint does not exist.",
+    );
+  if (!env.TMDB_READ_ACCESS_TOKEN)
+    return spApiError(
+      503,
+      "not_configured",
+      "Film details are not configured yet. The filming-location catalogue is still available.",
+    );
+  const db = env.DB;
+  if (!db)
+    return spApiError(
+      503,
+      "storage_unavailable",
+      "The title cache is temporarily unavailable.",
+    );
+  try {
+    await db.batch([
+      db.prepare(
+        "CREATE TABLE IF NOT EXISTS screenplaces_cache(id TEXT PRIMARY KEY,payload TEXT NOT NULL,expiry INTEGER NOT NULL)",
+      ),
+      db.prepare(
+        "CREATE TABLE IF NOT EXISTS screenplaces_budget(id TEXT PRIMARY KEY,hits INTEGER NOT NULL,expiry INTEGER NOT NULL)",
+      ),
+      db.prepare(
+        "CREATE TABLE IF NOT EXISTS screenplaces_salts(day TEXT PRIMARY KEY,secret TEXT NOT NULL)",
+      ),
+    ]);
+    const now = Date.now(),
+      day = new Date(now).toISOString().slice(0, 10);
+    await db.batch([
+      db.prepare("DELETE FROM screenplaces_cache WHERE expiry<=?").bind(now),
+      db.prepare("DELETE FROM screenplaces_budget WHERE expiry<=?").bind(now),
+      db.prepare("DELETE FROM screenplaces_salts WHERE day<?").bind(day),
+    ]);
+    const cached = await db
+      .prepare("SELECT payload FROM screenplaces_cache WHERE id=? AND expiry>?")
+      .bind(plan.id, now)
+      .first("payload");
+    if (cached)
+      return {
+        body: JSON.parse(cached),
+        headers: { "Cache-Control": "public, max-age=3600" },
+      };
+    const cooldown = await db
+      .prepare("SELECT expiry FROM screenplaces_budget WHERE id=? AND expiry>?")
+      .bind("source_cooldown", now)
+      .first("expiry");
+    if (cooldown)
+      return spApiError(
+        429,
+        "source_busy",
+        "TMDb is temporarily limiting requests. Please retry later.",
+        Math.ceil((cooldown - now) / 1000),
+      );
+    const spent = await db
+      .prepare("SELECT hits FROM screenplaces_budget WHERE id=? AND expiry>?")
+      .bind("global", now)
+      .first("hits");
+    if (spent >= 2000)
+      return spApiError(
+        429,
+        "daily_limit",
+        "Today’s film-detail request budget is exhausted. The location catalogue remains available.",
+        3600,
+      );
+    await db
+      .prepare(
+        "INSERT OR IGNORE INTO screenplaces_salts(day,secret) VALUES(?,?)",
+      )
+      .bind(day, crypto.randomUUID())
+      .run();
+    const salt = await db
+      .prepare("SELECT secret FROM screenplaces_salts WHERE day=?")
+      .bind(day)
+      .first("secret");
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown",
+      digest = await crypto.subtle.digest(
+        "SHA-256",
+        new TextEncoder().encode(salt + "|screenplaces|" + ip),
+      );
+    const client = Array.from(new Uint8Array(digest), (v) =>
+      v.toString(16).padStart(2, "0"),
+    ).join("");
+    if (!(await spApiBudget(db, "client:" + client, now, 3600000, 40)))
+      return spApiError(
+        429,
+        "client_wait",
+        "Too many uncached film lookups. Please try again later.",
+        3600,
+      );
+    if (!(await spApiBudget(db, "global", now, 86400000, 2000)))
+      return spApiError(
+        429,
+        "daily_limit",
+        "Today’s film-detail request budget is exhausted. The location catalogue remains available.",
+        3600,
+      );
+    let response;
+    try {
+      response = await fetch(plan.target, {
+        headers: {
+          Authorization: `Bearer ${env.TMDB_READ_ACCESS_TOKEN}`,
+          Accept: "application/json",
+        },
+        signal: AbortSignal.timeout(12000),
+        redirect: "manual",
+      });
+    } catch {
+      return spApiError(
+        502,
+        "source_network",
+        "TMDb could not be reached. Please try again later.",
+      );
+    }
+    if (response.status === 429) {
+      const retry = Math.max(
+        60,
+        Math.min(3600, Number(response.headers.get("Retry-After")) || 60),
+      );
+      await response.body?.cancel();
+      await db
+        .prepare(
+          "INSERT INTO screenplaces_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET expiry=excluded.expiry",
+        )
+        .bind("source_cooldown", now + retry * 1000)
+        .run();
+      return spApiError(
+        429,
+        "source_busy",
+        "TMDb is temporarily limiting requests. Please retry shortly.",
+        retry,
+      );
+    }
+    if (!response.ok) {
+      await response.body?.cancel();
+      return spApiError(
+        502,
+        "source_failure",
+        "TMDb could not return this title. Please retry later.",
+      );
+    }
+    const data = screenplacesNormalize(await spApiJson(response));
+    const result = { fetched_at: new Date(now).toISOString(), data };
+    await db
+      .prepare(
+        "INSERT INTO screenplaces_cache(id,payload,expiry) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,expiry=excluded.expiry",
+      )
+      .bind(plan.id, JSON.stringify(result), now + (data ? 86400000 : 3600000))
+      .run();
+    await db
+      .prepare(
+        "DELETE FROM screenplaces_cache WHERE id IN (SELECT id FROM screenplaces_cache ORDER BY expiry DESC LIMIT -1 OFFSET 5000)",
+      )
+      .run();
+    return {
+      body: result,
+      headers: { "Cache-Control": "public, max-age=3600" },
+    };
+  } catch {
+    return spApiError(
+      502,
+      "lookup_failed",
+      "Film details are temporarily unavailable. The location catalogue remains available.",
+    );
+  }
+}
+
+
+// Public ADS-B gateway. Inline into CoolCode's Worker after removing export keywords.
+// Reuses the existing DB binding / gateway_cache and gateway_budget tables.
+// The small structural DB type keeps this module testable with SQLite and D1.
+/** @typedef {{prepare:(sql:string)=>any,batch:(statements:any[])=>Promise<any>}} PhDB */
+/** @typedef {{DB?:PhDB,ADSBLOL_API_KEY?:string,PLANEHERE_AUTH_MODE?:string,PLANEHERE_DAILY_LIMIT?:string}} PhEnv */
+/** @typedef {{lat:number,lon:number,radius:number,centre:{lat:number,lon:number},cacheId:string}} PhQuery */
+/** @typedef {Error & {ph?:boolean,status:number,code:string,retry?:number}} PhError */
+const phVersion = 'planehere.v1';
+const phDay = 86400000;
+const phTTL = 300000;
+const phUA = 'CoolCode PlaneHere/1.0 (+https://coolcode.ca/planehere/)';
+/** @param {number} status @param {string} code @param {string} message @param {number} [retry] */
+const phFailure = (status, code, message, retry) => ({status, body:{error:{code,message}}, ...(retry ? {headers:{'Retry-After':String(retry)}} : {})});
+/** @param {number} status @param {string} code @param {string} message @param {number} [retry] @returns {never} */
+function phThrow(status, code, message, retry) { throw Object.assign(new Error(message), {ph:true,status,code,retry}); }
+
+/** @param {URL} url @returns {PhQuery} */
+function planehereQuery(url) {
+  const keys = ['lat','lon','radius'];
+  for (const [key] of url.searchParams) if (!keys.includes(key) || url.searchParams.getAll(key).length !== 1) phThrow(400,'invalid_parameter','Use one latitude, longitude and radius.');
+  /** @param {string} key @param {number} min @param {number} max */
+  function number(key, min, max) {
+    const raw = url.searchParams.get(key);
+    if (raw === null || !/^-?\d+(?:\.\d+)?$/.test(raw) || raw.length > 20) phThrow(400,'invalid_parameter','Enter valid latitude and longitude numbers.');
+    const n = Number(raw);
+    if (!Number.isFinite(n) || n < min || n > max) phThrow(400,'invalid_parameter','Latitude must be −90 to 90 and longitude −180 to 180.');
+    return n;
+  }
+  const lat = number('lat',-90,90), lon = number('lon',-180,180);
+  const radius = Number(url.searchParams.get('radius') || '25');
+  if (![10,25,50].includes(radius)) phThrow(400,'invalid_parameter','Choose a radius of 10, 25 or 50 nautical miles.');
+  const centre = {lat:Math.round(lat*10)/10,lon:Math.round(lon*10)/10};
+  return {lat,lon,radius,centre,cacheId:`${phVersion}:${centre.lat.toFixed(1)}:${centre.lon.toFixed(1)}`};
+}
+
+/** @param {any} raw @param {number} [now] */
+function planehereNormalize(raw, now = Date.now()) {
+  if (!raw || !Array.isArray(raw.ac) || raw.ac.length > 5000 || (raw.msg && raw.msg !== 'No error')) phThrow(502,'invalid_source','The aircraft source returned an unexpected result.');
+  const sourceNow = Number(raw.now);
+  if (!Number.isFinite(sourceNow) || sourceNow < 1577836800000 || sourceNow > now+60000) phThrow(502,'invalid_source','The aircraft source did not provide a valid observation time.');
+  if (sourceNow < now-900000) phThrow(502,'stale_source','The aircraft provider returned observations more than 15 minutes old. Try again later.');
+  /** @param {unknown} value @param {number} max */
+  const text = (value,max) => typeof value === 'string' ? value.replace(/[\x00-\x1f\x7f]/g,'').trim().slice(0,max) : null;
+  /** @param {unknown} value @param {number} min @param {number} max */
+  const numeric = (value,min,max) => typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max ? value : null;
+  const seen = new Set(), aircraft = [];
+  for (const ac of raw.ac) {
+    if (!ac || typeof ac !== 'object') continue;
+    const hex = text(ac.hex,16), lat = numeric(ac.lat,-90,90), lon = numeric(ac.lon,-180,180), age = numeric(ac.seen_pos,0,86400);
+    if (!hex || !/^~?[a-f0-9]{6}$/i.test(hex) || seen.has(hex) || lat === null || lon === null || age === null) continue;
+    seen.add(hex);
+    aircraft.push({hex,lat,lon,callsign:text(ac.flight,20),registration:text(ac.r,24),aircraft_type:text(ac.t,16),
+      altitude_ft:ac.alt_baro === 'ground' ? null : numeric(ac.alt_baro,-2000,100000),
+      on_ground:ac.alt_baro === 'ground',speed_knots:numeric(ac.gs,0,2500),track_deg:numeric(ac.track,0,360),
+      position_at:new Date(sourceNow-age*1000).toISOString(),source:text(ac.type,32)});
+  }
+  return {source_at:new Date(sourceNow).toISOString(),aircraft,coverage:'Aircraft with reported positions; reception is incomplete.',licence:'ODbL-1.0',source_url:'https://www.adsb.lol/'};
+}
+
+/** @param {PhDB} db */
+async function phSchema(db) {
+  await db.batch([
+    db.prepare('CREATE TABLE IF NOT EXISTS gateway_cache (id TEXT PRIMARY KEY, payload TEXT NOT NULL, expiry INTEGER NOT NULL, touched INTEGER NOT NULL)'),
+    db.prepare('CREATE TABLE IF NOT EXISTS gateway_budget (id TEXT PRIMARY KEY, hits INTEGER NOT NULL, expiry INTEGER NOT NULL)'),
+  ]);
+}
+/** @param {PhDB} db @param {string} id @param {number} now @param {number} maximum */
+async function phBudget(db,id,now,maximum) {
+  const bucket = Math.floor(now/phDay), expiry = (bucket+1)*phDay;
+  const row = await db.prepare('INSERT INTO gateway_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET hits=hits+1 WHERE hits<? RETURNING hits').bind(`${id}:${bucket}`,expiry,maximum).first();
+  if (!row) phThrow(429,'quota_wait','The shared daily aircraft allowance has been used. Previously loaded observations remain available.',Math.ceil((expiry-now)/1000));
+}
+/** @param {PhDB} db @param {string} id @param {number} now */
+async function phFlag(db,id,now) {return db.prepare('SELECT expiry FROM gateway_budget WHERE id=? AND expiry>?').bind(id,now).first();}
+/** @param {PhDB} db @param {string} id @param {number} expiry */
+async function phSetFlag(db,id,expiry) {return db.prepare('INSERT INTO gateway_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET expiry=excluded.expiry').bind(id,expiry).run();}
+/** @param {Response} response @param {number} now */
+function phRetry(response,now) {
+  const h = response.headers.get('Retry-After');
+  let n = /^\d+$/.test(h || '') ? Number(h) : (Date.parse(h || '')-now)/1000;
+  if (!Number.isFinite(n)) n = 300;
+  return Math.max(60,Math.min(86400,Math.ceil(n)));
+}
+/** @param {Response} response */
+async function phRead(response) {
+  const maximum = 1500000;
+  if (Number(response.headers.get('Content-Length')) > maximum) {await response.body?.cancel();phThrow(502,'source_too_large','The aircraft source exceeded its response limit.');}
+  if (!response.body) phThrow(502,'invalid_source','The aircraft source returned no data.');
+  const reader = response.body.getReader(), chunks=[];let size=0;
+  try {for (;;) {const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>maximum)phThrow(502,'source_too_large','The aircraft source exceeded its response limit.');chunks.push(value);}}
+  catch(error) {await reader.cancel().catch(()=>{});throw error;}
+  const bytes=new Uint8Array(size);let at=0;for(const c of chunks){bytes.set(c,at);at+=c.length;}
+  try{return JSON.parse(new TextDecoder('utf-8',{fatal:true,ignoreBOM:false}).decode(bytes));}catch{phThrow(502,'invalid_source','The aircraft source returned unreadable data.');}
+}
+/** @param {PhQuery} query @param {PhEnv} env @param {PhDB} db @param {number} now @param {typeof fetch} fetcher */
+async function phFetch(query,env,db,now,fetcher) {
+  const mode = env.PLANEHERE_AUTH_MODE || 'auto';
+  if (!['auto','key','anonymous'].includes(mode)) phThrow(503,'configuration_error','The aircraft service authentication mode needs review.');
+  const configuredKey = typeof env.ADSBLOL_API_KEY === 'string' ? env.ADSBLOL_API_KEY.trim() : '';
+  if (mode === 'key' && !configuredKey) phThrow(503,'not_configured','The aircraft service key has not been configured.');
+  const keyDisabled = mode === 'auto' && await phFlag(db,'planehere:key-rest',now);
+  let key = mode === 'anonymous' || keyDisabled ? '' : configuredKey;
+  const configuredLimit = Number(env.PLANEHERE_DAILY_LIMIT || 450);
+  if (!Number.isInteger(configuredLimit) || configuredLimit < 1 || configuredLimit > 7000) phThrow(503,'configuration_error','The aircraft service request limit needs review.');
+  const target = `https://api.adsb.lol/v2/lat/${query.centre.lat.toFixed(1)}/lon/${query.centre.lon.toFixed(1)}/dist/60`;
+  const signal = AbortSignal.timeout(12000);
+  for (let attempt=0;attempt<2;attempt++) {
+    await phBudget(db,'planehere:total',Date.now(),configuredLimit);
+    if (!key) await phBudget(db,'planehere:anonymous',Date.now(),450);
+    /** @type {Record<string,string>} */
+    const headers = {Accept:'application/json','User-Agent':phUA};if (key) headers['x-api-key']=key;
+    let response;
+    try {response=await fetcher(target,{headers,redirect:'manual',signal});}
+    catch {phThrow(signal.aborted?504:502,'source_unavailable',signal.aborted?'The aircraft source took too long to respond.':'The aircraft source is temporarily unreachable.');}
+    if ([401,403].includes(response.status) && key && mode === 'auto' && attempt === 0) {
+      // 401 means failed authentication. A 403 can instead be a policy block; only
+      // an explicit key-authentication error allows the documented anonymous path.
+      let keyRejected=response.status===401;
+      if(response.status===403){
+        let reason='';try{const detail=await phRead(response);reason=JSON.stringify(detail).slice(0,8000);}catch{}
+        keyRejected=/(?:invalid|expired|revoked)[_ \-]*(?:api[_ \-]*)?key|(?:api[_ \-]*)?key[_ \-]*(?:invalid|expired|revoked)/i.test(reason);
+      }
+      if(keyRejected){await response.body?.cancel().catch(()=>{});await phSetFlag(db,'planehere:key-rest',Date.now()+3600000);key='';continue;}
+    }
+    if (response.status === 429) {
+      const retry=phRetry(response,Date.now());await response.body?.cancel();await phSetFlag(db,'planehere:provider-rest',Date.now()+retry*1000);
+      phThrow(429,'source_wait','The aircraft provider has asked us to pause. Please retry after the indicated delay.',retry);
+    }
+    if (!response.ok) {await response.body?.cancel().catch(()=>{});phThrow(502,'source_unavailable','The aircraft source could not complete this lookup.');}
+    const data=planehereNormalize(await phRead(response));
+    return {fetched_at:new Date().toISOString(),data:{...data,query_centre:query.centre,query_radius_nm:60,access_mode:key?'key':'anonymous'}};
+  }
+  phThrow(502,'source_unavailable','The aircraft source could not complete this lookup.');
+}
+
+/** @param {Request} request @param {PhEnv} env @param {unknown} ctx @param {{fetcher?:typeof fetch}} [options] */
+async function planehereApiHandle(request,env,ctx,options={}) {
+  const fetcher=options.fetcher || fetch;let db,lease;
+  try {
+    const url=new URL(request.url),origin=request.headers.get('Origin');
+    if (origin && origin !== 'https://coolcode.ca') return phFailure(403,'origin_denied','Origin is not allowed.');
+    if (url.pathname !== '/api/planehere/nearby') return phFailure(404,'unknown_endpoint','Unknown aircraft endpoint.');
+    if (request.method==='OPTIONS') return {status:204};
+    if (request.method!=='GET') return phFailure(405,'method_denied','Use GET for aircraft lookups.');
+    const query=planehereQuery(url),now=Date.now();db=env.DB;
+    if(!db)return phFailure(503,'storage_unavailable','The shared aircraft cache is unavailable.');
+    await phSchema(db);
+    const cached=await db.prepare('SELECT payload FROM gateway_cache WHERE id=? AND expiry>?').bind(query.cacheId,now).first('payload');
+    if(cached)return {body:JSON.parse(cached),headers:{'Cache-Control':'public, max-age=30'}};
+    const resting=await phFlag(db,'planehere:provider-rest',now);
+    if(resting)return phFailure(429,'source_wait','The aircraft provider has asked us to pause.',Math.ceil((resting.expiry-now)/1000));
+    const leaseId='planehere:lease:'+query.cacheId;
+    const acquired=await db.prepare('INSERT INTO gateway_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET expiry=excluded.expiry WHERE expiry<=? RETURNING hits').bind(leaseId,now+20000,now).first();
+    if(!acquired)return phFailure(429,'refresh_in_progress','This area is being refreshed. Try again in a few seconds.',5);
+    lease={id:leaseId,expiry:now+20000};
+    const result=await phFetch(query,env,db,now,fetcher),payload=JSON.stringify(result),captured=Date.now();
+    if(new TextEncoder().encode(payload).byteLength>500000)phThrow(502,'source_too_large','The aircraft result exceeds the shared cache limit.');
+    await db.batch([
+      db.prepare('INSERT INTO gateway_cache(id,payload,expiry,touched) VALUES(?,?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,expiry=excluded.expiry,touched=excluded.touched').bind(query.cacheId,payload,captured+phTTL,captured),
+      db.prepare("DELETE FROM gateway_cache WHERE id LIKE 'planehere.v1:%' AND expiry<=?").bind(captured),
+      db.prepare("DELETE FROM gateway_cache WHERE id IN (SELECT id FROM gateway_cache WHERE id LIKE 'planehere.v1:%' ORDER BY touched DESC,id DESC LIMIT -1 OFFSET 128)"),
+      db.prepare("DELETE FROM gateway_budget WHERE id LIKE 'planehere:%' AND expiry<=?").bind(captured),
+    ]);
+    return {body:result,headers:{'Cache-Control':'public, max-age=30'}};
+  } catch(error) {
+    if(error && typeof error==='object' && 'ph' in error){const failure=/** @type {PhError} */(error);return phFailure(failure.status,failure.code,failure.message,failure.retry);}
+    return phFailure(503,'temporarily_unavailable','The shared aircraft service is temporarily unavailable.');
+  } finally {
+    if(db&&lease)await db.prepare('DELETE FROM gateway_budget WHERE id=? AND expiry=?').bind(lease.id,lease.expiry).run().catch(()=>{});
+  }
+}
+
+
+// Bounded server adapters for the second discovery batch. No client-chosen upstreams.
+// Existing DB binding and Secret values are reused; keys and request bodies are never logged.
+const sbVersion = 'second-batch.v1';
+const sbDay = 86400000;
+
+async function sbHash(value) {
+  const hash=await crypto.subtle.digest('SHA-256',encoder.encode(value));
+  return Array.from(new Uint8Array(hash), b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function sbSchema(db) {
+  await db.batch([
+    db.prepare('CREATE TABLE IF NOT EXISTS discovery_cache (id TEXT PRIMARY KEY,payload TEXT NOT NULL,expiry INTEGER NOT NULL)'),
+    db.prepare('CREATE TABLE IF NOT EXISTS discovery_budget (id TEXT PRIMARY KEY,hits INTEGER NOT NULL,expiry INTEGER NOT NULL)'),
+    db.prepare('CREATE TABLE IF NOT EXISTS measure_budget (month TEXT PRIMARY KEY,hits INTEGER NOT NULL,day TEXT NOT NULL,day_hits INTEGER NOT NULL,expiry INTEGER NOT NULL)'),
+  ]);
+}
+
+async function sbBudget(db,id,now,expiry,maximum) {
+  // One atomic conditional write. Simultaneous Worker instances cannot overspend.
+  const row=await db.prepare('INSERT INTO discovery_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET hits=hits+1 WHERE hits<? RETURNING hits').bind(id,expiry,maximum).first();
+  if(!row) apiThrow(429,'quota_wait','This source has reached its shared allowance. Cached results and local calculations remain available.',Math.max(1,Math.ceil((expiry-now)/1000)));
+}
+
+async function sbCacheGet(db,id,now) {
+  const value=await db.prepare('SELECT payload FROM discovery_cache WHERE id=? AND expiry>?').bind(id,now).first('payload');
+  return value ? JSON.parse(value) : null;
+}
+
+async function sbCachePut(db,id,value,ttl,now) {
+  const payload=JSON.stringify(value);
+  if(encoder.encode(payload).byteLength>500000) return;
+  await db.batch([
+    db.prepare('DELETE FROM discovery_cache WHERE expiry<=?').bind(now),
+    db.prepare('DELETE FROM discovery_budget WHERE expiry<=?').bind(now),
+    db.prepare('DELETE FROM measure_budget WHERE expiry<=?').bind(now),
+    db.prepare('INSERT INTO discovery_cache(id,payload,expiry) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,expiry=excluded.expiry').bind(id,payload,now+ttl),
+    db.prepare('DELETE FROM discovery_cache WHERE id IN (SELECT id FROM discovery_cache ORDER BY expiry DESC,id DESC LIMIT -1 OFFSET 512)'),
+  ]);
+}
+
+async function sbRead(target,headers,limit=1000000,timeout=12000) {
+  const signal=AbortSignal.timeout(timeout);
+  try {
+    const response=await fetch(target,{headers,redirect:'manual',signal});
+    if(!response.ok){await response.body?.cancel();apiThrow(response.status===429?429:502,'source_unavailable','The upstream source could not complete this request. Try again later.',response.status===429?60:undefined);}
+    return await apiRead(response,limit);
+  } catch(error) {
+    if(error.api) throw error;
+    if(signal.aborted) apiThrow(504,'source_timeout','The upstream source took too long to respond. Please retry later.');
+    apiThrow(502,'source_network','The upstream source could not be reached. Please retry later.');
+  }
+}
+
+async function sbJson(target,headers,limit=1000000) {
+  const text=await sbRead(target,headers,limit);
+  try{return JSON.parse(text);}catch{apiThrow(502,'invalid_source','The source returned invalid JSON.');}
+}
+
+function sbImage(path) {
+  return typeof path==='string' && /^\/[A-Za-z0-9_-]+\.(jpg|png|webp)$/.test(path) ? 'https://image.tmdb.org/t/p/w342'+path : null;
+}
+
+function sbPerson(person,payload,wikidata) {
+  if(!person || !Number.isSafeInteger(person.id) || person.id<=0 || typeof person.name!=='string' || !Array.isArray(payload.cast)) apiThrow(502,'invalid_source','The actor source returned an unexpected result.');
+  if(payload.id!==undefined && payload.id!==person.id) apiThrow(502,'invalid_source','The source credits belong to a different person.');
+  const seen=new Set();
+  const credits=payload.cast.filter(x=>x && x.adult!==true && ['movie','tv'].includes(x.media_type) && Number.isSafeInteger(x.id) && x.id>0)
+    .sort((a,b)=>(Number(b.vote_count)||0)-(Number(a.vote_count)||0))
+    .filter(x=>{const key=x.media_type+':'+x.id;if(seen.has(key))return false;seen.add(key);return true;})
+    .slice(0,30).map(x=>({id:x.id,media_type:x.media_type,title:String(x.title||x.name||'').slice(0,300),release_date:/^\d{4}-\d{2}-\d{2}$/.test(x.release_date||x.first_air_date||'') ? (x.release_date||x.first_air_date) : null,character:String(x.character||'').slice(0,500),url:`https://www.themoviedb.org/${x.media_type}/${x.id}`,poster:sbImage(x.poster_path)}));
+  return {person:{wikidata,id:person.id,name:person.name.slice(0,200),profile:sbImage(person.profile_path),url:`https://www.themoviedb.org/person/${person.id}`},credits,attribution:'This product uses the TMDB API but is not endorsed or certified by TMDB.'};
+}
+
+async function sbPersonHandle(request,env,url,db,now) {
+  if(url.pathname!=='/api/screenradar/person') return apiFailure(404,'unknown_endpoint','Unknown actor endpoint.');
+  const p=apiParams(url,['wikidata']), wikidata=p('wikidata',/^Q[1-9]\d{0,11}$/);
+  if(!env.TMDB_READ_ACCESS_TOKEN) return apiFailure(503,'not_configured','Actor credits are awaiting the site API configuration.');
+  const id=sbVersion+':person:'+wikidata, cached=await sbCacheGet(db,id,now);
+  if(cached) return {body:cached};
+  const day=Math.floor(now/sbDay);
+  await sbBudget(db,'tmdb-people:'+day,now,(day+1)*sbDay,1000);
+  const headers={Accept:'application/json',Authorization:'Bearer '+env.TMDB_READ_ACCESS_TOKEN,'User-Agent':apiUA};
+  const found=await sbJson(`https://api.themoviedb.org/3/find/${wikidata}?external_source=wikidata_id&language=en-US`,headers,524288);
+  if(!Array.isArray(found.person_results)) apiThrow(502,'invalid_source','The actor source returned an unexpected result.');
+  // Ambiguous mappings are not silently assigned to the first person.
+  if(found.person_results.length!==1) {
+    const result={fetched_at:new Date(now).toISOString(),data:null};
+    await sbCachePut(db,id,result,3600000,now); return {body:result};
+  }
+  const person=found.person_results[0];
+  if(!Number.isSafeInteger(person.id)||person.id<=0) apiThrow(502,'invalid_source','The actor source returned an invalid identifier.');
+  const credits=await sbJson(`https://api.themoviedb.org/3/person/${person.id}/combined_credits?language=en-US`,headers);
+  const captured=Date.now(), result={fetched_at:new Date(captured).toISOString(),data:sbPerson(person,credits,wikidata)};
+  await sbCachePut(db,id,result,sbDay,captured); return {body:result};
+}
+
+function sbArchivePlan(url) {
+  const p=apiParams(url,['domain','mode','from','to']);
+  const domain=p('domain',/^[a-zA-Z0-9.-]{1,253}$/).toLowerCase();
+  if(!domain.includes('.') || !/^[a-z]{2,63}$/.test(domain.split('.').at(-1)) || domain.split('.').some(x=>!x || x.length>63 || !/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(x)) || /\.(?:localhost|local|internal|lan|home|test|invalid|example|onion)$/.test(domain)) apiThrow(400,'invalid_parameter','Enter a public domain name without a URL, path or IP address.');
+  const mode=p('mode',/^(homepage|pages)$/,'homepage'),limit=mode==='homepage'?2500:500;
+  const target=new URL('https://web.archive.org/cdx/search/cdx');
+  target.searchParams.set('url',domain+'/');
+  target.searchParams.set('matchType',mode==='homepage'?'exact':'host');
+  target.searchParams.set('output','json');target.searchParams.set('fl','timestamp,original,statuscode,mimetype');
+  target.searchParams.append('filter','statuscode:200');target.searchParams.append('filter','mimetype:text/html');
+  target.searchParams.set('limit',String(limit+1));
+  if(mode==='pages') {
+    target.searchParams.set('collapse','urlkey');
+    target.searchParams.append('filter','original:.*[/:](about|contact)([-_/][^?]*)?(\\.(html?|php|aspx?))?/?(\\?.*)?$');
+  }
+  let from='',to='';
+  if(url.searchParams.has('from')) {from=p('from',/^(?:19|20)\d{2}$/);target.searchParams.set('from',from);}
+  if(url.searchParams.has('to')) {to=p('to',/^(?:19|20)\d{2}$/);target.searchParams.set('to',to);}
+  if(from && to && from>to) apiThrow(400,'invalid_parameter','The start year must not be after the end year.');
+  return {domain,mode,limit,target};
+}
+
+function sbArchiveRows(payload,plan,now) {
+  if(!Array.isArray(payload)) apiThrow(502,'invalid_source','The archive returned an unexpected result.');
+  const header=['timestamp','original','statuscode','mimetype'];
+  if(payload.length && JSON.stringify(payload[0])!==JSON.stringify(header)) apiThrow(502,'invalid_source','The archive returned an unexpected column layout.');
+  const all=payload.slice(1), rows=[];
+  for(const row of all.slice(0,plan.limit)) {
+    if(!Array.isArray(row)||row.length!==4||row.some(v=>typeof v!=='string')||!/^\d{14}$/.test(row[0])||row[2]!=='200'||row[3]!=='text/html'||row[1].length>2048) apiThrow(502,'invalid_source','The archive returned a malformed capture.');
+    const stamp=row[0],iso=`${stamp.slice(0,4)}-${stamp.slice(4,6)}-${stamp.slice(6,8)}T${stamp.slice(8,10)}:${stamp.slice(10,12)}:${stamp.slice(12,14)}Z`,date=new Date(iso);
+    if(!Number.isFinite(date.getTime())||date.toISOString().replace(/[-:TZ.]/g,'').slice(0,14)!==stamp || (plan.target.searchParams.has('from') && stamp.slice(0,4)<plan.target.searchParams.get('from')) || (plan.target.searchParams.has('to') && stamp.slice(0,4)>plan.target.searchParams.get('to'))) apiThrow(502,'invalid_source','The archive returned a capture outside the requested date range or with an invalid date.');
+    let original;try{original=new URL(row[1]);}catch{apiThrow(502,'invalid_source','The archive returned an invalid original URL.');}
+    if(!['http:','https:'].includes(original.protocol)||original.username||original.password||original.port||original.hostname.replace(/^www\./,'')!==plan.domain.replace(/^www\./,'')) apiThrow(502,'invalid_source','The archive returned a capture outside the requested hostname.');
+    if(plan.mode==='homepage' && (original.pathname!=='/'||original.search)) apiThrow(502,'invalid_source','The archive returned a non-homepage capture.');
+    if(plan.mode==='pages' && !/(?:^|\/)(?:about|contact)(?:[-_/][^?]*)?(?:\.(?:html?|php|aspx?))?\/?$/i.test(original.pathname)) continue;
+    rows.push(row);
+  }
+  return {rows:[header,...rows],truncated:all.length>plan.limit,checked_at:new Date(now).toISOString(),scope:plan.mode,limit:plan.limit,source_url:plan.target.href};
+}
+
+async function sbArchiveHandle(request,env,url,db,now) {
+  if(url.pathname!=='/api/domain-biography/archive') return apiFailure(404,'unknown_endpoint','Unknown archive endpoint.');
+  const plan=sbArchivePlan(url),id=sbVersion+':archive:'+await sbHash(plan.target.href),cached=await sbCacheGet(db,id,now);
+  if(cached) return {body:cached};
+  const day=Math.floor(now/sbDay);await sbBudget(db,'archive-cdx:'+day,now,(day+1)*sbDay,1000);
+  const payload=await sbJson(plan.target.href,{Accept:'application/json','User-Agent':apiUA});
+  const captured=Date.now(),result={fetched_at:new Date(captured).toISOString(),data:sbArchiveRows(payload,plan,captured)};
+  await sbCachePut(db,id,result,6*3600000,captured);return {body:result};
+}
+
+async function sbMeasureHandle(request,env,url,db,now) {
+  if(url.pathname!=='/api/measurebench/answer') return apiFailure(404,'unknown_endpoint','Unknown calculation endpoint.');
+  apiParams(url,[]);
+  if(!/^application\/json(?:;|$)/i.test(request.headers.get('Content-Type')||'')) return apiFailure(415,'content_type','Send a JSON calculation request.');
+  let value;try{value=await body(request,2048);}catch{return apiFailure(400,'invalid_request','Send one query of at most 300 characters.');}
+  if(Object.keys(value).some(k=>k!=='query')||typeof value.query!=='string') return apiFailure(400,'invalid_request','Send one calculation query.');
+  const query=value.query.trim().replace(/\s+/g,' ');
+  if(!query||query.length>300||/[\x00-\x1f\x7f]/.test(query)) return apiFailure(400,'invalid_request','Use a query of 1–300 characters.');
+  if(!env.WOLFRAM_APP_ID) return apiFailure(503,'not_configured','Optional Wolfram answers are awaiting the site API configuration. Local calculations are ready.');
+  const id=sbVersion+':wolfram:'+await sbHash(query),cached=await sbCacheGet(db,id,now);
+  if(cached) return {body:{...cached,cached:true}};
+  const date=new Date(now),day=Math.floor(now/sbDay),month=date.toISOString().slice(0,7),monthEnd=Date.UTC(date.getUTCFullYear(),date.getUTCMonth()+1,1);
+  // Reserve both limits in one atomic write, including failed provider calls.
+  // Rejected daily requests cannot consume the rest of the month's allowance.
+  const usage=await db.prepare('INSERT INTO measure_budget(month,hits,day,day_hits,expiry) VALUES(?,1,?,1,?) ON CONFLICT(month) DO UPDATE SET hits=hits+1,day=excluded.day,day_hits=CASE WHEN day=excluded.day THEN day_hits+1 ELSE 1 END WHERE hits<1000 AND CAST(day AS INTEGER)<=CAST(excluded.day AS INTEGER) AND (day<>excluded.day OR day_hits<50) RETURNING hits').bind(month,String(day),monthEnd).first();
+  if(!usage) {
+    const spent=await db.prepare('SELECT hits FROM measure_budget WHERE month=?').bind(month).first('hits');
+    apiThrow(429,'quota_wait','The shared Wolfram allowance is reached (50 requests per UTC day, 1,000 per calendar month). Cached answers and local calculations remain available.',Math.ceil(((spent>=1000?monthEnd:(day+1)*sbDay)-now)/1000));
+  }
+  const target=new URL('https://api.wolframalpha.com/v1/result');
+  target.searchParams.set('i',query);target.searchParams.set('appid',env.WOLFRAM_APP_ID);target.searchParams.set('units','metric');target.searchParams.set('timeout','5');
+  const answer=(await sbRead(target.href,{Accept:'text/plain','User-Agent':apiUA},16384,8000)).trim();
+  if(!answer||answer.length>8000||/^(?:Error\b|Invalid appid|Appid missing|<html|<!DOCTYPE)/i.test(answer)||answer.includes(env.WOLFRAM_APP_ID)) apiThrow(502,'no_answer','Wolfram could not provide a short answer for this query.');
+  const captured=Date.now(),result={answer,source:'Wolfram Alpha',cached:false,fetched_at:new Date(captured).toISOString()};
+  await sbCachePut(db,id,result,7*sbDay,captured);return {body:result};
+}
+
+async function secondBatchApiHandle(request,env,ctx) {
+  try {
+    const url=new URL(request.url),origin=request.headers.get('Origin'),measure=url.pathname.startsWith('/api/measurebench/');
+    if(origin && origin!==ORIGIN) return apiFailure(403,'origin_denied','Origin is not allowed.');
+    if(request.method==='OPTIONS') return {status:204};
+    if(request.method!==(measure?'POST':'GET')) return apiFailure(405,'method_denied',measure?'Use POST for optional calculation requests.':'Use GET for public data requests.');
+    if(measure && origin!==ORIGIN) return apiFailure(403,'origin_denied','Optional calculation requests must come from CoolCode.');
+    const db=env.DB,now=Date.now();if(!db) return apiFailure(503,'storage_unavailable','The shared request limiter is unavailable.');
+    if(!await allowed(db,request,new Date(now),'discovery-api')) return apiFailure(429,'client_wait','Too many requests. Please retry later.',300);
+    await sbSchema(db);
+    if(measure) return await sbMeasureHandle(request,env,url,db,now);
+    if(url.pathname.startsWith('/api/screenradar/')) return await sbPersonHandle(request,env,url,db,now);
+    return await sbArchiveHandle(request,env,url,db,now);
+  }catch(error){
+    if(error.api) return apiFailure(error.status,error.code,error.message,error.retry);
+    return apiFailure(503,'temporarily_unavailable','The source or shared request service is temporarily unavailable. Local tools remain available.');
+  }
 }
 
 

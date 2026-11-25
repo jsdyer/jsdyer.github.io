@@ -1,4 +1,5 @@
 jsdyer/accessreceipt
+jsdyer/addresschronicle
 jsdyer/aircheckdiary
 jsdyer/airpair
 jsdyer/algorithmwatch
@@ -20,9 +21,11 @@ jsdyer/borderpulse
 jsdyer/bridgeledger
 jsdyer/briefings
 jsdyer/broadbandatlas
+jsdyer/budgetmirror
 jsdyer/buoybench
 jsdyer/campcalendar
 jsdyer/canadaanalytics
+jsdyer/canadapulse
 jsdyer/cancon-atlas
 jsdyer/carecompass
 jsdyer/ccts-ledger
@@ -30,6 +33,7 @@ jsdyer/census-lens
 jsdyer/chargegaps
 jsdyer/charityflows
 jsdyer/chirproom
+jsdyer/civicrevision
 jsdyer/clamcounter
 jsdyer/clamground
 jsdyer/cloud-ledger
@@ -101,6 +105,7 @@ jsdyer/masspeaks
 jsdyer/metermath
 jsdyer/metroeconomy
 jsdyer/ministersays
+jsdyer/movebench
 jsdyer/museumdrawer
 jsdyer/mushroomcalendar
 jsdyer/namesforget
@@ -109,6 +114,7 @@ jsdyer/oicdiary
 jsdyer/oldnews-oddities
 jsdyer/onionpulse
 jsdyer/opendatagraveyard
+jsdyer/openseed
 jsdyer/orbitalcensus
 jsdyer/otherworldnames
 jsdyer/packagepulse
@@ -145,6 +151,7 @@ jsdyer/satpasses
 jsdyer/scanreceipt
 jsdyer/schoolhouseledger
 jsdyer/scorecard
+jsdyer/screenplaces
 jsdyer/seabusclock
 jsdyer/shieldcheck
 jsdyer/shipwrecks

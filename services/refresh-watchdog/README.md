@@ -56,6 +56,21 @@ repositories needs access to the six new scheduled repositories listed above.
 The private server report must confirm that access; passing public GitHub CI does
 not prove the server's credentials or installed runtime version.
 
+## November 25 discovery batch
+
+The generated registry adds the previously published collectors for Address Chronicle,
+Budget Mirror, Canada Pulse, Move Bench and Screen Places, plus Civic Revision and
+Open Seed. Civic Revision checks every six hours; Open Seed checks daily. Wage
+Window, Housing Pulse and Release Receipt keep their existing schedules and gain
+explicit probes for their additional CPI, compatible-series and watchlist datasets.
+The registry now accounts for 190 scheduled workflows across the full catalogue.
+
+This batch changes targets and documentation only. **No watchdog runtime reinstall
+is needed.** The existing all-repositories GitHub App installation covers the added
+repositories; the next pass downloads their targets automatically. The private
+server report remains the place to confirm dispatch access and actual collection
+outcomes. Notice Guide and Measure Bench have no scheduled collection.
+
 ## What changes
 
 - GitHub's existing schedules continue running. The Linux server checks for a successful refresh covering the most recent due occurrence, allowing a grace period for normal queueing.

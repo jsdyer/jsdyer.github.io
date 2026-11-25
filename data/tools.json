@@ -308,7 +308,7 @@
   {
     "id": "domain-biography",
     "title": "Domain Biography",
-    "description": "Follow a domain's life from registration through certificates and archived captures, with transfers, changes and quiet years on one timeline.",
+    "description": "Trace registry dates, certificate history, yearly archived homepage captures and old about/contact pages for a domain.",
     "category": "liminal-tools",
     "tags": [
       "domains",
@@ -329,11 +329,11 @@
     "access": "browser",
     "data_info": {
       "mode": "live",
-      "detail": "Your browser asks IANA's RDAP registry, crt.sh certificate logs and the Wayback Machine directly when you look up a domain."
+      "detail": "Current registry RDAP, certificate transparency and bounded Wayback archive observations; incomplete sources are labelled."
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Enter a domain such as cira.ca, or paste a full URL. A subdomain is looked up under its registered name at the registry. The timeline marks each event with its source. A quiet period means two or more years in which no source recorded anything, which often points to a parked, lapsed or re-registered domain. Compare that span with the registration date: a \"Registered\" date after the first archive capture usually means the name expired and someone registered it again. Use \"Copy link\" to share a lookup, or download the report as Markdown or JSON."
+      "note": "Enter a domain such as cira.ca, or paste a full URL. Compare its current registry dates with dated archive observations and certificate history. The archive section counts actual successful HTML responses at the exact homepage, and lists archived about/contact pages to inspect. For a busy site, narrow the optional year range; capped counts are labelled lower bounds. Capture dates are not registration or launch dates, and a gap is not proof of inactivity. Continue to Scan Receipt, Scam Trace or Corporate Ghosts for different investigation questions. Copy the dated-range lookup link or export the results as Markdown/JSON."
     }
   },
   {
@@ -3153,7 +3153,7 @@
   {
     "id": "nightfinder",
     "title": "Nightfinder",
-    "description": "Plan dark-sky sessions, camera framing and seven days of golden and blue-hour photography windows.",
+    "description": "Plan observing windows around your balcony horizon and Moon separation, with camera framing and golden-hour timing.",
     "category": "field-kit",
     "tags": [
       "astronomy",
@@ -3164,7 +3164,10 @@
       "astrophotography",
       "Canada",
       "night sky",
-      "observing sites"
+      "observing sites",
+      "obstructions",
+      "horizon",
+      "Moon separation"
     ],
     "icon": "telescope",
     "url": "/nightfinder/",
@@ -3176,7 +3179,7 @@
       "detail": "Sun, Moon and target positions are calculated locally. Optional cloud forecasts come from Open-Meteo only when requested."
     },
     "readme": {
-      "note": "Choose a location to calculate seven days of golden light (Sun −4° to +6°) and blue light (−6° to −4°), alongside dark-sky target sessions. Optionally load cloud-cover forecasts for those windows; that click sends coordinates to Open-Meteo. Download the plan to retain the calculated windows."
+      "note": "Save a named balcony/building horizon to find when a target clears it, constrain Moon separation, and calculate seven days of golden light (Sun −4° to +6°) and blue light (−6° to −4°), alongside dark-sky target sessions. Optionally load cloud-cover forecasts for those windows; that click sends coordinates to Open-Meteo. Download the plan to retain the calculated windows."
     },
     "sync_manifest": true
   },
@@ -3772,7 +3775,7 @@
   {
     "id": "screenradar",
     "title": "Screen Radar",
-    "description": "Find television and Canadian films, and keep a watchlist in this browser.",
+    "description": "Find TV and Canadian films, discover actors born near a town, and save a watchlist.",
     "category": "media",
     "tags": [
       "tv",
@@ -3780,7 +3783,10 @@
       "movie",
       "films",
       "cancon",
-      "cinema"
+      "cinema",
+      "actors",
+      "birthplaces",
+      "TMDb"
     ],
     "icon": "tv-minimal",
     "url": "/screenradar/",
@@ -3789,17 +3795,17 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "TV searches use TVmaze, and the selected Canadian films come from Wikidata."
+      "detail": "TVmaze searches, selected Wikidata films, live Wikidata birthplaces and optional TMDb credits."
     },
     "readme": {
-      "note": "Search TVmaze or filter the Canadian film shelf, then save titles to this browser’s watchlist and export it as CSV. Source records provide credits and release information; the app does not establish current streaming availability."
+      "note": "Search TVmaze, filter the Canadian film shelf, or choose **Actors by birthplace** to find people born near a town and open their notable credits, then save titles to this browser’s watchlist and export it as CSV. Source records provide credits and release information; the app does not establish current streaming availability."
     },
     "sync_manifest": true
   },
   {
     "id": "mediaechoes",
     "title": "Media Echoes",
-    "description": "Pinpoint old software, Flash projects and media by title, creator, collection, year and exclusions.",
+    "description": "Find old digital media and explore curated public-domain-labelled films with shuffle and private playlists.",
     "category": "media",
     "tags": [
       "software",
@@ -3818,7 +3824,7 @@
       "detail": "Internet Archive returns catalogue records, previews and file lists when you search."
     },
     "readme": {
-      "note": "Use Encarta software · 1995 to narrow the search to software records with Encarta in the title and a catalogue date in 1995. The source search included Microsoft Encarta ’95 (1995 MPEG Edition), identifier encarta95. Inspect its files or refine the search by creator. The Myst software · 1993 and Homestar Runner · Flash shortcuts also combine title and collection or year filters."
+      "note": "Use Encarta software · 1995 to narrow the search to software records with Encarta in the title and a catalogue date in 1995. The source search included Microsoft Encarta ’95 (1995 MPEG Edition), identifier encarta95. Inspect its files or refine the search by creator. The Myst software · 1993 and Homestar Runner · Flash shortcuts also combine title and collection or year filters. Public Reels presents a dated, curated Prelinger selection: Cold War PSAs, industrial films, educational shorts and historical travel. Filter the collection, play or shuffle a film, and save a local playlist with JSON import/export. Only films with an explicit public-domain designation in Archive metadata enter this shelf; the source designation does not guarantee rights in every jurisdiction. Playback loads Internet Archive only after you choose a film. The wider software/media search remains available below."
     },
     "sync_manifest": true
   },
@@ -6708,7 +6714,7 @@
   {
     "id": "housing-pulse",
     "title": "Housing Pulse",
-    "description": "Compare housing construction, vacancy and rent in Halifax, Vancouver and other Canadian markets.",
+    "description": "Compare Canadian rents, earnings and housing construction with matched places and dated series.",
     "category": "money",
     "tags": [
       "housing",
@@ -6724,7 +6730,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CMHC surveys and Statistics Canada rent estimates cover construction, vacancy, completed inventory and quarterly asking and paid rents.",
+      "detail": "CMHC housing surveys and Statistics Canada rent CPI, earnings and rent estimates retain exact geography and observation dates.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -6752,18 +6758,26 @@
           ],
           "label": "Coverage",
           "value": "1948-01–2026-10"
+        },
+        {
+          "url": "https://coolcode.ca/housing-pulse/data/context.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Comparable series checked",
+          "value": "2026-11-25"
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare Halifax and Vancouver for a two-bedroom apartment in the second quarter of 2026. Average asking rents were $2,400 and $3,030, while average paid rents were $1,770 and $2,470. Switch to rental housing starts to explore a different source and monthly reporting period."
+      "note": "Compare Halifax and Vancouver for a two-bedroom apartment in the second quarter of 2026. Average asking rents were $2,400 and $3,030, while average paid rents were $1,770 and $2,470. Switch to rental housing starts to explore a different source and monthly reporting period. A separate province-matched panel compares rent CPI, average weekly earnings and all-area housing completions over the same complete calendar years. Use the latest-common-years button for a fully numeric three-way comparison; newer unavailable completions remain gaps."
     }
   },
   {
     "id": "freenet-echo",
     "title": "FreeNet Echo",
-    "description": "Compare archived homepages and documented services of community networks in Halifax, Vancouver and Ottawa.",
+    "description": "Explore Canada’s early community networks and ISP portals through dated homepage captures, service traces and documented milestones.",
     "category": "media",
     "tags": [
       "Canada",
@@ -6771,7 +6785,12 @@
       "Halifax",
       "Vancouver",
       "Ottawa",
-      "FreeNet"
+      "FreeNet",
+      "Sympatico",
+      "Shaw @Home",
+      "Victoria",
+      "Toronto",
+      "dial-up"
     ],
     "icon": "history",
     "url": "/freenet-echo/",
@@ -6780,7 +6799,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Internet Archive capture metadata and the networks’ own histories document homepages, services and milestones.",
+      "detail": "Internet Archive homepage indexes and cited historical sources; community networks plus bounded early ISP eras.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -6796,7 +6815,7 @@
             "unit": "indexed captures"
           },
           "value": "2026-11-19",
-          "count": 5649
+          "count": 14128
         },
         {
           "url": "https://coolcode.ca/freenet-echo/data/status.json",
@@ -6807,13 +6826,13 @@
           "end_path": [
             "end"
           ],
-          "value": "1996-10-31–2026-10-12"
+          "value": "1996-10-31–2026-10-17"
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Pick Halifax and Vancouver, then select a year to compare the available homepage captures. Follow a dated snapshot or inspect the source explaining when each network offered a service."
+      "note": "Search seven configurable network/portal profiles, then choose two and a year. Start with VCN and Chebucto, or inspect the early Sympatico and Shaw @Home eras. Milestones cite historical sources and link the nearest saved year-edge capture where one exists. Missing source indexes are labelled unavailable, never zero. Enter another historic domain to prepare archive and Domain Biography links locally."
     }
   },
   {
@@ -7480,13 +7499,18 @@
   {
     "id": "releasereceipt",
     "title": "Release Receipt",
-    "description": "See how Canada's monthly GDP growth estimates changed across Statistics Canada releases.",
+    "description": "Follow Statistics Canada releases, watch series and inspect changes to previously published values.",
     "category": "money",
     "tags": [
       "GDP",
       "Statistics Canada",
       "economic data",
-      "revisions"
+      "revisions",
+      "CPI",
+      "earnings",
+      "watchlist",
+      "RSS",
+      "calendar"
     ],
     "icon": "receipt-text",
     "url": "/releasereceipt/",
@@ -7495,7 +7519,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Statistics Canada’s archived monthly GDP tables show what each release reported for the same month.",
+      "detail": "Archived GDP bulletins, StatCan vector observations and the official release calendar separate publication, reference and capture dates.",
       "cadence": "Twice weekly",
       "probes": [
         {
@@ -7513,6 +7537,14 @@
           },
           "value": "2026-11-25",
           "count": 13
+        },
+        {
+          "url": "https://coolcode.ca/releasereceipt/watchlist.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Watchlist checked",
+          "value": "2026-11-25"
         }
       ]
     },
@@ -7523,7 +7555,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose a reference month and an industry group to see the six-month window of growth estimates printed in successive Statistics Canada bulletins. The tool measures the difference between the first regular table and the latest archived table in percentage points. Select a month in the revision ranking to see the dated evidence, or download the figures and their source links."
+      "note": "Choose a reference month and an industry group to see the six-month window of growth estimates printed in successive Statistics Canada bulletins. The tool measures the difference between the first regular table and the latest archived table in percentage points. Select a month in the revision ranking to see the dated evidence, or download the figures and their source links. Follow public CPI and earnings vectors or check an arbitrary public vector on your device. Observed vintages are append-only, so later revisions do not erase what was seen earlier. Configured public series have RSS links usable in Feed Harbour and official calendar dates where a release match is available. Custom vectors keep manually checked observations on your device, without a hosted RSS feed or inferred calendar."
     }
   },
   {
@@ -9100,7 +9132,7 @@
   {
     "id": "headlinevault",
     "title": "Headline Vault",
-    "description": "Search historic newspaper pages and export a source-linked research trail.",
+    "description": "Browse historic newspapers by date, town and paper, search OCR and copy source-linked page citations.",
     "category": "media",
     "tags": [
       "newspapers",
@@ -9120,7 +9152,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Search any topic with dates, publication place or a newspaper LCCN; pin useful pages and save a JSON receipt or CSV. Saved starting searches load instantly; live searches query the Library of Congress. If a browser cannot read its response, open the exact source JSON and import it locally with its search URL. OCR matches and newspaper claims need checking against the original page."
+      "note": "Search any topic with dates, publication place or a newspaper LCCN; pin useful pages and save a JSON receipt or CSV. Saved starting searches load instantly; live searches query the Library of Congress. If a browser cannot read its response, open the exact source JSON and import it locally with its search URL. OCR matches and newspaper claims need checking against the original page. Use This day 100 years ago to browse the same calendar date a century earlier; select a reference date, newspaper or town, then search OCR words if needed. A blank query is allowed with a date or publication filter. Copy page citations with their original Library of Congress links, or copy a search link that restores filters without searching automatically. The retained collection is shared through data/newspapers.json for other CoolCode newspaper tools. Coverage remains digitized U.S. newspapers, including cross-border reporting; it is not a Canadian newspaper collection."
     }
   },
   {
@@ -9142,12 +9174,12 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Editable discovery shelves and live full-text page searches from Library of Congress Chronicling America.",
+      "detail": "Curated shelves, reusable Headline Vault captures and live full-text searches from Library of Congress Chronicling America.",
       "cadence": "Weekly"
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose a topic or search your own phrase, then open the original page to check the OCR and surrounding columns. Topic matches are historical reports, not verified events; save useful pages and export their source links. If a live request fails, import an official Library JSON response with its exact search URL; clippings stay usable and imports are clearly dated as imports."
+      "note": "Choose a topic, reuse a retained Headline Vault newspaper search, or search your own phrase, then open the original page to check the OCR and surrounding columns. Topic matches are historical reports, not verified events; save useful pages and export their source links. If a live request fails, import an official Library JSON response with its exact search URL; clippings stay usable and imports are clearly dated as imports."
     }
   },
   {
@@ -9255,7 +9287,7 @@
   {
     "id": "bookgraveyard",
     "title": "Book Graveyard",
-    "description": "Find old books, compare their editions, and follow the trail to a readable copy.",
+    "description": "Explore Canadian-author shelves, compare editions, estimate reading time and save books for later.",
     "category": "media",
     "tags": [
       "books",
@@ -9275,7 +9307,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Search any title, author, subject or set of words, optionally limiting the work's first-publication years and Open Library's access category. The starting searches are editable suggestions, not a fixed collection. Results are paginated. Open **Compare editions** on a work, then choose two publication records to compare publisher, date, language, pages, format and ISBN. A work groups editions; its first-publication year and reading-access label do not describe every edition. The opening screen uses a small, dated real Open Library capture. **Search books** retrieves live results directly from Open Library; failures preserve the previous results. Add books to a reading shelf, export JSON/CSV, or import a saved search/shelf JSON locally. The shelf stays in the current tab unless **Remember this shelf on this device** is selected. A readable-copy label is not a worldwide public-domain determination, and borrowing can require an Open Library/Internet Archive account. “Graveyard” is a discovery theme, not a claim that titles are forgotten or out of print. **Expand or customize:** edit `web/config.json` to change `defaultSearch`, add any number of `presets`, or change page sizes and timeouts. Each query has `query`, `field` (`all`, `title`, `author`, `subject`), `from`, `to`, `access` (`any`, `public`, `borrowable`, `no_ebook`) and `sort` (`relevance`, `old`, `new`). Visitors can type searches beyond these presets. After changing the opening search, run `python3 scripts/refresh_data.py` once; review `web/data/opening.json`, then run the normal checks and commit to `main`. The Pages workflow builds and publishes the change. This tool needs no API key; Open Library asks the owner to register the application/use case using the form linked in its API documentation."
+      "note": "Search any title, author, subject or set of words, optionally limiting the work's first-publication years and Open Library's access category. The starting searches are editable suggestions, not a fixed collection. Results are paginated. Open **Compare editions** on a work, then choose two publication records to compare publisher, date, language, pages, format and ISBN. A work groups editions; its first-publication year and reading-access label do not describe every edition. The opening screen uses a small, dated real Open Library capture. **Search books** retrieves live results directly from Open Library; failures preserve the previous results. Add books to a reading shelf, export JSON/CSV, or import a saved search/shelf JSON locally. The shelf stays in the current tab unless **Remember this shelf on this device** is selected. A readable-copy label is not a worldwide public-domain determination, and borrowing can require an Open Library/Internet Archive account. “Graveyard” is a discovery theme, not a claim that titles are forgotten or out of print. **Expand or customize:** edit `web/config.json` to change `defaultSearch`, add any number of `presets`, or change page sizes and timeouts. Each query has `query`, `field` (`all`, `title`, `author`, `subject`), `from`, `to`, `access` (`any`, `public`, `borrowable`, `no_ebook`) and `sort` (`relevance`, `old`, `new`). Visitors can type searches beyond these presets. After changing the opening search, run `python3 scripts/refresh_data.py` once; review `web/data/opening.json`, then run the normal checks and commit to `main`. The Pages workflow builds and publishes the change. This tool needs no API key; Open Library asks the owner to register the application/use case using the form linked in its API documentation. Canadian reading shelves add Montgomery, Leacock, Haliburton and Cameron, with British Columbia and Nova Scotia subject shortcuts into the wider catalogue. Reading time divides a counted mirrored text by your chosen words-per-minute rate; it is an estimate, not an audiobook duration. Random passages are preserved, bounded samples of these public-domain-labelled texts, with source links and no invented printed page numbers. EPUB labels describe the specific Archive mirror; the Gutenberg formats link lets you check other editions. Save a separate Canadian reading list locally or export/import JSON; the existing general Open Library shelf is preserved."
     }
   },
   {
@@ -9923,14 +9955,16 @@
   {
     "id": "commonslens",
     "title": "Commons Lens",
-    "description": "Find openly licensed images and audio, inspect rights and build a source-linked attribution.",
+    "description": "Find reusable images and audio by subject or place, inspect rights and build source-linked attribution.",
     "category": "media",
     "tags": [
       "images",
       "audio",
       "licences",
       "Wikimedia",
-      "attribution"
+      "attribution",
+      "places",
+      "coordinates"
     ],
     "icon": "scan-search",
     "url": "/commonslens/",
@@ -9943,7 +9977,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Search **Halifax waterfront**, then open **Inspect & credit** on a work to find its original record and reported licence. Licence and creator filters narrow the returned page, not the whole catalogue; inspect later pages or loosen a filter if a page has no matches. **Shortlist** keeps selections only in this tab. Save receipt JSON before closing; an imported receipt is processed locally. Always verify the original record before reusing a work."
+      "note": "Choose **Pictures of this place** to find geotagged media around a town or coordinates, or search **Halifax waterfront**, then open **Inspect & credit** on a work to find its original record and reported licence. Licence and creator filters narrow the returned page, not the whole catalogue; inspect later pages or loosen a filter if a page has no matches. **Shortlist** keeps selections only in this tab. Save receipt JSON before closing; an imported receipt is processed locally. Always verify the original record before reusing a work."
     }
   },
   {
@@ -10748,7 +10782,7 @@
   {
     "id": "manualshelf",
     "title": "Manual Shelf",
-    "description": "Find archived equipment manuals, inspect available editions and build a private equipment cabinet.",
+    "description": "Find equipment manuals, search PDF pages, compare editions and save a private equipment cabinet.",
     "category": "projects",
     "tags": [
       "manuals",
@@ -10768,7 +10802,7 @@
       "detail": "Searches Internet Archive public metadata on demand. Deliberately saved equipment labels, notes and cabinet exports stay on your device."
     },
     "readme": {
-      "note": "Search your manufacturer and model, then inspect the source record before choosing a PDF or other document format. Archive dates and title-based manual types do not establish compatibility; verify the exact model, region and revision in the document. Save an equipment label and notes only when you choose, compare up to three records, and export a cabinet backup. Search terms and selected item IDs go to Internet Archive; your private labels, notes and imported cabinet stay on your device. Restricted files remain subject to Internet Archive access controls."
+      "note": "Search your manufacturer and model, then inspect the source record before choosing a PDF or other document format. Archive dates and title-based manual types do not establish compatibility; verify the exact model, region and revision in the document. Save an equipment label and notes only when you choose, compare up to three records, and export a cabinet backup. Search terms and selected item IDs go to Internet Archive; your private labels, notes and imported cabinet stay on your device. Restricted files remain subject to Internet Archive access controls. Configured model-number aliases expand exact model searches; aliases are search aids, never a compatibility guarantee. Inspect a record to compare file formats and editions, then search a selected PDF’s existing text layer locally. Results link to exact PDF file pages and offer citations that distinguish file pages from printed numbering. Download availability checks make a bounded GET request and display the response status and time; metadata alone is not labelled verified. PDFs are fetched only after Search PDF pages, or a visitor can choose a local PDF without uploading it. Local-file citations do not claim a match to the selected archive edition. Search is limited to 50 MB and 500 pages; image-only scans need OCR from the provider. Your cabinet and notes stay local."
     },
     "sync_manifest": true
   },
@@ -10822,7 +10856,7 @@
       "detail": "Manually checked feed recommendations and your own RSS/Atom sources. Public feeds load on demand; local XML and reading state stay in your browser unless saved or exported."
     },
     "readme": {
-      "note": "Browse checked RSS feeds across CoolCode's topics, including British Columbia and Nova Scotia news, public records, Linux, networks, space, money and culture. Add one source or a topic pack, then choose Refresh; browsing or subscribing does not fetch articles automatically. You can still enter any public feed, import OPML or read local RSS/Atom XML privately. Save deliberately on your device or export JSON to keep reading state; OPML exports subscriptions and folders. Failed refreshes keep the last good items visible."
+      "note": "Browse checked RSS feeds across CoolCode's topics, including British Columbia and Nova Scotia news, public records, Linux, networks, space, money and culture. CoolCode’s Civic Revision and Release Receipt feeds cover Wikipedia revisions and Statistics Canada releases. Add one source or a topic pack, then choose Refresh; browsing or subscribing does not fetch articles automatically. You can still enter any public feed, import OPML or read local RSS/Atom XML privately. Save deliberately on your device or export JSON to keep reading state; OPML exports subscriptions and folders. Failed refreshes keep the last good items visible."
     },
     "sync_manifest": true
   },
@@ -11347,7 +11381,7 @@
   {
     "id": "wagewindow",
     "title": "Wage Window",
-    "description": "Compare official Canadian job wages by occupation and region, check an offer, and save private comparisons.",
+    "description": "Compare Canadian wages and see whether your raise beat provincial inflation.",
     "category": "money",
     "tags": [
       "wages",
@@ -11363,30 +11397,12 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "ESDC Job Bank wage estimates for all published occupations and regions, checked weekly; source periods and annual/hourly units are preserved.",
-      "probes": [
-        {
-          "url": "https://coolcode.ca/wagewindow/data/index.json",
-          "path": [
-            "checked_at"
-          ],
-          "label": "Official wage edition checked",
-          "precision": "minute",
-          "count_at": {
-            "path": [
-              "occupation_count"
-            ],
-            "unit": "occupations"
-          },
-          "value": "2026-11-25 08:14 UTC",
-          "count": 516
-        }
-      ],
+      "detail": "ESDC Job Bank wage benchmarks and Statistics Canada monthly provincial CPI support private pay comparisons.",
       "cadence": "Weekly"
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Wage Window includes every occupation-region row in the ESDC Job Bank wage download, including unavailable estimates. Search by English/French occupation title or NOC code, compare any two regions, inspect low/median/high wages and their own reference periods, or compare a gross offer using your paid hours and weeks. Annual source wages remain annual; missing values stay missing. Optional private comparisons preserve the selected edition and assumptions, survive refreshes and export/import as JSON; current comparisons also export CSV. The official release is checked weekly; failed downloads retain the previous good edition with its original successful check date."
+      "note": "Wage Window includes every occupation-region row in the ESDC Job Bank wage download, including unavailable estimates. Search by English/French occupation title or NOC code, compare any two regions, inspect low/median/high wages and their own reference periods, or compare a gross offer using your paid hours and weeks. Annual source wages remain annual; missing values stay missing. Optional private comparisons preserve the selected edition and assumptions, survive refreshes and export/import as JSON; current comparisons also export CSV. The official release is checked weekly; failed downloads retain the previous good edition with its original successful check date. The raise calculator compares your old and current hourly-equivalent pay with all-items CPI for the exact selected province and months. Separate hours and weeks prevent a longer work week from masquerading as a raise."
     }
   },
   {
@@ -11432,5 +11448,374 @@
     "readme": {
       "note": "Care Compass collects the complete published BC Child Care Map layer and Nova Scotia Child Care Directory, rather than limiting the search to a preset city list. Search a name, city, street or postal code; filter by province, age, program, operating pattern and reported vacancy. Specific filters match explicit positive source flags, so unknown fields remain visible under “Any / unknown”. The map uses supplied coordinates and loads OpenStreetMap tiles only when opened. BC covers ministry-funded licensed child care, not every BC provider. Its reported vacancy flags include their original update dates and are never promises of an available space. Nova Scotia updates its directory biannually; its source coverage date and publication date are displayed separately from our collection check. NS does not publish live vacancies in this dataset. Licence capacity is not spare capacity, and source inspection dates are not inspection findings or endorsements. Choose “Add to shortlist” to save a provider on this device. Contact status and notes survive ordinary refreshes in the same browser, with CSV export and a delete button; they do not sync or submit an application. Directory JSON export/reopen preserves earlier source coverage and dates separately from the private shortlist. Confirm age eligibility, fees, availability and hours with the provider before making plans."
     }
+  },
+  {
+    "id": "harbournow",
+    "title": "Harbour Now",
+    "description": "Identify observed ships around Halifax and Vancouver, explore recorded harbour movements, and compare time observed at anchor.",
+    "category": "places",
+    "tags": [
+      "ships",
+      "AIS",
+      "Halifax",
+      "Vancouver",
+      "English Bay",
+      "harbours",
+      "anchorage"
+    ],
+    "icon": "map",
+    "url": "/harbournow/",
+    "source": "https://github.com/jsdyer/harbournow",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "A separately installed VPS collector records AISStream observations continuously. Position dates, observation gaps and approximate boundaries are explicit. Requires a connected collector."
+    },
+    "readme": {
+      "note": "Choose Halifax or Vancouver, search a vessel name or MMSI, and select a ship for details and its recorded track. Older positions are hidden initially; enable “Show older positions” to inspect them with their original timestamps. Entries/exits require consecutive observations across a configurable boundary, and a first sighting is not an arrival. “Time observed at anchor” begins after compatible observations in an approximate anchorage zone and resets after a long gap. Connect the HTTPS address of an installed Harbour Now collector under “Connect a collector”; never enter the AISStream key in the browser."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "screenplaces",
+    "title": "Screen Places",
+    "description": "Explore documented film and television locations across Canadian regions, compare location precision and save an outing.",
+    "category": "media",
+    "tags": [
+      "film",
+      "television",
+      "filming locations",
+      "Canada",
+      "Vancouver",
+      "Halifax",
+      "Wikidata"
+    ],
+    "icon": "film",
+    "url": "/screenplaces/",
+    "source": "https://github.com/jsdyer/screenplaces",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Weekly regional Wikidata filming-location captures across Canada, with optional live TMDb details."
+    },
+    "readme": {
+      "note": "Search for a production such as The X-Files, then inspect the precision label before planning a visit. A city-level record only establishes that Wikidata associates the production with that city; choose recorded venues/sites for more specific leads and inspect each filming statement's references. Use **Pictures of this place** on a result to open Commons Lens with that record’s coordinates prefilled. Commons Lens waits for you to submit before requesting media."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "wikitrails",
+    "title": "Wiki Trails",
+    "description": "Discover nearby history, buildings and landmarks from Wikipedia, then save a personal walking list.",
+    "category": "places",
+    "tags": [
+      "Wikipedia",
+      "walking",
+      "places",
+      "Halifax",
+      "Vancouver",
+      "local history"
+    ],
+    "icon": "map",
+    "url": "/wikitrails/",
+    "source": "https://github.com/jsdyer/wikitrails",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Wikipedia geotagged articles and excerpts near a chosen place, with OpenStreetMap tiles."
+    },
+    "readme": {
+      "note": "Choose Halifax waterfront or search for another starting point, then increase the radius if few articles appear. Distances are straight-line measurements to article coordinates, not walking directions; save interesting places and check access before visiting. Use **Pictures of this place** on a result to open Commons Lens with that record’s coordinates prefilled. Commons Lens waits for you to submit before requesting media."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "addresschronicle",
+    "title": "Address Chronicle",
+    "description": "Search historical Vancouver and Halifax directories by address, street, person or business, with original scanned-page citations.",
+    "category": "places",
+    "tags": [
+      "history",
+      "directories",
+      "Vancouver",
+      "Halifax",
+      "addresses",
+      "archives"
+    ],
+    "icon": "map",
+    "url": "/addresschronicle/",
+    "source": "https://github.com/jsdyer/addresschronicle",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Page-indexed Internet Archive OCR from selected historical Vancouver and Halifax directories;monthly source checks."
+    },
+    "readme": {
+      "note": "Start with a street such as Granville or Barrington, then add a number or surname. OCR errors, changed street numbering and selective directory coverage can hide a match. Open the original scan and confirm the printed city heading before treating an excerpt as evidence."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "torrentlens",
+    "title": "Torrent Lens",
+    "description": "Inspect torrent files and magnet links locally: see files, sizes, hashes, trackers and filename warnings without downloading the content.",
+    "category": "security",
+    "tags": [
+      "torrent",
+      "magnet",
+      "privacy",
+      "files",
+      "hash",
+      "BitTorrent"
+    ],
+    "icon": "scan-search",
+    "url": "/torrentlens/",
+    "source": "https://github.com/jsdyer/torrentlens",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Reads torrent metadata or magnet links locally. Does not contact trackers, join peers or download the described files."
+    },
+    "readme": {
+      "note": "Drop a .torrent file to see its declared files, sizes, tracker addresses and exact infohashes. A magnet normally supplies only identifiers and hints; Torrent Lens does not fetch its missing file list. Filename warnings help you review metadata but are not a malware or authenticity verdict."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "skygeometry",
+    "title": "Sky Geometry",
+    "description": "Convert RA and declination to altitude and azimuth, plan target visibility and compare sky coordinates in your browser.",
+    "category": "field-kit",
+    "tags": [
+      "astronomy",
+      "coordinates",
+      "RA Dec",
+      "altitude",
+      "azimuth",
+      "observing"
+    ],
+    "icon": "moon-star",
+    "url": "/skygeometry/",
+    "source": "https://github.com/jsdyer/skygeometry",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Astronomy Engine calculates fixed sky-coordinate transformations locally from your location, date and selected coordinate system."
+    },
+    "readme": {
+      "note": "Choose your location, observation time and coordinate system before converting RA/Dec to altitude/azimuth. Catalogue coordinates usually use J2000; select equator of date only when your input already uses that frame. A positive altitude clears a level horizon, not nearby trees, buildings or cloud."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "budgetmirror",
+    "title": "Budget Mirror",
+    "description": "Compare your household spending with published Canadian averages, privately in your browser.",
+    "category": "money",
+    "tags": [
+      "Canada",
+      "household",
+      "budget"
+    ],
+    "icon": "wallet",
+    "url": "/budgetmirror/",
+    "source": "https://github.com/jsdyer/budgetmirror",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Statistics Canada household spending averages, with private comparisons calculated in your browser."
+    },
+    "readme": {
+      "note": "Choose a published geography, income group, household type or tenure, then enter only the spending categories you know. Blank amounts are unknown, while zero means no spending; the comparison subtotal matches only entered categories with a published estimate. Survey-year averages are historical context, not recommended budgets or current prices."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "movebench",
+    "title": "Move Bench",
+    "description": "Compare two places using your rent, job offers and moving costs to see the monthly difference.",
+    "category": "money",
+    "tags": [
+      "moving",
+      "rent",
+      "salary",
+      "comparison"
+    ],
+    "icon": "wallet",
+    "url": "/movebench/",
+    "source": "https://github.com/jsdyer/movebench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Your private pay and cost scenarios, with separately labelled Statistics Canada provincial household-spending context."
+    },
+    "readme": {
+      "note": "Enter actual pay and expenses for your current and proposed places. Move Bench separates the gross-pay change from the expense change, calculates an equivalent gross salary and shows moving-cost recovery. All salary comparisons are before income tax and payroll deductions; provincial household averages appear only as dated context and never fill your budget automatically."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "canadapulse",
+    "title": "Canada Pulse",
+    "description": "Explore Wikipedia reading trends in Canada and worldwide interest in Canadian topics.",
+    "category": "media",
+    "tags": [
+      "Wikipedia",
+      "pageviews",
+      "Canada",
+      "reading",
+      "trends"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/canadapulse/",
+    "source": "https://github.com/jsdyer/canadapulse",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Wikimedia daily Canadian readership rankings and worldwide user pageviews for configurable Canadian topics, with a growing dated archive and daily scheduled checks."
+    },
+    "readme": {
+      "note": "“Read from Canada” counts article views originating in Canada; “Canadian topics worldwide” follows a curated list globally. Country figures are privacy-protected upper bounds, not exact reader counts. Browse saved report dates by month, share a date link or export its results. Historical observations and the topic selection for each day are retained in the repository. Missing days remain gaps. A spike compares a complete earlier baseline; it does not explain why people are reading."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "planehere",
+    "title": "Plane Here",
+    "description": "Identify aircraft near you by callsign, direction, distance and altitude, with dated ADS-B observations.",
+    "category": "field-kit",
+    "tags": [
+      "aircraft",
+      "ADS-B",
+      "Halifax",
+      "Vancouver",
+      "aviation"
+    ],
+    "icon": "plane",
+    "url": "/planehere/",
+    "source": "https://github.com/jsdyer/planehere",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Community ADS-B observations from adsb.lol, shared in five-minute area snapshots with individual position times."
+    },
+    "readme": {
+      "note": "Choose a viewpoint and select Find aircraft. The list shows aircraft nearest first; bearing points from you toward the reported position, while track describes the aircraft's movement. Area observations may be cached for five minutes, and positions older than 15 minutes are hidden. Barometric altitude is not height above your building. Coverage is incomplete; this is a discovery tool, not aviation navigation."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "civicrevision",
+    "title": "Civic Revision",
+    "description": "Follow Wikipedia changes to Canadian institutions and public policy, with readable revision comparisons, citation changes and topic RSS feeds.",
+    "category": "explorers",
+    "tags": [
+      "Wikipedia",
+      "Canada",
+      "revisions",
+      "RSS"
+    ],
+    "icon": "landmark",
+    "url": "/civicrevision/",
+    "source": "https://github.com/jsdyer/civicrevision",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Scheduled Wikimedia revision captures with original revision links, citation changes and topic feeds.",
+      "cadence": "Every six hours"
+    },
+    "readme": {
+      "note": "Choose a topic, revision month or citation/reversion filter, then expand a revision to compare removed and added text. Original Wikipedia diff links retain the full context. Subscribe to all edits or one topic using the RSS links, including in Feed Harbour. The starter watchlist includes Canadian institutions, privacy/copyright/access-to-information policy, economic services, BC, Nova Scotia and Halifax. Revision date means when Wikipedia changed; first captured and source checked mean when this collector observed it. A changed citation can appear as one removal and one addition. Reversion signals are not judgments about intent, accuracy or vandalism."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "openseed",
+    "title": "Open Seed",
+    "description": "Find official Linux torrents, openly licensed archive media and research datasets with dated download checks.",
+    "category": "projects",
+    "tags": [
+      "Linux",
+      "torrent",
+      "open data",
+      "archive",
+      "downloads"
+    ],
+    "icon": "package-open",
+    "url": "/openseed/",
+    "source": "https://github.com/jsdyer/openseed",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Official Ubuntu, Debian and Arch torrents, openly licensed Internet Archive media and Zenodo datasets with bounded download checks.",
+      "cadence": "Daily"
+    },
+    "readme": {
+      "note": "Search Debian and choose Linux to find official installer torrents, or browse Archive media and Research data. “Available” means the small torrent was parsed or the first byte of the selected data file responded at the shown time. It does not mean the whole payload was downloaded or that seeders are currently online. Check the licence and publisher’s checksum before use."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "noticeguide",
+    "title": "Notice Guide",
+    "description": "Decode a Canadian ISP copyright notice privately, identify its key fields and review possible settlement or payment demands.",
+    "category": "security",
+    "tags": [
+      "privacy",
+      "copyright",
+      "Canada",
+      "ISP"
+    ],
+    "icon": "shield-check",
+    "url": "/noticeguide/",
+    "source": "https://github.com/jsdyer/noticeguide",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Pasted notices are processed only in your browser; dated explanations link to Justice Canada and ISED."
+    },
+    "readme": {
+      "note": "Paste a forwarded notice or open a plain-text `.txt`/`.eml` file to extract labelled claimant, work, allegation, event date and network fields. Payment, settlement, personal-information and court-document phrases are highlighted for human review. Try the fictional example before using your own notice. A missing extraction is not proof a legally required field is absent, and a flag is not a legal determination. Notice text never leaves the tab; the app uses no analytics or browser storage. A downloaded review contains the extracted private information. Clear or reload to remove the working text."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "measurebench",
+    "title": "Measure Bench",
+    "description": "Calculate transfer times, storage, energy use and everyday unit conversions locally.",
+    "category": "projects",
+    "tags": [
+      "calculator",
+      "units",
+      "storage",
+      "transfer",
+      "energy"
+    ],
+    "icon": "percent",
+    "url": "/measurebench/",
+    "source": "https://github.com/jsdyer/measurebench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "mixed",
+      "detail": "Local unit definitions and calculations; optional Wolfram Alpha short answers through a quota-limited proxy."
+    },
+    "readme": {
+      "note": "Try `100 GB at 100 Mbps`: the ideal transfer takes 2 hours, 13 minutes and 20 seconds. Lower the useful-throughput percentage to model overhead. GB and GiB differ; B means bytes and b means bits. Energy estimates include only the energy charge, not fixed fees or taxes."
+    },
+    "sync_manifest": true
   }
 ]

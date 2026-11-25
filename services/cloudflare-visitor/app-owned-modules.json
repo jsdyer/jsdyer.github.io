@@ -1,0 +1,12 @@
+[
+  {
+    "repo": "jsdyer/screenplaces",
+    "path": "services/gateway.mjs",
+    "sha256": "8c29d6f9ded31865a7beee5a24257b0b34403fdde3a37b7eaaca333ce29c19c7"
+  },
+  {
+    "repo": "jsdyer/planehere",
+    "path": "services/gateway.js",
+    "sha256": "72b06fc5caed728bee70a5407b179af759fabc143eeac2bd986ba8f23771452b"
+  }
+]
