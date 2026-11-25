@@ -10855,7 +10855,9 @@
               "count"
             ],
             "unit": "schedule entries"
-          }
+          },
+          "value": "2026-11-25 05:49 UTC",
+          "count": 1388
         }
       ]
     },
@@ -10898,7 +10900,9 @@
               "count"
             ],
             "unit": "projects"
-          }
+          },
+          "value": "2026-11-25 05:54 UTC",
+          "count": 12
         }
       ]
     },
@@ -10942,7 +10946,9 @@
               "count"
             ],
             "unit": "foods"
-          }
+          },
+          "value": "2026-11-25 06:03 UTC",
+          "count": 5993
         }
       ]
     },
@@ -11013,7 +11019,9 @@
               "count"
             ],
             "unit": "ASNs"
-          }
+          },
+          "value": "2026-11-25 05:49 UTC",
+          "count": 4
         }
       ]
     },
@@ -11083,7 +11091,9 @@
               "count"
             ],
             "unit": "destinations"
-          }
+          },
+          "value": "2026-11-25 05:37 UTC",
+          "count": 230
         }
       ]
     },

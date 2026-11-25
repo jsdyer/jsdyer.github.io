@@ -76,6 +76,11 @@ Actual Internet Archive PDF, NASA original image/assets/captions, official CLAA
 PDFs, Canadian food ZIP and advisory JSON downloads were checked. All 11 public
 app pages returned HTTP 200 with their finished interfaces. Collector status and
 data checks distinguish a failed download from a successful source refresh.
+Recipe Math's complete 26 MB official ZIP was also downloaded and validated by
+its real GitHub runner, followed by tests, snapshot commit and successful Pages
+publication. Its monthly cadence is retained; code publications also verify the
+source. Homepage metadata includes the five collectors' actual checked times and
+record counts.
 
 Each app has model/collector/build tests and actual Chrome workflow tests. Browser
 tests use fixtures for reproducibility; the production provider checks above use

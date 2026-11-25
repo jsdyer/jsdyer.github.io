@@ -71,7 +71,8 @@ def main():
                 assert page.locator('[data-tool]:visible').count() == 1
                 assert page.get_by_role('link', name='Word Weave', exact=True).is_visible()
             page.locator('#clear-tools').click()
-            page.locator('#tool-search').fill('Archive Shelf')
+            # The literal ID is unique; broad words also legitimately match Manual Shelf.
+            page.locator('#tool-search').fill('archive-shelf')
             assert page.locator('[data-tool]:visible').count() == 2
             assert page.locator('#tool-count').inner_text() == '1 tool found'
             page.locator('#clear-tools').click()
