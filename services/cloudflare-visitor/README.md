@@ -35,12 +35,15 @@ See [the complete tool lifecycle](../../docs/tool-lifecycle.md).
 
 The owner deployed the seven-tool release with 257 catalogue IDs and new Halifax
 Transit, Nova Scotia inspection, Canada Post and federal-corporation handlers.
-The deployed module was downloaded and verified at 08:41 UTC on November 25.
+The final deployed module was downloaded and verified at 09:11 UTC on November 25.
 Canada Post quotes/outlet searches, ISED corporation details and live provincial
-inspection search/reports passed production checks. A subsequent Halifax-only
-correction fixes upstream MIME negotiation and the Workers redirect mode; the
-receipt remains the record of the deployed version until that correction is
-pasted and verified. Instructions are in [seven-tools-setup.md](seven-tools-setup.md).
+inspection search/reports passed production checks. Halifax live predictions,
+alerts and vehicle positions also passed after correcting upstream MIME
+negotiation and the Workers redirect mode, then using native bounded streaming.
+The final cold trip-feed request used 8 ms CPU; all three feeds returned 200.
+Canada Post opening hours also passed after accepting canonical numeric-string
+day values. The receipt matches this final source.
+Instructions for future updates are in [seven-tools-setup.md](seven-tools-setup.md).
 
 For a later manual update, copy the complete generated source from
 [worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js),
@@ -83,7 +86,9 @@ are not sent to this API.
 The existing `DB` binding holds two additive tables, `gateway_cache` and
 `gateway_budget`. Existing visit/report tables and administration are retained.
 Ordinary cached responses have a 256-entry cap and a 500 KB response limit
-(1 MB for package evidence). Halifax uses three fixed public feed keys in the edge Cache API with 30-second
+(1 MB for package evidence). Halifax requires the official feed’s positive Content-Length (at most 5 MB) and
+uses a native FixedLengthStream to enforce it without JavaScript per network chunk.
+It uses three fixed public feed keys in the edge Cache API with 30-second
 expiry. Feed responses are bounded at 5 MB and decoded/filtered in the browser;
 no protobuf decode, JSON expansion or gzip work runs in the Worker.
 Halifax's IIS source requires `application/protocol-buffer` in the upstream Accept
@@ -144,3 +149,16 @@ check against pinned Cloudflare types. The JavaScript check is intentionally
 non-strict to match this existing plain-JavaScript Worker; no diagnostic is
 suppressed. Runtime suites exercise malformed UTF-8, source contracts, credential
 redaction, cache separation and source budgets against SQLite.
+
+### Optional native runtime verification
+
+With an existing official workerd executable, run:
+
+```sh
+python3 tests/check_halifax_native.py --workerd /path/to/workerd
+```
+
+This local test loads the actual relay helper and checks exact, short and excess
+bodies plus native cache-clone bytes and capture timestamps. It makes no provider
+requests and does not deploy anything. Production CPU telemetry remains separate
+from this correctness test.

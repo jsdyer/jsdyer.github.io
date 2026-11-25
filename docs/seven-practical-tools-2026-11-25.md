@@ -38,10 +38,11 @@ Pages repositories with a shared Cloudflare Worker for the APIs that need it.
 - Inspection findings are historical source records, not a current safety score.
   The province's Current Warnings search returned its own Unknown Error page
   during verification; that failure is shown rather than converted to zero results.
-- Canada Post live rates and nearby outlet locations were verified. Three tested
-  outlets produced no usable opening-hours rows through the adapter; the UI states
-  that hours are unavailable and links the official finder. The normalized response
-  cannot distinguish absent source rows from an unsupported source format.
+- Canada Post live rates, nearby outlet locations and opening hours were verified.
+  The provider returned day numbers as canonical strings; the adapter now accepts
+  both those and numeric values. Halifax Central returned Monday–Friday hours,
+  and Lawtons #114 rendered all seven days. If a future outlet lacks usable hours,
+  the UI explicitly says they are unavailable and links the official finder.
 - CHS predictions are planning information with source attribution and the
   prescribed notices; they are not navigation or safe-access advice.
 
@@ -58,7 +59,14 @@ absence of a collector for Parcel Bench. New successful-check probes, collection
 step names and schedule guards are registered. The watchdog runtime is unchanged;
 its existing timer downloads the updated targets automatically. A restricted
 GitHub App installation must include the six new scheduled repositories. The
-private server report has not been inspected from this workspace.
+private server report has not been inspected from this workspace. The first
+public outcome report finds current published data for all affected tools, but
+Halifax, Fuel, Wage and Weather are still awaiting a successful collection run of
+their final workflow. Their local source refreshes and hosted builds passed; this
+is recorded separately from scheduled-run proof. The watchdog bot automatically
+dispatched Tide & Dark’s newly registered daylight workflow at 08:58 UTC; run
+45580971022 succeeded and published fresh predictions. This verifies automatic
+target adoption for that existing repository without claiming access to new repos.
 
 Application builds version their HTML/module/style/data asset graph so a newly
 deployed page does not reuse incompatible cached JavaScript or data. Actual source
@@ -72,7 +80,9 @@ fixed-host adapters for Halifax protobuf feeds, Nova Scotia's anonymous inspecti
 session, Canada Post production OAuth/JSON and the current ISED corporation API.
 The Halifax adapter streams bounded public protobuf bytes through the edge cache;
 its browser performs decoding/filtering, avoiding the original server decoder's
-CPU cost. Existing bindings and APIs are retained. The API Key is the Canada Post client ID;
+CPU cost. Native fixed-length streaming also avoids a JavaScript callback for
+every network chunk, while rejecting missing, invalid or oversized declared
+lengths and short/excess bodies. Existing bindings and APIs are retained. The API Key is the Canada Post client ID;
 the matching API Secret is the client secret. Consumer quotes omit customer number.
 
 The screenshot's three editor diagnostics are fixed. Pinned Cloudflare type checks
@@ -85,7 +95,8 @@ Production checks on November 25 verified:
 
 - Canada Post: Halifax-to-Ottawa quotes for two box sizes returned Regular Parcel,
   Xpresspost and Priority prices and expected arrival dates; the outlet search
-  returned ten locations. Hours have the limitation documented above.
+  returned ten locations. Live opening hours were verified for Halifax Central
+  and Lawtons #114 after correcting the day-value parser.
 - ISED: corporation 7672233 returned Wikimedia Canada’s active record, eight
   directors and dated filings.
 - Nova Scotia: a live Donair/Halifax search returned six establishments; King of
@@ -93,15 +104,25 @@ Production checks on November 25 verified:
 - All eleven app repositories passed their hosted build/browser checks and Pages
   deployments; generated data and referenced assets were checked on the live sites.
 
-Local release validation passed 76 catalogue Python tests, 91 Node tests, 99
+Local release validation passed 76 catalogue Python tests, 92 Node tests, 99
 watchdog tests, pinned Cloudflare type checks and the 257-tool build/integration
-checks. Hosted catalogue checks run again when main is published.
+checks. Hosted catalogue browser/build checks, watchdog checks and Pages
+deployment passed in run 45579978178. The live homepage and search catalogue
+contain 257 tools, and the live sitemap includes all seven new routes.
 
-The owner-deployed module was downloaded and verified at 08:41 UTC on November
-25; its receipt records the actual bytes. Live verification identified a Halifax
-relay issue: Workers does not support fetch redirect mode `error`, and Halifax's
-IIS server requires its `application/protocol-buffer` MIME type in `Accept`. Both
-are corrected and regression-tested; exact upstream probes now return 200. This
-last correction awaits the owner's manual paste before live transit can be marked
-verified. Scheduled departures remain available and explicitly labelled. Follow
+The final owner-deployed module was downloaded and verified at 09:11 UTC on
+November 25; its receipt records the actual bytes. Live verification identified
+and fixed two Halifax relay issues: Workers does not support fetch redirect mode
+`error`, and Halifax's IIS server requires its `application/protocol-buffer` MIME
+type in `Accept`. Both are corrected and regression-tested. The production page
+then showed fresh live predictions at stop 8330, current route detours and six
+vehicle positions. Timetable-only departures remain explicitly labelled. Follow
 [the concrete Worker instructions](../services/cloudflare-visitor/seven-tools-setup.md).
+
+The native streaming path passed a separate actual-workerd correctness check.
+A real 1.318 MB feed benchmark including cache writes measured 2.98 ms median
+CPU for native streaming versus 9.83 ms for JavaScript chunk handling. That
+benchmark excludes production D1 calls. After owner deployment, actual uncached
+trip-feed CPU fell from 51–62 ms to 8 ms. The vehicle and alert requests used
+10 ms and 6 ms respectively, and all three returned 200 with outcome `ok`. These
+are measured requests, not a guarantee for every future load or source size.
