@@ -1,7 +1,8 @@
 # Eleven useful workspaces — November 24, 2026
 
 This release adds 11 functioning browser apps, bringing CoolCode to **250 tools:
-239 browser tools and 11 installable tools**. The complete inventory accounts for
+239 browser tools and 11 install-only tools**. Two browser tools also offer
+installable versions, so the install filter contains 13 projects. The complete inventory accounts for
 **253 public repositories**, with **241 listed source repositories**, 12 documented
 non-tool exclusions and no unreviewed public repositories. No repositories need
 deletion for this release.
@@ -91,3 +92,9 @@ test page events or issue reports were inserted during Worker verification.
 
 Historical reports for the previous three- and four-tool releases retain their
 then-current counts; this report and the generated catalogue describe this release.
+
+Final hub verification: [run 45558325870](https://github.com/jsdyer/jsdyer.github.io/actions/runs/45558325870)
+passed catalogue, watchdog, real-browser and Pages jobs. The deployed homepage
+finds every new app by its ID; the live sitemap returns HTTP 200 and includes all
+11 new routes. Its 248 URLs also include existing discovery pages and exclude
+installation destinations that are external to this site.
