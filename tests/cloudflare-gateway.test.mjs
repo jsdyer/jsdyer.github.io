@@ -30,6 +30,16 @@ test('new credential status reports presence only and keyless adapters remain en
   assert.equal((await(await run('/api/status',{CANADAPOST_CLIENT_ID:'only-one'})).json()).configured.parcelbench,false);
 });
 
+test('Halifax byte relay crosses the complete response wrapper with safe CORS headers',async t=>{
+  const env=environment(), bytes=new Uint8Array([10,3,50,46,48]);
+  stub(t,async()=>new Response(bytes,{headers:{'Content-Type':'application/protocol-buffer','Set-Cookie':'never-forward=private'}}));
+  const r=await run('/api/halifaxnext/realtime?feed=vehicles',env);
+  assert.equal(r.status,200);assert.deepEqual(new Uint8Array(await r.arrayBuffer()),bytes);
+  assert.equal(r.headers.get('Content-Type'),'application/x-protobuf');assert.equal(r.headers.get('Set-Cookie'),null);
+  assert.equal(r.headers.get('Cache-Control'),'no-store');assert.equal(r.headers.get('Access-Control-Allow-Origin'),origin);
+  assert.ok(r.headers.get('X-CoolCode-Fetched-At'));assert.match(r.headers.get('Access-Control-Expose-Headers'),/X-CoolCode-Fetched-At/);
+});
+
 test('federal detail dispatch is authenticated server-side and caches each corporation separately',async t=>{
   const env={...environment(),ISED_CORPORATIONS_API_KEY:'private-federal-key'};let calls=0;
   stub(t,async(target,options)=>{calls++;const u=new URL(target),id=u.pathname.split('/').at(-1);

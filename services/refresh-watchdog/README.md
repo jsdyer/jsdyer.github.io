@@ -31,15 +31,30 @@ release changes the registry, not the installed watchdog program. Confirm the ne
 server report sees any newly granted repositories; a public GitHub deployment
 cannot confirm the private server's credentials or running version.
 
-The eleven-app release adds five more collector targets: `tripbrief` (hourly),
+The earlier eleven-app release added five collector targets: `tripbrief` (hourly),
 `portwindow`, `distropilot` and `backbonecompare` (daily), and `recipemath`
-(monthly). The generated registry now contains 176 scheduled workflows. Their
+(monthly). Their
 published `data/status.json` files supply actual `checked_at` timestamps; alert
 ages are six hours, 72 hours for the daily jobs, and 45 days for Recipe Math.
 The other six new apps fetch data on demand or calculate locally and need no
 collector target. This release requires no watchdog runtime reinstall. If its
 GitHub App uses selected repositories, grant those five repositories access and
 confirm the next private server report sees them.
+
+The seven practical apps add six scheduled repositories: `halifaxnext`,
+`inspectiontrail`, `carecompass` and `weatherwindow` (daily), `fuelwindow`
+(twice daily) and `wagewindow` (weekly). `parcelbench` uses on-demand Canada Post
+requests and needs no scheduled collector. The existing `tide-and-dark` repository
+also adds a daily official CHS daylight collector beside its monthly modeled
+night-tide workflow. The registry contains reviewed successful-check probes and
+exact collection step names; source edition dates remain separate from successful
+download dates. Failed imports retain the earlier good data and its check time.
+
+These additions do not change the installed watchdog program. Its next pass
+downloads the generated targets from GitHub. An installation restricted to selected
+repositories needs access to the six new scheduled repositories listed above.
+The private server report must confirm that access; passing public GitHub CI does
+not prove the server's credentials or installed runtime version.
 
 ## What changes
 

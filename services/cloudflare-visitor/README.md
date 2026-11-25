@@ -71,6 +71,9 @@ deploys the new handlers.
 
 `/api/status` returns configuration booleans only. Successful lookups return
 `{fetched_at,data}`; failures return `{error:{code,message}}` with non-2xx status.
+Halifax real-time feeds are the exception: successful responses stream bounded
+`application/x-protobuf` bytes and expose `X-CoolCode-Fetched-At`. The browser
+decodes and filters the public feed, keeping that CPU work out of the Worker.
 The captured time survives cached reads. The browser's saved private work remains
 unchanged when a provider fails. Search terms and public feed URLs are sent to
 Cloudflare and the relevant provider. Private notes, recipes and listening state
@@ -79,8 +82,9 @@ are not sent to this API.
 The existing `DB` binding holds two additive tables, `gateway_cache` and
 `gateway_budget`. Existing visit/report tables and administration are retained.
 Ordinary cached responses have a 256-entry cap and a 500 KB response limit
-(1 MB for package evidence). Halifax has three fixed compressed feed keys capped
-at 1.9 MB each with 30-second expiry; filtering happens after source caching.
+(1 MB for package evidence). Halifax uses three fixed public feed keys in the edge Cache API with 30-second
+expiry. Feed responses are bounded at 5 MB and decoded/filtered in the browser;
+no protobuf decode, JSON expansion or gzip work runs in the Worker.
 Inspection and corporation details expire after five minutes. Parcel quotes and
 outlet lookups are never persisted in the shared cache and return no-store.
 Errors are not cached. SQL upserts enforce

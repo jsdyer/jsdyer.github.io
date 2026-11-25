@@ -3277,6 +3277,13 @@
     "branch": "main",
     "workflows": [
       {
+        "workflow": "daylight.yml",
+        "crons": [
+          "43 8 * * *"
+        ],
+        "inputs": {}
+      },
+      {
         "workflow": "pages.yml",
         "crons": [
           "13 10 2 * *"
@@ -3285,6 +3292,7 @@
       }
     ],
     "guarded_paths": [
+      ".github/workflows/daylight.yml",
       ".github/workflows/pages.yml",
       ".github/workflows/schedule-guard.yml"
     ]

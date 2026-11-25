@@ -2115,6 +2115,22 @@
       }
     ]
   },
+  "jsdyer/tide-and-dark/daylight.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/tide-and-dark/daylight-status.json",
+        "json_path": [
+          "retrieved"
+        ],
+        "precision": "timestamp",
+        "label": "Official CHS predictions checked",
+        "max_age_seconds": 129600
+      }
+    ],
+    "collection_steps": [
+      "Refresh and validate official tide predictions"
+    ]
+  },
   "jsdyer/tide-and-dark/pages.yml": {
     "freshness": [
       {

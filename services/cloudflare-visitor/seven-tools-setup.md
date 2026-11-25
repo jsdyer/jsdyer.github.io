@@ -13,7 +13,9 @@ details. Adding the seven names alone does not install these API handlers.
 
 Keep the current `DB` binding, existing keys, compatibility settings and routes.
 No additional database binding or migration command is needed. Small additional
-cache and request-budget tables are initialized by the handlers.
+cache and request-budget tables are initialized by the handlers. Halifax uses
+the built-in edge Cache API for its public protobuf feeds and decodes them in
+the browser, avoiding a dependency on a paid Worker CPU allowance.
 
 In **Settings → Variables and Secrets**, use type **Secret** for:
 

@@ -115,9 +115,9 @@ async function reports(db,url) {
   return {body:{reports:rows,next:result.results.length>100 ? last.created+'~'+last.id : null}};
 }
 
-async function handle(request,env) {
+async function handle(request,env,ctx) {
   const db=env.DB, url=new URL(request.url),path=url.pathname;
-  if (path.startsWith('/api/')) return apiHandle(request,env);
+  if (path.startsWith('/api/')) return apiHandle(request,env,ctx);
   const origin=request.headers.get('Origin');
   const publicPath=['/event','/report'].includes(path);
   const adminPath=['/admin/stats','/admin/reports'].includes(path)||/^\/admin\/reports\/[\da-f-]{36}$/.test(path);
@@ -165,21 +165,28 @@ async function handle(request,env) {
 }
 
 export default {
-  async fetch(request,env) {
+  async fetch(request,env,ctx) {
     const headers={'Cache-Control':cacheControl,Vary:'Origin','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'};
     if (request.headers.get('Origin')===ORIGIN) {
       headers['Access-Control-Allow-Origin']=ORIGIN;
       headers['Access-Control-Allow-Methods']='GET, POST, PATCH, OPTIONS';
       headers['Access-Control-Allow-Headers']='Authorization, Content-Type';
       headers['Access-Control-Max-Age']='600';
-      headers['Access-Control-Expose-Headers']='Retry-After';
+      headers['Access-Control-Expose-Headers']='Retry-After, X-CoolCode-Fetched-At';
     }
     let result;
-    try { result=await handle(request,env); }
+    try { result=await handle(request,env,ctx); }
     catch (e) {
       if (e instanceof RangeError) result=errorResponse(413,'Request is too large.');
       else if (e instanceof SyntaxError) result=errorResponse(400,'Invalid JSON request.');
       else result=errorResponse(503,'Service temporarily unavailable.');
+    }
+    if (result.rawResponse) {
+      const raw=result.rawResponse;
+      for(const name of ['Content-Type','X-CoolCode-Fetched-At']){
+        const value=raw.headers.get(name);if(value)headers[name]=value;
+      }
+      return new Response(raw.body,{status:raw.status,headers});
     }
     if (result.body) headers['Content-Type']='application/json; charset=utf-8';
     return new Response(result.body?JSON.stringify(result.body):null,{status:result.status||200,headers:{...headers,...result.headers}});

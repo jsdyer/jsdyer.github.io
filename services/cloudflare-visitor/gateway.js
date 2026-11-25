@@ -151,14 +151,14 @@ async function apiUpstream(plan,env) {
   }
 }
 
-async function apiHandle(request,env) {
+async function apiHandle(request,env,ctx) {
   try {
     const url=new URL(request.url), origin=request.headers.get('Origin');
     if(origin && origin!==ORIGIN) return apiFailure(403,'origin_denied','Origin is not allowed.');
     if(request.method==='OPTIONS') return {status:204};
     if(request.method!=='GET') return apiFailure(405,'method_denied','Use GET for public data requests.');
     if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY)}}};
-    if(url.pathname.startsWith('/api/halifaxnext/')) return await halifaxApiHandle(request,env);
+    if(url.pathname.startsWith('/api/halifaxnext/')) return await halifaxApiHandle(request,env,ctx);
     const plan=pcRoute(url,env)||inspectionRoute(url)||apiRoute(url,env), db=env.DB, now=Date.now();
     if(!db) return apiFailure(503,'storage_unavailable','The shared request limiter is unavailable.');
     if(!await allowed(db,request,new Date(now),'tool-api')) return apiFailure(429,'client_wait','Too many requests. Please wait before trying again.',300);
