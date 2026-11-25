@@ -66,24 +66,6 @@
     "reviewed_at": "2026-11-23"
   },
   {
-    "repo": "contaminatedplaces",
-    "status": "starter",
-    "reason": "Still contains the unimplemented CoolCode starter template.",
-    "reviewed_at": "2026-11-23"
-  },
-  {
-    "repo": "queryconfessional",
-    "status": "empty",
-    "reason": "Repository has no source files to implement a tool yet.",
-    "reviewed_at": "2026-11-23"
-  },
-  {
-    "repo": "backupledger",
-    "status": "empty",
-    "reason": "Repository has no source files to implement a tool yet.",
-    "reviewed_at": "2026-11-23"
-  },
-  {
     "repo": "public-apis",
     "status": "reference-fork",
     "reason": "Contribution/reference fork of public-apis/public-apis, not an independent CoolCode application.",

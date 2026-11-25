@@ -20,14 +20,14 @@ A newly added repository must also be accessible to the existing GitHub App inst
 - It recovers workflows disabled specifically for inactivity. Manually disabled workflows stay disabled.
 - It dispatches missed or failed refreshes, avoiding jobs already queued or running. It attempts at most ten dispatches per pass. Unresolved refreshes keep receiving recovery attempts at least six hours apart by default (up to four per day), without a lifetime attempt limit.
 - A successful dispatch request is **not** reported as a successful refresh. Later passes check the completed run and, where configured, the actual published data timestamp.
-- Published freshness checks use reviewed collection/check timestamps from `data/operations/freshness.json` in the hub. Old upstream observations and intentionally retained captures are not silently treated as fresh. The 162 data-publishing workflows have 166 reviewed probes; the six workflow-only exceptions are listed below.
+- Published freshness checks use reviewed collection/check timestamps from `data/operations/freshness.json` in the hub. Old upstream observations and intentionally retained captures are not silently treated as fresh. Every scheduled data-publishing workflow has a reviewed probe; the six workflow-only exceptions are listed below. The generated `targets.json` is the current inventory.
 - An optional Healthchecks-compatible heartbeat monitors watchdog execution: completing checks, requesting eligible recovery and saving the report. Collector failures and stale data stay in reports without failing this heartbeat. Without that URL, reporting is local through the JSON report and systemd journal.
 
 The separate weekly GitHub schedule guards are an immediate mitigation, not a documented exemption from GitHub's inactivity policy. This server provides the independent scheduling backstop. **Execution and publication still depend on GitHub Actions**; migrating the collectors themselves to your server would be a separate step.
 
 ## Published timestamp coverage
 
-All 162 scheduled data-publishing workflows have a published timestamp check.
+Every scheduled data-publishing workflow has a published timestamp check.
 The remaining six jobs monitor or audit existing material and do not publish a
 source-data snapshot:
 
@@ -138,6 +138,13 @@ download. The probe label names the checked feed: for example, Patch Signal chec
 KEV retrieval, while optional EPSS enrichment is reported by the app separately.
 A fresh capture timestamp does not certify every optional feed or the accuracy of
 the upstream data.
+
+Contaminated Places checks the official Federal Contaminated Sites Inventory weekly
+and publishes its successful `checked_at` timestamp in `data/status.json`. Its
+generated target is adopted on the next registry refresh. Query Confessional and
+Backup Ledger are private installable tools, so neither receives a public refresh
+target. If the watchdog App uses selected repositories, grant it access to
+`contaminatedplaces`; a catalogue update cannot change App installation permissions.
 
 Air Check Diary uses `data/check.json.checked_at`, the time its collector successfully
 checked the official CRTC archive catalogue. `awaiting_publication` means the next

@@ -1,6 +1,6 @@
 # Repository coverage audit
 
-The current inventory is regenerated from every public repository page. The latest review includes the missing Fleet Sheet tool, four newly created starter repositories, and the public-apis contribution/reference fork. The machine-readable result is
+The current inventory is regenerated from every public repository page. The latest review completes Contaminated Places, Query Confessional and Backup Ledger and retains the public-apis contribution/reference fork as a documented non-tool repository. The machine-readable result is
 [`data/repository-audit.json`](../data/repository-audit.json). It includes public
 repository names only; private repository identities are omitted.
 
@@ -35,8 +35,14 @@ records each public exclusion with a reason and review date:
 
 - Ten separate personal/business websites are not CoolCode utilities.
 - `coolcode-tool-template` is the reusable starter, not a finished tool.
-- Starter repositories are explicitly classified until their actual tools are implemented and verified.
-- `queryconfessional` and `backupledger` contain no source files yet.
+- `public-apis` is a contribution/reference fork, not an independent CoolCode tool.
+
+Contaminated Places now provides the national current-site map, while Toxic Ground
+retains its BC/Nova Scotia fiscal history. Query Confessional and Backup Ledger are
+implemented private installable tools, with their source, installation instructions
+and CI in their own repositories. All three have been removed from the exclusion
+list. Installable tools are explicitly recorded with no public collection schedule;
+their users' private logs and backup inventories are never collected by CoolCode.
 
 An exclusion is a review decision, not a permanent block. Remove it when a tool is
 implemented and verified, then add the catalogue entry. Dataset Diff retains its

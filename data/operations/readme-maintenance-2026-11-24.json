@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-24",
+  "change": "README-only stale scheduling prose and generated Worker instructions; guide excerpts and cadence unchanged",
+  "commits": [
+    {
+      "repo": "clamground",
+      "commit_sha": "2724d84220ef06b17ebd115e443da4027930c3a3",
+      "content_sha": "6f771ea3f732d6a6511ceed875cfc2f321c0453f",
+      "url": "https://github.com/jsdyer/clamground/commit/2724d84220ef06b17ebd115e443da4027930c3a3",
+      "verified": true
+    },
+    {
+      "repo": "cloud-ledger",
+      "commit_sha": "23c1192036f53fc385ba330dda40bf27a385f9c9",
+      "content_sha": "11d07b04883297f4e48aa811e0393fac3c7ee633",
+      "url": "https://github.com/jsdyer/cloud-ledger/commit/23c1192036f53fc385ba330dda40bf27a385f9c9",
+      "verified": true
+    },
+    {
+      "repo": "contractpatterns",
+      "commit_sha": "e92400a2360a1016192f4150e63f4914ac0ae800",
+      "content_sha": "00b314d400ad3039997897cd566027fb408f424a",
+      "url": "https://github.com/jsdyer/contractpatterns/commit/e92400a2360a1016192f4150e63f4914ac0ae800",
+      "verified": true
+    },
+    {
+      "repo": "donairafterdark",
+      "commit_sha": "02ab8c46d057de1aa01b80e03717bdf2bf1043d1",
+      "content_sha": "1f3750f94777b4462224f2b0192ccd8d6f8362c3",
+      "url": "https://github.com/jsdyer/donairafterdark/commit/02ab8c46d057de1aa01b80e03717bdf2bf1043d1",
+      "verified": true
+    },
+    {
+      "repo": "ferrycountss",
+      "commit_sha": "4b0fa00e7484f1f8992fac5ddaaef5ad422fead7",
+      "content_sha": "fcb109d1f7729d4a3f70db790b0b38f8f15ce459",
+      "url": "https://github.com/jsdyer/ferrycountss/commit/4b0fa00e7484f1f8992fac5ddaaef5ad422fead7",
+      "verified": true
+    },
+    {
+      "repo": "govgrade",
+      "commit_sha": "f2781c788debc76981a52c07ed8f07dd98c08c55",
+      "content_sha": "9b239e6598e01f36e0cf91c5cbc2e35f44386c43",
+      "url": "https://github.com/jsdyer/govgrade/commit/f2781c788debc76981a52c07ed8f07dd98c08c55",
+      "verified": true
+    },
+    {
+      "repo": "govtrackercensus",
+      "commit_sha": "b24486fb773047b92b02b8a1405f2ef0531af810",
+      "content_sha": "5881c821991a5e4955599a5782ecf5d2c675f234",
+      "url": "https://github.com/jsdyer/govtrackercensus/commit/b24486fb773047b92b02b8a1405f2ef0531af810",
+      "verified": true
+    },
+    {
+      "repo": "hotspotledger",
+      "commit_sha": "3fd674d0bafee3680d571e9de8bb18d13c05546a",
+      "content_sha": "ceae329a26aca63b66de4c197308daff30e867c4",
+      "url": "https://github.com/jsdyer/hotspotledger/commit/3fd674d0bafee3680d571e9de8bb18d13c05546a",
+      "verified": true
+    },
+    {
+      "repo": "lastrefill",
+      "commit_sha": "db54ed5aa22809ad0ce21e10603f3348f80d8979",
+      "content_sha": "4f232c80757ebdc88eac70453db675fcaa172a33",
+      "url": "https://github.com/jsdyer/lastrefill/commit/db54ed5aa22809ad0ce21e10603f3348f80d8979",
+      "verified": true
+    },
+    {
+      "repo": "lawdelta",
+      "commit_sha": "619f66cddbba0a73a0b9361f326e66c49be8cefa",
+      "content_sha": "c75dc7efde9776c2754a80dfa8eb4c0778627a45",
+      "url": "https://github.com/jsdyer/lawdelta/commit/619f66cddbba0a73a0b9361f326e66c49be8cefa",
+      "verified": true
+    },
+    {
+      "repo": "oldnews-oddities",
+      "commit_sha": "932f1fb9ac7738efcf563c354d05c2f864fa6ff7",
+      "content_sha": "7eb873bac48b98f0df85c65878edd785d856c14a",
+      "url": "https://github.com/jsdyer/oldnews-oddities/commit/932f1fb9ac7738efcf563c354d05c2f864fa6ff7",
+      "verified": true
+    },
+    {
+      "repo": "pantryprices",
+      "commit_sha": "72b1eae6fe205c3a6f0271f93e5426c75a6ce5ae",
+      "content_sha": "13ed26127ed1cd5d62a1e2ccc1d40cf2fb315462",
+      "url": "https://github.com/jsdyer/pantryprices/commit/72b1eae6fe205c3a6f0271f93e5426c75a6ce5ae",
+      "verified": true
+    },
+    {
+      "repo": "priceatlas",
+      "commit_sha": "2eb34c395a1570f2fb0f2defeaa0d98d0005e8fa",
+      "content_sha": "bbb28ae9c6fc01dc106f63da52c8cd5748e5a7c7",
+      "url": "https://github.com/jsdyer/priceatlas/commit/2eb34c395a1570f2fb0f2defeaa0d98d0005e8fa",
+      "verified": true
+    },
+    {
+      "repo": "recallradar",
+      "commit_sha": "881cc2d7b866e19f130bbb88242ff85afd6468c8",
+      "content_sha": "3f6a4b289656171ac121021d07b526e03f30b276",
+      "url": "https://github.com/jsdyer/recallradar/commit/881cc2d7b866e19f130bbb88242ff85afd6468c8",
+      "verified": true
+    },
+    {
+      "repo": "restroomreach",
+      "commit_sha": "36ff8a4c2c5a213782d6126612aa3a0150bf12e2",
+      "content_sha": "f8bf76d64bc2de6fe1c4f680931db4b853beeb5c",
+      "url": "https://github.com/jsdyer/restroomreach/commit/36ff8a4c2c5a213782d6126612aa3a0150bf12e2",
+      "verified": true
+    },
+    {
+      "repo": "scanreceipt",
+      "commit_sha": "b837b121276d86a8dc1632c8bb88d73462785a52",
+      "content_sha": "34f2297c149fcf6600a2408d6d0fdbe9346075eb",
+      "url": "https://github.com/jsdyer/scanreceipt/commit/b837b121276d86a8dc1632c8bb88d73462785a52",
+      "verified": true
+    },
+    {
+      "repo": "seabusclock",
+      "commit_sha": "8f9d047024e3164788c50f8ec9e5ad455692e789",
+      "content_sha": "4d196caeb4e43c8122cfdf7231e20c7d2f5b3dbb",
+      "url": "https://github.com/jsdyer/seabusclock/commit/8f9d047024e3164788c50f8ec9e5ad455692e789",
+      "verified": true
+    },
+    {
+      "repo": "toxic-ground",
+      "commit_sha": "4d9ae16040993b0cb76f65ae23eb02c9d37489eb",
+      "content_sha": "9d31b3c8303dccf887564c6339c2cc6d253ac651",
+      "url": "https://github.com/jsdyer/toxic-ground/commit/4d9ae16040993b0cb76f65ae23eb02c9d37489eb",
+      "verified": true
+    },
+    {
+      "repo": "transferwindow",
+      "commit_sha": "995844c62a1486311c55a1d50b3b0c86f88717ae",
+      "content_sha": "2012368426557c09b852353d0d195c0567990448",
+      "url": "https://github.com/jsdyer/transferwindow/commit/995844c62a1486311c55a1d50b3b0c86f88717ae",
+      "verified": true
+    },
+    {
+      "repo": "transitreceipt",
+      "commit_sha": "2e69f8a1d893d0c1a06fd38d711f21715a0bca2d",
+      "content_sha": "fb2787e0391b95c74f0ab38f8aacdad32aaeaef2",
+      "url": "https://github.com/jsdyer/transitreceipt/commit/2e69f8a1d893d0c1a06fd38d711f21715a0bca2d",
+      "verified": true
+    }
+  ]
+}

@@ -668,6 +668,28 @@
       ]
     },
     {
+      "repo": "jsdyer/contaminatedplaces",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "23 11 * * 3"
+      ],
+      "inputs": {},
+      "collection_steps": [
+        "Refresh public record files"
+      ],
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/contaminatedplaces/data/status.json",
+          "label": "FCSI source checked",
+          "max_age_seconds": 1209600,
+          "json_path": [
+            "checked_at"
+          ]
+        }
+      ]
+    },
+    {
       "repo": "jsdyer/contractpatterns",
       "branch": "main",
       "workflow": "pages.yml",

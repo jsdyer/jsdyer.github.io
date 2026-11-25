@@ -10462,5 +10462,107 @@
       "note": "The page asks several Cloudflare endpoints for their /cdn-cgi/trace and shows which data centre (an airport code such as YVR or SEA) answered each one, over IPv4 and IPv6. If Cloudflare locates your IP in Canada but an edge outside Canada answered, it is flagged. Turn on \"Remember my results in this browser\" and come back over days to see whether your ISP's route to Cloudflare moves; the history stores data centre codes only, never your IP, and can be downloaded as CSV."
     },
     "sync_manifest": true
+  },
+  {
+    "id": "backupledger",
+    "title": "Backup Ledger",
+    "description": "Find stale or missing restic backups and review the integrity checks that actually ran.",
+    "category": "projects",
+    "tags": [
+      "backup",
+      "restic",
+      "linux",
+      "homelab",
+      "integrity",
+      "inventory"
+    ],
+    "icon": "server",
+    "url": "https://github.com/jsdyer/backupledger",
+    "source": "https://github.com/jsdyer/backupledger",
+    "hosting": "external",
+    "access": "install",
+    "requirements": "Linux, Python 3.10+ and restic",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Your local restic snapshot metadata and recorded integrity-check results stay on your machine. An optional local timer refreshes inventory hourly."
+    },
+    "readme": {
+      "note": "Install locally to compare the newest restic snapshot for each host and path set, flag missing expected backups, and review recorded metadata, full-data or subset integrity checks. A recent snapshot does not prove it can be restored; failed refreshes preserve the previous inventory and display the failure. No snapshot metadata is uploaded to CoolCode."
+    }
+  },
+  {
+    "id": "queryconfessional",
+    "title": "Query Confessional",
+    "description": "Explore observed DNS queries by device, domain and time in your own dnsmasq logs.",
+    "category": "liminal-tools",
+    "tags": [
+      "DNS",
+      "dnsmasq",
+      "privacy",
+      "network",
+      "homelab",
+      "self-hosted"
+    ],
+    "icon": "network",
+    "url": "https://github.com/jsdyer/queryconfessional#readme",
+    "source": "https://github.com/jsdyer/queryconfessional",
+    "hosting": "external",
+    "access": "install",
+    "requirements": "Linux, Python 3.11+ and access to your own dnsmasq query logs",
+    "data_info": {
+      "mode": "installed",
+      "detail": "Your imported dnsmasq query logs stay on your server. Import captures locally to update the inventory; no public downloads or API keys are needed."
+    },
+    "readme": {
+      "note": "Query Confessional turns your own dnsmasq query logs into a private device/domain inventory. Import a log, open the local dashboard, choose a device address, and filter a domain to see when DNS queries were observed. Compare query counts and daily activity, or export matching records to CSV. DNS queries do not prove successful connections, page visits or malicious behavior. Explicit source year/timezone settings are required; reimport unchanged or appended captures at the same path, and avoid overlapping rotations. Requires Linux, Python 3.11+ and access to your own dnsmasq logs."
+    }
+  },
+  {
+    "id": "contaminatedplaces",
+    "title": "Contaminated Places",
+    "description": "Find federal contaminated sites across Canada by place, contaminant, status and cleanup stage.",
+    "category": "places",
+    "tags": [
+      "contaminated sites",
+      "Canada",
+      "cleanup",
+      "soil",
+      "groundwater",
+      "BC",
+      "Nova Scotia",
+      "environment"
+    ],
+    "icon": "map",
+    "url": "/contaminatedplaces/",
+    "source": "https://github.com/jsdyer/contaminatedplaces",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The official Federal Contaminated Sites Inventory covers Canada and some overseas federal sites, with current reported status, contaminants and cleanup steps.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/contaminatedplaces/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "label": "Source checked",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "federal sites"
+          },
+          "precision": "minute",
+          "value": "2026-11-25 03:59 UTC",
+          "count": 24433
+        }
+      ]
+    },
+    "readme": {
+      "note": "Search Halifax or choose British Columbia, then narrow the results by contaminant, inventory status, management strategy or completed cleanup step. Select a site for its custodian, record date and reported contaminant/media pairs. Download every matching result as CSV, or copy a link to the current search and selected site. Nearby search accepts coordinates or optional browser location permission. Closed records remain searchable; a listing alone is not evidence of present-day danger."
+    },
+    "sync_manifest": true
   }
 ]

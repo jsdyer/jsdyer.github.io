@@ -266,6 +266,12 @@
     ]
   },
   {
+    "repo": "jsdyer/backupledger",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
     "repo": "jsdyer/bankrates",
     "branch": "main",
     "workflows": [
@@ -639,6 +645,23 @@
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/contaminatedplaces",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "23 11 * * 3"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
   },
   {
     "repo": "jsdyer/contractpatterns",
@@ -2335,6 +2358,12 @@
       ".github/workflows/refresh.yml",
       ".github/workflows/schedule-guard.yml"
     ]
+  },
+  {
+    "repo": "jsdyer/queryconfessional",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
   },
   {
     "repo": "jsdyer/queryplan",

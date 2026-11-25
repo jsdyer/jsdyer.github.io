@@ -1,12 +1,12 @@
 {
   "schema": "coolcode.repository-audit.v1",
-  "checked_at": "2026-11-24T06:32:07+00:00",
+  "checked_at": "2026-11-25T03:59:44+00:00",
   "owner": "jsdyer",
   "scope": "Public repositories; private repository identities are omitted. Functional readiness is reviewed before listing.",
-  "catalogue_tools": 232,
+  "catalogue_tools": 235,
   "public_repositories": 238,
-  "private_repositories_omitted": 1,
-  "listed_source_repositories": 223,
+  "private_repositories_omitted": 0,
+  "listed_source_repositories": 226,
   "public_repository_names": [
     "abuse-kit",
     "abusepulse",
@@ -256,18 +256,6 @@
       "reviewed_at": "2026-11-23"
     },
     {
-      "repo": "backupledger",
-      "status": "empty",
-      "reason": "Repository has no source files to implement a tool yet.",
-      "reviewed_at": "2026-11-23"
-    },
-    {
-      "repo": "contaminatedplaces",
-      "status": "starter",
-      "reason": "Still contains the unimplemented CoolCode starter template.",
-      "reviewed_at": "2026-11-23"
-    },
-    {
       "repo": "coolcode-tool-template",
       "status": "template",
       "reason": "Starter template used to create tools; not a finished utility.",
@@ -319,12 +307,6 @@
       "repo": "public-apis",
       "status": "reference-fork",
       "reason": "Contribution/reference fork of public-apis/public-apis, not an independent CoolCode application.",
-      "reviewed_at": "2026-11-23"
-    },
-    {
-      "repo": "queryconfessional",
-      "status": "empty",
-      "reason": "Repository has no source files to implement a tool yet.",
       "reviewed_at": "2026-11-23"
     },
     {

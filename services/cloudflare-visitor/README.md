@@ -30,15 +30,23 @@ not mark the Worker integration complete.
 
 See [the complete tool lifecycle](../../docs/tool-lifecycle.md).
 
-## Verified deployment
+## Current deployment state
 
-The manually deployed Worker was downloaded and verified on 2026-11-24. Its
-public `/registry` matches all 232 catalogue IDs. The dashboard editor omitted
-one final newline; the receipt records that precise byte transformation and the
-actual downloaded hash. Any other source change still fails verification.
-Future deployments through `deploy.py` use an exact byte match by default.
+The last verified production Worker accepts 232 catalogue IDs. The generated
+`worker.js` now includes Contaminated Places, Query Confessional and Backup Ledger
+(235 IDs), but that update is **pending deployment**. Cloudflare rejected the
+content-only upload with HTTP 403 because the connection lacks Workers Scripts
+Write. The owner requested a manual dashboard update instead. Replace the Worker's
+code with the complete generated `worker.js`, preserving all bindings and settings;
+after deployment, download it to verify the hash and update the receipt. Do not replace the receipt with an
+unverified local hash. Until then, the live registry audit correctly reports the
+three missing IDs; existing bindings and production code remain intact.
+
+The existing receipt records the manually deployed source's omitted final newline.
+Future deployments through `deploy.py` require an exact byte match by default.
 
 Copy the generated source from
 [worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js).
-The connector still requires Workers Scripts Write for future API deployments;
-the current deployment is verified and no longer pending.
+The only application changes are the added `backupledger`, `contaminatedplaces`
+and `queryconfessional` strings in `toolList`. An API deployment would require
+Workers Scripts Write; the owner can instead paste the generated code in the dashboard.

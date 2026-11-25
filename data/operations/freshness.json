@@ -2036,5 +2036,20 @@
         "label": "Disclosure source retrieved"
       }
     ]
+  },
+  "jsdyer/contaminatedplaces/pages.yml": {
+    "collection_steps": [
+      "Refresh public record files"
+    ],
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/contaminatedplaces/data/status.json",
+        "label": "FCSI source checked",
+        "max_age_seconds": 1209600,
+        "json_path": [
+          "checked_at"
+        ]
+      }
+    ]
   }
 }

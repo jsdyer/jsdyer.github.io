@@ -31,6 +31,7 @@ jsdyer/chirproom
 jsdyer/clamground
 jsdyer/cloud-ledger
 jsdyer/coalbelow
+jsdyer/contaminatedplaces
 jsdyer/contractpatterns
 jsdyer/corporateghosts
 jsdyer/crossingrecord

@@ -44,7 +44,7 @@ Unresolved failures or limited evidence are re-read on each observation, so an
 independent publication cannot stay hidden behind the metadata cache.
 An explicit **Check GitHub now** run reads all metadata afresh.
 
-The report uses the same 168-target registry, reviewed timestamps and age limits
+The report uses the same generated watchdog registry, reviewed timestamps and age limits
 as the independent watchdog. It also reads record counts where the catalogue has
 a reviewed count definition on the checked document. Zero or unchanged counts
 are allowed; an old observation year is not substituted for a retrieval/check
