@@ -1,5 +1,13 @@
 # Eleven-tool API setup
 
+Update after the first production check: Podcast Index, YouTube, USDA and both
+Feed Harbour starter feeds responded successfully with the owner's runtime keys.
+Repology reached the Worker but exhausted its original 12-second source deadline.
+The updated `worker-next.js` allows Repology 35 seconds (other providers retain
+12 seconds), distinguishes source timeouts, and caches larger package responses.
+Distro Pilot's browser waits 45 seconds. The longer production path must be
+retested after replacing the Worker module; the other secrets/settings stay put.
+
 The owner has already registered the eleven IDs. This update adds the live API
 routes required by Podcast Route, Channel Queue, Feed Harbour, Distro Pilot and
 Recipe Math. It also retains all 250 IDs and the existing visit/report/admin code.

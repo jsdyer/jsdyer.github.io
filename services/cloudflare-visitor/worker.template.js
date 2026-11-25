@@ -12,6 +12,8 @@ const dayOf = date => date.toISOString().slice(0,10);
 const errorResponse = (status,message) => ({status, body:{error:message}});
 const cacheControl = 'no-store';
 
+/* PUBLIC_API_GATEWAY */
+
 async function body(request, limit) {
   if (Number(request.headers.get('content-length')) > limit) throw new RangeError();
   if (!request.body) throw new SyntaxError();
@@ -112,6 +114,7 @@ async function reports(db,url) {
 
 async function handle(request,env) {
   const db=env.DB, url=new URL(request.url),path=url.pathname;
+  if (path.startsWith('/api/')) return apiHandle(request,env);
   const origin=request.headers.get('Origin');
   const publicPath=['/event','/report'].includes(path);
   const adminPath=['/admin/stats','/admin/reports'].includes(path)||/^\/admin\/reports\/[\da-f-]{36}$/.test(path);
@@ -166,6 +169,7 @@ export default {
       headers['Access-Control-Allow-Methods']='GET, POST, PATCH, OPTIONS';
       headers['Access-Control-Allow-Headers']='Authorization, Content-Type';
       headers['Access-Control-Max-Age']='600';
+      headers['Access-Control-Expose-Headers']='Retry-After';
     }
     let result;
     try { result=await handle(request,env); }
@@ -175,6 +179,6 @@ export default {
       else result=errorResponse(503,'Service temporarily unavailable.');
     }
     if (result.body) headers['Content-Type']='application/json; charset=utf-8';
-    return new Response(result.body?JSON.stringify(result.body):null,{status:result.status||200,headers});
+    return new Response(result.body?JSON.stringify(result.body):null,{status:result.status||200,headers:{...headers,...result.headers}});
   },
 };

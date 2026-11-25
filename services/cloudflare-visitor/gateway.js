@@ -75,7 +75,7 @@ function apiRoute(url, env) {
     plan.keyName='api_key'; plan.secret=env.FDC_API_KEY;
   } else if (path==='/api/distropilot/project') {
     p=apiParams(url,['name']); target=new URL('https://repology.org/api/v1/project/'+encodeURIComponent(p('name',/^[a-zA-Z0-9][a-zA-Z0-9+_.-]{0,99}$/)));
-    plan.group='repology'; plan.maximum=600; plan.window=86400000; plan.ttl=21600; plan.limit=4_000_000;
+    plan.group='repology'; plan.maximum=600; plan.window=86400000; plan.ttl=21600; plan.limit=4_000_000; plan.timeout=35000;
   } else if (path==='/api/feedharbour/feed') {
     p=apiParams(url,['url']); target=apiPublicURL(p('url',/^.{1,2048}$/));
     plan.group='feeds'; plan.maximum=3000; plan.window=86400000; plan.feed=true;
@@ -118,7 +118,8 @@ async function apiUpstream(plan,env) {
     headers['X-Auth-Key']=env.PODCASTINDEX_API_KEY; headers['X-Auth-Date']=stamp;
     headers.Authorization=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
   }
-  let current=target, response; const signal=AbortSignal.timeout(12000);
+  let current=target, response; const signal=AbortSignal.timeout(plan.timeout||12000);
+  try {
   for(let redirect=0;redirect<4;redirect++){
     response=await fetch(current.href,{headers,redirect:'manual',signal});
     if(response.status>=300&&response.status<400){
@@ -137,10 +138,17 @@ async function apiUpstream(plan,env) {
   let data; try{data=JSON.parse(raw);}catch{apiThrow(502,'invalid_source','The source returned invalid JSON.');}
   if(plan.group==='podcast' && (data.status==='false'||data.status===false)) apiThrow(502,'source_unavailable','Podcast Index could not complete this lookup.');
   if(plan.group==='repology'){
-    if(!Array.isArray(data)) apiThrow(502,'invalid_source','The package source returned an unexpected result.');
+    if(!Array.isArray(data) || data.some(x=>!x||typeof x.repo!=='string'||!x.repo||typeof x.version!=='string'||!x.version)) apiThrow(502,'invalid_source','The package source returned an unexpected result.');
     const seen=new Set(); data=data.filter(x=>x&&typeof x==='object').map(x=>Object.fromEntries(['repo','subrepo','srcname','visiblename','version','origversion','summary'].filter(k=>typeof x[k]==='string').map(k=>[k,x[k].slice(0,k==='summary'?2000:300)]))).filter(x=>{const key=JSON.stringify(x);if(seen.has(key))return false;seen.add(key);return true;});
   }
   return data;
+  } catch (error) {
+    if(signal.aborted) apiThrow(504,'source_timeout','The upstream source took too long to respond. Please retry later; saved evidence is unchanged.');
+    if(error.api) throw error;
+    // Log only a fixed source identifier and error category, never URLs or keys.
+    console.warn(JSON.stringify({event:'public-api-source-error',source:plan.group,error:['TypeError','AbortError','TimeoutError'].includes(error.name)?error.name:'Error'}));
+    apiThrow(502,'source_network','The upstream source could not be reached. Please retry later.');
+  }
 }
 
 async function apiHandle(request,env) {
@@ -165,8 +173,9 @@ async function apiHandle(request,env) {
     }
     await apiBudget(db,plan.group,now,plan.window,plan.maximum);
     const data=await apiUpstream(plan,env), captured=Date.now(), result={fetched_at:new Date(captured).toISOString(),data}, payload=JSON.stringify(result);
-    // Bounded persistent cache: <=256 records, <=500 KB each; never cache failures.
-    if(encoder.encode(payload).byteLength<=500000) await db.batch([
+    // <=256 records; ordinary responses <=500 KB, package evidence <=1 MB.
+    // Popular projects such as PHP exceed 500 KB after lossless field selection.
+    if(encoder.encode(payload).byteLength<=(plan.group==='repology'?1000000:500000)) await db.batch([
       db.prepare('DELETE FROM gateway_cache WHERE expiry<=?').bind(captured),
       db.prepare('DELETE FROM gateway_budget WHERE expiry<=?').bind(captured),
       db.prepare('INSERT INTO gateway_cache(id,payload,expiry,touched) VALUES(?,?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,expiry=excluded.expiry,touched=excluded.touched').bind(id,payload,captured+plan.ttl*1000,captured),

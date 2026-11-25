@@ -76,12 +76,32 @@ test('Repology uses an atomic sliding lease across requests, not a local counter
   assert.equal(env.sql.prepare("SELECT hits FROM gateway_budget WHERE id LIKE 'repology:%'").get().hits,1,'locally rejected pacing must not consume a source call');
 });
 
+test('large normalized package evidence is cached and malformed package rows are rejected',async t=>{
+  const env=environment();let calls=0;
+  stub(t,async()=>{calls++;return Response.json(Array.from({length:320},(_,i)=>({repo:'distro'+i,version:'1',summary:'x'.repeat(1900)})));});
+  assert.equal((await run('/api/distropilot/project?name=php',env)).status,200);
+  assert.equal((await run('/api/distropilot/project?name=php',env)).status,200);assert.equal(calls,1);
+  assert.ok(env.sql.prepare('SELECT length(payload) n FROM gateway_cache').get().n>500000);
+  env.sql.prepare("DELETE FROM gateway_budget WHERE id='repology-lease'").run();
+  globalThis.fetch=async()=>Response.json([{repo:'debian',version:null}]);
+  assert.equal((await run('/api/distropilot/project?name=bad',env)).status,502);
+});
+
 test('global source budgets reject before any additional paid/quota request',async t=>{
   const env=environment();let calls=0;stub(t,async()=>{calls++;return Response.json({items:[]});});
   await run('/api/channelqueue/search?q=first',env);
   env.sql.prepare('UPDATE gateway_budget SET hits=50 WHERE id LIKE ?').run('youtube-search:%');
   const r=await run('/api/channelqueue/search?q=second',env);assert.equal(r.status,429);assert.ok(Number(r.headers.get('Retry-After'))>0);assert.equal(calls,1);
   assert.equal((await run('/api/channelqueue/search?q=first',env)).status,200);assert.equal(calls,1,'cached reads remain usable after quota reached');
+});
+
+test('only Repology gets a longer timeout; aborted sources have a distinct safe error',async t=>{
+  const env=environment(), original=AbortSignal.timeout, times=[];
+  AbortSignal.timeout=ms=>{times.push(ms);return AbortSignal.abort();};t.after(()=>{AbortSignal.timeout=original;});
+  stub(t,async()=>{throw new Error('private URL and credential must not escape');});
+  const r=await run('/api/distropilot/project?name=slow',env);assert.equal(r.status,504);assert.equal((await r.json()).error.code,'source_timeout');
+  assert.equal((await run('/api/recipemath/food?id=123',env)).status,504);
+  assert.deepEqual(times,[35000,12000]);
 });
 
 test('public RSS URL validation rejects local addresses, credentials and secret-bearing URLs',async t=>{
