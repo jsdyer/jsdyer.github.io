@@ -7,7 +7,7 @@ Pages repositories with a shared Cloudflare Worker for the APIs that need it.
 | Tool | Useful task and coverage |
 | --- | --- |
 | Halifax Next | Search all 2,347 passenger stops and 81 routes in the current Halifax GTFS edition; compare next departures, last service, ferry timetables, alerts and available live updates. |
-| Parcel Bench | Compare eligible Canada Post counter services and two packed box sizes, expected arrival dates and nearby post office hours. |
+| Parcel Bench | Compare eligible Canada Post counter services and two packed box sizes, expected arrival dates and nearby post offices; hours display when usable source data are available. |
 | Inspection Trail | Search arbitrary Nova Scotia establishments and read dated inspections, findings, remedies and separate advisory issue/removal dates; eight real starter histories are included. |
 | Weather Window | Search 844 official Canadian forecast places or coordinates, set personal weather preferences and read separately dated ECCC forecasts, AQHI and alert polygons. |
 | Fuel Window | Compare all six NS regulated zones and PEI prices, including PEI heating oil; calculate fill/trip budgets and retain private plans. |
@@ -38,6 +38,10 @@ Pages repositories with a shared Cloudflare Worker for the APIs that need it.
 - Inspection findings are historical source records, not a current safety score.
   The province's Current Warnings search returned its own Unknown Error page
   during verification; that failure is shown rather than converted to zero results.
+- Canada Post live rates and nearby outlet locations were verified. Three tested
+  outlets produced no usable opening-hours rows through the adapter; the UI states
+  that hours are unavailable and links the official finder. The normalized response
+  cannot distinguish absent source rows from an unsupported source format.
 - CHS predictions are planning information with source attribution and the
   prescribed notices; they are not navigation or safe-access advice.
 
@@ -74,9 +78,30 @@ the matching API Secret is the client secret. Consumer quotes omit customer numb
 The screenshot's three editor diagnostics are fixed. Pinned Cloudflare type checks
 run in CI; runtime tests cover malformed encoding, source parsing, route validation,
 rate budgets, no-store parcel responses, credentials, cache separation and previous
-API behavior. The live Worker health check passed before this update.
+API behavior. The deployed `/health` check passed and `/registry` contains all
+257 catalogue IDs. `/api/status` reports the new handlers configured.
 
-Post-deployment provider verification and the downloaded-code receipt are pending
-the owner's manual Worker update. The prior receipt remains untouched until the
-deployed bytes have actually been retrieved and compared. Follow
+Production checks on November 25 verified:
+
+- Canada Post: Halifax-to-Ottawa quotes for two box sizes returned Regular Parcel,
+  Xpresspost and Priority prices and expected arrival dates; the outlet search
+  returned ten locations. Hours have the limitation documented above.
+- ISED: corporation 7672233 returned Wikimedia Canada’s active record, eight
+  directors and dated filings.
+- Nova Scotia: a live Donair/Halifax search returned six establishments; King of
+  Donair’s report opened with nine dated inspections and source remedies.
+- All eleven app repositories passed their hosted build/browser checks and Pages
+  deployments; generated data and referenced assets were checked on the live sites.
+
+Local release validation passed 76 catalogue Python tests, 91 Node tests, 99
+watchdog tests, pinned Cloudflare type checks and the 257-tool build/integration
+checks. Hosted catalogue checks run again when main is published.
+
+The owner-deployed module was downloaded and verified at 08:41 UTC on November
+25; its receipt records the actual bytes. Live verification identified a Halifax
+relay issue: Workers does not support fetch redirect mode `error`, and Halifax's
+IIS server requires its `application/protocol-buffer` MIME type in `Accept`. Both
+are corrected and regression-tested; exact upstream probes now return 200. This
+last correction awaits the owner's manual paste before live transit can be marked
+verified. Scheduled departures remain available and explicitly labelled. Follow
 [the concrete Worker instructions](../services/cloudflare-visitor/seven-tools-setup.md).

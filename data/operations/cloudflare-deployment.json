@@ -1,7 +1,7 @@
 {
-  "source_sha256": "363c470a1c32483c5bf5cee56604383545129f7fb62e27c6526ba5092710b6e8",
+  "source_sha256": "4c36010ab76f81b518fbcf9e774ba3e61229acad4160c7c549f4c3b9be9c766b",
   "source_transform": "remove-final-newline",
   "worker": "coolcode-visitor-api",
-  "verified_at": "2026-11-25T05:57:17Z",
-  "method": "Downloaded owner-deployed module; exact generated 250-ID source verified allowing removed final newline; live provider verification recorded separately"
+  "verified_at": "2026-11-25T08:41:44+00:00",
+  "method": "Downloaded owner-deployed module; generated 257-ID source verified; live provider checks recorded in release report"
 }

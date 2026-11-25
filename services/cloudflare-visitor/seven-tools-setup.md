@@ -25,9 +25,10 @@ In **Settings → Variables and Secrets**, use type **Secret** for:
 | `CANADAPOST_CLIENT_SECRET` | Matching Canada Post production **API Secret** |
 | `ISED_CORPORATIONS_API_KEY` | Federal Corporation API key |
 
-These bindings have already been added. The configuration check found
-`CANADAPOST_CLIENT_SECRET` as a plain-text variable; change its type to Secret
-while retaining its value. No key belongs in a public repository or browser code.
+These bindings have already been added. The configuration check on November 25
+confirmed `CANADAPOST_CLIENT_SECRET` is now a Secret. Production counter quotes
+and a current federal corporation lookup succeeded. No key belongs in a public
+repository or browser code.
 The customer number is not needed: Parcel Bench requests consumer counter rates
 and excludes commercial account pricing. The approved production integration is
 used directly; no additional account-registration step is part of this release.

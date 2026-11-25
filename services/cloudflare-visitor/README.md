@@ -33,13 +33,14 @@ See [the complete tool lifecycle](../../docs/tool-lifecycle.md).
 
 ## Current deployment state
 
-The seven-tool release stages 257 catalogue IDs and new Halifax Transit, Nova
-Scotia inspection, Canada Post and federal-corporation handlers. Its complete
-manual deployment instructions are in [seven-tools-setup.md](seven-tools-setup.md).
-The owner will paste the tested generated Worker. The earlier deployment receipt
-remains the record of the last verified source until the new module has actually
-been downloaded and checked. Do not treat the configuration flags as a successful
-provider request or replace the receipt before verification.
+The owner deployed the seven-tool release with 257 catalogue IDs and new Halifax
+Transit, Nova Scotia inspection, Canada Post and federal-corporation handlers.
+The deployed module was downloaded and verified at 08:41 UTC on November 25.
+Canada Post quotes/outlet searches, ISED corporation details and live provincial
+inspection search/reports passed production checks. A subsequent Halifax-only
+correction fixes upstream MIME negotiation and the Workers redirect mode; the
+receipt remains the record of the deployed version until that correction is
+pasted and verified. Instructions are in [seven-tools-setup.md](seven-tools-setup.md).
 
 For a later manual update, copy the complete generated source from
 [worker.js](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/main/services/cloudflare-visitor/worker.js),
@@ -53,8 +54,8 @@ to overwrite unexpected live changes.
 Use the existing Worker **Settings → Variables and Secrets → Secret**. These are
 runtime bindings, never public frontend variables or files in tool repositories.
 The existing four provider keys remain configured. The new Canada Post and ISED
-bindings have been added; real provider requests are verified after the owner
-deploys the new handlers.
+bindings have been added as Secrets; real Canada Post and ISED requests passed
+production verification on November 25, 2026.
 
 | Tool | Secret bindings | GET routes below `/api/` |
 | --- | --- | --- |
