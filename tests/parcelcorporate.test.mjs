@@ -11,3 +11,17 @@ test('outlet validates link id, hours and coordinate bounds',()=>{const pc=sandb
 test('corporation drops personal addresses and birth dates and retains lifecycle evidence',()=>{const pc=sandbox(),data=pc.corp({corporationNumber:123,corporateName:{legalName:'Example'},status:'active',statusDetail:'intent_to_dissolve',registeredOffice:{city:'Halifax',line1:'omit street'},board:{directors:[{givenName:'Jane',familyName:'Doe',address:{line1:'omit private'}}]},controlStatements:[{recordType:'person',recordStatus:'closed',statementDate:'2024-01-01',recordDetails:{personType:'knownPerson',birthDate:'1900-01-01',names:[{fullName:'Jane Doe'}]}}],filingHistory:[{recordType:'incorporation',effectiveDate:'2020-01-01'}]});assert.equal(data.statusDetail,'intent_to_dissolve');assert.equal(data.directors[0].name,'Jane Doe');assert.equal(data.controlStatements[0].status,'closed');assert(!JSON.stringify(data).includes('omit'));assert(!JSON.stringify(data).includes('1900'));assert.equal(pc.corp({corporationNumber:1,corporateName:{legalName:'X'}}).directors,null);});
 test('OAuth exchange server-only, token reused, credential rotation refreshes',async()=>{const calls=[];const pc=sandbox(async(target,opts)=>{calls.push({target,opts});return new Response(JSON.stringify(String(target).endsWith('/token')?{token_type:'Bearer',access_token:'private-bearer',expires_in:3600}:[rate]),{headers:{'Content-Type':'application/json'}});});const p=pc.route(rateURL(),env);await pc.upstream(p,env);await pc.upstream(p,env);assert.equal(calls.length,3);assert.equal(calls[0].opts.body.get('client_id'),'test-key');assert.equal(calls[0].opts.body.get('scope'),'merchant');assert.equal(calls[1].opts.headers.Authorization,'Bearer private-bearer');assert.equal(calls[1].opts.redirect,'manual');assert(!String(calls[0].target).includes('secret'));await pc.upstream(p,{...env,CANADAPOST_CLIENT_SECRET:'rotated'});assert.equal(calls.length,5);});
 test('upstream errors are typed and redact upstream body',async()=>{const pc=sandbox(async()=>new Response('credential=secret',{status:403}));const p=pc.route(url('/api/corporateghosts/corporation?id=123'),env);await assert.rejects(()=>pc.upstream(p,env),e=>e.code==='source_authentication'&&!e.message.includes('secret'));});
+
+test('outlet hours accept canonical numeric-string days without broad coercion',()=>{
+  const pc=sandbox(),office={officeId:'123',address:{latitude:44.65,longitude:-63.57}};
+  const hours=pc.office({...office,hoursList:['1','2','3','4','5','6','7'].map(day=>({day,time:['09:00','17:00']}))}).hours;
+  assert.deepEqual(Array.from(hours,h=>h.day),[1,2,3,4,5,6,7]);
+  assert(hours.every(h=>typeof h.day==='number'));
+  assert.deepEqual([...hours[0].times],['09:00','17:00']);
+  for(const day of [0,8,-1,1.5,NaN,'0','8','01','1.0','1e0',' 1','1 ','Monday','',true,null,[1],{}]) {
+    assert.equal(pc.office({...office,hoursList:[{day,time:['09:00','17:00']}]}).hours.length,0,'Reject ambiguous day '+String(day));
+  }
+  assert.equal(pc.office({...office,hoursList:[null,{day:'2',time:'09:00'}]}).hours.length,0);
+  const bounded=pc.office({...office,hoursList:[{day:'2',time:['09:00','24:00','12:00','20:99','22:00']}]}).hours;
+  assert.deepEqual([...bounded[0].times],['09:00','12:00']);
+});

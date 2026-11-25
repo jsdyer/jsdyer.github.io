@@ -1,7 +1,11 @@
 // Fixed-source, bounded GTFS-realtime relay. Parsing runs in Halifax Next's browser worker.
 // This avoids large protobuf / JSON / gzip transformations in the edge CPU budget.
 const halifaxFeeds = Object.freeze({vehicles:'Vehicle/VehiclePositions.pb',trips:'TripUpdate/TripUpdates.pb',alerts:'Alert/Alerts.pb'});
-function halifaxBoundedStream(body,limit=5000000){let bytes=0;return body.pipeThrough(new TransformStream({transform(chunk,controller){bytes+=chunk.byteLength;if(bytes>limit)throw new Error('Halifax feed exceeds size limit');controller.enqueue(chunk)}}))}
+function halifaxBoundedStream(body,length,limit=5000000){
+ if(!Number.isSafeInteger(length)||length<=0||length>limit)throw new Error('Invalid Halifax feed length');
+ // Native stream enforces both short and excess bodies without JavaScript per chunk.
+ return body.pipeThrough(new FixedLengthStream(length));
+}
 async function halifaxApiHandle(request,env,ctx) {
   const origin=request.headers.get('Origin');if(origin&&origin!==ORIGIN)return apiFailure(403,'origin','This origin is not allowed.');
   if(request.method==='OPTIONS')return {status:204};if(request.method!=='GET')return apiFailure(405,'method','Use GET.');
@@ -23,8 +27,8 @@ async function halifaxApiHandle(request,env,ctx) {
     const size=response.headers.get('Content-Length'),encoding=response.headers.get('Content-Encoding');
     if(encoding&&encoding.toLowerCase()!=='identity'){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit returned an unsupported transport encoding.');}
     if(/^(?:text\/|application\/(?:json|xml|xhtml))/i.test(response.headers.get('Content-Type')||'')){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit did not return a realtime feed.');}
-    if(!response.body||size!==null&&(!/^\d+$/.test(size)||Number(size)>5000000)){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit returned an oversized or empty response.');}
-    const raw=new Response(halifaxBoundedStream(response.body),{headers:{'Content-Type':'application/x-protobuf','Cache-Control':'public, max-age=30','X-CoolCode-Fetched-At':new Date(now).toISOString()}});
+    if(!response.body||size===null||!/^\d+$/.test(size)||!Number.isSafeInteger(Number(size))||Number(size)<=0||Number(size)>5000000){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit returned an invalid or oversized response length.');}
+    const raw=new Response(halifaxBoundedStream(response.body,Number(size)),{headers:{'Content-Type':'application/x-protobuf','Cache-Control':'public, max-age=30','X-CoolCode-Fetched-At':new Date(now).toISOString()}});
     if(cache&&ctx?.waitUntil)ctx.waitUntil(cache.put(cacheRequest,raw.clone()).catch(()=>{}));
     return {rawResponse:raw};
   } catch(e){return e&&e.api?apiFailure(e.status,e.code,e.message,e.retry):apiFailure(503,'source','Live transit information is temporarily unavailable. Use the labelled scheduled times.');}

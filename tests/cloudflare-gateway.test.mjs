@@ -32,7 +32,8 @@ test('new credential status reports presence only and keyless adapters remain en
 
 test('Halifax byte relay crosses the complete response wrapper with safe CORS headers',async t=>{
   const env=environment(), bytes=new Uint8Array([10,3,50,46,48]);
-  stub(t,async()=>new Response(bytes,{headers:{'Content-Type':'application/protocol-buffer','Set-Cookie':'never-forward=private'}}));
+  const previous=globalThis.FixedLengthStream;globalThis.FixedLengthStream=class extends TransformStream {constructor(length){let size=0;super({transform(chunk,controller){size+=chunk.byteLength;if(size>length)throw new Error('Excess bytes');controller.enqueue(chunk)},flush(){if(size!==length)throw new Error('Short body')}})}};t.after(()=>{globalThis.FixedLengthStream=previous});
+  stub(t,async()=>new Response(bytes,{headers:{'Content-Type':'application/protocol-buffer','Content-Length':String(bytes.length),'Set-Cookie':'never-forward=private'}}));
   const r=await run('/api/halifaxnext/realtime?feed=vehicles',env);
   assert.equal(r.status,200);assert.deepEqual(new Uint8Array(await r.arrayBuffer()),bytes);
   assert.equal(r.headers.get('Content-Type'),'application/x-protobuf');assert.equal(r.headers.get('Set-Cookie'),null);

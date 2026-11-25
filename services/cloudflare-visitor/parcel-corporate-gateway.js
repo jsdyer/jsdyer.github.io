@@ -91,13 +91,18 @@ function pcRates(data) {
     return {code:pcText(x.serviceCode,40),name:pcText(x.serviceName),total:pcNumber(p.due),base:pcNumber(p.base),taxes:Object.fromEntries(['gst','pst','hst'].filter(k=>p.taxes?.[k]).map(k=>[k,pcNumber(p.taxes[k].amt)])),adjustments:(p.adjustments||[]).slice(0,20).map(a=>({name:pcText(a.adjustmentName),cost:pcNumber(a.adjustmentCost)})),options:(p.options||[]).slice(0,20).map(a=>({name:pcText(a.optionName),cost:pcNumber(a.optionPrice)})),cubedWeight:pcNumber(x.weightDetails?.cubedWeight),expectedDeliveryDate:pcDate(s.expectedDeliveryDate),expectedTransitTime:pcNumber(s.expectedTransitTime),guaranteedDelivery:typeof s.guaranteedDelivery==='boolean'?s.guaranteedDelivery:null};
   })};
 }
+function pcOfficeDay(day) {
+  // Only canonical integer strings are equivalent to the documented day numbers.
+  if(typeof day==='string' && /^[1-7]$/.test(day))return Number(day);
+  return Number.isInteger(day)&&day>=1&&day<=7?day:null;
+}
 function pcOffice(x) {
   if(!x||!/^\d{1,12}$/.test(String(x.officeId))||!x.address)apiThrow(502,'invalid_source','The post office source returned an incomplete record.');
   const a=x.address,latitude=Number(a.latitude),longitude=Number(a.longitude);
   const coordinates=Number.isFinite(latitude)&&latitude>=40&&latitude<=90&&Number.isFinite(longitude)&&longitude>=-150&&longitude<=-50?{latitude,longitude}:null;
   // Use a validated fixed-host detail link ID when supplied, preserving leading zeros.
   let id=String(x.officeId);try{const link=new URL(x.link?.href);if(link.origin===new URL(pcBase).origin){const match=link.pathname.match(/\/post-offices\/(\d{1,12})\/details$/);if(match)id=match[1];}}catch{}
-  return {id,name:pcText(x.name),location:pcText(x.location),address:[a.officeAddress,a.city,a.province,a.postalCode].filter(v=>typeof v==='string').map(v=>v.slice(0,150)).join(', '),coordinates,distance:pcNumber(x.distance),hours:Array.isArray(x.hoursList)?x.hoursList.slice(0,7).filter(h=>Number.isInteger(h.day)&&h.day>=1&&h.day<=7&&Array.isArray(h.time)).map(h=>({day:h.day,times:h.time.slice(0,4).filter(t=>typeof t==='string'&&/^(?:[01]?\d|2[0-3]):[0-5]\d$/.test(t))})):null};
+  return {id,name:pcText(x.name),location:pcText(x.location),address:[a.officeAddress,a.city,a.province,a.postalCode].filter(v=>typeof v==='string').map(v=>v.slice(0,150)).join(', '),coordinates,distance:pcNumber(x.distance),hours:Array.isArray(x.hoursList)?x.hoursList.slice(0,7).filter(h=>h&&pcOfficeDay(h.day)!==null&&Array.isArray(h.time)).map(h=>({day:pcOfficeDay(h.day),times:h.time.slice(0,4).filter(t=>typeof t==='string'&&/^(?:[01]?\d|2[0-3]):[0-5]\d$/.test(t))})):null};
 }
 function pcCorporation(x) {
   if(!x||!/^\d{1,12}$/.test(String(x.corporationNumber))||!x.corporateName||typeof x.corporateName.legalName!=='string')apiThrow(502,'invalid_source','The federal source returned an incomplete record.');

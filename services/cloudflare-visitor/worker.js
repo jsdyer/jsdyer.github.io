@@ -467,7 +467,11 @@ async function apiHandle(request,env,ctx) {
 // Fixed-source, bounded GTFS-realtime relay. Parsing runs in Halifax Next's browser worker.
 // This avoids large protobuf / JSON / gzip transformations in the edge CPU budget.
 const halifaxFeeds = Object.freeze({vehicles:'Vehicle/VehiclePositions.pb',trips:'TripUpdate/TripUpdates.pb',alerts:'Alert/Alerts.pb'});
-function halifaxBoundedStream(body,limit=5000000){let bytes=0;return body.pipeThrough(new TransformStream({transform(chunk,controller){bytes+=chunk.byteLength;if(bytes>limit)throw new Error('Halifax feed exceeds size limit');controller.enqueue(chunk)}}))}
+function halifaxBoundedStream(body,length,limit=5000000){
+ if(!Number.isSafeInteger(length)||length<=0||length>limit)throw new Error('Invalid Halifax feed length');
+ // Native stream enforces both short and excess bodies without JavaScript per chunk.
+ return body.pipeThrough(new FixedLengthStream(length));
+}
 async function halifaxApiHandle(request,env,ctx) {
   const origin=request.headers.get('Origin');if(origin&&origin!==ORIGIN)return apiFailure(403,'origin','This origin is not allowed.');
   if(request.method==='OPTIONS')return {status:204};if(request.method!=='GET')return apiFailure(405,'method','Use GET.');
@@ -489,8 +493,8 @@ async function halifaxApiHandle(request,env,ctx) {
     const size=response.headers.get('Content-Length'),encoding=response.headers.get('Content-Encoding');
     if(encoding&&encoding.toLowerCase()!=='identity'){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit returned an unsupported transport encoding.');}
     if(/^(?:text\/|application\/(?:json|xml|xhtml))/i.test(response.headers.get('Content-Type')||'')){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit did not return a realtime feed.');}
-    if(!response.body||size!==null&&(!/^\d+$/.test(size)||Number(size)>5000000)){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit returned an oversized or empty response.');}
-    const raw=new Response(halifaxBoundedStream(response.body),{headers:{'Content-Type':'application/x-protobuf','Cache-Control':'public, max-age=30','X-CoolCode-Fetched-At':new Date(now).toISOString()}});
+    if(!response.body||size===null||!/^\d+$/.test(size)||!Number.isSafeInteger(Number(size))||Number(size)<=0||Number(size)>5000000){await response.body?.cancel();return apiFailure(502,'source','Halifax Transit returned an invalid or oversized response length.');}
+    const raw=new Response(halifaxBoundedStream(response.body,Number(size)),{headers:{'Content-Type':'application/x-protobuf','Cache-Control':'public, max-age=30','X-CoolCode-Fetched-At':new Date(now).toISOString()}});
     if(cache&&ctx?.waitUntil)ctx.waitUntil(cache.put(cacheRequest,raw.clone()).catch(()=>{}));
     return {rawResponse:raw};
   } catch(e){return e&&e.api?apiFailure(e.status,e.code,e.message,e.retry):apiFailure(503,'source','Live transit information is temporarily unavailable. Use the labelled scheduled times.');}
@@ -662,13 +666,18 @@ function pcRates(data) {
     return {code:pcText(x.serviceCode,40),name:pcText(x.serviceName),total:pcNumber(p.due),base:pcNumber(p.base),taxes:Object.fromEntries(['gst','pst','hst'].filter(k=>p.taxes?.[k]).map(k=>[k,pcNumber(p.taxes[k].amt)])),adjustments:(p.adjustments||[]).slice(0,20).map(a=>({name:pcText(a.adjustmentName),cost:pcNumber(a.adjustmentCost)})),options:(p.options||[]).slice(0,20).map(a=>({name:pcText(a.optionName),cost:pcNumber(a.optionPrice)})),cubedWeight:pcNumber(x.weightDetails?.cubedWeight),expectedDeliveryDate:pcDate(s.expectedDeliveryDate),expectedTransitTime:pcNumber(s.expectedTransitTime),guaranteedDelivery:typeof s.guaranteedDelivery==='boolean'?s.guaranteedDelivery:null};
   })};
 }
+function pcOfficeDay(day) {
+  // Only canonical integer strings are equivalent to the documented day numbers.
+  if(typeof day==='string' && /^[1-7]$/.test(day))return Number(day);
+  return Number.isInteger(day)&&day>=1&&day<=7?day:null;
+}
 function pcOffice(x) {
   if(!x||!/^\d{1,12}$/.test(String(x.officeId))||!x.address)apiThrow(502,'invalid_source','The post office source returned an incomplete record.');
   const a=x.address,latitude=Number(a.latitude),longitude=Number(a.longitude);
   const coordinates=Number.isFinite(latitude)&&latitude>=40&&latitude<=90&&Number.isFinite(longitude)&&longitude>=-150&&longitude<=-50?{latitude,longitude}:null;
   // Use a validated fixed-host detail link ID when supplied, preserving leading zeros.
   let id=String(x.officeId);try{const link=new URL(x.link?.href);if(link.origin===new URL(pcBase).origin){const match=link.pathname.match(/\/post-offices\/(\d{1,12})\/details$/);if(match)id=match[1];}}catch{}
-  return {id,name:pcText(x.name),location:pcText(x.location),address:[a.officeAddress,a.city,a.province,a.postalCode].filter(v=>typeof v==='string').map(v=>v.slice(0,150)).join(', '),coordinates,distance:pcNumber(x.distance),hours:Array.isArray(x.hoursList)?x.hoursList.slice(0,7).filter(h=>Number.isInteger(h.day)&&h.day>=1&&h.day<=7&&Array.isArray(h.time)).map(h=>({day:h.day,times:h.time.slice(0,4).filter(t=>typeof t==='string'&&/^(?:[01]?\d|2[0-3]):[0-5]\d$/.test(t))})):null};
+  return {id,name:pcText(x.name),location:pcText(x.location),address:[a.officeAddress,a.city,a.province,a.postalCode].filter(v=>typeof v==='string').map(v=>v.slice(0,150)).join(', '),coordinates,distance:pcNumber(x.distance),hours:Array.isArray(x.hoursList)?x.hoursList.slice(0,7).filter(h=>h&&pcOfficeDay(h.day)!==null&&Array.isArray(h.time)).map(h=>({day:pcOfficeDay(h.day),times:h.time.slice(0,4).filter(t=>typeof t==='string'&&/^(?:[01]?\d|2[0-3]):[0-5]\d$/.test(t))})):null};
 }
 function pcCorporation(x) {
   if(!x||!/^\d{1,12}$/.test(String(x.corporationNumber))||!x.corporateName||typeof x.corporateName.legalName!=='string')apiThrow(502,'invalid_source','The federal source returned an incomplete record.');
