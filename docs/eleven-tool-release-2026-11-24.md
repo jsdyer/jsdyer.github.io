@@ -1,5 +1,7 @@
 # Eleven useful workspaces — November 24, 2026
 
+Follow-up: [expanded feeds, automatic podcast saving, Maritime ports, Linux coverage and provider search](five-tool-expansion-2026-11-24.md). The release figures below describe the initial publication.
+
 This release adds 11 functioning browser apps, bringing CoolCode to **250 tools:
 239 browser tools and 11 install-only tools**. Two browser tools also offer
 installable versions, so the install filter contains 13 projects. The complete inventory accounts for

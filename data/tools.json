@@ -10762,14 +10762,14 @@
       "detail": "Podcast Index supplies directory and episode metadata on request; audio plays from publishers. Queues, subscriptions, notes and listening progress stay on your device."
     },
     "readme": {
-      "note": "Search a subject or open an indexed RSS feed, then explore a show and filter its latest 100 indexed episodes by keywords, language at show level, and duration. Unknown durations are explicitly included or excluded. Follow shows, import/export subscriptions as OPML, and save a queue with notes and listening positions on your device; publisher audio and available chapter/transcript links remain on their original hosts."
+      "note": "Search a subject or open an indexed RSS feed, then explore a show and filter its latest 100 indexed episodes by keywords, language at show level, and duration. Unknown durations are explicitly included or excluded. Follow shows, import/export subscriptions as OPML, and keep a queue with notes and listening positions automatically saved in this browser on your device; publisher audio and available chapter/transcript links remain on their original hosts."
     },
     "sync_manifest": true
   },
   {
     "id": "feedharbour",
     "title": "Feed Harbour",
-    "description": "Read public RSS and Atom feeds together, filter headlines, and keep a private reading list.",
+    "description": "Discover RSS feeds by topic, read headlines together, and keep a private reading list.",
     "category": "media",
     "tags": [
       "RSS",
@@ -10786,10 +10786,10 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Your public RSS/Atom feeds are fetched on demand through the CoolCode gateway. Local XML, subscriptions and reading state stay in the browser unless you deliberately save or export them."
+      "detail": "Manually checked feed recommendations and your own RSS/Atom sources. Public feeds load on demand; local XML and reading state stay in your browser unless saved or exported."
     },
     "readme": {
-      "note": "Add a public HTTPS feed, or import an OPML subscription list, then choose Refresh public feeds. For example, put NASA in a Space folder and Canada news in a Canada folder, search a topic, and save useful items for later. Duplicate article links can be grouped without losing their original feed entries. Local RSS/Atom XML can be imported without contacting a publisher. Save explicitly on your device or export JSON to keep content and reading state; OPML exports subscriptions and folders only. A failed refresh keeps the last good items visible."
+      "note": "Browse checked RSS feeds across CoolCode's topics, including British Columbia and Nova Scotia news, public records, Linux, networks, space, money and culture. Add one source or a topic pack, then choose Refresh; browsing or subscribing does not fetch articles automatically. You can still enter any public feed, import OPML or read local RSS/Atom XML privately. Save deliberately on your device or export JSON to keep reading state; OPML exports subscriptions and folders. Failed refreshes keep the last good items visible."
     },
     "sync_manifest": true
   },
@@ -10823,13 +10823,17 @@
   {
     "id": "portwindow",
     "title": "Port Window",
-    "description": "Explore official cruise schedules, compare port days and plan your own time buffer.",
+    "description": "Compare published cruise schedules across Pacific and Maritime ports, with clear source years and personal time buffers.",
     "category": "places",
     "tags": [
       "travel",
       "cruises",
+      "Maritimes",
+      "Halifax",
+      "Charlottetown",
+      "Sydney",
+      "Saint John",
       "Vancouver",
-      "Victoria",
       "Alaska",
       "schedule"
     ],
@@ -10840,7 +10844,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "CLAA published cruise schedules for selected ports, checked daily. These are planned calls, not live ship positions or crowd estimates.",
+      "detail": "Official port schedules checked independently each day. Published years, missing releases and retained captures are shown per port; no live positions or crowd estimates.",
       "cadence": "Daily",
       "probes": [
         {
@@ -10848,7 +10852,7 @@
           "path": [
             "checked_at"
           ],
-          "label": "Official port schedules checked",
+          "label": "Oldest available schedule checked",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -10856,13 +10860,13 @@
             ],
             "unit": "schedule entries"
           },
-          "value": "2026-11-25 05:49 UTC",
-          "count": 1388
+          "value": "2026-11-25 06:47 UTC",
+          "count": 1484
         }
       ]
     },
     "readme": {
-      "note": "Choose Vancouver, Victoria or Juneau, search any vessel in the source schedule and filter a date range. The daily calendar counts scheduled entries and shows peak overlap among entries with both times. It does not estimate crowds, passengers or live ship positions. Set your own minutes after arrival and before departure to see a personal planning window. Your cruise operator decides disembarkation and all-aboard times; verify these directly. Missing times remain unknown. A 24:00 departure is midnight at the end of that date. Separate overnight entries are not silently joined. Mark favourites, explicitly save them on this device and export the filtered complete intervals as a calendar file. The export includes published times and source links; it does not turn your personal buffers into official deadlines. A capture selector preserves earlier source coverage when a schedule changes, and the changes view records observed additions, removals and time changes. Schedules are checked daily against Cruise Line Agencies of Alaska's public PDFs. The checked date, PDF edition and sailing dates have different meanings. Open the original PDF linked from each entry and reconfirm with your operator before travel."
+      "note": "Choose a port and its published schedule year, search any vessel in that source, and filter dates. Pacific coverage includes Vancouver, Victoria and Juneau. Maritime coverage includes Halifax, Charlottetown, Saint John, Sydney and Louisbourg, with an explicit availability notice when an official schedule cannot yet be downloaded. Each port keeps its own year and last successful check. Sydney and Louisbourg currently publish 2026 schedules, while the Pacific sources publish 2027. Past sailing dates are labelled as a prior season. A fresh download of an old schedule does not turn it into an upcoming schedule. Halifax's public source is currently inaccessible to the collector; Charlottetown says its schedule is coming soon, and Saint John says the 2027 release is expected in January. Their official links stay prominent. Use the daily calendar to compare scheduled entries and peak overlap among intervals with both times. It does not estimate crowds or passenger numbers. Set your own minutes after arrival and before departure to estimate a planning window; your operator decides disembarkation and all-aboard times. Blank times remain unknown, 24:00 means the end of that date, and separate overnight rows remain separate. Favourites stay in this tab until you explicitly save them on this device. Export complete filtered intervals as an ICS calendar file, including source years, source links and each port's real check time. Historical captures retain their original coverage. The changes view records observed additions, removals and time changes. Sources are checked independently every day. If one fails, its earlier verified rows and their original check time remain visible while other ports can update. An unavailable port without a prior capture shows no fabricated calls. Always confirm plans with the official port source and your cruise operator."
     },
     "sync_manifest": true
   },
@@ -10901,13 +10905,13 @@
             ],
             "unit": "projects"
           },
-          "value": "2026-11-25 05:54 UTC",
-          "count": 12
+          "value": "2026-11-25 06:46 UTC",
+          "count": 64
         }
       ]
     },
     "readme": {
-      "note": "Choose Linux releases, build a software wishlist and compare captured upstream versions, packaging revisions and repository sections. Add any valid Repology project identifier; new lookups use CoolCode’s cached gateway. Support dates are separately sourced from distro-info-data and AlmaLinux’s release notes, with Fedora dates explicitly uncaptured. Save notes and dated evidence locally or export/import a complete plan. Missing index records do not prove package absence, and older versions may have security backports."
+      "note": "Browse captured desktop apps, media tools, backup utilities, developer software and servers, then compare their package evidence across indexed Linux releases. Search and filter the app and distribution pickers; arbitrary valid Repology project identifiers still work through the cached gateway. Rolling releases and Debian’s development branch are labelled separately from fixed releases. Official lifecycle dates, source coverage and dated migration notes travel with exported plans. Mint coverage is explicitly unverified; an Ubuntu base comparison is not Mint package evidence. Missing records do not prove absence, and older versions may have security backports."
     },
     "sync_manifest": true
   },
@@ -10988,7 +10992,7 @@
   {
     "id": "backbonecompare",
     "title": "Backbone Compare",
-    "description": "Compare observed BGP neighbours and listed network exchanges and facilities for any two ASNs.",
+    "description": "Find providers by name or ASN and compare observed BGP neighbours, exchanges and facilities.",
     "category": "liminal-tools",
     "tags": [
       "networks",
@@ -11004,7 +11008,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "RIPE RIS path observations and PeeringDB exchange/facility listings, with dated captures and public ASN lookups.",
+      "detail": "RIPE RIS observations and PeeringDB listings, with a Canadian starter directory, public provider search and dated ASN captures.",
       "cadence": "Daily",
       "probes": [
         {
@@ -11020,13 +11024,13 @@
             ],
             "unit": "ASNs"
           },
-          "value": "2026-11-25 05:49 UTC",
-          "count": 4
+          "value": "2026-11-25 06:49 UTC",
+          "count": 8
         }
       ]
     },
     "readme": {
-      "note": "Enter any two ASNs to compare RIPE RIS neighbours and PeeringDB exchange/facility listings. Filter IPv4 or IPv6 evidence, inspect shared and one-sided records, and see observation dates separately from fetch dates. Save named private pairs with notes, export JSON/CSV, or import earlier evidence. Uncertain RIS observations are excluded by default. Shared directory listings and AS-path adjacency do not prove physical route diversity, direct peering or a contractual transit relationship."
+      "note": "Find providers by name, alias or ASN, including Eastlink (AS11260 / Bragg Communications), then compare RIPE RIS neighbours and PeeringDB exchange/facility listings. Filter IPv4 or IPv6 evidence, inspect shared and one-sided records, and see observation dates separately from fetch dates. Save named private pairs with notes, export JSON/CSV, or import earlier evidence. Uncertain RIS observations are excluded by default. Shared directory listings and AS-path adjacency do not prove physical route diversity, direct peering or a contractual transit relationship."
     },
     "sync_manifest": true
   },

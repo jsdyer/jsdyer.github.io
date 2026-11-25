@@ -2091,13 +2091,13 @@
         "json_path": [
           "checked_at"
         ],
-        "label": "Official port schedules checked",
+        "label": "Oldest available schedule checked",
         "precision": "timestamp",
         "max_age_seconds": 259200
       }
     ],
     "collection_steps": [
-      "Refresh official CLAA port schedules"
+      "Refresh official port schedules"
     ]
   },
   "jsdyer/distropilot/pages.yml": {

@@ -1,11 +1,11 @@
 {
   "schema": "coolcode.repository-audit.v1",
-  "checked_at": "2026-11-25T05:43:22.426Z",
+  "checked_at": "2026-11-25T06:42:28+00:00",
   "owner": "jsdyer",
   "scope": "Public repositories; private repository identities are omitted. Functional readiness is reviewed before listing.",
   "catalogue_tools": 250,
   "public_repositories": 253,
-  "private_repositories_omitted": 1,
+  "private_repositories_omitted": 0,
   "listed_source_repositories": 241,
   "public_repository_names": [
     "abuse-kit",
