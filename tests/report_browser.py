@@ -31,6 +31,16 @@ def check_report(browser, url):
         assert len(requests) == 2 and requests[0] == requests[1]
         assert requests[1]["tool"] == "nightfinder"
         assert "test-receipt" in page.locator("#report-status").inner_text()
+        page.goto(url + "/report/?tool=townheritage")
+        page.wait_for_function("document.querySelector('#tool').value === 'townheritage' && !document.querySelector('#send-report').disabled")
+        assert "unlisted prototype" in page.locator("#tool option:checked").inner_text()
+        page.locator("#message").fill("The prototype's selected record is missing its title.")
+        page.get_by_role("button", name="Send private report").click()
+        page.get_by_text("Your private report has been sent", exact=False).wait_for()
+        assert requests[-1]["tool"] == "townheritage"
+        page.goto(url + "/report/")
+        page.wait_for_function("!document.querySelector('#tool').disabled")
+        assert page.locator("#tool option[value=townheritage]").count() == 0
         page.route("**/assets/service.mjs", lambda route: route.fulfill(
             content_type="text/javascript", body='export const SERVICE = "";'))
         page.goto(url + "/report/?tool=nightfinder")

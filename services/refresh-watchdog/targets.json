@@ -1812,6 +1812,15 @@
           ],
           "label": "Source retrieved",
           "precision": "date"
+        },
+        {
+          "url": "https://coolcode.ca/inflation-basket/data/dollars.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Full CPI dollar history checked",
+          "max_age_seconds": 3888000
         }
       ]
     },
@@ -2836,6 +2845,15 @@
           ],
           "label": "Catalogue checked",
           "precision": "timestamp"
+        },
+        {
+          "url": "https://coolcode.ca/rackexpiry/data/github-releases.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Self-hosted software releases checked",
+          "max_age_seconds": 1209600
         }
       ]
     },
@@ -3634,6 +3652,29 @@
           "label": "All targets checked",
           "precision": "timestamp"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/tariffbench",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "31 9 2 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/tariffbench/data/appliances-status.json",
+          "json_path": [
+            "capturedAt"
+          ],
+          "label": "Appliance catalogue checked",
+          "precision": "timestamp",
+          "max_age_seconds": 3888000
+        }
+      ],
+      "collection_steps": [
+        "Refresh Canadian-market appliance catalogue"
       ]
     },
     {

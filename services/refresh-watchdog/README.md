@@ -24,10 +24,31 @@ A newly added repository must also be accessible to the existing GitHub App inst
 | A browser-only calculator or private installable tool is added | No target or server change; there is no public collector to dispatch. |
 | The watchdog program, dependencies or systemd service changes | Pull the reviewed update and rerun the installer using the runtime-upgrade instructions below. Automatic target updates do not install new program code. |
 
-Park Ready and Clam Counter add scheduled work: park/advisory collection and menu
-source-change checks respectively. Tariff Bench uses reviewed rate editions and
-Basket Math is a local calculator; neither needs a public watchdog target. This
-release changes the registry, not the installed watchdog program. Confirm the next
+## Current release: service health and new collectors
+
+This release **does require the runtime reinstall below**, because it fixes which
+failures can fail the watchdog heartbeat. The expected runtime is
+`2026-11-26-service-health-v2`. Download errors, individual workflow/API errors and
+stale outputs remain admin findings; service faults still fail the heartbeat.
+
+The generated registry adds Canada Board (weekdays), Selfhost Finder (weekly),
+Car Bench and Signal Relics (monthly), and the new monthly Tariff Bench appliance
+collector. Charge Gaps gains an AFDC probe; Rack Expiry and Inflation Basket gain
+separate checks for their additional datasets. Tariff prices remain manually
+reviewed. Existing all-repositories App access covers these repositories. Target
+changes arrive automatically; they do not install the runtime fix.
+
+Browser Receipt, Session Harbour, Heat Bench and DIN Compare need no scheduled
+collector. Town Heritage is measured but unlisted and manually refreshed, so it
+also has no watchdog target. The optional DNS observer is a separate VPS service.
+
+## Earlier registry additions
+
+Park Ready and Clam Counter added scheduled work: park/advisory collection and menu
+source-change checks respectively. At that point Tariff Bench used only reviewed
+rate editions; its appliance collector is registered in the current release.
+Basket Math remains a local calculator. Those earlier additions changed the
+registry, not the installed watchdog program. Confirm the next
 server report sees any newly granted repositories; a public GitHub deployment
 cannot confirm the private server's credentials or running version.
 
@@ -63,7 +84,8 @@ Budget Mirror, Canada Pulse, Move Bench and Screen Places, plus Civic Revision a
 Open Seed. Civic Revision checks every six hours; Open Seed checks daily. Wage
 Window, Housing Pulse and Release Receipt keep their existing schedules and gain
 explicit probes for their additional CPI, compatible-series and watchlist datasets.
-The registry now accounts for 190 scheduled workflows across the full catalogue.
+That batch accounted for 190 scheduled workflows; `targets.json` is the current
+inventory and includes subsequent additions.
 
 This batch changes targets and documentation only. **No watchdog runtime reinstall
 is needed.** The existing all-repositories GitHub App installation covers the added

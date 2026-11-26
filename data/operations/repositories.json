@@ -3491,8 +3491,19 @@
   {
     "repo": "jsdyer/tariffbench",
     "branch": "main",
-    "workflows": [],
-    "guarded_paths": []
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "31 9 2 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
   },
   {
     "repo": "jsdyer/tariffxray",

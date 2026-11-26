@@ -2385,7 +2385,7 @@
   {
     "id": "trailglass",
     "title": "Trailglass",
-    "description": "Inspect mapped trails or GPX rides, find steep sections and compare recorded elevations with optional terrain estimates.",
+    "description": "Explore municipal trails and private GPX rides, with BC rainfall, road events and official Trailforks condition widgets.",
     "category": "places",
     "tags": [
       "langley",
@@ -2405,7 +2405,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Municipal geometry and local GPX tracks, with optional 90 m Copernicus terrain estimates through Open-Meteo. Coordinates are sent only on an explicit terrain request.",
+      "detail": "Municipal geometry and local GPX tracks; optional terrain estimates, ECCC precipitation/forecasts, DriveBC events and official Trailforks widgets load on request.",
       "probes": [
         {
           "url": "https://coolcode.ca/trailglass/data/status.json",
@@ -2413,7 +2413,7 @@
             "oldest_retrieval"
           ],
           "label": "Oldest source retrieved",
-          "value": "2026-11-24",
+          "value": "2026-11-26",
           "count_at": {
             "path": [
               "regions"
@@ -2428,7 +2428,7 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "note": "Select a municipal segment or open a local GPX to inspect distance, recorded elevations and steep sections. You can explicitly send up to 100 sampled coordinates for a separate Open-Meteo terrain profile. The roughly 90 m terrain model does not replace recorded elevations and can miss bridges, tunnels and small climbs."
+      "note": "Select a municipal segment or open a local GPX to inspect distance, recorded elevations and steep sections. You can explicitly send up to 100 sampled coordinates for a separate Open-Meteo terrain profile. The roughly 90 m terrain model does not replace recorded elevations and can miss bridges, tunnels and small climbs. For BC riding regions, **Before you ride** loads recent ECCC station precipitation, dated regional forecasts and DriveBC road events. Trailforks status and report widgets load separately when requested."
     },
     "sync_manifest": true
   },
@@ -3153,7 +3153,7 @@
   {
     "id": "nightfinder",
     "title": "Nightfinder",
-    "description": "Plan observing windows around your balcony horizon and Moon separation, with camera framing and golden-hour timing.",
+    "description": "Plan cloud-aware observing sessions and golden-hour photography, with saved locations, horizon obstructions and coastal presets.",
     "category": "field-kit",
     "tags": [
       "astronomy",
@@ -3179,7 +3179,7 @@
       "detail": "Sun, Moon and target positions are calculated locally. Optional cloud forecasts come from Open-Meteo only when requested."
     },
     "readme": {
-      "note": "Save a named balcony/building horizon to find when a target clears it, constrain Moon separation, and calculate seven days of golden light (Sun −4° to +6°) and blue light (−6° to −4°), alongside dark-sky target sessions. Optionally load cloud-cover forecasts for those windows; that click sends coordinates to Open-Meteo. Download the plan to retain the calculated windows."
+      "note": "Save a named balcony/building horizon to find when a target clears it, constrain Moon separation, and calculate seven days of golden light (Sun −4° to +6°) and blue light (−6° to −4°), alongside dark-sky target sessions. Optionally load cloud-cover forecasts for those windows; that click sends coordinates to Open-Meteo. Download the plan to retain the calculated windows. Choose the Peggy’s Cove or Stanley Park photography preset, then load the optional cloud forecast and set a maximum cloud cover for observing sessions. Saved locations preserve whether a horizon obstruction is enabled."
     },
     "sync_manifest": true
   },
@@ -3457,7 +3457,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-25",
+          "value": "2026-11-26",
           "count_at": {
             "path": [
               "tracks"
@@ -3484,7 +3484,7 @@
       "cadence": "Weekdays"
     },
     "readme": {
-      "note": "Choose a date range and use the date inspector or data table to compare rates with matching units. Indexed FX starts each series at its first available observation, while CSV exports preserve original exchange rates and blank observations."
+      "note": "Choose a date range and use the date inspector or data table to compare rates with matching units. Indexed FX starts each series at its first available observation, while CSV exports preserve original exchange rates and blank observations. Check the next scheduled policy decision and recent observed target changes, then follow the private payment-scenario link to Renewal Bench."
     },
     "sync_manifest": true
   },
@@ -6392,7 +6392,7 @@
   {
     "id": "inflation-basket",
     "title": "Inflation Basket",
-    "description": "Compare the change in your own spending basket with official provincial or Canadian inflation over the same months.",
+    "description": "Convert historical Canadian dollars with CPI since 1914, or compare your spending basket with provincial inflation.",
     "category": "money",
     "tags": [
       "inflation",
@@ -6407,7 +6407,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Statistics Canada publishes monthly price indexes for eight spending categories and all-items CPI, with separate basket weights.",
+      "detail": "Statistics Canada monthly all-items CPI supplies complete-year dollar comparisons, alongside eight spending categories and published basket weights.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -6435,12 +6435,36 @@
           ],
           "label": "Coverage",
           "value": "2002-01–2026-10"
+        },
+        {
+          "label": "Historical dollar data checked",
+          "url": "https://coolcode.ca/inflation-basket/data/dollars.json",
+          "path": [
+            "checked_at"
+          ],
+          "precision": "minute",
+          "value": "2026-11-26 04:46 UTC"
+        },
+        {
+          "label": "Complete Canadian CPI years",
+          "url": "https://coolcode.ca/inflation-basket/data/dollars.json",
+          "path": [
+            "coverage",
+            "Canada",
+            "first_complete_year"
+          ],
+          "end_path": [
+            "coverage",
+            "Canada",
+            "last_complete_year"
+          ],
+          "value": "1914–2025"
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Set every category except food to zero to isolate food inflation. In BC from October 2025 to October 2026 the food index rose 2.37% and the official all-items index rose 2.51%. The contribution table shows exactly which spending categories drive a custom result."
+      "note": "Convert a historical Canadian dollar amount using all-items CPI, with complete annual averages from 1914 for Canada and separately labelled latest-month comparisons. The original spending-basket calculator still compares eight major categories from 2002 onward and shows their contributions. Both calculations use dated official observations; personal amounts stay local."
     }
   },
   {
@@ -7415,7 +7439,7 @@
   },
   {
     "title": "Tide & Dark",
-    "description": "Plan Canadian coastal photography with official tide and daylight windows, regional weather, or an independent dark-sky tide model.",
+    "description": "Plan coastal light around official tides, save photography locations, and connect Peggy’s Cove and Stanley Park to sky and cloud windows.",
     "category": "field-kit",
     "icon": "moon-star",
     "tags": [
@@ -7493,7 +7517,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose a coastal station and date in daylight mode to compare official tide predictions with sunrise and sunset. Current weather is fetched only when requested and is labelled separately from the selected tide date. Switch to dark-sky photography for the independent long-range tide model and Moon filters; the two modes use different height datums."
+      "note": "Choose a coastal station and date in daylight mode to compare official tide predictions with sunrise and sunset. Current weather is fetched only when requested and is labelled separately from the selected tide date. Switch to dark-sky photography for the independent long-range tide model and Moon filters; the two modes use different height datums. Peggy’s Cove and Stanley Park photography presets link to golden/blue-hour, Moon and cloud-aware sessions in Nightfinder. Named coastal selections can be saved locally. The tide reference is labelled separately from the photography coordinates."
     }
   },
   {
@@ -8513,7 +8537,7 @@
   {
     "id": "rackexpiry",
     "title": "Rack Expiry",
-    "description": "Match your software inventory to published support windows and plan the next upgrade.",
+    "description": "Match your software inventory to support windows and compare installed application releases.",
     "category": "projects",
     "tags": [
       "software",
@@ -8528,7 +8552,7 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Saved endoflife.date support windows are matched to a private inventory in your browser.",
+      "detail": "Saved endoflife.date support windows and selected public GitHub releases are compared with private installed versions in your browser.",
       "probes": [
         {
           "url": "https://coolcode.ca/rackexpiry/data/index.json",
@@ -8545,12 +8569,29 @@
           },
           "value": "2026-11-23 22:13 UTC",
           "count": 25
+        },
+        {
+          "label": "Self-hosted releases checked",
+          "url": "https://coolcode.ca/rackexpiry/data/github-releases.json",
+          "path": [
+            "checked_at"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "records"
+            ],
+            "measure": "length",
+            "unit": "tracked applications"
+          },
+          "value": "2026-11-26 04:51 UTC",
+          "count": 6
         }
       ],
       "cadence": "Weekly"
     },
     "readme": {
-      "note": "Add an asset label, software product and installed version. Rack Expiry matches the longest numeric release cycle from a saved endoflife.date catalogue, then sorts support-ended and upcoming deadlines first. Choose an assessment date, inspect the release reference, and export results as CSV. Imports accept simple three-column CSV (asset,product,version) or a JSON array; exported CSV files include evidence columns and can be imported again using their named inventory fields. CSV prefixes formula-leading cells for spreadsheet safety, which can alter labels on reimport; choose **Save inventory JSON** for a lossless backup and exact roundtrip. Inventory stays in memory until **Save on this device**; only that explicit action writes namespaced local storage. No inventory fields are uploaded. The example stack is illustrative. Standard upstream support, active support and extended support differ: purchased entitlements and distribution backports must be checked separately. Unknown versions stay unknown. Numeric prefix matching requires an entirely numeric installed version; nonnumeric release-cycle names match exactly, ignoring case. Prerelease or malformed suffixes are not treated as stable releases. A support deadline is not proof of an exploitable vulnerability. Upstream deadline dates are the last supported day (the status changes the following day). Boolean-only statuses with no known end date are used only on the catalogue check date, so historical or future assessments remain unknown instead of inventing coverage. The API’s `isMaintained` flag can include extended support and is not used to infer standard support. The selected product catalogue refreshes Mondays at 10:43 UTC. Changed catalogues are retained as immutable compressed JSON archives with hashes, dates and a change feed; a first capture is a baseline, not retroactive history. The public app works from the last validated saved snapshot. No API key is needed."
+      "note": "Add an asset label, software product and installed version. Rack Expiry matches the longest numeric release cycle from a saved endoflife.date catalogue, then sorts support-ended and upcoming deadlines first. Choose an assessment date, inspect the release reference, and export results as CSV. Imports accept simple three-column CSV (asset,product,version) or a JSON array; exported CSV files include evidence columns and can be imported again using their named inventory fields. CSV prefixes formula-leading cells for spreadsheet safety, which can alter labels on reimport; choose **Save inventory JSON** for a lossless backup and exact roundtrip. Inventory stays in memory until **Save on this device**; only that explicit action writes namespaced local storage. No inventory fields are uploaded. The example stack is illustrative. Standard upstream support, active support and extended support differ: purchased entitlements and distribution backports must be checked separately. Unknown versions stay unknown. Numeric prefix matching requires an entirely numeric installed version; nonnumeric release-cycle names match exactly, ignoring case. Prerelease or malformed suffixes are not treated as stable releases. A support deadline is not proof of an exploitable vulnerability. Upstream deadline dates are the last supported day (the status changes the following day). Boolean-only statuses with no known end date are used only on the catalogue check date, so historical or future assessments remain unknown instead of inventing coverage. The API’s `isMaintained` flag can include extended support and is not used to infer standard support. The selected product catalogue refreshes Mondays at 10:43 UTC. Changed catalogues are retained as immutable compressed JSON archives with hashes, dates and a change feed; a first capture is a baseline, not retroactive history. The public app works from the last validated saved snapshot. No API key is needed. Exact installed versions are now compared with each matched branch’s recorded latest version. A separate application release watch covers configurable public GitHub projects, with local-only saved installed versions and a weekly RSS feed. Release observations do not establish support, compatibility or vulnerability status."
     },
     "sync_manifest": true
   },
@@ -8916,7 +8957,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start with the saved wildfire, water or open-government collection, then inspect a paper's authors, funding and recorded update links. Search Crossref by topic, title, author or DOI for other work; export a CSV or save a timestamped receipt. Missing funding or correction metadata means unknown, and citation counts are incomplete—not a measure of quality."
+      "note": "Start with the saved wildfire, water or open-government collection, then inspect a paper's authors, funding and recorded update links. Search Crossref by topic, title, author or DOI for other work; export a CSV or save a timestamped receipt. Missing funding or correction metadata means unknown, and citation counts are incomplete—not a measure of quality. Filter by recorded author affiliation for Dalhousie, Saint Mary’s Halifax, UBC or SFU; keep private saved searches and subscribe to the institution’s weekly sample RSS. Missing affiliation metadata remains unknown."
     }
   },
   {
@@ -9053,7 +9094,7 @@
   {
     "id": "packagepulse",
     "title": "Package Pulse",
-    "description": "Inspect npm release histories, maintainers and dependencies, then compare packages with dated CDN usage.",
+    "description": "Compare npm release histories and dependencies, track installed versions, and follow public release feeds.",
     "category": "projects",
     "tags": [
       "npm",
@@ -9069,18 +9110,18 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Live public npm metadata and jsDelivr CDN usage, with dated default captures for immediate exploration.",
+      "detail": "Live public npm metadata and jsDelivr CDN usage, with dated default captures, local installed-version watchlists and weekly release RSS.",
       "cadence": "Weekly"
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Enter any public npm package, optionally add a second, and choose Look up live. The latest publisher tag can differ from the newest release; CDN requests are not npm downloads or unique users."
+      "note": "Enter any public npm package, optionally add a second, and choose Look up live. The latest publisher tag can differ from the newest release; CDN requests are not npm downloads or unique users. Installed-version watchlists are temporary until explicitly saved in this browser; public package checks never send installed versions. The weekly public RSS feed follows configured defaults, not visitors’ private watchlists. Comparisons use exact SemVer precedence and the publisher’s latest tag; ranges remain unclassified."
     }
   },
   {
     "id": "arttimeline",
     "title": "Art Timeline",
-    "description": "Explore two museum collections through time and compare artworks, materials and original records.",
+    "description": "Explore five museum collections through time, compare art and materials, and size open images for printing.",
     "category": "media",
     "tags": [
       "art",
@@ -9096,11 +9137,11 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Search The Met and Art Institute of Chicago, with a dated opening collection and public-domain images."
+      "detail": "Live Met, Chicago and Cleveland searches plus dated NGA and Getty selections with individual image rights."
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Search either museum with your own terms, then refine the loaded works and compare two objects with their original date labels and credits. The opening collection and search presets are editable in web/config.json; they do not limit live searches."
+      "note": "Search the Met, Chicago or Cleveland live, then compare periods and materials across five museums. The opening selection adds NGA and Getty records with individual image rights, verified image pixels and 150/300-PPI print dimensions. Configure opening IDs and live-search presets in web/config.json."
     }
   },
   {
@@ -9122,11 +9163,11 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Live Open Food Facts barcode lookups, dated starter labels and local receipt comparisons."
+      "detail": "Live Open Food Facts barcode lookups, dated starter labels and local receipt comparisons. Optional private receipt history compares dated package quantities and actual prices."
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Enter any food barcode to compare nutrition, including reported vitamins and minerals, ingredients and allergens. Inspect original label photos and additional product details. Switch between source-normalized 100 g/mL and each product’s own serving, then save a dated JSON receipt to reopen later; missing fields never become zero or an allergy-free claim."
+      "note": "Enter any food barcode to compare nutrition, including reported vitamins and minerals, ingredients and allergens. Inspect original label photos and additional product details. Switch between source-normalized 100 g/mL and each product’s own serving, then save a dated JSON receipt to reopen later; missing fields never become zero or an allergy-free claim. You can also transcribe actual receipts into a private dated price/package ledger, compare compatible unit prices over time, and export/import the same history in Basket Math or Label Compare. History is saved only on request."
     }
   },
   {
@@ -9307,7 +9348,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Search any title, author, subject or set of words, optionally limiting the work's first-publication years and Open Library's access category. The starting searches are editable suggestions, not a fixed collection. Results are paginated. Open **Compare editions** on a work, then choose two publication records to compare publisher, date, language, pages, format and ISBN. A work groups editions; its first-publication year and reading-access label do not describe every edition. The opening screen uses a small, dated real Open Library capture. **Search books** retrieves live results directly from Open Library; failures preserve the previous results. Add books to a reading shelf, export JSON/CSV, or import a saved search/shelf JSON locally. The shelf stays in the current tab unless **Remember this shelf on this device** is selected. A readable-copy label is not a worldwide public-domain determination, and borrowing can require an Open Library/Internet Archive account. “Graveyard” is a discovery theme, not a claim that titles are forgotten or out of print. **Expand or customize:** edit `web/config.json` to change `defaultSearch`, add any number of `presets`, or change page sizes and timeouts. Each query has `query`, `field` (`all`, `title`, `author`, `subject`), `from`, `to`, `access` (`any`, `public`, `borrowable`, `no_ebook`) and `sort` (`relevance`, `old`, `new`). Visitors can type searches beyond these presets. After changing the opening search, run `python3 scripts/refresh_data.py` once; review `web/data/opening.json`, then run the normal checks and commit to `main`. The Pages workflow builds and publishes the change. This tool needs no API key; Open Library asks the owner to register the application/use case using the form linked in its API documentation. Canadian reading shelves add Montgomery, Leacock, Haliburton and Cameron, with British Columbia and Nova Scotia subject shortcuts into the wider catalogue. Reading time divides a counted mirrored text by your chosen words-per-minute rate; it is an estimate, not an audiobook duration. Random passages are preserved, bounded samples of these public-domain-labelled texts, with source links and no invented printed page numbers. EPUB labels describe the specific Archive mirror; the Gutenberg formats link lets you check other editions. Save a separate Canadian reading list locally or export/import JSON; the existing general Open Library shelf is preserved."
+      "note": "Search any title, author, subject or set of words, optionally limiting the work's first-publication years and Open Library's access category. The starting searches are editable suggestions, not a fixed collection. Results are paginated. Open **Compare editions** on a work, then choose two publication records to compare publisher, date, language, pages, format and ISBN. Use an edition’s ISBN/OCLC/LCCN to find linked digitized volumes at HathiTrust, or enter an identifier directly. HathiTrust access labels are explicitly US labels; confirm access from your own location. A work groups editions; its first-publication year and reading-access label do not describe every edition. The opening screen uses a small, dated real Open Library capture. **Search books** retrieves live results directly from Open Library; failures preserve the previous results. Add books to a reading shelf, export JSON/CSV, or import a saved search/shelf JSON locally. The shelf stays in the current tab unless **Remember this shelf on this device** is selected. A readable-copy label is not a worldwide public-domain determination, and borrowing can require an Open Library/Internet Archive account. “Graveyard” is a discovery theme, not a claim that titles are forgotten or out of print. **Expand or customize:** edit `web/config.json` to change `defaultSearch`, add any number of `presets`, or change page sizes and timeouts. Each query has `query`, `field` (`all`, `title`, `author`, `subject`), `from`, `to`, `access` (`any`, `public`, `borrowable`, `no_ebook`) and `sort` (`relevance`, `old`, `new`). Visitors can type searches beyond these presets. After changing the opening search, run `python3 scripts/refresh_data.py` once; review `web/data/opening.json`, then run the normal checks and commit to `main`. The Pages workflow builds and publishes the change. This tool needs no API key; Open Library asks the owner to register the application/use case using the form linked in its API documentation. Canadian reading shelves add Montgomery, Leacock, Haliburton and Cameron, with British Columbia and Nova Scotia subject shortcuts into the wider catalogue. Reading time divides a counted mirrored text by your chosen words-per-minute rate; it is an estimate, not an audiobook duration. Random passages are preserved, bounded samples of these public-domain-labelled texts, with source links and no invented printed page numbers. EPUB labels describe the specific Archive mirror; the Gutenberg formats link lets you check other editions. Save a separate Canadian reading list locally or export/import JSON; the existing general Open Library shelf is preserved."
     }
   },
   {
@@ -10714,12 +10755,31 @@
     "hosting": "project",
     "access": "browser",
     "data_info": {
-      "mode": "reference",
-      "detail": "Private device and household inputs with manually reviewed BC Hydro and Nova Scotia Power residential tariffs, effective April/May 2026; reviewed November 24, 2026."
+      "mode": "mixed",
+      "detail": "Private device and household inputs with manually reviewed BC Hydro and Nova Scotia Power residential tariffs, effective April/May 2026; reviewed November 24, 2026. Monthly ENERGY STAR Canadian-market appliance model snapshots provide rated annual kWh.",
+      "cadence": "Monthly appliance checks; tariffs reviewed manually",
+      "probes": [
+        {
+          "url": "https://coolcode.ca/tariffbench/data/appliances-status.json",
+          "path": [
+            "capturedAt"
+          ],
+          "precision": "minute",
+          "label": "Appliance catalogue checked",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "appliance models"
+          },
+          "value": "2026-11-26 04:44 UTC",
+          "count": 4353
+        }
+      ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Enter actual billing days and the household kWh **excluding** the devices in your scenario. Add arbitrary devices with average watts, hours per day and quantity. Tariff Bench calculates total bills and the extra cost of all devices together, sharing the household's BC tier threshold rather than giving each device a new lower tier. BC time-of-day estimates use separate energy shares for household and added-device loads; check eligibility with BC Hydro before switching. NS standard service uses its published combined energy rate and your actual number of billed months. Rates were manually reviewed November 24, 2026, with effective dates shown on the page; this reference edition ends December 31, 2026. Tax defaults to zero; an optional simple percentage does not reproduce all tax/rebate rules. Save on your device only when requested, download/open scenario JSON or export CSV results. No inputs leave the browser. NS time-of-day equipment tariffs and enrollment-limited pilots are outside this calculator's coverage."
+      "note": "Enter actual billing days and the household kWh **excluding** the devices in your scenario. Add arbitrary devices with average watts, hours per day and quantity. Tariff Bench calculates total bills and the extra cost of all devices together, sharing the household's BC tier threshold rather than giving each device a new lower tier. BC time-of-day estimates use separate energy shares for household and added-device loads; check eligibility with BC Hydro before switching. NS standard service uses its published combined energy rate and your actual number of billed months. Rates were manually reviewed November 24, 2026, with effective dates shown on the page; this reference edition ends December 31, 2026. Tax defaults to zero; an optional simple percentage does not reproduce all tax/rebate rules. Save on your device only when requested, download/open scenario JSON or export CSV results. No inputs leave the browser. NS time-of-day equipment tariffs and enrollment-limited pilots are outside this calculator's coverage. Search the Canadian-market ENERGY STAR refrigeration catalogue by brand or model and add its rated annual energy use to the same household scenario. Catalogue capture dates are separate from manually reviewed tariff dates."
     }
   },
   {
@@ -10742,11 +10802,11 @@
     "access": "browser",
     "data_info": {
       "mode": "local",
-      "detail": "Your entered prices, pack sizes, promotion rules and tax assumptions are calculated privately in the browser."
+      "detail": "Your entered prices, pack sizes, promotion rules and tax assumptions are calculated privately in the browser. Optional private receipt history compares dated package quantities and actual prices."
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare two sizes of the same product using your own shelf prices. Basket Math calculates whole packs, checkout cost, unit price and extra quantity, including complete-bundle offers, qualifying per-pack prices and buy-X-get-Y-free deals. Lowest unit price can require a larger purchase. Enter coupon and tax assumptions explicitly; save or export only when you choose. The starting prices are invented examples, not live store prices."
+      "note": "Compare two sizes of the same product using your own shelf prices. Basket Math calculates whole packs, checkout cost, unit price and extra quantity, including complete-bundle offers, qualifying per-pack prices and buy-X-get-Y-free deals. Lowest unit price can require a larger purchase. Enter coupon and tax assumptions explicitly; save or export only when you choose. The starting prices are invented examples, not live store prices. You can also transcribe actual receipts into a private dated price/package ledger, compare compatible unit prices over time, and export/import the same history in Basket Math or Label Compare. History is saved only on request."
     }
   },
   {
@@ -10872,7 +10932,7 @@
       "detail": "Manually checked feed recommendations and your own RSS/Atom sources. Public feeds load on demand; local XML and reading state stay in your browser unless saved or exported."
     },
     "readme": {
-      "note": "Browse checked RSS feeds across CoolCode's topics, including British Columbia and Nova Scotia news, public records, Linux, networks, space, money and culture. CoolCode’s Civic Revision and Release Receipt feeds cover Wikipedia revisions and Statistics Canada releases. Add one source or a topic pack, then choose Refresh; browsing or subscribing does not fetch articles automatically. You can still enter any public feed, import OPML or read local RSS/Atom XML privately. Save deliberately on your device or export JSON to keep reading state; OPML exports subscriptions and folders. Failed refreshes keep the last good items visible."
+      "note": "Browse checked RSS feeds across CoolCode's topics, including British Columbia and Nova Scotia news, public records, Linux, networks, space, money and culture. CoolCode’s Civic Revision and Release Receipt feeds cover Wikipedia revisions and Statistics Canada releases. Paste Research Ledger’s university feeds or the Package Pulse and Rack Expiry release feeds to follow research and software updates. Add one source or a topic pack, then choose Refresh; browsing or subscribing does not fetch articles automatically. You can still enter any public feed, import OPML or read local RSS/Atom XML privately. Save deliberately on your device or export JSON to keep reading state; OPML exports subscriptions and folders. Failed refreshes keep the last good items visible."
     },
     "sync_manifest": true
   },
@@ -10899,7 +10959,7 @@
       "detail": "Your entered fixed-rate mortgage quotes, fees and prepayment plans are calculated privately in the browser. No live lender offers or API keys are used."
     },
     "readme": {
-      "note": "Compare written fixed-rate offers over a period no longer than the shortest term. The editable example compares a $400,000 mortgage over 36 months, with different rates and upfront fees; those offers are invented. Include your own fees and lender-quoted penalties, then inspect both borrowing cost and the amount owing. Dated lump sums apply to every offer; recurring extras and contract limits are set per offer. Save deliberately on your device or export a private JSON workspace, schedule CSV and text report."
+      "note": "Compare written fixed-rate offers over a period no longer than the shortest term. The editable example compares a $400,000 mortgage over 36 months, with different rates and upfront fees; those offers are invented. Include your own fees and lender-quoted penalties, then inspect both borrowing cost and the amount owing. Dated lump sums apply to every offer; recurring extras and contract limits are set per offer. Save deliberately on your device or export a private JSON workspace, schedule CSV and text report. A separate payment-scenario panel compares your own assumed current/renewal rates at the same balance and amortization without changing any written offer."
     },
     "sync_manifest": true
   },
@@ -11673,7 +11733,7 @@
       "detail": "Your private pay and cost scenarios, with separately labelled Statistics Canada provincial household-spending context."
     },
     "readme": {
-      "note": "Enter actual pay and expenses for your current and proposed places. Move Bench separates the gross-pay change from the expense change, calculates an equivalent gross salary and shows moving-cost recovery. All salary comparisons are before income tax and payroll deductions; provincial household averages appear only as dated context and never fill your budget automatically."
+      "note": "Enter actual pay and expenses for your current and proposed places. Move Bench separates the gross-pay change from the expense change, calculates an equivalent gross salary and shows moving-cost recovery. All salary comparisons are before income tax and payroll deductions; provincial household averages appear only as dated context and never fill your budget automatically. Vancouver/Halifax place presets preserve your financial entries, and a research checklist links to product prices, groceries, housing, wages and regulated Atlantic fuel limits with their geographic and date limitations."
     },
     "sync_manifest": true
   },
@@ -11696,10 +11756,40 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Wikimedia daily Canadian readership rankings and worldwide user pageviews for configurable Canadian topics, with a growing dated archive and daily scheduled checks."
+      "detail": "Wikimedia daily Canadian readership rankings and worldwide user pageviews for configurable Canadian topics, with historical archives from 2021 and 2015 respectively and daily scheduled checks.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "Source checked",
+          "url": "https://coolcode.ca/canadapulse/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "archived_days"
+            ],
+            "unit": "archived days"
+          },
+          "value": "2026-11-26 04:50 UTC",
+          "count": 4166
+        },
+        {
+          "label": "Archive coverage",
+          "url": "https://coolcode.ca/canadapulse/data/status.json",
+          "path": [
+            "archive_earliest"
+          ],
+          "end_path": [
+            "archive_latest"
+          ],
+          "value": "2015-07-01–2026-11-25"
+        }
+      ]
     },
     "readme": {
-      "note": "“Read from Canada” counts article views originating in Canada; “Canadian topics worldwide” follows a curated list globally. Country figures are privacy-protected upper bounds, not exact reader counts. Browse saved report dates by month, share a date link or export its results. Historical observations and the topic selection for each day are retained in the repository. Missing days remain gaps. A spike compares a complete earlier baseline; it does not explain why people are reading."
+      "note": "“Read from Canada” counts article views originating in Canada; “Canadian topics worldwide” follows a curated list globally. Country figures are privacy-protected upper bounds, not exact reader counts. Browse saved report dates by month, share a date link or export its results. Historical observations and each saved day’s topic selection are retained in the repository. A retrospective import extends the configured topic series to July 2015 and available country rankings to January 2021; these are distinct measures. Missing days remain gaps. A spike compares a complete earlier baseline; it does not explain why people are reading."
     },
     "sync_manifest": true
   },

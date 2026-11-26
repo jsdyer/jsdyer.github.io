@@ -172,6 +172,7 @@ jsdyer/streetworkdiary
 jsdyer/sunledger
 jsdyer/surplus-crown
 jsdyer/takedown-watcher
+jsdyer/tariffbench
 jsdyer/telecompulse
 jsdyer/tide-and-dark
 jsdyer/tidereceipt

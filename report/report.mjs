@@ -14,6 +14,7 @@ const categories = [
 ];
 const site = 'site';
 let sending = false;
+let loadingTools = true;
 let endpoint;
 
 function announce(text) {
@@ -44,30 +45,53 @@ async function enableReports() {
 }
 
 async function showTools() {
+  const note = document.getElementById('catalogue-note');
   try {
-    const response = await fetch('../assets/tool-catalog.json');
+    const response = await fetch('../assets/tool-catalog.json', {signal: AbortSignal.timeout(10000)});
     if (!response.ok) throw new Error('Catalogue unavailable');
     const catalogue = await response.json();
     const sorted = catalogue.filter(entry => entry?.id !== site && slug.test(entry?.id || '') &&
       typeof entry?.title === 'string').sort((a, b) => a.title.localeCompare(b.title, 'en-CA'));
+    // An unlisted tool belongs here only when its own report link was followed.
+    // Confirm it against the measured registry without exposing every prototype.
+    if (requested && requested.length <= 80 && slug.test(requested) && requested !== site &&
+        !sorted.some(entry => entry.id === requested)) {
+      try {
+        const measuredResponse = await fetch('../admin/measurement-tools.json', {
+          credentials: 'omit', referrerPolicy: 'no-referrer', cache: 'no-cache',
+          signal: AbortSignal.timeout(10000),
+        });
+        if (!measuredResponse.ok) throw new Error('Measurement registry unavailable');
+        const measured = await measuredResponse.json();
+        const entry = Array.isArray(measured) && measured.find(row => row?.id === requested &&
+          typeof row.title === 'string' && row.title.trim() &&
+          row.source === 'https://github.com/jsdyer/' + requested);
+        if (!entry) throw new Error('Requested tool is not registered');
+        sorted.push(entry);
+      } catch {
+        note.textContent = 'The requested tool could not be verified. Choose a listed tool or name it in your description.';
+        note.hidden = false;
+      }
+    }
     const original = tool.value;
     tool.replaceChildren(new Option('CoolCode website or catalogue', site));
     for (const entry of sorted) tool.add(new Option(entry.title, entry.id));
-    if ([...tool.options].some(option => option.value === original)) tool.value = original;
+    if (sorted.some(entry => entry.id === requested)) tool.value = requested;
+    else if ([...tool.options].some(option => option.value === original)) tool.value = original;
     updateGithub();
   } catch {
-    // Reporting from a tool still works when the full catalogue is temporarily unavailable.
-    const note = document.getElementById('catalogue-note');
     note.textContent = 'The full tool list could not load. You can name the tool in your description.';
     note.hidden = false;
+  } finally {
+    loadingTools = false;
+    tool.disabled = false;
+    submit.disabled = false;
   }
 }
 
 tool.add(new Option('CoolCode website or catalogue', site));
-if (requested && requested.length <= 80 && slug.test(requested) && requested !== site) {
-  tool.add(new Option(requested, requested));
-  tool.value = requested;
-}
+tool.disabled = true;
+submit.disabled = true;
 for (const [value, label] of categories) category.add(new Option(label, value));
 document.getElementById('tool-picker').hidden = false;
 tool.addEventListener('change', updateGithub);
@@ -77,7 +101,7 @@ void enableReports();
 
 form.addEventListener('submit', async event => {
   event.preventDefault();
-  if (sending || !endpoint) return;
+  if (sending || loadingTools || !endpoint) return;
   message.setCustomValidity(message.value.trim() ? '' : 'Describe the problem.');
   if (!form.reportValidity()) return;
   sending = true;
