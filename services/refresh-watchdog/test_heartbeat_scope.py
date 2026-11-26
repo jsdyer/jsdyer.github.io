@@ -107,38 +107,155 @@ class HeartbeatScope(unittest.TestCase):
         self.assertEqual(report['collector_errors'],1)
         self.assertFalse(fake.writes)
 
-    def test_cannot_read_github_workflows_is_an_execution_failure(self):
-        for error in (w.SafeError('authentication_failed',401),w.SafeError('permission_denied',403),w.SafeError('network_error')):
-            with self.subTest(error=error.kind):
-                code,report=self.execute(Fake(fail=error),state={})
-                self.assertEqual(code,1)
-                self.assertEqual(self.pings[-1],(self.url,False))
-                self.assertEqual(report['watchdog_health'],'unhealthy')
-                self.assertEqual(report['watchdog_errors'],1)
-                self.assertEqual(report['collector_errors'],0)
-                self.assertEqual(report['targets'][0]['error_scope'],'watchdog')
+    def test_shared_credentials_rejected_is_an_execution_failure(self):
+        code,report=self.execute(Fake(fail=w.SafeError('authentication_failed',401)),state={})
+        self.assertEqual(code,1)
+        self.assertEqual(self.pings[-1],(self.url,False))
+        self.assertEqual(report['watchdog_health'],'unhealthy')
+        self.assertEqual(report['watchdog_errors'],1)
+        self.assertEqual(report['targets'][0]['error_scope'],'watchdog')
 
-    def test_unable_to_request_recovery_is_an_execution_failure(self):
+    def test_handled_target_api_failures_remain_visible_without_failing_service(self):
+        errors=(w.SafeError('permission_denied',403),w.SafeError('http_error',404),
+                w.SafeError('http_error',503),w.SafeError('network_error'),w.SafeError('invalid_json'))
+        for error in errors:
+            with self.subTest(error=error.kind,status=error.status):
+                code,report=self.execute(Fake(fail=error),state={})
+                self.assertEqual(code,0)
+                self.assertEqual(self.pings[-1],(self.url,True))
+                self.assertEqual(report['watchdog_health'],'healthy')
+                self.assertEqual(report['watchdog_errors'],0)
+                self.assertEqual(report['target_errors'],1)
+                self.assertEqual(report['health'],'unhealthy')
+                self.assertTrue(report['completed'])
+                self.assertEqual(report['runtime_version'],w.RUNTIME_VERSION)
+                row=report['targets'][0]
+                self.assertEqual(row['error_scope'],'target')
+                self.assertEqual(row['status'],error.kind)
+                self.assertFalse(row['verified_refresh'])
+
+    def test_target_failure_does_not_stop_other_repositories(self):
+        configuration=config(freshness=[self.probe])
+        configuration['targets'].append(dict(configuration['targets'][0],repo='owner/second'))
+        class PartialFailure(Fake):
+            def request(self,method,path,payload=None,public=False):
+                if '/owner/tool/' in path:raise w.SafeError('network_error')
+                return super().request(method,path,payload,public)
+        code,report=self.execute(PartialFailure(runs=[completed()],public={'checked':w.stamp(NOW)}),configuration)
+        self.assertEqual(code,0)
+        self.assertEqual(self.pings,[(self.url,True)])
+        self.assertEqual([r['status'] for r in report['targets']],['network_error','current'])
+        self.assertEqual(report['target_errors'],1)
+        self.assertEqual(report['watchdog_errors'],0)
+
+    def test_unable_to_request_target_recovery_keeps_service_healthy_and_retry_cooldown(self):
         class DispatchDenied(Fake):
             def request(self,method,path,payload=None,public=False):
                 if method=='POST':raise w.SafeError('permission_denied',403)
                 return super().request(method,path,payload,public)
         code,report=self.execute(DispatchDenied(public={'checked':w.stamp(NOW)}))
-        self.assertEqual(code,1)
-        self.assertEqual(self.pings,[(self.url,False)])
-        self.assertEqual(report['watchdog_errors'],1)
+        self.assertEqual(code,0)
+        self.assertEqual(self.pings,[(self.url,True)])
+        self.assertEqual(report['watchdog_errors'],0)
+        self.assertEqual(report['target_errors'],1)
         self.assertEqual(report['dispatch_attempts'],1)
         self.assertEqual(report['dispatches'],0)
+        retry=Fake(public={'checked':w.stamp(NOW)})
+        code,report=self.execute(retry)
+        self.assertEqual(code,0)
+        self.assertEqual(report['targets'][0]['status'],'cooldown')
+        self.assertFalse(retry.writes)
 
-    def test_api_backoff_with_unchecked_targets_is_not_a_completed_pass(self):
+    def test_api_backoff_is_a_successful_safe_deferral_with_visible_attention(self):
         state={'blocked_until':w.stamp(NOW+dt.timedelta(minutes=10))}
         fake=Fake()
         code,report=self.execute(fake,state=state)
-        self.assertEqual(code,1)
-        self.assertEqual(self.pings,[(self.url,False)])
+        self.assertEqual(code,0)
+        self.assertEqual(self.pings,[(self.url,True)])
         self.assertEqual(report['targets'][0]['status'],'not_checked')
-        self.assertEqual(report['watchdog_errors'],1)
+        self.assertEqual(report['targets'][0]['reason'],'rate_limit_backoff')
+        self.assertEqual(report['attention'],1)
+        self.assertEqual(report['watchdog_errors'],0)
         self.assertFalse(fake.calls)
+
+    def test_rate_limit_stops_remote_requests_but_does_not_fail_execution(self):
+        configuration=config()
+        configuration['targets'].append(dict(configuration['targets'][0],repo='owner/second'))
+        limited=Fake(fail=w.SafeError('rate_limited',429,NOW+dt.timedelta(minutes=10)))
+        code,report=self.execute(limited,configuration)
+        self.assertEqual(code,0)
+        self.assertEqual(self.pings,[(self.url,True)])
+        self.assertEqual([r['status'] for r in report['targets']],['rate_limited','not_checked'])
+        self.assertEqual(report['targets'][1]['reason'],'rate_limited')
+        self.assertEqual(len(limited.calls),1)
+        self.assertEqual(report['watchdog_errors'],0)
+        self.assertEqual(report['target_errors'],1)
+
+    def test_request_budget_defers_remaining_targets_without_falsely_marking_checked(self):
+        configuration=config(freshness=[self.probe])
+        configuration['targets'].append(dict(configuration['targets'][0],repo='owner/second'))
+        class Exhausted(Fake):
+            def request(self,method,path,payload=None,public=False):
+                if public:raise w.SafeError('pass_time_budget')
+                return super().request(method,path,payload,public)
+        fake=Exhausted(runs=[completed()])
+        code,report=self.execute(fake,configuration)
+        self.assertEqual(code,0)
+        self.assertEqual(self.pings,[(self.url,True)])
+        self.assertEqual([r['status'] for r in report['targets']],['not_checked','not_checked'])
+        self.assertTrue(all(r['reason']=='pass_time_budget' for r in report['targets']))
+        self.assertTrue(all(not r['verified_refresh'] for r in report['targets']))
+        saved=json.loads((self.root/'state.json').read_text())
+        self.assertTrue(all('last_checked' not in r for r in saved['targets'].values()))
+        self.assertEqual(report['attention'],2)
+        self.assertEqual(report['watchdog_errors'],0)
+        self.assertFalse(fake.writes)
+
+    def test_transport_budget_bounds_timeout_retry_and_slow_response(self):
+        clock=[0.0]
+        timeouts=[]
+        class SlowResponse:
+            def __enter__(self):return self
+            def __exit__(self,*args):pass
+            def read(self,size):return b''
+            def read1(self,size):
+                clock[0]+=2
+                return b' '
+        class Open:
+            def open(self,request,timeout):
+                timeouts.append(timeout)
+                return SlowResponse()
+        transport=w.HTTP(opener=Open(),budget_seconds=3,monotonic=lambda:clock[0])
+        with self.assertRaises(w.SafeError) as caught:transport.request('GET','/test')
+        self.assertEqual(caught.exception.kind,'pass_time_budget')
+        self.assertEqual(timeouts,[3])
+        with self.assertRaises(w.SafeError):transport.request('GET','/later')
+        self.assertEqual(len(timeouts),1)
+        clock[0]=0
+        sleeps=[]
+        class FailedOpen:
+            def open(self,request,timeout):raise TimeoutError()
+        transport=w.HTTP(opener=FailedOpen(),budget_seconds=0.5,monotonic=lambda:clock[0],sleep=sleeps.append)
+        with self.assertRaises(w.SafeError) as caught:transport.request('GET','/test')
+        self.assertEqual(caught.exception.kind,'pass_time_budget')
+        self.assertFalse(sleeps)
+
+    def test_capped_remote_history_is_a_target_finding_and_never_dispatches(self):
+        fake=Fake(public={'checked':w.stamp(NOW)})
+        with patch.object(w,'get_runs',return_value=([],True)):
+            code,report=self.execute(fake)
+        self.assertEqual(code,0)
+        self.assertEqual(report['targets'][0]['status'],'history_incomplete')
+        self.assertEqual(report['target_errors'],1)
+        self.assertEqual(report['watchdog_errors'],0)
+        self.assertFalse(fake.writes)
+
+    def test_malformed_remote_run_is_not_a_local_service_failure(self):
+        code,report=self.execute(Fake(runs=['not a run']))
+        self.assertEqual(code,0)
+        self.assertEqual(report['targets'][0]['status'],'invalid_workflow_runs_response')
+        self.assertEqual(report['target_errors'],1)
+        self.assertEqual(self.pings,[(self.url,True)])
 
     def test_collector_findings_do_not_mask_a_separate_execution_failure(self):
         configuration=config(freshness=[self.probe])
@@ -190,6 +307,27 @@ class HeartbeatScope(unittest.TestCase):
         self.assertEqual(self.pings,[(self.url,False)])
         self.assertEqual(report['status'],'invalid_state_file')
         self.assertEqual(report['watchdog_health'],'unhealthy')
+
+    def test_broken_local_retry_state_is_a_service_failure(self):
+        key=w.target_key(config()['targets'][0])
+        states=({'targets':{key:[]}}, {'targets':{key:{'retry_after':'not a date'}}},
+                {'targets':{key:{'attempts':'three'}}}, {'targets':{key:{'probe_cache':[]}}})
+        for state in states:
+            with self.subTest(state=state):
+                self.pings.clear()
+                code,report=self.execute(Fake(),state=state)
+                self.assertEqual(code,2)
+                self.assertEqual(self.pings,[(self.url,False)])
+                self.assertEqual(report['status'],'invalid_state_file')
+                self.assertFalse(report['completed'])
+
+    def test_unhandled_runtime_failure_sends_failure_without_logging_exception_body(self):
+        with patch.object(w,'run',side_effect=RuntimeError('DO_NOT_LOG_THIS_SECRET')):
+            code,report=self.execute(Fake(),state={})
+        self.assertEqual(code,2)
+        self.assertEqual(report['status'],'internal_error')
+        self.assertEqual(self.pings,[(self.url,False)])
+        self.assertNotIn('DO_NOT_LOG_THIS_SECRET',json.dumps(report))
 
     def test_collector_error_scope_is_in_progress_log(self):
         events=[]

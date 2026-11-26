@@ -85,12 +85,14 @@ observation job. It reads workflow state and the latest 20 runs per registered
 workflow, then reads public output metadata. It never dispatches, enables or
 retries collectors, and it does not send additional alerts. The Linux watchdog
 continues to own recovery and Healthchecks signalling. Its Healthchecks heartbeat
-monitors completion of the watchdog's checks, recovery requests and saved report.
-Collector download failures, old datasets and unreadable published timestamps remain
-visible here and in the server log without failing that heartbeat. A green watchdog
-check can therefore coexist with **Needs review** in this report. Operational failures
-such as invalid credentials, inability to inspect/dispatch GitHub workflows or save
-state still fail the heartbeat; a stopped watchdog leaves missing pings.
+monitors the watchdog service executing and saving its results. Collector download
+failures, old datasets, unreadable published timestamps and handled per-target
+GitHub read/dispatch errors remain findings; they do not fail that heartbeat.
+Rate-limit backoff and refusal to dispatch with incomplete history are safe,
+reported decisions. A green watchdog check can therefore coexist with **Needs
+review** in this report. Missing/rejected shared credentials, invalid local
+configuration/state, disk-write failures and unexpected runtime errors still fail
+the service heartbeat; a stopped watchdog leaves missing pings.
 If a source can be downloaded in your browser but rejects the collector, follow
 [Manual data import](manual-data-import.md). It documents the verified Census Lens
 and Lobby Trail inputs, local validation, committed files and publication steps,
@@ -103,10 +105,11 @@ still raises a collector error in reports while recovery continues. The server's
 its own `recovery_attempts` and `retry_after`; this public observer does not read those
 fields or know the server's next retry time. In the private report, `watchdog_health`
 and `watchdog_errors` control the heartbeat, while the existing overall `health` and
-`errors` still include data findings. Per-target `error_scope` and `collector_errors`
-make the distinction explicit. The revised policy requires the installed runtime
+`errors` still include data findings. Per-target `error_scope`, `collector_errors` and `target_errors`
+make the distinction explicit. The installed `runtime_version` must be
+`2026-11-26-service-health-v2` or newer for the narrower service-only policy. The revised policy requires the installed runtime
 update; changing the target list alone does not install it. See the watchdog's
-[runtime update instructions](../services/refresh-watchdog/README.md#continuing-recovery-attempts).
+[runtime update instructions](../services/refresh-watchdog/README.md#install-this-runtime-update).
 
 The job saves `collector-outcomes.json` on the `collector-outcomes-log` branch,
 including the latest results and 24 recent observations. **Recent outcome

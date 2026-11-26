@@ -23,6 +23,8 @@ UTC = dt.timezone.utc
 API = 'https://api.github.com'
 ACTIVE = {'queued', 'in_progress', 'requested', 'waiting', 'pending'}
 REFRESH_EVENTS = {'schedule', 'workflow_dispatch'}
+RUNTIME_VERSION = '2026-11-26-service-health-v2'
+REQUEST_BUDGET_SECONDS = 600  # Leave time to persist/report before systemd's 15-minute limit.
 
 
 def stamp(value):
@@ -133,6 +135,30 @@ class SafeError(Exception):
         super().__init__(kind + (f' (HTTP {status})' if status else ''))
 
 
+def validate_state(state):
+    """Reject broken local state before target-response errors can hide it."""
+    try:
+        if not isinstance(state,dict) or state.get('version',1)!=1 or not isinstance(state.get('targets',{}),dict):
+            raise ValueError()
+        if state.get('blocked_until'):timestamp(state['blocked_until'])
+        for key,record in state.get('targets',{}).items():
+            if not isinstance(key,str) or not isinstance(record,dict):raise ValueError()
+            for field in ('last_checked','attempt_due','retry_after','last_dispatch_attempt'):
+                if record.get(field):timestamp(record[field])
+            if 'attempts' in record and (not isinstance(record['attempts'],int) or isinstance(record['attempts'],bool) or record['attempts']<0):
+                raise ValueError()
+            workflow=record.get('workflow_cache',{})
+            if not isinstance(workflow,dict):raise ValueError()
+            if workflow:
+                timestamp(workflow['at'])
+                if workflow.get('state') is not None and not isinstance(workflow['state'],str):raise ValueError()
+            probes=record.get('probe_cache',{})
+            if not isinstance(probes,dict) or any(not isinstance(value,dict) for value in probes.values()):raise ValueError()
+    except (ValueError,TypeError,KeyError,OverflowError):
+        raise SafeError('invalid_state_file') from None
+    return state
+
+
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         # Never forward credentials across a redirect, even to a guessed API URL.
@@ -140,10 +166,22 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 
 class HTTP:
-    def __init__(self, token=None, timeout=20, opener=None, sleep=time.sleep, now=None):
+    def __init__(self, token=None, timeout=20, opener=None, sleep=time.sleep, now=None, budget_seconds=None, monotonic=time.monotonic):
         self.token, self.timeout = token, timeout
         self.opener = opener or urllib.request.build_opener(NoRedirect())
         self.sleep, self.now = sleep, now or (lambda: dt.datetime.now(UTC))
+        self.monotonic=monotonic
+        self.deadline=None if budget_seconds is None else monotonic()+budget_seconds
+
+    def remaining(self):
+        remaining=float('inf') if self.deadline is None else self.deadline-self.monotonic()
+        if remaining<=0:raise SafeError('pass_time_budget')
+        return remaining
+
+    def retry_delay(self, attempt):
+        delay=2**attempt
+        if self.remaining()<=delay:raise SafeError('pass_time_budget')
+        self.sleep(delay)
 
     def request(self, method, path, payload=None, *, public=False):
         if public:
@@ -167,9 +205,21 @@ class HTTP:
         for attempt in range(tries):
             request = urllib.request.Request(url, data=data, headers=headers, method=method)
             try:
-                with self.opener.open(request, timeout=self.timeout) as response:
+                with self.opener.open(request, timeout=min(self.timeout,self.remaining())) as response:
                     limit = (24 if public else 4)*1024*1024
-                    body = response.read(limit+1)
+                    if self.deadline is None:
+                        body = response.read(limit+1)
+                    else:
+                        # read1 returns available socket data, so a slow trickle
+                        # cannot keep a single metadata response alive forever.
+                        reader=getattr(response,'read1',response.read)
+                        body=bytearray()
+                        while len(body)<=limit:
+                            self.remaining()
+                            chunk=reader(min(65536,limit+1-len(body)))
+                            if not chunk:break
+                            body.extend(chunk)
+                        self.remaining()
                     if len(body)>limit:
                         raise SafeError('response_too_large')
                     return json.loads(body) if body else None
@@ -201,12 +251,12 @@ class HTTP:
                 if status == 403:
                     raise SafeError('permission_denied', status) from None
                 if status >= 500 and attempt+1 < tries:
-                    self.sleep(2**attempt)
+                    self.retry_delay(attempt)
                     continue
                 raise SafeError('http_error', status) from None
             except (urllib.error.URLError, TimeoutError, OSError):
                 if attempt+1 < tries:
-                    self.sleep(2**attempt)
+                    self.retry_delay(attempt)
                     continue
                 raise SafeError('network_error') from None
             except (json.JSONDecodeError, UnicodeDecodeError):
@@ -325,6 +375,7 @@ def freshness_checks(target, http, now, cadence, cache=None, refresh_marker=None
                 if status=='future_timestamp':cache.pop(cache_slot,None)
                 else:cache[cache_slot]={'key':cache_key,'read_at':stamp(read_at),'timestamp':stamp(checked)}
         except SafeError as exc:
+            if exc.kind=='pass_time_budget':raise
             result['error']=exc.kind
             if cache is not None:cache.pop(cache_slot,None)
         except (KeyError,IndexError,TypeError,ValueError,OverflowError):
@@ -343,7 +394,7 @@ def get_runs(http, prefix, branch, due):
         query=urllib.parse.urlencode({'branch':branch,'per_page':100,'page':page})
         body=http.request('GET',prefix+'/runs?'+query)
         runs=body.get('workflow_runs') if isinstance(body,dict) else None
-        if not isinstance(runs,list):
+        if not isinstance(runs,list) or any(not isinstance(r,dict) for r in runs):
             raise SafeError('invalid_workflow_runs_response')
         collected.extend(r for r in runs if r.get('head_branch')==branch)
         dates=[]
@@ -356,7 +407,7 @@ def get_runs(http, prefix, branch, due):
 
 
 def run(config, state, http, now, apply=False, persist=None, progress=None):
-    report={'version':1,'checked_at':stamp(now),'mode':'apply' if apply else 'dry-run',
+    report={'version':1,'runtime_version':RUNTIME_VERSION,'checked_at':stamp(now),'mode':'apply' if apply else 'dry-run',
             'health':'unknown','dispatches':0,'dispatch_attempts':0,'targets':[]}
     state.setdefault('version',1)
     records=state.setdefault('targets',{})
@@ -382,7 +433,11 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
                     if 'http_status' in row:fields['http_status']=row['http_status']
                 progress(event,**fields)
         if stop_reason:
-            row.update(status='not_checked',severity='error',error_scope='watchdog',reason=stop_reason)
+            # Backing off an external rate limit is a completed, safe decision.
+            # A rejected shared credential is an actual service configuration failure.
+            row.update(status='not_checked',severity='error' if stop_reason=='authentication_failed' else 'warning',
+                       reason=stop_reason)
+            if stop_reason=='authentication_failed':row['error_scope']='watchdog'
             notify('target_finished')
             continue
         notify('target_started')
@@ -436,6 +491,8 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
                 if workflow_state=='disabled_inactivity':
                     if apply:
                         fresh_workflow=http.request('GET',prefix)
+                        if not isinstance(fresh_workflow,dict) or not isinstance(fresh_workflow.get('state'),str):
+                            raise SafeError('invalid_workflow_response')
                         if fresh_workflow.get('state')=='disabled_inactivity':
                             http.request('PUT',prefix+'/enable');record.pop('workflow_cache',None);row['re_enabled']=True
                             if persist:persist(state)
@@ -463,7 +520,7 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
             if workflow_state=='disabled_inactivity' and not apply:
                 row['would_enable']=True
             if truncated:
-                row.update(status='history_incomplete',severity='error',error_scope='watchdog',reason='History cap reached; refusing uncertain duplicate dispatch')
+                row.update(status='history_incomplete',severity='error',error_scope='target',reason='History cap reached; refusing uncertain duplicate dispatch')
                 continue
             retry=record.get('retry_after')
             if record.get('attempts') and record.get('last_dispatch_attempt'):
@@ -484,7 +541,9 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
                 continue
             # Fresh owner intent wins over a cached active state, immediately before dispatch.
             latest_workflow=http.request('GET',prefix)
-            latest_state=latest_workflow.get('state') if isinstance(latest_workflow,dict) else None
+            if not isinstance(latest_workflow,dict) or not isinstance(latest_workflow.get('state'),str):
+                raise SafeError('invalid_workflow_response')
+            latest_state=latest_workflow['state']
             row['workflow_state']=latest_state
             record['workflow_cache']={'at':stamp(now),'state':latest_state}
             if latest_state=='disabled_inactivity':
@@ -509,20 +568,27 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
             row.update(status='dispatch_requested',severity='warning',retry_after=record['retry_after'],recovery_attempts=attempts,
                        reason='GitHub accepted dispatch; a later pass must verify completion and published timestamps')
         except SafeError as error:
-            row.update(status=error.kind,severity='error',error_scope='watchdog')
+            # A handled remote failure is a target finding, not a crashed scheduler.
+            # HTTP 401 rejects the service's shared credential and is the exception.
+            if error.kind=='pass_time_budget':
+                row.update(status='not_checked',severity='warning',reason='pass_time_budget')
+                stop_reason='pass_time_budget'
+            else:
+                row.update(status=error.kind,severity='error',
+                           error_scope='watchdog' if error.kind=='authentication_failed' else 'target')
             if error.status: row['http_status']=error.status
             if error.retry_at:
                 state['blocked_until']=stamp(error.retry_at);row['retry_after']=state['blocked_until'];stop_reason='rate_limited'
             elif error.kind=='authentication_failed':stop_reason='authentication_failed'
         except (ValueError,KeyError,TypeError,OverflowError):
-            row.update(status='invalid_api_or_state_data',severity='error',error_scope='watchdog')
+            row.update(status='invalid_api_data',severity='error',error_scope='target')
         finally:
             if (row['status'] in ('cooldown','dispatch_budget','dispatch_requested')
                     and any(check['status']!='fresh' for check in row.get('freshness',[]))):
                 row.update(severity='error',published_data_stale=True)
                 row['reason']+='; published freshness checks also fail'
             if row['severity']=='error':row.setdefault('error_scope','collector')
-            record['last_checked']=stamp(now)
+            if row['status']!='not_checked':record['last_checked']=stamp(now)
             # Preserve completed checks even if a later request stalls and
             # systemd ends the pass. The next pass resumes with older targets.
             if persist:persist(state)
@@ -536,10 +602,13 @@ def run(config, state, http, now, apply=False, persist=None, progress=None):
     report['attention']=sum(r['severity']=='warning' for r in report['targets'])
     report['health']='unhealthy' if report['errors'] else 'attention' if report['attention'] else 'healthy'
     # Keep the overall findings intact; the execution heartbeat has a narrower scope.
-    # Public probe failures are caught inside freshness_checks, while GitHub API or
-    # state failures above prevent the watchdog from completing its own work.
+    # Handled target API failures, rate limits and safe recovery deferrals belong
+    # in admin findings. Shared authentication rejection remains a service failure;
+    # local configuration/state/I/O failures are handled by main().
     report['watchdog_errors']=sum(r.get('error_scope')=='watchdog' for r in report['targets'])
     report['collector_errors']=sum(r.get('error_scope')=='collector' for r in report['targets'])
+    report['target_errors']=sum(r.get('error_scope')=='target' for r in report['targets'])
+    report['completed']=True
     report['watchdog_health']='unhealthy' if report['watchdog_errors'] else 'healthy' if apply else 'dry_run'
     report['heartbeat_scope']='watchdog_execution'
     report['assurance']='Published timestamp checks are reported separately; workflow success alone does not prove new source data'
@@ -584,6 +653,24 @@ def atomic_json(path, document):
         if os.path.exists(name):os.unlink(name)
 
 
+def fail_service(args, now, heartbeat, status, http_status=None):
+    """Record only sanitized local/service failures; never echo exception bodies."""
+    report={'version':1,'runtime_version':RUNTIME_VERSION,'checked_at':stamp(now),
+            'health':'unhealthy','status':status,'completed':False,'errors':1,'attention':0,
+            'watchdog_health':'unhealthy','watchdog_errors':1,'collector_errors':0,'target_errors':0,
+            'heartbeat_scope':'watchdog_execution','http_status':http_status,
+            'mode':'apply' if args.apply else 'dry-run','targets':[]}
+    try:atomic_json(args.report,report)
+    except OSError:pass  # The failure ping must still happen when the disk is full.
+    delivered=ping_heartbeat(heartbeat,False)
+    if delivered is not None:
+        report['heartbeat']='delivered' if delivered else 'delivery_failed'
+        try:atomic_json(args.report,report)
+        except OSError:pass
+    print(json.dumps({'watchdog_health':'unhealthy','status':status,'runtime_version':RUNTIME_VERSION}),file=sys.stderr)
+    return 2
+
+
 def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config',required=True);parser.add_argument('--state',default='state.json')
@@ -593,20 +680,22 @@ def main(argv=None):
     parser.add_argument('--heartbeat-url-file')
     args=parser.parse_args(argv)
     now=dt.datetime.now(UTC)
-    if not args.check_config:log_progress('watchdog_started',mode='apply' if args.apply else 'dry-run')
+    if not args.check_config:log_progress('watchdog_started',mode='apply' if args.apply else 'dry-run',runtime_version=RUNTIME_VERSION)
     try:
         heartbeat=None if args.check_config or not args.apply else heartbeat_url(args.heartbeat_url_file)
     except SafeError as error:
-        print(json.dumps({'health':'unhealthy','status':error.kind}),file=sys.stderr);return 2
+        return fail_service(args,now,None,error.kind,error.status)
     try:
         with open(args.config) as source:config=validate_config(json.load(source))
         if args.check_config:
             print(json.dumps({'status':'config_valid','targets':len(config['targets'])}));return 0
     except (OSError,ValueError,TypeError,KeyError):
-        ping_heartbeat(heartbeat,False)
-        print('Configuration validation failed; check config structure, cron expressions and file permissions.',file=sys.stderr);return 2
-    lockpath=Path(args.state+'.lock');lockpath.parent.mkdir(parents=True,exist_ok=True)
-    lock=open(lockpath,'a+');os.chmod(lockpath,0o600)
+        return fail_service(args,now,heartbeat,'invalid_configuration')
+    try:
+        lockpath=Path(args.state+'.lock');lockpath.parent.mkdir(parents=True,exist_ok=True)
+        lock=open(lockpath,'a+');os.chmod(lockpath,0o600)
+    except OSError:
+        return fail_service(args,now,heartbeat,'state_lock_io_failed')
     try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError:
         lock.close()
@@ -614,7 +703,7 @@ def main(argv=None):
     report=None
     try:
         state=json.loads(Path(args.state).read_text()) if Path(args.state).exists() else {'version':1,'targets':{}}
-        if not isinstance(state,dict) or not isinstance(state.get('targets',{}),dict):raise SafeError('invalid_state_file')
+        validate_state(state)
         app=(args.app_id,args.installation_id,args.private_key_file)
         if any(app):
             if not all(app):raise SafeError('app_auth_requires_all_three_options')
@@ -627,10 +716,10 @@ def main(argv=None):
             if not token and filename:token=secure_read(filename)
             if not token:raise SafeError('github_credentials_missing')
         log_progress('checking_targets',targets=len(config['targets']))
-        report=run(config,state,HTTP(token),now,args.apply,persist=lambda value:atomic_json(args.state,value),progress=log_progress)
+        report=run(config,state,HTTP(token,budget_seconds=REQUEST_BUDGET_SECONDS),now,args.apply,persist=lambda value:atomic_json(args.state,value),progress=log_progress)
         # Dry runs may cache reads but never write dispatch attempt or enable state.
         atomic_json(args.state,state)
-        log_progress('saving_report',watchdog_errors=report['watchdog_errors'],collector_errors=report['collector_errors'],dispatches=report['dispatches'])
+        log_progress('saving_report',watchdog_errors=report['watchdog_errors'],collector_errors=report['collector_errors'],target_errors=report['target_errors'],dispatches=report['dispatches'])
         # A successful heartbeat also means the completed findings reached disk.
         if heartbeat:report['heartbeat']='pending'
         atomic_json(args.report,report)
@@ -643,20 +732,16 @@ def main(argv=None):
                 report['watchdog_errors']+=1;report['watchdog_health']='unhealthy'
             atomic_json(args.report,report)
         print(json.dumps({'watchdog_health':report['watchdog_health'],'mode':report['mode'],'targets':len(report['targets']),
-                          'watchdog_errors':report['watchdog_errors'],'collector_errors':report['collector_errors'],
+                          'watchdog_errors':report['watchdog_errors'],'collector_errors':report['collector_errors'],'target_errors':report['target_errors'],
                           'attention':report['attention'],'dispatches':report['dispatches']}))
         return 1 if (report['watchdog_errors'] if args.apply else report['errors']) else 0
     except SafeError as error:
-        report={'version':1,'checked_at':stamp(now),'health':'unhealthy','status':error.kind,
-                'watchdog_health':'unhealthy','watchdog_errors':1,'collector_errors':0,'heartbeat_scope':'watchdog_execution',
-                'http_status':error.status,'mode':'apply' if args.apply else 'dry-run'}
-        delivered=ping_heartbeat(heartbeat,False)
-        if delivered is not None:report['heartbeat']='delivered' if delivered else 'delivery_failed'
-        atomic_json(args.report,report)
-        print(json.dumps({'health':'unhealthy','status':error.kind}),file=sys.stderr);return 2
+        return fail_service(args,now,heartbeat,error.kind,error.status)
     except (OSError,ValueError,TypeError):
-        ping_heartbeat(heartbeat,False)
-        print('Watchdog state/report I/O failed; no credentials or response bodies were logged.',file=sys.stderr);return 2
+        return fail_service(args,now,heartbeat,'state_or_report_io_failed')
+    except Exception:
+        # A programming/runtime failure is a service failure, not a target finding.
+        return fail_service(args,now,heartbeat,'internal_error')
     finally:
         fcntl.flock(lock,fcntl.LOCK_UN);lock.close()
 

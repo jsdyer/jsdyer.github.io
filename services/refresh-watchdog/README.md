@@ -111,44 +111,81 @@ scheduled workflow; the due-run check remains separate and unchanged.
 
 ## What Healthchecks monitors
 
-The heartbeat answers **“Did the watchdog complete its own checks and recovery work?”**
-It does not require every collector to download successfully or every dataset to be
-recent. A source HTTP 403, failed collector, stalled GitHub run, stale timestamp or
-unreadable published status remains visible in the per-tool report and journal. A
-completed watchdog pass can send a success ping with those findings still present.
-Waiting for an active job, the six-hour retry window or the dispatch budget is normal.
-Recovery continues according to the same rules; timestamps and validation results are
-never changed just to make the heartbeat green.
+The heartbeat answers **“Is the watchdog service executing and saving its results?”**
+It does not measure whether individual collectors, downloads, GitHub workflow reads,
+or recovery requests succeed. Handled external errors remain visible in the report
+and the admin's independent **Tool outcomes** observation. They do not send `/fail`
+or make a completed `--apply` pass exit unsuccessfully.
 
-The heartbeat fails when the watchdog cannot complete its own work: invalid credentials
-or configuration, failure to inspect GitHub workflows or request recovery, an incomplete
-history that prevents a safe recovery decision, or inability to save its state/report.
-A crash or stopped timer also leaves missing pings for Healthchecks to detect. GitHub
-API authentication/permission errors are operational failures; an upstream source 403
-inside a collector, or a 403 reading public data metadata, is a reported collector issue.
-A registry fetch warning does not fail a pass that successfully uses validated cached
-targets; the warning stays in the report.
+| Situation | Healthchecks | Report/admin finding |
+| --- | --- | --- |
+| Collector fails, source returns 403/410, data is stale, public metadata is unreadable | Success after a completed pass | Collector problem stays visible; normal recovery continues |
+| One repository's GitHub API read or dispatch returns 403/404/5xx, times out or supplies malformed data | Success after recording the result | Target error; the next target is still checked |
+| Remote requests consume the ten-minute pass budget | Success after saving explicit deferred targets | Unchecked targets keep their old check time and are prioritized next pass |
+| GitHub rate-limits requests | Success after recording a safe deferral | Current error and unchecked targets stay visible; requests resume after the saved retry time |
+| Workflow history exceeds the safety cap | Success after recording the result | Target needs review; no uncertain duplicate dispatch |
+| Registry download fails but validated cached targets are available | Success after a completed pass | Cached registry and warning remain visible |
+| Shared GitHub credential is rejected (401), credentials/configuration are missing or invalid, local state is corrupt, or state/report storage fails | Failure | Actual service setup/execution problem |
+| Unexpected runtime exception or heartbeat delivery fails | Failure | Sanitized service failure; no exception bodies or credentials are logged |
+| Process crashes, exceeds systemd's timeout, server stops, or timer stops | Missing heartbeat (or failure if caught) | Investigate the service/journal |
+
+This narrows the earlier policy: handled per-target GitHub errors, rate-limit
+backoff and history limits previously counted as watchdog execution errors. A
+successful pass now means that these outcomes were safely handled and persisted,
+not that the external services cooperated. API rate limits still pause requests;
+dispatch timeouts still retain the retry cooldown so a possibly accepted dispatch
+is never immediately repeated. Remote requests share a ten-minute time budget,
+including retries and bounded response reads, leaving time to save results and
+ping before systemd's fifteen-minute limit. Budget-deferred targets are marked
+`not_checked` with reason `pass_time_budget`; their `last_checked` does not advance.
+The next pass prioritizes the oldest targets. Successful timestamps are never fabricated.
 
 | Report field | Meaning |
 | --- | --- |
-| `watchdog_health`, `watchdog_errors` | Execution health. Controls Healthchecks and the exit status in `--apply` mode. |
-| `collector_errors` | Targets with error-level collector/output findings. Ordinary warnings remain in `attention`. |
-| `health`, `errors` | Existing overall findings, including collector data problems and registry warnings. Kept for compatibility; **not the heartbeat decision**. |
-| `targets[].error_scope` | `watchdog` or `collector` for each error-level target; also included in the journal. |
-| `heartbeat_scope` | `watchdog_execution`, identifying the new policy. |
+| `runtime_version` | Installed program identifier; this edition is `2026-11-26-service-health-v2` (UTC release date). |
+| `completed` | Whether the main target-processing pass completed. A completed pass can still detect rejected shared credentials. |
+| `watchdog_health`, `watchdog_errors` | Service health. Controls Healthchecks and the exit status in `--apply` mode. |
+| `collector_errors` | Error-level collector/output findings. |
+| `target_errors` | Handled target API/recovery/history errors. These do not control the heartbeat. |
+| `health`, `errors`, `attention` | Overall findings, retained for compatibility. **Not the heartbeat decision.** |
+| `targets[].error_scope` | `watchdog`, `collector` or `target` for error-level findings; also included in the journal. |
+| `heartbeat_scope` | `watchdog_execution`; use `runtime_version` to distinguish this narrower policy from the earlier edition. |
 
-For example, Lobby Trail may repeatedly receive 403s and exceed its data-age limit.
-Its report still shows the stale data and recovery attempts, while Healthchecks stays
-green if the watchdog keeps completing its work. The final journal summary prints
-`watchdog_health`, `watchdog_errors` and `collector_errors` separately. The admin's
-Tool outcomes report independently continues to show failed runs and overdue data.
-The overall JSON `health` can therefore remain `unhealthy` while `watchdog_health`
-and Healthchecks are healthy. A dry run never sends the production heartbeat and
-retains its existing nonzero exit for findings; `watchdog_health` is `dry_run` when
-its read-only checks complete.
+The admin's Tool outcomes report observes workflow execution, source-step results,
+and published data independently, even while the service heartbeat is green. It
+does not read your private VPS report or retry history. A dry run never sends the
+production heartbeat and retains its nonzero exit for findings.
 
-This replaces the older combined heartbeat policy. Install the runtime update below;
-keep the existing Healthchecks URL, five-minute period and twenty-minute grace.
+The supplied report at `2026-11-26T04:04:29Z` already records
+`watchdog_health: healthy`, `watchdog_errors: 0`, and `heartbeat: delivered`.
+Its five attention rows are four recovery cooldowns and one accepted dispatch,
+not a service failure. That latest snapshot does not identify earlier failed
+pings; use journal entries from those timestamps for that diagnosis.
+
+### Install this runtime update
+
+Automatic target updates **do not install program changes**. From your existing
+`services/refresh-watchdog` checkout on the VPS:
+
+```bash
+git pull --ff-only
+sudo systemctl stop coolcode-watchdog.timer coolcode-watchdog.service
+sudo bash ./install.sh
+sudo journalctl -u coolcode-watchdog.service -n 60 --no-pager
+```
+
+The installer preserves credentials, heartbeat URL and retry history. It restarts
+the timer and starts a pass. After that pass completes, verify the installed policy:
+
+```bash
+sudo python3 -c 'import json; r=json.load(open("/var/lib/coolcode-watchdog/report.json")); print({k:r.get(k) for k in ("runtime_version","checked_at","completed","watchdog_health","watchdog_errors","collector_errors","target_errors","attention","heartbeat")})'
+```
+
+Expect `runtime_version: 2026-11-26-service-health-v2` and a newer `checked_at`.
+Keep the existing five-minute Healthchecks period and twenty-minute grace.
+No new key, port, monitor, database or Cloudflare deployment is required.
+If installation fails, correct it and rerun the installer; do not leave the timer
+stopped. Committing this code to GitHub does not update the VPS by itself.
 
 ## Continuing recovery attempts
 

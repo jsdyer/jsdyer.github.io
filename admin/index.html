@@ -59,6 +59,7 @@
 </details></section>
 <section id="outcomes"><h2>Tool outcomes</h2><details id="outcomes-panel"><summary>Compare workflow results with published data</summary>
 <p>A saved report, scheduled hourly at 37 minutes past the hour. GitHub can delay it. Load saved report reads the last completed report; Check GitHub now requests a new one, which can take several minutes. Neither button retries data collectors.</p>
+<p>Individual download, workflow and published-data problems belong in this report. They do not mean the VPS watchdog service is down. Its heartbeat measures service execution; this independent report does not read private VPS logs or retry history.</p>
 <div id="outcomes-body"></div>
 <details><summary>What these checks verify</summary>
 <p>The existing hourly service-check workflow saves this report for every registered scheduled workflow. Workflow execution and published output are separate checks. The report uses the watchdog’s reviewed check timestamps and age limits, plus available record counts.</p>
