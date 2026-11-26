@@ -3377,7 +3377,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-26 18:26 UTC",
+          "value": "2026-11-26 22:26 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -3486,7 +3486,7 @@
             "unit": "daily captures",
             "measure": "length"
           },
-          "value": "2026-11-26 15:22 UTC",
+          "value": "2026-11-26 22:19 UTC",
           "count": 4
         }
       ]
@@ -3651,7 +3651,7 @@
             0
           ],
           "label": "Observation dates",
-          "value": "2017-01-02–2026-11-25",
+          "value": "2017-01-02–2026-11-26",
           "end_path": [
             "dates",
             -1
@@ -4426,7 +4426,7 @@
           "path": [
             "latest"
           ],
-          "value": "2026-11-25"
+          "value": "2026-11-26"
         }
       ]
     },
@@ -8167,8 +8167,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-26 21:00 UTC",
-          "count": 5394
+          "value": "2026-11-26 21:58 UTC",
+          "count": 5509
         }
       ]
     },
@@ -8214,8 +8214,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-26 20:36 UTC",
-          "count": 54
+          "value": "2026-11-26 21:45 UTC",
+          "count": 57
         }
       ]
     },
@@ -8583,8 +8583,8 @@
             "unit": "observations",
             "measure": "length"
           },
-          "value": "2026-11-26 14:52 UTC",
-          "count": 7735
+          "value": "2026-11-26 21:56 UTC",
+          "count": 7680
         }
       ]
     },
@@ -8676,7 +8676,7 @@
             "unit": "crossings",
             "measure": "length"
           },
-          "value": "2026-11-26 21:23 UTC",
+          "value": "2026-11-26 21:58 UTC",
           "count": 30
         }
       ]
@@ -9394,7 +9394,7 @@
             "captured_at"
           ],
           "precision": "minute",
-          "value": "2026-11-26 15:24 UTC"
+          "value": "2026-11-26 22:23 UTC"
         }
       ]
     },
@@ -9975,7 +9975,7 @@
             "capturedAt"
           ],
           "precision": "minute",
-          "value": "2026-11-26 20:28 UTC"
+          "value": "2026-11-26 21:40 UTC"
         }
       ]
     },
@@ -10079,7 +10079,7 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-26 20:53 UTC",
+          "value": "2026-11-26 21:59 UTC",
           "count": 261
         }
       ]
@@ -10127,8 +10127,8 @@
             ],
             "unit": "observations"
           },
-          "value": "2026-11-26 20:23 UTC",
-          "count": 468
+          "value": "2026-11-26 21:34 UTC",
+          "count": 472
         }
       ]
     },
@@ -10235,8 +10235,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-26 20:54 UTC",
-          "count": 547
+          "value": "2026-11-26 22:00 UTC",
+          "count": 553
         }
       ]
     },
@@ -10908,8 +10908,8 @@
             "unit": "buses out"
           },
           "precision": "minute",
-          "value": "2026-11-26 20:58 UTC",
-          "count": 883
+          "value": "2026-11-26 22:24 UTC",
+          "count": 1220
         },
         {
           "label": "Network",
@@ -11239,7 +11239,7 @@
             ],
             "unit": "protected areas"
           },
-          "value": "2026-11-26 20:57 UTC",
+          "value": "2026-11-26 22:02 UTC",
           "count": 1037
         }
       ]
@@ -11777,7 +11777,7 @@
             ],
             "unit": "destinations"
           },
-          "value": "2026-11-26 21:05 UTC",
+          "value": "2026-11-26 22:10 UTC",
           "count": 230
         }
       ]
