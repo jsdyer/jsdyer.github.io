@@ -2429,7 +2429,17 @@
       "note": "Save a product or brand as a search term, then revisit to check matching notices and read the issuing agency’s instructions. The watchlist runs when you visit and does not send background notifications."
     },
     "sync_manifest": true,
-    "task_label": "Canadian Vehicle Recalls and Safety Alerts"
+    "task_label": "Canadian Vehicle Recalls and Safety Alerts",
+    "use_cases": [
+      {
+        "title": "Ford F-150 Recalls in Canada",
+        "path": "ford-f150.html"
+      },
+      {
+        "title": "Ford Escape Recalls in Canada",
+        "path": "ford-escape.html"
+      }
+    ]
   },
   {
     "id": "patentattic",
@@ -2893,7 +2903,17 @@
     "readme": {
       "note": "Choose the 2025 satellite layer on either side to compare the harbour with an earlier aerial mosaic. Start with Cogswell and Scotia Square to compare the blocks before clearance with the 1977 mosaic, then open the 1961 photograph and the later demolition view. At the ferry terminal, see the closest 1955 and 2001 archive references within one kilometre, show the indexed points on both maps, and save references to a downloadable GeoJSON notebook."
     },
-    "task_label": "Halifax Historical Aerial Photo Comparison"
+    "task_label": "Halifax Historical Aerial Photo Comparison",
+    "use_cases": [
+      {
+        "title": "Cogswell Interchange Before and After in Aerial Photos",
+        "path": "cogswell.html"
+      },
+      {
+        "title": "Dartmouth Ferry Landing in Historical Aerial Photos",
+        "path": "dartmouth-ferry.html"
+      }
+    ]
   },
   {
     "id": "langleychanges",
@@ -4450,6 +4470,10 @@
       {
         "title": "Vancouver Phone Prefixes & Exchange Assignments",
         "path": "vancouver-phone-prefixes/"
+      },
+      {
+        "title": "Canadian IPv4 and IPv6 Registration Lookup",
+        "path": "ip/"
       }
     ]
   },
@@ -11049,7 +11073,17 @@
       "note": "Search Halifax or choose British Columbia, then narrow the results by contaminant, inventory status, management strategy or completed cleanup step. Select a site for its custodian, record date and reported contaminant/media pairs. Download every matching result as CSV, or copy a link to the current search and selected site. Nearby search accepts coordinates or optional browser location permission. Closed records remain searchable; a listing alone is not evidence of present-day danger."
     },
     "sync_manifest": true,
-    "task_label": "Canadian Federal Contaminated Sites Map"
+    "task_label": "Canadian Federal Contaminated Sites Map",
+    "use_cases": [
+      {
+        "title": "Federal Contaminated Sites in Langley, BC",
+        "path": "langley.html"
+      },
+      {
+        "title": "Federal Contaminated Sites in Halifax, Nova Scotia",
+        "path": "halifax.html"
+      }
+    ]
   },
   {
     "id": "parkready",
