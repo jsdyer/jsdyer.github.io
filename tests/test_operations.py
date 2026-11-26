@@ -84,7 +84,8 @@ class BuiltIntegrationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / 'dist/assets').mkdir(parents=True)
-            sitemap = root / 'dist/sitemap.xml'
+            (root / 'dist/sitemap.xml').write_text('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://coolcode.ca/sitemap-pages.xml</loc></sitemap></sitemapindex>')
+            sitemap = root / 'dist/sitemap-pages.xml'
             sitemap.write_text('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://coolcode.ca/new-tool/</loc></url></urlset>')
             catalog = root / 'dist/assets/tool-catalog.json'
             catalog.write_text(json.dumps([tool]))

@@ -9,6 +9,7 @@ import time
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from audit_result_maps import audit as audit_result_map
 from build import data_date_path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,12 +57,13 @@ def main():
                for tool in tools for case in tool.get("use_cases", [])}
     with ThreadPoolExecutor(max_workers=4) as pool:
         results = list(pool.map(check, urls, (url in presets for url in urls)))
+    results.extend(audit_result_map(tool, check) for tool in tools if tool.get("result_directory"))
     report = ROOT / "link-audit.json"
     report.write_text(json.dumps(results, indent=2) + "\n")
     failed = [result for result in results if not result["ok"]]
     print(f"Checked {len(results)} URLs; {len(failed)} need review. See {report.name}.")
     for result in failed:
-        print(f"{result['url']}: {result['error']}")
+        print(f"{result['url']}: {result.get('error', 'Result page check failed')}")
     print("403/429/timeouts can be blocking or transient failures; inspect before removing a tool.")
     return bool(failed)
 

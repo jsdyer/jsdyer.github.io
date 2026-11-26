@@ -24,7 +24,7 @@ SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 # Retain the existing public files, including downloadable examples and tool source.
 PUBLIC_PATHS = {"admin", "report", "metrics", "about", "assets", "field-notes", "tools", "favicon.svg", "CNAME",
                 ".nojekyll", "README.md", "SECURITY.md"}
-RESERVED = PUBLIC_PATHS | {"datasets", "topics", "data", "templates", "scripts", "tests", "dist", "index.html"}
+RESERVED = PUBLIC_PATHS | {"datasets", "topics", "results", "data", "templates", "scripts", "tests", "dist", "index.html"}
 
 
 def require(condition, message):
@@ -71,7 +71,7 @@ def validate(categories, tools, root=ROOT):
     required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access", "readme"}
     for tool in tools:
         require(isinstance(tool, dict), "Each tool must be an object")
-        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info", "sync_manifest", "dataset", "task_label", "brand_name", "use_cases"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
+        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info", "sync_manifest", "dataset", "task_label", "brand_name", "use_cases", "result_directory"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
         tid = tool["id"]
         require(isinstance(tid, str) and SLUG.fullmatch(tid), f"Invalid tool ID: {tid!r}")
         require(tid not in ids, f"Duplicate tool ID: {tid}")
@@ -103,6 +103,13 @@ def validate(categories, tools, root=ROOT):
                             r"(?:[a-z0-9]+(?:-[a-z0-9]+)*/)*(?:[a-z0-9]+(?:-[a-z0-9]+)*(?:/|\.html))", case["path"])
                         and case["path"] not in paths, f"{tid}: invalid or duplicate public use case")
                 paths.add(case["path"])
+        if "result_directory" in tool:
+            directory = tool["result_directory"]
+            require(tool["access"] == "browser" and tool["hosting"] == "project"
+                    and isinstance(directory, dict) and set(directory) == {"path", "title"}
+                    and nonempty(directory["title"]) and nonempty(directory["path"])
+                    and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*/", directory["path"]),
+                    f"{tid}: invalid public result directory")
         if "dataset" in tool:
             dataset = tool["dataset"]
             require(tool["access"] == "browser" and tool["hosting"] in {"local", "project"}
@@ -292,7 +299,9 @@ def render_data(tool, access, *, show_access=False):
 
 
 def use_case_links(tool):
-    cases = tool.get("use_cases", [])
+    cases = list(tool.get("use_cases", []))
+    if tool.get("result_directory"):
+        cases.insert(0, tool["result_directory"])
     if not cases:
         return ""
     links = [f'<a href="{escape(tool["url"] + case["path"], quote=True)}">{escape(case["title"])}</a>'
@@ -443,8 +452,9 @@ def write_search_files(stage, tools):
                       if t["access"] == "browser" and t["hosting"] in {"local", "project"}}
     if (stage / "about/index.html").is_file():
         routes.add("/about/")
-    if (stage / "datasets/index.html").is_file():
-        routes.add("/datasets/")
+    for section in ("datasets", "results"):
+        if (stage / section / "index.html").is_file():
+            routes.add(f"/{section}/")
     for tool in tools:
         routes.update(tool["url"] + case["path"] for case in tool.get("use_cases", []))
     for folder in ("field-notes", "topics"):
@@ -456,7 +466,14 @@ def write_search_files(stage, tools):
         entry = ElementTree.SubElement(sitemap, "url")
         ElementTree.SubElement(entry, "loc").text = origin + route
     ElementTree.indent(sitemap)
-    ElementTree.ElementTree(sitemap).write(stage / "sitemap.xml", encoding="utf-8", xml_declaration=True)
+    ElementTree.ElementTree(sitemap).write(stage / "sitemap-pages.xml", encoding="utf-8", xml_declaration=True)
+    index = ElementTree.Element("sitemapindex", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+    children = [origin + "/sitemap-pages.xml"] + sorted(
+        origin + t["url"] + "sitemap.xml" for t in tools if t.get("result_directory"))
+    for url in children:
+        ElementTree.SubElement(ElementTree.SubElement(index, "sitemap"), "loc").text = url
+    ElementTree.indent(index)
+    ElementTree.ElementTree(index).write(stage / "sitemap.xml", encoding="utf-8", xml_declaration=True)
     (stage / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {origin}/sitemap.xml\n", encoding="utf-8")
 
 
@@ -497,6 +514,19 @@ def build(root=ROOT):
         (stage / "datasets").mkdir()
         dataset_template = (root / "templates/datasets.html").read_text(encoding="utf-8")
         (stage / "datasets/index.html").write_text(render_datasets(dataset_template, tools), encoding="utf-8")
+        result_sections = []
+        for category in categories:
+            groups = []
+            for tool in tools:
+                if tool["category"] == category["id"] and (links := use_case_links(tool)):
+                    label = escape(tool.get("task_label", tool["title"]))
+                    groups.append(f'<h3><a href="{escape(tool["url"], quote=True)}">{label}</a></h3>{links}')
+            if groups:
+                result_sections.append(f'<section><h2>{escape(category["title"])}</h2>' + "".join(groups) + '</section>')
+        result_dir = stage / "results"
+        result_dir.mkdir()
+        result_template = (root / "templates/results.html").read_text(encoding="utf-8")
+        (result_dir / "index.html").write_text(result_template.replace("{{RESULTS}}", "\n".join(result_sections)), encoding="utf-8")
         write_topics(stage, tools, root)
         write_search_files(stage, tools)
         require((stage / "CNAME").read_text().strip() == "coolcode.ca", "Keep the CoolCode custom domain")

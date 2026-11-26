@@ -213,6 +213,7 @@ def inventory(tools, read, candidate_budget):
              and re.fullmatch(r"/[a-z0-9]+(?:-[a-z0-9]+)*/", t["url"])
              and t["url"].strip("/") not in EXCLUDED]
     known = {u + case["path"] for t,u in roots for case in t.get("use_cases", [])}
+    directories = tuple(u + t["result_directory"]["path"] for t, u in roots if t.get("result_directory"))
     candidates = {}
     with ThreadPoolExecutor(max_workers=3) as executor:
         results = list(executor.map(visit, roots))
@@ -221,7 +222,7 @@ def inventory(tools, read, candidate_budget):
                 continue
             for link in links:
                 url = candidate_url(root, link)
-                if url and url not in known:
+                if url and url not in known and not url.startswith(directories):
                     candidates[url] = tool
         selected = sorted(candidates)[:candidate_budget]
         children = list(executor.map(visit, ((candidates[url], url) for url in selected)))

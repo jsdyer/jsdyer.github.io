@@ -5009,7 +5009,21 @@
     "readme": {
       "note": "Compare Halifax’s 1890–91 and 1899–1900 directories to find the explicit vacancies at 80 and 100–102 Upper Water. On the same street, see both listed occupants at number 54, alongside the earlier 54–56 range. Compare Vancouver in 1901 and 1903 to see John Oben listed at 413 Hastings W in both, alongside different second shop addresses. Each entry links to its source page."
     },
-    "task_label": "Historical Halifax and Vancouver Street Directory Comparison"
+    "task_label": "Historical Halifax and Vancouver Street Directory Comparison",
+    "use_cases": [
+      {
+        "title": "413 West Hastings Street in Vancouver Directories",
+        "path": "413-hastings-west.html"
+      },
+      {
+        "title": "608 Granville Street in Vancouver Directories",
+        "path": "608-granville.html"
+      },
+      {
+        "title": "80 Upper Water Street in Halifax Directories",
+        "path": "80-upper-water.html"
+      }
+    ]
   },
   {
     "id": "transferwindow",
@@ -5131,7 +5145,17 @@
     "readme": {
       "note": "Compare fall weekday volumes in each direction, then select a terminal and service date to see the scheduled wait after a missed sailing."
     },
-    "task_label": "Vancouver SeaBus Passenger Patterns and Sailing Gaps"
+    "task_label": "Vancouver SeaBus Passenger Patterns and Sailing Gaps",
+    "use_cases": [
+      {
+        "title": "Lonsdale Quay to Waterfront SeaBus Schedule",
+        "path": "lonsdale-quay-to-waterfront.html"
+      },
+      {
+        "title": "Waterfront to Lonsdale Quay SeaBus Schedule",
+        "path": "waterfront-to-lonsdale-quay.html"
+      }
+    ]
   },
   {
     "id": "dispatchledger",
@@ -5293,7 +5317,11 @@
     "readme": {
       "note": "Start with Fort Langley and Halifax Citadel, pick a fiscal year, then compare their trend lines, year bars and full annual table. Counts represent visits and can include repeat visitors. Try Jasper and Gros Morne, or the northern parks Aulavik and Ivvavik."
     },
-    "task_label": "Parks Canada Visitor Statistics"
+    "task_label": "Parks Canada Visitor Statistics",
+    "result_directory": {
+      "path": "places/",
+      "title": "Parks Canada attendance by park and historic site"
+    }
   },
   {
     "id": "streetworkdiary",
@@ -5494,7 +5522,11 @@
     "readme": {
       "note": "Choose Lake Banook, compare April 18 and August 14, 2023 at 10 metres, and switch between oxygen and temperature. The plot and table include only measured depths."
     },
-    "task_label": "Halifax Lake Oxygen and Temperature Profiles"
+    "task_label": "Halifax Lake Oxygen and Temperature Profiles",
+    "result_directory": {
+      "path": "stations/",
+      "title": "Halifax lake water profiles by monitoring station"
+    }
   },
   {
     "id": "forecastreceipt",
@@ -6548,6 +6580,14 @@
       {
         "title": "Eastlink internet speeds in Halifax",
         "path": "halifax-eastlink/"
+      },
+      {
+        "title": "Novus internet speeds in Vancouver",
+        "path": "vancouver-novus/"
+      },
+      {
+        "title": "TELUS internet speeds in Vancouver",
+        "path": "vancouver-telus/"
       }
     ]
   },
@@ -8049,7 +8089,11 @@
     "readme": {
       "note": "Compare Halifax with Vancouver or Abbotsford–Mission. Pick a month to see how many people were working or looking for work and how their share of the labour force changed. Share the selected comparison or download the underlying monthly estimates."
     },
-    "task_label": "Canadian City Employment and Unemployment Comparison"
+    "task_label": "Canadian City Employment and Unemployment Comparison",
+    "result_directory": {
+      "path": "cities/",
+      "title": "Canadian employment and unemployment by metro area"
+    }
   },
   {
     "id": "transitreceipt",

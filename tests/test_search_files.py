@@ -21,6 +21,7 @@ class SearchFilesTests(unittest.TestCase):
     def test_sitemap_uses_public_routes_and_published_articles(self):
         tools = [
             {"access": "browser", "hosting": "project", "url": "/from-another-repo/",
+             "result_directory": {"title": "Records", "path": "records/"},
              "use_cases": [{"title": "Ready example", "path": "common/"}]},
             {"access": "browser", "hosting": "local", "url": "/shared/", "install_url": "https://github.com/example"},
             {"access": "install", "hosting": "external", "url": "https://github.com/example/install"},
@@ -33,7 +34,10 @@ class SearchFilesTests(unittest.TestCase):
                 (stage / path / "index.html").write_text("<!doctype html>")
             write_search_files(stage, tools)
             ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-            sitemap = ElementTree.parse(stage / "sitemap.xml")
+            index = ElementTree.parse(stage / "sitemap.xml")
+            self.assertEqual([node.text for node in index.findall("s:sitemap/s:loc", ns)],
+                             ["https://coolcode.ca/sitemap-pages.xml", "https://coolcode.ca/from-another-repo/sitemap.xml"])
+            sitemap = ElementTree.parse(stage / "sitemap-pages.xml")
             self.assertEqual(
                 [el.text for el in sitemap.findall("s:url/s:loc", ns)],
                 ["https://coolcode.ca" + path for path in
@@ -50,3 +54,14 @@ class SearchFilesTests(unittest.TestCase):
         self.assertIn('href="/example/#rates"', page)
         self.assertIn('href="/example/data/rates.csv"', page)
         self.assertNotIn("calculator", page)
+
+    def test_project_result_sitemap_rejects_other_origins_and_input_permutations(self):
+        from audit_result_maps import result_urls
+        prefix = "https://coolcode.ca/parks/places/"
+        def document(child):
+            return ('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>'
+                    + prefix + '</loc></url><url><loc>' + child + '</loc></url></urlset>')
+        self.assertEqual(result_urls(document(prefix + "jasper/"), prefix), [prefix, prefix + "jasper/"])
+        for invalid in ("https://other.example/parks/", prefix + "?q=me", prefix + "../private/", prefix):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                result_urls(document(invalid), prefix)

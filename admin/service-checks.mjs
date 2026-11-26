@@ -8,7 +8,7 @@ const checks = [
     return Array.isArray(tools) && tools.length > 0 && tools.every(t => t && typeof t.id === 'string' && typeof t.title === 'string');
   }},
   {name: 'Search sitemap', url: site + '/sitemap.xml', valid: body =>
-    body.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"') && body.includes('<loc>https://coolcode.ca/</loc>')},
+    body.includes('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"') && body.includes('<loc>https://coolcode.ca/sitemap-pages.xml</loc>')},
   {name: 'Visitor API and D1', url: SERVICE + '/health', valid: body => JSON.parse(body)?.ok === true},
 ];
 

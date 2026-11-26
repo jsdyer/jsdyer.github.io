@@ -137,5 +137,82 @@
         "help": "Choose a network such as the Vancouver Community Network or Chebucto Community Net and follow its dated archived pages."
       }
     ]
+  },
+  "halifax-local-records": {
+    "title": "Halifax menus, maps and local records",
+    "intro": "Follow a Halifax address from an old directory to an aerial photograph, compare posted restaurant prices, or look up what the municipality measured in a nearby lake.",
+    "tasks": [
+      {
+        "tool": "shopfrontdiary",
+        "label": "Who traded on Upper Water Street?",
+        "help": "Check how the printed address and occupant changed between directory editions. Each example links to the original page."
+      },
+      {
+        "tool": "halifaxtimelens",
+        "label": "How did the Cogswell area or Dartmouth waterfront change?",
+        "help": "Compare aerial photographs from two years, then locate the same streets on a modern map."
+      },
+      {
+        "tool": "lakeprofiles",
+        "label": "What was measured in Lake Banook?",
+        "help": "Choose a monitoring station to see the oxygen and temperature readings by depth. The station page links to a comparison of two visits."
+      },
+      {
+        "tool": "donairafterdark",
+        "label": "What did Halifax counters list for two donairs and extra sauce?",
+        "help": "Compare the same order across the dated branch menus. Check the portion size before comparing sauce prices."
+      },
+      {
+        "tool": "clamcounter",
+        "label": "What do Halifax-area menus charge for clams and chips?",
+        "help": "Read the portion description and the restaurant’s own menu alongside the listed price. Some restaurants quote market price."
+      },
+      {
+        "tool": "clamground",
+        "label": "Where are Nova Scotia clam landings recorded?",
+        "help": "Compare commercial landings by year or open the 1931 county return for its barrels and canned cases."
+      },
+      {
+        "tool": "inspectiontrail",
+        "label": "What did inspectors report about a restaurant?",
+        "help": "Use the establishment name and community to find the dated Nova Scotia inspection record."
+      }
+    ]
+  },
+  "metro-vancouver-local-records": {
+    "title": "Metro Vancouver transit, history and local data",
+    "intro": "Check a SeaBus crossing, trace an address in a Vancouver directory, or compare observations for Langley and neighbouring communities.",
+    "tasks": [
+      {
+        "tool": "seabusclock",
+        "label": "How long is the wait after a missed SeaBus?",
+        "help": "Open a direction to see scheduled crossings and the next departure. The separate historical counts describe seasonal ridership."
+      },
+      {
+        "tool": "shopfrontdiary",
+        "label": "Who occupied a downtown Vancouver storefront?",
+        "help": "Start with Hastings or Granville and compare the trade and occupant printed in each edition."
+      },
+      {
+        "tool": "parkvisits",
+        "label": "How many visits did Fort Langley record?",
+        "help": "Look up the historic site’s fiscal-year attendance and compare it with another park or historic site."
+      },
+      {
+        "tool": "metroeconomy",
+        "label": "How do Vancouver and Abbotsford–Mission compare?",
+        "help": "Compare unemployment, employment and participation for the same three-month period. Each city has an individual history."
+      },
+      {
+        "tool": "lastmilepercentile",
+        "label": "What internet speeds were measured in Langley and Vancouver?",
+        "help": "Compare the network, month and test count alongside the median upload and download speeds."
+      },
+      {
+        "tool": "crossingrecord",
+        "label": "What crash counts did ICBC publish for a Langley junction?",
+        "help": "Choose an intersection and compare the years on either side of a road project."
+      }
+    ]
   }
 }

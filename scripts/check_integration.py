@@ -14,8 +14,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def check_built(root, tools):
-    locations = {node.text for node in ElementTree.parse(root / 'dist/sitemap.xml').iter()
-                 if node.tag.endswith('}loc')}
+    ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
+    index = ElementTree.parse(root / 'dist/sitemap.xml').getroot()
+    children = [node.text for node in index.findall(f'{ns}sitemap/{ns}loc')]
+    expected_children = {'https://coolcode.ca/sitemap-pages.xml'} | {
+        'https://coolcode.ca' + t['url'] + 'sitemap.xml' for t in tools if t.get('result_directory')}
+    if index.tag != ns + 'sitemapindex' or sorted(children) != sorted(expected_children):
+        raise ValueError('Built sitemap index differs from the registered result publishers')
+    locations = {node.text for node in ElementTree.parse(root / 'dist/sitemap-pages.xml').findall(f'{ns}url/{ns}loc')}
     required = {'https://coolcode.ca' + t['url'] for t in tools
                 if t['access'] == 'browser' and t['hosting'] in {'local', 'project'}}
     required.update('https://coolcode.ca' + t['url'] + case['path'] for t in tools for case in t.get('use_cases', []))
