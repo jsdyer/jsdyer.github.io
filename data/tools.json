@@ -4426,7 +4426,11 @@
     "readme": {
       "note": "Try Grouse Mountain’s April survey, then select Barkerville under Automated station to compare the same date across earlier winters. Follow the full October–September season against earlier same-period medians, inspect sample sizes and share the station, measurement, date and year in one link."
     },
-    "task_label": "BC Snow Depth and Water Equivalent History"
+    "task_label": "BC Snow Depth and Water Equivalent History",
+    "result_directory": {
+      "path": "courses/",
+      "title": "B.C. snow measurements and seasonal comparisons by station"
+    }
   },
   {
     "id": "prefixdiary",
@@ -4742,7 +4746,11 @@
     "readme": {
       "note": "In 1894–95 Langley enrolled 32 pupils and averaged 19.79 present each day. Langley East enrolled 23 and averaged 12.85. Earlier attendance tables and the report-year financial figures cover different periods."
     },
-    "task_label": "Historical Lower Mainland School Records"
+    "task_label": "Historical Lower Mainland School Records",
+    "result_directory": {
+      "path": "schools/",
+      "title": "Historical Lower Mainland attendance and enrolment by school"
+    }
   },
   {
     "id": "spillledger",
@@ -4931,7 +4939,11 @@
     "readme": {
       "note": "Anderson Brook Bridge in Annapolis County received a general rating of Good on April 22, 2020 and Fair on April 26, 2023. Its detailed inspections use a separate scale. The place link comes from a unique match on the provincial structure ID."
     },
-    "task_label": "Nova Scotia Bridge Inspection History"
+    "task_label": "Nova Scotia Bridge Inspection History",
+    "result_directory": {
+      "path": "bridges/",
+      "title": "Nova Scotia bridge inspection histories by structure"
+    }
   },
   {
     "id": "libraryworkbench",

@@ -5,10 +5,17 @@ import unittest
 from xml.etree import ElementTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from build import render_datasets, write_search_files
+from build import render_datasets, source_check_time, write_search_files
 
 
 class SearchFilesTests(unittest.TestCase):
+    def test_scheduled_source_checks(self):
+        self.assertEqual(source_check_time("23 10 * * *"), "Daily at 10:23 UTC")
+        self.assertEqual(source_check_time("38 9 * * 3"), "Each Wednesday at 09:38 UTC")
+        self.assertEqual(source_check_time("24 14 6 * *"), "Day 6 of each month at 14:24 UTC")
+        for unsupported in ("0 36 * * *", "9 8 5 * 3", "0 */6 * * *"):
+            self.assertIsNone(source_check_time(unsupported))
+
     def test_multi_file_dataset_links_to_explanatory_download_section(self):
         tools = [{"id": "example", "url": "/example/", "title": "Example",
                   "data_info": {"detail": "A group of source files."},

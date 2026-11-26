@@ -309,6 +309,45 @@ def use_case_links(tool):
     return '<div class="use-case-links">' + ' · '.join(links) + '</div>'
 
 
+def source_check_time(cron):
+    """Describe the daily, weekly and monthly schedules used by result collections."""
+    match = re.fullmatch(r"(\d{1,2}) (\d{1,2}) (\*|\d{1,2}) \* (\*|[0-6])", cron)
+    if not match:
+        return None
+    minute, hour, day, weekday = match.groups()
+    if int(hour) > 23 or int(minute) > 59:
+        return None
+    if day == "*":
+        days = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+        period = "Daily" if weekday == "*" else "Each " + days[int(weekday)]
+    elif weekday == "*" and 1 <= int(day) <= 31:
+        period = f"Day {int(day)} of each month"
+    else:
+        return None
+    return f"{period} at {int(hour):02d}:{int(minute):02d} UTC"
+
+
+def render_result_schedules(tools, repositories):
+    operations = {item["repo"]: item for item in repositories}
+    rows = []
+    for tool in sorted(tools, key=lambda t: t["title"].casefold()):
+        directory = tool.get("result_directory")
+        if not directory:
+            continue
+        repo = operations.get(tool["source"].removeprefix("https://github.com/"), {})
+        links = []
+        for workflow in repo.get("workflows", []):
+            for cron in workflow.get("crons", []):
+                label = source_check_time(cron) or tool["data_info"].get("cadence", "See schedule")
+                url = f'{tool["source"]}/blob/{repo["branch"]}/.github/workflows/{workflow["workflow"]}'
+                links.append(f'<a href="{escape(url, quote=True)}">{escape(label)}</a>')
+        when = ", ".join(links) or escape(tool["data_info"].get("cadence", "See collection"))
+        path = escape(tool["url"] + directory["path"], quote=True)
+        rows.append(f'<tr><th scope="row"><a href="{path}">{escape(tool["title"])}</a></th><td>{when}</td></tr>')
+    return ('<table><thead><tr><th scope="col">Collection</th><th scope="col">Scheduled source check</th>'
+            '</tr></thead><tbody>' + "".join(rows) + '</tbody></table>')
+
+
 def render_entry(tool, access):
     tags = escape(" ".join([tool["id"], *tool["tags"]]), quote=True)
     icon, title, description, tid = (escape(tool[key], quote=True) for key in ("icon", "title", "description", "id"))
@@ -526,6 +565,8 @@ def build(root=ROOT):
         result_dir = stage / "results"
         result_dir.mkdir()
         result_template = (root / "templates/results.html").read_text(encoding="utf-8")
+        repositories = json.loads((root / "data/operations/repositories.json").read_text(encoding="utf-8"))
+        result_template = result_template.replace("{{RESULT_SCHEDULES}}", render_result_schedules(tools, repositories))
         (result_dir / "index.html").write_text(result_template.replace("{{RESULTS}}", "\n".join(result_sections)), encoding="utf-8")
         write_topics(stage, tools, root)
         write_search_files(stage, tools)
