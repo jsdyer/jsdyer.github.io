@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 from urllib.request import Request, urlopen
+from measurement import measurement_ids
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -13,11 +14,11 @@ def verify_registry(result, wanted):
     if (not isinstance(result, dict) or result.get('schema') != 'coolcode.tool-registry.v1'
             or not isinstance(actual, list) or not all(isinstance(item, str) for item in actual)
             or len(actual) != len(set(actual)) or sorted(actual) != sorted(wanted)):
-        raise ValueError('Deployed Worker registry differs from data/tools.json; regenerate, deploy, and verify.')
+        raise ValueError('Deployed Worker registry differs from public and unlisted measured tool IDs; regenerate, deploy, and verify.')
 
 
 def main():
-    wanted = sorted(t['id'] for t in json.loads((ROOT / 'data/tools.json').read_text()))
+    wanted = measurement_ids(ROOT, json.loads((ROOT / 'data/tools.json').read_text()))
     request = Request('https://coolcode-visitor-api.jeffdyer.workers.dev/registry',
                       headers={'User-Agent': 'CoolCode registry audit'})
     with urlopen(request, timeout=20) as response:
@@ -26,7 +27,7 @@ def main():
         verify_registry(result, wanted)
     except ValueError as error:
         raise SystemExit(str(error)) from error
-    print(f'Deployed Worker accepts all {len(wanted)} catalogue IDs; no events or reports were submitted.')
+    print(f'Deployed Worker accepts all {len(wanted)} measured tool IDs; no events or reports were submitted.')
 
 
 if __name__ == '__main__':

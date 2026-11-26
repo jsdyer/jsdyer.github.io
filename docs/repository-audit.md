@@ -1,6 +1,6 @@
 # Repository coverage audit
 
-The current inventory is regenerated from every public repository page. The latest review includes Park Ready, Tariff Bench, Clam Counter and Basket Math, following Contaminated Places, Query Confessional and Backup Ledger. The public-apis contribution/reference fork remains a documented non-tool repository. The machine-readable result is
+The current inventory is regenerated from every public repository page. The latest review includes Browser Receipt, Session Harbour, Car Bench, Canada Board, Signal Relics, Selfhost Finder, Heat Bench and DIN Compare. The public-apis contribution/reference fork remains a documented non-tool repository. The machine-readable result is
 [`data/repository-audit.json`](../data/repository-audit.json). It includes public
 repository names only; private repository identities are omitted.
 
@@ -37,8 +37,10 @@ records each public exclusion with a reason and review date:
 - `coolcode-tool-template` is the reusable starter, not a finished tool.
 - `public-apis` is a contribution/reference fork, not an independent CoolCode tool.
 - `townheritage` is an intentionally unlisted Europeana personal-key review prototype.
-  Keep it out of the homepage catalogue, search, sitemap, visitor registration and
-  watchdog. It has no scheduled public collection. After production-key approval
+  Keep it out of the homepage catalogue, search and sitemap. Aggregate visit
+  measurement is enabled through `data/unlisted-tools.json`, including its name
+  in admin statistics. It has no scheduled collection and needs no watchdog target.
+  After production-key approval
   and an explicit production release, apply the full tool lifecycle before
   removing this exclusion.
 

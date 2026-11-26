@@ -4,9 +4,10 @@ import {readFile} from 'node:fs/promises';
 
 const code = await readFile(new URL('../services/cloudflare-visitor/worker.js', import.meta.url), 'utf8');
 const {default: worker} = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
-const tools = JSON.parse(await readFile(new URL('../data/tools.json', import.meta.url), 'utf8'));
+const tools = [...JSON.parse(await readFile(new URL('../data/tools.json', import.meta.url), 'utf8')),
+  ...JSON.parse(await readFile(new URL('../data/unlisted-tools.json', import.meta.url), 'utf8'))];
 
-test('live-registry contract returns every catalogue ID without touching the database', async () => {
+test('live-registry returns public and unlisted measured IDs without touching the database', async () => {
   const response = await worker.fetch(new Request('https://worker.example/registry'), {});
   assert.equal(response.status, 200);
   assert.deepEqual((await response.json()).tool_ids, tools.map(t => t.id).sort());

@@ -443,6 +443,12 @@
     ]
   },
   {
+    "repo": "jsdyer/browserreceipt",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
     "repo": "jsdyer/budgetmirror",
     "branch": "main",
     "workflows": [
@@ -513,6 +519,23 @@
     ]
   },
   {
+    "repo": "jsdyer/canadaboard",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "47 22 * * 1-5"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/canadapulse",
     "branch": "main",
     "workflows": [
@@ -537,6 +560,23 @@
         "workflow": "pages.yml",
         "crons": [
           "41 10 9 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/carbench",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "47 8 1 * *"
         ],
         "inputs": {}
       }
@@ -893,6 +933,12 @@
   },
   {
     "repo": "jsdyer/diagrambench",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/dincompare",
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
@@ -1518,6 +1564,12 @@
   },
   {
     "repo": "jsdyer/headlinevault",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/heatbench",
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
@@ -3120,6 +3172,29 @@
     ]
   },
   {
+    "repo": "jsdyer/selfhostfinder",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "53 10 * * 1"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/sessionharbour",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
     "repo": "jsdyer/shieldcheck",
     "branch": "main",
     "workflows": [
@@ -3167,6 +3242,25 @@
     ],
     "guarded_paths": [
       ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/signalrelics",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "11 9 8 * *"
+        ],
+        "inputs": {
+          "refresh_data": "true"
+        }
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
       ".github/workflows/schedule-guard.yml"
     ]
   },

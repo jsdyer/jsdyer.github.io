@@ -1,4 +1,4 @@
-// Catalogue IDs accepted by the CoolCode report form and usage counter.
+// Public and explicitly unlisted tool IDs accepted by reports and aggregate counts.
 const toolList = /* CATALOGUE_TOOL_IDS */;
 
 const ORIGIN = 'https://coolcode.ca';

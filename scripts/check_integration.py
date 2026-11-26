@@ -8,6 +8,7 @@ import re
 from xml.etree import ElementTree
 from audit_repositories import audit
 from sync_operations import sync
+from measurement import unlisted_tools
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -24,6 +25,14 @@ def check_built(root, tools):
     expected = [{k: t[k] for k in fields} for t in tools]
     if [{k: t.get(k) for k in fields} for t in published] != expected:
         raise ValueError('Built search/report catalogue differs from data/tools.json')
+    unlisted = unlisted_tools(root, tools)
+    if unlisted:
+        hidden_routes = {'https://coolcode.ca/' + t['id'] + '/' for t in unlisted}
+        if hidden_routes & locations:
+            raise ValueError('Unlisted measurement tools leaked into the public sitemap')
+        admin_tools = json.loads((root / 'dist/admin/measurement-tools.json').read_text())
+        if admin_tools != unlisted:
+            raise ValueError('Admin measurement names differ from the unlisted registry')
 
 
 def tool_list_ids(literal):

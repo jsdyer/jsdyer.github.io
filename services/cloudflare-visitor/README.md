@@ -6,7 +6,7 @@
 The two app-owned adapters record their upstream commit and SHA-256 in
 `app-owned-modules.json`; regeneration includes them rather than overwriting
 previously deployed routes.
-`worker.js` is generated from them and every ID in `data/tools.json` by
+`worker.js` is generated from them and every ID in `data/tools.json` plus explicitly measured unlisted IDs in `data/unlisted-tools.json` by
 `python3 scripts/sync_operations.py`. Never hand-maintain a second tool array.
 
 The existing `coolcode-visitor-api` Worker provides aggregate visits, private issue
@@ -179,3 +179,9 @@ This local test loads the actual relay helper and checks exact, short and excess
 bodies plus native cache-clone bytes and capture timestamps. It makes no provider
 requests and does not deploy anything. Production CPU telemetry remains separate
 from this correctness test.
+
+## Unlisted prototypes and connection diagnostics
+
+Unlisted tools can participate in aggregate statistics without becoming public catalogue entries. `data/unlisted-tools.json` is the reviewed source for these IDs and admin display names; they remain absent from the homepage, search catalogue and sitemap. Town Heritage uses this path. Removing noindex or promoting a prototype is a separate decision.
+
+Browser Receipt can explicitly request `GET /api/browserreceipt/connection` with the CoolCode Origin. It returns only the visitor connection IP and available Cloudflare ASN/organization/country/edge/protocol fields; missing values are null. It accepts no query arguments, uses no database or external provider, writes no application log and sends `private, no-store`. These are connection observations, not proof of a complete DNS resolver chain.

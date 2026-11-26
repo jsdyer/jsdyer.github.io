@@ -14,7 +14,7 @@ This applies to installable tools as well as browser tools.
 | Complete repository accounting | Full public GitHub inventory plus `data/repository-audit-exclusions.json` | `data/repository-audit.json`; no unreviewed repos |
 | Actual schedules and dispatch inputs, including explicit absence of schedules | Each source repo's `.github/workflows/`, scanned into `data/operations/repositories.json` | Generated watchdog targets; guard coverage checks |
 | Published freshness fields and tolerances | Reviewed `data/operations/freshness.json` | Generated watchdog probes; never infer check dates from source editions |
-| Visitor counts, issue acceptance and public tool APIs | `services/cloudflare-visitor/worker.template.js`, inlined API modules and catalogue IDs | Generated `worker.js`, deployed Worker and verified deployment receipt |
+| Visitor counts, issue acceptance and public tool APIs | `services/cloudflare-visitor/worker.template.js`, inlined API modules and public/unlisted measurement IDs | Generated `worker.js`, deployed Worker and verified deployment receipt |
 | Independent scheduling | `services/refresh-watchdog/` in this repository | Server timer downloads validated `targets.json` from GitHub every pass |
 | Admin outcome reporting | The same generated watchdog registry and reviewed catalogue count definitions | Hourly or explicitly requested service observer saves workflow/output results on `collector-outcomes-log`; reviewed collection step names and cache allowances live in the same freshness registry |
 | Search indexing | Catalogue routes and `scripts/build.py` | Generated `dist/sitemap.xml` and `robots.txt`; do not hand-edit them |
@@ -103,3 +103,7 @@ failed check or call an uninstalled service active just to make the checklist gr
 
 Current machine-readable accounting is in [repository-audit.json](../data/repository-audit.json).
 The previous standalone watchdog ZIP is superseded by the [GitHub-managed service](../services/refresh-watchdog/README.md).
+
+## Unlisted tools with statistics
+
+An unlisted prototype may use the shared aggregate counter when requested by the owner. Register its ID/title/source in `data/unlisted-tools.json`, instrument its page, regenerate the Worker and verify the admin measurement metadata. Keep the prototype in the repository audit exclusions with an accurate reason. Do not add it to `data/tools.json`, homepage/search/sitemap, featured choices or scheduled watchdog targets merely to collect visit statistics.

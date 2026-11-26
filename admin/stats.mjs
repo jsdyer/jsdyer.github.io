@@ -322,10 +322,10 @@ function renderExperiments(target, rows, cards, names) {
   }
 }
 
-export function initializeStats(catalog, session, initialMetrics) {
+export function initializeStats(catalog, session, initialMetrics, unlisted = []) {
   const root = document.getElementById("statistics");
   root.replaceChildren(el("h2", "Statistics and issue reports"));
-  const names = new Map(catalog.filter(t => t.access === "browser").map(t => [t.id, t.title]));
+  const names = new Map([...catalog.filter(t => t.access === "browser"), ...unlisted].map(t => [t.id, t.title]));
   const access = section(root, "Private reports");
   const period = choice([["7", "Last 7 days"], ["28", "Last 28 days"]]);
   const load = button("Refresh reports");

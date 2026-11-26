@@ -159,6 +159,18 @@ async function apiHandle(request,env,ctx) {
     if(request.method==='OPTIONS') return {status:204};
     if(['/api/measurebench/','/api/screenradar/','/api/domain-biography/'].some(prefix=>url.pathname.startsWith(prefix))) return await secondBatchApiHandle(request,env,ctx);
     if(request.method!=='GET') return apiFailure(405,'method_denied','Use GET for public data requests.');
+    if(url.pathname==='/api/browserreceipt/connection') {
+      if(origin!==ORIGIN) return apiFailure(403,'origin_denied','Open the connection check on CoolCode.');
+      if(url.search) return apiFailure(400,'invalid_query','This connection check takes no query parameters.');
+      const cf=request.cf || {};
+      const limited=value=>typeof value==='string' ? value.slice(0,200) : null;
+      return {headers:{'Cache-Control':'private, no-store'},body:{fetched_at:new Date().toISOString(),data:{
+        ip:limited(request.headers.get('CF-Connecting-IP')),
+        asn:Number.isSafeInteger(cf.asn) && cf.asn>0 ? cf.asn : null,
+        organization:limited(cf.asOrganization),country:limited(cf.country),colo:limited(cf.colo),
+        http:limited(cf.httpProtocol),tls:limited(cf.tlsVersion)
+      }}};
+    }
     if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY),screenplaces:Boolean(env.TMDB_READ_ACCESS_TOKEN),planehere:true,planehere_key:Boolean(env.ADSBLOL_API_KEY),screenradar:Boolean(env.TMDB_READ_ACCESS_TOKEN),measurebench:Boolean(env.WOLFRAM_APP_ID),domain_biography:true}}};
     if(url.pathname.startsWith('/api/halifaxnext/')) return await halifaxApiHandle(request,env,ctx);
     if(url.pathname.startsWith('/api/screenplaces/')) return await screenplacesApiHandle(request,env,ctx);

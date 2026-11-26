@@ -13,6 +13,22 @@
       }
     ]
   },
+  "jsdyer/addresschronicle/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/addresschronicle/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Archive directory sources checked and indexes validated",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Check archive sources and rebuild page indexes"
+    ]
+  },
   "jsdyer/aircheckdiary/refresh.yml": {
     "freshness": [
       {
@@ -286,6 +302,22 @@
       }
     ]
   },
+  "jsdyer/budgetmirror/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/budgetmirror/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Statistics Canada spending sources checked",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Refresh validated Statistics Canada spending data"
+    ]
+  },
   "jsdyer/buoybench/pages.yml": {
     "freshness": [
       {
@@ -322,6 +354,38 @@
       }
     ]
   },
+  "jsdyer/canadaboard/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/canadaboard/data/snapshot.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 345600
+      }
+    ],
+    "collection_steps": [
+      "Refresh official economic sources"
+    ]
+  },
+  "jsdyer/canadapulse/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/canadapulse/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Wikimedia pageview sources checked",
+        "max_age_seconds": 172800
+      }
+    ],
+    "collection_steps": [
+      "Collect complete Wikimedia daily rankings and article histories"
+    ]
+  },
   "jsdyer/cancon-atlas/pages.yml": {
     "freshness": [
       {
@@ -332,6 +396,22 @@
         "label": "Source retrieved",
         "precision": "date"
       }
+    ]
+  },
+  "jsdyer/carbench/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/carbench/data/index.json",
+        "json_path": [
+          "capturedAt"
+        ],
+        "label": "Sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 3888000
+      }
+    ],
+    "collection_steps": [
+      "Refresh NRCan ratings"
     ]
   },
   "jsdyer/carecompass/pages.yml": {
@@ -386,7 +466,19 @@
         ],
         "label": "Sources checked",
         "precision": "timestamp"
+      },
+      {
+        "url": "https://coolcode.ca/chargegaps/data/afdc.json",
+        "json_path": [
+          "checkedAt"
+        ],
+        "label": "AFDC Canadian directory checked",
+        "precision": "timestamp",
+        "max_age_seconds": 1209600
       }
+    ],
+    "collection_steps": [
+      "Capture the Canadian AFDC directory"
     ]
   },
   "jsdyer/charityflows/pages.yml": {
@@ -411,6 +503,22 @@
         "label": "Data retrieved",
         "precision": "date"
       }
+    ]
+  },
+  "jsdyer/civicrevision/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/civicrevision/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Wikimedia revisions checked",
+        "precision": "timestamp",
+        "max_age_seconds": 64800
+      }
+    ],
+    "collection_steps": [
+      "Collect complete configured Wikipedia revision windows"
     ]
   },
   "jsdyer/clamcounter/pages.yml": {
@@ -1323,6 +1431,22 @@
       }
     ]
   },
+  "jsdyer/movebench/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/movebench/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Statistics Canada spending sources checked",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Refresh validated Statistics Canada spending data"
+    ]
+  },
   "jsdyer/museumdrawer/pages.yml": {
     "freshness": [
       {
@@ -1427,6 +1551,22 @@
         "precision": "date",
         "label": "Source checked"
       }
+    ]
+  },
+  "jsdyer/openseed/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/openseed/data/catalogue.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Official download availability checked",
+        "precision": "timestamp",
+        "max_age_seconds": 259200
+      }
+    ],
+    "collection_steps": [
+      "Refresh public catalogues and check download availability"
     ]
   },
   "jsdyer/orbitalcensus/refresh.yml": {
@@ -1909,6 +2049,22 @@
       }
     ]
   },
+  "jsdyer/screenplaces/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/screenplaces/data/catalogue.json",
+        "json_path": [
+          "fetched_at"
+        ],
+        "precision": "timestamp",
+        "label": "Wikidata filming locations fetched",
+        "max_age_seconds": 864000
+      }
+    ],
+    "collection_steps": [
+      "Refresh documented filming locations"
+    ]
+  },
   "jsdyer/seabusclock/refresh-profile.yml": {
     "freshness": [
       {
@@ -1931,6 +2087,22 @@
         "label": "Timetable retrieved",
         "precision": "date"
       }
+    ]
+  },
+  "jsdyer/selfhostfinder/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/selfhostfinder/data/catalogue.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "label": "Sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 1209600
+      }
+    ],
+    "collection_steps": [
+      "Refresh the public catalogue"
     ]
   },
   "jsdyer/shieldcheck/pages.yml": {
@@ -1968,6 +2140,22 @@
         "label": "Data retrieved",
         "precision": "date"
       }
+    ]
+  },
+  "jsdyer/signalrelics/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/signalrelics/data/objects.json",
+        "json_path": [
+          "checkedAt"
+        ],
+        "label": "Sources checked",
+        "precision": "timestamp",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Refresh museum collection"
     ]
   },
   "jsdyer/skyarchive/pages.yml": {
@@ -2320,118 +2508,6 @@
         "precision": "timestamp",
         "label": "Disclosure source retrieved"
       }
-    ]
-  },
-  "jsdyer/screenplaces/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/screenplaces/data/catalogue.json",
-        "json_path": [
-          "fetched_at"
-        ],
-        "precision": "timestamp",
-        "label": "Wikidata filming locations fetched",
-        "max_age_seconds": 864000
-      }
-    ],
-    "collection_steps": [
-      "Refresh documented filming locations"
-    ]
-  },
-  "jsdyer/budgetmirror/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/budgetmirror/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "precision": "timestamp",
-        "label": "Statistics Canada spending sources checked",
-        "max_age_seconds": 3456000
-      }
-    ],
-    "collection_steps": [
-      "Refresh validated Statistics Canada spending data"
-    ]
-  },
-  "jsdyer/movebench/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/movebench/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "precision": "timestamp",
-        "label": "Statistics Canada spending sources checked",
-        "max_age_seconds": 3456000
-      }
-    ],
-    "collection_steps": [
-      "Refresh validated Statistics Canada spending data"
-    ]
-  },
-  "jsdyer/canadapulse/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/canadapulse/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "precision": "timestamp",
-        "label": "Wikimedia pageview sources checked",
-        "max_age_seconds": 172800
-      }
-    ],
-    "collection_steps": [
-      "Collect complete Wikimedia daily rankings and article histories"
-    ]
-  },
-  "jsdyer/addresschronicle/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/addresschronicle/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "precision": "timestamp",
-        "label": "Archive directory sources checked and indexes validated",
-        "max_age_seconds": 3456000
-      }
-    ],
-    "collection_steps": [
-      "Check archive sources and rebuild page indexes"
-    ]
-  },
-  "jsdyer/civicrevision/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/civicrevision/data/status.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "label": "Wikimedia revisions checked",
-        "precision": "timestamp",
-        "max_age_seconds": 64800
-      }
-    ],
-    "collection_steps": [
-      "Collect complete configured Wikipedia revision windows"
-    ]
-  },
-  "jsdyer/openseed/pages.yml": {
-    "freshness": [
-      {
-        "url": "https://coolcode.ca/openseed/data/catalogue.json",
-        "json_path": [
-          "checked_at"
-        ],
-        "label": "Official download availability checked",
-        "precision": "timestamp",
-        "max_age_seconds": 259200
-      }
-    ],
-    "collection_steps": [
-      "Refresh public catalogues and check download availability"
     ]
   }
 }

@@ -561,6 +561,29 @@
       ]
     },
     {
+      "repo": "jsdyer/canadaboard",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "47 22 * * 1-5"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/canadaboard/data/snapshot.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "timestamp",
+          "max_age_seconds": 345600
+        }
+      ],
+      "collection_steps": [
+        "Refresh official economic sources"
+      ]
+    },
+    {
       "repo": "jsdyer/canadapulse",
       "branch": "main",
       "workflow": "pages.yml",
@@ -600,6 +623,29 @@
           "label": "Source retrieved",
           "precision": "date"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/carbench",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "47 8 1 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/carbench/data/index.json",
+          "json_path": [
+            "capturedAt"
+          ],
+          "label": "Sources checked",
+          "precision": "timestamp",
+          "max_age_seconds": 3888000
+        }
+      ],
+      "collection_steps": [
+        "Refresh NRCan ratings"
       ]
     },
     {
@@ -684,7 +730,19 @@
           ],
           "label": "Sources checked",
           "precision": "timestamp"
+        },
+        {
+          "url": "https://coolcode.ca/chargegaps/data/afdc.json",
+          "json_path": [
+            "checkedAt"
+          ],
+          "label": "AFDC Canadian directory checked",
+          "precision": "timestamp",
+          "max_age_seconds": 1209600
         }
+      ],
+      "collection_steps": [
+        "Capture the Canadian AFDC directory"
       ]
     },
     {
@@ -3230,6 +3288,29 @@
       ]
     },
     {
+      "repo": "jsdyer/selfhostfinder",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "53 10 * * 1"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/selfhostfinder/data/catalogue.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "label": "Sources checked",
+          "precision": "timestamp",
+          "max_age_seconds": 1209600
+        }
+      ],
+      "collection_steps": [
+        "Refresh the public catalogue"
+      ]
+    },
+    {
       "repo": "jsdyer/shieldcheck",
       "branch": "main",
       "workflow": "pages.yml",
@@ -3285,6 +3366,31 @@
           "label": "Data retrieved",
           "precision": "date"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/signalrelics",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "11 9 8 * *"
+      ],
+      "inputs": {
+        "refresh_data": "true"
+      },
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/signalrelics/data/objects.json",
+          "json_path": [
+            "checkedAt"
+          ],
+          "label": "Sources checked",
+          "precision": "timestamp",
+          "max_age_seconds": 3456000
+        }
+      ],
+      "collection_steps": [
+        "Refresh museum collection"
       ]
     },
     {

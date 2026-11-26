@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 from urllib.parse import quote, urlsplit
 from xml.etree import ElementTree
+from measurement import unlisted_tools
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_MODES = {
@@ -434,6 +435,7 @@ def build(root=ROOT):
         catalog = [{**{key: tool[key] for key in ("id", "title", "access", "source")},
                     "genre": category_titles[tool["category"]]} for tool in tools]
         (stage / "assets/tool-catalog.json").write_text(json.dumps(catalog, ensure_ascii=False), encoding="utf-8")
+        (stage / "admin/measurement-tools.json").write_text(json.dumps(unlisted_tools(root, tools), ensure_ascii=False), encoding="utf-8")
         activity_tools = [{
             "id": tool["id"], "title": tool["title"], "source": tool["source"],
             "unavailable": [probe["label"] for probe in tool["data_info"].get("probes", [])

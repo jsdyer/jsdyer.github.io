@@ -9858,7 +9858,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Dated Open Charge Map country exports, searched locally with straight-line distances and provider attribution.",
+      "detail": "Dated Open Charge Map exports and a separate Canadian AFDC catalogue, with local distance calculations and source dates.",
       "cadence": "Weekly",
       "probes": [
         {
@@ -9890,12 +9890,28 @@
           },
           "value": "2026-11-23 11:36 UTC",
           "count": 18798
+        },
+        {
+          "label": "AFDC directory checked",
+          "url": "https://coolcode.ca/chargegaps/data/afdc.json",
+          "path": [
+            "checkedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "recordCount"
+            ],
+            "unit": "AFDC stations"
+          },
+          "value": "2026-11-26 04:37 UTC",
+          "count": 15295
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start with **Langley**, select a connector and minimum power, then compare the nearest matching record and the number inside your radius. Enter any valid coordinates to investigate another point; the shortcuts are optional. Distances are straight lines, not driving routes, and an empty result means no matching record in this capture—not proof that no charger exists. **Recorded access** and **Recorded status** include private, restricted and planned locations unless filtered. The source export date is prominent because these downloads can be much older than their retrieval date. Save capture JSON to keep a portable record; imports and coordinate calculations stay in this tab."
+      "note": "Start with **Langley**, select a connector and minimum power, then compare the nearest matching record and the number inside your radius. Enter any valid coordinates to investigate another point; the shortcuts are optional. Distances are straight lines, not driving routes, and an empty result means no matching record in this capture—not proof that no charger exists. **Recorded access** and **Recorded status** include private, restricted and planned locations unless filtered. The source export date is prominent because these downloads can be much older than their retrieval date. Use the separate **Cross-check Canadian coverage with AFDC** section for the same point and radius; its filters and counts are independent, and overlapping directory counts must not be added. Save capture JSON to keep a portable record; imports and coordinate calculations stay in this tab."
     }
   },
   {
@@ -11814,6 +11830,284 @@
     },
     "readme": {
       "note": "Try `100 GB at 100 Mbps`: the ideal transfer takes 2 hours, 13 minutes and 20 seconds. Lower the useful-throughput percentage to model overhead. GB and GiB differ; B means bytes and b means bits. Energy estimates include only the energy charge, not fixed fees or taxes."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "browserreceipt",
+    "title": "Browser Receipt",
+    "description": "See what your browser reveals, compare local privacy snapshots, and check your public connection on demand.",
+    "category": "security",
+    "tags": [
+      "browser",
+      "privacy",
+      "fingerprint",
+      "ip",
+      "dns"
+    ],
+    "icon": "scan-line",
+    "url": "/browserreceipt/",
+    "source": "https://github.com/jsdyer/browserreceipt",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Browser-reported values stay local; optional connection and DNS checks run only when requested."
+    },
+    "readme": {
+      "note": "Capture browser-reported values, inspect differences against an explicitly saved or imported baseline, and export a JSON receipt. Public IP/ASN lookup and the optional DNS observer run only when requested. Network fields are excluded from saved/exported receipts unless selected. The standard CoolCode counter receives only the tool ID, never receipt contents."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "sessionharbour",
+    "title": "Session Harbour",
+    "description": "Inspect and organize exported browser tabs and bookmarks privately, with duplicate detection and portable exports.",
+    "category": "projects",
+    "tags": [
+      "browser",
+      "tabs",
+      "bookmarks",
+      "session",
+      "privacy"
+    ],
+    "icon": "files",
+    "url": "/sessionharbour/",
+    "source": "https://github.com/jsdyer/sessionharbour",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Browser-local parsing of visitor-selected session exports, bookmarks and URL lists."
+    },
+    "readme": {
+      "note": "Import JSON sessions, bookmark HTML, URL lists or unencrypted Chromium SNSS v1/v3. Search titles/URLs, filter domains and duplicate URLs, select matching tabs, and export browser-importable bookmarks, portable JSON or URL text. Files, filenames and imported URLs never leave this browser tab unless you deliberately open a link. Reloading clears imported data."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "carbench",
+    "title": "Car Bench",
+    "description": "Compare Canadian vehicle fuel and electricity costs with NRCan ratings and your driving assumptions.",
+    "category": "money",
+    "tags": [
+      "cars",
+      "fuel",
+      "electric vehicles",
+      "Canada",
+      "costs"
+    ],
+    "icon": "route",
+    "url": "/carbench/",
+    "source": "https://github.com/jsdyer/carbench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "NRCan fuel and battery-electric vehicle ratings, combined with visitor-entered driving and price assumptions.",
+      "probes": [
+        {
+          "label": "Sources checked",
+          "url": "https://coolcode.ca/carbench/data/index.json",
+          "path": [
+            "capturedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "vehicle variants"
+          },
+          "value": "2026-11-26 04:42 UTC",
+          "count": 13033
+        }
+      ],
+      "cadence": "Monthly"
+    },
+    "readme": {
+      "note": "Choose a model year and search any make, model or vehicle class; compare up to three variants. Enter annual kilometres, city driving share, local fuel prices and home/public charging costs. Plug-in hybrids include both electricity and any reported fuel use in charged mode. Add each vehicle's purchase price, expected resale and annual insurance/maintenance to compare an ownership period. Prices begin as editable examples; purchase and other costs begin at zero. Explicitly saved comparisons preserve original source records and capture dates. CSV exports include assumptions."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "heatbench",
+    "title": "Heat Bench",
+    "description": "Compare home heating costs from your annual energy use, fuel prices and heat-pump performance assumptions.",
+    "category": "money",
+    "tags": [
+      "heating",
+      "heat pumps",
+      "energy",
+      "costs",
+      "Canada"
+    ],
+    "icon": "lightbulb",
+    "url": "/heatbench/",
+    "source": "https://github.com/jsdyer/heatbench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "local",
+      "detail": "Local calculations from visitor-entered energy use and prices, with NRCan fuel conversion factors."
+    },
+    "readme": {
+      "note": "Start with a complete year of bills and separate space heating from hot water, cooking and other electricity use. Enter your own marginal prices, equipment efficiency, seasonal COP range and backup share. Results show delivered heat, annual costs, savings ranges and simple payback. Initial values are clearly labelled examples, not current utility tariffs. Scenarios are saved only when requested, in this browser; CSV exports preserve the assumptions. This tool does not size heating equipment or establish rebate eligibility."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "dincompare",
+    "title": "DIN Compare",
+    "description": "Find Canadian drug products by DIN or name and compare official ingredient, strength, form and status information.",
+    "category": "field-kit",
+    "tags": [
+      "health",
+      "Canada",
+      "drugs",
+      "DIN",
+      "reference"
+    ],
+    "icon": "hand-heart",
+    "url": "/dincompare/",
+    "source": "https://github.com/jsdyer/dincompare",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "live",
+      "detail": "Live product, ingredient, form, route and status information from Health Canada’s Drug Product Database."
+    },
+    "readme": {
+      "note": "Keep leading zeros when entering a DIN. Search a brand name or exact DIN, choose a status and refine returned products by company or class. Add products to compare ingredients and strengths, dosage forms, administration routes, company and status. Open the official record for available monographs. Searches go directly to Health Canada; nothing is saved locally unless you explicitly export a comparison. Matching fields do not establish interchangeability, suitable treatment, dosage equivalence, retail price or pharmacy stock."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "canadaboard",
+    "title": "Canada Board",
+    "description": "Six Canadian economic indicators, with dated trends, source links and the next official releases.",
+    "category": "money",
+    "tags": [
+      "Canada",
+      "economy",
+      "inflation",
+      "interest rates",
+      "housing"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/canadaboard/",
+    "source": "https://github.com/jsdyer/canadaboard",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Statistics Canada vectors and Bank of Canada Valet observations supply six dated national indicators. Official release calendars are checked each weekday.",
+      "probes": [
+        {
+          "label": "Sources checked",
+          "url": "https://coolcode.ca/canadaboard/data/snapshot.json",
+          "path": [
+            "checked_at"
+          ],
+          "precision": "minute",
+          "value": "2026-11-26 04:38 UTC"
+        }
+      ],
+      "cadence": "Weekdays"
+    },
+    "readme": {
+      "note": "Read inflation, unemployment, the policy target, CAD/USD, the 10-year benchmark yield and annualized housing starts together without losing their different reference dates. Switch chart periods, inspect exact observations, pin cards locally and export CSV. Download the publisher-scheduled release calendar as all-day events. This is a dated source snapshot, not trading prices or forecasts."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "selfhostfinder",
+    "title": "Selfhost Finder",
+    "description": "Find self-hosted applications by purpose, platform and licence, then keep a private shortlist.",
+    "category": "projects",
+    "tags": [
+      "self-hosting",
+      "alternatives",
+      "homelab",
+      "open source"
+    ],
+    "icon": "server",
+    "url": "/selfhostfinder/",
+    "source": "https://github.com/jsdyer/selfhostfinder",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "The awesome-selfhosted community catalogue supplies software descriptions, licences, platforms and dated repository activity. Checked weekly.",
+      "probes": [
+        {
+          "label": "Sources checked",
+          "url": "https://coolcode.ca/selfhostfinder/data/catalogue.json",
+          "path": [
+            "checked_at"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "projects"
+            ],
+            "measure": "length",
+            "unit": "applications"
+          },
+          "value": "2026-11-26 04:30 UTC",
+          "count": 1361
+        }
+      ],
+      "cadence": "Weekly"
+    },
+    "readme": {
+      "note": "Search an application or purpose, narrow by category, platform/language and project licence, and save candidates on your device. The shortlist compares source-reported releases and activity dates and exports CSV. Hardware requirements and security scores are deliberately not inferred. Supported projects link to Rack Recipes; choose the named project there. Searches and saved IDs never leave your browser."
+    },
+    "sync_manifest": true
+  },
+  {
+    "id": "signalrelics",
+    "title": "Signal Relics",
+    "description": "Explore historical modems, computers, telephones and radio equipment through museum records, dates, makers and image rights.",
+    "category": "media",
+    "tags": [
+      "museum",
+      "computing",
+      "telephones",
+      "radio",
+      "history",
+      "modems"
+    ],
+    "icon": "radio-tower",
+    "url": "/signalrelics/",
+    "source": "https://github.com/jsdyer/signalrelics",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Science Museum Group bulk collection metadata, with source-edition dates and individual image licences; checked monthly.",
+      "probes": [
+        {
+          "label": "Sources checked",
+          "url": "https://coolcode.ca/signalrelics/data/objects.json",
+          "path": [
+            "checkedAt"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "count"
+            ],
+            "unit": "objects"
+          },
+          "value": "2026-11-26 04:34 UTC",
+          "count": 1970
+        }
+      ],
+      "cadence": "Monthly"
+    },
+    "readme": {
+      "note": "Search the captured collection by object, maker or material, filter overlapping museum date ranges, compare two objects and save a local shortlist. Every object links to its source and every displayed preview retains its individual image licence. The source edition is shown separately from the last successful check."
     },
     "sync_manifest": true
   }

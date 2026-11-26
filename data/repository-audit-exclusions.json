@@ -74,7 +74,7 @@
   {
     "repo": "townheritage",
     "status": "unlisted-prototype",
-    "reason": "Europeana personal-key review prototype. Intentionally excluded from the public catalogue, search, sitemap, visitor registration and watchdog until production-key approval and an explicit production release.",
+    "reason": "Europeana personal-key review prototype. Intentionally excluded from public catalogue, search and sitemap pending production approval. Aggregate visit statistics are enabled through the separate unlisted measurement registry; manual collection needs no watchdog schedule.",
     "reviewed_at": "2026-11-25"
   }
 ]

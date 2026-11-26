@@ -25,8 +25,10 @@ jsdyer/budgetmirror
 jsdyer/buoybench
 jsdyer/campcalendar
 jsdyer/canadaanalytics
+jsdyer/canadaboard
 jsdyer/canadapulse
 jsdyer/cancon-atlas
+jsdyer/carbench
 jsdyer/carecompass
 jsdyer/ccts-ledger
 jsdyer/census-lens
@@ -153,9 +155,11 @@ jsdyer/schoolhouseledger
 jsdyer/scorecard
 jsdyer/screenplaces
 jsdyer/seabusclock
+jsdyer/selfhostfinder
 jsdyer/shieldcheck
 jsdyer/shipwrecks
 jsdyer/shopfrontdiary
+jsdyer/signalrelics
 jsdyer/skyarchive
 jsdyer/snowcourses
 jsdyer/spectrum-explorer

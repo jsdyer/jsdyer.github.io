@@ -63,14 +63,15 @@ export async function openDashboard(session, initialMetrics) {
     } catch(err) { if (!session.signal.aborted) $('save-status').textContent=err.message; }
     finally { if (!session.signal.aborted) $('controls').disabled=!baseline; }
   });
-  const responses=await Promise.all(['/assets/tool-catalog.json','./featured.json'].map(path=>fetch(path,{cache:'no-cache',signal:session.signal})));
+  const responses=await Promise.all(['/assets/tool-catalog.json','./featured.json','./measurement-tools.json'].map(path=>fetch(path,{cache:'no-cache',signal:session.signal})));
   if(responses.some(r=>!r.ok)) throw Error('Catalogue data is unavailable. Reload to try again.');
-  [catalog,baseline]=await Promise.all(responses.map(r=>r.json()));
+  const loaded=await Promise.all(responses.map(r=>r.json()));
+  [catalog,baseline]=loaded;
   if (session.signal.aborted) return;
   const browser=catalog.filter(t=>t.access==='browser').length;
   $('health').textContent=catalog.length+' catalogue tools · '+browser+' available in the browser · '+(catalog.length-browser)+' install-only projects';
   bind();
-  initializeStats(catalog, session, initialMetrics);
+  initializeStats(catalog, session, initialMetrics, loaded[2]);
   initializeActivity(session.signal);
   initializeOutcomes(session);
   initializeServiceStatus(session.signal);
