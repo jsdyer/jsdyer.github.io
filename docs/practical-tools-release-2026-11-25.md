@@ -11,7 +11,7 @@ workflows across 270 catalogue source repositories.
 
 | Application | Delivered behaviour | Source and maintenance |
 | --- | --- | --- |
-| [Browser Receipt](https://coolcode.ca/browserreceipt/) | Local browser measurements, baseline comparisons, redacted exports and explicit connection/DNS checks | Local features need no service. Optional IP/ASN route is included in the prepared Worker; DNS observer is an optional separate VPS project. |
+| [Browser Receipt](https://coolcode.ca/browserreceipt/) | Local browser measurements, baseline comparisons, redacted exports and explicit connection/DNS checks | Local features need no service. Optional IP/ASN route is deployed and verified; DNS observer is an optional separate VPS project. |
 | [Session Harbour](https://coolcode.ca/sessionharbour/) | Private session/bookmark/URL imports, supported unencrypted SNSS parsing, grouping, deduplication and export | Files remain local; unsupported encrypted formats give export instructions. No collector. |
 | [Car Bench](https://coolcode.ca/carbench/) | Fuel, electric and plug-in-hybrid comparisons with editable driving/ownership assumptions | 13,033 NRCan variants in the verified capture; monthly refresh. |
 | [Canada Board](https://coolcode.ca/canadaboard/) | Six dated economic indicators, trends, official next releases, calendar export, saved pins and CSV | Statistics Canada and Bank of Canada; weekday checks. |
@@ -75,13 +75,13 @@ Follow [Install this runtime update](../services/refresh-watchdog/README.md#inst
 Ordinary target/probe updates still arrive automatically. The existing
 all-repositories GitHub App setting covers the new collector repositories.
 
-## Remaining owner-controlled setup
+## Owner-controlled setup and verified Worker
 
-1. Deploy the complete [prepared Worker](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/dfbb6509ac9801604f0b7b5ab95299b0026f41ff/services/cloudflare-visitor/worker.js).
-   It preserves all 280 measured IDs and existing gateway modules, and adds
-   Browser Receipt's opt-in connection response. Keep current secrets and DB
-   binding. A new deployment receipt must be recorded only after downloading and
-   verifying the owner-deployed module.
+1. The complete [Worker](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/dfbb6509ac9801604f0b7b5ab95299b0026f41ff/services/cloudflare-visitor/worker.js).
+   is now deployed and verified by downloading the actual module. It matches the
+   generated 280-ID source; Browser Receipt's opt-in connection route returns 200
+   with `private, no-store`. No further Worker paste or binding change is needed.
+   The checked source hash is recorded in `data/operations/cloudflare-deployment.json`.
 2. Add `LOC_USER_AGENT` as an **Actions secret** in both `headlinevault` and
    `oldnews-oddities`. The value is the exact single line LOC issued: email,
    one space, issued token. Do not include quotes, `User-Agent:` or
