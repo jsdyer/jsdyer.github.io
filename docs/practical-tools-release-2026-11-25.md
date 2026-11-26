@@ -82,12 +82,17 @@ all-repositories GitHub App setting covers the new collector repositories.
    generated 280-ID source; Browser Receipt's opt-in connection route returns 200
    with `private, no-store`. No further Worker paste or binding change is needed.
    The checked source hash is recorded in `data/operations/cloudflare-deployment.json`.
-2. Add `LOC_USER_AGENT` as an **Actions secret** in both `headlinevault` and
-   `oldnews-oddities`. The value is the exact single line LOC issued: email,
-   one space, issued token. Do not include quotes, `User-Agent:` or
-   `LOC_USER_AGENT=`. Old News's published build had no value for this secret.
-   Run each repository's existing manual refresh after adding it. No credential
-   value belongs in source, generated data or this report.
+2. The owner confirmed `LOC_USER_AGENT` was added as an **Actions secret** in
+   both `headlinevault` and `oldnews-oddities`. The format is the exact single
+   line LOC issued: email, one space, token, with no quotes or header/name prefix.
+   Code/build/browser checks passed, but a new credential-backed collection has
+   not yet run: the GitHub connector has no dispatch action, and the browser's
+   secure sign-in was cancelled. Use **Run workflow → main → refresh enabled**
+   in [Headline Vault](https://github.com/jsdyer/headlinevault/actions/workflows/pages.yml)
+   and [Old News Oddities](https://github.com/jsdyer/oldnews-oddities/actions/workflows/pages.yml).
+   Neither refresh was dispatched by the assistant. Existing captures remain
+   intact until a validated collection succeeds. No credential value belongs
+   in source, generated data or this report.
 3. Browser Receipt's [optional DNS observer](https://github.com/jsdyer/browserreceipt/tree/main/optional-dns)
    includes delegated-subzone, reverse-proxy and systemd instructions. Nothing
    was installed on a VPS. It observes resolver egress contacting that subzone,
