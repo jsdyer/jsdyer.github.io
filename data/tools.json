@@ -1860,7 +1860,7 @@
             ],
             "unit": "catalogue entries"
           },
-          "value": "2026-11-25",
+          "value": "2026-11-26",
           "count": 48361
         },
         {
@@ -1911,7 +1911,7 @@
             ],
             "unit": "removed entries"
           },
-          "value": "2026-11-25",
+          "value": "2026-11-26",
           "count": 3934
         },
         {
@@ -2440,7 +2440,7 @@
             ],
             "unit": "notices"
           },
-          "value": "2026-11-25",
+          "value": "2026-11-26",
           "count": 34425
         }
       ],
@@ -3695,7 +3695,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-25",
+          "value": "2026-11-26",
           "count_at": {
             "path": [
               "products"
@@ -3759,7 +3759,7 @@
             "oldest_retrieval"
           ],
           "label": "Oldest source retrieved",
-          "value": "2026-11-25",
+          "value": "2026-11-26",
           "count_at": {
             "path": [
               "sources"
@@ -5000,7 +5000,7 @@
             ],
             "unit": "directory listings"
           },
-          "value": "2026-11-24",
+          "value": "2026-11-26",
           "count": 49
         }
       ]
@@ -5532,8 +5532,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-26 02:19 UTC",
-          "count": 38
+          "value": "2026-11-26 08:11 UTC",
+          "count": 40
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -5548,7 +5548,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 1520
+          "count": 1600
         }
       ]
     },
@@ -8087,8 +8087,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-26 05:57 UTC",
-          "count": 4129
+          "value": "2026-11-26 08:59 UTC",
+          "count": 4150
         }
       ]
     },
@@ -8134,8 +8134,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-26 02:37 UTC",
-          "count": 45
+          "value": "2026-11-26 08:40 UTC",
+          "count": 48
         }
       ]
     },
@@ -8181,8 +8181,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-26 03:45 UTC",
-          "count": 101
+          "value": "2026-11-26 08:17 UTC",
+          "count": 104
         }
       ]
     },
@@ -8596,8 +8596,8 @@
             "unit": "crossings",
             "measure": "length"
           },
-          "value": "2026-11-26 06:55 UTC",
-          "count": 29
+          "value": "2026-11-26 09:27 UTC",
+          "count": 28
         }
       ]
     },
@@ -8738,8 +8738,8 @@
             ],
             "unit": "threat domains tracked"
           },
-          "value": "2026-11-26 01:51 UTC",
-          "count": 592
+          "value": "2026-11-26 08:33 UTC",
+          "count": 601
         }
       ]
     },
@@ -9828,7 +9828,7 @@
             "lastSuccessfulAt"
           ],
           "precision": "minute",
-          "value": "2026-11-25 07:48 UTC"
+          "value": "2026-11-26 07:46 UTC"
         }
       ]
     },
@@ -9895,7 +9895,7 @@
             "capturedAt"
           ],
           "precision": "minute",
-          "value": "2026-11-26 02:22 UTC"
+          "value": "2026-11-26 08:31 UTC"
         }
       ]
     },
@@ -9999,7 +9999,7 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-26 06:49 UTC",
+          "value": "2026-11-26 08:51 UTC",
           "count": 261
         }
       ]
@@ -10047,8 +10047,8 @@
             ],
             "unit": "observations"
           },
-          "value": "2026-11-26 02:18 UTC",
-          "count": 396
+          "value": "2026-11-26 08:21 UTC",
+          "count": 420
         }
       ]
     },
@@ -10155,8 +10155,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-26 06:50 UTC",
-          "count": 472
+          "value": "2026-11-26 08:53 UTC",
+          "count": 487
         }
       ]
     },
@@ -10828,8 +10828,8 @@
             "unit": "buses out"
           },
           "precision": "minute",
-          "value": "2026-11-26 05:54 UTC",
-          "count": 413
+          "value": "2026-11-26 08:56 UTC",
+          "count": 124
         },
         {
           "label": "Network",
@@ -10934,7 +10934,7 @@
             ],
             "unit": "watched targets"
           },
-          "value": "2026-11-26 01:52 UTC",
+          "value": "2026-11-26 08:34 UTC",
           "count": 4
         }
       ]
@@ -11100,7 +11100,7 @@
             "unit": "federal sites"
           },
           "precision": "minute",
-          "value": "2026-11-25 20:31 UTC",
+          "value": "2026-11-26 07:18 UTC",
           "count": 24433
         }
       ]
@@ -11159,7 +11159,7 @@
             ],
             "unit": "protected areas"
           },
-          "value": "2026-11-26 06:52 UTC",
+          "value": "2026-11-26 09:30 UTC",
           "count": 1037
         }
       ]
@@ -11697,7 +11697,7 @@
             ],
             "unit": "destinations"
           },
-          "value": "2026-11-26 06:06 UTC",
+          "value": "2026-11-26 09:09 UTC",
           "count": 230
         }
       ]
@@ -11908,7 +11908,7 @@
           ],
           "label": "Nova Scotia fuel prices checked",
           "precision": "minute",
-          "value": "2026-11-26 02:12 UTC"
+          "value": "2026-11-26 09:23 UTC"
         },
         {
           "url": "https://coolcode.ca/fuelwindow/data/prices.json",
@@ -11919,7 +11919,7 @@
           ],
           "label": "PEI fuel prices checked",
           "precision": "minute",
-          "value": "2026-11-26 02:12 UTC"
+          "value": "2026-11-26 09:23 UTC"
         }
       ],
       "cadence": "Twice daily"
