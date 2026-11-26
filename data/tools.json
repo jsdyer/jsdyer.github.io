@@ -4176,7 +4176,11 @@
     "readme": {
       "note": "Compare Nova Scotia and New Brunswick over the same years to see where DFO published landings or marked them x for confidentiality. For a local historical view, choose a county in the 1931 returns and check its barrels or canned cases against the linked scan of page 84."
     },
-    "task_label": "Maritime Clam Habitat and Landings"
+    "task_label": "Maritime Clam Habitat and Landings",
+    "result_directory": {
+      "path": "landings/",
+      "title": "Commercial clam landings by province and region"
+    }
   },
   {
     "id": "ferrycountss",
@@ -4673,7 +4677,11 @@
     "readme": {
       "note": "On Route 08, compare the quarters ending June 2025 and June 2026. The operator recorded 1,386 and 1,384 round trips respectively, while passenger totals rose from 374,200 to 387,857."
     },
-    "task_label": "BC Ferries Route Service History"
+    "task_label": "BC Ferries Route Service History",
+    "result_directory": {
+      "path": "routes/",
+      "title": "BC Ferries passenger counts and round trips by route"
+    }
   },
   {
     "id": "schoolhouseledger",

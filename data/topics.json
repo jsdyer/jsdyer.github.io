@@ -212,6 +212,11 @@
         "tool": "crossingrecord",
         "label": "What crash counts did ICBC publish for a Langley junction?",
         "help": "Choose an intersection and compare the years on either side of a road project."
+      },
+      {
+        "tool": "ferryrecord",
+        "label": "How many passengers used the Bowen Island ferry?",
+        "help": "Choose Route 08 and compare the same quarter in two years. The source report separates passenger totals, round trips and deck utilization."
       }
     ]
   }
