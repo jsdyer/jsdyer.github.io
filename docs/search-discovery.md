@@ -43,3 +43,9 @@ Google's documentation: [titles](https://developers.google.com/search/docs/appea
 [software apps](https://developers.google.com/search/docs/appearance/structured-data/software-app),
 [datasets](https://developers.google.com/search/docs/appearance/structured-data/dataset).
 Dataset markup assists Dataset Search; structured data is not a ranking guarantee.
+
+## Common tasks and configured examples
+
+Use the hub's optional `task_label` to give a card a descriptive link while keeping its app name searchable. Add a `use_cases` array to a public browser tool's hub record after checking the deployed pages. Each item has a human-readable `title` and a relative `path` ending in a slash or `.html`. For example, a path of `usd-to-cad/` on FX Receipt points to `/fxreceipt/usd-to-cad/`. Use an ordinary HTML page with a self-referencing canonical, an example/result in the initial HTML and the calculator or lookup already configured. Keep personal searches and saved reports out of the list.
+
+The builder adds those URLs to the tool's catalogue card, its applicable topic guides and the public sitemap. The link audit checks them alongside tool roots. Edit `data/topics.json` for the curated task guides. Independent app repos own the working examples and their metadata. Test the generated links and the deployed page before adding a preset.

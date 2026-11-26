@@ -15,6 +15,7 @@ jsdyer/atlas-canada
 jsdyer/auroratrace
 jsdyer/backbonecompare
 jsdyer/bankrates
+jsdyer/benefitcalendar
 jsdyer/blockedorgone
 jsdyer/boomerang-meter
 jsdyer/borderpulse
@@ -133,6 +134,7 @@ jsdyer/portwindow
 jsdyer/postmarkplaces
 jsdyer/prefixdiary
 jsdyer/priceatlas
+jsdyer/processinghistory
 jsdyer/quakeecho
 jsdyer/rackexpiry
 jsdyer/radarscope
@@ -147,6 +149,7 @@ jsdyer/rfctrail
 jsdyer/riverpulse
 jsdyer/roadpulse
 jsdyer/routemirror
+jsdyer/salestax
 jsdyer/salmonlines
 jsdyer/sanctionsledger
 jsdyer/satpasses

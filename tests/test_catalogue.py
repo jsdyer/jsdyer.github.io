@@ -138,6 +138,14 @@ class CatalogueTests(unittest.TestCase):
     def test_install_guide_must_be_https(self):
         self.reject(lambda: self.tools[0].update(install_url="javascript:bad()", requirements="Python"), "HTTPS guide")
 
+    def test_use_cases_cannot_index_user_queries_or_external_urls(self):
+        tool = next(t for t in self.tools if t["hosting"] == "project" and t["access"] == "browser")
+        for path in ["https://example.org/", "../admin/", "/admin/", "lookup/?id=private", "saved/#receipt", ""]:
+            with self.subTest(path=path):
+                tool["use_cases"] = [{"title": "Public example", "path": path}]
+                with self.assertRaisesRegex(ValueError, "public use case"):
+                    validate(self.categories, self.tools)
+
     def test_duplicate_tool_id(self):
         self.reject(lambda: self.tools.append(copy.deepcopy(self.tools[0])), "Duplicate tool ID")
 

@@ -185,3 +185,9 @@ from this correctness test.
 Unlisted tools can participate in aggregate statistics without becoming public catalogue entries. `data/unlisted-tools.json` is the reviewed source for these IDs and admin display names; they remain absent from the homepage, search catalogue and sitemap. Town Heritage uses this path. Removing noindex or promoting a prototype is a separate decision.
 
 Browser Receipt can explicitly request `GET /api/browserreceipt/connection` with the CoolCode Origin. It returns only the visitor connection IP and available Cloudflare ASN/organization/country/edge/protocol fields; missing values are null. It accepts no query arguments, uses no database or external provider, writes no application log and sends `private, no-store`. These are connection observations, not proof of a complete DNS resolver chain.
+
+### Live newspaper searches
+
+Headline Vault and Old News Oddities use `GET /api/newspapers/search` for interactive Chronicling America searches. In the existing Worker's **Settings → Variables and Secrets**, add the encrypted secret `LOC_USER_AGENT`. Use the complete single-line value issued by the Library, exactly as in the two repositories' Actions secrets. Deploy the generated `worker.js` with the existing DB binding. `GET /api/status` exposes only the `newspapers` configuration boolean.
+
+To check the live route, search **halifax** from **1800** through **1930** in Old News Oddities. The JSON request should reach the Worker, with an archive capture timestamp and up to twelve newspaper pages. The original-source and citation links still open loc.gov. Both tools share a four-second interval between upstream searches and a one-hour result cache. The service pauses new requests for an hour after an upstream rate-limit response.

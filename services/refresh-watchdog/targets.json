@@ -362,6 +362,29 @@
       ]
     },
     {
+      "repo": "jsdyer/benefitcalendar",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "17 10 * * 2"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/benefitcalendar/data/calendar.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Official payment calendars checked",
+          "max_age_seconds": 864000
+        }
+      ],
+      "collection_steps": [
+        "Refresh official data"
+      ]
+    },
+    {
       "repo": "jsdyer/blockedorgone",
       "branch": "main",
       "workflow": "pages.yml",
@@ -2811,6 +2834,29 @@
       ]
     },
     {
+      "repo": "jsdyer/processinghistory",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "43 13 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/processinghistory/data/index.json",
+          "json_path": [
+            "checkedAt"
+          ],
+          "precision": "timestamp",
+          "label": "IRCC estimates checked",
+          "max_age_seconds": 172800
+        }
+      ],
+      "collection_steps": [
+        "Collect IRCC observations"
+      ]
+    },
+    {
       "repo": "jsdyer/quakeecho",
       "branch": "main",
       "workflow": "refresh.yml",
@@ -3121,6 +3167,29 @@
           "label": "Data retrieved",
           "precision": "date"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/salestax",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "23 10 1 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/salestax/data/rates.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Official rates checked",
+          "max_age_seconds": 3283200
+        }
+      ],
+      "collection_steps": [
+        "Refresh official data"
       ]
     },
     {

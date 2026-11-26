@@ -340,3 +340,9 @@ footer a { font-weight: 500; font-size: .74rem; }
   .cover > div { scale: .52; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.task-topics {display:flex; flex-wrap:wrap; gap:.45rem 1rem; margin:1rem 0; font-weight:600}
+.task-topics a, .use-case-links a {text-decoration:underline; text-underline-offset:.16em}
+.tool-brand {display:block; font-size:.84rem; margin-top:.2rem}
+.use-case-links {display:block; margin:.45rem 0; font-size:.95rem}
+.tool-entry .use-case-links a {display:inline; font:inherit}

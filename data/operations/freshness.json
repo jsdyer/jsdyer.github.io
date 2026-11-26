@@ -2543,5 +2543,53 @@
     "collection_steps": [
       "Refresh Canadian-market appliance catalogue"
     ]
+  },
+  "jsdyer/benefitcalendar/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/benefitcalendar/data/calendar.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Official payment calendars checked",
+        "max_age_seconds": 864000
+      }
+    ],
+    "collection_steps": [
+      "Refresh official data"
+    ]
+  },
+  "jsdyer/salestax/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/salestax/data/rates.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Official rates checked",
+        "max_age_seconds": 3283200
+      }
+    ],
+    "collection_steps": [
+      "Refresh official data"
+    ]
+  },
+  "jsdyer/processinghistory/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/processinghistory/data/index.json",
+        "json_path": [
+          "checkedAt"
+        ],
+        "precision": "timestamp",
+        "label": "IRCC estimates checked",
+        "max_age_seconds": 172800
+      }
+    ],
+    "collection_steps": [
+      "Collect IRCC observations"
+    ]
   }
 }

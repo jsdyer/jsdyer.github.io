@@ -25,6 +25,8 @@ def import_manifest(tool, manifest):
             f"{slug}: the README note needs a practical detail beyond the card")
 
     # Validate the full update before changing any cached field.
+    if "task_label" in tool and manifest["title"] != tool["title"]:
+        tool.setdefault("brand_name", tool["title"])
     tool["title"] = manifest["title"]
     tool["description"] = manifest["description"]
     tool["data_info"]["detail"] = info["detail"]

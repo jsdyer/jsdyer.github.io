@@ -24,7 +24,7 @@ SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 # Retain the existing public files, including downloadable examples and tool source.
 PUBLIC_PATHS = {"admin", "report", "metrics", "about", "assets", "field-notes", "tools", "favicon.svg", "CNAME",
                 ".nojekyll", "README.md", "SECURITY.md"}
-RESERVED = PUBLIC_PATHS | {"datasets", "data", "templates", "scripts", "tests", "dist", "index.html"}
+RESERVED = PUBLIC_PATHS | {"datasets", "topics", "data", "templates", "scripts", "tests", "dist", "index.html"}
 
 
 def require(condition, message):
@@ -71,7 +71,7 @@ def validate(categories, tools, root=ROOT):
     required = {"id", "title", "description", "category", "tags", "icon", "url", "source", "hosting", "access", "readme"}
     for tool in tools:
         require(isinstance(tool, dict), "Each tool must be an object")
-        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info", "sync_manifest", "dataset"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
+        require(required <= set(tool) <= required | {"requirements", "install_url", "data_date_badge", "data_info", "sync_manifest", "dataset", "task_label", "brand_name", "use_cases"}, f"Missing or unknown tool fields: {tool.get('id', '?')}")
         tid = tool["id"]
         require(isinstance(tid, str) and SLUG.fullmatch(tid), f"Invalid tool ID: {tid!r}")
         require(tid not in ids, f"Duplicate tool ID: {tid}")
@@ -89,6 +89,20 @@ def validate(categories, tools, root=ROOT):
         info = tool.get("data_info", {})
         require(isinstance(info, dict) and info.get("mode") in DATA_MODES
                 and nonempty(info.get("detail")), f"{tid}: describe the data source and mode")
+        for field in ("task_label", "brand_name"):
+            if field in tool:
+                require(nonempty(tool[field]), f"{tid}: empty {field}")
+        if "use_cases" in tool:
+            cases = tool["use_cases"]
+            require(tool["access"] == "browser" and tool["hosting"] in {"local", "project"}
+                    and isinstance(cases, list) and cases, f"{tid}: invalid public use cases")
+            paths = set()
+            for case in cases:
+                require(isinstance(case, dict) and set(case) == {"title", "path"} and nonempty(case["title"])
+                        and isinstance(case["path"], str) and re.fullmatch(
+                            r"(?:[a-z0-9]+(?:-[a-z0-9]+)*/)*(?:[a-z0-9]+(?:-[a-z0-9]+)*(?:/|\.html))", case["path"])
+                        and case["path"] not in paths, f"{tid}: invalid or duplicate public use case")
+                paths.add(case["path"])
         if "dataset" in tool:
             dataset = tool["dataset"]
             require(tool["access"] == "browser" and tool["hosting"] in {"local", "project"}
@@ -277,16 +291,29 @@ def render_data(tool, access, *, show_access=False):
     return ''.join(lines) + '</div>'
 
 
+def use_case_links(tool):
+    cases = tool.get("use_cases", [])
+    if not cases:
+        return ""
+    links = [f'<a href="{escape(tool["url"] + case["path"], quote=True)}">{escape(case["title"])}</a>'
+             for case in cases]
+    return '<div class="use-case-links">' + ' · '.join(links) + '</div>'
+
+
 def render_entry(tool, access):
     tags = escape(" ".join([tool["id"], *tool["tags"]]), quote=True)
     icon, title, description, tid = (escape(tool[key], quote=True) for key in ("icon", "title", "description", "id"))
     destination = tool.get("install_url", tool["url"]) if access == "install" else tool["url"]
     url = escape(destination, quote=True)
+    label = escape(tool.get("task_label", tool["title"]))
+    brand_name = escape(tool.get("brand_name", tool["title"]))
+    brand = f'<small class="tool-brand">{brand_name}</small>' if label != brand_name else ""
+    cases = use_case_links(tool) if access == "browser" else ""
     arrow = "↗" if destination.startswith("https:") else "→"
     return (f'                <li data-tool data-tool-id="{tid}" data-access="{access}" data-keywords="{tags}">'
             f'<span class="tool-icon" data-icon="{icon}" aria-hidden="true"></span><div class="tool-entry">'
-            f'<a href="{url}"><span>{title}</span><span aria-hidden="true">{arrow}</span></a>'
-            f'<p>{description}</p>{render_data(tool, access, show_access=True)}</div></li>')
+            f'<a href="{url}"><span>{label}</span><span aria-hidden="true">{arrow}</span></a>{brand}'
+            f'<p>{description}</p>{cases}{render_data(tool, access, show_access=True)}</div></li>')
 
 
 def validate_featured(config, tools):
@@ -315,7 +342,7 @@ def render_featured(config, categories, tools):
         parts = []
         for tid in ids:
             tool = by_id[tid]
-            title = escape(tool["title"])
+            title = escape(tool.get("task_label", tool["title"]))
             category = escape(category_titles[tool["category"]])
             url = escape(tool["url"], quote=True)
             parts.append(
@@ -388,6 +415,27 @@ def render_datasets(template, tools):
     return template.replace("{{DATASET_ENTRIES}}", "\n".join(entries))
 
 
+def write_topics(stage, tools, root):
+    topics = json.loads((root / "data/topics.json").read_text(encoding="utf-8"))
+    template = (root / "templates/topic.html").read_text(encoding="utf-8")
+    by_id = {tool["id"]: tool for tool in tools}
+    for slug, topic in topics.items():
+        require(SLUG.fullmatch(slug) and nonempty(topic["title"]) and nonempty(topic["intro"]),
+                "Invalid topic definition")
+        entries = []
+        for item in topic["tasks"]:
+            tool = by_id.get(item["tool"])
+            require(tool and tool["access"] == "browser", f"{slug}: topic refers to unknown browser tool")
+            entries.append(f'<section><h2><a href="{escape(tool["url"], quote=True)}">{escape(item["label"])}</a></h2>'
+                           f'<p>{escape(item["help"])}</p>{use_case_links(tool)}</section>')
+        route = f"/topics/{slug}/"
+        content = template.replace("{{TITLE}}", escape(topic["title"])).replace("{{INTRO}}", escape(topic["intro"], quote=True))
+        content = content.replace("{{ROUTE}}", route).replace("{{TASKS}}", "\n".join(entries))
+        directory = stage / route.strip("/")
+        directory.mkdir(parents=True)
+        (directory / "index.html").write_text(content, encoding="utf-8")
+
+
 def write_search_files(stage, tools):
     origin = "https://coolcode.ca"
     # Project sites deploy separately and do not have directories in the hub.
@@ -397,8 +445,11 @@ def write_search_files(stage, tools):
         routes.add("/about/")
     if (stage / "datasets/index.html").is_file():
         routes.add("/datasets/")
-    for article in (stage / "field-notes").rglob("index.html"):
-        routes.add("/" + quote(article.parent.relative_to(stage).as_posix()) + "/")
+    for tool in tools:
+        routes.update(tool["url"] + case["path"] for case in tool.get("use_cases", []))
+    for folder in ("field-notes", "topics"):
+        for article in (stage / folder).rglob("index.html"):
+            routes.add("/" + quote(article.parent.relative_to(stage).as_posix()) + "/")
 
     sitemap = ElementTree.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
     for route in sorted(routes):
@@ -446,6 +497,7 @@ def build(root=ROOT):
         (stage / "datasets").mkdir()
         dataset_template = (root / "templates/datasets.html").read_text(encoding="utf-8")
         (stage / "datasets/index.html").write_text(render_datasets(dataset_template, tools), encoding="utf-8")
+        write_topics(stage, tools, root)
         write_search_files(stage, tools)
         require((stage / "CNAME").read_text().strip() == "coolcode.ca", "Keep the CoolCode custom domain")
         for tool in tools:

@@ -18,6 +18,7 @@ def check_built(root, tools):
                  if node.tag.endswith('}loc')}
     required = {'https://coolcode.ca' + t['url'] for t in tools
                 if t['access'] == 'browser' and t['hosting'] in {'local', 'project'}}
+    required.update('https://coolcode.ca' + t['url'] + case['path'] for t in tools for case in t.get('use_cases', []))
     if not required <= locations:
         raise ValueError('Built sitemap is missing public tool routes: ' + ', '.join(sorted(required-locations)))
     published = json.loads((root / 'dist/assets/tool-catalog.json').read_text())
@@ -28,7 +29,7 @@ def check_built(root, tools):
     unlisted = unlisted_tools(root, tools)
     if unlisted:
         hidden_routes = {'https://coolcode.ca/' + t['id'] + '/' for t in unlisted}
-        if hidden_routes & locations:
+        if any(url.startswith(prefix) for prefix in hidden_routes for url in locations):
             raise ValueError('Unlisted measurement tools leaked into the public sitemap')
         admin_tools = json.loads((root / 'dist/admin/measurement-tools.json').read_text())
         if admin_tools != unlisted:

@@ -58,7 +58,7 @@ def main():
             page.get_by_role('button', name='Install yourself', exact=True).click()
             assert page.locator('[data-tool]:visible').count() == install_count
             assert not page.locator('#browser-tools').is_visible()
-            assert page.get_by_role('link', name='Waystation', exact=True).is_visible()
+            assert page.get_by_role('link', name='Offline Website Archiver', exact=True).is_visible()
             page.locator('#tool-search').fill('Waystation')
             assert page.locator('[data-tool]:visible').count() == 1
             page.locator('#clear-tools').click()
@@ -69,7 +69,7 @@ def main():
             for query in ('wordweave', 'Word Weave'):
                 page.locator('#tool-search').fill(query)
                 assert page.locator('[data-tool]:visible').count() == 1
-                assert page.get_by_role('link', name='Word Weave', exact=True).is_visible()
+                assert page.get_by_role('link', name='Word Finder, Text Statistics and Unicode Tools', exact=True).is_visible()
             page.locator('#clear-tools').click()
             # The literal ID is unique; broad words also legitimately match Manual Shelf.
             page.locator('#tool-search').fill('archive-shelf')
@@ -77,7 +77,7 @@ def main():
             assert page.locator('#tool-count').inner_text() == '1 tool found'
             page.locator('#clear-tools').click()
             page.locator("#tool-search").fill("DNS")
-            assert page.get_by_role("link", name="DNS Lens", exact=True).is_visible()
+            assert page.get_by_role("link", name="DNS Records and Email Setup Checker", exact=True).is_visible()
             page.locator("#tool-search").fill("zzzz-no-such-tool")
             assert page.locator("#tool-empty").is_visible()
             assert page.locator("[data-tool]:visible").count() == 0

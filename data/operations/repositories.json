@@ -335,6 +335,23 @@
     "guarded_paths": []
   },
   {
+    "repo": "jsdyer/benefitcalendar",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "17 10 * * 2"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/blockedorgone",
     "branch": "main",
     "workflows": [
@@ -2590,6 +2607,12 @@
     ]
   },
   {
+    "repo": "jsdyer/plancost",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
     "repo": "jsdyer/planehere",
     "branch": "main",
     "workflows": [],
@@ -2700,6 +2723,23 @@
         "workflow": "pages.yml",
         "crons": [
           "44 11 * * 3"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/processinghistory",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "43 13 * * *"
         ],
         "inputs": {}
       }
@@ -2996,6 +3036,23 @@
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/salestax",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "23 10 1 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
   },
   {
     "repo": "jsdyer/salmonlines",

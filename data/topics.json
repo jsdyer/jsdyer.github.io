@@ -1,0 +1,110 @@
+{
+  "canadian-money-calculators": {
+    "title": "Canadian money calculators",
+    "intro": "Check a foreign card charge, compare mortgage offers or see how inflation changed the value of your money. Each calculator shows the assumptions behind its answer.",
+    "tasks": [
+      {
+        "tool": "fxreceipt",
+        "label": "Check a foreign-currency purchase",
+        "help": "Use the purchase currency and the amount on your statement to compare your effective rate with a dated reference rate."
+      },
+      {
+        "tool": "salestax",
+        "label": "Find the tax in a Canadian receipt",
+        "help": "Enter a total including tax, select the province and receipt date and see the pre-tax amount and each tax component."
+      },
+      {
+        "tool": "plancost",
+        "label": "Compare two internet or mobile offers",
+        "help": "Enter the promotional months, regular price, credits and fees to compare full-term costs and the first month a switch pays off."
+      },
+      {
+        "tool": "renewalbench",
+        "label": "Compare mortgage renewal offers",
+        "help": "Enter the same balance and remaining amortization for both offers. Compare total interest and the balance left at the end of the term."
+      },
+      {
+        "tool": "inflation-basket",
+        "label": "Convert an old Canadian dollar amount",
+        "help": "Choose the original and comparison years to translate a historical price into dollars of the other year."
+      },
+      {
+        "tool": "wagewindow",
+        "label": "Check whether your raise beat inflation",
+        "help": "Compare earnings at the same paid hours and use your province's price index over the period."
+      },
+      {
+        "tool": "basketmath",
+        "label": "Find the better grocery deal",
+        "help": "Compare different package sizes for the amount you actually need, including multi-buy pricing."
+      },
+      {
+        "tool": "benefitcalendar",
+        "label": "Find the next published benefit payment date",
+        "help": "Select your programs and subscribe to their calendars. Each date links to its official publication."
+      }
+    ]
+  },
+  "internet-and-isp": {
+    "title": "Canadian internet and ISP checks",
+    "intro": "Compare a speed measurement with other Canadian tests, look up your public IP or investigate a possible outage. Choose the question that matches what you see.",
+    "tasks": [
+      {
+        "tool": "outagescope",
+        "label": "Check for signs of a provider outage",
+        "help": "Inspect independent measurements for the network and time in question. A stale signal leaves the present status uncertain."
+      },
+      {
+        "tool": "lastmilepercentile",
+        "label": "Compare internet speed by network and city",
+        "help": "Enter your download or upload result in Mbps. The sample count and month help you decide whether the comparison is meaningful."
+      },
+      {
+        "tool": "browserreceipt",
+        "label": "Look up my public IP and network",
+        "help": "Request a connection check to see the public address, network and serving edge that the website observes."
+      },
+      {
+        "tool": "packet-detour",
+        "label": "Understand a Canadian traceroute",
+        "help": "Inspect measured paths or supply your own trace. Check the destination, direction and unknown hops before interpreting a border crossing."
+      },
+      {
+        "tool": "prefixdiary",
+        "label": "Look up a Canadian telephone prefix",
+        "help": "Start with the area code and exchange to learn where a number block is assigned. People can keep a number when they switch carriers."
+      }
+    ]
+  },
+  "website-and-email": {
+    "title": "Website history, domain and email checks",
+    "intro": "Investigate an unfamiliar website, check your domain's mail records or read the headers of a message. Each tool answers a different part of the question.",
+    "tasks": [
+      {
+        "tool": "domain-biography",
+        "label": "Check the history of a website",
+        "help": "Start with a domain to compare registration evidence, certificate dates and archived pages. Look for changes in who the site claimed to represent."
+      },
+      {
+        "tool": "dnslens",
+        "label": "Check a domain's email DNS records",
+        "help": "Look up MX, SPF and DMARC. If you have a DKIM selector from a message or mail administrator, enter it to check its published key."
+      },
+      {
+        "tool": "mailpath",
+        "label": "Read the authentication results on an email",
+        "help": "Paste the original message headers locally to inspect the receiving server's reported results and delivery hops."
+      },
+      {
+        "tool": "scanreceipt",
+        "label": "Inspect a saved website scan",
+        "help": "Compare dated screenshots and observed requests with the evidence you collected about the domain."
+      },
+      {
+        "tool": "abuse-kit",
+        "label": "Find where to report an abusive domain",
+        "help": "Use the public domain or IP to find an appropriate contact and prepare a report with your evidence."
+      }
+    ]
+  }
+}

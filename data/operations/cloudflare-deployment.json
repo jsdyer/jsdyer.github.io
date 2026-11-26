@@ -1,7 +1,7 @@
 {
-  "source_sha256": "a12da9633cf706079cac3ee2200220fe887c4fcefb407c0d4a39c962063bdaca",
+  "source_sha256": "1fd826c93786119a1271755e881eba60b1fb5dff1f3a59e7efb9d57cbb71246a",
   "source_transform": "remove-final-newline",
   "worker": "coolcode-visitor-api",
-  "verified_at": "2026-11-26T05:02:01+00:00",
-  "method": "Downloaded owner-deployed module and matched generated 280-ID Worker; live connection response and registry verified without creating events or reports"
+  "verified_at": "2026-11-26T06:51:47.170565+00:00",
+  "method": "Compared the owner-deployed module downloaded via the Cloudflare API to the generated 284-ID Worker."
 }

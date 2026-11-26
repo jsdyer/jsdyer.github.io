@@ -24,6 +24,15 @@ def link(label, destination):
     return f"[{markdown_text(label)}](<{destination}>)"
 
 
+def tool_link(tool, destination):
+    label = tool.get("task_label", tool["title"])
+    entry = link(label, destination)
+    name = tool.get("brand_name", tool["title"])
+    if label != name:
+        entry += " <br> " + markdown_text(name)
+    return entry
+
+
 def describe(tool, access):
     mode, detail = data_summary(tool, access)
     text = markdown_text(tool["description"]) + " <br> " + markdown_text(f"{mode} · {detail}")
@@ -49,7 +58,7 @@ def browser_tables(categories, tools):
             if badge_path := data_date_path(tool):
                 image = "!" + link(data_date_alt(tool), badge_path)
                 description += f" <br> [{image}](<https://coolcode.ca{badge_path}>)"
-            lines.append(f"| {link(tool['title'], tool['url'])} | "
+            lines.append(f"| {tool_link(tool, tool['url'])} | "
                          f"{description} | "
                          f"{link('Source & docs', tool['source'])} |")
     return "\n".join(lines)
@@ -62,7 +71,7 @@ def installation_table(tools):
              "| --- | --- | --- | --- |"]
     for tool in install:
         destination = tool.get("install_url", tool["url"])
-        lines.append(f"| {link(tool['title'], destination)} | "
+        lines.append(f"| {tool_link(tool, destination)} | "
                      f"{describe(tool, 'install')} | "
                      f"{markdown_text(tool['requirements'])} | "
                      f"{link('Source & docs', tool['source'])} |")

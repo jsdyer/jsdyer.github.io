@@ -124,3 +124,60 @@ async function pcUpstream(plan,env) {
   if(Number(corporation.id)!==Number(plan.id))apiThrow(502,'invalid_source','The federal source returned a different corporation number.');
   return corporation;
 }
+
+// Only expose tracking dates and event text. Raw tracking responses contain references,
+// postal codes and delivery details outside the scope of this consumer tool.
+function pcPublicTracking(record) {
+  if (!record || !Array.isArray(record.significantEvents) || record.significantEvents.length > 500) {
+    apiThrow(502,'invalid_source','Canada Post returned an unrecognized tracking response.');
+  }
+  return {
+    service: pcText(record.serviceName,100),
+    expected: pcDate(record.changedExpectedDate) || pcDate(record.expectedDeliveryDate),
+    events: record.significantEvents.slice(0,100)
+      .filter(event => event && typeof event.eventDescription === 'string')
+      .map(event => ({
+        date: pcDate(event.eventDate),
+        time: /^\d\d:\d\d:\d\d$/.test(event.eventTime) ? event.eventTime : '',
+        zone: pcText(event.eventTimeZone,12),
+        description: pcText(event.eventDescription,240),
+        city: pcText(event.eventSite,100),
+        province: pcText(event.eventProvince,8)
+      }))
+  };
+}
+
+async function pcTracking(request,env,origin,url) {
+  if (origin !== ORIGIN) return apiFailure(403,'origin_denied','Open parcel tracking on CoolCode.');
+  if (request.method !== 'POST') return apiFailure(405,'method_denied','Submit the tracking form.');
+  if (url.search || (request.headers.get('Content-Type') || '').split(';')[0].trim() !== 'application/json') {
+    return apiFailure(400,'invalid_query','Submit a tracking number in the form.');
+  }
+  if (env.CANADAPOST_PUBLIC_TRACKING !== 'enabled' || !env.CANADAPOST_CLIENT_ID || !env.CANADAPOST_CLIENT_SECRET) {
+    return apiFailure(503,'tracking_unavailable','View the latest events directly at Canada Post.');
+  }
+  let payload;
+  try { payload = JSON.parse(await apiRead(request,160)); }
+  catch { return apiFailure(400,'invalid_query','Enter a single tracking number.'); }
+  const id = payload?.number;
+  if (!payload || Object.keys(payload).length !== 1 || typeof id !== 'string' || !/^(?:[A-Z0-9]{12,13}|\d{15,16})$/.test(id)) {
+    return apiFailure(400,'invalid_parameter','Check the tracking or delivery notice number.');
+  }
+  const plan = {group:'canadapost',limit:160000};
+  if (!env.DB) return apiFailure(503,'storage_unavailable','Tracking is temporarily unavailable.');
+  const now = Date.now();
+  if (!await allowed(env.DB,request,new Date(now),'tool-api')) return apiFailure(429,'client_wait','Please wait before checking another parcel.',300);
+  await apiSchema(env.DB);
+  await apiBudget(env.DB,'canadapost',now,60000,80);
+  const token = await pcBearer(plan,env);
+  const resource = /^\d{15}$/.test(id) ? 'dncs' : 'pins';
+  try {
+    const record = await pcFetch(pcBase+'tracking/v1/'+resource+'/'+id+'/details',
+      {method:'GET',headers:{Accept:'application/json','Accept-Language':'en-CA',Authorization:'Bearer '+token}},plan,env);
+    return {headers:{'Cache-Control':'private, no-store'},body:{fetched_at:new Date().toISOString(),data:pcPublicTracking(record)}};
+  } catch (error) {
+    if (error.code === 'source_authentication') pcToken = null;
+    if (error.code === 'record_not_found' || error.code === 'source_input') return apiFailure(404,'tracking_unknown','No tracking events were found for that number.');
+    throw error;
+  }
+}
