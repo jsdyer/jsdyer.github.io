@@ -474,7 +474,13 @@ def write_topics(stage, tools, root):
         for item in topic["tasks"]:
             tool = by_id.get(item["tool"])
             require(tool and tool["access"] == "browser", f"{slug}: topic refers to unknown browser tool")
-            entries.append(f'<section><h2><a href="{escape(tool["url"], quote=True)}">{escape(item["label"])}</a></h2>'
+            destination = tool["url"]
+            if "record" in item:
+                record = item["record"]
+                require("result_directory" in tool and isinstance(record, str) and SLUG.fullmatch(record),
+                        f"{slug}: expected a result collection and a record slug for {tool['id']}")
+                destination += tool["result_directory"]["path"] + record + "/"
+            entries.append(f'<section><h2><a href="{escape(destination, quote=True)}">{escape(item["label"])}</a></h2>'
                            f'<p>{escape(item["help"])}</p>{use_case_links(tool)}</section>')
         route = f"/topics/{slug}/"
         content = template.replace("{{TITLE}}", escape(topic["title"])).replace("{{INTRO}}", escape(topic["intro"], quote=True))

@@ -153,6 +153,12 @@
         "help": "Compare aerial photographs from two years, then locate the same streets on a modern map."
       },
       {
+        "tool": "stormtracks",
+        "record": "dorian-2019",
+        "label": "How high did Bedford Basin rise above the predicted tide during Dorian?",
+        "help": "Compare the time of the highest measured difference at Bedford Institute with the storm’s track. The record identifies the gauge, units and hours with observations."
+      },
+      {
         "tool": "lakeprofiles",
         "label": "What was measured in Lake Banook?",
         "help": "Choose a monitoring station to see the oxygen and temperature readings by depth. The station page links to a comparison of two visits."
@@ -210,13 +216,20 @@
       },
       {
         "tool": "crossingrecord",
-        "label": "What crash counts did ICBC publish for a Langley junction?",
-        "help": "Choose an intersection and compare the years on either side of a road project."
+        "label": "What did ICBC record at Douglas Crescent and 203 Street?",
+        "help": "See the published junction label, the road-project year and the reported crash counts in the years before and after the work.",
+        "record": "douglas-crescent-at-203-street"
       },
       {
         "tool": "ferryrecord",
         "label": "How many passengers used the Bowen Island ferry?",
         "help": "Choose Route 08 and compare the same quarter in two years. The source report separates passenger totals, round trips and deck utilization."
+      },
+      {
+        "tool": "salmonlines",
+        "record": "47959-26",
+        "label": "When were coho recorded in Yorkson Creek?",
+        "help": "Read the annual DFO estimates and survey years, then follow the creek to its mapped channel in Langley."
       }
     ]
   },

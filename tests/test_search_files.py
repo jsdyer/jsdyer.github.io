@@ -1,14 +1,36 @@
 from pathlib import Path
+import json
 import sys
 import tempfile
 import unittest
 from xml.etree import ElementTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from build import render_datasets, source_check_time, write_search_files
+from build import render_datasets, source_check_time, write_search_files, write_topics
 
 
 class SearchFilesTests(unittest.TestCase):
+    def test_topic_links_a_named_record_inside_its_collection(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "data").mkdir()
+            (root / "templates").mkdir()
+            (root / "templates/topic.html").write_text("{{TASKS}}")
+            item = {"tool": "example", "label": "Read the record", "help": "Compare observations.", "record": "sample"}
+            topics = {"local": {"title": "Local", "intro": "Local observations.", "tasks": [item]}}
+            config = root / "data/topics.json"
+            config.write_text(json.dumps(topics))
+            tool = {"id": "example", "access": "browser", "url": "/example/",
+                    "result_directory": {"path": "records/", "title": "All records"}}
+            write_topics(root, [tool], root)
+            page = (root / "topics/local/index.html").read_text()
+            self.assertIn('<a href="/example/records/sample/">Read the record</a>', page)
+            self.assertIn('<a href="/example/records/">All records</a>', page)
+            item["record"] = "../another-tool"
+            config.write_text(json.dumps(topics))
+            with self.assertRaises(ValueError):
+                write_topics(root, [tool], root)
+
     def test_scheduled_source_checks(self):
         self.assertEqual(source_check_time("23 10 * * *"), "Daily at 10:23 UTC")
         self.assertEqual(source_check_time("38 9 * * 3"), "Each Wednesday at 09:38 UTC")

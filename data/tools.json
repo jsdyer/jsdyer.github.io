@@ -2074,7 +2074,11 @@
       "title": "Pacific salmon escapement records from DFO NuSEDS",
       "section": "dataset"
     },
-    "task_label": "Pacific Salmon Returns by River"
+    "task_label": "Pacific Salmon Returns by River",
+    "result_directory": {
+      "path": "series/",
+      "title": "Pacific salmon returns by waterbody and population"
+    }
   },
   {
     "id": "datasetdiff",
@@ -3305,7 +3309,11 @@
       "note": "Move through a 48-hour storm window to compare the same quarter hour at each gauge and see how many readings support each peak."
     },
     "data_date_badge": true,
-    "task_label": "Atlantic Canada Hurricane Tracks and Storm Tides"
+    "task_label": "Atlantic Canada Hurricane Tracks and Storm Tides",
+    "result_directory": {
+      "path": "events/",
+      "title": "Atlantic storm tracks and measured harbour water levels by storm"
+    }
   },
   {
     "id": "nightfinder",
@@ -5287,7 +5295,11 @@
     "readme": {
       "note": "Select a dot on the junction map or search by road name. Choose a Langley junction and compare annual averages on either side of a reference year. Douglas Crescent at 203 Street and 56 Avenue at 201A Street have linked, completed city projects. The project year is excluded from both periods. Counts represent crashes reported to ICBC, and the view shows how many years support each average."
     },
-    "task_label": "Langley Intersection Crash History"
+    "task_label": "Langley Intersection Crash History",
+    "result_directory": {
+      "path": "junctions/",
+      "title": "Langley intersection crash histories around completed road projects"
+    }
   },
   {
     "id": "parkvisits",
