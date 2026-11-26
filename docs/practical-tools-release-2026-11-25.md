@@ -77,7 +77,7 @@ all-repositories GitHub App setting covers the new collector repositories.
 
 ## Owner-controlled setup and verified Worker
 
-1. The complete [Worker](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/dfbb6509ac9801604f0b7b5ab95299b0026f41ff/services/cloudflare-visitor/worker.js).
+1. The complete [Worker](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/dfbb6509ac9801604f0b7b5ab95299b0026f41ff/services/cloudflare-visitor/worker.js)
    is now deployed and verified by downloading the actual module. It matches the
    generated 280-ID source; Browser Receipt's opt-in connection route returns 200
    with `private, no-store`. No further Worker paste or binding change is needed.
