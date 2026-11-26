@@ -1,7 +1,7 @@
 {
-  "source_sha256": "1fd826c93786119a1271755e881eba60b1fb5dff1f3a59e7efb9d57cbb71246a",
+  "source_sha256": "d16f9c5e5dcb749c0fddcedc3b1e39d49b89e8b14b4d6f67082d18a7332a0af1",
   "source_transform": "remove-final-newline",
   "worker": "coolcode-visitor-api",
-  "verified_at": "2026-11-26T06:51:47.170565+00:00",
-  "method": "Compared the owner-deployed module downloaded via the Cloudflare API to the generated 284-ID Worker."
+  "verified_at": "2026-11-26T09:22:48.299474+00:00",
+  "method": "Downloaded the active Cloudflare Worker module and compared it with the generated newspaper request fix at b3c58c6. The dashboard removed its final newline."
 }
