@@ -10,6 +10,8 @@ Catalogue revision: [d883b952f6ba](https://github.com/jsdyer/jsdyer.github.io/co
 
 [Canadian Open Dataset Search](https://coolcode.ca/datasetexplorer/) and [Removed Federal Dataset Lookup](https://coolcode.ca/opendatagraveyard/) now serve descriptions and self-referencing canonicals. A repeat inventory of those two pages returned zero findings. [Headline Vault](https://coolcode.ca/headlinevault/) now emits one canonical. All seven candidate links listed below returned their own canonical and were registered in the [catalogue update](https://github.com/jsdyer/jsdyer.github.io/commit/9500043bc58ad8844978fffb88e805a93662c539). The table preserves the original observations.
 
+[Mail Path](https://coolcode.ca/mailpath/) and [Price Atlas](https://coolcode.ca/priceatlas/) now open with a working example and a descriptive title, H1 and canonical. [Nightfinder](https://coolcode.ca/nightfinder/) shows dark hours and Moon phase first. [Event Radar](https://coolcode.ca/eventradar/) puts the city selector beside its task heading. Both featured tools passed their mobile interaction checks.
+
 ## Counts by finding
 
 | Code | Finding | Roots |

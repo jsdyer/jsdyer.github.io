@@ -825,8 +825,8 @@
   },
   {
     "id": "mailpath",
-    "title": "Mail Path",
-    "description": "Trace the relay hops and authentication results recorded in the headers of an email you received.",
+    "title": "Email Header Analyzer",
+    "description": "Read email relay hops and reported SPF, DKIM and DMARC results from pasted headers or a saved EML file, privately in your browser.",
     "category": "security",
     "tags": [
       "email",
@@ -851,7 +851,8 @@
       "note": "Copy the Received and Authentication-Results fields from a message you received, including indented continuation lines. The timeline shows which servers recorded each hop and the delay between their timestamps."
     },
     "sync_manifest": true,
-    "task_label": "Email Header and Authentication Analyzer"
+    "task_label": "Email Header and Authentication Analyzer",
+    "brand_name": "Mail Path"
   },
   {
     "id": "packetpocket",
@@ -3331,7 +3332,7 @@
       "detail": "Sun, Moon and target positions are calculated locally. Optional cloud forecasts come from Open-Meteo only when requested."
     },
     "readme": {
-      "note": "Save a named balcony/building horizon to find when a target clears it, constrain Moon separation, and calculate seven days of golden light (Sun −4° to +6°) and blue light (−6° to −4°), alongside dark-sky target sessions. Optionally load cloud-cover forecasts for those windows; that click sends coordinates to Open-Meteo. Download the plan to retain the calculated windows. Choose the Peggy’s Cove or Stanley Park photography preset, then load the optional cloud forecast and set a maximum cloud cover for observing sessions. Saved locations preserve whether a horizon obstruction is enabled."
+      "note": "Read the opening summary for your site’s dark hours and Moon phase, then change the community or date. Save a local horizon to find when a target clears your balcony, set a minimum Moon separation or check a week of golden and blue light. Cloud forecasts are optional and send the selected coordinates to Open-Meteo."
     },
     "sync_manifest": true,
     "task_label": "Stargazing and Night Photography Planner"
@@ -3665,8 +3666,8 @@
   },
   {
     "id": "priceatlas",
-    "title": "Canadian Price Atlas",
-    "description": "Compare grocery price histories across Canada, all provinces and available northern cities.",
+    "title": "Canadian Grocery Price Comparison",
+    "description": "Compare monthly grocery prices for Canada and all ten provinces, plus Whitehorse and Yellowknife where Statistics Canada publishes city observations.",
     "category": "money",
     "tags": [
       "statcan",
@@ -3724,7 +3725,8 @@
       "note": "Compare all ten provinces and Canada, plus Whitehorse and Yellowknife where monthly prices are published. The northern series cover those cities only; Nunavut is explicitly marked unavailable with a link to its separate survey. Add package quantities to a basket and compare exact endpoint months. Missing prices remain missing, and CSV exports retain Statistics Canada vector identifiers."
     },
     "sync_manifest": true,
-    "task_label": "Canadian Grocery Price History by Province"
+    "task_label": "Canadian Grocery Price History by Province",
+    "brand_name": "Canadian Price Atlas"
   },
   {
     "id": "insolvencyatlas",
@@ -3861,7 +3863,7 @@
       "detail": "Has Things supplies local showtimes across all ten provinces and three territories. Langley links to venue calendars."
     },
     "readme": {
-      "note": "Choose a city, filter its showtimes and add events from several cities to one downloadable calendar. Plans and imported calendars last only for the current tab; download before leaving and check organizer details for unlisted times or changed availability."
+      "note": "Choose a city to see the next two weeks of shows and community events. Filter by title, venue or date and add showtimes from several cities to one calendar. Download your plans before leaving the tab and check unlisted times or availability with the organizer."
     },
     "sync_manifest": true,
     "task_label": "Canadian Local Events and Show Calendar"
