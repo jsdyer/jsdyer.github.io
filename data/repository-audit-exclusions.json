@@ -70,5 +70,11 @@
     "status": "reference-fork",
     "reason": "Contribution/reference fork of public-apis/public-apis, not an independent CoolCode application.",
     "reviewed_at": "2026-11-23"
+  },
+  {
+    "repo": "townheritage",
+    "status": "unlisted-prototype",
+    "reason": "Europeana personal-key review prototype. Intentionally excluded from the public catalogue, search, sitemap, visitor registration and watchdog until production-key approval and an explicit production release.",
+    "reviewed_at": "2026-11-25"
   }
 ]

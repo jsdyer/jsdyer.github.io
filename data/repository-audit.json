@@ -1,10 +1,10 @@
 {
   "schema": "coolcode.repository-audit.v1",
-  "checked_at": "2026-11-25T13:17:01+00:00",
+  "checked_at": "2026-11-26T00:01:01+00:00",
   "owner": "jsdyer",
   "scope": "Public repositories; private repository identities are omitted. Functional readiness is reviewed before listing.",
   "catalogue_tools": 271,
-  "public_repositories": 274,
+  "public_repositories": 275,
   "private_repositories_omitted": 0,
   "listed_source_repositories": 262,
   "public_repository_names": [
@@ -265,6 +265,7 @@
     "tide-and-dark",
     "tidereceipt",
     "torrentlens",
+    "townheritage",
     "toxic-ground",
     "trackerxray",
     "trailglass",
@@ -356,6 +357,12 @@
       "status": "personal-or-business-site",
       "reason": "Separate personal or business website, not a standalone CoolCode utility.",
       "reviewed_at": "2026-11-23"
+    },
+    {
+      "repo": "townheritage",
+      "status": "unlisted-prototype",
+      "reason": "Europeana personal-key review prototype. Intentionally excluded from the public catalogue, search, sitemap, visitor registration and watchdog until production-key approval and an explicit production release.",
+      "reviewed_at": "2026-11-25"
     }
   ],
   "stale_exclusions": [],

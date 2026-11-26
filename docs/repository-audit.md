@@ -36,6 +36,11 @@ records each public exclusion with a reason and review date:
 - Ten separate personal/business websites are not CoolCode utilities.
 - `coolcode-tool-template` is the reusable starter, not a finished tool.
 - `public-apis` is a contribution/reference fork, not an independent CoolCode tool.
+- `townheritage` is an intentionally unlisted Europeana personal-key review prototype.
+  Keep it out of the homepage catalogue, search, sitemap, visitor registration and
+  watchdog. It has no scheduled public collection. After production-key approval
+  and an explicit production release, apply the full tool lifecycle before
+  removing this exclusion.
 
 Contaminated Places now provides the national current-site map, while Toxic Ground
 retains its BC/Nova Scotia fiscal history. Query Confessional and Backup Ledger are
@@ -45,7 +50,8 @@ list. Installable tools are explicitly recorded with no public collection schedu
 their users' private logs and backup inventories are never collected by CoolCode.
 
 An exclusion is a review decision, not a permanent block. Remove it when a tool is
-implemented and verified, then add the catalogue entry. Dataset Diff retains its
+implemented, verified and approved for public discovery, then add the catalogue
+entry. Dataset Diff retains its
 CSV/GeoJSON comparisons; no completed general JSON comparison tool was found to
 cross-link. DNS Lens remains the existing DNS utility.
 
