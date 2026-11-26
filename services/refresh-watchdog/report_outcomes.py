@@ -124,6 +124,12 @@ def observe(target, tools, now, http, previous=None, fresh=False):
         if not isinstance(metadata, dict) or not isinstance(metadata.get('state'), str):
             raise wd.SafeError('invalid_workflow_response')
         row['execution']['state'] = metadata['state']
+        # A new workflow cannot miss a cron occurrence before GitHub created it.
+        # Edits and dispatches never reset the schedule's observation window.
+        created_at = metadata.get('created_at')
+        schedule_due = not created_at or due >= wd.timestamp(created_at)
+        if not schedule_due:
+            row['execution']['due_at'] = None
         payload = http.request('GET', prefix + '/runs?' + urlencode({'branch': target['branch'], 'per_page': 20}))
         runs = payload.get('workflow_runs') if isinstance(payload, dict) else None
         if not isinstance(runs, list):
@@ -138,7 +144,7 @@ def observe(target, tools, now, http, previous=None, fresh=False):
         # workflow-only targets perform their checks on push too, so a recent
         # push execution is valid evidence that those checks actually ran.
         due_runs = refreshes if target.get('freshness') else runs
-        row['execution']['due_unobserved'] = not any(wd.timestamp(r['created_at']) >= due for r in due_runs)
+        row['execution']['due_unobserved'] = schedule_due and not any(wd.timestamp(r['created_at']) >= due for r in due_runs)
         latest = row['execution']['latest']
         names = target.get('collection_steps', [])
         if names:
@@ -165,7 +171,7 @@ def observe(target, tools, now, http, previous=None, fresh=False):
             observed_attempt = collection and wd.timestamp(row['execution'].get('collection_started_at') or collection['at']) >= due
             pending_refresh = any(r.get('event') in wd.REFRESH_EVENTS and r.get('status') in ACTIVE
                                   and wd.timestamp(r['created_at']) >= due for r in runs)
-            row['execution']['due_unobserved'] = not (observed_attempt or pending_refresh)
+            row['execution']['due_unobserved'] = schedule_due and not (observed_attempt or pending_refresh)
         if latest and latest.get('conclusion') in FAILED:
             try:
                 jobs = http.request('GET', f"/repos/{repo}/actions/runs/{latest['id']}/jobs?filter=latest&per_page=100")
@@ -187,7 +193,7 @@ def observe(target, tools, now, http, previous=None, fresh=False):
     # a verified local import can repair it without changing this workflow's ID.
     reread = fresh or (previous or {}).get('status') in ('attention', 'limited')
     row['probe_cache'] = {} if reread else copy.deepcopy((previous or {}).get('probe_cache', {}))
-    checks = wd.freshness_checks(target, documents, now, cadence, cache=row['probe_cache'], refresh_marker=marker, due=wd.stamp(due))
+    checks = wd.freshness_checks(target, documents, now, cadence, cache=row['probe_cache'], refresh_marker=marker, due=row['execution']['due_at'])
     for result, probe in zip(checks, probes):
         result.update(label=probe['label'], url=probe['url'], precision=probe.get('precision', 'timestamp'))
     states = {x['status'] for x in checks}

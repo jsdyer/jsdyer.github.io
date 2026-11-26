@@ -62,6 +62,31 @@ class OutcomeTests(unittest.TestCase):
         self.assertEqual(row['output']['status'],'stale')
         self.assertEqual(row['status'],'attention')
 
+    def test_first_scheduled_occurrence_after_creation_uses_normal_grace(self):
+        class NewWorkflow(HTTP):
+            def request(self, method, path, **kwargs):
+                result = super().request(method, path, **kwargs)
+                if path.endswith('/refresh.yml'):
+                    result['created_at'] = '2026-11-24T11:25:00Z'
+                    result['updated_at'] = '2026-11-24T12:15:00Z'
+                if '/runs?' in path:
+                    result['workflow_runs'][0]['event'] = 'push'
+                return result
+
+        for steps in ([], ['Download source']):
+            target = dict(TARGET, collection_steps=steps)
+            before = observe(target, TOOLS, NOW + dt.timedelta(minutes=29, seconds=59), NewWorkflow())
+            self.assertIsNone(before['execution']['due_at'])
+            self.assertFalse(before['execution']['due_unobserved'])
+            self.assertEqual(before['status'], 'limited')
+            first_due = observe(target, TOOLS, NOW + dt.timedelta(minutes=30), NewWorkflow())
+            self.assertEqual(first_due['execution']['due_at'], '2026-11-24T12:00:00Z')
+            self.assertTrue(first_due['execution']['due_unobserved'])
+            self.assertEqual(first_due['status'], 'attention')
+            failed = observe(target, TOOLS, NOW, NewWorkflow(result='failure'))
+            self.assertEqual(failed['status'], 'attention')
+            self.assertFalse(failed['execution']['due_unobserved'])
+
     def test_unchanged_and_zero_counts_are_valid_without_fabricated_changes(self):
         http=HTTP(count=0)
         row=observe(TARGET,TOOLS,NOW,http)
