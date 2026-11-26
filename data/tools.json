@@ -1413,7 +1413,11 @@
       "title": "Completed federal ATIP request summaries",
       "section": "dataset"
     },
-    "task_label": "Canadian Access to Information Records Search"
+    "task_label": "Canadian Access to Information Records Search",
+    "result_directory": {
+      "path": "institutions/",
+      "title": "Published federal ATIP request summaries by institution"
+    }
   },
   {
     "id": "governmentmemory",

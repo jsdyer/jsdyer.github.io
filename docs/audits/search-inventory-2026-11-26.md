@@ -12,6 +12,14 @@ Catalogue revision: [d883b952f6ba](https://github.com/jsdyer/jsdyer.github.io/co
 
 [Mail Path](https://coolcode.ca/mailpath/) and [Price Atlas](https://coolcode.ca/priceatlas/) now open with a working example and a descriptive title, H1 and canonical. [Nightfinder](https://coolcode.ca/nightfinder/) shows dark hours and Moon phase first. [Event Radar](https://coolcode.ca/eventradar/) puts the city selector beside its task heading. Both featured tools passed their mobile interaction checks.
 
+### Result pages and sitemap rollout, November 26
+
+The [results directory](https://coolcode.ca/results/) links the catalogue’s worked examples and six independently published collections. Their first combined build produced 468 individual histories: 183 federal institutions with at least two completion months, 134 Parks Canada places, 77 Halifax lake stations, 41 metro labour markets, 25 BC Ferries routes and eight commercial clam landing regions or totals. The [root sitemap](https://coolcode.ca/sitemap.xml) indexes the catalogue sitemap and one URL set per collection. Unchanged paths survive data refreshes, and each app writes its URLs from the records it actually published.
+
+The rollout also registered seven existing storefront, SeaBus and internet speed results after checking their published examples. All 71 registered presets returned HTML with their own canonical URL. The donair and clams-and-chips planners now include the reviewed menu prices, dates and source links in their initial HTML. Each directory, topic guide and result is reachable through ordinary links from the homepage.
+
+The title and canonical repairs targeted the independently hosted tool homepages. The findings table below records the earlier baseline. Use the live inventory for a current check.
+
 ## Counts by finding
 
 | Code | Finding | Roots |

@@ -219,5 +219,36 @@
         "help": "Choose Route 08 and compare the same quarter in two years. The source report separates passenger totals, round trips and deck utilization."
       }
     ]
+  },
+  "federal-access-records": {
+    "title": "Find federal access to information records in Canada",
+    "intro": "Start with a published request, find the department responsible for a record, or compare an institution’s annual statistics with the summaries it has released.",
+    "tasks": [
+      {
+        "tool": "atip",
+        "label": "What has this institution already released?",
+        "help": "Browse the institution’s publication history, open its filtered search and use the request number to find the official record or request a copy."
+      },
+      {
+        "tool": "governmentmemory",
+        "label": "Which institution describes this kind of record?",
+        "help": "Search federal record classes and personal information banks for the responsible organization and terminology used in its descriptions."
+      },
+      {
+        "tool": "atipmetrics",
+        "label": "How many requests did the institution handle in a fiscal year?",
+        "help": "Read annual administrative statistics separately from the completed summaries published in the federal catalogue. They count different populations and use different reporting periods."
+      },
+      {
+        "tool": "briefings",
+        "label": "Was a briefing note prepared on the subject?",
+        "help": "Search briefing note titles for the department, date and reference number to narrow a request."
+      },
+      {
+        "tool": "atipdecisions",
+        "label": "Has an access complaint led to a published decision?",
+        "help": "Search published access decisions to find a case and follow it to the original document."
+      }
+    ]
   }
 }
