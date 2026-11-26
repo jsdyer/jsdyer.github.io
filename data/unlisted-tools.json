@@ -3,5 +3,25 @@
     "id": "townheritage",
     "title": "Town Heritage (unlisted prototype)",
     "source": "https://github.com/jsdyer/townheritage"
+  },
+  {
+    "id": "benefitcalendar",
+    "title": "Canada Benefit Payment Dates",
+    "source": "https://github.com/jsdyer/benefitcalendar"
+  },
+  {
+    "id": "plancost",
+    "title": "Internet and Mobile Plan Cost Calculator",
+    "source": "https://github.com/jsdyer/plancost"
+  },
+  {
+    "id": "salestax",
+    "title": "Canadian Sales Tax Calculator",
+    "source": "https://github.com/jsdyer/salestax"
+  },
+  {
+    "id": "processinghistory",
+    "title": "IRCC Processing Time History",
+    "source": "https://github.com/jsdyer/processinghistory"
   }
 ]

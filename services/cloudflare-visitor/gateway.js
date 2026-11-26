@@ -32,7 +32,74 @@ function apiParams(url, names) {
   };
 }
 
+// Accept only the forms used by the two newspaper tools. The client supplies
+// search fields; the upstream host, path, output projection and header are fixed.
+function newspaperRoute(url, env) {
+  const agent=env.LOC_USER_AGENT;
+  if(typeof agent!=='string' || !/^[^\s@]+@[^\s@]+ [!-~]+$/.test(agent) || /[\r\n\u0000]/.test(agent) || agent.length>512)
+    apiThrow(503,'not_configured','The newspaper search connection needs its Library of Congress configuration.');
+  const constants={dl:'page',searchType:'advanced',fo:'json',at:'results,pagination'};
+  const filters=['qs','ops','c','sp','st','start_date','end_date','location_state','location_city','partof_title','sb','fa'];
+  const p=apiParams(url,[...Object.keys(constants),...filters]);
+  for(const [key,value] of Object.entries(constants)){
+    if(url.searchParams.get(key)!==value) apiThrow(400,'invalid_parameter','Use the newspaper page-search form.');
+  }
+  const target=new URL('https://www.loc.gov/collections/chronicling-america/');
+  const query=p('qs',/^[^\u0000-\u001f\u007f]{0,300}$/u);
+  for(const [key,value] of Object.entries(constants)) target.searchParams.set(key,value);
+  target.searchParams.set('qs',query);
+  target.searchParams.set('ops',p('ops',/^(?:AND|OR|PHRASE|~5|~10)$/));
+  const size=Number(p('c',/^(?:[1-9]\d?|100)$/));
+  const page=Number(p('sp',/^[1-9]\d{0,5}$/));
+  if((page-1)*size>=100000) apiThrow(400,'invalid_parameter','Narrow your dates or search before paging deeper.');
+  target.searchParams.set('c',String(size));
+  target.searchParams.set('sp',String(page));
+  for(const key of ['start_date','end_date']){
+    if(!url.searchParams.has(key)) continue;
+    const value=p(key,/^\d{4}-\d{2}-\d{2}$/);
+    const parsed=Date.parse(value);
+    if(!Number.isFinite(parsed)||new Date(parsed).toISOString().slice(0,10)!==value) apiThrow(400,'invalid_parameter','Enter a valid newspaper date.');
+    target.searchParams.set(key,value);
+  }
+  if(target.searchParams.has('start_date')&&target.searchParams.has('end_date')&&target.searchParams.get('start_date')>target.searchParams.get('end_date')) apiThrow(400,'invalid_parameter','The start date must precede the end date.');
+  for(const key of ['location_state','location_city','partof_title']) {
+    if(url.searchParams.has(key)) target.searchParams.set(key,p(key,/^[^\u0000-\u001f\u007f]{1,200}$/u));
+  }
+  if(url.searchParams.has('fa')) target.searchParams.set('fa',p('fa',/^number_lccn:[a-zA-Z0-9-]{4,30}$/));
+  if(!query && !['start_date','end_date','location_state','location_city','partof_title','fa'].some(k=>target.searchParams.has(k))) apiThrow(400,'invalid_parameter','Enter a topic, date, town or newspaper.');
+  if(url.searchParams.has('sb')) target.searchParams.set('sb',p('sb',/^(?:date|date_desc)$/));
+  if(url.searchParams.has('st')) target.searchParams.set('st',p('st',/^gallery$/));
+  return {target,group:'loc-newspapers',ttl:3600,limit:4_000_000,timeout:80000,
+    maximum:15,window:60000,headers:{Accept:'application/json','User-Agent':agent}};
+}
+
+function newspaperResults(data,plan) {
+  const page=Number(plan.target.searchParams.get('sp')), size=Number(plan.target.searchParams.get('c'));
+  const pagination=data?.pagination;
+  if(!Array.isArray(data?.results)||data.results.length>size||!pagination||
+    !Number.isSafeInteger(pagination.of)||pagination.of<0||Number(pagination.current)!==page||Number(pagination.perpage)!==size)
+    apiThrow(502,'invalid_source','The newspaper archive returned an unexpected results page.');
+  const results=[];
+  const scalar=['url','id','title','date','page_id'];
+  const lists=['partof_title','location_city','location_state','number_lccn','number_page','language','contributor','image_url','description'];
+  for(const row of data.results){
+    if(!row||typeof row!=='object'||row.access_restricted===true||typeof row.title!=='string') continue;
+    const output={};
+    for(const key of scalar) if(typeof row[key]==='string') output[key]=row[key].slice(0,2048);
+    for(const key of lists){
+      if(Array.isArray(row[key])) output[key]=row[key].filter(v=>typeof v==='string').slice(0,12).map(v=>v.slice(0,2048));
+    }
+    results.push(output);
+  }
+  const result={results,pagination:{of:pagination.of,current:page,perpage:size,next:Boolean(pagination.next)}};
+  // Inspect the final decoded values too, in case JSON escaping concealed an echo.
+  const agent=plan.headers['User-Agent'];
+  if(JSON.stringify(result).includes(agent.split(' ')[1])) apiThrow(502,'invalid_source','The newspaper archive returned an unexpected response.');
+  return result;
+}
+
 function apiRoute(url, env) {
+  if(url.pathname==='/api/newspapers/search') return newspaperRoute(url,env);
   const path=url.pathname, plan={ttl:900,limit:2_000_000,headers:{Accept:'application/json','User-Agent':apiUA}};
   let p, target;
   if (path.startsWith('/api/podcastroute/')) {
@@ -131,12 +198,16 @@ async function apiUpstream(plan,env) {
     break;
   }
   if(!response.ok){await response.body?.cancel(); apiThrow(response.status===429?429:502,'source_unavailable','The upstream source could not complete this request.',response.status===429?60:undefined);}
+  if(plan.group==='loc-newspapers'&&!/application\/(?:[a-z0-9.+-]+\+)?json\b/i.test(response.headers.get('Content-Type')||'')){
+    await response.body?.cancel(); apiThrow(502,'invalid_source','The newspaper archive returned a web page instead of JSON.');
+  }
   const raw=await apiRead(response,plan.limit);
   if(plan.feed){
     if(/<!DOCTYPE|<!ENTITY/i.test(raw) || !/^\s*(?:<\?xml[^>]*>\s*)?(?:<!--[\s\S]*?-->\s*)*<(?:rss\b|feed\b|rdf:RDF\b)/i.test(raw)) apiThrow(502,'invalid_feed','The URL did not return a supported RSS or Atom feed.');
     return {url:current.href,xml:raw};
   }
   let data; try{data=JSON.parse(raw);}catch{apiThrow(502,'invalid_source','The source returned invalid JSON.');}
+  if(plan.group==='loc-newspapers') return newspaperResults(data,plan);
   if(plan.group==='podcast' && (data.status==='false'||data.status===false)) apiThrow(502,'source_unavailable','Podcast Index could not complete this lookup.');
   if(plan.group==='repology'){
     if(!Array.isArray(data) || data.some(x=>!x||typeof x.repo!=='string'||!x.repo||typeof x.version!=='string'||!x.version)) apiThrow(502,'invalid_source','The package source returned an unexpected result.');
@@ -158,6 +229,7 @@ async function apiHandle(request,env,ctx) {
     if(origin && origin!==ORIGIN) return apiFailure(403,'origin_denied','Origin is not allowed.');
     if(request.method==='OPTIONS') return {status:204};
     if(['/api/measurebench/','/api/screenradar/','/api/domain-biography/'].some(prefix=>url.pathname.startsWith(prefix))) return await secondBatchApiHandle(request,env,ctx);
+    if(url.pathname==='/api/parcelbench/tracking') return await pcTracking(request,env,origin,url);
     if(request.method!=='GET') return apiFailure(405,'method_denied','Use GET for public data requests.');
     if(url.pathname==='/api/browserreceipt/connection') {
       if(origin!==ORIGIN) return apiFailure(403,'origin_denied','Open the connection check on CoolCode.');
@@ -171,7 +243,7 @@ async function apiHandle(request,env,ctx) {
         http:limited(cf.httpProtocol),tls:limited(cf.tlsVersion)
       }}};
     }
-    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY),screenplaces:Boolean(env.TMDB_READ_ACCESS_TOKEN),planehere:true,planehere_key:Boolean(env.ADSBLOL_API_KEY),screenradar:Boolean(env.TMDB_READ_ACCESS_TOKEN),measurebench:Boolean(env.WOLFRAM_APP_ID),domain_biography:true}}};
+    if(url.pathname==='/api/status') return {body:{schema:apiVersion,configured:{podcastroute:Boolean(env.PODCASTINDEX_API_KEY&&env.PODCASTINDEX_API_SECRET),channelqueue:Boolean(env.YOUTUBE_API_KEY),recipemath:Boolean(env.FDC_API_KEY),distropilot:true,feedharbour:true,halifaxnext:true,inspectiontrail:true,parcelbench:Boolean(env.CANADAPOST_CLIENT_ID&&env.CANADAPOST_CLIENT_SECRET),corporateghosts:Boolean(env.ISED_CORPORATIONS_API_KEY),screenplaces:Boolean(env.TMDB_READ_ACCESS_TOKEN),planehere:true,planehere_key:Boolean(env.ADSBLOL_API_KEY),screenradar:Boolean(env.TMDB_READ_ACCESS_TOKEN),measurebench:Boolean(env.WOLFRAM_APP_ID),domain_biography:true,newspapers:Boolean(env.LOC_USER_AGENT)}}};
     if(url.pathname.startsWith('/api/halifaxnext/')) return await halifaxApiHandle(request,env,ctx);
     if(url.pathname.startsWith('/api/screenplaces/')) return await screenplacesApiHandle(request,env,ctx);
     if(url.pathname.startsWith('/api/planehere/')) return await planehereApiHandle(request,env,ctx);
@@ -183,13 +255,30 @@ async function apiHandle(request,env,ctx) {
     const id=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
     const cached=plan.ttl>0 ? await db.prepare('SELECT payload FROM gateway_cache WHERE id=? AND expiry>?').bind(id,now).first('payload') : null;
     if(cached) return {body:JSON.parse(cached)};
+    if(plan.group==='loc-newspapers'){
+      const lease=await db.prepare('INSERT INTO gateway_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET expiry=excluded.expiry WHERE expiry<=? RETURNING hits').bind('loc-newspapers-lease',now+4000,now).first();
+      if(!lease){
+        const until=await db.prepare('SELECT expiry FROM gateway_budget WHERE id=?').bind('loc-newspapers-lease').first('expiry');
+        const retry=Math.max(1,Math.ceil((Number(until)-now)/1000));
+        return apiFailure(429,'source_pacing',retry>4?'The Library has paused requests. Please try again later.':'Please wait a few seconds between newspaper searches.',retry);
+      }
+    }
     if(plan.group==='repology'){
       // Atomic sliding lease across ALL Worker instances; Cache API alone is only per-PoP.
       const lease=await db.prepare('INSERT INTO gateway_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET expiry=excluded.expiry WHERE expiry<=? RETURNING hits').bind('repology-lease',now+1100,now).first();
       if(!lease) return apiFailure(429,'source_pacing','The package source permits one request per second. Please retry shortly.',2);
     }
     await apiBudget(db,plan.group,now,plan.window,plan.maximum);
-    const data=await (plan.pc?pcUpstream(plan,env):plan.inspection?inspectionUpstream(plan):apiUpstream(plan,env)), captured=Date.now(), result={fetched_at:new Date(captured).toISOString(),data}, payload=JSON.stringify(result);
+    let data;
+    try {data=await (plan.pc?pcUpstream(plan,env):plan.inspection?inspectionUpstream(plan):apiUpstream(plan,env));}
+    catch(error){
+      if(plan.group==='loc-newspapers' && error.api && error.status===429){
+        await db.prepare('INSERT INTO gateway_budget(id,hits,expiry) VALUES(?,1,?) ON CONFLICT(id) DO UPDATE SET expiry=MAX(expiry,excluded.expiry)').bind('loc-newspapers-lease',Date.now()+3600000).run();
+        apiThrow(429,'source_cooldown','The Library has paused requests. Try again in an hour.',3600);
+      }
+      throw error;
+    }
+    const captured=Date.now(), result={fetched_at:new Date(captured).toISOString(),data}, payload=JSON.stringify(result);
     await db.prepare('DELETE FROM gateway_budget WHERE expiry<=?').bind(captured).run();
     // <=256 records; ordinary responses <=500 KB, package evidence <=1 MB.
     // Popular projects such as PHP exceed 500 KB after lossless field selection.

@@ -187,3 +187,59 @@ test('cache is capped and expired records are evicted without touching visitor t
   const insert=env.sql.prepare('INSERT INTO gateway_cache VALUES(?,?,?,?)');for(let i=0;i<260;i++)insert.run('record'+i,'{}',Date.now()+60000,i);
   await run('/api/channelqueue/search?q=second',env);assert.equal(env.sql.prepare('SELECT COUNT(*) AS n FROM gateway_cache').get().n,256);assert.equal(env.sql.prepare('SELECT COUNT(*) AS n FROM salts').get().n,1);
 });
+
+const newspaperPath='/api/newspapers/search?c=12&sp=1&st=gallery&dl=page&searchType=advanced&qs=halifax&ops=PHRASE&start_date=1800-01-01&end_date=1930-12-31&fo=json&at=results%2Cpagination';
+const locEnvironment=()=>({...environment(),LOC_USER_AGENT:'test@example.org fake-lib-token'});
+const newspaperPage={title:'Halifax in print',url:'https://www.loc.gov/resource/abc/1925-01-01/ed-1/',date:'1925-01-01'};
+const locResponse=row=>({results:[row],pagination:{of:345,current:1,perpage:12,next:'official-page-2'}});
+
+test('the actual Old News Halifax form reaches only the approved collection with its private header and caches safe fields',async t=>{
+  const env=locEnvironment();let requests=0;
+  stub(t,async(url,opts)=>{
+    requests++;
+    const target=new URL(url);
+    assert.equal(target.origin,'https://www.loc.gov');
+    assert.equal(target.pathname,'/collections/chronicling-america/');
+    assert.equal(target.searchParams.get('qs'),'halifax');
+    assert.equal(target.searchParams.get('end_date'),'1930-12-31');
+    assert.equal(opts.redirect,'manual');
+    assert.equal(opts.headers['User-Agent'],env.LOC_USER_AGENT);
+    return Response.json({...locResponse({...newspaperPage,ignored:env.LOC_USER_AGENT}),request_headers:{ua:env.LOC_USER_AGENT}});
+  });
+  const first=await run(newspaperPath,env);
+  const result=await first.text();
+  assert.equal(first.status,200,result);
+  assert.equal(JSON.parse(result).data.results[0].title,newspaperPage.title);
+  assert.equal(result.includes('fake-lib-token'),false);
+  assert.equal(await (await run(newspaperPath,env)).text(),result);
+  assert.equal((await run(newspaperPath.replace('halifax','vancouver'),env)).status,429);
+  assert.equal(requests,1);
+});
+
+test('newspaper searches reject redirects, HTML, oversized responses, credential echoes and unsupported query shapes',async t=>{
+  const replies=[new Response(null,{status:302,headers:{Location:'https://untrusted.example/'}}),new Response('<html>',{headers:{'Content-Type':'text/html'}}),
+    new Response('oversized',{headers:{'Content-Type':'application/json','Content-Length':'50000000'}}),Response.json(locResponse({...newspaperPage,title:'echo fake-lib-token'}))];
+  stub(t,async(url)=>{assert.equal(new URL(url).hostname,'www.loc.gov');return replies.shift();});
+  for(let n=0;n<4;n++){
+    const r=await run(newspaperPath,locEnvironment());
+    assert.equal(r.status,502);assert.equal((await r.text()).includes('fake-lib-token'),false);
+  }
+  for(const bad of ['&url=https://other.example/','&qs=again','&callback=foo']){
+    assert.equal((await run(newspaperPath+bad,locEnvironment())).status,400);
+  }
+  assert.equal((await run(newspaperPath.replace('1800-01-01','1900-02-30'),locEnvironment())).status,400);
+  assert.equal((await run(newspaperPath,environment())).status,503);
+  assert.equal(replies.length,0);
+});
+
+test('an upstream newspaper rate limit pauses both apps; cached pages remain usable',async t=>{
+  const env=locEnvironment();let requests=0;
+  stub(t,async()=>++requests===1?Response.json(locResponse(newspaperPage)):new Response(null,{status:429}));
+  assert.equal((await run(newspaperPath,env)).status,200);
+  env.sql.prepare("DELETE FROM gateway_budget WHERE id='loc-newspapers-lease'").run();
+  const other=newspaperPath.replace('halifax','other');
+  const refused=await run(other,env);
+  assert.equal(refused.status,429);assert.equal(refused.headers.get('Retry-After'),'3600');
+  assert.equal((await run(other,env)).status,429);
+  assert.equal((await run(newspaperPath,env)).status,200);assert.equal(requests,2);
+});

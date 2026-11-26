@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import {readFileSync} from 'node:fs';import {webcrypto} from 'node:crypto';
-function sandbox(fetch=()=>{throw Error('unexpected network');}){const c=vm.createContext({URL,URLSearchParams,TextEncoder,TextDecoder,Uint8Array,Date,Response,AbortSignal,crypto:webcrypto,encoder:new TextEncoder(),fetch,setTimeout,console,ORIGIN:'https://coolcode.ca'});vm.runInContext(readFileSync(new URL('../services/cloudflare-visitor/gateway.js',import.meta.url),'utf8')+'\n'+readFileSync(new URL('../services/cloudflare-visitor/parcel-corporate-gateway.js',import.meta.url),'utf8')+'\nglobalThis.pc={route:pcRoute,upstream:pcUpstream,rates:pcRates,office:pcOffice,corp:pcCorporation};',c);return c.pc;}
+function sandbox(fetch=()=>{throw Error('unexpected network');}){const c=vm.createContext({URL,URLSearchParams,TextEncoder,TextDecoder,Uint8Array,Date,Response,AbortSignal,crypto:webcrypto,encoder:new TextEncoder(),fetch,setTimeout,console,ORIGIN:'https://coolcode.ca'});vm.runInContext(readFileSync(new URL('../services/cloudflare-visitor/gateway.js',import.meta.url),'utf8')+'\n'+readFileSync(new URL('../services/cloudflare-visitor/parcel-corporate-gateway.js',import.meta.url),'utf8')+'\nglobalThis.pc={route:pcRoute,upstream:pcUpstream,rates:pcRates,office:pcOffice,corp:pcCorporation,tracking:pcTracking,publicTracking:pcPublicTracking};',c);return c.pc;}
 const env={CANADAPOST_CLIENT_ID:'test-key',CANADAPOST_CLIENT_SECRET:'test-secret',ISED_CORPORATIONS_API_KEY:'ised-test',DB:{prepare:()=>({bind:()=>({first:async()=>({hits:1})})})}};
 const url=path=>new URL('https://gateway.example'+path);
 function rateURL(extra=''){const date=new Date().toISOString().slice(0,10);return url('/api/parcelbench/rates?origin=B3J1S9&destination=X0A0H0&weight=1.25&length=10&width=30&height=20&mailingDate='+date+extra);}
@@ -24,4 +24,19 @@ test('outlet hours accept canonical numeric-string days without broad coercion',
   assert.equal(pc.office({...office,hoursList:[null,{day:'2',time:'09:00'}]}).hours.length,0);
   const bounded=pc.office({...office,hoursList:[{day:'2',time:['09:00','24:00','12:00','20:99','22:00']}]}).hours;
   assert.deepEqual([...bounded[0].times],['09:00','12:00']);
+});
+
+test('tracking only exposes the supported event fields, and a disabled gateway sends no PIN upstream',async()=>{
+  const pc=sandbox(),detail={customerRef1:'confidential',destinationPostalId:'A1A1A1',serviceName:'Standard',significantEvents:[
+    {eventDate:'2026-01-02',eventSite:'Halifax',eventProvince:'NS',eventDescription:'Delivered',signatoryName:'confidential'}
+  ]};
+  const events=pc.publicTracking(detail);
+  assert.equal(events.events[0].description,'Delivered');
+  assert(!JSON.stringify(events).includes('confidential'));
+  assert(!JSON.stringify(events).includes('A1A1A1'));
+  const u=url('/api/parcelbench/tracking'),o='https://coolcode.ca';
+  const options={method:'POST',headers:{'Content-Type':'application/json'},body:'{"number":"1234567890123456"}'};
+  assert.equal((await pc.tracking(new Request(u,options),env,o,u)).status,503);
+  assert.equal((await pc.tracking(new Request(u),env,o,u)).status,405);
+  assert.equal((await pc.tracking(new Request(u,options),env,'https://other.example',u)).status,403);
 });
