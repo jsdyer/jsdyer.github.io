@@ -346,14 +346,16 @@ function newspaperRoute(url, env) {
   }
   const target=new URL('https://www.loc.gov/collections/chronicling-america/');
   const query=p('qs',/^[^\u0000-\u001f\u007f]{0,300}$/u);
-  for(const [key,value] of Object.entries(constants)) target.searchParams.set(key,value);
-  target.searchParams.set('qs',query);
-  target.searchParams.set('ops',p('ops',/^(?:AND|OR|PHRASE|~5|~10)$/));
   const size=Number(p('c',/^(?:[1-9]\d?|100)$/));
   const page=Number(p('sp',/^[1-9]\d{0,5}$/));
   if((page-1)*size>=100000) apiThrow(400,'invalid_parameter','Narrow your dates or search before paging deeper.');
   target.searchParams.set('c',String(size));
   target.searchParams.set('sp',String(page));
+  if(url.searchParams.has('st')) target.searchParams.set('st',p('st',/^gallery$/));
+  target.searchParams.set('dl',constants.dl);
+  target.searchParams.set('searchType',constants.searchType);
+  target.searchParams.set('qs',query);
+  target.searchParams.set('ops',p('ops',/^(?:AND|OR|PHRASE|~5|~10)$/));
   for(const key of ['start_date','end_date']){
     if(!url.searchParams.has(key)) continue;
     const value=p(key,/^\d{4}-\d{2}-\d{2}$/);
@@ -368,9 +370,12 @@ function newspaperRoute(url, env) {
   if(url.searchParams.has('fa')) target.searchParams.set('fa',p('fa',/^number_lccn:[a-zA-Z0-9-]{4,30}$/));
   if(!query && !['start_date','end_date','location_state','location_city','partof_title','fa'].some(k=>target.searchParams.has(k))) apiThrow(400,'invalid_parameter','Enter a topic, date, town or newspaper.');
   if(url.searchParams.has('sb')) target.searchParams.set('sb',p('sb',/^(?:date|date_desc)$/));
-  if(url.searchParams.has('st')) target.searchParams.set('st',p('st',/^gallery$/));
+  target.searchParams.set('fo',constants.fo);
+  target.searchParams.set('at',constants.at);
+  // fo=json selects LOC's representation. Match the working curl request's
+  // media negotiation and use an uncompressed body for this bounded JSON read.
   return {target,group:'loc-newspapers',ttl:3600,limit:4_000_000,timeout:80000,
-    maximum:15,window:60000,headers:{Accept:'application/json','User-Agent':agent}};
+    maximum:15,window:60000,headers:{Accept:'*/*','Accept-Encoding':'identity','User-Agent':agent}};
 }
 
 function newspaperResults(data,plan) {
@@ -497,7 +502,16 @@ async function apiUpstream(plan,env) {
     }
     break;
   }
-  if(!response.ok){await response.body?.cancel(); apiThrow(response.status===429?429:502,'source_unavailable','The upstream source could not complete this request.',response.status===429?60:undefined);}
+  if(!response.ok){
+    const status=response.status;
+    await response.body?.cancel();
+    if(plan.group==='loc-newspapers' && status>=400 && status!==429){
+      // Never expose a source error page or its headers; it can echo the credential.
+      console.warn(JSON.stringify({event:'newspaper-source-http',status}));
+      apiThrow(status,'loc_http_'+status,'The Library of Congress returned HTTP '+status+' for this search.');
+    }
+    apiThrow(status===429?429:502,'source_unavailable','The upstream source could not complete this request.',status===429?60:undefined);
+  }
   if(plan.group==='loc-newspapers'&&!/application\/(?:[a-z0-9.+-]+\+)?json\b/i.test(response.headers.get('Content-Type')||'')){
     await response.body?.cancel(); apiThrow(502,'invalid_source','The newspaper archive returned a web page instead of JSON.');
   }
@@ -515,6 +529,11 @@ async function apiUpstream(plan,env) {
   }
   return data;
   } catch (error) {
+    if(plan.group==='loc-newspapers' && !error.api){
+      const timedOut=signal.aborted || error.name==='TimeoutError' || error.name==='AbortError';
+      apiThrow(timedOut?504:502,timedOut?'loc_timeout':'loc_connection',
+        timedOut?'The Library of Congress search timed out. Please try again later.':'The Worker could not read a response from the Library of Congress. Please try again later.');
+    }
     if(signal.aborted) apiThrow(504,'source_timeout','The upstream source took too long to respond. Please retry later; saved evidence is unchanged.');
     if(error.api) throw error;
     // Log only a fixed source identifier and error category, never URLs or keys.

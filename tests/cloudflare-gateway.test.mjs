@@ -216,6 +216,109 @@ test('the actual Old News Halifax form reaches only the approved collection with
   assert.equal(requests,1);
 });
 
+const locHalifaxPageOne='https://www.loc.gov/collections/chronicling-america/?c=12&sp=1&st=gallery&dl=page&searchType=advanced&qs=halifax&ops=PHRASE&start_date=1800-01-01&end_date=1930-12-31&fo=json&at=results%2Cpagination';
+
+// LOC reports the number of matching records as 'of' and the page count as
+// 'total'. The scan and date are from the public Halifax curl response. Other
+// scan numbers below are distinct fixture records, not live ranking claims.
+function locHalifaxPage(page) {
+  const first=(page-1)*12+1;
+  const results=Array.from({length:12},(_,index)=>{
+    const scan=first+index+1;
+    return {date:'1917-12-07', title:`The Sun, December 7, 1917, image ${scan}`,
+      url:`https://www.loc.gov/resource/sn83030431/1917-12-07/ed-1/?sp=${scan}`};
+  });
+  const pageUrl=n=>locHalifaxPageOne.replace('sp=1',`sp=${n}`);
+  return {pagination:{current:page,perpage:12,of:407395,total:33950,from:first,to:first+11,
+    results:`${first} - ${first+11}`,next:pageUrl(page+1),previous:page===1?null:pageUrl(page-1)},results};
+}
+
+test('LOC search sends the curl URL and headers, shares the canonical cache and preserves the next page',async t=>{
+  const env=locEnvironment();
+  const calls=[];
+  stub(t,async(url,options)=>{
+    calls.push({url:String(url),headers:[...new Headers(options.headers)],redirect:options.redirect});
+    return Response.json(locHalifaxPage(calls.length));
+  });
+  const inbound=request(newspaperPath,{
+    'User-Agent':'visitor browser',Accept:'text/html','Accept-Encoding':'br',
+    Authorization:'Bearer visitor-only',Cookie:'visitor=only',Referer:'https://private.example/'
+  });
+  const first=await worker.fetch(inbound,env);
+  assert.equal(first.status,200);
+  assert.equal(first.headers.get('Access-Control-Allow-Origin'),origin);
+  const firstData=(await first.json()).data;
+  assert.equal(firstData.results.length,12);
+  assert.deepEqual(firstData.results[0],locHalifaxPage(1).results[0]);
+  assert.deepEqual(firstData.pagination,{of:407395,current:1,perpage:12,next:true});
+
+  const reordered=new URL(inbound.url);
+  reordered.searchParams.sort();
+  const cached=await run(reordered.pathname+reordered.search,env);
+  assert.equal(cached.status,200);
+  assert.deepEqual((await cached.json()).data,firstData);
+  assert.equal(calls.length,1);
+
+  // Model a second search after the shared pacing window has elapsed.
+  env.sql.prepare("UPDATE gateway_budget SET expiry=0 WHERE id='loc-newspapers-lease'").run();
+  reordered.searchParams.set('sp','2');
+  const second=await run(reordered.pathname+reordered.search,env);
+  assert.equal(second.status,200);
+  const secondData=(await second.json()).data;
+  assert.deepEqual(secondData.pagination,{of:407395,current:2,perpage:12,next:true});
+  assert.equal(secondData.results.length,12);
+  assert.deepEqual(secondData.results[0],locHalifaxPage(2).results[0]);
+  const firstUrls=new Set(firstData.results.map(row=>row.url));
+  assert.ok(secondData.results.every(row=>!firstUrls.has(row.url)));
+  assert.deepEqual(calls.map(call=>call.url),[locHalifaxPageOne,locHalifaxPageOne.replace('sp=1','sp=2')]);
+  for(const call of calls){
+    assert.equal(call.redirect,'manual');
+    assert.deepEqual(call.headers,[['accept','*/*'],['accept-encoding','identity'],['user-agent',env.LOC_USER_AGENT]]);
+  }
+});
+
+test('LOC reports the HTTP status without leaking the upstream error body or response headers',async t=>{
+  const statuses=[403,404,503];
+  const env=locEnvironment();
+  let requests=0;
+  stub(t,async()=>new Response('Private diagnostic: '+env.LOC_USER_AGENT,{
+    status:statuses[requests++],
+    headers:{'Content-Type':'text/html','Set-Cookie':'source-only=cookie','X-Private-Loc-Detail':env.LOC_USER_AGENT}
+  }));
+  for(const status of statuses){
+    const response=await run(newspaperPath,env);
+    assert.equal(response.status,status);
+    assert.equal(response.headers.get('Access-Control-Allow-Origin'),origin);
+    assert.equal(response.headers.get('Set-Cookie'),null);
+    assert.equal(response.headers.get('X-Private-Loc-Detail'),null);
+    const body=await response.text();
+    assert.equal(JSON.parse(body).error.code,'loc_http_'+status);
+    assert.doesNotMatch(body,/fake-lib-token|Private diagnostic|source-only/);
+    env.sql.prepare("UPDATE gateway_budget SET expiry=0 WHERE id='loc-newspapers-lease'").run();
+  }
+  assert.equal(requests,statuses.length);
+  assert.equal(env.sql.prepare('SELECT count(*) n FROM gateway_cache').get().n,0);
+});
+
+test('LOC distinguishes a connection failure from its request deadline and omits private transport details',async t=>{
+  const env=locEnvironment();
+  const timeout=AbortSignal.timeout;
+  let expired=false;
+  AbortSignal.timeout=ms=>expired?AbortSignal.abort():timeout(ms);
+  t.after(()=>{AbortSignal.timeout=timeout;});
+  stub(t,async()=>{throw new TypeError('Private URL '+env.LOC_USER_AGENT);});
+  for(const [isTimeout,status,code] of [[false,502,'loc_connection'],[true,504,'loc_timeout']]){
+    expired=isTimeout;
+    const response=await run(newspaperPath,env);
+    assert.equal(response.status,status);
+    const body=await response.text();
+    assert.equal(JSON.parse(body).error.code,code);
+    assert.doesNotMatch(body,/fake-lib-token|Private URL/);
+    env.sql.prepare("UPDATE gateway_budget SET expiry=0 WHERE id='loc-newspapers-lease'").run();
+  }
+  assert.equal(env.sql.prepare('SELECT count(*) n FROM gateway_cache').get().n,0);
+});
+
 test('newspaper searches reject redirects, HTML, oversized responses, credential echoes and unsupported query shapes',async t=>{
   const replies=[new Response(null,{status:302,headers:{Location:'https://untrusted.example/'}}),new Response('<html>',{headers:{'Content-Type':'text/html'}}),
     new Response('oversized',{headers:{'Content-Type':'application/json','Content-Length':'50000000'}}),Response.json(locResponse({...newspaperPage,title:'echo fake-lib-token'}))];
