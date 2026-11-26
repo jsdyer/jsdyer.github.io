@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '17 15 * * 1'
   workflow_dispatch:
+    inputs:
+      search_inventory:
+        description: Save an inventory of public tool pages and linked preset candidates
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -51,4 +56,23 @@ jobs:
         with:
           name: catalogue-link-audit
           path: link-audit.json
+          retention-days: 30
+
+
+  search-inventory:
+    if: github.event_name == 'workflow_dispatch' && inputs.search_inventory
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python3 scripts/audit_search.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: catalogue-search-inventory
+          path: search-audit.json
           retention-days: 30

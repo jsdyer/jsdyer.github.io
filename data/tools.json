@@ -1250,7 +1250,17 @@
       "note": "Compare Capilano’s warning with Manitoba’s Rotor Investments alert to see which source actually confirms a domain suspension. Add dated observations to a case in the current tab and export its timeline before leaving."
     },
     "sync_manifest": true,
-    "task_label": "Canadian Scam Warnings and Takedown Records"
+    "task_label": "Canadian Scam Warnings and Takedown Records",
+    "use_cases": [
+      {
+        "title": "Capilano Suspension Bridge Ticket Warnings",
+        "path": "capilano-ticket-warnings.html"
+      },
+      {
+        "title": "Toronto Green P Parking Payment Warnings",
+        "path": "green-p-payment-warnings.html"
+      }
+    ]
   },
   {
     "id": "abusepulse",
@@ -2377,7 +2387,17 @@
       "note": "Search a device or FCC ID, narrow the exhibit types and open the original filing or independent reference. Confirm the hardware variant against the filing before using its exhibits; the app links to documents rather than republishing them."
     },
     "sync_manifest": true,
-    "task_label": "FCC ID and Device Filing Lookup"
+    "task_label": "FCC ID and Device Filing Lookup",
+    "use_cases": [
+      {
+        "title": "Raspberry Pi 5 FCC Filing and Board Photos",
+        "path": "raspberry-pi-5.html"
+      },
+      {
+        "title": "Nintendo Switch HAC-001 FCC Filing and Photos",
+        "path": "nintendo-switch.html"
+      }
+    ]
   },
   {
     "id": "recallradar",
@@ -3631,7 +3651,17 @@
       "note": "Choose a date range and use the date inspector or data table to compare rates with matching units. Indexed FX starts each series at its first available observation, while CSV exports preserve original exchange rates and blank observations. Check the next scheduled policy decision and recent observed target changes, then follow the private payment-scenario link to Renewal Bench."
     },
     "sync_manifest": true,
-    "task_label": "Bank of Canada Rates, Yields and Exchange Rate History"
+    "task_label": "Bank of Canada Rates, Yields and Exchange Rate History",
+    "use_cases": [
+      {
+        "title": "Bank of Canada Policy Rate History",
+        "path": "policy-rate-history.html"
+      },
+      {
+        "title": "Canadian 2-Year and 10-Year Government Bond Yields",
+        "path": "canada-bond-yields.html"
+      }
+    ]
   },
   {
     "id": "priceatlas",
@@ -7577,7 +7607,7 @@
   {
     "id": "colocheck",
     "title": "Colo Check",
-    "description": "See which Cloudflare data centre your connection reaches over IPv4 and IPv6, how fast it answers, and whether Canadian traffic crosses the border.",
+    "description": "Compare Cloudflare response times over IPv4 and IPv6 and see which data centre answers each request.",
     "category": "liminal-tools",
     "tags": [
       "cloudflare",
@@ -9507,6 +9537,10 @@
     },
     "task_label": "Historical Newspaper Page and OCR Search",
     "use_cases": [
+      {
+        "title": "1917 Halifax Explosion Newspaper Front Pages",
+        "path": "search/halifax-explosion-1917/"
+      },
       {
         "title": "Canadian Railways in U.S. Newspapers in 1900",
         "path": "search/canadian-railways-1900/"

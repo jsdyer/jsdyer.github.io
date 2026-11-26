@@ -106,5 +106,36 @@
         "help": "Use the public domain or IP to find an appropriate contact and prepare a report with your evidence."
       }
     ]
+  },
+  "newspapers-and-local-history": {
+    "title": "Historical newspapers, maps and city directories",
+    "intro": "Look up an event, an address or a neighbourhood. Open a dated newspaper scan, compare Halifax aerial photos, or see which businesses a Halifax or Vancouver directory listed on a street.",
+    "tasks": [
+      {
+        "tool": "headlinevault",
+        "label": "Find a newspaper page about a historical event",
+        "help": "Start with a saved scan and its publication date. Change the words, dates or newspaper to search the U.S. Chronicling America collection, which includes reporting on Canada."
+      },
+      {
+        "tool": "halifaxtimelens",
+        "label": "See how a Halifax neighbourhood changed",
+        "help": "Compare the same location in two aerial views. Start at Cogswell or the Dartmouth ferry landing, then open nearby photographs from the archives."
+      },
+      {
+        "tool": "shopfrontdiary",
+        "label": "Look up an old Halifax or Vancouver street address",
+        "help": "Compare two directory editions side by side and follow the citation to the printed listing. Street numbers and business names can change between editions."
+      },
+      {
+        "tool": "oldnews-oddities",
+        "label": "Trace an unusual story through the newspapers",
+        "help": "Choose a saved topic and read the original pages. Compare the papers, towns and publication dates to follow how the account spread."
+      },
+      {
+        "tool": "freenet-echo",
+        "label": "Revisit Canada’s early community networks",
+        "help": "Choose a network such as the Vancouver Community Network or Chebucto Community Net and follow its dated archived pages."
+      }
+    ]
   }
 }

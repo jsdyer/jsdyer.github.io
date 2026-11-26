@@ -5,3 +5,4 @@ __pycache__/
 /link-audit.json
 /browser-checks/
 node_modules/
+/search-audit.json

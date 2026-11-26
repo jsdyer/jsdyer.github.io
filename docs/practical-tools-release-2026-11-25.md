@@ -1,10 +1,10 @@
 # Practical tools, historical data and monitoring corrections
 
 Owner release review, November 25, 2026. Source/check timestamps below use UTC.
-The public catalogue has 279 tools; aggregate measurement covers those plus the
+At this release, the public catalogue had 279 tools. Aggregate measurement covered those plus the
 intentionally unlisted Town Heritage prototype. The paginated repository audit
-accounts for 283 public repositories, with 13 documented exclusions and none
-awaiting classification. The generated watchdog registry contains 195 scheduled
+accounted for 283 public repositories, with 13 documented exclusions and none
+awaiting classification. The generated watchdog registry contained 195 scheduled
 workflows across 270 catalogue source repositories.
 
 ## New public applications
@@ -77,22 +77,21 @@ all-repositories GitHub App setting covers the new collector repositories.
 
 ## Owner-controlled setup and verified Worker
 
-1. The complete [Worker](https://raw.githubusercontent.com/jsdyer/jsdyer.github.io/dfbb6509ac9801604f0b7b5ab95299b0026f41ff/services/cloudflare-visitor/worker.js)
-   is now deployed and verified by downloading the actual module. It matches the
-   generated 280-ID source; Browser Receipt's opt-in connection route returns 200
-   with `private, no-store`. No further Worker paste or binding change is needed.
-   The checked source hash is recorded in `data/operations/cloudflare-deployment.json`.
-2. The owner confirmed `LOC_USER_AGENT` was added as an **Actions secret** in
-   both `headlinevault` and `oldnews-oddities`. The format is the exact single
-   line LOC issued: email, one space, token, with no quotes or header/name prefix.
-   Code/build/browser checks passed, but a new credential-backed collection has
-   not yet run: the GitHub connector has no dispatch action, and the browser's
-   secure sign-in was cancelled. Use **Run workflow → main → refresh enabled**
-   in [Headline Vault](https://github.com/jsdyer/headlinevault/actions/workflows/pages.yml)
-   and [Old News Oddities](https://github.com/jsdyer/oldnews-oddities/actions/workflows/pages.yml).
-   Neither refresh was dispatched by the assistant. Existing captures remain
-   intact until a validated collection succeeds. No credential value belongs
-   in source, generated data or this report.
+1. The subsequent practical-search release registered four additional public apps.
+   The current [deployment receipt](../data/operations/cloudflare-deployment.json)
+   records the verified Worker hash. The deployed registry accepts 284 measurement
+   IDs, including Town Heritage. Browser Receipt’s optional connection check and
+   the interactive newspaper gateway use this Worker.
+2. Both newspaper collectors use the GitHub Actions secret `LOC_USER_AGENT`.
+   The interactive forms in [Headline Vault](https://coolcode.ca/headlinevault/)
+   and [Old News Oddities](https://coolcode.ca/oldnews-oddities/) now send
+   searches to the deployed Worker. It attaches the encrypted Worker secret to
+   its fixed HTTPS request to the Library of Congress. The earlier collector
+   update had left both interactive forms sending requests directly from the
+   browser. The [credential-backed check](https://github.com/jsdyer/oldnews-oddities/actions/runs/45771471800)
+   received HTTP 503 for the original Halifax request and HTTP 429 for the
+   reordered query. During an upstream interruption the forms show matching
+   locally retained pages with source links and coverage.
 3. Browser Receipt's [optional DNS observer](https://github.com/jsdyer/browserreceipt/tree/main/optional-dns)
    includes delegated-subzone, reverse-proxy and systemd instructions. Nothing
    was installed on a VPS. It observes resolver egress contacting that subzone,
