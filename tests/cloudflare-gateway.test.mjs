@@ -300,6 +300,23 @@ test('LOC reports the HTTP status without leaking the upstream error body or res
   assert.equal(env.sql.prepare('SELECT count(*) n FROM gateway_cache').get().n,0);
 });
 
+test('LOC support references identify the upstream request and omit arbitrary header values',async t=>{
+  const env=locEnvironment();
+  const ray='aaaaaaaa00000000-YVR';
+  const references=[ray,env.LOC_USER_AGENT];
+  stub(t,async()=>new Response(null,{status:403,headers:{'CF-Mitigated':'challenge','CF-Ray':references.shift()}}));
+  for(const expected of [ray,null]){
+    const response=await run(newspaperPath,env);
+    const {error}=await response.json();
+    assert.equal(error.code,'loc_http_403');
+    assert.match(error.message,/browser verification/);
+    assert.equal(error.message.includes('Library request ID'),Boolean(expected));
+    if(expected) assert.ok(error.message.includes(expected));
+    assert.ok(!error.message.includes('fake-lib-token'));
+    env.sql.prepare("UPDATE gateway_budget SET expiry=0 WHERE id='loc-newspapers-lease'").run();
+  }
+});
+
 test('LOC distinguishes a connection failure from its request deadline and omits private transport details',async t=>{
   const env=locEnvironment();
   const timeout=AbortSignal.timeout;

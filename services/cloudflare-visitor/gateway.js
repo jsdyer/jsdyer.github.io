@@ -206,9 +206,13 @@ async function apiUpstream(plan,env) {
     const status=response.status;
     await response.body?.cancel();
     if(plan.group==='loc-newspapers' && status>=400 && status!==429){
-      // Never expose a source error page or its headers; it can echo the credential.
-      console.warn(JSON.stringify({event:'newspaper-source-http',status}));
-      apiThrow(status,'loc_http_'+status,'The Library of Congress returned HTTP '+status+' for this search.');
+      const ray=response.headers.get('CF-Ray') || '';
+      const reference=/^[a-f0-9]{16}(?:-[A-Z]{3})?$/.test(ray) ? ray : undefined;
+      const challenged=response.headers.get('CF-Mitigated')==='challenge';
+      console.warn(JSON.stringify({event:'newspaper-source-http',status,reference,challenged}));
+      const reason=challenged ? 'The Library of Congress requested browser verification for the server request.'
+        : 'The Library of Congress returned HTTP '+status+' for this search.';
+      apiThrow(status,'loc_http_'+status,reason+(reference?' Library request ID '+reference+'.':''));
     }
     apiThrow(status===429?429:502,'source_unavailable','The upstream source could not complete this request.',status===429?60:undefined);
   }
