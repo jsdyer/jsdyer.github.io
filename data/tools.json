@@ -9869,7 +9869,7 @@
             "captured_at"
           ],
           "precision": "minute",
-          "value": "2026-11-26 17:49 UTC"
+          "value": "2026-11-27 09:31 UTC"
         }
       ]
     },
@@ -10079,7 +10079,7 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-27 08:49 UTC",
+          "value": "2026-11-27 09:43 UTC",
           "count": 262
         }
       ]
@@ -10235,8 +10235,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-27 08:50 UTC",
-          "count": 601
+          "value": "2026-11-27 09:43 UTC",
+          "count": 605
         }
       ]
     },
