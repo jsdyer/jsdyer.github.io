@@ -318,7 +318,7 @@ def use_case_links(tool):
 
 def source_check_time(cron):
     """Describe the daily, weekly and monthly schedules used by result collections."""
-    match = re.fullmatch(r"(\d{1,2}) (\d{1,2}) (\*|\d{1,2}) \* (\*|[0-6])", cron)
+    match = re.fullmatch(r"(\d{1,2}) (\d{1,2}) (\*|\d{1,2}(?:,\d{1,2})*) \* (\*|[0-6])", cron)
     if not match:
         return None
     minute, hour, day, weekday = match.groups()
@@ -327,8 +327,15 @@ def source_check_time(cron):
     if day == "*":
         days = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
         period = "Daily" if weekday == "*" else "Each " + days[int(weekday)]
-    elif weekday == "*" and 1 <= int(day) <= 31:
-        period = f"Day {int(day)} of each month"
+    elif weekday == "*":
+        dates = sorted({int(part) for part in day.split(",")})
+        if dates[0] < 1 or dates[-1] > 31:
+            return None
+        if len(dates) == 1:
+            period = f"Day {dates[0]} of each month"
+        else:
+            first_dates = ", ".join(str(value) for value in dates[:-1])
+            period = f"Days {first_dates} and {dates[-1]} of each month"
     else:
         return None
     return f"{period} at {int(hour):02d}:{int(minute):02d} UTC"
@@ -484,8 +491,9 @@ def write_topics(stage, tools, root):
             destination = tool["url"]
             if "record" in item:
                 record = item["record"]
-                require("result_directory" in tool and isinstance(record, str) and SLUG.fullmatch(record),
-                        f"{slug}: expected a result collection and a record slug for {tool['id']}")
+                require("result_directory" in tool and isinstance(record, str)
+                        and all(SLUG.fullmatch(part) for part in record.split("/")),
+                        f"{slug}: expected a record path inside the result collection for {tool['id']}")
                 destination += tool["result_directory"]["path"] + record + "/"
             entries.append(f'<section><h2><a href="{escape(destination, quote=True)}">{escape(item["label"])}</a></h2>'
                            f'<p>{escape(item["help"])}</p>{use_case_links(tool)}</section>')

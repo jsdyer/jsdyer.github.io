@@ -135,6 +135,12 @@
         "tool": "freenet-echo",
         "label": "Revisit Canada’s early community networks",
         "help": "Choose a network such as the Vancouver Community Network or Chebucto Community Net and follow its dated archived pages."
+      },
+      {
+        "tool": "postmarkplaces",
+        "record": "names/langley-prairie",
+        "label": "Which office used the Langley Prairie postmark?",
+        "help": "Compare the name on the envelope with the cancellation date. On May 16, 1911, one office became Murrayville and another took the Langley Prairie name."
       }
     ]
   },
@@ -149,8 +155,9 @@
       },
       {
         "tool": "halifaxtimelens",
-        "label": "How did the Cogswell area or Dartmouth waterfront change?",
-        "help": "Compare aerial photographs from two years, then locate the same streets on a modern map."
+        "label": "How did the Dartmouth ferry waterfront change?",
+        "help": "Compare the Portland Street and ferry docks photograph with the later Queen Street and City Hall view. Open the same area on the dated aerial maps.",
+        "record": "dartmouth-ferry-landing"
       },
       {
         "tool": "stormtracks",
@@ -182,6 +189,12 @@
         "tool": "inspectiontrail",
         "label": "What did inspectors report about a restaurant?",
         "help": "Use the establishment name and community to find the dated Nova Scotia inspection record."
+      },
+      {
+        "tool": "postmarkplaces",
+        "record": "offices/dartmouth",
+        "label": "Where did Dartmouth’s post office operate?",
+        "help": "Trace the move to King and Portland in 1876, the move to Water and Ochterloney in 1891 and the brick post office built in 1894. The municipal heritage report identifies the buildings and streets."
       }
     ]
   },
@@ -230,6 +243,12 @@
         "record": "47959-26",
         "label": "When were coho recorded in Yorkson Creek?",
         "help": "Read the annual DFO estimates and survey years, then follow the creek to its mapped channel in Langley."
+      },
+      {
+        "tool": "routemirror",
+        "record": "routes/555",
+        "label": "Which direction had the higher peak load on route 555?",
+        "help": "Compare westbound and eastbound trips for the same season and day type. TransLink reports the average load at the busiest point as a percentage of vehicle capacity."
       }
     ]
   },

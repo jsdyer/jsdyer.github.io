@@ -26,16 +26,22 @@ class SearchFilesTests(unittest.TestCase):
             page = (root / "topics/local/index.html").read_text()
             self.assertIn('<a href="/example/records/sample/">Read the record</a>', page)
             self.assertIn('<a href="/example/records/">All records</a>', page)
-            item["record"] = "../another-tool"
+            item["record"] = "offices/dartmouth"
             config.write_text(json.dumps(topics))
-            with self.assertRaises(ValueError):
-                write_topics(root, [tool], root)
+            write_topics(root / "nested", [tool], root)
+            self.assertIn('href="/example/records/offices/dartmouth/"', (root / "nested/topics/local/index.html").read_text())
+            for invalid in ("../another-tool", "/another-tool", "offices//dartmouth", "offices/x?q=record"):
+                item["record"] = invalid
+                config.write_text(json.dumps(topics))
+                with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                    write_topics(root, [tool], root)
 
     def test_scheduled_source_checks(self):
         self.assertEqual(source_check_time("23 10 * * *"), "Daily at 10:23 UTC")
         self.assertEqual(source_check_time("38 9 * * 3"), "Each Wednesday at 09:38 UTC")
         self.assertEqual(source_check_time("24 14 6 * *"), "Day 6 of each month at 14:24 UTC")
-        for unsupported in ("0 36 * * *", "9 8 5 * 3", "0 */6 * * *"):
+        self.assertEqual(source_check_time("31 9 5,20 * *"), "Days 5 and 20 of each month at 09:31 UTC")
+        for unsupported in ("0 36 * * *", "9 8 5 * 3", "0 */6 * * *", "31 9 5,32 * *"):
             self.assertIsNone(source_check_time(unsupported))
 
     def test_multi_file_dataset_links_to_explanatory_download_section(self):

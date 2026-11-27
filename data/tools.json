@@ -2930,7 +2930,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose the 2025 satellite layer on either side to compare the harbour with an earlier aerial mosaic. Start with Cogswell and Scotia Square to compare the blocks before clearance with the 1977 mosaic, then open the 1961 photograph and the later demolition view. At the ferry terminal, see the closest 1955 and 2001 archive references within one kilometre, show the indexed points on both maps, and save references to a downloadable GeoJSON notebook."
+      "note": "Open a named harbour viewpoint to compare three matched image extracts, browse dated archive photographs and return to the same place in the map. Start with Cogswell and Scotia Square to compare the blocks before clearance with the 1977 mosaic, then open the 1961 photograph and the later demolition view. At the ferry terminal, see the closest 1955 and 2001 archive references within one kilometre, show the indexed points on both maps, and save references to a downloadable GeoJSON notebook."
     },
     "task_label": "Halifax Historical Aerial Photo Comparison",
     "use_cases": [
@@ -2942,7 +2942,11 @@
         "title": "Dartmouth Ferry Landing in Historical Aerial Photos",
         "path": "dartmouth-ferry.html"
       }
-    ]
+    ],
+    "result_directory": {
+      "path": "records/",
+      "title": "Halifax and Dartmouth harbour viewpoints"
+    }
   },
   {
     "id": "langleychanges",
@@ -3231,10 +3235,20 @@
       ]
     },
     "readme": {
-      "note": "Choose a light station and compare its character with neighbouring signals, or try Identify mode with playback started on request. Schematic flash widths are labelled when source timings are absent; use current official publications for navigation."
+      "note": "Open a light profile by Coast Guard section to read its signal and compare the closest lights. At Peggy’s Point, the five-second cycle has 1.5 seconds of red light and 3.5 seconds of darkness. Open its player or the map with the light already selected."
     },
     "sync_manifest": true,
-    "task_label": "Canadian Coastal Lights and Signals"
+    "task_label": "Canadian Coastal Lights and Signals",
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian light signals and nearby stations by Coast Guard section"
+    },
+    "dataset": {
+      "title": "Canadian Coast Guard lights and signals",
+      "file": "data/lights.json",
+      "format": "JSON",
+      "section": "dataset"
+    }
   },
   {
     "id": "stormtracks",
@@ -4811,9 +4825,18 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "The June 2015 Farley Mowat incident in Shelburne has separate claims by the town and the Canadian Coast Guard. Select the incident to compare the amounts submitted and offered, alongside the shared recovery entry."
+      "note": "The June 2015 Farley Mowat incident in Shelburne has separate claims by the town and the Canadian Coast Guard. Open its incident record to compare each claimant’s submission and offer alongside the shared recovery entry. Browse the other multi-claimant incidents or compare recoveries across cases."
     },
-    "task_label": "BC and Nova Scotia Marine Pollution Claims"
+    "task_label": "BC and Nova Scotia Marine Pollution Claims",
+    "result_directory": {
+      "path": "records/",
+      "title": "Marine pollution claims by incident, place and financial stage"
+    },
+    "dataset": {
+      "title": "BC and Nova Scotia marine pollution claims in the 2023–24 report",
+      "file": "data/edition.json",
+      "format": "JSON"
+    }
   },
   {
     "id": "pantryprices",
@@ -5422,7 +5445,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "TransLink publishes average peak passenger loads by route, direction, time band, season, day type and year.",
+      "detail": "TransLink’s annual bus route totals and seasonal directional peak-load tables report Metro Vancouver boardings and load factors.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -5437,7 +5460,7 @@
             ],
             "unit": "peak-load records"
           },
-          "value": "2026-11-24",
+          "value": "2026-11-27",
           "count": 12901
         },
         {
@@ -5455,9 +5478,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start with route 555 on fall weekdays to see how its westbound morning lead and eastbound afternoon lead change across years. Open the repeat-reversal ranking to compare its smallest lead with other routes."
+      "note": "Start with Route 555 on fall weekdays or browse the published route records. Each profile compares the same peaks across years, links to exact interactive selections and shows annual boardings from TransLink’s companion table. The three-route tour moves from directional comparisons to a combined route whose annual series is available even though its peak directions are missing."
     },
-    "task_label": "Metro Vancouver Peak Bus Passenger Patterns"
+    "task_label": "Metro Vancouver Peak Bus Passenger Patterns",
+    "result_directory": {
+      "path": "records/",
+      "title": "Metro Vancouver bus route loads and peak comparisons"
+    }
   },
   {
     "id": "postmarkplaces",
@@ -5501,9 +5528,18 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare the “Langley Prairie” postmark in 1910 and 1912. The earlier office became Murrayville on May 16, 1911, the day a different office took the Langley Prairie name. Browse Dartmouth’s history to see how its post office moved between a general store and a purpose-built building. Approximate openings and undocumented closures are labelled on the cards."
+      "note": "Compare the “Langley Prairie” postmark in 1910 and 1912. The earlier office became Murrayville on May 16, 1911, the day a different office took the Langley Prairie name. Browse Dartmouth’s history to see how its post office moved between a general store and a purpose-built building. Follow the name timeline to both office histories, or browse dated events by area. Approximate openings and undocumented closures are labelled on the cards."
     },
-    "task_label": "Historical Canadian Post Office Lookup"
+    "task_label": "Historical Canadian Post Office Lookup",
+    "result_directory": {
+      "path": "records/",
+      "title": "Postal histories by office, place and postmark name"
+    },
+    "dataset": {
+      "title": "Historic post-office names, dates and places",
+      "file": "data/edition.json",
+      "format": "JSON"
+    }
   },
   {
     "id": "lakeprofiles",
@@ -5717,9 +5753,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Start at Coal Mine Point in the Joggins Formation and search for Hylonomus to see how several reported names resolve to one accepted taxon. Switch to Haslam on Vancouver Island to compare its much younger collections with Canadian collections whose age ranges overlap."
+      "note": "Start with the Coal Mine Point fossil profile to see the original identifications and accepted names. Follow a collection with overlapping age bounds or with matching accepted PBDB taxon IDs. Switch to Haslam on Vancouver Island to compare its much younger collections with Canadian collections whose age ranges overlap."
     },
-    "task_label": "Joggins and Haslam Fossil Collection Comparison"
+    "task_label": "Joggins and Haslam Fossil Collection Comparison",
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian fossil collection and formation profiles"
+    }
   },
   {
     "id": "sunledger",
@@ -5821,9 +5861,13 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Select TRAPPIST-1 e and compare the mass estimates from Gillon (2017), Grimm (2018) and Agol (2021). The plot and table preserve each paper’s uncertainties, while the other solutions remain visible when that paper has no mass estimate."
+      "note": "Select TRAPPIST-1 e and compare the mass estimates from Gillon (2017), Grimm (2018) and Agol (2021). The plot and table preserve each paper’s uncertainties, while the other solutions remain visible when that paper has no mass estimate. The permanent measurement records compare exoplanets with at least three dated references reporting the same parameter and at least two distinct central estimates. Browse mass, radius, orbital period or minimum mass. Each profile links directly to the individual references and opens the matching planet and parameter in the chart. Other planets are linked when their records cite the same paper."
     },
-    "task_label": "Exoplanet Measurement and Research Comparison"
+    "task_label": "Exoplanet Measurement and Research Comparison",
+    "result_directory": {
+      "path": "records/",
+      "title": "Published exoplanet measurements by planet"
+    }
   },
   {
     "id": "masspeaks",
