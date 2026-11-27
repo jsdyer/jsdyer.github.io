@@ -13054,5 +13054,60 @@
         "path": "work-permit-united-states/"
       }
     ]
+  },
+  {
+    "id": "gamblingregulatorwatch",
+    "title": "Gambling Regulator Watch",
+    "task_label": "Gambling Operator Licences and Enforcement Records",
+    "description": "Look up a gambling operator, trace regulatory decisions and compare licence records across jurisdictions.",
+    "category": "explorers",
+    "tags": [
+      "gambling",
+      "regulators",
+      "licences",
+      "enforcement",
+      "operators",
+      "public records"
+    ],
+    "icon": "landmark",
+    "url": "/gamblingregulatorwatch/",
+    "source": "https://github.com/jsdyer/gamblingregulatorwatch",
+    "hosting": "project",
+    "access": "browser",
+    "sync_manifest": true,
+    "result_directory": {
+      "path": "records/",
+      "title": "Gambling licences and enforcement decisions by operator"
+    },
+    "dataset": {
+      "title": "Gambling licence and enforcement evidence",
+      "file": "data/edition.json",
+      "format": "JSON"
+    },
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Weekly",
+      "detail": "Public licensing registers, regulatory decisions and annual reports. Source coverage and appeal status are shown for each authority.",
+      "probes": [
+        {
+          "label": "Latest source snapshot",
+          "url": "https://coolcode.ca/gamblingregulatorwatch/data/status.json",
+          "path": [
+            "edition_date"
+          ],
+          "count_at": {
+            "path": [
+              "operators"
+            ],
+            "unit": "named entities"
+          },
+          "value": "2026-11-27",
+          "count": 4340
+        }
+      ]
+    },
+    "readme": {
+      "note": "Search by legal entity or a source-listed trading name. A profile links each licence and published action to its issuing authority. Compare the coverage and dates before interpreting repeat cases or documented revocation intervals."
+    }
   }
 ]

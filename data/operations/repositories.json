@@ -1384,6 +1384,23 @@
     "guarded_paths": []
   },
   {
+    "repo": "jsdyer/gamblingregulatorwatch",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "43 9 * * 5"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/gc-domain-graveyard",
     "branch": "main",
     "workflows": [

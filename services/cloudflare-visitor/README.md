@@ -26,6 +26,7 @@ token. It refuses to overwrite unreviewed live changes, uploads through Cloudfla
 It preserves the D1 binding, secrets, settings, routes and database contents.
 Commit `data/operations/cloudflare-deployment.json` with the generated Worker.
 No token or private report belongs in Git.
+The optional `LOC_DIAGNOSTIC_CONFIG` encrypted binding preserves the owner’s newspaper receiver check. Its JSON fields are `path`, `target` and `userAgent`. Keep their values private. A matching POST uses the configured search and test identity and returns the receiver’s status and capture ID.
 
 An equivalent connected-tool deployment must produce the same verified receipt.
 The operations audit rejects a generated Worker whose code hash differs from that

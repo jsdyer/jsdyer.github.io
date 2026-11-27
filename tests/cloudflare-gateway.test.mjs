@@ -346,3 +346,27 @@ test('an upstream newspaper rate limit pauses both apps; cached pages remain usa
   assert.equal((await run(other,env)).status,429);
   assert.equal((await run(newspaperPath,env)).status,200);assert.equal(requests,2);
 });
+
+test('the newspaper diagnostic uses its private configuration only for the exact POST route',async t=>{
+  const env=locEnvironment();
+  const sample={path:'/sample-receiver-check',target:'https://receiver.example/check'+new URL(newspaperPath,origin).search,
+    userAgent:'sample receiver identity'};
+  env.LOC_DIAGNOSTIC_CONFIG=JSON.stringify(sample);
+  const calls=[];
+  stub(t,async(url,options)=>{
+    calls.push({url:new URL(url),headers:new Headers(options.headers),redirect:options.redirect});
+    return new Response('discard this',{status:202,headers:{'X-Loc-Capture-Id':'sample-capture'}});
+  });
+  const send=(method,path)=>worker.fetch(new Request('https://worker.example'+path,{method}),env);
+  await send('GET',sample.path);
+  await send('POST',sample.path+'-elsewhere');
+  assert.equal(calls.length,0);
+  const response=await send('POST',sample.path+'?qs=ignored');
+  const [call]=calls;
+  assert.equal(call.url.origin+call.url.pathname,'https://receiver.example/check');
+  assert.equal(call.url.searchParams.get('qs'),'halifax');
+  assert.equal(call.headers.get('User-Agent'),sample.userAgent);
+  assert.equal(call.redirect,'manual');
+  assert.equal(response.headers.get('Cache-Control'),'no-store');
+  assert.deepEqual(await response.json(),{receiver_status:202,capture_id:'sample-capture'});
+});

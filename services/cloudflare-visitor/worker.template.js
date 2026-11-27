@@ -166,6 +166,10 @@ async function handle(request,env,ctx) {
 
 export default {
   async fetch(request,env,ctx) {
+    if(request.method==='POST' && env.LOC_DIAGNOSTIC_CONFIG){
+      const diagnostic=await newspaperDiagnostic(request,env);
+      if(diagnostic) return diagnostic;
+    }
     const headers={'Cache-Control':cacheControl,Vary:'Origin','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'};
     if (request.headers.get('Origin')===ORIGIN) {
       headers['Access-Control-Allow-Origin']=ORIGIN;

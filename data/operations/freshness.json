@@ -926,6 +926,21 @@
       "Refresh official public data"
     ]
   },
+  "jsdyer/gamblingregulatorwatch/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/gamblingregulatorwatch/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "All configured regulatory sources checked successfully"
+      }
+    ],
+    "collection_steps": [
+      "Refresh official regulatory sources"
+    ]
+  },
   "jsdyer/gc-domain-graveyard/pages.yml": {
     "freshness": [
       {
