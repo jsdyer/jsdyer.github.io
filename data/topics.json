@@ -34,6 +34,12 @@
         "help": "Compare earnings at the same paid hours and use your province's price index over the period."
       },
       {
+        "tool": "tuitiontrail",
+        "record": "nursing/nova-scotia",
+        "label": "How does nursing tuition in Nova Scotia compare with British Columbia?",
+        "help": "Compare tuition for the same field and academic year. Follow the separately dated graduate income cohorts to see which graduates and years each figure covers."
+      },
+      {
         "tool": "basketmath",
         "label": "Find the better grocery deal",
         "help": "Compare different package sizes for the amount you actually need, including multi-buy pricing."
@@ -213,6 +219,12 @@
         "record": "offices/dartmouth",
         "label": "Where did Dartmouth’s post office operate?",
         "help": "Trace the move to King and Portland in 1876, the move to Water and Ochterloney in 1891 and the brick post office built in 1894. The municipal heritage report identifies the buildings and streets."
+      },
+      {
+        "tool": "mainstreetcensus",
+        "record": "halifax-restaurant-locations",
+        "label": "How many restaurant locations are in Halifax?",
+        "help": "Compare Halifax Regional Municipality with the wider metropolitan area using the same industry group and employer count. The boundaries overlap."
       }
     ]
   },
@@ -267,6 +279,12 @@
         "record": "routes/555",
         "label": "Which direction had the higher peak load on route 555?",
         "help": "Compare westbound and eastbound trips for the same season and day type. TransLink reports the average load at the busiest point as a percentage of vehicle capacity."
+      },
+      {
+        "tool": "mainstreetcensus",
+        "record": "langley-restaurant-locations",
+        "label": "How many restaurant locations are in Langley City and Township?",
+        "help": "Compare the two municipalities in the same Statistics Canada table. See how many operating locations had employees in each place."
       }
     ]
   },
@@ -337,6 +355,46 @@
         "tool": "priceatlas",
         "label": "How does this grocery price compare with the provincial average?",
         "help": "Pick the product, package size, province and month that fit your shelf price."
+      }
+    ]
+  },
+  "canadian-business-research": {
+    "title": "Canadian business and trade research",
+    "intro": "Choose an industry, a place, a product or a trademark. Each example shows what the source counted and when.",
+    "tasks": [
+      {
+        "tool": "mainstreetcensus",
+        "record": "langley-restaurant-locations",
+        "label": "How many restaurant locations are in each Langley?",
+        "help": "Compare employer locations in Langley City and the Township of Langley for the same industry and edition. The municipal boundaries identify different places."
+      },
+      {
+        "tool": "businessbench",
+        "record": "54192",
+        "label": "What do Canadian photography businesses spend?",
+        "help": "Read the income and expense figures for the published revenue band, then enter your own figures privately to compare."
+      },
+      {
+        "tool": "importtrail",
+        "record": "hs-090111",
+        "label": "Who imports green coffee into Canada?",
+        "help": "See which importers appear for unroasted, non-decaffeinated coffee. The concentration table reports the share held by groups of importers."
+      },
+      {
+        "tool": "trademarktrail",
+        "record": "2090183",
+        "label": "When was TrueNorth.bet registered as a trademark?",
+        "help": "Follow the application number through filing, advertisement and registration. Compare the dates with the separately documented gaming authorization."
+      },
+      {
+        "tool": "langleytrades",
+        "label": "Which businesses appear in the Township licence file?",
+        "help": "Find a named business or street in the municipal licence file and check the date of the observation."
+      },
+      {
+        "tool": "exportneighbours",
+        "label": "Where does a province send its exports?",
+        "help": "Choose a domestic export and compare trading destinations across the years covered."
       }
     ]
   }

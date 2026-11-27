@@ -546,6 +546,29 @@
       ]
     },
     {
+      "repo": "jsdyer/businessbench",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "19 11 7 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/businessbench/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "ISED financial performance data checked",
+          "max_age_seconds": 3456000
+        }
+      ],
+      "collection_steps": [
+        "Check ISED financial performance data"
+      ]
+    },
+    {
       "repo": "jsdyer/campcalendar",
       "branch": "main",
       "workflow": "refresh.yml",
@@ -1908,6 +1931,29 @@
       ]
     },
     {
+      "repo": "jsdyer/importtrail",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "47 10 7 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/importtrail/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Canadian Importers Database editions checked",
+          "max_age_seconds": 3456000
+        }
+      ],
+      "collection_steps": [
+        "Check Canadian Importers Database editions"
+      ]
+    },
+    {
       "repo": "jsdyer/inflation-basket",
       "branch": "main",
       "workflow": "pages.yml",
@@ -2246,6 +2292,29 @@
       ],
       "collection_steps": [
         "Retrieve and validate the official export"
+      ]
+    },
+    {
+      "repo": "jsdyer/mainstreetcensus",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "19 14 15 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/mainstreetcensus/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Statistics Canada business count editions checked",
+          "max_age_seconds": 3456000
+        }
+      ],
+      "collection_steps": [
+        "Check Statistics Canada business count editions"
       ]
     },
     {
@@ -4001,6 +4070,28 @@
       ]
     },
     {
+      "repo": "jsdyer/trademarktrail",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "41 10 * * 5"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/trademarktrail/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "date",
+          "label": "CIPO trademark records checked"
+        }
+      ],
+      "collection_steps": [
+        "Check CIPO trademark records"
+      ]
+    },
+    {
       "repo": "jsdyer/trailglass",
       "branch": "main",
       "workflow": "pages.yml",
@@ -4098,6 +4189,29 @@
       ],
       "collection_steps": [
         "Refresh official travel advisory index"
+      ]
+    },
+    {
+      "repo": "jsdyer/tuitiontrail",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "29 13 8 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/tuitiontrail/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Statistics Canada tuition and graduate income tables checked",
+          "max_age_seconds": 3456000
+        }
+      ],
+      "collection_steps": [
+        "Check tuition and graduate income tables"
       ]
     },
     {

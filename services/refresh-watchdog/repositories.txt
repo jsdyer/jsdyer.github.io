@@ -24,6 +24,7 @@ jsdyer/briefings
 jsdyer/broadbandatlas
 jsdyer/budgetmirror
 jsdyer/buoybench
+jsdyer/businessbench
 jsdyer/campcalendar
 jsdyer/canadaanalytics
 jsdyer/canadaboard
@@ -89,6 +90,7 @@ jsdyer/hosted-where
 jsdyer/hotspotledger
 jsdyer/housing-pulse
 jsdyer/iceweeks
+jsdyer/importtrail
 jsdyer/inflation-basket
 jsdyer/insolvencyatlas
 jsdyer/inspectiontrail
@@ -105,6 +107,7 @@ jsdyer/lawdelta
 jsdyer/libraryworkbench
 jsdyer/lightkeeper
 jsdyer/lobbytrail
+jsdyer/mainstreetcensus
 jsdyer/malwarelineage
 jsdyer/maplehosting
 jsdyer/maplelabel
@@ -187,11 +190,13 @@ jsdyer/telecompulse
 jsdyer/tide-and-dark
 jsdyer/tidereceipt
 jsdyer/toxic-ground
+jsdyer/trademarktrail
 jsdyer/trailglass
 jsdyer/transferwindow
 jsdyer/transitreceipt
 jsdyer/translink
 jsdyer/tripbrief
+jsdyer/tuitiontrail
 jsdyer/wagewindow
 jsdyer/weatherwindow
 jsdyer/welllayers

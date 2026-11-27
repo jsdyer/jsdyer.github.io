@@ -13541,5 +13541,284 @@
     "readme": {
       "note": "Compare the past year for .ca, .games and .lol, then open an extension for its longer record. Read the number of reported transactions beside the dollar average. A single sale can move a small sample considerably."
     }
+  },
+  {
+    "id": "businessbench",
+    "title": "Business Bench",
+    "description": "Compare your annual revenue, expenses and profit margin with published Canadian small-business financial benchmarks by industry and region.",
+    "category": "money",
+    "tags": [
+      "small business",
+      "NAICS",
+      "ISED",
+      "profit margin",
+      "Canada",
+      "expenses",
+      "financial benchmarks"
+    ],
+    "icon": "chart-candlestick",
+    "url": "/businessbench/",
+    "source": "https://github.com/jsdyer/businessbench",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "ISED annual financial performance data for incorporated and unincorporated businesses with $30,000 to $5 million in revenue. The source is checked monthly.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "ISED sources checked",
+          "url": "https://coolcode.ca/businessbench/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "industry_count"
+            ],
+            "unit": "industry profiles"
+          },
+          "value": "2026-11-27",
+          "count": 1160
+        }
+      ]
+    },
+    "result_directory": {
+      "title": "Canadian small-business industry financial profiles",
+      "path": "records/"
+    },
+    "task_label": "Compare Canadian small-business finances by industry",
+    "dataset": {
+      "title": "Canadian small-business financial benchmarks by industry and region",
+      "file": "data/benchmarks.csv",
+      "format": "CSV"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Choose a Canadian industry and region, then enter annual revenue and expenses to compare a profit margin privately. In 2024, the 7,546 businesses in the photographic services cohort averaged $142,100 in revenue and $49,300 in net profit. Open a profile for quality grades, revenue quartiles and the original ISED files."
+    }
+  },
+  {
+    "id": "mainstreetcensus",
+    "title": "Main Street Census",
+    "description": "Compare businesses with employees across Canadian municipalities and metro areas by industry and employee-size band.",
+    "category": "places",
+    "tags": [
+      "business counts",
+      "Statistics Canada",
+      "NAICS",
+      "municipalities",
+      "Canada",
+      "employer locations",
+      "retail"
+    ],
+    "icon": "map",
+    "url": "/mainstreetcensus/",
+    "source": "https://github.com/jsdyer/mainstreetcensus",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Statistics Canada’s semiannual Canadian Business Counts table reports employer locations by industry, geography and employee-size band. The source catalogue is checked monthly.",
+      "cadence": "Monthly",
+      "probes": [
+        {
+          "label": "Source catalogue and table checked",
+          "url": "https://coolcode.ca/mainstreetcensus/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "geographies"
+            ],
+            "unit": "published areas"
+          },
+          "value": "2026-11-27",
+          "count": 3348
+        }
+      ]
+    },
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian employer locations by place and industry"
+    },
+    "task_label": "Compare Canadian employer locations by place and industry",
+    "dataset": {
+      "title": "Canadian employer-location counts by geography, industry and size",
+      "section": "edition-source"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare the Township of Langley with the City of Langley, then open the employee-size bands to see how their restaurant locations are distributed. The Halifax comparison illustrates the overlap between a municipality and its surrounding metro area. Place codes identify each boundary when names repeat. Industry profiles link to every included metro area and let you change either place."
+    }
+  },
+  {
+    "id": "importtrail",
+    "title": "Import Trail",
+    "description": "Find the companies listed for selected imports into Canada. Explore products, importer addresses, countries of origin and annual editions.",
+    "category": "money",
+    "tags": [
+      "imports",
+      "Canada",
+      "trade",
+      "companies",
+      "HS6",
+      "supply chains",
+      "consumer products",
+      "coffee"
+    ],
+    "icon": "package-search",
+    "url": "/importtrail/",
+    "source": "https://github.com/jsdyer/importtrail",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Monthly",
+      "detail": "Annual ISED Canadian Importers Database workbooks supply the major-importer lists. Selected product reports also supply cumulative import values and shares.",
+      "probes": [
+        {
+          "label": "Canadian Importers Database editions checked",
+          "url": "https://coolcode.ca/importtrail/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "product_count"
+            ],
+            "unit": "product profiles"
+          },
+          "value": "2026-11-27",
+          "count": 24
+        }
+      ]
+    },
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian importers by product and trade year"
+    },
+    "task_label": "Look up major importers by product in Canada",
+    "dataset": {
+      "title": "Major importers of green coffee into Canada by year and country of origin",
+      "file": "data/products/090111.json",
+      "format": "JSON"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Search a product, company, city or HS code to explore Canada’s annual major-importer lists. Each product opens a shareable report with a national directory, separate lists for each published country of origin and earlier trade years. Selected reports also show ISED’s cumulative import values and shares. The source check runs monthly and builds use the last verified workbooks."
+    }
+  },
+  {
+    "id": "trademarktrail",
+    "title": "Trademark Trail",
+    "description": "Search selected Canadian trademarks, compare two applications and follow filing, advertisement and registration dates to the official register.",
+    "category": "explorers",
+    "tags": [
+      "trademarks",
+      "CIPO",
+      "Canadian brands",
+      "registration",
+      "intellectual property",
+      "opposition"
+    ],
+    "icon": "files",
+    "url": "/trademarktrail/",
+    "source": "https://github.com/jsdyer/trademarktrail",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Weekly",
+      "detail": "Selected CIPO register histories are checked weekly. Filing, action and registration dates are published with the observed status and official sources.",
+      "probes": [
+        {
+          "label": "Register checked",
+          "url": "https://coolcode.ca/trademarktrail/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "record_count"
+            ],
+            "unit": "trademark records"
+          },
+          "value": "2026-11-27",
+          "count": 11
+        }
+      ]
+    },
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian trademark histories by application number"
+    },
+    "task_label": "Compare Canadian trademark application histories",
+    "dataset": {
+      "title": "Canadian trademark application milestones and observed status",
+      "file": "data/compare.json",
+      "format": "JSON"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with TrueNorth.bet to see its filing, advertisement and registration, then open the original Trademarks Journal. Compare the two CANADARM applications to see how the same name can have separate numbers, histories and outcomes. Filing and registration dates come from the register. Each profile dates the status observation."
+    }
+  },
+  {
+    "id": "tuitiontrail",
+    "title": "Tuition Trail",
+    "description": "Compare Canadian undergraduate tuition by field, province and academic year, then explore reported employment income for earlier graduate cohorts.",
+    "category": "money",
+    "tags": [
+      "tuition",
+      "universities",
+      "students",
+      "Canada",
+      "graduate earnings",
+      "education",
+      "Statistics Canada"
+    ],
+    "icon": "chart-no-axes-combined",
+    "url": "/tuitiontrail/",
+    "source": "https://github.com/jsdyer/tuitiontrail",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "Statistics Canada’s Canadian undergraduate tuition averages and graduate employment income medians have separate units, fields and reference years.",
+      "cadence": "Monthly source check",
+      "probes": [
+        {
+          "label": "Last successful source check",
+          "url": "https://coolcode.ca/tuitiontrail/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "tuition_values"
+            ],
+            "unit": "published tuition amounts"
+          },
+          "value": "2026-11-27",
+          "count": 3866
+        }
+      ]
+    },
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian tuition histories and graduate income cohorts"
+    },
+    "task_label": "Compare Canadian tuition and graduate earnings",
+    "dataset": {
+      "title": "Canadian undergraduate tuition and graduate income by cohort",
+      "file": "data/edition.json",
+      "format": "JSON"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with nursing in Nova Scotia and British Columbia, then change the places, field or academic year. Open a place’s tuition history to inspect the reported fees and preliminary years. The graduate-income comparison uses earlier Canadian undergraduate degree cohorts and broader fields, each labelled with the graduation year and constant-dollar basis."
+    }
   }
 ]

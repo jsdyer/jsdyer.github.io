@@ -502,6 +502,23 @@
     ]
   },
   {
+    "repo": "jsdyer/businessbench",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "19 11 7 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/campcalendar",
     "branch": "main",
     "workflows": [
@@ -1781,6 +1798,23 @@
     ]
   },
   {
+    "repo": "jsdyer/importtrail",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "47 10 7 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/inflation-basket",
     "branch": "main",
     "workflows": [
@@ -2109,6 +2143,23 @@
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/mainstreetcensus",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "19 14 15 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
   },
   {
     "repo": "jsdyer/malwarelineage",
@@ -3776,6 +3827,23 @@
     "guarded_paths": []
   },
   {
+    "repo": "jsdyer/trademarktrail",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "41 10 * * 5"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/trailglass",
     "branch": "main",
     "workflows": [
@@ -3863,6 +3931,23 @@
     ],
     "guarded_paths": [
       ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/tuitiontrail",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "29 13 8 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
       ".github/workflows/schedule-guard.yml"
     ]
   },

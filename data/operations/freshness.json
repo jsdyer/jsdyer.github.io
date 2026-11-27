@@ -2696,5 +2696,84 @@
     "collection_steps": [
       "Collect Canadian publisher feeds"
     ]
+  },
+  "jsdyer/businessbench/refresh.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/businessbench/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "ISED financial performance data checked",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Check ISED financial performance data"
+    ]
+  },
+  "jsdyer/mainstreetcensus/refresh.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/mainstreetcensus/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Statistics Canada business count editions checked",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Check Statistics Canada business count editions"
+    ]
+  },
+  "jsdyer/importtrail/refresh.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/importtrail/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Canadian Importers Database editions checked",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Check Canadian Importers Database editions"
+    ]
+  },
+  "jsdyer/trademarktrail/refresh.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/trademarktrail/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "date",
+        "label": "CIPO trademark records checked"
+      }
+    ],
+    "collection_steps": [
+      "Check CIPO trademark records"
+    ]
+  },
+  "jsdyer/tuitiontrail/refresh.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/tuitiontrail/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Statistics Canada tuition and graduate income tables checked",
+        "max_age_seconds": 3456000
+      }
+    ],
+    "collection_steps": [
+      "Check tuition and graduate income tables"
+    ]
   }
 }
