@@ -3377,7 +3377,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-26 22:26 UTC",
+          "value": "2026-11-27 00:35 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -4417,7 +4417,7 @@
             ],
             "unit": "stations"
           },
-          "value": "2026-11-26",
+          "value": "2026-11-27",
           "count": 394
         },
         {
@@ -5600,8 +5600,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-26 20:25 UTC",
-          "count": 44
+          "value": "2026-11-27 02:21 UTC",
+          "count": 46
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -5616,7 +5616,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 1760
+          "count": 1840
         }
       ]
     },
@@ -6406,7 +6406,7 @@
             ],
             "unit": "mapped facilities"
           },
-          "value": "2026-11-26",
+          "value": "2026-11-27",
           "count": 439
         },
         {
@@ -6483,7 +6483,7 @@
             ],
             "unit": "in-service meter records"
           },
-          "value": "2026-11-26",
+          "value": "2026-11-27",
           "count": 3129
         },
         {
@@ -6968,8 +6968,8 @@
             ],
             "unit": "published prefixes"
           },
-          "value": "2026-11-26 16:50 UTC",
-          "count": 13995
+          "value": "2026-11-26 23:17 UTC",
+          "count": 13996
         }
       ]
     },
@@ -8167,8 +8167,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-26 21:58 UTC",
-          "count": 5509
+          "value": "2026-11-27 03:01 UTC",
+          "count": 6089
         }
       ]
     },
@@ -8214,8 +8214,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-26 21:45 UTC",
-          "count": 57
+          "value": "2026-11-27 02:39 UTC",
+          "count": 60
         }
       ]
     },
@@ -8261,8 +8261,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-26 20:18 UTC",
-          "count": 120
+          "value": "2026-11-27 01:54 UTC",
+          "count": 130
         }
       ]
     },
@@ -8676,8 +8676,8 @@
             "unit": "crossings",
             "measure": "length"
           },
-          "value": "2026-11-26 21:58 UTC",
-          "count": 30
+          "value": "2026-11-27 03:22 UTC",
+          "count": 29
         }
       ]
     },
@@ -8767,7 +8767,7 @@
             ],
             "unit": "aggregate cohorts"
           },
-          "value": "2026-11-26 16:31 UTC",
+          "value": "2026-11-26 23:06 UTC",
           "count": 12
         }
       ]
@@ -8818,8 +8818,8 @@
             ],
             "unit": "threat domains tracked"
           },
-          "value": "2026-11-26 20:35 UTC",
-          "count": 697
+          "value": "2026-11-27 01:49 UTC",
+          "count": 780
         }
       ]
     },
@@ -8863,8 +8863,8 @@
             ],
             "unit": "scan receipts"
           },
-          "value": "2026-11-26 16:58 UTC",
-          "count": 21
+          "value": "2026-11-26 23:22 UTC",
+          "count": 24
         }
       ]
     },
@@ -9975,7 +9975,7 @@
             "capturedAt"
           ],
           "precision": "minute",
-          "value": "2026-11-26 21:40 UTC"
+          "value": "2026-11-27 02:24 UTC"
         }
       ]
     },
@@ -10079,8 +10079,8 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-26 21:59 UTC",
-          "count": 261
+          "value": "2026-11-27 02:54 UTC",
+          "count": 262
         }
       ]
     },
@@ -10127,8 +10127,8 @@
             ],
             "unit": "observations"
           },
-          "value": "2026-11-26 21:34 UTC",
-          "count": 472
+          "value": "2026-11-27 02:20 UTC",
+          "count": 492
         }
       ]
     },
@@ -10235,8 +10235,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-26 22:00 UTC",
-          "count": 553
+          "value": "2026-11-27 02:55 UTC",
+          "count": 573
         }
       ]
     },
@@ -10908,8 +10908,8 @@
             "unit": "buses out"
           },
           "precision": "minute",
-          "value": "2026-11-26 22:24 UTC",
-          "count": 1220
+          "value": "2026-11-27 02:59 UTC",
+          "count": 736
         },
         {
           "label": "Network",
@@ -10917,7 +10917,7 @@
           "path": [
             "retrieved"
           ],
-          "value": "2026-11-26"
+          "value": "2026-11-27"
         }
       ]
     },
@@ -11014,7 +11014,7 @@
             ],
             "unit": "watched targets"
           },
-          "value": "2026-11-26 20:36 UTC",
+          "value": "2026-11-27 01:49 UTC",
           "count": 4
         }
       ]
@@ -11239,7 +11239,7 @@
             ],
             "unit": "protected areas"
           },
-          "value": "2026-11-26 22:02 UTC",
+          "value": "2026-11-27 02:50 UTC",
           "count": 1037
         }
       ]
@@ -11777,7 +11777,7 @@
             ],
             "unit": "destinations"
           },
-          "value": "2026-11-26 22:10 UTC",
+          "value": "2026-11-27 03:03 UTC",
           "count": 230
         }
       ]
@@ -11988,7 +11988,7 @@
           ],
           "label": "Nova Scotia fuel prices checked",
           "precision": "minute",
-          "value": "2026-11-26 21:25 UTC"
+          "value": "2026-11-27 02:10 UTC"
         },
         {
           "url": "https://coolcode.ca/fuelwindow/data/prices.json",
@@ -11999,7 +11999,7 @@
           ],
           "label": "PEI fuel prices checked",
           "precision": "minute",
-          "value": "2026-11-26 21:25 UTC"
+          "value": "2026-11-27 02:10 UTC"
         }
       ],
       "cadence": "Twice daily"
@@ -12351,7 +12351,7 @@
             ],
             "unit": "archived days"
           },
-          "value": "2026-11-26 18:29 UTC",
+          "value": "2026-11-27 00:41 UTC",
           "count": 4166
         },
         {
@@ -12721,7 +12721,7 @@
             "checked_at"
           ],
           "precision": "minute",
-          "value": "2026-11-26 04:38 UTC"
+          "value": "2026-11-27 00:52 UTC"
         }
       ],
       "cadence": "Weekdays"
