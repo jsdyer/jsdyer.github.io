@@ -13077,7 +13077,10 @@
     "sync_manifest": true,
     "result_directory": {
       "path": "records/",
-      "title": "Gambling licences and enforcement decisions by operator"
+      "title": "Gambling licences and enforcement decisions by operator",
+      "additional_paths": [
+        "regulators/"
+      ]
     },
     "dataset": {
       "title": "Gambling licence and enforcement evidence",
@@ -13108,6 +13111,67 @@
     },
     "readme": {
       "note": "Search by legal entity or a source-listed trading name. A profile links each licence and published action to its issuing authority. Compare the coverage and dates before interpreting repeat cases or documented revocation intervals."
+    }
+  },
+  {
+    "id": "offshorerecords",
+    "title": "Offshore Records Atlas",
+    "description": "Explore how countries appear in five offshore investigations, trace documented company roles and read dated tax-transparency reviews.",
+    "category": "explorers",
+    "tags": [
+      "offshore records",
+      "ICIJ",
+      "Panama Papers",
+      "Canada",
+      "corporate ownership",
+      "tax transparency"
+    ],
+    "icon": "landmark",
+    "url": "/offshorerecords/",
+    "source": "https://github.com/jsdyer/offshorerecords",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Monthly",
+      "detail": "ICIJ archive counts, documented organization relationships and OECD tax-information exchange reviews, with source dates shown separately.",
+      "probes": [
+        {
+          "label": "Sources checked",
+          "url": "https://coolcode.ca/offshorerecords/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "country_count"
+            ],
+            "unit": "linked countries and territories"
+          },
+          "value": "2026-11-27",
+          "count": 232
+        }
+      ]
+    },
+    "task_label": "Explore Offshore Leaks by Country and Investigation",
+    "sync_manifest": true,
+    "result_directory": {
+      "path": "records/",
+      "title": "Offshore records by country and investigation",
+      "additional_paths": [
+        "incorporation/",
+        "investigations/",
+        "places/",
+        "trails/"
+      ]
+    },
+    "dataset": {
+      "title": "Offshore Leaks record counts by country and investigation",
+      "file": "data/icij.json",
+      "format": "JSON"
+    },
+    "readme": {
+      "note": "Start with Canada in the Pandora Papers. Compare the number of directly tagged entities, officers and addresses. Follow a recorded company relationship to its ICIJ source, then check the jurisdiction of incorporation and the years covered. The OECD panel dates its separate review of how the jurisdiction exchanges tax information on request."
     }
   }
 ]

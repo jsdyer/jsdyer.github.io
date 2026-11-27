@@ -29,10 +29,12 @@ class ProductionSearchTests(unittest.TestCase):
 
     def test_brand_headings_canonical_robots_and_candidate_budget(self):
         seen = []
+        self.tool['result_directory'] = {'path': 'records/', 'additional_paths': ['places/']}
         def read(url):
             seen.append(url)
             if url == self.root:
                 html = ('<title>My Tool · CoolCode</title></head><body><h1><a href="./">My Tool</a></h1>'
+                        '<a href="records/">Index</a><a href="places/can/">Indexed country</a>'
                         '<a href="existing/">Registered example</a><a href="new/">New</a><a href="z/">Later</a>')
             else:
                 html = (f'<title>Example task</title><link rel="canonical" href="{url}">'

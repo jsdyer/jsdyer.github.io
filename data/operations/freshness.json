@@ -1541,6 +1541,21 @@
       }
     ]
   },
+  "jsdyer/offshorerecords/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/offshorerecords/data/status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "date",
+        "label": "ICIJ archive and OECD review sources checked"
+      }
+    ],
+    "collection_steps": [
+      "Refresh archive and transparency sources"
+    ]
+  },
   "jsdyer/oldnews-oddities/pages.yml": {
     "freshness": [
       {

@@ -2323,6 +2323,23 @@
     "guarded_paths": []
   },
   {
+    "repo": "jsdyer/offshorerecords",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "23 11 3 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/oicdiary",
     "branch": "main",
     "workflows": [

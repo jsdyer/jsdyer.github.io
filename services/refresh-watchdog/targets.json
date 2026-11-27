@@ -2432,6 +2432,28 @@
       ]
     },
     {
+      "repo": "jsdyer/offshorerecords",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "23 11 3 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/offshorerecords/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "date",
+          "label": "ICIJ archive and OECD review sources checked"
+        }
+      ],
+      "collection_steps": [
+        "Refresh archive and transparency sources"
+      ]
+    },
+    {
       "repo": "jsdyer/oicdiary",
       "branch": "main",
       "workflow": "pages.yml",

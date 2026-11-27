@@ -94,3 +94,16 @@ class SearchFilesTests(unittest.TestCase):
         for invalid in ("https://other.example/parks/", prefix + "?q=me", prefix + "../private/", prefix):
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
                 result_urls(document(invalid), prefix)
+
+        jurisdiction = "https://coolcode.ca/parks/jurisdictions/malta/"
+        self.assertEqual(result_urls(document(jurisdiction), prefix, ["jurisdictions/"]), sorted([prefix, jurisdiction]))
+        landing = jurisdiction.removesuffix("malta/")
+        with_landing = document(jurisdiction).replace("</urlset>", f"<url><loc>{landing}</loc></url></urlset>")
+        self.assertEqual(result_urls(with_landing, prefix, ["jurisdictions/"]), sorted([prefix, jurisdiction, landing]))
+        for paths, child in (([], jurisdiction), (["jurisdictions/"], jurisdiction + "?input=x"),
+                             (["jurisdictions/"], jurisdiction.replace("/parks/", "/other/")),
+                             (["jurisdictions/"], jurisdiction.replace("/malta/", "/../private/")),
+                             (["jurisdictions/"], jurisdiction.replace("/malta/", "/")),
+                             (["https://other.example/"], "https://other.example/malta/")):
+            with self.subTest(paths=paths, child=child), self.assertRaises(ValueError):
+                result_urls(document(child), prefix, paths)

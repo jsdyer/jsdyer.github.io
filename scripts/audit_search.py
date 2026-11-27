@@ -17,6 +17,7 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 from urllib.robotparser import RobotFileParser
 
 from audit_links import PageHead, ROOT
+from audit_result_maps import result_prefixes
 
 ORIGIN = "https://coolcode.ca"
 AGENT = "CoolCodeSearchAudit"
@@ -213,7 +214,8 @@ def inventory(tools, read, candidate_budget):
              and re.fullmatch(r"/[a-z0-9]+(?:-[a-z0-9]+)*/", t["url"])
              and t["url"].strip("/") not in EXCLUDED]
     known = {u + case["path"] for t,u in roots for case in t.get("use_cases", [])}
-    directories = tuple(u + t["result_directory"]["path"] for t, u in roots if t.get("result_directory"))
+    directories = tuple(prefix for t, u in roots if (directory := t.get("result_directory"))
+                        for prefix in result_prefixes(u + directory["path"], directory.get("additional_paths", ())))
     candidates = {}
     with ThreadPoolExecutor(max_workers=3) as executor:
         results = list(executor.map(visit, roots))

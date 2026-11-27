@@ -114,6 +114,7 @@ jsdyer/museumdrawer
 jsdyer/mushroomcalendar
 jsdyer/namesforget
 jsdyer/nasa
+jsdyer/offshorerecords
 jsdyer/oicdiary
 jsdyer/oldnews-oddities
 jsdyer/onionpulse

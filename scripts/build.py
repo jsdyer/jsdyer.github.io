@@ -106,10 +106,17 @@ def validate(categories, tools, root=ROOT):
         if "result_directory" in tool:
             directory = tool["result_directory"]
             require(tool["access"] == "browser" and tool["hosting"] == "project"
-                    and isinstance(directory, dict) and set(directory) == {"path", "title"}
+                    and isinstance(directory, dict)
+                    and {"path", "title"} <= set(directory) <= {"path", "title", "additional_paths"}
                     and nonempty(directory["title"]) and nonempty(directory["path"])
                     and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*/", directory["path"]),
                     f"{tid}: invalid public result directory")
+            if "additional_paths" in directory:
+                paths = directory["additional_paths"]
+                require(isinstance(paths, list) and paths
+                        and all(isinstance(path, str) and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*/", path) for path in paths)
+                        and len(set(paths)) == len(paths) and directory["path"] not in paths,
+                        f"{tid}: invalid additional result paths")
         if "dataset" in tool:
             dataset = tool["dataset"]
             require(tool["access"] == "browser" and tool["hosting"] in {"local", "project"}
