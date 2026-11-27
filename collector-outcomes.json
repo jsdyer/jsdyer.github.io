@@ -12,11 +12,11 @@
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45978749920,
+        "latest_id": 45982467069,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45978749920,
+        "refresh_id": 45982467069,
         "refresh_result": "success",
         "run_alignment": "at_or_after_start",
         "source_status_error": null,
@@ -35,11 +35,11 @@
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45969884376,
+        "latest_id": 45978749920,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45969884376,
+        "refresh_id": 45978749920,
         "refresh_result": "success",
         "run_alignment": "at_or_after_start",
         "source_status_error": null,
@@ -52,166 +52,121 @@
     },
     {
       "after": {
-        "collection_result": null,
+        "collection_result": "failure",
         "counts": [
           {
-            "label": "Data retrieved",
-            "value": 262
+            "label": "Source retrieved",
+            "value": 5335
           }
         ],
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45976058470,
-        "latest_result": "success",
+        "latest_id": 45983462861,
+        "latest_result": "failure",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45976058470,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
+        "refresh_id": 45983462861,
+        "refresh_result": "failure",
+        "run_alignment": null,
         "source_status_error": null,
         "sources": [],
         "state": "active",
-        "status": "checked"
+        "status": "attention"
       },
       "before": {
-        "collection_result": null,
+        "collection_result": "failure",
         "counts": [
           {
-            "label": "Data retrieved",
-            "value": 262
+            "label": "Source retrieved",
+            "value": 5335
           }
         ],
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45968681524,
-        "latest_result": "success",
+        "latest_id": 45940532891,
+        "latest_result": "failure",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45968681524,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
+        "refresh_id": 45940532891,
+        "refresh_result": "failure",
+        "run_alignment": null,
         "source_status_error": null,
         "sources": [],
         "state": "active",
-        "status": "checked"
+        "status": "attention"
       },
-      "repo": "jsdyer/dockdiary",
+      "repo": "jsdyer/census-lens",
       "workflow": "pages.yml"
-    },
-    {
-      "after": {
-        "collection_result": null,
-        "counts": [
-          {
-            "label": "Sources checked",
-            "value": 800929
-          }
-        ],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45976192733,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_attempt": 1,
-        "refresh_id": 45976192733,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "checked"
-      },
-      "before": {
-        "collection_result": null,
-        "counts": [
-          {
-            "label": "Sources checked",
-            "value": 800929
-          }
-        ],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45815500765,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_attempt": 1,
-        "refresh_id": 45022547478,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "checked"
-      },
-      "repo": "jsdyer/donationradar",
-      "workflow": "pages.yml"
-    },
-    {
-      "after": {
-        "collection_result": null,
-        "counts": [
-          {
-            "label": "Data retrieved",
-            "value": 605
-          }
-        ],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45976077460,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_attempt": 1,
-        "refresh_id": 45976077460,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "checked"
-      },
-      "before": {
-        "collection_result": null,
-        "counts": [
-          {
-            "label": "Data retrieved",
-            "value": 601
-          }
-        ],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45968772068,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_attempt": 1,
-        "refresh_id": 45968772068,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "checked"
-      },
-      "repo": "jsdyer/flightweather",
-      "workflow": "refresh.yml"
     },
     {
       "after": {
         "collection_result": "success",
-        "counts": [],
+        "counts": [
+          {
+            "label": "Package sources checked",
+            "value": 64
+          }
+        ],
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45973186908,
+        "latest_id": 45983547892,
+        "latest_result": null,
+        "output": "recent",
+        "refresh_attempt": 1,
+        "refresh_id": 45983547892,
+        "refresh_result": null,
+        "run_alignment": "at_or_after_start",
+        "source_status_error": null,
+        "sources": [],
+        "state": "active",
+        "status": "running"
+      },
+      "before": {
+        "collection_result": "success",
+        "counts": [
+          {
+            "label": "Package sources checked",
+            "value": 64
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_attempt": 1,
+        "latest_id": 45876857907,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45973186908,
+        "refresh_id": 45876857907,
+        "refresh_result": "success",
+        "run_alignment": "at_or_after_start",
+        "source_status_error": null,
+        "sources": [],
+        "state": "active",
+        "status": "checked"
+      },
+      "repo": "jsdyer/distropilot",
+      "workflow": "pages.yml"
+    },
+    {
+      "after": {
+        "collection_result": "success",
+        "counts": [
+          {
+            "label": "Halifax schedule downloaded",
+            "value": 2347
+          }
+        ],
+        "due_unobserved": false,
+        "error": null,
+        "latest_attempt": 1,
+        "latest_id": 45981797343,
+        "latest_result": "success",
+        "output": "recent",
+        "refresh_attempt": 1,
+        "refresh_id": 45981797343,
         "refresh_result": "success",
         "run_alignment": "at_or_after_start",
         "source_status_error": null,
@@ -221,15 +176,20 @@
       },
       "before": {
         "collection_result": "success",
-        "counts": [],
+        "counts": [
+          {
+            "label": "Halifax schedule downloaded",
+            "value": 2347
+          }
+        ],
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45926754563,
+        "latest_id": 45876115861,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45926754563,
+        "refresh_id": 45876115861,
         "refresh_result": "success",
         "run_alignment": "at_or_after_start",
         "source_status_error": null,
@@ -237,7 +197,7 @@
         "state": "active",
         "status": "checked"
       },
-      "repo": "jsdyer/fuelwindow",
+      "repo": "jsdyer/halifaxnext",
       "workflow": "pages.yml"
     },
     {
@@ -247,41 +207,19 @@
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45976412172,
-        "latest_result": "success",
+        "latest_id": 45983908410,
+        "latest_result": null,
         "output": "not_configured",
         "refresh_attempt": 1,
-        "refresh_id": 45976412172,
+        "refresh_id": 45980122752,
         "refresh_result": "success",
         "run_alignment": null,
         "source_status_error": null,
         "sources": [],
         "state": "active",
-        "status": "workflow_only"
+        "status": "running"
       },
       "before": {
-        "collection_result": null,
-        "counts": [],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45934551465,
-        "latest_result": "success",
-        "output": "not_configured",
-        "refresh_attempt": 1,
-        "refresh_id": 45934551465,
-        "refresh_result": "success",
-        "run_alignment": null,
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "workflow_only"
-      },
-      "repo": "jsdyer/jsdyer.github.io",
-      "workflow": "catalogue-freshness.yml"
-    },
-    {
-      "after": {
         "collection_result": null,
         "counts": [],
         "due_unobserved": false,
@@ -299,115 +237,57 @@
         "state": "active",
         "status": "running"
       },
-      "before": {
-        "collection_result": null,
-        "counts": [],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45971596507,
-        "latest_result": null,
-        "output": "not_configured",
-        "refresh_attempt": 1,
-        "refresh_id": 45971596507,
-        "refresh_result": null,
-        "run_alignment": null,
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "running"
-      },
       "repo": "jsdyer/jsdyer.github.io",
       "workflow": "service-monitor.yml"
     },
     {
       "after": {
         "collection_result": null,
-        "counts": [],
-        "due_unobserved": false,
+        "counts": [
+          {
+            "label": "Data retrieved",
+            "value": 173
+          }
+        ],
+        "due_unobserved": true,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45974305774,
+        "latest_id": 45815778321,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45974305774,
+        "refresh_id": 44781274027,
         "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
+        "run_alignment": "date_only",
         "source_status_error": null,
         "sources": [],
         "state": "active",
-        "status": "checked"
+        "status": "attention"
       },
       "before": {
         "collection_result": null,
-        "counts": [],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45870880363,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_attempt": 1,
-        "refresh_id": 45870880363,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "checked"
-      },
-      "repo": "jsdyer/malwarelineage",
-      "workflow": "pages.yml"
-    },
-    {
-      "after": {
-        "collection_result": "success",
         "counts": [
           {
-            "label": "Source checked",
-            "value": 1037
+            "label": "Data retrieved",
+            "value": 173
           }
         ],
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45978017155,
+        "latest_id": 45815778321,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45978017155,
+        "refresh_id": 44781274027,
         "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
+        "run_alignment": "date_only",
         "source_status_error": null,
         "sources": [],
         "state": "active",
         "status": "checked"
       },
-      "before": {
-        "collection_result": "success",
-        "counts": [
-          {
-            "label": "Source checked",
-            "value": 1037
-          }
-        ],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45969235934,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_attempt": 1,
-        "refresh_id": 45969235934,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "checked"
-      },
-      "repo": "jsdyer/parkready",
+      "repo": "jsdyer/pipeda-findings",
       "workflow": "pages.yml"
     },
     {
@@ -415,18 +295,18 @@
         "collection_result": null,
         "counts": [
           {
-            "label": "Sources checked",
-            "value": 6355
+            "label": "Data retrieved",
+            "value": 6
           }
         ],
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45977186453,
+        "latest_id": 45982187308,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45977186453,
+        "refresh_id": 45982187308,
         "refresh_result": "success",
         "run_alignment": "at_or_after_start",
         "source_status_error": null,
@@ -438,18 +318,18 @@
         "collection_result": null,
         "counts": [
           {
-            "label": "Sources checked",
-            "value": 6285
+            "label": "Data retrieved",
+            "value": 6
           }
         ],
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45964296785,
+        "latest_id": 45951730836,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45964296785,
+        "refresh_id": 45951730836,
         "refresh_result": "success",
         "run_alignment": "at_or_after_start",
         "source_status_error": null,
@@ -457,7 +337,7 @@
         "state": "active",
         "status": "checked"
       },
-      "repo": "jsdyer/transitreceipt",
+      "repo": "jsdyer/satpasses",
       "workflow": "pages.yml"
     },
     {
@@ -465,105 +345,458 @@
         "collection_result": null,
         "counts": [
           {
-            "label": "Fleet captured",
-            "value": 51
+            "label": "Data retrieved",
+            "value": 8
           }
         ],
-        "due_unobserved": false,
+        "due_unobserved": true,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45977217326,
+        "latest_id": 45877444913,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45977217326,
+        "refresh_id": 45877444913,
         "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
+        "run_alignment": "date_only",
         "source_status_error": null,
         "sources": [],
         "state": "active",
-        "status": "checked"
+        "status": "attention"
       },
       "before": {
         "collection_result": null,
         "counts": [
           {
-            "label": "Fleet captured",
-            "value": 125
+            "label": "Data retrieved",
+            "value": 8
           }
         ],
         "due_unobserved": false,
         "error": null,
         "latest_attempt": 1,
-        "latest_id": 45969532568,
+        "latest_id": 45877444913,
         "latest_result": "success",
         "output": "recent",
         "refresh_attempt": 1,
-        "refresh_id": 45969532568,
+        "refresh_id": 45877444913,
         "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
+        "run_alignment": "date_only",
         "source_status_error": null,
         "sources": [],
         "state": "active",
         "status": "checked"
       },
-      "repo": "jsdyer/translink",
+      "repo": "jsdyer/transferwindow",
       "workflow": "refresh.yml"
-    },
-    {
-      "after": {
-        "collection_result": "success",
-        "counts": [
-          {
-            "label": "Official advisory index checked",
-            "value": 230
-          }
-        ],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45979626425,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_attempt": 1,
-        "refresh_id": 45979626425,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "checked"
-      },
-      "before": {
-        "collection_result": "success",
-        "counts": [
-          {
-            "label": "Official advisory index checked",
-            "value": 230
-          }
-        ],
-        "due_unobserved": false,
-        "error": null,
-        "latest_attempt": 1,
-        "latest_id": 45971210239,
-        "latest_result": "success",
-        "output": "recent",
-        "refresh_attempt": 1,
-        "refresh_id": 45971210239,
-        "refresh_result": "success",
-        "run_alignment": "at_or_after_start",
-        "source_status_error": null,
-        "sources": [],
-        "state": "active",
-        "status": "checked"
-      },
-      "repo": "jsdyer/tripbrief",
-      "workflow": "pages.yml"
     }
   ],
-  "checked_at": "2026-11-27T10:13:27.697450Z",
+  "checked_at": "2026-11-27T10:40:20.062069Z",
   "expected_interval_seconds": 3600,
   "history": [
+    {
+      "changes": [
+        {
+          "after": {
+            "collection_result": "success",
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 28
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45982467069,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45982467069,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "collection_result": "success",
+            "counts": [
+              {
+                "label": "Sources checked",
+                "value": 28
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45978749920,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45978749920,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/borderpulse",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "collection_result": "failure",
+            "counts": [
+              {
+                "label": "Source retrieved",
+                "value": 5335
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45983462861,
+            "latest_result": "failure",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45983462861,
+            "refresh_result": "failure",
+            "run_alignment": null,
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "attention"
+          },
+          "before": {
+            "collection_result": "failure",
+            "counts": [
+              {
+                "label": "Source retrieved",
+                "value": 5335
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45940532891,
+            "latest_result": "failure",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45940532891,
+            "refresh_result": "failure",
+            "run_alignment": null,
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "attention"
+          },
+          "repo": "jsdyer/census-lens",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "collection_result": "success",
+            "counts": [
+              {
+                "label": "Package sources checked",
+                "value": 64
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45983547892,
+            "latest_result": null,
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45983547892,
+            "refresh_result": null,
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "running"
+          },
+          "before": {
+            "collection_result": "success",
+            "counts": [
+              {
+                "label": "Package sources checked",
+                "value": 64
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45876857907,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45876857907,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/distropilot",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "collection_result": "success",
+            "counts": [
+              {
+                "label": "Halifax schedule downloaded",
+                "value": 2347
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45981797343,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45981797343,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "collection_result": "success",
+            "counts": [
+              {
+                "label": "Halifax schedule downloaded",
+                "value": 2347
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45876115861,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45876115861,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/halifaxnext",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "collection_result": null,
+            "counts": [],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45983908410,
+            "latest_result": null,
+            "output": "not_configured",
+            "refresh_attempt": 1,
+            "refresh_id": 45980122752,
+            "refresh_result": "success",
+            "run_alignment": null,
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "running"
+          },
+          "before": {
+            "collection_result": null,
+            "counts": [],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45980122752,
+            "latest_result": null,
+            "output": "not_configured",
+            "refresh_attempt": 1,
+            "refresh_id": 45980122752,
+            "refresh_result": null,
+            "run_alignment": null,
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "running"
+          },
+          "repo": "jsdyer/jsdyer.github.io",
+          "workflow": "service-monitor.yml"
+        },
+        {
+          "after": {
+            "collection_result": null,
+            "counts": [
+              {
+                "label": "Data retrieved",
+                "value": 173
+              }
+            ],
+            "due_unobserved": true,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45815778321,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 44781274027,
+            "refresh_result": "success",
+            "run_alignment": "date_only",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "attention"
+          },
+          "before": {
+            "collection_result": null,
+            "counts": [
+              {
+                "label": "Data retrieved",
+                "value": 173
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45815778321,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 44781274027,
+            "refresh_result": "success",
+            "run_alignment": "date_only",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/pipeda-findings",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "collection_result": null,
+            "counts": [
+              {
+                "label": "Data retrieved",
+                "value": 6
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45982187308,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45982187308,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "before": {
+            "collection_result": null,
+            "counts": [
+              {
+                "label": "Data retrieved",
+                "value": 6
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45951730836,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45951730836,
+            "refresh_result": "success",
+            "run_alignment": "at_or_after_start",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/satpasses",
+          "workflow": "pages.yml"
+        },
+        {
+          "after": {
+            "collection_result": null,
+            "counts": [
+              {
+                "label": "Data retrieved",
+                "value": 8
+              }
+            ],
+            "due_unobserved": true,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45877444913,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45877444913,
+            "refresh_result": "success",
+            "run_alignment": "date_only",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "attention"
+          },
+          "before": {
+            "collection_result": null,
+            "counts": [
+              {
+                "label": "Data retrieved",
+                "value": 8
+              }
+            ],
+            "due_unobserved": false,
+            "error": null,
+            "latest_attempt": 1,
+            "latest_id": 45877444913,
+            "latest_result": "success",
+            "output": "recent",
+            "refresh_attempt": 1,
+            "refresh_id": 45877444913,
+            "refresh_result": "success",
+            "run_alignment": "date_only",
+            "source_status_error": null,
+            "sources": [],
+            "state": "active",
+            "status": "checked"
+          },
+          "repo": "jsdyer/transferwindow",
+          "workflow": "refresh.yml"
+        }
+      ],
+      "checked_at": "2026-11-27T10:40:20.062069Z",
+      "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45983908410",
+      "summary": {
+        "attention": 9,
+        "checked": 177,
+        "limited": 6,
+        "running": 2,
+        "workflow_only": 5
+      }
+    },
     {
       "changes": [
         {
@@ -23880,972 +24113,9 @@
         "running": 1,
         "workflow_only": 5
       }
-    },
-    {
-      "changes": [
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Capture started",
-                "value": 90
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45813751034,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45813751034,
-            "refresh_result": "success",
-            "run_alignment": "predates_success",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "limited"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Capture started",
-                "value": 90
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45686607372,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45686607372,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/atlas-canada",
-          "workflow": "collect.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Latest sample",
-                "value": 22588
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45814709697,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45814709697,
-            "refresh_result": "success",
-            "run_alignment": "date_only",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Latest sample",
-                "value": 20079
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45686885294,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45686885294,
-            "refresh_result": "success",
-            "run_alignment": "date_only",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/boomerang-meter",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Sources checked",
-                "value": 28
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45814753046,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45814753046,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Sources checked",
-                "value": 28
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45805931061,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45805931061,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/borderpulse",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Complete child-care directories checked",
-                "value": 6459
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45810103974,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45810103974,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Complete child-care directories checked",
-                "value": 6459
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45684583534,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45684583534,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/carecompass",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Menu sources checked",
-                "value": 9
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45814315721,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45544971099,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Menu sources checked",
-                "value": 9
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45548573737,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45544971099,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/clamcounter",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Data retrieved",
-                "value": 261
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45814923003,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45814923003,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Data retrieved",
-                "value": 261
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45804922580,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45804922580,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/dockdiary",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Data retrieved",
-                "value": 500
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45815006018,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45815006018,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Data retrieved",
-                "value": 496
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45805024405,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45805024405,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/flightweather",
-          "workflow": "refresh.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Internet data retrieved",
-                "value": 10
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45815080818,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45815080818,
-            "refresh_result": "success",
-            "run_alignment": "date_only",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Internet data retrieved",
-                "value": 10
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45687019555,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45687019555,
-            "refresh_result": "success",
-            "run_alignment": "date_only",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/grid-dark",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Sources checked",
-                "value": 107
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45809335991,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45809335991,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Sources checked",
-                "value": 104
-              }
-            ],
-            "due_unobserved": true,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45781961626,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45781961626,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "attention"
-          },
-          "repo": "jsdyer/gridreceipt",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Official starter reports checked",
-                "value": 7
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45812228240,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45812228240,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Official starter reports checked",
-                "value": 8
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45686160159,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45686160159,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/inspectiontrail",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45815203366,
-            "latest_result": null,
-            "output": "not_configured",
-            "refresh_attempt": 1,
-            "refresh_id": 45808405072,
-            "refresh_result": "success",
-            "run_alignment": null,
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "running"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45808405072,
-            "latest_result": null,
-            "output": "not_configured",
-            "refresh_attempt": 1,
-            "refresh_id": 45808405072,
-            "refresh_result": null,
-            "run_alignment": null,
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "running"
-          },
-          "repo": "jsdyer/jsdyer.github.io",
-          "workflow": "service-monitor.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45813247941,
-            "latest_result": "failure",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45813247941,
-            "refresh_result": "failure",
-            "run_alignment": null,
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "attention"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45774034202,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45763183649,
-            "refresh_result": "failure",
-            "run_alignment": null,
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "attention"
-          },
-          "repo": "jsdyer/oldnews-oddities",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Source checked",
-                "value": 1037
-              }
-            ],
-            "due_unobserved": true,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45805362653,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45805362653,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "attention"
-          },
-          "before": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Source checked",
-                "value": 1037
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45805362653,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45805362653,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/parkready",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Source checked",
-                "value": 502
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45813359290,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45813359290,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Source checked",
-                "value": 501
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45771498656,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45686277395,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/radarscope",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45814321790,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45814321790,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45686498697,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45686498697,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/riverpulse",
-          "workflow": "refresh.yml"
-        },
-        {
-          "after": {
-            "collection_result": "success",
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45812562288,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45812562288,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45622040519,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45593809882,
-            "refresh_result": "success",
-            "run_alignment": null,
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "limited"
-          },
-          "repo": "jsdyer/screenplaces",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Sources checked",
-                "value": 4292
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45814532042,
-            "latest_result": null,
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45814532042,
-            "refresh_result": null,
-            "run_alignment": null,
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "running"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Sources checked",
-                "value": 4292
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45805677265,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45805677265,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/transitreceipt",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Fleet captured",
-                "value": 28
-              }
-            ],
-            "due_unobserved": true,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45805708578,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45805708578,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "attention"
-          },
-          "before": {
-            "collection_result": null,
-            "counts": [
-              {
-                "label": "Fleet captured",
-                "value": 28
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45805708578,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45805708578,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/translink",
-          "workflow": "refresh.yml"
-        },
-        {
-          "after": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Official advisory index checked",
-                "value": 230
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45809117567,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45809117567,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": "success",
-            "counts": [
-              {
-                "label": "Official advisory index checked",
-                "value": 230
-              }
-            ],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45807907059,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45807907059,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/tripbrief",
-          "workflow": "pages.yml"
-        },
-        {
-          "after": {
-            "collection_result": "success",
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45811768340,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45811768340,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "before": {
-            "collection_result": "success",
-            "counts": [],
-            "due_unobserved": false,
-            "error": null,
-            "latest_attempt": 1,
-            "latest_id": 45684817837,
-            "latest_result": "success",
-            "output": "recent",
-            "refresh_attempt": 1,
-            "refresh_id": 45684817837,
-            "refresh_result": "success",
-            "run_alignment": "at_or_after_start",
-            "source_status_error": null,
-            "sources": [],
-            "state": "active",
-            "status": "checked"
-          },
-          "repo": "jsdyer/weatherwindow",
-          "workflow": "pages.yml"
-        }
-      ],
-      "checked_at": "2026-11-26T11:58:25.129693Z",
-      "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45815203366",
-      "summary": {
-        "attention": 7,
-        "checked": 174,
-        "limited": 10,
-        "running": 2,
-        "workflow_only": 5
-      }
     }
   ],
-  "read_mode": "fresh",
+  "read_mode": "cached_where_unchanged",
   "rows": [
     {
       "counts": [],
@@ -24873,12 +24143,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:43.798024Z",
+      "observed_at": "2026-11-27T10:39:33.604594Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 77084,
-            "cached": false,
+            "age_seconds": 78694,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 1209600.0,
@@ -24951,17 +24221,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:43.798507Z",
+      "observed_at": "2026-11-27T10:39:33.605060Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 170927,
+            "age_seconds": 172536,
             "cached": false,
             "check": 0,
             "label": "Archive directory sources checked and indexes validated",
             "max_age_seconds": 3456000,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:12:43.798507Z",
+            "read_at": "2026-11-27T10:39:33.605060Z",
             "status": "fresh",
             "timestamp": "2026-11-25T10:43:57.235628Z",
             "url": "https://coolcode.ca/addresschronicle/data/status.json"
@@ -24972,7 +24242,7 @@
       "probe_cache": {
         "0": {
           "key": "0de0798b5cbdadb1378e90e2b04950938af50008d184f5277f86334f0ac18782",
-          "read_at": "2026-11-27T10:12:43.798507Z",
+          "read_at": "2026-11-27T10:39:33.605060Z",
           "timestamp": "2026-11-25T10:43:57.235628Z"
         }
       },
@@ -25038,12 +24308,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:43.798944Z",
+      "observed_at": "2026-11-27T10:39:33.605429Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 238039,
-            "cached": false,
+            "age_seconds": 239649,
+            "cached": true,
             "check": 0,
             "label": "Official archive catalogue checked",
             "max_age_seconds": 5356800.0,
@@ -25114,12 +24384,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:43.799288Z",
+      "observed_at": "2026-11-27T10:39:33.605845Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123164,
-            "cached": false,
+            "age_seconds": 124774,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -25189,12 +24459,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:44.539872Z",
+      "observed_at": "2026-11-27T10:39:34.383128Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123165,
-            "cached": false,
+            "age_seconds": 124774,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 1296000.0,
@@ -25264,12 +24534,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:44.713751Z",
+      "observed_at": "2026-11-27T10:39:34.398608Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 44160,
-            "cached": false,
+            "age_seconds": 45769,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 172800.0,
@@ -25330,12 +24600,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:44.781932Z",
+      "observed_at": "2026-11-27T10:39:34.620049Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 228006,
-            "cached": false,
+            "age_seconds": 229616,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 1209600.0,
@@ -25405,12 +24675,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:45.395871Z",
+      "observed_at": "2026-11-27T10:39:34.991800Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295965,
-            "cached": false,
+            "age_seconds": 297575,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -25480,12 +24750,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:45.531952Z",
+      "observed_at": "2026-11-27T10:39:35.123775Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 52174,
-            "cached": false,
+            "age_seconds": 53783,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -25555,12 +24825,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:45.584199Z",
+      "observed_at": "2026-11-27T10:39:35.500844Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 227196,
-            "cached": false,
+            "age_seconds": 228806,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -25630,12 +24900,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:45.815756Z",
+      "observed_at": "2026-11-27T10:39:35.639621Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123166,
-            "cached": false,
+            "age_seconds": 124776,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 5443200.0,
@@ -25646,8 +24916,8 @@
             "url": "https://coolcode.ca/atipmetrics/data.json"
           },
           {
-            "age_seconds": 123166,
-            "cached": false,
+            "age_seconds": 124776,
+            "cached": true,
             "check": 1,
             "label": "Research sources retrieved",
             "max_age_seconds": 5443200.0,
@@ -25722,12 +24992,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:46.125780Z",
+      "observed_at": "2026-11-27T10:39:35.728213Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 50023,
-            "cached": false,
+            "age_seconds": 51632,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -25797,12 +25067,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:46.306653Z",
+      "observed_at": "2026-11-27T10:39:36.059161Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 36766,
-            "cached": false,
+            "age_seconds": 38376,
+            "cached": true,
             "check": 0,
             "label": "Episode feeds retrieved",
             "max_age_seconds": 259200.0,
@@ -25863,7 +25133,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:46.487242Z",
+      "observed_at": "2026-11-27T10:39:36.197587Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -25918,12 +25188,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:46.672769Z",
+      "observed_at": "2026-11-27T10:39:36.329623Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 53725,
-            "cached": false,
+            "age_seconds": 55334,
+            "cached": true,
             "check": 0,
             "label": "Capture started",
             "max_age_seconds": 172800.0,
@@ -25993,12 +25263,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:46.964505Z",
+      "observed_at": "2026-11-27T10:39:36.446652Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295967,
-            "cached": false,
+            "age_seconds": 297576,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -26090,12 +25360,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:47.050217Z",
+      "observed_at": "2026-11-27T10:39:36.809763Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 55926,
-            "cached": false,
+            "age_seconds": 57536,
+            "cached": true,
             "check": 0,
             "label": "Network evidence sources checked",
             "max_age_seconds": 259200,
@@ -26165,12 +25435,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:47.059574Z",
+      "observed_at": "2026-11-27T10:39:36.881858Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 44937,
-            "cached": false,
+            "age_seconds": 46547,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -26210,7 +25480,7 @@
         {
           "definition": "[\"https://coolcode.ca/benefitcalendar/data/calendar.json\", {\"path\": [\"record_count\"], \"unit\": \"payment dates\"}]",
           "label": "Official payment calendars checked",
-          "read_at": "2026-11-27T10:12:47.317251Z",
+          "read_at": "2026-11-27T10:39:36.981750Z",
           "unit": "payment dates",
           "url": "https://coolcode.ca/benefitcalendar/data/calendar.json",
           "value": 178
@@ -26252,17 +25522,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:47.317251Z",
+      "observed_at": "2026-11-27T10:39:36.981750Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 99128,
+            "age_seconds": 100738,
             "cached": false,
             "check": 0,
             "label": "Official payment calendars checked",
             "max_age_seconds": 864000,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:12:47.317251Z",
+            "read_at": "2026-11-27T10:39:36.981750Z",
             "status": "fresh",
             "timestamp": "2026-11-26T06:40:39Z",
             "url": "https://coolcode.ca/benefitcalendar/data/calendar.json"
@@ -26273,7 +25543,7 @@
       "probe_cache": {
         "0": {
           "key": "1db5407c7af9c90dc729050bb453dd61b3265a993bc46779b3c7453354bc1bf4",
-          "read_at": "2026-11-27T10:12:47.317251Z",
+          "read_at": "2026-11-27T10:39:36.981750Z",
           "timestamp": "2026-11-26T06:40:39Z"
         }
       },
@@ -26317,12 +25587,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:47.539518Z",
+      "observed_at": "2026-11-27T10:39:37.019728Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 44356,
-            "cached": false,
+            "age_seconds": 45965,
+            "cached": true,
             "check": 0,
             "label": "Rolling cases retrieved",
             "max_age_seconds": 172800.0,
@@ -26392,12 +25662,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:47.907214Z",
+      "observed_at": "2026-11-27T10:39:37.788493Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123168,
-            "cached": false,
+            "age_seconds": 124778,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -26437,7 +25707,7 @@
         {
           "definition": "[\"https://coolcode.ca/borderpulse/data/current.json\", {\"measure\": \"length\", \"path\": [\"records\"], \"unit\": \"crossings\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-27T10:12:48.248303Z",
+          "read_at": "2026-11-27T10:39:37.994366Z",
           "unit": "crossings",
           "url": "https://coolcode.ca/borderpulse/data/current.json",
           "value": 28
@@ -26445,40 +25715,40 @@
       ],
       "execution": {
         "collection_result": "success",
-        "collection_started_at": "2026-11-27T10:03:13Z",
+        "collection_started_at": "2026-11-27T10:29:10Z",
         "collection_unconfirmed": false,
-        "due_at": "2026-11-27T09:37:00Z",
+        "due_at": "2026-11-27T10:07:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-27T10:02:48Z",
+          "at": "2026-11-27T10:29:02Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45978749920,
+          "id": 45982467069,
           "status": "completed",
-          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45978749920"
+          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45982467069"
         },
         "latest_collection": {
-          "at": "2026-11-27T10:02:48Z",
+          "at": "2026-11-27T10:29:02Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45978749920,
+          "id": 45982467069,
           "status": "completed",
-          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45978749920"
+          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45982467069"
         },
         "latest_refresh": {
-          "at": "2026-11-27T10:02:48Z",
+          "at": "2026-11-27T10:29:02Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45978749920,
+          "id": 45982467069,
           "status": "completed",
-          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45978749920"
+          "url": "https://github.com/jsdyer/borderpulse/actions/runs/45982467069"
         },
         "latest_step_check": {
-          "started_at": "2026-11-27T10:03:13Z",
+          "started_at": "2026-11-27T10:29:10Z",
           "status": "success",
           "steps": [
             {
@@ -26489,19 +25759,19 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:48.248303Z",
+      "observed_at": "2026-11-27T10:39:37.994366Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 575,
+            "age_seconds": 628,
             "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 3600,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:12:48.248303Z",
+            "read_at": "2026-11-27T10:39:37.994366Z",
             "status": "fresh",
-            "timestamp": "2026-11-27T10:03:13Z",
+            "timestamp": "2026-11-27T10:29:10Z",
             "url": "https://coolcode.ca/borderpulse/data/current.json"
           }
         ],
@@ -26510,9 +25780,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "543b686b1cafad04d60e9554c5d3e0193317a3f63e5ec7326438219503530efc",
-          "read_at": "2026-11-27T10:12:48.248303Z",
-          "timestamp": "2026-11-27T10:03:13Z"
+          "key": "c4ad0bcaeb6300e340608292afb0ff0364e6de2630757c43ab8c428eb97137d2",
+          "read_at": "2026-11-27T10:39:37.994366Z",
+          "timestamp": "2026-11-27T10:29:10Z"
         }
       },
       "reasons": [
@@ -26564,12 +25834,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:48.287539Z",
+      "observed_at": "2026-11-27T10:39:38.058055Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295968,
-            "cached": false,
+            "age_seconds": 297578,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -26639,12 +25909,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:48.719022Z",
+      "observed_at": "2026-11-27T10:39:38.697026Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 41895,
-            "cached": false,
+            "age_seconds": 43505,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -26714,12 +25984,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:49.012669Z",
+      "observed_at": "2026-11-27T10:39:38.766067Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123169,
-            "cached": false,
+            "age_seconds": 124779,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 5443200.0,
@@ -26802,12 +26072,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:49.543468Z",
+      "observed_at": "2026-11-27T10:39:39.365689Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 170585,
-            "cached": false,
+            "age_seconds": 172194,
+            "cached": true,
             "check": 0,
             "label": "Statistics Canada spending sources checked",
             "max_age_seconds": 3456000,
@@ -26877,12 +26147,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:49.579172Z",
+      "observed_at": "2026-11-27T10:39:39.418413Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 5739,
-            "cached": false,
+            "age_seconds": 7348,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 43200.0,
@@ -26952,12 +26222,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:49.584903Z",
+      "observed_at": "2026-11-27T10:39:39.444458Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295970,
-            "cached": false,
+            "age_seconds": 297579,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -27027,12 +26297,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:49.671819Z",
+      "observed_at": "2026-11-27T10:39:39.471354Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 43192,
-            "cached": false,
+            "age_seconds": 44802,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -27115,12 +26385,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:50.108370Z",
+      "observed_at": "2026-11-27T10:39:39.962107Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 20267,
-            "cached": false,
+            "age_seconds": 21877,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 345600,
@@ -27212,12 +26482,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:50.347104Z",
+      "observed_at": "2026-11-27T10:39:40.263320Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 34266,
-            "cached": false,
+            "age_seconds": 35876,
+            "cached": true,
             "check": 0,
             "label": "Wikimedia pageview sources checked",
             "max_age_seconds": 172800,
@@ -27287,12 +26557,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:50.407270Z",
+      "observed_at": "2026-11-27T10:39:40.271554Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 727970,
-            "cached": false,
+            "age_seconds": 729580,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -27383,12 +26653,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:50.526821Z",
+      "observed_at": "2026-11-27T10:39:40.325061Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 106205,
-            "cached": false,
+            "age_seconds": 107815,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 3888000,
@@ -27480,12 +26750,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:50.970335Z",
+      "observed_at": "2026-11-27T10:39:40.932892Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 54373,
-            "cached": false,
+            "age_seconds": 55983,
+            "cached": true,
             "check": 0,
             "label": "Complete child-care directories checked",
             "max_age_seconds": 129600,
@@ -27555,12 +26825,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:51.125207Z",
+      "observed_at": "2026-11-27T10:39:41.029942Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 727971,
-            "cached": false,
+            "age_seconds": 729581,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -27600,7 +26870,7 @@
         {
           "definition": "[\"https://coolcode.ca/census-lens/data/status.json\", {\"path\": [\"count\"], \"unit\": \"places\"}]",
           "label": "Source retrieved",
-          "read_at": "2026-11-27T10:12:51.530001Z",
+          "read_at": "2026-11-27T10:39:41.414873Z",
           "unit": "places",
           "url": "https://coolcode.ca/census-lens/data/status.json",
           "value": 5335
@@ -27608,7 +26878,7 @@
       ],
       "execution": {
         "collection_result": "failure",
-        "collection_started_at": "2026-11-27T04:32:39Z",
+        "collection_started_at": "2026-11-27T10:36:09Z",
         "collection_unconfirmed": false,
         "due_at": "2026-11-20T09:18:00Z",
         "due_unobserved": false,
@@ -27617,34 +26887,34 @@
         ],
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-27T04:32:25Z",
+          "at": "2026-11-27T10:35:59Z",
           "attempt": 1,
           "conclusion": "failure",
           "event": "workflow_dispatch",
-          "id": 45940532891,
+          "id": 45983462861,
           "status": "completed",
-          "url": "https://github.com/jsdyer/census-lens/actions/runs/45940532891"
+          "url": "https://github.com/jsdyer/census-lens/actions/runs/45983462861"
         },
         "latest_collection": {
-          "at": "2026-11-27T04:32:25Z",
+          "at": "2026-11-27T10:35:59Z",
           "attempt": 1,
           "conclusion": "failure",
           "event": "workflow_dispatch",
-          "id": 45940532891,
+          "id": 45983462861,
           "status": "completed",
-          "url": "https://github.com/jsdyer/census-lens/actions/runs/45940532891"
+          "url": "https://github.com/jsdyer/census-lens/actions/runs/45983462861"
         },
         "latest_refresh": {
-          "at": "2026-11-27T04:32:25Z",
+          "at": "2026-11-27T10:35:59Z",
           "attempt": 1,
           "conclusion": "failure",
           "event": "workflow_dispatch",
-          "id": 45940532891,
+          "id": 45983462861,
           "status": "completed",
-          "url": "https://github.com/jsdyer/census-lens/actions/runs/45940532891"
+          "url": "https://github.com/jsdyer/census-lens/actions/runs/45983462861"
         },
         "latest_step_check": {
-          "started_at": "2026-11-27T04:32:39Z",
+          "started_at": "2026-11-27T10:36:09Z",
           "status": "failure",
           "steps": [
             {
@@ -27655,17 +26925,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:51.530001Z",
+      "observed_at": "2026-11-27T10:39:41.414873Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295972,
+            "age_seconds": 297581,
             "cached": false,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 15984000.0,
             "precision": "date",
-            "read_at": "2026-11-27T10:12:51.530001Z",
+            "read_at": "2026-11-27T10:39:41.414873Z",
             "status": "fresh",
             "timestamp": "2026-11-24T00:00:00Z",
             "url": "https://coolcode.ca/census-lens/data/status.json"
@@ -27675,8 +26945,8 @@
       },
       "probe_cache": {
         "0": {
-          "key": "a6820c79b5edf8e86b0846a534a300e17e11b4be51f8cabfde9ba6f7c62aae09",
-          "read_at": "2026-11-27T10:12:51.530001Z",
+          "key": "f478cfe88267a22e77020fa1ed23ac2f7d80293a575b95c4696737684b46a8f8",
+          "read_at": "2026-11-27T10:39:41.414873Z",
           "timestamp": "2026-11-24T00:00:00Z"
         }
       },
@@ -27699,7 +26969,7 @@
         {
           "definition": "[\"https://coolcode.ca/chargegaps/data/index.json\", {\"path\": [\"captures\", 0, \"count\"], \"unit\": \"locations\"}]",
           "label": "Capture retrieved",
-          "read_at": "2026-11-27T10:12:51.756443Z",
+          "read_at": "2026-11-27T10:39:41.680148Z",
           "unit": "locations",
           "url": "https://coolcode.ca/chargegaps/data/index.json",
           "value": 18798
@@ -27707,7 +26977,7 @@
         {
           "definition": "[\"https://coolcode.ca/chargegaps/data/afdc.json\", {\"path\": [\"recordCount\"], \"unit\": \"AFDC stations\"}]",
           "label": "AFDC directory checked",
-          "read_at": "2026-11-27T10:12:51.756443Z",
+          "read_at": "2026-11-27T10:39:41.680148Z",
           "unit": "AFDC stations",
           "url": "https://coolcode.ca/chargegaps/data/afdc.json",
           "value": 15295
@@ -27758,29 +27028,29 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:51.756443Z",
+      "observed_at": "2026-11-27T10:39:41.680148Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 266490,
+            "age_seconds": 268100,
             "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:12:51.756443Z",
+            "read_at": "2026-11-27T10:39:41.680148Z",
             "status": "fresh",
             "timestamp": "2026-11-24T08:11:22Z",
             "url": "https://coolcode.ca/chargegaps/data/index.json"
           },
           {
-            "age_seconds": 106508,
+            "age_seconds": 108118,
             "cached": false,
             "check": 1,
             "label": "AFDC Canadian directory checked",
             "max_age_seconds": 1209600,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:12:51.756443Z",
+            "read_at": "2026-11-27T10:39:41.680148Z",
             "status": "fresh",
             "timestamp": "2026-11-26T04:37:43.724692Z",
             "url": "https://coolcode.ca/chargegaps/data/afdc.json"
@@ -27792,12 +27062,12 @@
       "probe_cache": {
         "0": {
           "key": "f7d734e635d6f87425ad4fe57f0b1a0377ecd2b86c6d52e27c9d095abccfdb81",
-          "read_at": "2026-11-27T10:12:51.756443Z",
+          "read_at": "2026-11-27T10:39:41.680148Z",
           "timestamp": "2026-11-24T08:11:22Z"
         },
         "1": {
           "key": "84a5d95df206a0ff31be6d29066c74ace40af4786fdfdf49245eab3feeb95b34",
-          "read_at": "2026-11-27T10:12:51.756443Z",
+          "read_at": "2026-11-27T10:39:41.680148Z",
           "timestamp": "2026-11-26T04:37:43.724692Z"
         }
       },
@@ -27850,12 +27120,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:52.039191Z",
+      "observed_at": "2026-11-27T10:39:42.091589Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123172,
-            "cached": false,
+            "age_seconds": 124782,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 5443200.0,
@@ -27925,12 +27195,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:52.612359Z",
+      "observed_at": "2026-11-27T10:39:42.794792Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295973,
-            "cached": false,
+            "age_seconds": 297583,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -28013,12 +27283,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:53.088898Z",
+      "observed_at": "2026-11-27T10:39:43.125375Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 5397,
-            "cached": false,
+            "age_seconds": 7007,
+            "cached": true,
             "check": 0,
             "label": "Wikimedia revisions checked",
             "max_age_seconds": 64800,
@@ -28110,12 +27380,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:53.124247Z",
+      "observed_at": "2026-11-27T10:39:43.336832Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 80476,
-            "cached": false,
+            "age_seconds": 82086,
+            "cached": true,
             "check": 0,
             "label": "All menu sources successfully checked",
             "max_age_seconds": 1296000,
@@ -28185,12 +27455,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:53.530615Z",
+      "observed_at": "2026-11-27T10:39:43.387479Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295974,
-            "cached": false,
+            "age_seconds": 297583,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -28260,12 +27530,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:54.002580Z",
+      "observed_at": "2026-11-27T10:39:43.995033Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295974,
-            "cached": false,
+            "age_seconds": 297584,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -28335,12 +27605,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:54.071941Z",
+      "observed_at": "2026-11-27T10:39:44.280987Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295974,
-            "cached": false,
+            "age_seconds": 297584,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -28432,12 +27702,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:54.108168Z",
+      "observed_at": "2026-11-27T10:39:44.440786Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 96865,
-            "cached": false,
+            "age_seconds": 98475,
+            "cached": true,
             "check": 0,
             "label": "FCSI source checked",
             "max_age_seconds": 1209600,
@@ -28498,12 +27768,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:54.257604Z",
+      "observed_at": "2026-11-27T10:39:44.460067Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 142053,
-            "cached": false,
+            "age_seconds": 143663,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -28573,12 +27843,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:54.581435Z",
+      "observed_at": "2026-11-27T10:39:44.685000Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 43994,
-            "cached": false,
+            "age_seconds": 45605,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 172800.0,
@@ -28648,12 +27918,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:54.701696Z",
+      "observed_at": "2026-11-27T10:39:44.803226Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295975,
-            "cached": false,
+            "age_seconds": 297585,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -28723,12 +27993,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:54.959947Z",
+      "observed_at": "2026-11-27T10:39:45.207813Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123175,
-            "cached": false,
+            "age_seconds": 124785,
+            "cached": true,
             "check": 0,
             "label": "Source snapshot generated",
             "max_age_seconds": 259200.0,
@@ -28798,12 +28068,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:55.220087Z",
+      "observed_at": "2026-11-27T10:39:45.291616Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 308793,
-            "cached": false,
+            "age_seconds": 310403,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -28873,12 +28143,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:55.344166Z",
+      "observed_at": "2026-11-27T10:39:45.441780Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295975,
-            "cached": false,
+            "age_seconds": 297585,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -28918,7 +28188,7 @@
         {
           "definition": "[\"https://coolcode.ca/distropilot/data/status.json\", {\"path\": [\"count\"], \"unit\": \"projects\"}]",
           "label": "Package sources checked",
-          "read_at": "2026-11-27T10:12:55.751977Z",
+          "read_at": "2026-11-27T10:39:45.568962Z",
           "unit": "projects",
           "url": "https://coolcode.ca/distropilot/data/status.json",
           "value": 64
@@ -28928,17 +28198,17 @@
         "collection_result": "success",
         "collection_started_at": "2026-11-26T18:33:29Z",
         "collection_unconfirmed": false,
-        "due_at": "2026-11-26T08:31:00Z",
+        "due_at": "2026-11-27T08:31:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-26T18:33:18Z",
+          "at": "2026-11-27T10:36:35Z",
           "attempt": 1,
-          "conclusion": "success",
-          "event": "schedule",
-          "id": 45876857907,
-          "status": "completed",
-          "url": "https://github.com/jsdyer/distropilot/actions/runs/45876857907"
+          "conclusion": null,
+          "event": "workflow_dispatch",
+          "id": 45983547892,
+          "status": "in_progress",
+          "url": "https://github.com/jsdyer/distropilot/actions/runs/45983547892"
         },
         "latest_collection": {
           "at": "2026-11-26T18:33:18Z",
@@ -28950,37 +28220,30 @@
           "url": "https://github.com/jsdyer/distropilot/actions/runs/45876857907"
         },
         "latest_refresh": {
-          "at": "2026-11-26T18:33:18Z",
+          "at": "2026-11-27T10:36:35Z",
           "attempt": 1,
-          "conclusion": "success",
-          "event": "schedule",
-          "id": 45876857907,
-          "status": "completed",
-          "url": "https://github.com/jsdyer/distropilot/actions/runs/45876857907"
+          "conclusion": null,
+          "event": "workflow_dispatch",
+          "id": 45983547892,
+          "status": "in_progress",
+          "url": "https://github.com/jsdyer/distropilot/actions/runs/45983547892"
         },
         "latest_step_check": {
-          "started_at": "2026-11-26T18:33:29Z",
-          "status": "success",
-          "steps": [
-            {
-              "conclusion": "success",
-              "name": "Refresh validated source capture"
-            }
-          ]
+          "status": "pending"
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:55.751977Z",
+      "observed_at": "2026-11-27T10:39:45.568962Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 56367,
+            "age_seconds": 57977,
             "cached": false,
             "check": 0,
             "label": "Package sources checked",
             "max_age_seconds": 259200,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:12:55.751977Z",
+            "read_at": "2026-11-27T10:39:45.568962Z",
             "status": "fresh",
             "timestamp": "2026-11-26T18:33:29Z",
             "url": "https://coolcode.ca/distropilot/data/status.json"
@@ -28991,16 +28254,16 @@
       },
       "probe_cache": {
         "0": {
-          "key": "a968b43571afb06d9b1b830a09f6c2265aa38a646cf6c6b5d1c6b7f98c37741b",
-          "read_at": "2026-11-27T10:12:55.751977Z",
+          "key": "1b92ad7500fc2cf6962debfb6c2a1e11c9f4ef653b57c854aef894a8fb0b6ed3",
+          "read_at": "2026-11-27T10:39:45.568962Z",
           "timestamp": "2026-11-26T18:33:29Z"
         }
       },
       "reasons": [
-        "Workflow and configured published checks are available"
+        "Workflow is queued or running; output result is independent"
       ],
       "repo": "jsdyer/distropilot",
-      "status": "checked",
+      "status": "running",
       "titles": [
         "Distro Pilot"
       ],
@@ -29045,12 +28308,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:55.834161Z",
+      "observed_at": "2026-11-27T10:39:45.911408Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 1769,
-            "cached": false,
+            "age_seconds": 3379,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 7200.0,
@@ -29111,7 +28374,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:55.908513Z",
+      "observed_at": "2026-11-27T10:39:45.937447Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -29166,12 +28429,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:56.041108Z",
+      "observed_at": "2026-11-27T10:39:46.123594Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 1593,
-            "cached": false,
+            "age_seconds": 3203,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -29241,12 +28504,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:56.363630Z",
+      "observed_at": "2026-11-27T10:39:46.421674Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295976,
-            "cached": false,
+            "age_seconds": 297586,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -29316,12 +28579,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:56.592367Z",
+      "observed_at": "2026-11-27T10:39:46.829972Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 44712,
-            "cached": false,
+            "age_seconds": 46322,
+            "cached": true,
             "check": 0,
             "label": "Canadian notices checked",
             "max_age_seconds": 172800.0,
@@ -29413,12 +28676,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:56.709692Z",
+      "observed_at": "2026-11-27T10:39:46.831246Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295977,
-            "cached": false,
+            "age_seconds": 297587,
+            "cached": true,
             "check": 0,
             "label": "Trade data retrieved",
             "max_age_seconds": 1296000.0,
@@ -29488,12 +28751,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:56.853133Z",
+      "observed_at": "2026-11-27T10:39:46.894798Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295977,
-            "cached": false,
+            "age_seconds": 297587,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 1296000.0,
@@ -29554,12 +28817,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:56.951065Z",
+      "observed_at": "2026-11-27T10:39:46.992179Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295977,
-            "cached": false,
+            "age_seconds": 297587,
+            "cached": true,
             "check": 0,
             "label": "SeaBus retrieved",
             "max_age_seconds": 5443200.0,
@@ -29629,12 +28892,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:57.321095Z",
+      "observed_at": "2026-11-27T10:39:47.622765Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 209577,
-            "cached": false,
+            "age_seconds": 211188,
+            "cached": true,
             "check": 0,
             "label": "Halifax retrieved",
             "max_age_seconds": 1296000.0,
@@ -29704,12 +28967,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:57.498131Z",
+      "observed_at": "2026-11-27T10:39:47.645889Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 209577,
-            "cached": false,
+            "age_seconds": 211188,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -29770,12 +29033,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:57.537147Z",
+      "observed_at": "2026-11-27T10:39:47.647872Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 56034,
-            "cached": false,
+            "age_seconds": 57644,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -29845,12 +29108,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:57.835342Z",
+      "observed_at": "2026-11-27T10:39:48.019874Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 265590,
-            "cached": false,
+            "age_seconds": 267200,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1209600.0,
@@ -29920,12 +29183,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:57.976847Z",
+      "observed_at": "2026-11-27T10:39:48.233728Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 1756,
-            "cached": false,
+            "age_seconds": 3366,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 7200.0,
@@ -29995,12 +29258,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:57.991058Z",
+      "observed_at": "2026-11-27T10:39:48.247295Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295978,
-            "cached": false,
+            "age_seconds": 297588,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -30078,12 +29341,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:58.264501Z",
+      "observed_at": "2026-11-27T10:39:48.449139Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 6621,
-            "cached": false,
+            "age_seconds": 8231,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 43200.0,
@@ -30153,12 +29416,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:58.442272Z",
+      "observed_at": "2026-11-27T10:39:48.652440Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 261872,
-            "cached": false,
+            "age_seconds": 263483,
+            "cached": true,
             "check": 0,
             "label": "Heritage workbook retrieved",
             "max_age_seconds": 1209600.0,
@@ -30228,12 +29491,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:58.599157Z",
+      "observed_at": "2026-11-27T10:39:48.754207Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295979,
-            "cached": false,
+            "age_seconds": 297589,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -30311,12 +29574,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:58.801619Z",
+      "observed_at": "2026-11-27T10:39:49.178642Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 292422,
-            "cached": false,
+            "age_seconds": 294032,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -30386,12 +29649,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:59.044274Z",
+      "observed_at": "2026-11-27T10:39:49.226980Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 727979,
-            "cached": false,
+            "age_seconds": 729589,
+            "cached": true,
             "check": 0,
             "label": "Archive index retrieved",
             "max_age_seconds": 5443200.0,
@@ -30474,12 +29737,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:59.155139Z",
+      "observed_at": "2026-11-27T10:39:49.375873Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 3001,
-            "cached": false,
+            "age_seconds": 4611,
+            "cached": true,
             "check": 0,
             "label": "Nova Scotia fuel prices checked",
             "max_age_seconds": 172800,
@@ -30490,8 +29753,8 @@
             "url": "https://coolcode.ca/fuelwindow/data/prices.json"
           },
           {
-            "age_seconds": 3001,
-            "cached": false,
+            "age_seconds": 4611,
+            "cached": true,
             "check": 1,
             "label": "PEI fuel prices checked",
             "max_age_seconds": 172800,
@@ -30534,6 +29797,82 @@
     {
       "counts": [
         {
+          "definition": "[\"https://coolcode.ca/gamblingregulatorwatch/data/status.json\", {\"path\": [\"operators\"], \"unit\": \"named entities\"}]",
+          "label": "Latest source snapshot",
+          "read_at": "2026-11-27T10:39:49.385406Z",
+          "unit": "named entities",
+          "url": "https://coolcode.ca/gamblingregulatorwatch/data/status.json",
+          "value": 4340
+        }
+      ],
+      "execution": {
+        "collection_result": null,
+        "collection_unconfirmed": true,
+        "due_at": null,
+        "due_unobserved": false,
+        "history_limit": 20,
+        "latest": {
+          "at": "2026-11-27T10:37:05Z",
+          "attempt": 1,
+          "conclusion": "success",
+          "event": "push",
+          "id": 45983615687,
+          "status": "completed",
+          "url": "https://github.com/jsdyer/gamblingregulatorwatch/actions/runs/45983615687"
+        },
+        "latest_collection": null,
+        "latest_refresh": {
+          "at": "2026-11-27T10:30:50Z",
+          "attempt": 1,
+          "conclusion": "success",
+          "event": "workflow_dispatch",
+          "id": 45982723368,
+          "status": "completed",
+          "url": "https://github.com/jsdyer/gamblingregulatorwatch/actions/runs/45982723368"
+        },
+        "latest_step_check": {
+          "status": "skipped",
+          "steps": [
+            {
+              "conclusion": "skipped",
+              "name": "Refresh official regulatory sources"
+            }
+          ]
+        },
+        "state": "active"
+      },
+      "observed_at": "2026-11-27T10:39:49.385406Z",
+      "output": {
+        "checks": [
+          {
+            "check": 0,
+            "error": "timestamp_missing_or_invalid",
+            "label": "All configured regulatory sources checked successfully",
+            "precision": "timestamp",
+            "status": "error",
+            "url": "https://coolcode.ca/gamblingregulatorwatch/data/status.json"
+          }
+        ],
+        "status": "unavailable"
+      },
+      "probe_cache": {},
+      "reasons": [
+        "Published check unavailable"
+      ],
+      "repo": "jsdyer/gamblingregulatorwatch",
+      "status": "attention",
+      "titles": [
+        "Gambling Regulator Watch"
+      ],
+      "tool_ids": [
+        "gamblingregulatorwatch"
+      ],
+      "workflow": "pages.yml",
+      "workflow_url": "https://github.com/jsdyer/gamblingregulatorwatch/actions/workflows/pages.yml"
+    },
+    {
+      "counts": [
+        {
           "definition": "[\"https://coolcode.ca/gc-domain-graveyard/data.json\", {\"path\": [\"count\"], \"unit\": \"historic resources\"}]",
           "label": "Source retrieved",
           "read_at": "2026-11-27T10:12:59.281251Z",
@@ -30566,12 +29905,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:59.281251Z",
+      "observed_at": "2026-11-27T10:39:49.672399Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 727979,
-            "cached": false,
+            "age_seconds": 729590,
+            "cached": true,
             "check": 0,
             "label": "Catalogue retrieved",
             "max_age_seconds": 5443200.0,
@@ -30641,12 +29980,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:59.624230Z",
+      "observed_at": "2026-11-27T10:39:49.894745Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123180,
-            "cached": false,
+            "age_seconds": 124790,
+            "cached": true,
             "check": 0,
             "label": "Government directory retrieved",
             "max_age_seconds": 259200.0,
@@ -30707,12 +30046,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:59.762171Z",
+      "observed_at": "2026-11-27T10:39:50.264380Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 313218,
-            "cached": false,
+            "age_seconds": 314828,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1209600.0,
@@ -30782,12 +30121,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:12:59.924866Z",
+      "observed_at": "2026-11-27T10:39:50.717005Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 78006,
-            "cached": false,
+            "age_seconds": 79617,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1209600.0,
@@ -30857,12 +30196,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:00.124483Z",
+      "observed_at": "2026-11-27T10:39:50.750417Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 379026,
-            "cached": false,
+            "age_seconds": 380637,
+            "cached": true,
             "check": 0,
             "label": "Captured",
             "max_age_seconds": 1209600.0,
@@ -30953,12 +30292,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:00.333847Z",
+      "observed_at": "2026-11-27T10:39:50.768993Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 223053,
-            "cached": false,
+            "age_seconds": 224664,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -30998,7 +30337,7 @@
         {
           "definition": "[\"https://coolcode.ca/grid-dark/status.json\", {\"path\": [\"bulletins\"], \"unit\": \"utility bulletins\"}]",
           "label": "Internet data retrieved",
-          "read_at": "2026-11-27T10:13:00.442593Z",
+          "read_at": "2026-11-27T10:39:51.350048Z",
           "unit": "utility bulletins",
           "url": "https://coolcode.ca/grid-dark/status.json",
           "value": 10
@@ -31031,17 +30370,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:00.442593Z",
+      "observed_at": "2026-11-27T10:39:51.350048Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123180,
+            "age_seconds": 124791,
             "cached": false,
             "check": 0,
             "label": "Internet data retrieved",
             "max_age_seconds": 259200.0,
             "precision": "date",
-            "read_at": "2026-11-27T10:13:00.442593Z",
+            "read_at": "2026-11-27T10:39:51.350048Z",
             "status": "fresh",
             "timestamp": "2026-11-26T00:00:00Z",
             "url": "https://coolcode.ca/grid-dark/status.json"
@@ -31052,7 +30391,7 @@
       "probe_cache": {
         "0": {
           "key": "150ebd712d0b5ba28da825a27205aa66734c31e063442658e10ab9e0af7ab44a",
-          "read_at": "2026-11-27T10:13:00.442593Z",
+          "read_at": "2026-11-27T10:39:51.350048Z",
           "timestamp": "2026-11-26T00:00:00Z"
         }
       },
@@ -31105,12 +30444,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:00.836182Z",
+      "observed_at": "2026-11-27T10:39:51.500819Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 7084,
-            "cached": false,
+            "age_seconds": 8695,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 21600.0,
@@ -31150,7 +30489,7 @@
         {
           "definition": "[\"https://coolcode.ca/halifaxnext/status.json\", {\"path\": [\"stops\"], \"unit\": \"stops\"}]",
           "label": "Halifax schedule downloaded",
-          "read_at": "2026-11-27T10:13:01.253072Z",
+          "read_at": "2026-11-27T10:39:51.582643Z",
           "unit": "stops",
           "url": "https://coolcode.ca/halifaxnext/status.json",
           "value": 2347
@@ -31158,40 +30497,40 @@
       ],
       "execution": {
         "collection_result": "success",
-        "collection_started_at": "2026-11-26T18:27:56Z",
+        "collection_started_at": "2026-11-27T10:24:30Z",
         "collection_unconfirmed": false,
-        "due_at": "2026-11-26T08:17:00Z",
+        "due_at": "2026-11-27T08:17:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-26T18:27:49Z",
+          "at": "2026-11-27T10:24:12Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "schedule",
-          "id": 45876115861,
+          "event": "workflow_dispatch",
+          "id": 45981797343,
           "status": "completed",
-          "url": "https://github.com/jsdyer/halifaxnext/actions/runs/45876115861"
+          "url": "https://github.com/jsdyer/halifaxnext/actions/runs/45981797343"
         },
         "latest_collection": {
-          "at": "2026-11-26T18:27:49Z",
+          "at": "2026-11-27T10:24:12Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "schedule",
-          "id": 45876115861,
+          "event": "workflow_dispatch",
+          "id": 45981797343,
           "status": "completed",
-          "url": "https://github.com/jsdyer/halifaxnext/actions/runs/45876115861"
+          "url": "https://github.com/jsdyer/halifaxnext/actions/runs/45981797343"
         },
         "latest_refresh": {
-          "at": "2026-11-26T18:27:49Z",
+          "at": "2026-11-27T10:24:12Z",
           "attempt": 1,
           "conclusion": "success",
-          "event": "schedule",
-          "id": 45876115861,
+          "event": "workflow_dispatch",
+          "id": 45981797343,
           "status": "completed",
-          "url": "https://github.com/jsdyer/halifaxnext/actions/runs/45876115861"
+          "url": "https://github.com/jsdyer/halifaxnext/actions/runs/45981797343"
         },
         "latest_step_check": {
-          "started_at": "2026-11-26T18:27:56Z",
+          "started_at": "2026-11-27T10:24:30Z",
           "status": "success",
           "steps": [
             {
@@ -31202,19 +30541,19 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:01.253072Z",
+      "observed_at": "2026-11-27T10:39:51.582643Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 56702,
+            "age_seconds": 916,
             "cached": false,
             "check": 0,
             "label": "Halifax schedule downloaded",
             "max_age_seconds": 129600,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:01.253072Z",
+            "read_at": "2026-11-27T10:39:51.582643Z",
             "status": "fresh",
-            "timestamp": "2026-11-26T18:27:59Z",
+            "timestamp": "2026-11-27T10:24:36Z",
             "url": "https://coolcode.ca/halifaxnext/status.json"
           }
         ],
@@ -31223,9 +30562,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "372077eca02d4e4cde040925c0462fa53cada9cc27c70992273f927cd1dbe3c7",
-          "read_at": "2026-11-27T10:13:01.253072Z",
-          "timestamp": "2026-11-26T18:27:59Z"
+          "key": "3981c1ac1bd3bd6d1c7ea25b7820e5a559161151994bdc77832760ef1f92efa6",
+          "read_at": "2026-11-27T10:39:51.582643Z",
+          "timestamp": "2026-11-27T10:24:36Z"
         }
       },
       "reasons": [
@@ -31277,12 +30616,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:01.602808Z",
+      "observed_at": "2026-11-27T10:39:52.392260Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 209582,
-            "cached": false,
+            "age_seconds": 211192,
+            "cached": true,
             "check": 0,
             "label": "Photo index retrieved",
             "max_age_seconds": 1296000.0,
@@ -31352,12 +30691,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:01.623881Z",
+      "observed_at": "2026-11-27T10:39:52.901320Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 225566,
-            "cached": false,
+            "age_seconds": 227177,
+            "cached": true,
             "check": 0,
             "label": "Waterways retrieved",
             "max_age_seconds": 1209600.0,
@@ -31368,8 +30707,8 @@
             "url": "https://coolcode.ca/hiddenwater/data/status.json"
           },
           {
-            "age_seconds": 295982,
-            "cached": false,
+            "age_seconds": 297593,
+            "cached": true,
             "check": 1,
             "label": "Fish passage retrieved",
             "max_age_seconds": 1296000.0,
@@ -31444,12 +30783,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:02.103242Z",
+      "observed_at": "2026-11-27T10:39:52.983101Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 265256,
-            "cached": false,
+            "age_seconds": 266867,
+            "cached": true,
             "check": 0,
             "label": "Camera list",
             "max_age_seconds": 1209600.0,
@@ -31519,12 +30858,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:02.139353Z",
+      "observed_at": "2026-11-27T10:39:53.406759Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 340713,
-            "cached": false,
+            "age_seconds": 342324,
+            "cached": true,
             "check": 0,
             "label": "Canadian cache retrieved",
             "max_age_seconds": 5356800.0,
@@ -31594,12 +30933,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:02.437731Z",
+      "observed_at": "2026-11-27T10:39:53.429508Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 727982,
-            "cached": false,
+            "age_seconds": 729593,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -31669,12 +31008,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:02.558020Z",
+      "observed_at": "2026-11-27T10:39:53.512878Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 52234,
-            "cached": false,
+            "age_seconds": 53845,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -31765,12 +31104,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:02.619809Z",
+      "observed_at": "2026-11-27T10:39:53.688233Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 641583,
-            "cached": false,
+            "age_seconds": 643194,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -31781,8 +31120,8 @@
             "url": "https://coolcode.ca/housing-pulse/data/status.json"
           },
           {
-            "age_seconds": 162264,
-            "cached": false,
+            "age_seconds": 163875,
+            "cached": true,
             "check": 1,
             "label": "Compatible rent, earnings and completions sources checked",
             "max_age_seconds": 5616000,
@@ -31857,12 +31196,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:02.789143Z",
+      "observed_at": "2026-11-27T10:39:54.038153Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 209583,
-            "cached": false,
+            "age_seconds": 211194,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -31932,12 +31271,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:02.984234Z",
+      "observed_at": "2026-11-27T10:39:54.045211Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 641583,
-            "cached": false,
+            "age_seconds": 643194,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -31948,8 +31287,8 @@
             "url": "https://coolcode.ca/inflation-basket/data/status.json"
           },
           {
-            "age_seconds": 106017,
-            "cached": false,
+            "age_seconds": 107628,
+            "cached": true,
             "check": 1,
             "label": "Full CPI dollar history checked",
             "max_age_seconds": 3888000,
@@ -32024,12 +31363,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:03.351873Z",
+      "observed_at": "2026-11-27T10:39:54.586562Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 79655,
-            "cached": false,
+            "age_seconds": 81267,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -32121,12 +31460,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:03.373200Z",
+      "observed_at": "2026-11-27T10:39:54.623230Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 53886,
-            "cached": false,
+            "age_seconds": 55498,
+            "cached": true,
             "check": 0,
             "label": "Official starter reports checked",
             "max_age_seconds": 129600,
@@ -32196,12 +31535,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:03.743349Z",
+      "observed_at": "2026-11-27T10:39:54.707958Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 50163,
-            "cached": false,
+            "age_seconds": 51774,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -32271,12 +31610,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:04.003645Z",
+      "observed_at": "2026-11-27T10:39:55.304644Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 209584,
-            "cached": false,
+            "age_seconds": 211195,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -32337,7 +31676,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:04.423596Z",
+      "observed_at": "2026-11-27T10:39:55.361780Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -32379,7 +31718,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:04.424423Z",
+      "observed_at": "2026-11-27T10:39:55.726132Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -32421,7 +31760,7 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:04.594365Z",
+      "observed_at": "2026-11-27T10:39:55.938335Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -32444,26 +31783,26 @@
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-27T10:12:26Z",
+          "at": "2026-11-27T10:39:16Z",
           "attempt": 1,
           "conclusion": null,
-          "event": "workflow_dispatch",
-          "id": 45980122752,
+          "event": "push",
+          "id": 45983908410,
           "status": "in_progress",
-          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45980122752"
+          "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45983908410"
         },
         "latest_refresh": {
           "at": "2026-11-27T10:12:26Z",
           "attempt": 1,
-          "conclusion": null,
+          "conclusion": "success",
           "event": "workflow_dispatch",
           "id": 45980122752,
-          "status": "in_progress",
+          "status": "completed",
           "url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45980122752"
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:04.896241Z",
+      "observed_at": "2026-11-27T10:39:56.075741Z",
       "output": {
         "checks": [],
         "status": "not_configured"
@@ -32514,12 +31853,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:05.036369Z",
+      "observed_at": "2026-11-27T10:39:56.271928Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 209585,
-            "cached": false,
+            "age_seconds": 211196,
+            "cached": true,
             "check": 0,
             "label": "Municipal profiles retrieved",
             "max_age_seconds": 1296000.0,
@@ -32589,12 +31928,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:05.431529Z",
+      "observed_at": "2026-11-27T10:39:56.884612Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 56038,
-            "cached": false,
+            "age_seconds": 57650,
+            "cached": true,
             "check": 0,
             "label": "Permit list checked",
             "max_age_seconds": 172800.0,
@@ -32664,12 +32003,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:05.606274Z",
+      "observed_at": "2026-11-27T10:39:56.937626Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 264952,
-            "cached": false,
+            "age_seconds": 266563,
+            "cached": true,
             "check": 0,
             "label": "Licence data retrieved",
             "max_age_seconds": 5356800.0,
@@ -32739,12 +32078,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:05.683481Z",
+      "observed_at": "2026-11-27T10:39:56.958166Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123186,
-            "cached": false,
+            "age_seconds": 124797,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -32830,12 +32169,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:06.005839Z",
+      "observed_at": "2026-11-27T10:39:57.350906Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 36786,
-            "cached": false,
+            "age_seconds": 38397,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -32896,12 +32235,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:06.120942Z",
+      "observed_at": "2026-11-27T10:39:57.565143Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 8641,
-            "cached": false,
+            "age_seconds": 10253,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -32971,12 +32310,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:06.266560Z",
+      "observed_at": "2026-11-27T10:39:57.606477Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 308826,
-            "cached": false,
+            "age_seconds": 310438,
+            "cached": true,
             "check": 0,
             "label": "Captured",
             "max_age_seconds": 1209600.0,
@@ -33046,12 +32385,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:06.527361Z",
+      "observed_at": "2026-11-27T10:39:57.651798Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295987,
-            "cached": false,
+            "age_seconds": 297598,
+            "cached": true,
             "check": 0,
             "label": "Survey retrieved",
             "max_age_seconds": 5443200.0,
@@ -33121,12 +32460,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:06.605312Z",
+      "observed_at": "2026-11-27T10:39:58.000974Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 641587,
-            "cached": false,
+            "age_seconds": 643198,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 2678400.0,
@@ -33166,7 +32505,7 @@
         {
           "definition": "[\"https://coolcode.ca/lobbytrail/index.json\", {\"path\": [\"reports\"], \"unit\": \"communication reports\"}]",
           "label": "Source export",
-          "read_at": "2026-11-27T10:13:06.853153Z",
+          "read_at": "2026-11-27T10:39:58.271966Z",
           "unit": "communication reports",
           "url": "https://coolcode.ca/lobbytrail/index.json",
           "value": 270514
@@ -33221,17 +32560,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:06.853153Z",
+      "observed_at": "2026-11-27T10:39:58.271966Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 154804,
+            "age_seconds": 156415,
             "cached": false,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:06.853153Z",
+            "read_at": "2026-11-27T10:39:58.271966Z",
             "status": "fresh",
             "timestamp": "2026-11-25T15:13:03Z",
             "url": "https://coolcode.ca/lobbytrail/index.json"
@@ -33242,7 +32581,7 @@
       "probe_cache": {
         "0": {
           "key": "41e364ec33f3b26aae635a09457cf5b5d5311b3d1c9cdb749522053f36fff43a",
-          "read_at": "2026-11-27T10:13:06.853153Z",
+          "read_at": "2026-11-27T10:39:58.271966Z",
           "timestamp": "2026-11-25T15:13:03Z"
         }
       },
@@ -33286,12 +32625,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:06.944618Z",
+      "observed_at": "2026-11-27T10:39:58.337983Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 2501,
-            "cached": false,
+            "age_seconds": 4112,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -33361,12 +32700,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:07.042211Z",
+      "observed_at": "2026-11-27T10:39:58.362193Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 418299,
-            "cached": false,
+            "age_seconds": 419910,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 5356800.0,
@@ -33436,12 +32775,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:07.044224Z",
+      "observed_at": "2026-11-27T10:39:58.538249Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 39989,
-            "cached": false,
+            "age_seconds": 41601,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -33511,12 +32850,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:07.607391Z",
+      "observed_at": "2026-11-27T10:39:58.936566Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295988,
-            "cached": false,
+            "age_seconds": 297599,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -33586,12 +32925,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:07.735472Z",
+      "observed_at": "2026-11-27T10:39:59.191392Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 36788,
-            "cached": false,
+            "age_seconds": 38399,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -33661,12 +33000,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:07.755124Z",
+      "observed_at": "2026-11-27T10:39:59.211509Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 257695,
-            "cached": false,
+            "age_seconds": 259306,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -33736,12 +33075,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:08.181792Z",
+      "observed_at": "2026-11-27T10:39:59.495756Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 50241,
-            "cached": false,
+            "age_seconds": 51852,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -33824,12 +33163,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:08.317863Z",
+      "observed_at": "2026-11-27T10:39:59.792232Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 105623,
-            "cached": false,
+            "age_seconds": 107235,
+            "cached": true,
             "check": 0,
             "label": "Statistics Canada spending sources checked",
             "max_age_seconds": 3456000,
@@ -33899,12 +33238,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:08.570493Z",
+      "observed_at": "2026-11-27T10:39:59.825291Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 413997,
-            "cached": false,
+            "age_seconds": 415608,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 5356800.0,
@@ -33974,12 +33313,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:08.708131Z",
+      "observed_at": "2026-11-27T10:39:59.949744Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 414050,
-            "cached": false,
+            "age_seconds": 415661,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
@@ -34049,12 +33388,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:09.039347Z",
+      "observed_at": "2026-11-27T10:40:00.336029Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 42950,
-            "cached": false,
+            "age_seconds": 44561,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -34094,7 +33433,7 @@
         {
           "definition": "[\"https://coolcode.ca/nasa/data/index.json\", {\"measure\": \"length\", \"path\": [\"captures\"], \"unit\": \"daily captures\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-27T10:13:09.154239Z",
+          "read_at": "2026-11-27T10:40:00.417635Z",
           "unit": "daily captures",
           "url": "https://coolcode.ca/nasa/data/index.json",
           "value": 4
@@ -34146,12 +33485,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:09.154239Z",
+      "observed_at": "2026-11-27T10:40:00.417635Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 42847,
-            "cached": false,
+            "age_seconds": 44458,
+            "cached": true,
             "check": 0,
             "label": "NASA/NOAA capture",
             "max_age_seconds": 172800.0,
@@ -34253,12 +33592,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:09.261101Z",
+      "observed_at": "2026-11-27T10:40:00.704610Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 307980,
-            "cached": false,
+            "age_seconds": 309592,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -34322,17 +33661,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:09.362287Z",
+      "observed_at": "2026-11-27T10:40:00.814549Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 363608,
+            "age_seconds": 365220,
             "cached": false,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 1209600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:09.362287Z",
+            "read_at": "2026-11-27T10:40:00.814549Z",
             "status": "fresh",
             "timestamp": "2026-11-23T05:13:01Z",
             "url": "https://coolcode.ca/oldnews-oddities/data/shelf.json"
@@ -34343,7 +33682,7 @@
       "probe_cache": {
         "0": {
           "key": "fcc0682da547b84f16298f25f7d9327ae6e623b142c293a170cd972bcd498230",
-          "read_at": "2026-11-27T10:13:09.362287Z",
+          "read_at": "2026-11-27T10:40:00.814549Z",
           "timestamp": "2026-11-23T05:13:01Z"
         }
       },
@@ -34396,12 +33735,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:09.836164Z",
+      "observed_at": "2026-11-27T10:40:01.199832Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123190,
-            "cached": false,
+            "age_seconds": 124801,
+            "cached": true,
             "check": 0,
             "label": "Tor Metrics retrieved",
             "max_age_seconds": 259200.0,
@@ -34471,12 +33810,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:09.837667Z",
+      "observed_at": "2026-11-27T10:40:01.401123Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123190,
-            "cached": false,
+            "age_seconds": 124801,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 259200.0,
@@ -34559,12 +33898,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:10.359133Z",
+      "observed_at": "2026-11-27T10:40:01.844742Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 52272,
-            "cached": false,
+            "age_seconds": 53884,
+            "cached": true,
             "check": 0,
             "label": "Official download availability checked",
             "max_age_seconds": 259200,
@@ -34634,12 +33973,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:10.486469Z",
+      "observed_at": "2026-11-27T10:40:02.152136Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 52556,
-            "cached": false,
+            "age_seconds": 54168,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -34717,12 +34056,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:10.625132Z",
+      "observed_at": "2026-11-27T10:40:02.264073Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295991,
-            "cached": false,
+            "age_seconds": 297602,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -34733,8 +34072,8 @@
             "url": "https://coolcode.ca/otherworldnames/data-status.json"
           },
           {
-            "age_seconds": 295991,
-            "cached": false,
+            "age_seconds": 297602,
+            "cached": true,
             "check": 1,
             "label": "Horizons retrieved",
             "max_age_seconds": 5443200.0,
@@ -34800,12 +34139,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:11.118739Z",
+      "observed_at": "2026-11-27T10:40:02.530613Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 79672,
-            "cached": false,
+            "age_seconds": 81283,
+            "cached": true,
             "check": 0,
             "label": "Package registry capture",
             "max_age_seconds": 1209600.0,
@@ -34875,12 +34214,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:11.127882Z",
+      "observed_at": "2026-11-27T10:40:02.824022Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 382391,
-            "cached": false,
+            "age_seconds": 384003,
+            "cached": true,
             "check": 0,
             "label": "Monthly tables retrieved",
             "max_age_seconds": 3715200.0,
@@ -34950,12 +34289,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:11.349157Z",
+      "observed_at": "2026-11-27T10:40:02.883133Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 727991,
-            "cached": false,
+            "age_seconds": 729603,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -35047,12 +34386,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:11.460634Z",
+      "observed_at": "2026-11-27T10:40:03.042152Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 921,
-            "cached": false,
+            "age_seconds": 2533,
+            "cached": true,
             "check": 0,
             "label": "BC Parks sources checked",
             "max_age_seconds": 21600,
@@ -35122,12 +34461,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:11.699565Z",
+      "observed_at": "2026-11-27T10:40:03.275641Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295992,
-            "cached": false,
+            "age_seconds": 297603,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -35197,12 +34536,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:11.879350Z",
+      "observed_at": "2026-11-27T10:40:03.467179Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 44639,
-            "cached": false,
+            "age_seconds": 46251,
+            "cached": true,
             "check": 0,
             "label": "KEV source retrieved",
             "max_age_seconds": 172800.0,
@@ -35272,12 +34611,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:11.908942Z",
+      "observed_at": "2026-11-27T10:40:03.544116Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 79613,
-            "cached": false,
+            "age_seconds": 81225,
+            "cached": true,
             "check": 0,
             "label": "Pre-grant workbook retrieved",
             "max_age_seconds": 1209600.0,
@@ -35317,15 +34656,15 @@
         {
           "definition": "[\"https://coolcode.ca/pipeda-findings/data/index.json\", {\"path\": [\"count\"], \"unit\": \"published records\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-27T10:13:12.244282Z",
+          "read_at": "2026-11-27T10:40:03.810984Z",
           "unit": "published records",
           "url": "https://coolcode.ca/pipeda-findings/data/index.json",
           "value": 173
         }
       ],
       "execution": {
-        "due_at": "2026-11-20T08:39:00Z",
-        "due_unobserved": false,
+        "due_at": "2026-11-27T08:39:00Z",
+        "due_unobserved": true,
         "history_limit": 20,
         "latest": {
           "at": "2026-11-26T12:01:20Z",
@@ -35347,17 +34686,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:12.244282Z",
+      "observed_at": "2026-11-27T10:40:03.810984Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 641592,
+            "age_seconds": 643204,
             "cached": false,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
             "precision": "date",
-            "read_at": "2026-11-27T10:13:12.244282Z",
+            "read_at": "2026-11-27T10:40:03.810984Z",
             "status": "fresh",
             "timestamp": "2026-11-20T00:00:00Z",
             "url": "https://coolcode.ca/pipeda-findings/data/index.json"
@@ -35368,16 +34707,16 @@
       },
       "probe_cache": {
         "0": {
-          "key": "e64b12abd9f43f25993a9357a94fd50b042d9a2b76e91be987b0805074c5e026",
-          "read_at": "2026-11-27T10:13:12.244282Z",
+          "key": "2a5284954c4a6ae05939ba9134eddbed25f43dae05dfe21a8642f9a301f39ee1",
+          "read_at": "2026-11-27T10:40:03.810984Z",
           "timestamp": "2026-11-20T00:00:00Z"
         }
       },
       "reasons": [
-        "Workflow and configured published checks are available"
+        "No scheduled/manual run observed for the latest due time"
       ],
       "repo": "jsdyer/pipeda-findings",
-      "status": "checked",
+      "status": "attention",
       "titles": [
         "PIPEDA Findings"
       ],
@@ -35422,12 +34761,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:12.537365Z",
+      "observed_at": "2026-11-27T10:40:04.284537Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295993,
-            "cached": false,
+            "age_seconds": 297604,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -35497,12 +34836,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:12.642386Z",
+      "observed_at": "2026-11-27T10:40:04.348149Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295993,
-            "cached": false,
+            "age_seconds": 297604,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -35542,7 +34881,7 @@
         {
           "definition": "[\"https://coolcode.ca/portwindow/data/status.json\", {\"path\": [\"count\"], \"unit\": \"schedule entries\"}]",
           "label": "Oldest available schedule checked",
-          "read_at": "2026-11-27T10:13:12.691253Z",
+          "read_at": "2026-11-27T10:40:04.597406Z",
           "unit": "schedule entries",
           "url": "https://coolcode.ca/portwindow/data/status.json",
           "value": 1484
@@ -35594,17 +34933,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:12.691253Z",
+      "observed_at": "2026-11-27T10:40:04.597406Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 185117,
+            "age_seconds": 186729,
             "cached": false,
             "check": 0,
             "label": "Oldest available schedule checked",
             "max_age_seconds": 259200,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:12.691253Z",
+            "read_at": "2026-11-27T10:40:04.597406Z",
             "status": "fresh",
             "timestamp": "2026-11-25T06:47:56Z",
             "url": "https://coolcode.ca/portwindow/data/status.json"
@@ -35616,7 +34955,7 @@
       "probe_cache": {
         "0": {
           "key": "20e568d3ca77dd39d84b43b24ae41ef17e7882bf376688ed9f527e95eddf5680",
-          "read_at": "2026-11-27T10:13:12.691253Z",
+          "read_at": "2026-11-27T10:40:04.597406Z",
           "timestamp": "2026-11-25T06:47:56Z"
         }
       },
@@ -35669,12 +35008,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:12.880562Z",
+      "observed_at": "2026-11-27T10:40:04.650630Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295993,
-            "cached": false,
+            "age_seconds": 297605,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -35744,12 +35083,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:12.996112Z",
+      "observed_at": "2026-11-27T10:40:04.908827Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123193,
-            "cached": false,
+            "age_seconds": 124805,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 345600,
@@ -35819,12 +35158,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:13.163026Z",
+      "observed_at": "2026-11-27T10:40:04.978887Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 96432,
-            "cached": false,
+            "age_seconds": 98044,
+            "cached": true,
             "check": 0,
             "label": "Price table retrieved",
             "max_age_seconds": 1209600.0,
@@ -35916,12 +35255,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:13.436885Z",
+      "observed_at": "2026-11-27T10:40:05.225869Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 41929,
-            "cached": false,
+            "age_seconds": 43541,
+            "cached": true,
             "check": 0,
             "label": "IRCC estimates checked",
             "max_age_seconds": 172800,
@@ -35991,12 +35330,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:13.798082Z",
+      "observed_at": "2026-11-27T10:40:05.677618Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295994,
-            "cached": false,
+            "age_seconds": 297606,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -36074,12 +35413,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:13.902610Z",
+      "observed_at": "2026-11-27T10:40:05.682003Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 302367,
-            "cached": false,
+            "age_seconds": 303979,
+            "cached": true,
             "check": 0,
             "label": "Catalogue checked",
             "max_age_seconds": 1209600.0,
@@ -36090,8 +35429,8 @@
             "url": "https://coolcode.ca/rackexpiry/data/index.json"
           },
           {
-            "age_seconds": 105704,
-            "cached": false,
+            "age_seconds": 107316,
+            "cached": true,
             "check": 1,
             "label": "Self-hosted software releases checked",
             "max_age_seconds": 1209600,
@@ -36166,12 +35505,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:14.055092Z",
+      "observed_at": "2026-11-27T10:40:05.703995Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 53878,
-            "cached": false,
+            "age_seconds": 55490,
+            "cached": true,
             "check": 0,
             "label": "Source checked",
             "max_age_seconds": 172800.0,
@@ -36241,12 +35580,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:14.397031Z",
+      "observed_at": "2026-11-27T10:40:06.275703Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 39364,
-            "cached": false,
+            "age_seconds": 40976,
+            "cached": true,
             "check": 0,
             "label": "Provider capture",
             "max_age_seconds": 172800.0,
@@ -36316,12 +35655,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:14.525132Z",
+      "observed_at": "2026-11-27T10:40:06.280837Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 44377,
-            "cached": false,
+            "age_seconds": 45988,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -36413,12 +35752,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:14.839255Z",
+      "observed_at": "2026-11-27T10:40:06.331977Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 187771,
-            "cached": false,
+            "age_seconds": 189382,
+            "cached": true,
             "check": 0,
             "label": "Official CNF release checked",
             "max_age_seconds": 3888000,
@@ -36510,12 +35849,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:15.247247Z",
+      "observed_at": "2026-11-27T10:40:06.706818Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 236308,
-            "cached": false,
+            "age_seconds": 237920,
+            "cached": true,
             "check": 0,
             "label": "Quarterly sources checked",
             "max_age_seconds": 2419200.0,
@@ -36606,12 +35945,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:15.296258Z",
+      "observed_at": "2026-11-27T10:40:07.036611Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 209595,
-            "cached": false,
+            "age_seconds": 211207,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 777600.0,
@@ -36622,8 +35961,8 @@
             "url": "https://coolcode.ca/releasereceipt/receipts.json"
           },
           {
-            "age_seconds": 162058,
-            "cached": false,
+            "age_seconds": 163670,
+            "cached": true,
             "check": 1,
             "label": "Configured Statistics Canada vectors checked",
             "max_age_seconds": 604800,
@@ -36689,12 +36028,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:15.345384Z",
+      "observed_at": "2026-11-27T10:40:07.038597Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 106070,
-            "cached": false,
+            "age_seconds": 107682,
+            "cached": true,
             "check": 0,
             "label": "Crossref capture",
             "max_age_seconds": 1209600.0,
@@ -36734,7 +36073,7 @@
         {
           "definition": "[\"https://coolcode.ca/restroomreach/data/index.json\", {\"path\": [\"count\"], \"unit\": \"mapped toilets\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-27T10:13:15.939658Z",
+          "read_at": "2026-11-27T10:40:07.414404Z",
           "unit": "mapped toilets",
           "url": "https://coolcode.ca/restroomreach/data/index.json",
           "value": 1285
@@ -36789,17 +36128,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:15.939658Z",
+      "observed_at": "2026-11-27T10:40:07.414404Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 340627,
+            "age_seconds": 342238,
             "cached": false,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1209600.0,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:15.939658Z",
+            "read_at": "2026-11-27T10:40:07.414404Z",
             "status": "fresh",
             "timestamp": "2026-11-23T11:36:09Z",
             "url": "https://coolcode.ca/restroomreach/data/index.json"
@@ -36810,7 +36149,7 @@
       "probe_cache": {
         "0": {
           "key": "2ae7bdafeb61c9567b3c7ba3db46ef5fbcd72bebce6a35c7a96a903ae12a32fa",
-          "read_at": "2026-11-27T10:13:15.939658Z",
+          "read_at": "2026-11-27T10:40:07.414404Z",
           "timestamp": "2026-11-23T11:36:09Z"
         }
       },
@@ -36863,12 +36202,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:16.036855Z",
+      "observed_at": "2026-11-27T10:40:07.634611Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 264622,
-            "cached": false,
+            "age_seconds": 266234,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600.0,
@@ -36929,12 +36268,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:16.079578Z",
+      "observed_at": "2026-11-27T10:40:07.641375Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 53845,
-            "cached": false,
+            "age_seconds": 55457,
+            "cached": true,
             "check": 0,
             "label": "River observation capture",
             "max_age_seconds": 172800.0,
@@ -36995,12 +36334,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:16.593145Z",
+      "observed_at": "2026-11-27T10:40:08.207030Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 5317,
-            "cached": false,
+            "age_seconds": 6928,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 43200.0,
@@ -37070,12 +36409,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:16.718374Z",
+      "observed_at": "2026-11-27T10:40:08.555293Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295997,
-            "cached": false,
+            "age_seconds": 297609,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -37115,7 +36454,7 @@
         {
           "definition": "[\"https://coolcode.ca/salestax/data/rates.json\", {\"path\": [\"record_count\"], \"unit\": \"jurisdictions\"}]",
           "label": "Official rates checked",
-          "read_at": "2026-11-27T10:13:17.160105Z",
+          "read_at": "2026-11-27T10:40:09.069895Z",
           "unit": "jurisdictions",
           "url": "https://coolcode.ca/salestax/data/rates.json",
           "value": 13
@@ -37157,17 +36496,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:17.160105Z",
+      "observed_at": "2026-11-27T10:40:09.069895Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 99056,
+            "age_seconds": 100668,
             "cached": false,
             "check": 0,
             "label": "Official rates checked",
             "max_age_seconds": 3283200,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:17.160105Z",
+            "read_at": "2026-11-27T10:40:09.069895Z",
             "status": "fresh",
             "timestamp": "2026-11-26T06:42:21Z",
             "url": "https://coolcode.ca/salestax/data/rates.json"
@@ -37178,7 +36517,7 @@
       "probe_cache": {
         "0": {
           "key": "15c694f34f6a748e884e10254c4c4d327c7ec66a7eb1d7976ddeb0d0de12ba0d",
-          "read_at": "2026-11-27T10:13:17.160105Z",
+          "read_at": "2026-11-27T10:40:09.069895Z",
           "timestamp": "2026-11-26T06:42:21Z"
         }
       },
@@ -37231,12 +36570,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:17.242931Z",
+      "observed_at": "2026-11-27T10:40:09.119230Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 814397,
-            "cached": false,
+            "age_seconds": 816009,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -37306,12 +36645,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:17.404046Z",
+      "observed_at": "2026-11-27T10:40:09.188989Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 52864,
-            "cached": false,
+            "age_seconds": 54476,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 172800.0,
@@ -37351,49 +36690,49 @@
         {
           "definition": "[\"https://coolcode.ca/satpasses/elements.json\", {\"measure\": \"length\", \"path\": [\"objects\"], \"unit\": \"satellites\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-27T10:13:17.778415Z",
+          "read_at": "2026-11-27T10:40:09.911405Z",
           "unit": "satellites",
           "url": "https://coolcode.ca/satpasses/elements.json",
           "value": 6
         }
       ],
       "execution": {
-        "due_at": "2026-11-27T04:17:00Z",
+        "due_at": "2026-11-27T08:17:00Z",
         "due_unobserved": false,
         "history_limit": 20,
         "latest": {
-          "at": "2026-11-27T06:25:10Z",
+          "at": "2026-11-27T10:26:57Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45951730836,
+          "id": 45982187308,
           "status": "completed",
-          "url": "https://github.com/jsdyer/satpasses/actions/runs/45951730836"
+          "url": "https://github.com/jsdyer/satpasses/actions/runs/45982187308"
         },
         "latest_refresh": {
-          "at": "2026-11-27T06:25:10Z",
+          "at": "2026-11-27T10:26:57Z",
           "attempt": 1,
           "conclusion": "success",
           "event": "workflow_dispatch",
-          "id": 45951730836,
+          "id": 45982187308,
           "status": "completed",
-          "url": "https://github.com/jsdyer/satpasses/actions/runs/45951730836"
+          "url": "https://github.com/jsdyer/satpasses/actions/runs/45982187308"
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:17.778415Z",
+      "observed_at": "2026-11-27T10:40:09.911405Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 13679,
+            "age_seconds": 781,
             "cached": false,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 28800.0,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:17.778415Z",
+            "read_at": "2026-11-27T10:40:09.911405Z",
             "status": "fresh",
-            "timestamp": "2026-11-27T06:25:19.197535Z",
+            "timestamp": "2026-11-27T10:27:08.760260Z",
             "url": "https://coolcode.ca/satpasses/elements.json"
           }
         ],
@@ -37402,9 +36741,9 @@
       },
       "probe_cache": {
         "0": {
-          "key": "13b7b3c30e005755fed8d601d010cc3348ff7aa27021ff8be3e06a6aa3bada5d",
-          "read_at": "2026-11-27T10:13:17.778415Z",
-          "timestamp": "2026-11-27T06:25:19.197535Z"
+          "key": "4e3687231c8688f95ef76ca2d49ca2169116b99432ba4520766ddc80cb73bcb5",
+          "read_at": "2026-11-27T10:40:09.911405Z",
+          "timestamp": "2026-11-27T10:27:08.760260Z"
         }
       },
       "reasons": [
@@ -37456,12 +36795,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:17.907573Z",
+      "observed_at": "2026-11-27T10:40:09.922524Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 39068,
-            "cached": false,
+            "age_seconds": 40680,
+            "cached": true,
             "check": 0,
             "label": "Browser captured",
             "max_age_seconds": 172800.0,
@@ -37531,12 +36870,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:18.170916Z",
+      "observed_at": "2026-11-27T10:40:09.924094Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295998,
-            "cached": false,
+            "age_seconds": 297610,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -37606,12 +36945,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:18.633045Z",
+      "observed_at": "2026-11-27T10:40:10.631214Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123199,
-            "cached": false,
+            "age_seconds": 124811,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 1296000.0,
@@ -37694,12 +37033,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:18.676284Z",
+      "observed_at": "2026-11-27T10:40:10.803338Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 53940,
-            "cached": false,
+            "age_seconds": 55552,
+            "cached": true,
             "check": 0,
             "label": "Wikidata filming locations fetched",
             "max_age_seconds": 864000,
@@ -37769,12 +37108,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:18.736800Z",
+      "observed_at": "2026-11-27T10:40:11.012664Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 295999,
-            "cached": false,
+            "age_seconds": 297611,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -37835,12 +37174,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:19.166015Z",
+      "observed_at": "2026-11-27T10:40:11.318315Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123199,
-            "cached": false,
+            "age_seconds": 124811,
+            "cached": true,
             "check": 0,
             "label": "Timetable retrieved",
             "max_age_seconds": 259200.0,
@@ -37880,7 +37219,7 @@
         {
           "definition": "[\"https://coolcode.ca/selfhostfinder/data/catalogue.json\", {\"measure\": \"length\", \"path\": [\"projects\"], \"unit\": \"applications\"}]",
           "label": "Sources checked",
-          "read_at": "2026-11-27T10:13:19.180576Z",
+          "read_at": "2026-11-27T10:40:11.467447Z",
           "unit": "applications",
           "url": "https://coolcode.ca/selfhostfinder/data/catalogue.json",
           "value": 1361
@@ -37922,17 +37261,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:19.180576Z",
+      "observed_at": "2026-11-27T10:40:11.467447Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 106972,
+            "age_seconds": 108584,
             "cached": false,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 1209600,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:19.180576Z",
+            "read_at": "2026-11-27T10:40:11.467447Z",
             "status": "fresh",
             "timestamp": "2026-11-26T04:30:27.168379Z",
             "url": "https://coolcode.ca/selfhostfinder/data/catalogue.json"
@@ -37943,7 +37282,7 @@
       "probe_cache": {
         "0": {
           "key": "5f7300f7db945d534f6e28fb2467e5787942b347229d5c5b46001e768f8561e6",
-          "read_at": "2026-11-27T10:13:19.180576Z",
+          "read_at": "2026-11-27T10:40:11.467447Z",
           "timestamp": "2026-11-26T04:30:27.168379Z"
         }
       },
@@ -37996,12 +37335,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:19.649367Z",
+      "observed_at": "2026-11-27T10:40:11.759385Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 6074,
-            "cached": false,
+            "age_seconds": 7686,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 43200.0,
@@ -38071,12 +37410,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:19.688058Z",
+      "observed_at": "2026-11-27T10:40:11.876955Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 50354,
-            "cached": false,
+            "age_seconds": 51966,
+            "cached": true,
             "check": 0,
             "label": "Snapshot generated",
             "max_age_seconds": 172800.0,
@@ -38146,12 +37485,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:19.794255Z",
+      "observed_at": "2026-11-27T10:40:11.996305Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123200,
-            "cached": false,
+            "age_seconds": 124812,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -38242,12 +37581,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:20.435558Z",
+      "observed_at": "2026-11-27T10:40:12.614823Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 106752,
-            "cached": false,
+            "age_seconds": 108364,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 3456000,
@@ -38317,12 +37656,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:20.436484Z",
+      "observed_at": "2026-11-27T10:40:12.668058Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123200,
-            "cached": false,
+            "age_seconds": 124813,
+            "cached": true,
             "check": 0,
             "label": "MAST observations retrieved",
             "max_age_seconds": 1296000.0,
@@ -38392,12 +37731,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:20.522084Z",
+      "observed_at": "2026-11-27T10:40:12.765468Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 36801,
-            "cached": false,
+            "age_seconds": 38413,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
@@ -38475,12 +37814,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:21.021159Z",
+      "observed_at": "2026-11-27T10:40:13.244201Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 728001,
-            "cached": false,
+            "age_seconds": 729613,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 5443200.0,
@@ -38550,12 +37889,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:21.172660Z",
+      "observed_at": "2026-11-27T10:40:13.565865Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123201,
-            "cached": false,
+            "age_seconds": 124814,
+            "cached": true,
             "check": 0,
             "label": "Spectrum sources retrieved",
             "max_age_seconds": 5443200.0,
@@ -38625,12 +37964,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:21.604371Z",
+      "observed_at": "2026-11-27T10:40:13.945417Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 296002,
-            "cached": false,
+            "age_seconds": 297614,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -38713,12 +38052,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:21.938216Z",
+      "observed_at": "2026-11-27T10:40:13.982168Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 42602,
-            "cached": false,
+            "age_seconds": 44214,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 172800.0,
@@ -38796,12 +38135,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:22.149301Z",
+      "observed_at": "2026-11-27T10:40:14.315663Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 296002,
-            "cached": false,
+            "age_seconds": 297614,
+            "cached": true,
             "check": 0,
             "label": "Tracks retrieved",
             "max_age_seconds": 5443200.0,
@@ -38812,8 +38151,8 @@
             "url": "https://coolcode.ca/stormtracks/data-status.json"
           },
           {
-            "age_seconds": 296002,
-            "cached": false,
+            "age_seconds": 297614,
+            "cached": true,
             "check": 1,
             "label": "Harbour data retrieved",
             "max_age_seconds": 5443200.0,
@@ -38888,12 +38227,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:22.235682Z",
+      "observed_at": "2026-11-27T10:40:14.445654Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 50656,
-            "cached": false,
+            "age_seconds": 52268,
+            "cached": true,
             "check": 0,
             "label": "CADORS sources retrieved",
             "max_age_seconds": 172800.0,
@@ -38963,12 +38302,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:22.710787Z",
+      "observed_at": "2026-11-27T10:40:14.795746Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 209603,
-            "cached": false,
+            "age_seconds": 211215,
+            "cached": true,
             "check": 0,
             "label": "Cityworks data retrieved",
             "max_age_seconds": 1296000.0,
@@ -39038,12 +38377,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:22.739156Z",
+      "observed_at": "2026-11-27T10:40:15.068841Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 296003,
-            "cached": false,
+            "age_seconds": 297615,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -39113,12 +38452,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:22.923394Z",
+      "observed_at": "2026-11-27T10:40:15.162173Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 296003,
-            "cached": false,
+            "age_seconds": 297615,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 1296000.0,
@@ -39188,12 +38527,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:23.168279Z",
+      "observed_at": "2026-11-27T10:40:15.379602Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 6035,
-            "cached": false,
+            "age_seconds": 7647,
+            "cached": true,
             "check": 0,
             "label": "All targets checked",
             "max_age_seconds": 43200.0,
@@ -39233,7 +38572,7 @@
         {
           "definition": "[\"https://coolcode.ca/tariffbench/data/appliances-status.json\", {\"path\": [\"count\"], \"unit\": \"appliance models\"}]",
           "label": "Appliance catalogue checked",
-          "read_at": "2026-11-27T10:13:23.288324Z",
+          "read_at": "2026-11-27T10:40:15.449453Z",
           "unit": "appliance models",
           "url": "https://coolcode.ca/tariffbench/data/appliances-status.json",
           "value": 4353
@@ -39284,17 +38623,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:23.288324Z",
+      "observed_at": "2026-11-27T10:40:15.449453Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 106111,
+            "age_seconds": 107723,
             "cached": false,
             "check": 0,
             "label": "Appliance catalogue checked",
             "max_age_seconds": 3888000,
             "precision": "timestamp",
-            "read_at": "2026-11-27T10:13:23.288324Z",
+            "read_at": "2026-11-27T10:40:15.449453Z",
             "status": "fresh",
             "timestamp": "2026-11-26T04:44:52.612113Z",
             "url": "https://coolcode.ca/tariffbench/data/appliances-status.json"
@@ -39305,7 +38644,7 @@
       "probe_cache": {
         "0": {
           "key": "b847348b0eedbd8eac598a7d23728c438c76f419a1b3e440d01b0c7485a8a9a7",
-          "read_at": "2026-11-27T10:13:23.288324Z",
+          "read_at": "2026-11-27T10:40:15.449453Z",
           "timestamp": "2026-11-26T04:44:52.612113Z"
         }
       },
@@ -39358,12 +38697,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:23.315333Z",
+      "observed_at": "2026-11-27T10:40:15.687484Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 79580,
-            "cached": false,
+            "age_seconds": 81192,
+            "cached": true,
             "check": 0,
             "label": "Telecom sources retrieved",
             "max_age_seconds": 1209600.0,
@@ -39455,12 +38794,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:23.755239Z",
+      "observed_at": "2026-11-27T10:40:15.880469Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 56070,
-            "cached": false,
+            "age_seconds": 57682,
+            "cached": true,
             "check": 0,
             "label": "Official CHS predictions checked",
             "max_age_seconds": 129600,
@@ -39530,12 +38869,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:23.914018Z",
+      "observed_at": "2026-11-27T10:40:16.196985Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 728004,
-            "cached": false,
+            "age_seconds": 729616,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -39605,12 +38944,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:23.929541Z",
+      "observed_at": "2026-11-27T10:40:16.341176Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 4903,
-            "cached": false,
+            "age_seconds": 6515,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 43200.0,
@@ -39680,12 +39019,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:24.455997Z",
+      "observed_at": "2026-11-27T10:40:16.747617Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 296004,
-            "cached": false,
+            "age_seconds": 297617,
+            "cached": true,
             "check": 0,
             "label": "Source retrieved",
             "max_age_seconds": 1296000.0,
@@ -39755,12 +39094,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:24.785613Z",
+      "observed_at": "2026-11-27T10:40:16.846716Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 79577,
-            "cached": false,
+            "age_seconds": 81189,
+            "cached": true,
             "check": 0,
             "label": "Oldest regional retrieval",
             "max_age_seconds": 1209600.0,
@@ -39800,15 +39139,15 @@
         {
           "definition": "[\"https://coolcode.ca/transferwindow/data/status.json\", {\"path\": [\"routes\"], \"unit\": \"transit routes\"}]",
           "label": "Data retrieved",
-          "read_at": "2026-11-27T10:13:24.960787Z",
+          "read_at": "2026-11-27T10:40:17.326817Z",
           "unit": "transit routes",
           "url": "https://coolcode.ca/transferwindow/data/status.json",
           "value": 8
         }
       ],
       "execution": {
-        "due_at": "2026-11-26T08:39:00Z",
-        "due_unobserved": false,
+        "due_at": "2026-11-27T08:39:00Z",
+        "due_unobserved": true,
         "history_limit": 20,
         "latest": {
           "at": "2026-11-26T18:37:43Z",
@@ -39830,17 +39169,17 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:24.960787Z",
+      "observed_at": "2026-11-27T10:40:17.326817Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 123205,
+            "age_seconds": 124817,
             "cached": false,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 259200.0,
             "precision": "date",
-            "read_at": "2026-11-27T10:13:24.960787Z",
+            "read_at": "2026-11-27T10:40:17.326817Z",
             "status": "fresh",
             "timestamp": "2026-11-26T00:00:00Z",
             "url": "https://coolcode.ca/transferwindow/data/status.json"
@@ -39851,16 +39190,16 @@
       },
       "probe_cache": {
         "0": {
-          "key": "58b5f9481b728ece4dfbe6e0e1703d45b755984b69c0c7ababbc1eb803c17c6d",
-          "read_at": "2026-11-27T10:13:24.960787Z",
+          "key": "6770b4c99d9a1f65ece9dc631c4126b9da7b36592d85f978ae549df69c8e32e3",
+          "read_at": "2026-11-27T10:40:17.326817Z",
           "timestamp": "2026-11-26T00:00:00Z"
         }
       },
       "reasons": [
-        "Workflow and configured published checks are available"
+        "No scheduled/manual run observed for the latest due time"
       ],
       "repo": "jsdyer/transferwindow",
-      "status": "checked",
+      "status": "attention",
       "titles": [
         "Transfer Window"
       ],
@@ -39905,12 +39244,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:25.151129Z",
+      "observed_at": "2026-11-27T10:40:17.492455Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 746,
-            "cached": false,
+            "age_seconds": 2358,
+            "cached": true,
             "check": 0,
             "label": "Sources checked",
             "max_age_seconds": 7200.0,
@@ -39980,12 +39319,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:25.437219Z",
+      "observed_at": "2026-11-27T10:40:17.618823Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 1297,
-            "cached": false,
+            "age_seconds": 2910,
+            "cached": true,
             "check": 0,
             "label": "Live fleet capture",
             "max_age_seconds": 7200.0,
@@ -40077,12 +39416,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:25.581800Z",
+      "observed_at": "2026-11-27T10:40:17.908612Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 256,
-            "cached": false,
+            "age_seconds": 1868,
+            "cached": true,
             "check": 0,
             "label": "Official advisory index checked",
             "max_age_seconds": 21600,
@@ -40164,12 +39503,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:25.613735Z",
+      "observed_at": "2026-11-27T10:40:18.074759Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 141797,
-            "cached": false,
+            "age_seconds": 143409,
+            "cached": true,
             "check": 0,
             "label": "Official wage edition checked",
             "max_age_seconds": 1382400,
@@ -40180,8 +39519,8 @@
             "url": "https://coolcode.ca/wagewindow/data/index.json"
           },
           {
-            "age_seconds": 141787,
-            "cached": false,
+            "age_seconds": 143399,
+            "cached": true,
             "check": 1,
             "label": "Provincial CPI checked",
             "max_age_seconds": 1382400,
@@ -40269,12 +39608,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:26.093697Z",
+      "observed_at": "2026-11-27T10:40:18.411363Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 54328,
-            "cached": false,
+            "age_seconds": 55940,
+            "cached": true,
             "check": 0,
             "label": "ECCC APIs and place directory checked",
             "max_age_seconds": 129600,
@@ -40344,12 +39683,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:26.317449Z",
+      "observed_at": "2026-11-27T10:40:18.491615Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 296006,
-            "cached": false,
+            "age_seconds": 297618,
+            "cached": true,
             "check": 0,
             "label": "Data retrieved",
             "max_age_seconds": 5443200.0,
@@ -40419,12 +39758,12 @@
         },
         "state": "active"
       },
-      "observed_at": "2026-11-27T10:13:26.689278Z",
+      "observed_at": "2026-11-27T10:40:18.998122Z",
       "output": {
         "checks": [
           {
-            "age_seconds": 44331,
-            "cached": false,
+            "age_seconds": 45944,
+            "cached": true,
             "check": 0,
             "label": "Disclosure source retrieved",
             "max_age_seconds": 172800.0,
@@ -40460,13 +39799,13 @@
       "workflow_url": "https://github.com/jsdyer/wrongdoings/actions/workflows/pages.yml"
     }
   ],
-  "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45980122752",
+  "run_url": "https://github.com/jsdyer/jsdyer.github.io/actions/runs/45983908410",
   "stale_after_seconds": 10800,
   "summary": {
-    "attention": 6,
-    "checked": 180,
+    "attention": 9,
+    "checked": 177,
     "limited": 6,
-    "running": 1,
+    "running": 2,
     "workflow_only": 5
   },
   "version": 1
