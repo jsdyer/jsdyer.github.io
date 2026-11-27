@@ -2415,13 +2415,12 @@
   {
     "id": "recallradar",
     "title": "Recall Radar",
-    "description": "Search Canadian safety alerts and check affected vehicle makes, models and years.",
+    "description": "Search Canadian safety notices by product category, brand or vehicle model, and check the official notice for affected products.",
     "category": "disclosures",
     "tags": [
       "health",
       "canada",
       "transport",
-      "canada",
       "recalls",
       "safety",
       "food",
@@ -2429,7 +2428,9 @@
       "cars",
       "model",
       "tires",
-      "alerts"
+      "alerts",
+      "toys",
+      "electronics"
     ],
     "icon": "shield-alert",
     "url": "/recallradar/",
@@ -2459,10 +2460,10 @@
       "cadence": "Daily"
     },
     "readme": {
-      "note": "Save a product or brand as a search term, then revisit to check matching notices and read the issuing agency’s instructions. The watchlist runs when you visit and does not send background notifications."
+      "note": "Browse product topics to check the latest updated notices, or select a category and search for a product or brand. Save a search term, then revisit to check matching notices and read the issuing agency’s instructions. The watchlist runs when you visit and does not send background notifications."
     },
     "sync_manifest": true,
-    "task_label": "Canadian Vehicle Recalls and Safety Alerts",
+    "task_label": "Canadian Product and Vehicle Recall Search",
     "use_cases": [
       {
         "title": "Ford F-150 Recalls in Canada",
@@ -2472,7 +2473,11 @@
         "title": "Ford Escape Recalls in Canada",
         "path": "ford-escape.html"
       }
-    ]
+    ],
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian consumer product recall topics"
+    }
   },
   {
     "id": "patentattic",
@@ -11347,7 +11352,7 @@
   {
     "id": "basketmath",
     "title": "Basket Math",
-    "description": "Compare package sizes, unit prices and multi-buy offers for the amount you need.",
+    "description": "Compare grocery deals, laundry detergent cost per load and pet food cost per day. See the price per use and the cost of buying enough whole packages.",
     "category": "money",
     "tags": [
       "unit price",
@@ -11355,7 +11360,10 @@
       "shopping",
       "coupons",
       "multipacks",
-      "calculator"
+      "calculator",
+      "cost per use",
+      "laundry detergent",
+      "pet food"
     ],
     "icon": "shopping-basket",
     "url": "/basketmath/",
@@ -11368,13 +11376,21 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare two sizes of the same product using your own shelf prices. Basket Math calculates whole packs, checkout cost, unit price and extra quantity, including complete-bundle offers, qualifying per-pack prices and buy-X-get-Y-free deals. Lowest unit price can require a larger purchase. Enter coupon and tax assumptions explicitly; save or export only when you choose. The starting prices are invented examples, not live store prices. You can also transcribe actual receipts into a private dated price/package ledger, compare compatible unit prices over time, and export/import the same history in Basket Math or Label Compare. History is saved only on request."
+      "note": "Compare two sizes of the same product using your own shelf prices. Basket Math calculates whole packs, checkout cost, unit price and extra quantity, including complete-bundle offers, qualifying per-pack prices and buy-X-get-Y-free deals. Lowest unit price can require a larger purchase. Enter coupon and tax assumptions explicitly; save or export only when you choose. The starting prices are invented examples, not live store prices. You can also transcribe actual receipts into a private dated price/package ledger, compare compatible unit prices over time, and export/import the same history in Basket Math or Label Compare. History is saved only on request. Compare laundry detergents by the dose per wash, or pet food by the grams you already feed per day. Each comparison shows cost per use, the whole-package checkout total and what remains."
     },
-    "task_label": "Grocery Unit Price and Multi-Buy Calculator",
+    "task_label": "Grocery Unit Price and Household Cost Calculator",
     "use_cases": [
       {
         "title": "Is Buy Two, Get One Free the Better Grocery Deal?",
         "path": "buy-two-get-one-free.html"
+      },
+      {
+        "title": "Laundry Detergent Cost per Load",
+        "path": "laundry-cost-per-load.html"
+      },
+      {
+        "title": "Pet Food Cost per Day",
+        "path": "pet-food-cost-per-day.html"
       }
     ]
   },

@@ -306,5 +306,38 @@
         "help": "Follow the inquiry’s findings in September 2006 to the apology and settlement announcement in January 2007. Both are linked to their official publications."
       }
     ]
+  },
+  "canadian-shopping-tools": {
+    "title": "Canadian shopping tools for prices, labels and recalls",
+    "intro": "Compare what two packages cost to use, check a Canadian origin claim, or look for an official recall before buying a product.",
+    "tasks": [
+      {
+        "tool": "basketmath",
+        "label": "Which package costs less per use?",
+        "help": "Use the prices on the shelf and the amounts on the labels to compare a load of laundry or a day of pet food. Change the example to match your purchases."
+      },
+      {
+        "tool": "maplelabel",
+        "record": "quebec-cheese-and-coffee",
+        "label": "What part of this product was made in Canada?",
+        "help": "Compare Québec cheese and coffee. Follow the producer and program sources to see which claims cover ingredients and which cover processing."
+      },
+      {
+        "tool": "recallradar",
+        "record": "toys-and-games",
+        "label": "Has a toy been recalled in Canada?",
+        "help": "Browse dated notices, then follow the official record to check the affected model or lot and the action the issuer recommends."
+      },
+      {
+        "tool": "labelcompare",
+        "label": "How do two food labels compare?",
+        "help": "Enter two barcodes to compare the listed ingredients, allergens and serving sizes."
+      },
+      {
+        "tool": "priceatlas",
+        "label": "How does this grocery price compare with the provincial average?",
+        "help": "Pick the product, package size, province and month that fit your shelf price."
+      }
+    ]
   }
 }
