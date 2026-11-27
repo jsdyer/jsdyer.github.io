@@ -50,12 +50,15 @@ jsdyer/dawnchorus
 jsdyer/dispatchledger
 jsdyer/distropilot
 jsdyer/dockdiary
+jsdyer/domainalmanac
 jsdyer/donairafterdark
 jsdyer/donationradar
 jsdyer/drivecohort
 jsdyer/exploitgraveyard
 jsdyer/exportneighbours
 jsdyer/federal-property-atlas
+jsdyer/fedifootprint
+jsdyer/feedharbour
 jsdyer/ferrycountss
 jsdyer/ferryrecord
 jsdyer/filingdelta
@@ -104,6 +107,7 @@ jsdyer/lightkeeper
 jsdyer/lobbytrail
 jsdyer/malwarelineage
 jsdyer/maplehosting
+jsdyer/maplelabel
 jsdyer/maplephish
 jsdyer/masspeaks
 jsdyer/metermath
@@ -166,6 +170,7 @@ jsdyer/shipwrecks
 jsdyer/shopfrontdiary
 jsdyer/signalrelics
 jsdyer/skyarchive
+jsdyer/slowweb
 jsdyer/snowcourses
 jsdyer/spectrum-explorer
 jsdyer/spectrumatlas

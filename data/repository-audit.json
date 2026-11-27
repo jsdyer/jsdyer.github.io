@@ -1,12 +1,12 @@
 {
   "schema": "coolcode.repository-audit.v1",
-  "checked_at": "2026-11-27T11:20:26+00:00",
+  "checked_at": "2026-11-27T17:04:52+00:00",
   "owner": "jsdyer",
   "scope": "Public repositories; private repository identities are omitted. Functional readiness is reviewed before listing.",
-  "catalogue_tools": 285,
-  "public_repositories": 289,
+  "catalogue_tools": 290,
+  "public_repositories": 296,
   "private_repositories_omitted": 0,
-  "listed_source_repositories": 276,
+  "listed_source_repositories": 281,
   "public_repository_names": [
     "abuse-kit",
     "abusepulse",
@@ -15,6 +15,7 @@
     "aircheckdiary",
     "airpair",
     "algorithmwatch",
+    "and",
     "anycastcompass",
     "apiarchaeology",
     "arttimeline",
@@ -78,11 +79,14 @@
     "dependencyxray",
     "diagrambench",
     "dincompare",
+    "disclosureatlas",
     "dispatchledger",
     "distropilot",
     "dnslens",
     "dockdiary",
     "domain-biography",
+    "domainalmanac",
+    "donair-pizza",
     "donairafterdark",
     "donationradar",
     "drivecohort",
@@ -93,6 +97,7 @@
     "exploitgraveyard",
     "exportneighbours",
     "federal-property-atlas",
+    "fedifootprint",
     "feedharbour",
     "ferrycountss",
     "ferryrecord",
@@ -162,6 +167,7 @@
     "malwarelineage",
     "manualshelf",
     "maplehosting",
+    "maplelabel",
     "maplephish",
     "marinenames",
     "marketshadows",
@@ -260,6 +266,7 @@
     "skyarchive",
     "skygeometry",
     "slash-access",
+    "slowweb",
     "snowcourses",
     "spectrum-explorer",
     "spectrumatlas",
@@ -301,6 +308,12 @@
   "needs_review": [],
   "excluded": [
     {
+      "repo": "and",
+      "status": "template",
+      "reason": "Contains the uninitialized CoolCode browser tool template.",
+      "reviewed_at": "2026-11-27"
+    },
+    {
       "repo": "b0x-ca",
       "status": "personal-or-business-site",
       "reason": "Separate personal or business website, not a standalone CoolCode utility.",
@@ -311,6 +324,12 @@
       "status": "template",
       "reason": "Starter template used to create tools; not a finished utility.",
       "reviewed_at": "2026-11-23"
+    },
+    {
+      "repo": "donair-pizza",
+      "status": "personal-or-business-site",
+      "reason": "Independent recipe and fan site published at donairpizza.com.",
+      "reviewed_at": "2026-11-27"
     },
     {
       "repo": "funapps-ca",

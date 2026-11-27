@@ -76,5 +76,17 @@
     "status": "unlisted-prototype",
     "reason": "Europeana personal-key review prototype. Intentionally excluded from public catalogue, search and sitemap pending production approval. Aggregate visit statistics are enabled through the separate unlisted measurement registry; manual collection needs no watchdog schedule.",
     "reviewed_at": "2026-11-25"
+  },
+  {
+    "repo": "donair-pizza",
+    "status": "personal-or-business-site",
+    "reason": "Independent recipe and fan site published at donairpizza.com.",
+    "reviewed_at": "2026-11-27"
+  },
+  {
+    "repo": "and",
+    "status": "template",
+    "reason": "Contains the uninitialized CoolCode browser tool template.",
+    "reviewed_at": "2026-11-27"
   }
 ]

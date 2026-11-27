@@ -355,7 +355,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare dated registry events, archived homepage captures and certificate history for a website. Start with the Canadian domain example or enter a hostname."
+      "note": "Compare dated registry events, archived homepage captures and certificate history for a website. Start with the Canadian domain example or enter a hostname. Follow the TrueNorth.bet timeline from archived pages to Kahnawà:ke’s decisions, or compare CIRA.ca’s registration with a preserved homepage. Each case cites dated evidence and links back to the editable lookup."
     },
     "task_label": "Website History and Domain Check",
     "brand_name": "Domain Biography",
@@ -364,7 +364,11 @@
         "title": "Check a Canadian Domain’s History",
         "path": "canadian-domain-history/"
       }
-    ]
+    ],
+    "result_directory": {
+      "path": "records/",
+      "title": "Website history case files"
+    }
   },
   {
     "id": "renewalboard",
@@ -11488,7 +11492,9 @@
       "OPML",
       "news",
       "reader",
-      "feeds"
+      "feeds",
+      "directory",
+      "Canada"
     ],
     "icon": "film",
     "url": "/feedharbour/",
@@ -11497,13 +11503,35 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Manually checked feed recommendations and your own RSS/Atom sources. Public feeds load on demand; local XML and reading state stay in your browser unless saved or exported."
+      "detail": "Manually checked feed recommendations, weekly headlines from independent Canadian publishers, and on-demand feeds in your private reading list.",
+      "cadence": "Weekly for Small Web North; on demand for your reading list",
+      "probes": [
+        {
+          "label": "Small Web North source check",
+          "url": "https://coolcode.ca/feedharbour/data/small-web-status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "sites"
+            ],
+            "unit": "independent sites"
+          },
+          "value": "2026-11-27",
+          "count": 6
+        }
+      ]
     },
     "readme": {
-      "note": "Browse checked RSS feeds across CoolCode's topics, including British Columbia and Nova Scotia news, public records, Linux, networks, space, money and culture. CoolCode’s Civic Revision and Release Receipt feeds cover Wikipedia revisions and Statistics Canada releases. Paste Research Ledger’s university feeds or the Package Pulse and Rack Expiry release feeds to follow research and software updates. Add one source or a topic pack, then choose Refresh; browsing or subscribing does not fetch articles automatically. You can still enter any public feed, import OPML or read local RSS/Atom XML privately. Save deliberately on your device or export JSON to keep reading state; OPML exports subscriptions and folders. Failed refreshes keep the last good items visible."
+      "note": "Browse checked RSS feeds across CoolCode's topics, including British Columbia and Nova Scotia news, public records, Linux, networks, space, money and culture. CoolCode’s Civic Revision and Release Receipt feeds cover Wikipedia revisions and Statistics Canada releases. Paste Research Ledger’s university feeds or the Package Pulse and Rack Expiry release feeds to follow research and software updates. Add one source or a topic pack, then choose Refresh; browsing or subscribing does not fetch articles automatically. You can still enter any public feed, import OPML or read local RSS/Atom XML privately. Save deliberately on your device or export JSON to keep reading state; OPML exports subscriptions and folders. Small Web North checks independent Canadian publishers every Tuesday at 11:17 UTC. Browse its source profiles, follow related sites, open a weekly capture in the reader, subscribe to combined RSS or download the publisher feeds as OPML. Each profile gives the publisher’s own Canadian connection and separates its posting dates from the collection dates. Failed refreshes keep the last good items visible."
     },
     "sync_manifest": true,
-    "task_label": "RSS Feed Directory and News Reader"
+    "task_label": "RSS Feed Directory and News Reader",
+    "result_directory": {
+      "path": "records/",
+      "title": "Small Web North — Canadian independent sites"
+    }
   },
   {
     "id": "renewalbench",
@@ -13111,7 +13139,8 @@
       "licences",
       "enforcement",
       "operators",
-      "public records"
+      "public records",
+      "domain warnings"
     ],
     "icon": "landmark",
     "url": "/gamblingregulatorwatch/",
@@ -13121,10 +13150,10 @@
     "sync_manifest": true,
     "result_directory": {
       "path": "records/",
-      "title": "Gambling licences and enforcement decisions by operator",
       "additional_paths": [
         "regulators/"
-      ]
+      ],
+      "title": "Gambling licences and enforcement decisions by operator"
     },
     "dataset": {
       "title": "Gambling licence and enforcement evidence",
@@ -13149,18 +13178,18 @@
             "unit": "named entities"
           },
           "value": "2026-11-27",
-          "count": 4340
+          "count": 4341
         }
       ]
     },
     "readme": {
-      "note": "Search by legal entity or a source-listed trading name. A profile links each licence and published action to its issuing authority. Compare the coverage and dates before interpreting repeat cases or documented revocation intervals."
+      "note": "Search by legal entity or a source-listed trading name. A profile links each licence and published action to its issuing authority. Compare the coverage and dates before interpreting repeat cases or documented revocation intervals. Look up an exact website in the Tobique and Malta warning lists. The result preserves each regulator’s date, source and listing category."
     }
   },
   {
     "id": "offshorerecords",
     "title": "Offshore Records Atlas",
-    "description": "Explore how countries appear in five offshore investigations, trace documented company roles and read dated tax-transparency reviews.",
+    "description": "Explore five offshore investigations, trace documented company roles and compare Canadian direct investment and tax-transparency reviews by destination.",
     "category": "explorers",
     "tags": [
       "offshore records",
@@ -13178,7 +13207,7 @@
     "data_info": {
       "mode": "snapshot",
       "cadence": "Monthly",
-      "detail": "ICIJ archive counts, documented organization relationships and OECD tax-information exchange reviews, with source dates shown separately.",
+      "detail": "ICIJ records, OECD transparency reviews and Statistics Canada outward direct investment positions, with separate source dates.",
       "probes": [
         {
           "label": "Sources checked",
@@ -13194,6 +13223,14 @@
           },
           "value": "2026-11-27",
           "count": 232
+        },
+        {
+          "label": "Canadian investment data checked",
+          "url": "https://coolcode.ca/offshorerecords/data/status.json",
+          "path": [
+            "investment_checked_at"
+          ],
+          "value": "2026-11-27"
         }
       ]
     },
@@ -13215,7 +13252,278 @@
       "format": "JSON"
     },
     "readme": {
-      "note": "Start with Canada in the Pandora Papers. Compare the number of directly tagged entities, officers and addresses. Follow a recorded company relationship to its ICIJ source, then check the jurisdiction of incorporation and the years covered. The OECD panel dates its separate review of how the jurisdiction exchanges tax information on request."
+      "note": "Start with Canada in the Pandora Papers. Compare the number of directly tagged entities, officers and addresses. Follow a recorded company relationship to its ICIJ source, then check the jurisdiction of incorporation and the years covered. The OECD panel dates its separate review of how the jurisdiction exchanges tax information on request. Compare the latest five annual Canadian direct investment positions on destination pages, with Statistics Canada’s source series and units."
+    }
+  },
+  {
+    "id": "fedifootprint",
+    "title": "FediFootprint",
+    "description": "Compare where fediverse servers are hosted, which software runs there, and how monthly active account shares change between weekly FediDB exports.",
+    "category": "liminal-tools",
+    "tags": [
+      "fediverse",
+      "hosting",
+      "Mastodon",
+      "FediDB",
+      "open data"
+    ],
+    "icon": "network",
+    "url": "/fedifootprint/",
+    "source": "https://github.com/jsdyer/fedifootprint",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "FediDB publishes weekly counts by hosting country and software, plus a separate directory export with reported server activity.",
+      "cadence": "Weekly",
+      "probes": [
+        {
+          "label": "Source check",
+          "url": "https://coolcode.ca/fedifootprint/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "country_software_rows"
+            ],
+            "unit": "country and software rows"
+          },
+          "value": "2026-11-27",
+          "count": 997
+        },
+        {
+          "label": "Latest FediDB export",
+          "url": "https://coolcode.ca/fedifootprint/data/status.json",
+          "path": [
+            "latest"
+          ],
+          "value": "2026-11-22"
+        }
+      ]
+    },
+    "result_directory": {
+      "path": "records/",
+      "title": "Fediverse hosting by country, software and week"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with Mastodon in Canada and Germany. Compare its share of hosted servers with its share of monthly active accounts in each country. Change the software, countries or export week, then open a country or software record for its history and the largest reporting server domains."
+    }
+  },
+  {
+    "id": "maplelabel",
+    "title": "Maple Label",
+    "description": "Compare Canadian origin claims on named products and see what the sources say about ingredients, manufacturing and ownership.",
+    "task_label": "Made in Canada Finder",
+    "category": "explorers",
+    "tags": [
+      "Canada",
+      "shopping",
+      "product origin",
+      "food labels",
+      "manufacturing",
+      "local products"
+    ],
+    "icon": "badge-check",
+    "url": "/maplelabel/",
+    "source": "https://github.com/jsdyer/maplelabel",
+    "hosting": "project",
+    "access": "browser",
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian product-origin records and label criteria"
+    },
+    "dataset": {
+      "title": "Canadian product-origin claims and sources",
+      "file": "data/catalogue.json",
+      "format": "JSON"
+    },
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Monthly",
+      "detail": "Named products, producer statements and regional program listings are reviewed individually. Monthly checks test selected source wording, with manual sources and review dates identified.",
+      "probes": [
+        {
+          "label": "Monitored source wording last matched",
+          "url": "https://coolcode.ca/maplelabel/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "product_count"
+            ],
+            "unit": "products"
+          },
+          "value": "2026-11-27",
+          "count": 10
+        },
+        {
+          "label": "Product evidence reviewed",
+          "url": "https://coolcode.ca/maplelabel/data/status.json",
+          "path": [
+            "reviewed_at"
+          ],
+          "value": "2026-11-27"
+        }
+      ]
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare OKA Original cheese with Hortus espresso roasted in Laval. One Québec mark documents where the main ingredients come from and the other documents processing. Each product record separates ingredient or material origin, manufacturing and company ownership, with a link to the original evidence."
+    }
+  },
+  {
+    "id": "slowweb",
+    "title": "Slow Web",
+    "description": "Compare dated browser checks for everyday tasks with JavaScript off, inspect downloaded response data and estimate transfer time at dial-up speeds.",
+    "category": "explorers",
+    "tags": [
+      "low bandwidth",
+      "JavaScript",
+      "dial-up",
+      "Halifax",
+      "community networks",
+      "web performance"
+    ],
+    "icon": "activity",
+    "url": "/slowweb/",
+    "source": "https://github.com/jsdyer/slowweb",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "cadence": "Weekly",
+      "detail": "Dated Chromium visits test named tasks with JavaScript off and record encoded HTTP response bytes. Transfer times use explicit modelled line rates.",
+      "probes": [
+        {
+          "label": "Web tasks checked",
+          "url": "https://coolcode.ca/slowweb/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "page_count"
+            ],
+            "unit": "pages"
+          },
+          "value": "2026-11-27",
+          "count": 8
+        }
+      ]
+    },
+    "result_directory": {
+      "path": "records/",
+      "title": "Website tasks tested with JavaScript off"
+    },
+    "task_label": "Find websites that work without JavaScript",
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with the Alderney ferry timetable to see which date and departure time remained readable with JavaScript off. Compare the Dartmouth archive page with the interactive map, inspect the actual browser evidence and change the assumed line rate to recalculate the transfer estimate."
+    }
+  },
+  {
+    "id": "disclosureatlas",
+    "title": "Disclosure Atlas",
+    "description": "Trace public disclosures through original documents, published findings and official outcomes.",
+    "category": "explorers",
+    "tags": [
+      "public inquiries",
+      "declassification",
+      "press freedom",
+      "access to information",
+      "archives",
+      "public records"
+    ],
+    "icon": "files",
+    "url": "/disclosureatlas/",
+    "source": "https://github.com/jsdyer/disclosureatlas",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "reference",
+      "detail": "Casefiles cite inquiry reports, archival originals, court decisions and published outcomes. Each edition displays its editorial review date.",
+      "probes": [
+        {
+          "label": "Editorial casefiles reviewed",
+          "url": "https://coolcode.ca/disclosureatlas/data/edition.json",
+          "path": [
+            "reviewed"
+          ],
+          "count_at": {
+            "path": [
+              "cases"
+            ],
+            "measure": "length",
+            "unit": "casefiles"
+          },
+          "value": "2026-11-27",
+          "count": 6
+        }
+      ]
+    },
+    "result_directory": {
+      "title": "Disclosure casefiles and source documents",
+      "path": "records/"
+    },
+    "dataset": {
+      "title": "Public disclosure casefiles, timelines and source citations",
+      "format": "JSON",
+      "file": "data/edition.json"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Start with the Arar inquiry to trace the commission’s findings to Canada’s apology. Each casefile links the timeline and its conclusions to specific public records. Search by topic or filter by source type and region."
+    }
+  },
+  {
+    "id": "domainalmanac",
+    "title": "Domain Market Almanac",
+    "description": "Compare reported domain resale counts, prices and dollar volume by extension and time window.",
+    "category": "money",
+    "tags": [
+      "domain names",
+      "aftermarket",
+      "reported sales",
+      "TLDs",
+      "Canada"
+    ],
+    "icon": "chart-candlestick",
+    "url": "/domainalmanac/",
+    "source": "https://github.com/jsdyer/domainalmanac",
+    "hosting": "project",
+    "access": "browser",
+    "data_info": {
+      "mode": "snapshot",
+      "detail": "NameBio publishes aggregated reported domain aftermarket sales in US dollars for each extension.",
+      "cadence": "Daily",
+      "probes": [
+        {
+          "label": "NameBio totals checked",
+          "url": "https://coolcode.ca/domainalmanac/data/status.json",
+          "path": [
+            "checked_at"
+          ],
+          "count_at": {
+            "path": [
+              "extensions"
+            ],
+            "unit": "extensions"
+          },
+          "value": "2026-11-27",
+          "count": 744
+        }
+      ]
+    },
+    "result_directory": {
+      "title": "Reported domain sales by extension",
+      "path": "records/"
+    },
+    "sync_manifest": true,
+    "readme": {
+      "note": "Compare the past year for .ca, .games and .lol, then open an extension for its longer record. Read the number of reported transactions beside the dollar average. A single sale can move a small sample considerably."
     }
   }
 ]

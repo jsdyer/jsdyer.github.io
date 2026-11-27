@@ -1088,6 +1088,28 @@
       ]
     },
     {
+      "repo": "jsdyer/domainalmanac",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "47 7 * * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/domainalmanac/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "date",
+          "label": "NameBio extension aggregates checked"
+        }
+      ],
+      "collection_steps": [
+        "Collect NameBio extension totals"
+      ]
+    },
+    {
       "repo": "jsdyer/donairafterdark",
       "branch": "main",
       "workflow": "watch.yml",
@@ -1192,6 +1214,50 @@
           "label": "Source retrieved",
           "precision": "date"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/fedifootprint",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "43 9 * * 1"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/fedifootprint/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "date",
+          "label": "FediDB weekly exports checked"
+        }
+      ],
+      "collection_steps": [
+        "Collect FediDB weekly exports"
+      ]
+    },
+    {
+      "repo": "jsdyer/feedharbour",
+      "branch": "main",
+      "workflow": "small-web.yml",
+      "crons": [
+        "17 11 * * 2"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/feedharbour/data/small-web-status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "date",
+          "label": "Canadian independent publisher feeds checked"
+        }
+      ],
+      "collection_steps": [
+        "Collect Canadian publisher feeds"
       ]
     },
     {
@@ -2223,6 +2289,28 @@
           "label": "Sources checked",
           "precision": "timestamp"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/maplelabel",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "26 13 6 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/maplelabel/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "date",
+          "label": "Monitored product source wording checked"
+        }
+      ],
+      "collection_steps": [
+        "Check published origin wording"
       ]
     },
     {
@@ -3541,6 +3629,28 @@
           "precision": "date",
           "label": "MAST observations retrieved"
         }
+      ]
+    },
+    {
+      "repo": "jsdyer/slowweb",
+      "branch": "main",
+      "workflow": "refresh.yml",
+      "crons": [
+        "17 10 * * 1"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/slowweb/data/status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Published website tasks measured"
+        }
+      ],
+      "collection_steps": [
+        "Measure published website tasks"
       ]
     },
     {
