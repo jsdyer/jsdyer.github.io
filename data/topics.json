@@ -104,6 +104,24 @@
         "tool": "abuse-kit",
         "label": "Find where to report an abusive domain",
         "help": "Use the public domain or IP to find an appropriate contact and prepare a report with your evidence."
+      },
+      {
+        "tool": "domainalmanac",
+        "record": "tld-ca",
+        "label": "How many .ca domain sales were reported?",
+        "help": "See NameBio’s reported sale count and dollar volume for the past year, then compare another extension in the same time window."
+      },
+      {
+        "tool": "slowweb",
+        "record": "alderney-ferry",
+        "label": "Can I read the Alderney ferry timetable with JavaScript off?",
+        "help": "Read the dated browser measurement to see which departure information was visible and how much data the page transferred."
+      },
+      {
+        "tool": "gamblingregulatorwatch",
+        "record": "warnings",
+        "label": "Has a regulator published a warning about this gambling domain?",
+        "help": "Search the domain and open the regulator’s dated notice to check where it applies and what it says."
       }
     ]
   },
@@ -280,6 +298,12 @@
         "tool": "atipdecisions",
         "label": "Has an access complaint led to a published decision?",
         "help": "Search published access decisions to find a case and follow it to the original document."
+      },
+      {
+        "tool": "disclosureatlas",
+        "record": "arar-inquiry",
+        "label": "Where can I read the Arar inquiry and the government’s response?",
+        "help": "Follow the inquiry’s findings in September 2006 to the apology and settlement announcement in January 2007. Both are linked to their official publications."
       }
     ]
   }

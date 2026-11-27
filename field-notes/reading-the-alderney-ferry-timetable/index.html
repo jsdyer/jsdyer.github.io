@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reading the Alderney ferry timetable with JavaScript off · CoolCode</title>
+  <meta name="description" content="A Halifax ferry page showed a dated departure time in a browser with JavaScript disabled. Use its saved receipt to work out what 56 kb/s would mean for that page.">
+  <link rel="canonical" href="https://coolcode.ca/field-notes/reading-the-alderney-ferry-timetable/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Reading the Alderney ferry timetable with JavaScript off">
+  <meta property="og:description" content="A Halifax ferry page showed a dated departure time in a browser with JavaScript disabled. Use its saved receipt to work out what 56 kb/s would mean for that page.">
+  <meta property="og:url" content="https://coolcode.ca/field-notes/reading-the-alderney-ferry-timetable/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="CoolCode Field Notes" href="../feed.xml">
+  <link rel="stylesheet" href="../notes.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Reading the Alderney ferry timetable with JavaScript off","description":"A Halifax ferry page showed a dated departure time in a browser with JavaScript disabled. Use its saved receipt to work out what 56 kb/s would mean for that page.","datePublished":"2026-11-27","author":{"@type":"Organization","name":"CoolCode.ca","url":"https://coolcode.ca/"},"publisher":{"@type":"Organization","name":"CoolCode.ca","url":"https://coolcode.ca/"},"mainEntityOfPage":"https://coolcode.ca/field-notes/reading-the-alderney-ferry-timetable/","url":"https://coolcode.ca/field-notes/reading-the-alderney-ferry-timetable/"}</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead"><div class="mast-inner">
+    <a class="wordmark" href="/"><span aria-hidden="true">&gt;_</span> CoolCode<span class="domain">.ca</span></a>
+    <nav aria-label="Site"><a href="/#projects">Projects</a><a href="../feed.xml">RSS feed</a></nav>
+  </div></header>
+  <main class="wrap" id="main"><article>
+    <header class="article-head"><a href="../">All field notes</a>
+      <h1>Reading the Alderney ferry timetable with JavaScript off</h1>
+      <time datetime="2026-11-27">27 November 2026</time>
+    </header>
+    <div class="prose article-body">
+      <p><strong>The saved timetable for Friday, 27 November 2026, showed 06:30 Halifax time</strong> as the first scheduled departure from Alderney Landing in Dartmouth to downtown Halifax. For a trip today, check <a href="https://www.halifax.ca/transportation/halifax-transit/ferry-service">Halifax Transit’s current ferry schedule</a>.</p>
+      <h2>What the browser found</h2>
+      <p>Slow Web opened Halifax Next in a fresh Chromium session with JavaScript disabled. The downloaded page contained both the service date and a clock time for the crossing. You can repeat the check by turning off JavaScript, reloading the <a href="/halifaxnext/alderney-ferry.html">Alderney departure page</a> and reading the date next to the time. The <a href="/slowweb/records/alderney-ferry/visits/20261127t165411z/">27 November browser receipt</a> preserves the original result as the timetable changes.</p>
+      <h2>What 56 kb/s would buy</h2>
+      <p>Chromium counted <strong>5,558 encoded bytes</strong> across two finished responses. Multiply by eight to get 44,464 bits. At an ideal 56,000 bits per second, transferring those bits would take <strong>about 0.8 seconds</strong>. The check ran through a managed HTTPS proxy. It never dialled a modem or timed a passenger’s wait for the page. A real connection would also spend time reaching the server and setting up the connection. <a href="/slowweb/#methods">Read the measurement method.</a></p>
+      <h2>Try a different task at the same landing</h2>
+      <p>The <a href="/halifaxtimelens/records/dartmouth-ferry-landing/">Dartmouth ferry photo record</a> gave the same browser links to the 1950s Portland Street and 1960s Queen Street photographs. On the interactive map, the control for switching to the 2025 satellite layer was unavailable with JavaScript off. A page can make its evidence readable while an interactive control still needs scripting. Compare the <a href="/slowweb/records/dartmouth-archive/visits/20261127t165411z/">photo-link receipt</a> and the <a href="/slowweb/records/halifax-map-layers/visits/20261127t165411z/">map-control receipt</a>.</p>
+    </div>
+  </article></main>
+  <footer><div class="foot-inner"><a href="../">All field notes</a><a href="../feed.xml">Subscribe via RSS</a></div></footer>
+</body></html>

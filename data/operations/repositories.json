@@ -961,6 +961,12 @@
     "guarded_paths": []
   },
   {
+    "repo": "jsdyer/disclosureatlas",
+    "branch": "main",
+    "workflows": [],
+    "guarded_paths": []
+  },
+  {
     "repo": "jsdyer/dispatchledger",
     "branch": "main",
     "workflows": [
@@ -1022,6 +1028,23 @@
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/domainalmanac",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "47 7 * * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
   },
   {
     "repo": "jsdyer/donairafterdark",
@@ -1150,10 +1173,38 @@
     ]
   },
   {
+    "repo": "jsdyer/fedifootprint",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "43 9 * * 1"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
     "repo": "jsdyer/feedharbour",
     "branch": "main",
-    "workflows": [],
-    "guarded_paths": []
+    "workflows": [
+      {
+        "workflow": "small-web.yml",
+        "crons": [
+          "17 11 * * 2"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/schedule-guard.yml",
+      ".github/workflows/small-web.yml"
+    ]
   },
   {
     "repo": "jsdyer/ferrycountss",
@@ -2099,6 +2150,23 @@
     ],
     "guarded_paths": [
       ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
+  },
+  {
+    "repo": "jsdyer/maplelabel",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "26 13 6 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
       ".github/workflows/schedule-guard.yml"
     ]
   },
@@ -3383,6 +3451,23 @@
     "branch": "main",
     "workflows": [],
     "guarded_paths": []
+  },
+  {
+    "repo": "jsdyer/slowweb",
+    "branch": "main",
+    "workflows": [
+      {
+        "workflow": "refresh.yml",
+        "crons": [
+          "17 10 * * 1"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/refresh.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
   },
   {
     "repo": "jsdyer/snowcourses",
