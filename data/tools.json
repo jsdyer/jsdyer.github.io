@@ -3400,7 +3400,7 @@
             "retrieved"
           ],
           "label": "Data retrieved",
-          "value": "2026-11-28 02:28 UTC",
+          "value": "2026-11-28 06:27 UTC",
           "precision": "minute",
           "count_at": {
             "path": [
@@ -3968,7 +3968,7 @@
             "measure": "length",
             "unit": "episodes"
           },
-          "value": "2026-11-27",
+          "value": "2026-11-28",
           "count": 45
         },
         {
@@ -5645,8 +5645,8 @@
             "measure": "length"
           },
           "precision": "minute",
-          "value": "2026-11-28 02:25 UTC",
-          "count": 54
+          "value": "2026-11-28 07:43 UTC",
+          "count": 56
         },
         {
           "url": "https://coolcode.ca/forecastreceipt/data/index.json",
@@ -5661,7 +5661,7 @@
             "unit": "forecast points"
           },
           "value": "2026-11-19",
-          "count": 2160
+          "count": 2240
         }
       ]
     },
@@ -8220,8 +8220,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-28 02:58 UTC",
-          "count": 8240
+          "value": "2026-11-28 08:05 UTC",
+          "count": 8433
         }
       ]
     },
@@ -8267,8 +8267,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-28 02:36 UTC",
-          "count": 75
+          "value": "2026-11-28 08:10 UTC",
+          "count": 78
         }
       ]
     },
@@ -8314,8 +8314,8 @@
             ],
             "unit": "saved receipts"
           },
-          "value": "2026-11-28 02:18 UTC",
-          "count": 162
+          "value": "2026-11-28 08:22 UTC",
+          "count": 167
         }
       ]
     },
@@ -8729,8 +8729,8 @@
             "unit": "crossings",
             "measure": "length"
           },
-          "value": "2026-11-28 03:25 UTC",
-          "count": 29
+          "value": "2026-11-28 08:25 UTC",
+          "count": 28
         }
       ]
     },
@@ -8871,8 +8871,8 @@
             ],
             "unit": "threat domains tracked"
           },
-          "value": "2026-11-28 01:30 UTC",
-          "count": 1032
+          "value": "2026-11-28 08:30 UTC",
+          "count": 1048
         }
       ]
     },
@@ -9961,7 +9961,7 @@
             "lastSuccessfulAt"
           ],
           "precision": "minute",
-          "value": "2026-11-27 15:32 UTC"
+          "value": "2026-11-28 07:53 UTC"
         }
       ]
     },
@@ -10028,7 +10028,7 @@
             "capturedAt"
           ],
           "precision": "minute",
-          "value": "2026-11-28 02:28 UTC"
+          "value": "2026-11-28 07:58 UTC"
         }
       ]
     },
@@ -10132,7 +10132,7 @@
             "field": "stations",
             "unit": "stations"
           },
-          "value": "2026-11-28 02:45 UTC",
+          "value": "2026-11-28 08:53 UTC",
           "count": 262
         }
       ]
@@ -10180,8 +10180,8 @@
             ],
             "unit": "observations"
           },
-          "value": "2026-11-28 02:23 UTC",
-          "count": 587
+          "value": "2026-11-28 07:51 UTC",
+          "count": 607
         }
       ]
     },
@@ -10288,8 +10288,8 @@
             "measure": "length",
             "unit": "reports"
           },
-          "value": "2026-11-28 02:44 UTC",
-          "count": 711
+          "value": "2026-11-28 08:54 UTC",
+          "count": 754
         }
       ]
     },
@@ -10961,8 +10961,8 @@
             "unit": "buses out"
           },
           "precision": "minute",
-          "value": "2026-11-28 02:56 UTC",
-          "count": 758
+          "value": "2026-11-28 07:56 UTC",
+          "count": 221
         },
         {
           "label": "Network",
@@ -11067,7 +11067,7 @@
             ],
             "unit": "watched targets"
           },
-          "value": "2026-11-28 01:30 UTC",
+          "value": "2026-11-28 08:31 UTC",
           "count": 4
         }
       ]
@@ -11292,7 +11292,7 @@
             ],
             "unit": "protected areas"
           },
-          "value": "2026-11-28 03:19 UTC",
+          "value": "2026-11-28 08:56 UTC",
           "count": 1037
         }
       ]
@@ -11865,7 +11865,7 @@
             ],
             "unit": "destinations"
           },
-          "value": "2026-11-28 03:12 UTC",
+          "value": "2026-11-28 08:10 UTC",
           "count": 230
         }
       ]
@@ -12809,7 +12809,7 @@
             "checked_at"
           ],
           "precision": "minute",
-          "value": "2026-11-28 00:48 UTC"
+          "value": "2026-11-28 04:17 UTC"
         }
       ],
       "cadence": "Weekdays"
