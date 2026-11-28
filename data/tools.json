@@ -11427,6 +11427,10 @@
       {
         "title": "Pet Food Cost per Day",
         "path": "pet-food-cost-per-day.html"
+      },
+      {
+        "title": "Compare 12- and 18-Pack Egg Prices",
+        "path": "compare-egg-carton-prices.html"
       }
     ]
   },

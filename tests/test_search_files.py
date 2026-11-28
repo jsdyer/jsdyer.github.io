@@ -10,6 +10,26 @@ from build import render_datasets, source_check_time, write_search_files, write_
 
 
 class SearchFilesTests(unittest.TestCase):
+    def test_topic_guide_must_resolve_to_a_real_article(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "data").mkdir()
+            (root / "templates").mkdir()
+            (root / "templates/topic.html").write_text("{{TASKS}}")
+            link = {"slug": "rent", "label": "Rent & tuition"}
+            task = {"tool": "fees", "label": "Compare fees", "help": "Select a year.", "field_note": link}
+            (root / "data/topics.json").write_text(json.dumps({"study": {
+                "title": "Study", "intro": "Cost comparisons.", "tasks": [task]}}))
+            tool = {"id": "fees", "url": "/fees/", "access": "browser"}
+            with self.assertRaisesRegex(ValueError, "field note rent is missing"):
+                write_topics(root / "dist", [tool], root)
+            note = root / "field-notes/rent/index.html"
+            note.parent.mkdir(parents=True)
+            note.write_text("<h1>Rent and tuition</h1>")
+            write_topics(root / "dist", [tool], root)
+            page = (root / "dist/topics/study/index.html").read_text()
+            self.assertIn('<a href="/field-notes/rent/">Rent &amp; tuition</a>', page)
+
     def test_topic_links_a_named_record_inside_its_collection(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

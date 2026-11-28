@@ -50,6 +50,8 @@ Use the hub's optional `task_label` to give a card a descriptive link while keep
 
 The builder adds those URLs to the tool's catalogue card, its applicable topic guides and the public sitemap. The link audit checks them alongside tool roots. Edit `data/topics.json` for the curated task guides. Independent app repos own the working examples and their metadata. Test the generated links and the deployed page before adding a preset.
 
+A topic task can also link to a worked Field Note using `field_note` with a `slug` and descriptive `label`. The build checks that the article exists. Link the article to the particular record or prefilled calculator that reproduces its example.
+
 ## Review production search metadata
 
 The [November 26, 2026 production baseline](audits/search-inventory-2026-11-26.md) records the catalogue revision, observation window and page-by-page results. Run `python3 scripts/audit_search.py` for the initial HTML of public browser tools on coolcode.ca. For a small sample, use `python3 scripts/audit_search.py --tool fxreceipt --tool dnslens --candidate-budget 4`. The JSON report records the observation time, HTTP status, titles, descriptions, canonical targets, headings and indexing directives. It also identifies titles and headings that match the tool ID or recorded brand. A separate review flag identifies an exact match with the legacy catalogue title when a different task label or brand label is recorded. A short existing name can still be a good task label. Search Console and Bing Webmaster Tools provide separate evidence about indexing and traffic.

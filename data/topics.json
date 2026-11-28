@@ -37,7 +37,11 @@
         "tool": "tuitiontrail",
         "record": "nursing/nova-scotia",
         "label": "How does nursing tuition in Nova Scotia compare with British Columbia?",
-        "help": "Compare tuition for the same field and academic year. Follow the separately dated graduate income cohorts to see which graduates and years each figure covers."
+        "help": "Compare tuition for the same field and academic year. Follow the separately dated graduate income cohorts to see which graduates and years each figure covers.",
+        "field_note": {
+          "slug": "nursing-tuition-and-rent-in-nova-scotia-and-bc",
+          "label": "Work out how much rent would offset the nursing tuition difference"
+        }
       },
       {
         "tool": "basketmath",
@@ -290,7 +294,11 @@
         "tool": "routemirror",
         "record": "routes/555",
         "label": "Which direction had the higher peak load on route 555?",
-        "help": "Compare westbound and eastbound trips for the same season and day type. TransLink reports the average load at the busiest point as a percentage of vehicle capacity."
+        "help": "Compare westbound and eastbound trips for the same season and day type. TransLink reports the average load at the busiest point as a percentage of vehicle capacity.",
+        "field_note": {
+          "slug": "carvolth-555-to-501-connection",
+          "label": "Work through the 555-to-501 transfer at Carvolth"
+        }
       },
       {
         "tool": "mainstreetcensus",
@@ -379,7 +387,11 @@
         "tool": "priceatlas",
         "label": "How does the price of eggs in Ontario compare with my carton?",
         "help": "Start with the provincial price for one dozen eggs. Adjust for the number of eggs in the carton and compare prices from the same month.",
-        "record": "eggs/ontario"
+        "record": "eggs/ontario",
+        "field_note": {
+          "slug": "comparing-egg-carton-prices",
+          "label": "Calculate the break-even price for an 18-pack of eggs"
+        }
       }
     ]
   },
@@ -431,7 +443,11 @@
         "tool": "housing-pulse",
         "label": "What does a two-bedroom apartment cost in Halifax?",
         "help": "Compare average advertised and paid rent in the same quarter, and see how the figures vary by apartment size.",
-        "record": "halifax-rent"
+        "record": "halifax-rent",
+        "field_note": {
+          "slug": "comparing-halifax-rent-and-child-care",
+          "label": "See how a family can use the Halifax rent and child-care records together"
+        }
       },
       {
         "tool": "carecompass",
@@ -472,7 +488,11 @@
         "tool": "campcalendar",
         "label": "How far ahead did people book Rissers Beach in July?",
         "help": "Compare Friday and Saturday arrivals with the rest of the week, then check the official reservation service for this season.",
-        "record": "rissers-beach/july"
+        "record": "rissers-beach/july",
+        "field_note": {
+          "slug": "booking-july-rv-campsites-in-nova-scotia",
+          "label": "Compare July weekend RV bookings at Rissers Beach and Graves Island"
+        }
       }
     ]
   }

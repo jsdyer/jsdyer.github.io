@@ -495,8 +495,17 @@ def write_topics(stage, tools, root):
                         and all(SLUG.fullmatch(part) for part in record.split("/")),
                         f"{slug}: expected a record path inside the result collection for {tool['id']}")
                 destination += tool["result_directory"]["path"] + record + "/"
+            reading = ""
+            if "field_note" in item:
+                note = item["field_note"]
+                require(isinstance(note, dict) and set(note) == {"slug", "label"}
+                        and isinstance(note["slug"], str) and SLUG.fullmatch(note["slug"])
+                        and nonempty(note["label"]), f"{slug}: invalid field note link")
+                require((root / "field-notes" / note["slug"] / "index.html").is_file(),
+                        f"{slug}: field note {note['slug']} is missing")
+                reading = f'<p><a href="/field-notes/{note["slug"]}/">{escape(note["label"])}</a></p>'
             entries.append(f'<section><h2><a href="{escape(destination, quote=True)}">{escape(item["label"])}</a></h2>'
-                           f'<p>{escape(item["help"])}</p>{use_case_links(tool)}</section>')
+                           f'<p>{escape(item["help"])}</p>{reading}{use_case_links(tool)}</section>')
         route = f"/topics/{slug}/"
         content = template.replace("{{TITLE}}", escape(topic["title"])).replace("{{INTRO}}", escape(topic["intro"], quote=True))
         content = content.replace("{{ROUTE}}", route).replace("{{TASKS}}", "\n".join(entries))
