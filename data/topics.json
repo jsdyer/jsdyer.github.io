@@ -467,6 +467,18 @@
         "help": "Check language of service and licensed age groups, save a shortlist and contact providers about fees, hours and openings."
       },
       {
+        "tool": "carecompass",
+        "record": "on-toronto",
+        "label": "Where can I find licensed child care in Toronto?",
+        "help": "Compare the licensed centres and home child-care agency offices. Use Ontario’s finder for phone and inspection information."
+      },
+      {
+        "tool": "carecompass",
+        "record": "qc-montreal",
+        "label": "Which Montréal CPEs and garderies list infant places?",
+        "help": "Find published infant capacities and contacts. Ask the provider about openings for your start date."
+      },
+      {
         "tool": "movebench",
         "label": "What would the move change in my monthly budget?",
         "help": "Put your actual rent and job offer into a comparison and include one-time moving costs."
