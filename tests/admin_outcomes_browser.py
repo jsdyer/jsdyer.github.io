@@ -10,7 +10,7 @@ REPORT_API = 'https://api.github.com/repos/jsdyer/jsdyer.github.io/contents/coll
 
 
 def check_outcomes(browser, base, screenshots):
-    now=datetime.now(timezone.utc)
+    now=datetime(2026,11,25,12,0,tzinfo=timezone.utc)
     at=now.isoformat().replace('+00:00','Z')
     row={'repo':'jsdyer/lobbytrail','workflow':'refresh.yml','titles':['Lobby Trail'],
          'status':'attention','reasons':['Latest workflow run failure'],
@@ -25,6 +25,8 @@ def check_outcomes(browser, base, screenshots):
     context=browser.new_context()
     try:
         page=context.new_page();errors=[];page.on('pageerror',lambda error:errors.append(str(error)))
+        # The dispatch may fall back to the browser clock when CORS hides the Date header.
+        page.clock.set_fixed_time(now)
         context.route('**/admin/sign-in.mjs',lambda route:route.fulfill(content_type='text/javascript',body='''
           import {initializeOutcomes} from './tool-outcomes.mjs';
           document.getElementById('gate').hidden=true;
@@ -75,7 +77,10 @@ def check_outcomes(browser, base, screenshots):
             census['execution'][key].update(id=45441466838,at='2026-11-24T16:48:52Z')
         census['execution']['failed_steps']=['Retrieve and check source files']
         report['rows'].append(census)
-        for item in report['rows']:item['observed_at']=(now+timedelta(seconds=1)).isoformat().replace('+00:00','Z')
+        completed=now+timedelta(minutes=1)
+        page.clock.set_fixed_time(completed)
+        report['checked_at']=completed.isoformat().replace('+00:00','Z')
+        for item in report['rows']:item['observed_at']=report['checked_at']
         page.get_by_role('button',name='Load saved report').click()
         expect(page.locator('.outcome-request')).to_contain_text('fresh check has finished')
         expect(page.get_by_role('button',name='Check GitHub now')).to_be_enabled()
