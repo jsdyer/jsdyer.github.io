@@ -1547,10 +1547,42 @@
           "precision": "timestamp",
           "label": "PEI fuel prices checked",
           "max_age_seconds": 172800
+        },
+        {
+          "url": "https://coolcode.ca/fuelwindow/data/city-prices.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Monthly city gasoline prices checked",
+          "max_age_seconds": 172800
         }
       ],
       "collection_steps": [
         "Refresh official public data"
+      ]
+    },
+    {
+      "repo": "jsdyer/fxreceipt",
+      "branch": "main",
+      "workflow": "pages.yml",
+      "crons": [
+        "27 10 1 * *"
+      ],
+      "inputs": {},
+      "freshness": [
+        {
+          "url": "https://coolcode.ca/fxreceipt/annual-status.json",
+          "json_path": [
+            "checked_at"
+          ],
+          "precision": "timestamp",
+          "label": "Official annual rates checked",
+          "max_age_seconds": 3024000
+        }
+      ],
+      "collection_steps": [
+        "Refresh Bank of Canada annual rates"
       ]
     },
     {

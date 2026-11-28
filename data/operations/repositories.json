@@ -1448,8 +1448,19 @@
   {
     "repo": "jsdyer/fxreceipt",
     "branch": "main",
-    "workflows": [],
-    "guarded_paths": []
+    "workflows": [
+      {
+        "workflow": "pages.yml",
+        "crons": [
+          "27 10 1 * *"
+        ],
+        "inputs": {}
+      }
+    ],
+    "guarded_paths": [
+      ".github/workflows/pages.yml",
+      ".github/workflows/schedule-guard.yml"
+    ]
   },
   {
     "repo": "jsdyer/gamblingregulatorwatch",

@@ -52,6 +52,16 @@
         "tool": "benefitcalendar",
         "label": "Find the next published benefit payment date",
         "help": "Select your programs and subscribe to their calendars. Each date links to its official publication."
+      },
+      {
+        "tool": "bankrates",
+        "label": "How has prime moved alongside the Bank of Canada’s policy rate?",
+        "help": "Compare the weekly published prime rate with the daily policy target. Use your lender’s contract to find the rate that applies to your loan."
+      },
+      {
+        "tool": "fuelwindow",
+        "label": "How much would the fuel for my trip cost?",
+        "help": "Enter your distance and fuel economy. Price the trip at one city’s monthly gasoline average, or compare two city-price scenarios."
       }
     ]
   },

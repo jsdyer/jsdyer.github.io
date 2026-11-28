@@ -8,6 +8,7 @@ from playwright.sync_api import sync_playwright
 from archive_shelf_browser import check_archive_shelf
 from featured_browser import check_featured
 from report_browser import check_report
+from tool_commitments_browser import check_tool_commitments
 from protocol_captures_browser import check_protocols
 from rack_recipes_browser import check_rack_recipes
 from admin_outcomes_browser import check_outcomes
@@ -120,6 +121,7 @@ def main():
             check_featured(browser, url)
             check_outcomes(browser, url, screenshots)
             check_report(browser, url)
+            check_tool_commitments(browser, ROOT / "dist")
             check_protocols(browser,url)
             check_archive_shelf(browser,url,screenshots)
             assert not errors, errors

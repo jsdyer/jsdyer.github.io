@@ -567,6 +567,12 @@ def build(root=ROOT):
             target = stage / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)
+        shared_script = stage / "assets/tool-metrics.js"
+        script = shared_script.read_text(encoding="utf-8")
+        marker = "{{PUBLIC_BROWSER_TOOL_IDS}}"
+        require(script.count(marker) == 1, "Shared tool script needs the public browser tool IDs")
+        browser_ids = " ".join(sorted(tool["id"] for tool in tools if tool["access"] == "browser"))
+        shared_script.write_text(script.replace(marker, browser_ids), encoding="utf-8")
         (stage / "index.html").write_text(page, encoding="utf-8")
         category_titles = {category["id"]: category["title"] for category in categories}
         catalog = [{**{key: tool[key] for key in ("id", "title", "access", "source")},

@@ -107,3 +107,11 @@ The previous standalone watchdog ZIP is superseded by the [GitHub-managed servic
 ## Unlisted tools with statistics
 
 An unlisted prototype may use the shared aggregate counter when requested by the owner. Register its ID/title/source in `data/unlisted-tools.json`, instrument its page, regenerate the Worker and verify the admin measurement metadata. Keep the prototype in the repository audit exclusions with an accurate reason. Do not add it to `data/tools.json`, homepage/search/sitemap, featured choices or scheduled watchdog targets merely to collect visit statistics.
+
+## Reader commitments and commit identity
+
+- Keep existing free, public tasks usable without a CoolCode account. Do not add advertisements, paid rankings, signup interruptions or third-party advertising trackers.
+- Put the short commitments line near the task heading. Only make claims about local processing or official sources when they match that tool. Before a visitor submits a live lookup, identify its destination and the information sent. Exclude entered data from analytics and leave optional third-party diagnostics off by default.
+- For published figures, check the source, date, coverage, units and link. For a formula, show which inputs and assumptions produced the result. Keep basic directions and source links readable without JavaScript. Check the first visit on a phone and keep new requests and page weight proportionate to the task.
+- For public-sector or community outreach, describe the actual benefit in plain words. For a local calculator: “Free to use, no account or ads. Your figures stay in this tab.” For a directory: “Free to search, with links to the original records.”
+- Before publishing commits by jsdyer, inspect both raw identity fields with `git log --format='%h %ae %ce' origin/main..HEAD`. Use `911357+jsdyer@users.noreply.github.com` for each. Push the verified native Git objects. An API that chooses its own commit email cannot inherit the workstation's Git configuration.

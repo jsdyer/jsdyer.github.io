@@ -1,11 +1,38 @@
 /* Only tool IDs and the public homepage lineup are eligible for counting. */
-(() => {
-  if (location.origin !== 'https://coolcode.ca' || window.top !== window ||
-      navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+(function start() {
+  if (location.origin !== 'https://coolcode.ca' || window.top !== window) return;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, {once:true});
+    return;
+  }
   const home = location.pathname === '/' || location.pathname === '/index.html';
   const match = /^\/([a-z0-9]+(?:-[a-z0-9]+)*)(?:\/|$)/.exec(location.pathname);
   if (!home && !match) return;
-  monitorPublicErrors();
+
+  // The catalogue build supplies these public tool IDs. Showing the notice
+  // only changes the DOM and works even when the visitor disables statistics.
+  if (match && '{{PUBLIC_BROWSER_TOOL_IDS}}'.split(' ').includes(match[1]) &&
+      !document.querySelector('[data-coolcode-commitments]')) {
+    const heading = document.querySelector('h1');
+    if (heading) {
+      const intro = heading.nextElementSibling;
+      const notice = document.createElement('p');
+      notice.setAttribute('data-coolcode-commitments', '');
+      const wording = document.createElement('small');
+      const link = document.createElement('a');
+      link.href = '/about/#our-commitments';
+      link.textContent = 'How CoolCode works';
+      wording.append('No CoolCode account · No ads · ', link);
+      notice.append(wording);
+      (intro?.tagName === 'P' ? intro : heading).after(notice);
+    }
+  }
+
+  if (navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+  // Diagnostics are an explicit, per-tab choice on the About page.
+  try {
+    if (window.sessionStorage.getItem('coolcode:diagnostics-consent') === 'enabled') monitorPublicErrors();
+  } catch { /* A storage-restricted tab keeps diagnostics disabled. */ }
 
   const frame = document.createElement('iframe');
   frame.hidden = true;

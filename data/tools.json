@@ -3631,7 +3631,7 @@
   {
     "id": "bankrates",
     "title": "BankRate Lab",
-    "description": "Chart Bank of Canada rates, exchange rates and yields.",
+    "description": "Chart Canadian prime and policy rates, government bond yields and exchange rates.",
     "category": "money",
     "tags": [
       "interest",
@@ -3640,7 +3640,8 @@
       "cad",
       "usd",
       "bonds",
-      "mortgage"
+      "mortgage",
+      "prime lending rate"
     ],
     "icon": "percent",
     "url": "/bankrates/",
@@ -3649,7 +3650,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "The Bank of Canada publishes the interest rates, bond yields and Canadian-dollar exchange rates shown here.",
+      "detail": "The Bank of Canada publishes weekly prime lending rates and daily observations for the overnight target, government bond yields and Canadian-dollar exchange rates.",
       "probes": [
         {
           "url": "https://coolcode.ca/bankrates/snapshot.json",
@@ -3657,7 +3658,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-27",
+          "value": "2026-11-28",
           "count_at": {
             "path": [
               "tracks"
@@ -3665,7 +3666,7 @@
             "unit": "rate series",
             "measure": "length"
           },
-          "count": 9
+          "count": 10
         },
         {
           "url": "https://coolcode.ca/bankrates/snapshot.json",
@@ -3684,10 +3685,10 @@
       "cadence": "Weekdays"
     },
     "readme": {
-      "note": "Choose a date range and use the date inspector or data table to compare rates with matching units. Indexed FX starts each series at its first available observation, while CSV exports preserve original exchange rates and blank observations. Check the next scheduled policy decision and recent observed target changes, then follow the private payment-scenario link to Renewal Bench."
+      "note": "Choose a date range and use the date inspector or data table to compare rates with matching units. Indexed FX starts each series at its first available observation, while CSV exports preserve original exchange rates and blank observations. Compare the weekly prime lending rate with the overnight target, check the next scheduled decision and open Renewal Bench with your own contractual rates."
     },
     "sync_manifest": true,
-    "task_label": "Bank of Canada Rates, Yields and Exchange Rate History",
+    "task_label": "Canadian Prime Rate, Policy Rate and Bond Yield History",
     "use_cases": [
       {
         "title": "Bank of Canada Policy Rate History",
@@ -3696,6 +3697,10 @@
       {
         "title": "Canadian 2-Year and 10-Year Government Bond Yields",
         "path": "canada-bond-yields.html"
+      },
+      {
+        "title": "Canadian Prime Rate and Bank of Canada Policy Rate History",
+        "path": "canadian-prime-rate-history.html"
       }
     ]
   },
@@ -6809,13 +6814,18 @@
   {
     "id": "inflation-basket",
     "title": "Inflation Basket",
-    "description": "Convert historical Canadian dollars with CPI since 1914, or compare your spending basket with provincial inflation.",
+    "description": "Convert historical Canadian dollars, compare a spending basket with provincial inflation, or look up rental inflation in Halifax and Nova Scotia.",
     "category": "money",
     "tags": [
       "inflation",
       "CPI",
       "spending",
-      "prices"
+      "prices",
+      "historical dollars",
+      "purchasing power",
+      "rent",
+      "Halifax",
+      "Nova Scotia"
     ],
     "icon": "shopping-basket",
     "url": "/inflation-basket/",
@@ -6824,7 +6834,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Statistics Canada monthly all-items CPI supplies complete-year dollar comparisons, alongside eight spending categories and published basket weights.",
+      "detail": "Statistics Canada supplies monthly all-items and rental CPI, eight spending categories and published basket weights.",
       "cadence": "Monthly",
       "probes": [
         {
@@ -6881,7 +6891,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Convert a historical Canadian dollar amount using all-items CPI, with complete annual averages from 1914 for Canada and separately labelled latest-month comparisons. The original spending-basket calculator still compares eight major categories from 2002 onward and shows their contributions. Both calculations use dated official observations; personal amounts stay local."
+      "note": "Convert a historical Canadian dollar amount using all-items CPI, with complete annual averages from 1914 for Canada and separately labelled latest-month comparisons. The original spending-basket calculator still compares eight major categories from 2002 onward and shows their contributions. Compare two months of rental inflation in Halifax and Nova Scotia, with both endpoint indexes and direct links to the matching official series. Personal amounts stay local."
     },
     "task_label": "Canadian Inflation Calculator",
     "use_cases": [
@@ -9560,7 +9570,7 @@
   {
     "id": "fxreceipt",
     "title": "Currency Converter & Card Charge Comparison",
-    "description": "Convert USD, CAD or INR at the Bank of Canada daily reference rate, check the dated history and compare it with the amount charged to your card.",
+    "description": "Convert foreign amounts at Bank of Canada daily or annual average rates and compare a dated purchase with the amount charged to your card.",
     "category": "money",
     "tags": [
       "currency",
@@ -9576,13 +9586,32 @@
     "access": "browser",
     "data_info": {
       "mode": "mixed",
-      "detail": "Bank of Canada daily observations for CAD, USD and INR, plus Frankfurter reference rates for the card comparison. Amounts stay local."
+      "detail": "Bank of Canada observations supply daily conversions and published annual CAD averages. Frankfurter supplies additional reference rates for the card comparison. Entered amounts stay local.",
+      "probes": [
+        {
+          "label": "Official annual rates checked",
+          "url": "https://coolcode.ca/fxreceipt/annual-status.json",
+          "path": [
+            "checked_at"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "observation_count"
+            ],
+            "unit": "currency-year observations"
+          },
+          "value": "2026-11-28 14:57 UTC",
+          "count": 216
+        }
+      ],
+      "cadence": "Daily rates on demand; annual table checked monthly"
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Convert at the Bank of Canada rate for the selected date and compare the result with the final posted charge. Export the receipt with its source and observation date."
+      "note": "Look up a Bank of Canada daily rate for a purchase or select a calendar year to see its published annual average in Canadian dollars. Compare a daily conversion with a posted charge and export the dated receipt."
     },
-    "task_label": "Currency Converter and Card Charge Comparison",
+    "task_label": "Daily and Annual Exchange Rates and Card Charge Comparison",
     "brand_name": "FX Receipt",
     "use_cases": [
       {
@@ -9592,6 +9621,10 @@
       {
         "title": "CAD to INR Currency Converter",
         "path": "cad-to-inr/"
+      },
+      {
+        "title": "Bank of Canada Annual Average Exchange Rates",
+        "path": "annual-rates/"
       }
     ]
   },
@@ -11393,7 +11426,7 @@
   {
     "id": "basketmath",
     "title": "Basket Math",
-    "description": "Compare grocery deals, laundry detergent cost per load and pet food cost per day. See the price per use and the cost of buying enough whole packages.",
+    "description": "Compare up to three packages per 100 g, litre or sheet, or check grocery deals, laundry cost per wash and pet food cost per day.",
     "category": "money",
     "tags": [
       "unit price",
@@ -11417,7 +11450,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare two sizes of the same product using your own shelf prices. Basket Math calculates whole packs, checkout cost, unit price and extra quantity, including complete-bundle offers, qualifying per-pack prices and buy-X-get-Y-free deals. Lowest unit price can require a larger purchase. Enter coupon and tax assumptions explicitly; save or export only when you choose. The starting prices are invented examples, not live store prices. You can also transcribe actual receipts into a private dated price/package ledger, compare compatible unit prices over time, and export/import the same history in Basket Math or Label Compare. History is saved only on request. Compare laundry detergents by the dose per wash, or pet food by the grams you already feed per day. Each comparison shows cost per use, the whole-package checkout total and what remains."
+      "note": "For a quick shelf comparison, enter two or three prices and sizes to find the cost per 100 g, litre or sheet. Use the grocery deal planner when a promotion or required quantity affects the checkout total. Basket Math calculates whole packs, checkout cost, unit price and extra quantity, including complete-bundle offers, qualifying per-pack prices and buy-X-get-Y-free deals. Lowest unit price can require a larger purchase. Enter coupon and tax assumptions explicitly; save or export only when you choose. The starting prices are invented examples, not live store prices. You can also transcribe actual receipts into a private dated price/package ledger, compare compatible unit prices over time, and export/import the same history in Basket Math or Label Compare. History is saved only on request. Compare laundry detergents by the dose per wash, or pet food by the grams you already feed per day. Each comparison shows cost per use, the whole-package checkout total and what remains."
     },
     "task_label": "Grocery Unit Price and Household Cost Calculator",
     "use_cases": [
@@ -11436,6 +11469,10 @@
       {
         "title": "Compare 12- and 18-Pack Egg Prices",
         "path": "compare-egg-carton-prices.html"
+      },
+      {
+        "title": "Compare Package Prices per 100 g, Litre or Sheet",
+        "path": "unit-price.html"
       }
     ]
   },
@@ -12094,14 +12131,17 @@
   {
     "id": "fuelwindow",
     "title": "Fuel Window",
-    "description": "Compare regulated fuel prices in Nova Scotia and PEI, estimate a fill or trip, and keep private vehicle budgets.",
+    "description": "Estimate Canadian trip fuel costs using monthly city gasoline prices, compare regulated fuel limits in Nova Scotia and PEI, and keep private vehicle budgets.",
     "category": "money",
     "tags": [
       "fuel",
       "Nova Scotia",
       "PEI",
       "trip cost",
-      "heating oil"
+      "heating oil",
+      "Canada",
+      "Statistics Canada",
+      "gasoline prices"
     ],
     "icon": "wallet",
     "url": "/fuelwindow/",
@@ -12110,7 +12150,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Official Nova Scotia Energy Board and PEI IRAC regulated prices, checked twice daily; calculations stay in your browser.",
+      "detail": "Statistics Canada monthly regular self-serve city averages and the Nova Scotia and PEI regulated limits are checked twice daily. Trip inputs stay in your browser.",
       "probes": [
         {
           "url": "https://coolcode.ca/fuelwindow/data/prices.json",
@@ -12133,19 +12173,39 @@
           "label": "PEI fuel prices checked",
           "precision": "minute",
           "value": "2026-11-28 01:58 UTC"
+        },
+        {
+          "label": "Monthly city gasoline prices checked",
+          "url": "https://coolcode.ca/fuelwindow/data/city-prices.json",
+          "path": [
+            "checked_at"
+          ],
+          "precision": "minute",
+          "count_at": {
+            "path": [
+              "city_count"
+            ],
+            "unit": "cities and urban areas"
+          },
+          "value": "2026-11-28 14:57 UTC",
+          "count": 18
         }
       ],
       "cadence": "Twice daily"
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Fuel Window includes all six Nova Scotia pricing zones for self-serve regular gasoline and diesel; PEI adds self/full-serve regular, mid-grade, premium and diesel plus the after-tax furnace-oil maximum. Prices are official regulated limits, not live station quotes or forecasts. Editions and successful check dates are separate. Enter litres, distance and consumption to estimate a budget; optional saved plans retain their original source edition and can be exported/imported as JSON. Calculations and saved plans stay in your browser. Public sources are checked twice daily and an unavailable source retains its prior good prices with a visible warning."
+      "note": "The Canadian city trip calculator compares the cost of the same fuel volume at two published city prices or estimates a trip at one city’s price. Enter kilometres and L/100 km. The monthly city averages come from Statistics Canada, independently of the regulated prices below. Fuel Window includes all six Nova Scotia pricing zones for self-serve regular gasoline and diesel; PEI adds self/full-serve regular, mid-grade, premium and diesel plus the after-tax furnace-oil maximum. Prices are official regulated limits, not live station quotes or forecasts. Editions and successful check dates are separate. Enter litres, distance and consumption to estimate a budget; optional saved plans retain their original source edition and can be exported/imported as JSON. Calculations and saved plans stay in your browser. Public sources are checked twice daily and an unavailable source retains its prior good prices with a visible warning."
     },
-    "task_label": "Nova Scotia and PEI Fuel Prices",
+    "task_label": "Canadian City Gas Prices, Trip Costs and Atlantic Fuel Prices",
     "use_cases": [
       {
         "title": "PEI Gas Prices and Fill-Up Calculator",
         "path": "pei-fill-up.html"
+      },
+      {
+        "title": "Trip Fuel Cost Using Canadian City Gas Prices",
+        "path": "city-trip-cost.html"
       }
     ]
   },

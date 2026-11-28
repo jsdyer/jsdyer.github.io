@@ -920,6 +920,15 @@
         "precision": "timestamp",
         "label": "PEI fuel prices checked",
         "max_age_seconds": 172800
+      },
+      {
+        "url": "https://coolcode.ca/fuelwindow/data/city-prices.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Monthly city gasoline prices checked",
+        "max_age_seconds": 172800
       }
     ],
     "collection_steps": [
@@ -2774,6 +2783,22 @@
     ],
     "collection_steps": [
       "Check tuition and graduate income tables"
+    ]
+  },
+  "jsdyer/fxreceipt/pages.yml": {
+    "freshness": [
+      {
+        "url": "https://coolcode.ca/fxreceipt/annual-status.json",
+        "json_path": [
+          "checked_at"
+        ],
+        "precision": "timestamp",
+        "label": "Official annual rates checked",
+        "max_age_seconds": 3024000
+      }
+    ],
+    "collection_steps": [
+      "Refresh Bank of Canada annual rates"
     ]
   }
 }

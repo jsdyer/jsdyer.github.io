@@ -72,6 +72,7 @@ jsdyer/fossilneighbours
 jsdyer/fraudpulse
 jsdyer/freenet-echo
 jsdyer/fuelwindow
+jsdyer/fxreceipt
 jsdyer/gamblingregulatorwatch
 jsdyer/gc-domain-graveyard
 jsdyer/gc-subdomain-watch

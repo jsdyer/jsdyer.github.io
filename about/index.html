@@ -1,1 +1,52 @@
-<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>About CoolCode · Canadian public data and browser tools</title><meta name="description" content="Learn who makes CoolCode, where its Canadian data comes from, and how to trace an answer or report a problem."><link rel="canonical" href="https://coolcode.ca/about/"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/assets/desk.css"></head><body><header><div class="bar"><a href="/" class="brand">CoolCode.ca</a><a href="/field-notes/">Field Notes</a></div></header><main><h1>About CoolCode</h1><p>Jeffrey Dyer builds CoolCode in Canada. The collection grew from questions about places he knows in British Columbia and Nova Scotia. Which way does a crowded Langley bus travel? What did Halifax look like before the Cogswell Interchange? The tools let you explore a question, change the inputs and follow the result back to its source.</p><section><h2>Where the figures come from</h2><p>The catalogue explains what each tool measures. Saved datasets have source and retrieval details where available. Each tool’s guide describes coverage, definitions and known gaps. Some tools work entirely with files or calculations on your device.</p><p><a href="/field-notes/reading-the-tools/">Read worked examples</a> · <a href="https://github.com/jsdyer/jsdyer.github.io">Browse the catalogue source</a></p></section><section><h2>Site statistics and feedback</h2><p>When site statistics are enabled, CoolCode counts tool opens and interactions with featured homepage cards. The counter uses tool names and test lineups. It leaves search terms, uploaded files, precise locations and full page addresses out of the event. The homepage keeps an A/B assignment in the current tab for the duration of a test. The counter respects Global Privacy Control and Do Not Track where browsers expose either setting.</p><p id="browser-errors">The catalogue, Release Receipt, Policy Rate Scorecard, Export Neighbours, Metro Economy, Pantry Prices, Well Layers and Halifax Time Lens send selected browser errors to Sentry. Each report contains the tool name, a standard error category and a location in a published script. The browser omits messages, search terms, stack text and file contents. Sentry receives standard network information when the browser connects. Up to three distinct errors are sent per page load. Global Privacy Control and Do Not Track also disable these reports.</p><p>If something looks wrong, include the tool name and what you expected. Leave sensitive inputs out of your report.</p><a href="/report/">Report an issue</a></section></main></body></html>
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>How CoolCode works · Free Canadian tools and public data</title>
+  <meta name="description" content="CoolCode’s commitments on accounts, advertising, public sources, privacy and keeping its Canadian tools useful.">
+  <link rel="canonical" href="https://coolcode.ca/about/">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="stylesheet" href="/assets/desk.css">
+  <script type="module" src="./diagnostics.mjs"></script>
+</head>
+<body>
+  <header><div class="bar"><a href="/" class="brand">CoolCode.ca</a><a href="/field-notes/">Field Notes</a></div></header>
+  <main>
+    <h1>How CoolCode works</h1>
+    <p>I’m Jeffrey Dyer, an independent Canadian developer. CoolCode grew out of questions about places I know in British Columbia and Nova Scotia. Which Halifax ferry can I catch? How far ahead do people book a campsite? You should be able to get an answer, see where it came from and get on with your day.</p>
+    <section id="our-commitments">
+      <h2>What you can count on</h2>
+      <p>This is my commitment against enshittification. A tool that’s useful to you today should stay useful as the site grows.</p>
+      <ul>
+        <li><strong>Keep public tools free and open.</strong> Existing free features stay free to use without a CoolCode account.</li>
+        <li><strong>Keep money out of results.</strong> No ads, sponsored rankings or paid spots in the directories.</li>
+        <li><strong>Respect what you enter.</strong> Local calculators and private shortlists work on your device. For a live lookup, explain which service gets the request and what it needs. Searches, uploaded files and private notes stay out of our usage statistics.</li>
+        <li><strong>Make figures checkable.</strong> Link published numbers to the original data, identify the period and geography, and label estimates and assumptions. For calculators, show the units and explain the arithmetic.</li>
+        <li><strong>Respect your time and connection.</strong> Start with the task, keep pages light, and keep guides readable without JavaScript. Leave out signup popups, autoplay and advertising scripts.</li>
+      </ul>
+      <p>If a tool falls short of a commitment, <a href="/report/">tell me which tool and what happened</a>.</p>
+    </section>
+    <section>
+      <h2>Where the figures come from</h2>
+      <p>The <a href="/datasets/">dataset directory</a> explains what each tool measures. Look for source coverage, the date the underlying figures describe, and the last time CoolCode checked them. A fresh check can still return the same edition. You can also <a href="/field-notes/reading-the-tools/">read worked examples</a> or <a href="https://github.com/jsdyer/jsdyer.github.io">inspect the catalogue source</a>.</p>
+    </section>
+    <section id="site-statistics">
+      <h2>What the site counts</h2>
+      <p>CoolCode counts tool opens and interactions with featured homepage cards. The counter gets a tool name, event type and, for a homepage experiment, a lineup. It receives no search terms, file contents, full page addresses or visitor accounts. The homepage can keep a lineup assignment for the current tab.</p>
+      <p>The counter runs on CoolCode’s Cloudflare service. It uses temporary, salted network-address values for rate limiting. Global Privacy Control and Do Not Track disable these browser statistics where the browser provides either signal. We do not sell visitor data or use third-party advertising trackers.</p>
+      <p>Opening a map, running a live lookup or following an external link can connect your browser to another service. Its operator receives the request and standard connection details. Check the source or privacy note on the tool for its specific behaviour.</p>
+    </section>
+    <section id="browser-errors">
+      <h2>Optional browser diagnostics</h2>
+      <p>If you’re helping troubleshoot, you can enable error reports for this tab. On supported tools, a report sends Sentry the tool name, a standard error category and a location in CoolCode’s published script. Sentry receives standard network information when your browser connects. Reports omit error messages, search terms and file contents. Global Privacy Control and Do Not Track take precedence.</p>
+      <div id="diagnostics-controls" hidden>
+        <button type="button" id="diagnostics-change" aria-describedby="diagnostics-status">Enable for this tab</button>
+        <span id="diagnostics-status" role="status"></span>
+      </div>
+      <noscript><p>Optional browser diagnostics require JavaScript.</p></noscript>
+      <p>To report something directly, use the <a href="/report/">problem report form</a>. Include what you expected and leave out sensitive information.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # Working on CoolCode
 
+- For human-authored commits by jsdyer, use 911357+jsdyer@users.noreply.github.com for both the author and the committer. Verify both raw emails on outgoing commits before publishing. Preserve the existing noreply identity for bot-authored data updates.
+
 - Every tool addition, update, rename or removal must follow `docs/tool-lifecycle.md`.
   A repo alone is not a completed release. Reconcile documentation, catalogue,
   repository coverage, Cloudflare registration, watchdog schedules/probes/permissions,
