@@ -4868,7 +4868,7 @@
   {
     "id": "pantryprices",
     "title": "Pantry Prices",
-    "description": "Compare Canadian grocery baskets across time and follow world coffee prices to supermarket shelves in BC and Nova Scotia.",
+    "description": "Compare Canadian grocery baskets across time and follow world coffee prices to supermarket shelves across all ten provinces.",
     "category": "money",
     "tags": [
       "Canada",
@@ -4902,7 +4902,7 @@
             ],
             "unit": "published prices"
           },
-          "value": "2026-11-23",
+          "value": "2026-11-28",
           "count": 19733
         },
         {
@@ -4930,14 +4930,14 @@
       ]
     },
     "dataset": {
-      "title": "Arabica benchmark and retail coffee in BC and Nova Scotia",
+      "title": "Arabica benchmark and monthly retail coffee prices in all ten provinces",
       "file": "data/coffee.csv",
       "format": "CSV",
       "section": "coffee"
     },
     "sync_manifest": true,
     "readme": {
-      "note": "One 454 g butter, one 675 g white bread and a dozen eggs totalled $9.69 in September 2017 and $13.99 in September 2026 at Canadian scanner averages. Choose a province to compare its prices, or select an earlier price series to explore the published urban and national records back to 1914. In Commodity to shelf, choose a base month to see when Arabica, BC and Nova Scotia retail coffee first rose or fell by the same percentage."
+      "note": "One 454 g butter, one 675 g white bread and a dozen eggs totalled $9.69 in September 2017 and $13.99 in September 2026 at Canadian scanner averages. Choose a province to compare its prices, or select an earlier price series to explore the published urban and national records back to 1914. In Commodity to shelf, choose any two of the ten provinces and a base month to see when Arabica and each province’s 340 g retail coffee price first rose or fell by the same percentage."
     },
     "task_label": "Canadian Grocery Basket and Coffee Price History"
   },
@@ -5006,14 +5006,19 @@
   {
     "id": "libraryworkbench",
     "title": "Library Workbench",
-    "description": "Check whether a 3D print fits Halifax or Richmond library limits, estimate Richmond’s fee, or plan a Vancouver tape transfer.",
+    "description": "Compare library 3D printing times and costs in Halifax, Oakville, Richmond and Toronto, or plan a tape transfer in Vancouver.",
     "category": "places",
     "tags": [
       "libraries",
       "Halifax",
       "Vancouver",
       "digitization",
-      "program attendance"
+      "program attendance",
+      "Richmond",
+      "3D printing",
+      "Oakville",
+      "Toronto",
+      "Ontario"
     ],
     "icon": "library-big",
     "url": "/libraryworkbench/",
@@ -5037,14 +5042,14 @@
             ],
             "unit": "library-region years"
           },
-          "value": "2026-11-24",
+          "value": "2026-11-28",
           "count": 54
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Enter 90 minutes and 30 grams in the 3D print planner. This fits Halifax’s published under-two-hour service and gives a CAD $6.50 estimate in Richmond. At 120 minutes, only the Richmond option meets the published time limit. Try a PAL Hi8 cassette in the Vancouver transfer planner. Enter 60, 90, 45 for three tapes to see 3 h 15 min of real-time copying and roughly 13 GB of storage before setup and saving. Explore Regular 8 film, quarter-inch audio reels or floppy disks in the equipment directory. In the activity table, minutes per session relates reported hours to sessions. Select Halifax in 2024–25 to compare its survey and annual-report figures."
+      "note": "Enter 90 minutes and 30 grams in the 3D print planner. This fits Halifax’s published under-two-hour service and gives a CAD $6.50 estimate in Richmond. The same 30 grams costs an estimated $3.00 before HST in Oakville or $4.50 in filament charges in Toronto. Toronto includes file preparation in the usual two-hour booking. Oakville offers three-hour appointments. Try a PAL Hi8 cassette in the Vancouver transfer planner. Enter 60, 90, 45 for three tapes to see 3 h 15 min of real-time copying and roughly 13 GB of storage before setup and saving. Explore Regular 8 film, quarter-inch audio reels or floppy disks in the equipment directory. In the activity table, minutes per session relates reported hours to sessions. Select Halifax in 2024–25 to compare its survey and annual-report figures."
     },
     "task_label": "Library 3D Printing and Tape Transfer Planner"
   },
@@ -12181,13 +12186,14 @@
   {
     "id": "carecompass",
     "title": "Care Compass",
-    "description": "Find licensed child care in British Columbia and Nova Scotia, compare published services and keep a private contact shortlist.",
+    "description": "Find licensed child care in British Columbia, New Brunswick and Nova Scotia. Compare published services and save a private contact shortlist.",
     "category": "places",
     "tags": [
       "child care",
       "BC",
       "Nova Scotia",
-      "family"
+      "family",
+      "New Brunswick"
     ],
     "icon": "hand-heart",
     "url": "/carecompass/",
@@ -12196,7 +12202,7 @@
     "access": "browser",
     "data_info": {
       "mode": "snapshot",
-      "detail": "Official BC and NS child-care directory snapshots, with source coverage and vacancy dates.",
+      "detail": "Three provincial directories provide locations and services. Vacancy flags are available only where British Columbia reports them.",
       "probes": [
         {
           "url": "https://coolcode.ca/carecompass/data/status.json",
@@ -12211,23 +12217,23 @@
             ],
             "unit": "facilities"
           },
-          "value": "2026-11-28 12:54 UTC",
-          "count": 6459
+          "value": "2026-11-28 13:56 UTC",
+          "count": 7420
         }
       ],
       "cadence": "Daily"
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Care Compass collects the complete published BC Child Care Map layer and Nova Scotia Child Care Directory, rather than limiting the search to a preset city list. Search a name, city, street or postal code; filter by province, age, program, operating pattern and reported vacancy. Specific filters match explicit positive source flags, so unknown fields remain visible under “Any / unknown”. The map uses supplied coordinates and loads OpenStreetMap tiles only when opened. Community guides list provider phones, published age groups, local service coverage and nearby places. Nova Scotia distinguishes infant and toddler flags where the capture includes them. A community link opens the same address locality and age or program in the shortlist tool. BC covers ministry-funded licensed child care, not every BC provider. Its reported vacancy flags include their original update dates and are never promises of an available space. Nova Scotia updates its directory biannually; its source coverage date and publication date are displayed separately from our collection check. NS does not publish live vacancies in this dataset. Licence capacity is not spare capacity, and source inspection dates are not inspection findings or endorsements. Choose “Add to shortlist” to save a provider on this device. Contact status and notes survive ordinary refreshes in the same browser, with CSV export and a delete button; they do not sync or submit an application. Directory JSON export/reopen preserves earlier source coverage and dates separately from the private shortlist. Confirm age eligibility, fees, availability and hours with the provider before making plans."
+      "note": "Care Compass searches the published British Columbia Child Care Map, New Brunswick licensed facilities and Nova Scotia Child Care Directory. Search coverage extends beyond the communities with individual guides. Search a name, city, street or postal code; filter by province, age, program, operating pattern and reported vacancy. Specific filters match explicit positive source flags, so unknown fields remain visible under “Any / unknown”. The map uses supplied coordinates and loads OpenStreetMap tiles only when opened. Community guides list provider phones, published age groups, local service coverage and nearby places. Nova Scotia distinguishes infant and toddler flags where the capture includes them. A community link opens the same address locality and age or program in the shortlist tool. BC covers ministry-funded licensed child care, not every BC provider. Its reported vacancy flags include their original update dates and are never promises of an available space. Nova Scotia updates its directory biannually; its source coverage date and publication date are displayed separately from our collection check. New Brunswick publishes licensed capacity and language of service. Choose English or French to include providers the province lists as bilingual. Neither Atlantic directory supplies live vacancies. Licence capacity is not spare capacity, and source inspection dates are not inspection findings or endorsements. Choose “Add to shortlist” to save a provider on this device. Contact status and notes survive ordinary refreshes in the same browser, with CSV export and a delete button; they do not sync or submit an application. Directory JSON export/reopen preserves earlier source coverage and dates separately from the private shortlist. Confirm age eligibility, fees, availability and hours with the provider before making plans."
     },
-    "task_label": "BC and Nova Scotia Licensed Child Care Finder",
+    "task_label": "Licensed Child Care Finder in BC, New Brunswick and Nova Scotia",
     "result_directory": {
       "path": "records/",
       "title": "Child-care programs and provider contacts by community"
     },
     "dataset": {
-      "title": "British Columbia and Nova Scotia licensed child-care directory sources",
+      "title": "Licensed child-care directory sources for British Columbia, New Brunswick and Nova Scotia",
       "section": "sources"
     }
   },

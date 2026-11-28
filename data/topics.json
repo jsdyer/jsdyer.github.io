@@ -392,6 +392,11 @@
           "slug": "comparing-egg-carton-prices",
           "label": "Calculate the break-even price for an 18-pack of eggs"
         }
+      },
+      {
+        "tool": "pantryprices",
+        "label": "How has the price of ground coffee changed in my province?",
+        "help": "Open Commodity to shelf and compare two provinces for the same 340 g package. Use the same base month to compare price changes with the Arabica benchmark."
       }
     ]
   },
@@ -454,6 +459,12 @@
         "label": "Which licensed Halifax child-care programs serve my child’s age?",
         "help": "Review the services each facility reports and open the local directory to shortlist providers and confirm spaces.",
         "record": "ns-halifax"
+      },
+      {
+        "tool": "carecompass",
+        "record": "nb-moncton",
+        "label": "Which licensed child-care providers in Moncton can I contact?",
+        "help": "Check language of service and licensed age groups, save a shortlist and contact providers about fees, hours and openings."
       },
       {
         "tool": "movebench",
