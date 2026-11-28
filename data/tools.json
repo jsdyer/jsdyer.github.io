@@ -3730,7 +3730,7 @@
             "built"
           ],
           "label": "Snapshot generated",
-          "value": "2026-11-26",
+          "value": "2026-11-28",
           "count_at": {
             "path": [
               "products"
@@ -3757,11 +3757,21 @@
       "cadence": "Weekly"
     },
     "readme": {
-      "note": "Compare all ten provinces and Canada, plus Whitehorse and Yellowknife where monthly prices are published. The northern series cover those cities only; Nunavut is explicitly marked unavailable with a link to its separate survey. Add package quantities to a basket and compare exact endpoint months. Missing prices remain missing, and CSV exports retain Statistics Canada vector identifiers."
+      "note": "Look up a staple such as eggs, butter or coffee in the grocery price guides. Each guide gives the monthly average for its published package and a conversion you can compare with a flyer. Compare all ten provinces and Canada, plus Whitehorse and Yellowknife where monthly prices are published. The northern series cover those cities only; Nunavut is explicitly marked unavailable with a link to its separate survey. Add package quantities to a basket and compare exact endpoint months. Missing prices remain missing, and CSV exports retain Statistics Canada vector identifiers."
     },
     "sync_manifest": true,
     "task_label": "Canadian Grocery Price History by Province",
-    "brand_name": "Canadian Price Atlas"
+    "brand_name": "Canadian Price Atlas",
+    "result_directory": {
+      "path": "records/",
+      "title": "Grocery prices by product and province"
+    },
+    "dataset": {
+      "title": "Monthly grocery prices by product, package and Canadian region",
+      "file": "snapshot.json",
+      "format": "JSON",
+      "section": "sources"
+    }
   },
   {
     "id": "insolvencyatlas",
@@ -4401,9 +4411,17 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Select July, RV and Friday or Saturday to compare the booking lead time at Rissers Beach with Graves Island. The percentile range covers the middle half of successful bookings."
+      "note": "Open the July guide for Rissers Beach to compare how early tent and RV campers reserved, then compare a second park with the same arrival month. The percentile range covers the middle half of successful bookings."
     },
-    "task_label": "Nova Scotia Campsite Booking History"
+    "task_label": "Nova Scotia Campsite Booking History",
+    "result_directory": {
+      "path": "parks/",
+      "title": "Nova Scotia campground booking histories by park and arrival month"
+    },
+    "dataset": {
+      "title": "Nova Scotia provincial park camping reservation histories",
+      "section": "sources"
+    }
   },
   {
     "id": "snowcourses",
@@ -7201,9 +7219,18 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Compare Halifax and Vancouver for a two-bedroom apartment in the second quarter of 2026. Average asking rents were $2,400 and $3,030, while average paid rents were $1,770 and $2,470. Switch to rental housing starts to explore a different source and monthly reporting period. A separate province-matched panel compares rent CPI, average weekly earnings and all-area housing completions over the same complete calendar years. Use the latest-common-years button for a fully numeric three-way comparison; newer unavailable completions remain gaps."
+      "note": "Compare Halifax and Vancouver for a two-bedroom apartment in the second quarter of 2026. Average asking rents were $2,400 and $3,030, while average paid rents were $1,770 and $2,470. Switch to rental housing starts to explore a different source and monthly reporting period. A separate province-matched panel compares rent CPI, average weekly earnings and all-area housing completions over the same complete calendar years. Use the latest-common-years button for a fully numeric three-way comparison; newer unavailable completions remain gaps. Each metro report compares unit types in one quarter, shows available asking and paid rents side by side, and opens the matching selection in the chart. Provincial reports compare complete rent-index and earnings years and date the latest published completion count separately."
     },
-    "task_label": "Canadian Rent, Earnings and Housing Construction"
+    "task_label": "Canadian Rent, Earnings and Housing Construction",
+    "result_directory": {
+      "path": "records/",
+      "title": "Canadian apartment rents by city and housing trends by province"
+    },
+    "dataset": {
+      "title": "Rent CPI, weekly payroll earnings and housing completions by province",
+      "file": "data/context.json",
+      "format": "JSON"
+    }
   },
   {
     "id": "freenet-echo",
@@ -11292,16 +11319,25 @@
             ],
             "unit": "protected areas"
           },
-          "value": "2026-11-28 08:56 UTC",
+          "value": "2026-11-28 12:53 UTC",
           "count": 1037
         }
       ]
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Search for a BC park, choose your visit date and open its details. Read the published notices and check the recorded gate dates before following the official park link. A facility listing is a description, not a guarantee that it is available. No notice does not mean open or safe. Save parks locally for next time, copy a shareable plan link, or download a dated planning snapshot. Check the source timestamp and the official page again before travelling."
+      "note": "Browse BC park visit guides by region to compare entrances and facilities. At Golden Ears, for example, the gate instructions distinguish seasonal hours from access-road restrictions. Choose a visit date in the planner to check notices for that day. Read the published notices and check the recorded gate dates before following the official park link. A facility listing is a description, not a guarantee that it is available. No notice does not mean open or safe. Save parks locally for next time, copy a shareable plan link, or download a dated planning snapshot. Check the source timestamp and the official page again before travelling."
     },
-    "task_label": "BC Parks Advisories, Facilities and Gate Dates"
+    "task_label": "BC Parks Advisories, Facilities and Gate Dates",
+    "result_directory": {
+      "path": "records/",
+      "title": "BC park visit guides and regional comparisons"
+    },
+    "dataset": {
+      "title": "BC Parks protected areas, recorded facilities and published notices",
+      "file": "data/index.json",
+      "format": "JSON"
+    }
   },
   {
     "id": "tariffbench",
@@ -12171,7 +12207,7 @@
             ],
             "unit": "facilities"
           },
-          "value": "2026-11-27 19:02 UTC",
+          "value": "2026-11-28 12:54 UTC",
           "count": 6459
         }
       ],
@@ -12179,9 +12215,17 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Care Compass collects the complete published BC Child Care Map layer and Nova Scotia Child Care Directory, rather than limiting the search to a preset city list. Search a name, city, street or postal code; filter by province, age, program, operating pattern and reported vacancy. Specific filters match explicit positive source flags, so unknown fields remain visible under “Any / unknown”. The map uses supplied coordinates and loads OpenStreetMap tiles only when opened. BC covers ministry-funded licensed child care, not every BC provider. Its reported vacancy flags include their original update dates and are never promises of an available space. Nova Scotia updates its directory biannually; its source coverage date and publication date are displayed separately from our collection check. NS does not publish live vacancies in this dataset. Licence capacity is not spare capacity, and source inspection dates are not inspection findings or endorsements. Choose “Add to shortlist” to save a provider on this device. Contact status and notes survive ordinary refreshes in the same browser, with CSV export and a delete button; they do not sync or submit an application. Directory JSON export/reopen preserves earlier source coverage and dates separately from the private shortlist. Confirm age eligibility, fees, availability and hours with the provider before making plans."
+      "note": "Care Compass collects the complete published BC Child Care Map layer and Nova Scotia Child Care Directory, rather than limiting the search to a preset city list. Search a name, city, street or postal code; filter by province, age, program, operating pattern and reported vacancy. Specific filters match explicit positive source flags, so unknown fields remain visible under “Any / unknown”. The map uses supplied coordinates and loads OpenStreetMap tiles only when opened. Community guides list provider phones, published age groups, local service coverage and nearby places. Nova Scotia distinguishes infant and toddler flags where the capture includes them. A community link opens the same address locality and age or program in the shortlist tool. BC covers ministry-funded licensed child care, not every BC provider. Its reported vacancy flags include their original update dates and are never promises of an available space. Nova Scotia updates its directory biannually; its source coverage date and publication date are displayed separately from our collection check. NS does not publish live vacancies in this dataset. Licence capacity is not spare capacity, and source inspection dates are not inspection findings or endorsements. Choose “Add to shortlist” to save a provider on this device. Contact status and notes survive ordinary refreshes in the same browser, with CSV export and a delete button; they do not sync or submit an application. Directory JSON export/reopen preserves earlier source coverage and dates separately from the private shortlist. Confirm age eligibility, fees, availability and hours with the provider before making plans."
     },
-    "task_label": "BC and Nova Scotia Licensed Child Care Finder"
+    "task_label": "BC and Nova Scotia Licensed Child Care Finder",
+    "result_directory": {
+      "path": "records/",
+      "title": "Child-care programs and provider contacts by community"
+    },
+    "dataset": {
+      "title": "British Columbia and Nova Scotia licensed child-care directory sources",
+      "section": "sources"
+    }
   },
   {
     "id": "harbournow",
@@ -13126,7 +13170,7 @@
     },
     "sync_manifest": true,
     "readme": {
-      "note": "Choose the country applying from and one of four IRCC country-based programs. The first result shows the latest retained value and IRCC source edition. Review earlier observations with source links, download the selected history as CSV, or subscribe to its RSS change feed. A point is an observed estimate, never an individual completion date."
+      "note": "Choose the country applying from and one of four IRCC country-based programs. The first result shows the latest retained value and IRCC source edition. Open the country comparison to see all four application types together, with dated changes from a prior edition around four weeks earlier. Review earlier observations with source links, download the selected history as CSV, or subscribe to its RSS change feed. A point is an observed estimate, never an individual completion date."
     },
     "use_cases": [
       {
@@ -13141,7 +13185,16 @@
         "title": "Canada Work Permit Processing Time from the United States",
         "path": "work-permit-united-states/"
       }
-    ]
+    ],
+    "result_directory": {
+      "path": "records/",
+      "title": "IRCC visa and permit processing time histories by country of application"
+    },
+    "dataset": {
+      "title": "Canada visitor visa estimate history for applications from India",
+      "file": "series/visitor-outside-canada/IN.csv",
+      "format": "CSV"
+    }
   },
   {
     "id": "gamblingregulatorwatch",

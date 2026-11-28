@@ -225,6 +225,18 @@
         "record": "halifax-restaurant-locations",
         "label": "How many restaurant locations are in Halifax?",
         "help": "Compare Halifax Regional Municipality with the wider metropolitan area using the same industry group and employer count. The boundaries overlap."
+      },
+      {
+        "tool": "housing-pulse",
+        "label": "What does a two-bedroom apartment cost in Halifax?",
+        "help": "Compare average advertised and paid rent in the same quarter, and see how the figures vary by apartment size.",
+        "record": "halifax-rent"
+      },
+      {
+        "tool": "carecompass",
+        "label": "Which licensed Halifax child-care programs serve my child’s age?",
+        "help": "Review the services each facility reports and open the local directory to shortlist providers and confirm spaces.",
+        "record": "ns-halifax"
       }
     ]
   },
@@ -285,6 +297,18 @@
         "record": "langley-restaurant-locations",
         "label": "How many restaurant locations are in Langley City and Township?",
         "help": "Compare the two municipalities in the same Statistics Canada table. See how many operating locations had employees in each place."
+      },
+      {
+        "tool": "carecompass",
+        "label": "Which child-care programs are listed in Langley?",
+        "help": "Start with provincial service records for the Langley locality. Compare age groups and contact providers about a specific date.",
+        "record": "bc-langley"
+      },
+      {
+        "tool": "parkready",
+        "label": "Which Golden Ears park notices affect my trip?",
+        "help": "Check the dates, location and wording of each notice, then follow BC Parks for current conditions.",
+        "record": "golden-ears-park"
       }
     ]
   },
@@ -353,8 +377,9 @@
       },
       {
         "tool": "priceatlas",
-        "label": "How does this grocery price compare with the provincial average?",
-        "help": "Pick the product, package size, province and month that fit your shelf price."
+        "label": "How does the price of eggs in Ontario compare with my carton?",
+        "help": "Start with the provincial price for one dozen eggs. Adjust for the number of eggs in the carton and compare prices from the same month.",
+        "record": "eggs/ontario"
       }
     ]
   },
@@ -395,6 +420,59 @@
         "tool": "exportneighbours",
         "label": "Where does a province send its exports?",
         "help": "Choose a domestic export and compare trading destinations across the years covered."
+      }
+    ]
+  },
+  "moving-and-settling-in-canada": {
+    "title": "Planning a move to Canada or between provinces",
+    "intro": "Check the rent a new tenant might face, find child-care contacts and compare moving costs. If you are applying from abroad, look up the published processing estimate for your application type and country.",
+    "tasks": [
+      {
+        "tool": "housing-pulse",
+        "label": "What does a two-bedroom apartment cost in Halifax?",
+        "help": "Compare average advertised and paid rent in the same quarter, and see how the figures vary by apartment size.",
+        "record": "halifax-rent"
+      },
+      {
+        "tool": "carecompass",
+        "label": "Which licensed Halifax child-care programs serve my child’s age?",
+        "help": "Review the services each facility reports and open the local directory to shortlist providers and confirm spaces.",
+        "record": "ns-halifax"
+      },
+      {
+        "tool": "movebench",
+        "label": "What would the move change in my monthly budget?",
+        "help": "Put your actual rent and job offer into a comparison and include one-time moving costs."
+      },
+      {
+        "tool": "processinghistory",
+        "label": "How have Canadian visa and permit estimates changed for applicants in India?",
+        "help": "Compare visitor, study and work estimates for the same application country. Check the observation date and units before opening the official IRCC tool.",
+        "record": "in"
+      }
+    ]
+  },
+  "provincial-park-trip-planning": {
+    "title": "Planning a provincial park trip in BC or Nova Scotia",
+    "intro": "Find out what to check before leaving for a BC park or choosing a reservation date in Nova Scotia. Each guide names the park, the time period and the source you can check before you book.",
+    "tasks": [
+      {
+        "tool": "parkready",
+        "label": "Which Sea-to-Sky parks suit the trip I have in mind?",
+        "help": "Compare the facilities and dated notices for nearby parks, then open a park’s own BC Parks page.",
+        "record": "sea-to-sky"
+      },
+      {
+        "tool": "parkready",
+        "label": "What should I check before driving to Golden Ears?",
+        "help": "Read the scope and dates of the published notices and look for gate information relevant to your visit.",
+        "record": "golden-ears-park"
+      },
+      {
+        "tool": "campcalendar",
+        "label": "How far ahead did people book Rissers Beach in July?",
+        "help": "Compare Friday and Saturday arrivals with the rest of the week, then check the official reservation service for this season.",
+        "record": "rissers-beach/july"
       }
     ]
   }
